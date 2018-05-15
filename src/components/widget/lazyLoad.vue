@@ -21,7 +21,7 @@
 				default: {
 					scrollEle: 'appView',
 					ele:'lazyLoad_img',
-					errorImg:'/svip-static/images/default.png',
+					errorImg:'/activity-static/images/default.png',
 					time: 100, // 设置一个检测时间间隔
 					complete: true, //页面内所有数据图片加载完成后，是否自己销毁程序，true默认销毁，false不销毁
 					position: { // 只要其中一个位置符合条件，都会触发加载机制

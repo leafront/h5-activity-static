@@ -8,7 +8,7 @@ module.exports = {
   dev: {
 
     // Paths
-    assetsSubDirectory: 'svip-static',
+    assetsSubDirectory: 'activity-static',
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
@@ -50,7 +50,7 @@ module.exports = {
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'svip-static',
+    assetsSubDirectory: 'activity-static',
     assetsPublicPath: 'http://10.0.0.27:8080/',
 
     /**
@@ -80,7 +80,7 @@ module.exports = {
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'svip-static',
+    assetsSubDirectory: 'activity-static',
     assetsPublicPath: 'http://m.static.laiyifen.com/',
 
     /**
