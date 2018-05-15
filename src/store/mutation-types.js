@@ -1,0 +1,3 @@
+
+export const UPDATE_PAGE_VIEW = 'UPDATE_PAGE_VIEW'
+

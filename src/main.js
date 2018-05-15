@@ -1,0 +1,80 @@
+
+import Vue from 'vue'
+
+import Application from './App'
+
+import app from '@/widget/app'
+
+import config from '@/config'
+
+import router from './router'
+
+import store from './store'
+
+import utils from '@/widget/utils'
+
+import filter from '@/filters'
+
+import Toast from '@/components/toast'
+
+import showLoading from '@/components/loading'
+
+import pageLoading from '@/components/pageLoading'
+
+import dialog from '@/components/dialog'
+
+import { loading } from '@/mixins/loading'
+
+Vue.mixin(loading)
+
+Vue.use(dialog)
+
+Object.keys(filter).forEach(key => {
+	Vue.filter(key, filter[key])
+})
+
+Vue.use(Toast,{    //支持全局配置
+	duration: "1500"
+})
+
+Vue.use(showLoading)
+
+Vue.use(pageLoading)
+
+if (process.env.NODE_ENV == 'production') {
+
+  router.beforeEach((to, from, next) => {
+
+    if (to.matched.some(record => record.meta.requireLogin)) {
+
+      //判断用户已经登录
+      if (app.loggedIn()) {
+        next()
+
+      } else {
+
+        if (utils.isApp()) {
+
+          app.login()
+
+        } else {
+
+          const from = utils.getRelatedUrl()
+          window.location.href = `/login.html?from=` + encodeURIComponent(from);
+        }
+      }
+
+    } else {
+      next()
+    }
+
+  })
+}
+
+new Vue({
+  el: '#app',
+  router,
+	store,
+  components: { Application },
+  template: '<Application/>'
+})

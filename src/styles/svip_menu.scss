@@ -1,0 +1,78 @@
+.strategy_menu{
+  height: 1.56rem;
+  background: #f0f0f0;
+  position: relative;
+  overflow-x:auto;
+  &.active{
+    height: 1.4rem;
+  }
+}
+.strategyList{
+  height: 1.4rem;
+  background: #3e3e4a;
+}
+
+.strategy_menu_list{
+  padding: 0 .3rem;
+  display: flex;
+  align-items: center;
+  width: 11rem;
+  height: 1.4rem;
+  background: #3e3e4a;
+
+  li{
+    height: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    margin-right: .5rem;
+    align-items: center;
+    justify-content: center;
+
+    &.active {
+      strong{
+        width: 0;
+        height: 0;
+        display:block;
+        position: absolute;
+        top:1.4rem;
+        border-top: .09rem solid #3e3e4a;
+        border-right: .09rem solid transparent;
+        border-left: .09rem solid transparent;
+      }
+    }
+    &:last-child{
+      margin-right:0;
+    }
+    i {
+      width: .56rem;
+      height: .56rem;
+      background: url(/src/views/svip/images/svip_sprite.png) no-repeat;
+      background-size: 5rem auto;
+    }
+    .icon1 {
+      background-position: -.54rem -.06rem;
+    }
+    .icon2 {
+      background-position: -1.25rem -.04rem;
+    }
+    .icon3 {
+      background-position: -1.94rem -.04rem;
+    }
+    .icon4 {
+      background-position: -2.58rem -.04rem;
+    }
+    .icon5 {
+      background-position: -3.19rem -.05rem;
+    }
+    .icon6 {
+      background-position: -3.83rem -.05rem;
+    }
+    .icon7 {
+      background-position: -4.43rem -.07rem;
+    }
+    span{
+      font-size: .26rem;
+      color: #b0a99f;
+    }
+  }
+}

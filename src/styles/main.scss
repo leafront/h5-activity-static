@@ -1,0 +1,139 @@
+
+.scroll-view-wrapper{
+	position: relative;
+	overflow-y: scroll;
+	flex: 1;
+	-webkit-overflow-scrolling: touch;
+	overflow-scrolling: touch;
+  background: #f0f0f0;
+}
+
+.visibility{
+
+	visibility: hidden;
+}
+
+
+.scroll_view_hidden{
+
+  overflow:hidden;
+
+}
+
+.app_fixed {
+  position: fixed;
+  left:0;
+  top:0;
+}
+
+#app{
+
+  width:100%;
+
+	height:100%;
+
+	background: #fff;
+
+}
+
+.ico{
+	fill: currentColor;
+	overflow: hidden;
+}
+
+
+body,html{
+	height:100%;
+	overflow: hidden;
+	text-size-adjust: 100%;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color: #bbb; }
+
+input {
+
+	color: #333;
+
+}
+
+body{
+	color:#666;
+	font-size: .24rem;
+}
+
+.pageView{
+
+	.page_bottom{
+
+		padding-bottom: .68rem;
+
+	}
+
+}
+
+.white-view{
+  background:#fff;
+}
+
+.pageView{
+	width: 100%;
+	height:100%;
+	overflow-x:hidden;
+	display: flex;
+	flex-direction: column;
+  background: #f0f0f0;
+}
+.ui-mask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.7);
+  z-index:100;
+  display: none;
+  &.active{
+    display: block;
+  }
+}
+.ui-submit {
+  background: linear-gradient(top,#ff7c20,#ff7900);
+  background: -webkit-linear-gradient(top,#ff7c20,#ff7900);
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .1rem;
+  span{
+    font-size: .36rem;
+    color: #fff;
+  }
+}
+
+.ui_right_arrow{
+  width: .16rem;
+  height: .28rem;
+  background:url(./images/svip_sprite.png) no-repeat -2.77rem -1.33rem;
+  background-size: 5rem auto;
+}
+
+.ui-checked{
+  width: .36rem;
+  height: .36rem;
+  border-radius: 50%;
+  border: .01rem solid #b2b2b2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.active{
+    background: #ff6900;
+    border:.01rem solid transparent;
+  }
+  i {
+    width:.24rem;
+    height: .18rem;
+    display: block;
+    background: url(./images/svip_sprite.png) no-repeat -3.02rem -1.37rem;
+    background-size: 5rem auto;
+  }
+}
