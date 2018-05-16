@@ -10,7 +10,7 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-const configEnv = process.env.NODE_ENV || "dev"
+const configEnv = process.env.NODE_ENV || "develop"
 
 module.exports = {
   context: path.resolve(__dirname, '../'),

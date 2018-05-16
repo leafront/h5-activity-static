@@ -4,7 +4,7 @@ const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
 
-const configEnv = process.env.NODE_ENV || "dev"
+const configEnv = process.env.NODE_ENV || "develop"
 
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = config[configEnv].assetsSubDirectory

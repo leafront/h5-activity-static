@@ -5,16 +5,15 @@ import utils from '@/widget/utils'
 
 import config from '@/config/index'
 
-import distribution from '@/common/distribution'
+import distribution from './distribution'
 
 import * as Model from '@/model/wx_share'
 
 import mall_setting from '@/widget/mall_setting'
 
-import wx from '@/lib/weixin'
+import wx from 'weixin-js-sdk'
 
 import app from '@/widget/app'
-
 
 //调用getUnionId的页面
 const SKEY_INVOLKEPAGE = "s_invokepage";
@@ -88,10 +87,6 @@ const weixin_share = {
   },
   //处理url里的上家分享码并保存进cookie
   checkShareCode () {
-    //不处理分享页面
-    if (this.excludeCurrentPage()) {
-      return;
-    }
     var urlParams = utils.query()
     var hashParams = utils.hashFormat(location.href)
     //缓存的上家的shareCode
@@ -150,7 +145,7 @@ const weixin_share = {
     this.loadCurrentDistributionData()
     .then((result) => {
       const data = result.data
-      if (result.code == 0 && data) {
+      if (result.code == 0) {
         this.rewriteUrl()
       } else {
         app.toast('当前分享功能异常，建议刷新页面')
@@ -270,7 +265,7 @@ const weixin_share = {
   loadCurrentDistributionData () {
 
     const unionid = this.getUnionid()
-    const shareCode = utils.getCookie('shareCode')
+    const shareCode = utils.getCookie('shareCode') || ""
 
     return Model.getCurrDistributor({
       type: 'GET',
@@ -279,7 +274,6 @@ const weixin_share = {
         shareCode
       }
     }).then((result) => {
-
       const data = result.data
 
       if (result.code == 0 && data && data.id) {

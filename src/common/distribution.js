@@ -1,7 +1,5 @@
 
-import utils from '@widget/utils'
-
-import store from '@widget/store'
+import utils from '@/widget/utils'
 
 const SHANGJIA_SHARE_CODE = 'shareCode' //上家的sharecode
 

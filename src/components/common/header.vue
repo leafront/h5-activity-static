@@ -19,7 +19,7 @@
     data () {
       return {
         isApp: utils.isApp(),
-        isWeixin: utils.isWeixin()
+        isWeixin: utils.weixin()
       }
     },
     created () {
@@ -93,6 +93,27 @@
       font-size: .36rem;
       color:#333;
       text-align: center;
+    }
+  }
+  .ui-header-right-icon{
+    position:absolute;
+    right:0;
+    top:0;
+    display: flex;
+    align-items: center;
+    height: .88rem;
+    width: 1.2rem;
+    padding-right: .3rem;
+    justify-content: flex-end;
+    i{
+      width: .42rem;
+      height: .11rem;
+      background: url(../../images/svip_sprite.png) no-repeat -.53rem -.1rem;
+      background-size: 5rem auto;
+      transition: transform .4s linear;
+      &.active{
+        transform: rotate(90deg);
+      }
     }
   }
 
