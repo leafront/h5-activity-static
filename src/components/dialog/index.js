@@ -1,19 +1,19 @@
-var Toast = {}
-//避免重复install，设立flag
-Toast.installed = false
-Toast.install = function(Vue, options) {
-	if(Toast.installed) return
-	Vue.prototype.$dialog = (options) => {
 
-		// 如果页面有toast则不继续执行
-		if(document.querySelector('.dialog-container')) return
-		// 1、创建构造器，定义好提示信息的模板
-    const cancelBtn = options.cancelText || '取消'
-    const buttonText = options.buttonText || '确定'
-    const toast = options.cancelText ? 'block' : 'none'
+const Dialog = {
+  installed: false,
+  install (Vue,options) {
+    if(Dialog.installed) return
+    Vue.prototype.$dialog = (options) => {
 
-		let toastTip = Vue.extend({
-			template: `
+      // 如果页面有toast则不继续执行
+      if(document.querySelector('.dialog-container')) return
+      // 1、创建构造器，定义好提示信息的模板
+      const cancelBtn = options.cancelText || '取消'
+      const buttonText = options.buttonText || '确定'
+      const toast = options.cancelText ? 'block' : 'none'
+
+      let toastTip = Vue.extend({
+        template: `
 				<div class="ui-dialog">
 					<div class="ui-dialog-mask"></div>
 					<div class="ui-dialog-container">
@@ -24,35 +24,35 @@ Toast.install = function(Vue, options) {
 						</div>
 					</div>
 				</div>`
-		})
+      })
 
-		// 2、创建实例，挂载到文档以后的地方
-		let tpl = new toastTip().$mount().$el
+      // 2、创建实例，挂载到文档以后的地方
+      let tpl = new toastTip().$mount().$el
 
-		// 3、把创建的实例添加到body中
+      // 3、把创建的实例添加到body中
 
-    const bodyElement = document.body
-    bodyElement.appendChild(tpl)
+      const bodyElement = document.body
+      bodyElement.appendChild(tpl)
 
-		document.getElementById('ui-dialog-cancel').addEventListener('click',() => {
+      document.getElementById('ui-dialog-cancel').addEventListener('click',() => {
 
-      bodyElement.removeChild(tpl)
+        bodyElement.removeChild(tpl)
 
-			options.cancel && options.cancel()
+        options.cancel && options.cancel()
 
-		})
+      })
 
-		document.getElementById('ui-dialog-confirm').addEventListener('click', () => {
+      document.getElementById('ui-dialog-confirm').addEventListener('click', () => {
 
-      bodyElement.removeChild(tpl)
+        bodyElement.removeChild(tpl)
 
-			options.success && options.success()
+        options.success && options.success()
 
-		})
+      })
 
-		Toast.installed = true
-
-	}
+      Dialog.installed = true
+    }
+  }
 }
 
-export default Toast
+export default Dialog
