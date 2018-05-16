@@ -1,9 +1,10 @@
 /**
  *
- * @param {Object} optionsAjax
+ * @param {Object} options
  * arguments
  * type:'GET',
  * timeout: 3000,
+ * hostPath: 'http://m.laiyifen.com'
  * headers:{
 	 *  Content-Type:'application/json'
 	 * },
@@ -16,15 +17,13 @@
 
 import config from '@/config/index'
 
-export default function ajax (optionsAjax){
+export default function ajax (options){
 
-	var options = Object.assign({},optionsAjax)
+  const baseHostPath = options.hostPath || config.hostPath
 
-  var baseHostPath = optionsAjax.hostPath || config.hostPath
+	return new Promise((resolve, reject) => {
 
-	var ajax = new Promise((resolve, reject) => {
-
-		var xhr = new XMLHttpRequest()
+		const xhr = new XMLHttpRequest()
 
 		xhr.open(options.type, baseHostPath + options.url, options.async)
 
@@ -57,10 +56,7 @@ export default function ajax (optionsAjax){
 			}
 		}
 
-		options.type == "GET" ? xhr.send(null) : 	xhr.send(options.data)
+    options.type == "GET" ? xhr.send(null) : 	xhr.send(options.data)
 
 	})
-
-	return ajax
-
 }

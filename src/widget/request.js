@@ -7,10 +7,8 @@ import utils from './utils'
 export default function request (url,options){
 
   const ut = app.getUserToken()
-
- const data = Object.assign({ut},options.data)
-
-  let defaultOpt = {
+  const data = Object.assign({ut},options.data)
+  const defaults = {
     isHeader:true,
     type: options.type,
     data,
@@ -24,42 +22,42 @@ export default function request (url,options){
     }
   }
 
-  if (defaultOpt.type == 'GET') {
+  if (defaults.type == 'GET') {
 
-    defaultOpt.data.cashe = new Date().getTime()
+    defaults.data.cashe = new Date().getTime()
   }
 
   if (options.headers) {
-    defaultOpt.headers["Content-type"] = options.headers["Content-type"]
-    defaultOpt.data = JSON.stringify(options.data)
+
+    defaults.headers["Content-type"] = options.headers["Content-type"]
+    defaults.data = JSON.stringify(options.data)
+
   } else {
 
-    defaultOpt.data = utils.queryStringify(defaultOpt.data)
+    defaults.data = utils.queryStringify(defaults.data)
   }
 
   if (app.loggedIn()) {
 
-    defaultOpt.headers.ut = app.getUserToken()
+    defaults.headers.ut = app.getUserToken()
 
   }
+  if (defaults.type == "GET") {
 
-  if (defaultOpt.type == "GET") {
-
-    defaultOpt.url =  defaultOpt.data ?  defaultOpt.url + '?' + defaultOpt.data: defaultOpt.url;
-
+    defaults.url =  defaults.data ?  defaults.url + '?' + defaults.data: defaults.url
   }
 
   return new Promise((resolve, reject) => {
 
-    ajax(defaultOpt).then((results) => {
-      if (results.code == "99") {
-        if (process.env.NODE_ENV == 'production' || process.env.NODE_ENV == 'release') {
-          if (utils.isApp()) {
-            app.login()
-          } else {
-            const from = utils.getRelatedUrl()
-            window.location.href = `/login.html?from=` + encodeURIComponent(from);
-          }
+    ajax(defaults).then((results) => {
+
+      if (results.code == "99" && process.env.NODE_ENV != 'develop') {
+
+        if (utils.isApp()) {
+          app.login()
+        } else {
+          const from = utils.getRelatedUrl()
+          window.location.href = `/login.html?from=` + encodeURIComponent(from);
         }
       }
       resolve(results)

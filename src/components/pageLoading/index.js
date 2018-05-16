@@ -1,4 +1,3 @@
-
 const pageLoading = {
   installed: false,
   install (Vue, options) {
@@ -63,7 +62,6 @@ const pageLoading = {
         maskUi.parentNode.removeChild(maskUi)
       }
     }
-
   }
 }
 
