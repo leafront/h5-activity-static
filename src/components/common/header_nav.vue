@@ -18,7 +18,6 @@
   </div>
 </template>
 
-
 <style lang="scss">
 
   .ui-header-nav{
@@ -60,7 +59,7 @@
         padding-left: .15rem;
       }
       i{
-        background: url(../../images/svip_sprite.png) no-repeat;
+        background: url(../../images/activity_sprite.png) no-repeat;
         background-size: 5rem auto;
         width: .34rem;
         height: .34rem;

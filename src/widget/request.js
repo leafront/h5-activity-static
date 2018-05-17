@@ -17,8 +17,9 @@ export default function request (url,options){
     timeout: options.timeout || 6000,
     dataType: options.dataType || 'json',
     headers: {
-      "Content-type": "application/x-www-form-urlencoded",
-      "X-Requested-With": "XMLHttpRequest"
+      "Content-Type": "application/x-www-form-urlencoded",
+      "X-Requested-With": "XMLHttpRequest",
+      "Accept": "application/json, text/plain, */*"
     }
   }
 

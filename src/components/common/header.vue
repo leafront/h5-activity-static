@@ -79,7 +79,7 @@
       width:0.21rem;
       height:0.4rem;
       display: block;
-      background:url(../../images/svip_sprite.png) no-repeat -0.11rem -0.11rem;
+      background:url(../../images/activity_sprite.png) no-repeat -0.11rem -0.11rem;
       background-size: 5rem auto;
     }
     .ui-header-title{
@@ -108,7 +108,7 @@
     i{
       width: .42rem;
       height: .11rem;
-      background: url(../../images/svip_sprite.png) no-repeat -.53rem -.1rem;
+      background: url(../../images/activity_sprite.png) no-repeat -.53rem -.1rem;
       background-size: 5rem auto;
       transition: transform .4s linear;
       &.active{
