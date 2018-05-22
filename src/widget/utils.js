@@ -402,26 +402,6 @@ const utils = {
   },
   trim (text) {
     return  text.replace(/\s+/g,"");
-  },
-  /**
-   *  替换四个位置空格
-   * @param text
-   */
-
-  replaceSpace (text) {
-
-    var pattern = /([a-zA-Z0-9]{4})/g
-    return text.replace(pattern, "$1 ")
-  },
-  replaceMobile (text) {
-
-    var pattern = /^(\d{3})(\d{4})(\d{4})$/
-
-    return text.replace(pattern,'$1 $2 $3')
-  },
-  hideMobile (text) {
-    var pattern = /^(\d{3})(\d{4})(\d{4})$/
-    return text.replace(pattern,'$1****$2')
   }
 }
 
