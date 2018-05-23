@@ -1,11 +1,5 @@
-/*!
- * mob网页分享
- *
- * @package mobShare
- * @version 0.1.2
- * @date 2016-03-07
- * @copyright © 2012-2015 mob All Rights Reserved 掌淘网络 版权所有 粤ICP备12079301号
- */.-mob-share-ui-button {
+
+.-mob-share-ui-button {
   display:block;
   padding:.6em;
   text-align:center;
@@ -147,7 +141,7 @@
   z-index:999999998;
   width:4em;
   height:5em;
-  background:url(/activity-static/images/weixin_tips.png) center no-repeat;
+  background:url(./images/weixin_tips.png) center no-repeat;
   background-size:cover
 }
 .-mob-share-weixin-tips {

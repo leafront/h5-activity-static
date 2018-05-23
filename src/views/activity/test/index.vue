@@ -48,6 +48,11 @@
         }
       }
     },
+    components: {
+      AppHeader,
+      HeaderNav,
+      UIShare
+    },
     computed: {
       ...mapGetters({
         'pageView': 'getPageView',
@@ -90,11 +95,6 @@
           this.updateHeaderMenu(false)
         }
       }
-    },
-    components: {
-      AppHeader,
-      HeaderNav,
-      UIShare
     }
   }
 </script>

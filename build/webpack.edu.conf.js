@@ -51,7 +51,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
       // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
       // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
-      allChunks: true,
+      allChunks: false,
     }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
@@ -118,14 +118,14 @@ const webpackConfig = merge(baseWebpackConfig, {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../activity-static'),
-        to: config.release.assetsSubDirectory,
+        to: config.edu.assetsSubDirectory,
         ignore: ['.*']
       }
     ])
   ]
 })
 
-if (config.release.productionGzip) {
+if (config.edu.productionGzip) {
   const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
   webpackConfig.plugins.push(
@@ -134,7 +134,7 @@ if (config.release.productionGzip) {
       algorithm: 'gzip',
       test: new RegExp(
         '\\.(' +
-        config.release.productionGzipExtensions.join('|') +
+        config.edu.productionGzipExtensions.join('|') +
         ')$'
       ),
       threshold: 10240,
@@ -143,7 +143,7 @@ if (config.release.productionGzip) {
   )
 }
 
-if (config.release.bundleAnalyzerReport) {
+if (config.edu.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }

@@ -10,12 +10,6 @@
       </ul>
       <button class="ui-cancel-button" @click="updateShareMenu(false)">取消分享</button>
     </div>
-    <div class="ui-share-tips" @click="updateShareMenu(false)">
-      <img class="arrow" src="/activity-static/images/weixin_tips.png" alt="">
-      <div class="inner">
-        <p>点击右上角<br>将它分享到朋友圈<br>或指定的朋友</p>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -28,6 +22,11 @@
   require('@/libs/mob-share')
 
   export default {
+    data () {
+      return {
+        tipsImg: config.staticPath + '/activity-static/images/weixin_tips.png'
+      }
+    },
     computed: {
       ...mapGetters({
         'shareMenu': 'getShareMenu'
@@ -88,8 +87,7 @@
 
 </script>
 
-<style lang="scss">
-  @import '../../styles/mob-share.scss';
+<style lang="scss" scoped>
   .ui-cancel-button{
     width:100%;
     background:#fff;
@@ -152,32 +150,5 @@
     background-size: 1rem auto;
     width: 1rem;
     height: 1rem;
-  }
-  .ui-share-tips{
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    color: #fff;
-    z-index: 106;
-    background: rgba(51,51,51,0.8);
-    display: none;
-
-    &.active{
-      display: block;
-    }
-    .inner{
-      padding-top: 2rem;
-      margin-left: 30%;
-      font-size: .36rem;
-    }
-    .arrow{
-      position: absolute;
-      top: .4rem;
-      right: .5rem;
-      width: 1.4rem;
-    }
-
   }
 </style>
