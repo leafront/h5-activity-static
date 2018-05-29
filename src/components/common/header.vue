@@ -1,7 +1,9 @@
 <template>
   <div class="ui-header" :class="{'ui-header-border':isBorder}">
     <div class="ui-header-back" @click="backAction">
-      <span class="ui-header-back_btn"></span>
+      <svg class="icon ui-header-back_btn" aria-hidden="true">
+        <use xlink:href="#icon-back"></use>
+      </svg>
     </div>
     <h4 class="ui-header-title">{{title}}</h4>
     <slot></slot>
@@ -71,16 +73,14 @@
     }
     .ui-header-back{
       height: .88rem;
-      padding: 0 .3rem;
+      padding: 0 .3rem 0 .15rem;
       display: flex;
       align-items: center;
     }
     .ui-header-back_btn{
-      width:0.21rem;
-      height:0.4rem;
-      display: block;
-      background:url(../../images/activity_sprite.png) no-repeat -0.11rem -0.11rem;
-      background-size: 5rem auto;
+      font-size: .46rem;
+      color:#ff6900;
+      font-weight: bold;
     }
     .ui-header-title{
       height:.88rem;
@@ -103,13 +103,11 @@
     align-items: center;
     height: .88rem;
     width: 1.2rem;
-    padding-right: .3rem;
+    padding-right: .2rem;
     justify-content: flex-end;
-    i{
-      width: .42rem;
-      height: .11rem;
-      background: url(../../images/activity_sprite.png) no-repeat -.53rem -.1rem;
-      background-size: 5rem auto;
+    .icon-gengduo{
+      font-size: .5rem;
+      color:#999;
       transition: transform .4s linear;
       &.active{
         transform: rotate(90deg);

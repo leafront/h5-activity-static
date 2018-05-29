@@ -3,15 +3,22 @@
     <i class="ui-header-arrow"></i>
     <ul class="ui-header-nav-list">
       <li>
-        <i class="ui-header-nav-home-icon"></i>
+        <svg class="icon icon-home" aria-hidden="true">
+          <use xlink:href="#icon-home"></use>
+        </svg>
         <span class="font">首页</span>
+
       </li>
       <li @click="showShareMenu">
-        <i class="ui-header-nav-share-icon"></i>
+        <svg class="icon icon-share" aria-hidden="true">
+          <use xlink:href="#icon-connection"></use>
+        </svg>
         <span class="font">分享</span>
       </li>
       <li>
-        <i class="ui-header-nav-my-icon"></i>
+        <svg class="icon icon-my" aria-hidden="true">
+          <use xlink:href="#icon-wode"></use>
+        </svg>
         <span class="font">我&nbsp;&nbsp;</span>
       </li>
     </ul>
@@ -58,22 +65,17 @@
         color: #fff;
         padding-left: .15rem;
       }
-      i{
-        background: url(../../images/activity_sprite.png) no-repeat;
-        background-size: 5rem auto;
-        width: .34rem;
-        height: .34rem;
-        &.ui-header-nav-home-icon{
-          background-position: -1.01rem 0;
-        }
-        &.ui-header-nav-share-icon{
-          width: .3rem;
-          background-position: -1.38rem .01rem;
-        }
-        &.ui-header-nav-my-icon{
-          height: .38rem;
-          background-position: -1.7rem .01rem;
-        }
+      .icon-home{
+        font-size: .3rem;
+        color:#999;
+      }
+      .icon-share {
+        font-size: .3rem;
+        color:#999;
+      }
+      .icon-my {
+        font-size: .34rem;
+        color:#999;
       }
     }
   }

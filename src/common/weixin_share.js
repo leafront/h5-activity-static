@@ -165,6 +165,8 @@ const weixin_share = {
         data: {
           url: returnURL
         }
+      }).then((data) => {
+        return data
       }).then((result) => {
         mall_setting._getWeixinAppId().then(() => {
           const {

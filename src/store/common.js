@@ -3,14 +3,16 @@ import * as types from './mutation-types'
 const state = {
 	pageView: false,
   headerMenu: false,
-  shareMenu: false
+  shareMenu: false,
+  imageValidate: false
 }
 
 const getters = {
 
 	getPageView: state => state.pageView,
   getHeaderMenu: state => state.headerMenu,
-  getShareMenu: state => state.shareMenu
+  getShareMenu: state => state.shareMenu,
+  getImageValidate: state => state.imageValidate
 
 }
 
@@ -25,6 +27,9 @@ const actions = {
   },
   updateShareMenu ({commit},info) {
 	  commit(types.UPDATE_SHARE_MENU,info)
+  },
+  updateImageValidate ({commit}, info) {
+	  commit(types.UPDATE_IMAGE_VALIDATE,info)
   }
 }
 
@@ -39,6 +44,10 @@ const mutations = {
   [types.UPDATE_SHARE_MENU] (state,info) {
 
 	  state.shareMenu = info
+  },
+  [types.UPDATE_IMAGE_VALIDATE] (state,info) {
+
+	  state.imageValidate = info
   }
 }
 

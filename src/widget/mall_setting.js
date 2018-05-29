@@ -101,7 +101,7 @@ class MallSettings {
     Model.getMobileMallBasicSetting({
       type: 'POST',
       headers: {
-        "Content-type": "application/json"
+        "Content-Type": "application/json"
       },
       data: {
         data: {

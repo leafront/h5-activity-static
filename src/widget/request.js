@@ -4,10 +4,12 @@ import app from '@/widget/app'
 
 import utils from './utils'
 
+import config from '@/config/index'
+
 export default function request (url,options){
 
   const ut = app.getUserToken()
-  const data = Object.assign({ut},options.data)
+  const data = Object.assign({ ut, platformId: config.platformId },options.data)
   const defaults = {
     isHeader:true,
     type: options.type,
@@ -30,7 +32,7 @@ export default function request (url,options){
 
   if (options.headers) {
 
-    defaults.headers["Content-type"] = options.headers["Content-type"]
+    defaults.headers["Content-Type"] = options.headers["Content-Type"]
     defaults.data = JSON.stringify(options.data)
 
   } else {

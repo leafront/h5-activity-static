@@ -1,0 +1,59 @@
+.redpack-view{
+  background: #2d4072;
+}
+.redpack-bg{
+  background-size: 7.5rem auto;
+  height: 6.92rem;
+}
+
+.redpack-content{
+  margin: -.75rem .28rem 0;
+  padding: .38rem .48rem .6rem;
+  background: #fff;
+  border-top-left-radius: .15rem;
+  border-top-right-radius: .15rem;
+}
+
+.redpack-share-btn{
+  border-radius: .5rem;
+  background: linear-gradient(top,#fbf5ba,#f0b432);
+  background: -webkit-linear-gradient(top,#fbf5ba,#f0b432);
+  height: .8rem;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  span{
+    color:#8b2902;
+    font-size: .36rem;
+  }
+}
+
+
+.redpack-view-bg1{
+  width: .58rem;
+  height: 1.34rem;
+  position: absolute;
+  left:0;
+  top:8.75rem;
+  background:url(./images/redpack-vew_bg1.jpg) no-repeat;
+  background-size: .58rem 1.34rem;
+}
+.redpack-view-bg2{
+  width: .56rem;
+  height: .7rem;
+  right:0;
+  top: 6.62rem;
+  position: absolute;
+  background:url(./images/redpack-vew_bg2.jpg) no-repeat;
+  background-size: .56rem .7rem;
+}
+
+.redpack-view-bg3{
+  width: .28rem;
+  height: 1.27rem;
+  position: absolute;
+  right:0;
+  top:12.5rem;
+  background:url(./images/redpack-vew_bg3.jpg) no-repeat;
+  background-size: .28rem 1.27rem;
+}

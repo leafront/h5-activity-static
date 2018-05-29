@@ -37,15 +37,6 @@ apiRoutes.get('/superVipRead/memberInfo',function (req,res) {
   })
 })
 
-apiRoutes.get('/superVipRead/purchase/expectedSave',function (req,res) {
-  res.json({
-    "code": "0",
-    "data": {
-      "nickName":"田小九",
-      "saveMoney":"1000.00"
-    }
-  })
-})
 
 
 

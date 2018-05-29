@@ -41,35 +41,35 @@ Vue.use(showLoading)
 
 Vue.use(pageLoading)
 
-if (process.env.NODE_ENV == 'production') {
+router.beforeEach((to, from, next) => {
 
-  router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
 
-    if (to.matched.some(record => record.meta.requireLogin)) {
+  if (to.matched.some(record => record.meta.requireLogin) && process.env.NODE_ENV != 'develop') {
 
-      //判断用户已经登录
-      if (app.loggedIn()) {
-        next()
+    //判断用户已经登录
+    if (app.loggedIn()) {
+      next()
+
+    } else {
+
+      if (utils.isApp()) {
+
+        app.login()
 
       } else {
 
-        if (utils.isApp()) {
+        const from = utils.getRelatedUrl()
 
-          app.login()
-
-        } else {
-
-          const from = utils.getRelatedUrl()
-          window.location.href = `/login.html?from=` + encodeURIComponent(from);
-        }
+        // window.location.href = `/login.html?from=` + encodeURIComponent(from);
       }
-
-    } else {
-      next()
     }
 
-  })
-}
+  } else {
+    next()
+  }
+})
+
 
 new Vue({
   el: '#app',

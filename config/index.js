@@ -18,6 +18,10 @@ module.exports = {
       '/osc-api': {
         target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
+      },
+      '/ouser-web': {
+        target: 'http://m.lyf.edu.laiyifen.com',
+        changeOrigin: true
       }
     },
     // Various Dev Server settings

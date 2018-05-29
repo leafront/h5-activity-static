@@ -10,19 +10,6 @@ const validate = {
     return pattern.test(text)
 
   },
-
-  /**
-   * @param {string} zipCode
-   * @returns {boolean}
-   * @example
-   * Lizard.isZipCode('430406')
-   */
-  isZipCode (text){
-
-	  const pattern = /^[0-9]{6}$/
-
-    return pattern.test(text)
-  },
   isMessageCode (text){
 
 	  const pattern = /^[0-9]{6}$/
@@ -119,43 +106,6 @@ const validate = {
       return false
 
     }
-  },
-
-  /**
-   * 验证银行卡
-   * @param {string} text 银行卡
-   * @return {boolean}
-   * @example
-   * validate.isBankCard('5222323889')
-   */
-  isBankCard (text) {
-    // 16位以上
-	  const pattern = /^\d{16,19}$/
-
-    return pattern.test(text)
-  },
-
-  /**
-   * 验证是否为身份证号码
-   * @param {string} card 身份证号码
-   * @return {boolean}
-   * @example
-   * validate.isIdCard('513030198908230234')
-   */
-  isIdCard (text) {
-    //身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X。
-	  const pattern = /(^\d{15}$)|(^\d{17}([0-9]|X)$)/
-
-    return pattern.test(text)
-  },
-  /**
-   * 验证优惠券
-   * @param {String} text
-   * @returns {boolean}
-   */
-  isCouponCode (text) {
-	  const pattern = /[0-9a-zA-Z]{16}/
-    return pattern.test(text)
   }
 }
 
