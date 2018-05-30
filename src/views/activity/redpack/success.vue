@@ -83,7 +83,6 @@
         downloadLink: '',
         couponMoney: '',
         couponAmount: '',
-        from: this.$route.query.from,
         startTime: '',
         endTime: ''
       }
@@ -116,7 +115,7 @@
         'updateShareMenu'
       ]),
       backAction () {
-        const from = this.from
+        const from = this.$route.query.from
         if (utils.isApp()) {
           app.back('refresh','forceBack')
         } else {

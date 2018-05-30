@@ -67,8 +67,7 @@
         overTime: '',
         showCountTime: '',
         countTimer:  null,
-        needHelpCount: 0,
-        from: this.$route.query.from
+        needHelpCount: 0
       }
     },
     components: {
@@ -106,7 +105,7 @@
         'updateShareMenu'
       ]),
       backAction () {
-        const from = this.from
+        const from = this.$route.query.from
         if (utils.isApp()) {
           app.back('refresh','forceBack')
         } else {

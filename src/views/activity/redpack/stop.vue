@@ -66,8 +66,7 @@
         redpackImage: config.staticPath + '/activity-static/images/redpack_stop_bg.jpg?v=' + config.getTime,
         downloadLink: '',
         couponMoney: '',
-        friendCouponList: [],
-        from: this.$route.query.from
+        friendCouponList: []
       }
     },
     components: {
@@ -97,7 +96,7 @@
         'updateShareMenu'
       ]),
       backAction () {
-        const from = this.from
+        const from = this.$route.query.from
         if (utils.isApp()) {
           app.back('refresh','forceBack')
         } else {

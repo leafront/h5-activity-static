@@ -79,11 +79,10 @@
         isClickCode: true,
         codeText: '验证码',
         countTimeTimer: null,
-        from: this.$route.query.from,
         params: {
           mobile: '',
           smsCode: '',
-          shareCode: this.$route.query.shareCode
+          shareCode: this.$route.query.redpackCode
         },
         showCountTime: '',
         shareConfig,
@@ -122,7 +121,7 @@
         'updateImageValidate'
       ]),
       backAction () {
-        const from = this.from
+        const from = this.$route.query.from
         if (utils.isApp()) {
           app.back('refresh','forceBack')
         } else {
