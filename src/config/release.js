@@ -4,7 +4,8 @@ const config = JSON.stringify({
   "platformId": 3,  //H5
   "staticPath": 'http://m.stg.laiyifen.com',
   "appKey": "9ca572cc88e6",
-  "platform": 2
+  "platform": 2,
+  "getTime": new Date().getTime()
 })
 
 module.exports = config

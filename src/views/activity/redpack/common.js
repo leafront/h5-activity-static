@@ -29,8 +29,8 @@ export const countTime = (activityTimes,self) => {
 
 export const redpackShareConfig = () => {
   const shareConfig = {
-    link: config.hostPath + '/activity/redpack/receive',
-    url: config.hostPath + '/activity/redpack/receive',
+    link: config.hostPath + '/activity/redpack/start',
+    url: config.hostPath + '/activity/redpack/start',
     title:'速来！来伊份618狂欢，瓜分1亿红包',
     desc: '我刚领到一个大红包，快帮我拆一下！拆者有份，你也有红包拿哦~',
     description: '我刚领到一个大红包，快帮我拆一下！拆者有份，你也有红包拿哦~',

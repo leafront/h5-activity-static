@@ -5,6 +5,7 @@ const config = JSON.stringify({
   "staticPath": "http://m.static.laiyifen.com",
   "appKey": "9ca572cc88e6",
   "platform": 2,
+  "getTime": new Date().getTime()
 })
 
 module.exports = config

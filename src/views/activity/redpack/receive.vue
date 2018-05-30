@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder">
+    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
       <div class="ui-header-right-icon" @click="toggleHeaderMenu">
         <i :class="{'active': headerMenu}"></i>
         <svg class="icon icon-gengduo" aria-hidden="true">
@@ -79,6 +79,7 @@
         isClickCode: true,
         codeText: '验证码',
         countTimeTimer: null,
+        from: this.$route.query.from,
         params: {
           mobile: '',
           smsCode: '',
@@ -86,7 +87,7 @@
         },
         showCountTime: '',
         shareConfig,
-        redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg'
+        redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v='+ config.getTime
       }
     },
     computed: {
@@ -108,8 +109,8 @@
       this.$showLoading()
       this.getRedPackDetail().then(((result) => {
         this.$hideLoading()
-        this.updatePageView(true)
         this.startShowCountTime(result)
+        this.updatePageView(true)
       }))
 
     },
@@ -120,6 +121,18 @@
         'updateShareMenu',
         'updateImageValidate'
       ]),
+      backAction () {
+        const from = this.from
+        if (utils.isApp()) {
+          app.back('refresh','forceBack')
+        } else {
+          if (from) {
+            location.replace(from)
+          } else {
+            location.href = '/index.html'
+          }
+        }
+      },
       toggleHeaderMenu() {
         if (this.headerMenu) {
           this.updateHeaderMenu(false)
@@ -147,20 +160,20 @@
         },1000)
       },
       getRedPackDetail () {
-        const shareCode = this.$route.query
+        const {redpackCode} = this.$route.query
         return Model.getRedPackDetail({
           type: 'GET',
           data: {
-            shareCode
+            shareCode: redpackCode
           }
         }).then((result) => {
 
           const data = result.data
           if (result.code == 0 && data) {
-            const activityStatus = data.activityStatus
-
-            this.receivedList = data.receivedList
-            this.overTime = data.overTime
+            const {
+              overTime
+            } = data
+            this.overTime = overTime
 
           } else {
             this.$toast(result.message)

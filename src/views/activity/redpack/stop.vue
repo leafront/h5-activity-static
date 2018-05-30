@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder">
+    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
       <div class="ui-header-right-icon" @click="toggleHeaderMenu">
         <i :class="{'active': headerMenu}"></i>
         <svg class="icon icon-gengduo" aria-hidden="true">
@@ -13,8 +13,8 @@
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="stop-tips">
-          <h4 class="c3">您的好友已获得一张<strong>{{discountAmount}}</strong>元优惠券</h4>
-          <p class="c3" v-for="item in receivedList"><b>{{item}}</b>帮忙拆红包获得一张20优惠券</p>
+          <h4 class="c3">您的好友已获得一张<strong>{{couponMoney}}</strong>元优惠券</h4>
+          <p class="c3" v-for="item in friendCouponList"><b>{{item.hideMobile}}</b>帮忙拆红包获得一张{{item.couponMoney}}优惠券</p>
         </div>
         <div class="redpack-share-btn start-share-btn" @click="linkAction(downloadLink)">
           <span>前往APP下单，您也可以得红包</span>
@@ -63,10 +63,11 @@
         title: '拆红包',
         isBorder: true,
         shareConfig,
-        redpackImage: config.staticPath + '/activity-static/images/redpack_stop_bg.jpg',
+        redpackImage: config.staticPath + '/activity-static/images/redpack_stop_bg.jpg?v=' + config.getTime,
         downloadLink: '',
-        receivedList: [],
-        discountAmount: ''
+        couponMoney: '',
+        friendCouponList: [],
+        from: this.$route.query.from
       }
     },
     components: {
@@ -95,6 +96,18 @@
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
+      backAction () {
+        const from = this.from
+        if (utils.isApp()) {
+          app.back('refresh','forceBack')
+        } else {
+          if (from) {
+            location.replace(from)
+          } else {
+            location.href = '/index.html'
+          }
+        }
+      },
       linkAction (url) {
 
         if (url) {
@@ -112,11 +125,11 @@
         }
       },
       getRedPackDetail () {
-        const shareCode = this.$route.query
+        const {redpackCode} = this.$route.query
         Model.getRedPackDetail({
           type: 'GET',
           data: {
-            shareCode
+            shareCode: redpackCode
           }
         }).then((result) => {
 
@@ -126,9 +139,14 @@
           if (result.code == 0 && data) {
             this.updatePageView(true)
 
-            const activityStatus = data.activityStatus
-            this.receivedList = data.receivedList
-            this.discountAmount = data.discountAmount
+            const {
+              friendCouponList,
+              activityStatus,
+              couponMoney
+
+            } = data
+            this.couponMoney = couponMoney
+            this.friendCouponList = friendCouponList
 
             if (activityStatus == 0) {  //进行中
 

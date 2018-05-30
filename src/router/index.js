@@ -40,7 +40,7 @@ export default new Router({
       }
     },{
       path: '/activity/redpack/receive',
-      name: 'redPackInvite',
+      name: 'redPackReceive',
       component: redPackReceive,
       meta: {
         title: '拆红包'

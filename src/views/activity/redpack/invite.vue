@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder">
+    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
       <div class="ui-header-right-icon" @click="toggleHeaderMenu">
         <i :class="{'active': headerMenu}"></i>
         <svg class="icon icon-gengduo" aria-hidden="true">
@@ -16,15 +16,15 @@
           <div class="invite-left-tit-bg">
           </div>
           <div class="invite-title-txt">
-            <p>恭喜您获得50元红包</p>
+            <p>恭喜您获得{{couponMoney}}元红包</p>
           </div>
           <div class="invite-right-tit-bg">
           </div>
         </div>
         <div class="invite-help">
-          <p>邀请2位好友帮忙拆红包</p>
+          <p>邀请{{needHelpCount}}位好友帮忙拆红包</p>
         </div>
-        <div class="redpack-share-btn" @click="weixinShare">
+        <div class="redpack-share-btn invite-share-btn" @click="weixinShare">
           <span>立即分享</span>
         </div>
       </div>
@@ -53,6 +53,8 @@
 
   import config from '@/config/index'
 
+  import * as Model from '@/model/redpack'
+
   import {mapGetters, mapActions} from 'vuex'
 
   import weixin_share from '@/common/weixin_share'
@@ -67,7 +69,10 @@
         title: '拆红包',
         isBorder: true,
         shareConfig,
-        redpackImage: ''
+        redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v=' + config.getTime,
+        couponMoney: "",
+        needHelpCount: 0,
+        from: this.$route.query.from
       }
     },
     components: {
@@ -86,16 +91,7 @@
 
       this.updatePageView(false)
       this.$showLoading()
-
-      const img = new Image()
-      img.src = config.staticPath + '/activity-static/images/redpack_invite_bg.jpg'
-      img.addEventListener('load', () => {
-
-        this.redpackImage = img.src
-        this.$hideLoading()
-        this.updatePageView(true)
-
-      }, false)
+      this.getRedPackDetail()
 
     },
     methods: {
@@ -104,12 +100,66 @@
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
+      backAction () {
+        const from = this.from
+        if (utils.isApp()) {
+          app.back('refresh','forceBack')
+        } else {
+          if (from) {
+            location.replace(from)
+          } else {
+            location.href = '/index.html'
+          }
+        }
+      },
       toggleHeaderMenu () {
         if (this.headerMenu) {
           this.updateHeaderMenu(false)
         } else {
           this.updateHeaderMenu(true)
         }
+      },
+      getRedPackDetail () {
+        const {redpackCode} = this.$route.query
+        Model.getRedPackDetail({
+          type: 'GET',
+          data: {
+            shareCode: redpackCode
+          }
+        }).then((result) => {
+          this.$hideLoading()
+          const data = result.data
+          if (result.code == 0 && data) {
+            this.updatePageView(true)
+            const {
+              activityStatus,
+              userCouponList,
+              needHelpCount
+            } = data
+            this.couponMoney = userCouponList[0].couponMoney
+            this.needHelpCount = needHelpCount
+            if (activityStatus == 0) {  //进行中
+
+              this.pageAction('/activity/redpack/start')
+
+            }else if (activityStatus == 2) {
+              this.pageAction('/activity/redpack/finished')
+            } else if (activityStatus == 3) {
+              this.pageAction('/activity/redpack/success')
+            } else if (activityStatus == 4) {
+              this.pageAction('/activity/redpack/stop')
+            } else if (activityStatus == 5) {
+              this.pageAction('/activity/redpack/invalid')
+            }
+
+          } else {
+            this.$toast(result.message)
+          }
+
+        })
+      },
+      pageAction (url) {
+        this.$router.push(url)
       },
       weixinShare () {
         const config = this.shareConfig
@@ -177,12 +227,14 @@
   }
   .invite-help{
     padding-top: .25rem;
-    padding-bottom: .55rem;
     text-align:center;
     p{
       font-size: .36rem;
       color: #333;
     }
+  }
+  .invite-share-btn {
+    margin-top: .55rem;
   }
 
 </style>

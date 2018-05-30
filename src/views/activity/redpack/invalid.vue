@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder">
+    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
       <div class="ui-header-right-icon" @click="toggleHeaderMenu">
         <i :class="{'active': headerMenu}"></i>
         <svg class="icon icon-gengduo" aria-hidden="true">
@@ -12,8 +12,8 @@
     <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView}">
       <div class="redpack-bg" v-if="redpackImage" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
-        <div class="invalid-tips">
-          <p class="c3"><b>斯塔克</b>帮忙拆红包获得一张20优惠券</p>
+        <div class="invalid-tips" v-for="item in friendCouponList">
+          <p class="c3"><b>{{item.hideMobile}}</b>帮忙拆红包获得一张{{item.couponMoney}}优惠券</p>
         </div>
         <div class="redpack-share-btn start-share-btn" @click="linkAction(downloadLink)">
           <span>前往APP下单，您也可以得红包</span>
@@ -62,8 +62,10 @@
         title: '拆红包',
         isBorder: true,
         shareConfig,
-        redpackImage: config.staticPath + '/activity-static/images/redpack_invalid_bg.jpg',
-        downloadLink: ''
+        redpackImage: config.staticPath + '/activity-static/images/redpack_invalid_bg.jpg?v=' + config.getTime,
+        downloadLink: '',
+        friendCouponList: [],
+        from: this.$route.query.from
       }
     },
     components: {
@@ -90,6 +92,18 @@
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
+      backAction () {
+        const from = this.from
+        if (utils.isApp()) {
+          app.back('refresh','forceBack')
+        } else {
+          if (from) {
+            location.replace(from)
+          } else {
+            location.href = '/index.html'
+          }
+        }
+      },
       linkAction (url) {
 
         if (url) {
@@ -100,10 +114,11 @@
         this.$router.push(url)
       },
       getRedPackDetail () {
+        const {redpackCode} = this.$route.query
         Model.getRedPackDetail({
           type: 'GET',
           data: {
-            shareCode: '79e594ff183907bebcaa71fdaf1db2a4'
+            shareCode: redpackCode
           }
         }).then((result) => {
 
@@ -112,8 +127,15 @@
           this.$hideLoading()
           if (result.code == 0 && data) {
             this.updatePageView(true)
-            const activityStatus = data.activityStatus
-            this.receivedList = data.receivedList
+            const {
+              activityStatus,
+              friendCouponList,
+              overTime
+            } = data
+
+            this.friendCouponList = data.friendCouponList
+            this.overTime = overTime
+
             if (activityStatus == 0) {  //进行中
               this.pageAction('/activity/redpack/start')
             } else if (activityStatus == 2) {

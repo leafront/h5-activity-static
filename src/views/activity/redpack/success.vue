@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder">
+    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
       <div class="ui-header-right-icon" @click="toggleHeaderMenu">
         <i :class="{'active': headerMenu}"></i>
         <svg class="icon icon-gengduo" aria-hidden="true">
@@ -14,19 +14,19 @@
       <div class="redpack-content">
         <div class="redpack-success">
           <p class="c3">恭喜您！</p>
-          <p class="c3">成功帮好友获得一张<b>{{discountAmount}}</b>元优惠券</p>
-          <h4>同时奖励您一张</h4>
+          <p class="c3">成功帮好友获得一张<b>{{couponMoney}}</b>元优惠券</p>
+          <h4 v-if="couponAmount">同时奖励您一张</h4>
         </div>
-        <div class="invite-title">
+        <div class="invite-title" v-if="couponAmount">
           <div class="invite-left-tit-bg">
           </div>
           <div class="invite-success-txt">
             <div class="redpack-success-money">
-              <p><i>¥</i>5</p>
+              <p><i>¥</i>{{couponAmount}}</p>
             </div>
             <div class="redpack-success-discount">
-              <p>5元无门槛券</p>
-              <span>2018/6/16-2018/6/20可用</span>
+              <p>{{couponAmount}}元无门槛券</p>
+              <span>{{startTime}}-{{startTime}}可用</span>
             </div>
           </div>
           <div class="invite-right-tit-bg">
@@ -79,10 +79,13 @@
         title: '拆红包',
         isBorder: true,
         shareConfig,
-        redpackImage: config.staticPath + '/activity-static/images/redpack_finished_bg.jpg',
+        redpackImage: config.staticPath + '/activity-static/images/redpack_finished_bg.jpg?v=' + config.getTime,
         downloadLink: '',
-        receivedList: [],
-        discountAmount: ''
+        couponMoney: '',
+        couponAmount: '',
+        from: this.$route.query.from,
+        startTime: '',
+        endTime: ''
       }
     },
     components: {
@@ -100,7 +103,6 @@
     created () {
 
       this.updatePageView(false)
-
       this.$showLoading()
 
       this.getDownloadLink()
@@ -113,6 +115,18 @@
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
+      backAction () {
+        const from = this.from
+        if (utils.isApp()) {
+          app.back('refresh','forceBack')
+        } else {
+          if (from) {
+            location.replace(from)
+          } else {
+            location.href = '/index.html'
+          }
+        }
+      },
       toggleHeaderMenu () {
         if (this.headerMenu) {
           this.updateHeaderMenu(false)
@@ -130,11 +144,11 @@
         this.$router.push(url)
       },
       getRedPackDetail () {
-        const shareCode = this.$route.query
+        const {redpackCode} = this.$route.query
         Model.getRedPackDetail({
           type: 'GET',
           data: {
-            shareCode
+            shareCode: redpackCode
           }
         }).then((result) => {
 
@@ -144,9 +158,30 @@
           if (result.code == 0 && data) {
             this.updatePageView(true)
 
-            const activityStatus = data.activityStatus
-            this.receivedList = data.receivedList
-            this.discountAmount = data.discountAmount
+            const {
+              userCouponList,
+              activityStatus,
+              friendCouponList,
+              startTime,
+              endTime,
+              userId
+            } = data
+
+            this.couponMoney = userCouponList[0].couponMoney
+            this.startTime = startTime
+            this.endTime = endTime
+            let couponAmount = ''
+
+            friendCouponList.some((item) => {
+              if (userId == item.userId) {
+                couponAmount = item.couponMoney
+                return true
+              } else {
+                return false
+              }
+            })
+
+            this.couponAmount = couponAmount
 
             if (activityStatus == 0) {  //进行中
 
