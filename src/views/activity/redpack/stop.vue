@@ -1,14 +1,7 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
-      <div class="ui-header-right-icon" @click="toggleHeaderMenu">
-        <i :class="{'active': headerMenu}"></i>
-        <svg class="icon icon-gengduo" aria-hidden="true">
-          <use xlink:href="#icon-gengduo"></use>
-        </svg>
-      </div>
     </AppHeader>
-    <HeaderNav @weixinShare="weixinShare"></HeaderNav>
     <div class="scroll-view-wrapper invite-view" :class="{'visibility': !pageView}">
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
@@ -24,18 +17,13 @@
       <div class="redpack-view-bg1"></div>
       <div class="redpack-view-bg2"></div>
       <div class="redpack-view-bg3"></div>
-      <UIShare :config="shareConfig"></UIShare>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
 
-  import HeaderNav from '@/components/common/header_nav'
-
   import AppHeader from '@/components/common/header'
-
-  import UIShare from '@/components/widget/ui-share'
 
   import inviteRule from '@/components/redpack/rule'
 
@@ -51,11 +39,7 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import wx_share from './weixin_share'
-
-  import { countTime, redpackShareConfig } from './common'
-
-  const shareConfig = redpackShareConfig()
+  import { countTime } from './common'
 
   export default {
     data () {
@@ -72,7 +56,6 @@
     components: {
       AppHeader,
       HeaderNav,
-      UIShare,
       inviteRule
     },
     computed: {
@@ -89,7 +72,6 @@
 
       this.getDownloadLink()
       this.getRedPackDetail()
-      this.weixinShare()
     },
     methods: {
       ...mapActions([
@@ -143,26 +125,31 @@
             const {
               friendCouponList,
               activityStatus,
-              couponMoney,
+              userCouponList,
               role
             } = data
-            this.couponMoney = couponMoney
+            if (role == 0 || role == 1) {
+              if (userCouponList.length) {
+                this.couponMoney = userCouponList[0].couponMoney
+              }
+
+            }
             this.friendCouponList = friendCouponList
             const searchPrams = location.search
 
-            if (role == 2) {
+            if (role == 2 && activityStatus == 0) {
               this.pageAction('/activity/redpack/receive' + searchPrams)
 
             } else if (activityStatus == 0) {  //进行中
 
               this.pageAction('/activity/redpack/start' + searchPrams)
 
+            } else if (activityStatus == 1) {
+              this.$toast('活动已超时')
             } else if (activityStatus == 2) {
               this.pageAction('/activity/redpack/finished' + searchPrams)
             } else if (activityStatus == 3) {
               this.pageAction('/activity/redpack/success' + searchPrams)
-            } else if (activityStatus == 4) {
-
             } else if (activityStatus == 5) {
               this.pageAction('/activity/redpack/invalid' + searchPrams)
             }
@@ -191,9 +178,6 @@
             this.downloadLink = data.float_tail[0].linkUrl
           }
         })
-      },
-      weixinShare (type) {
-        wx_share.weixinShare.call(this,type)
       }
     }
   }

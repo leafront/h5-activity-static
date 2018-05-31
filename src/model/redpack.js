@@ -4,11 +4,9 @@ export const getRedPackDetail = (data) => request('/api/social/read/redEnvelop/g
 
 export const openRedPack = (data) => request('/api/social/write/redEnvelop/open',data)
 
-export const redPackBasicInfo = (data) => request('/activity-static/api/social/write/redEnvelop/activityBasicData.js',data)
+export const  getRedPackCode = (data) => request('/api/social/read/redEnvelop/getShareCode',data)
 
 export const getDownloadLink = (data) => request('/api/dolphin/list',data)
-
-
 
 
 

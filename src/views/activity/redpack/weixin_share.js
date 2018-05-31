@@ -22,10 +22,8 @@ const wx_share = {
         weixin_share.weixinShare(this.shareConfig)
       }
 
-      if (type == 'click') {
-        this.updateShareMenu(true)
-        this.updateHeaderMenu(false)
-      }
+      this.updateShareMenu(true)
+      this.updateHeaderMenu(false)
     }
   }
 }

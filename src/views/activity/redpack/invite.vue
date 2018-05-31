@@ -1,27 +1,20 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
-      <div class="ui-header-right-icon" @click="toggleHeaderMenu">
-        <i :class="{'active': headerMenu}"></i>
-        <svg class="icon icon-gengduo" aria-hidden="true">
-          <use xlink:href="#icon-gengduo"></use>
-        </svg>
-      </div>
     </AppHeader>
-    <HeaderNav @weixinShare="weixinShare"></HeaderNav>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView}">
+    <div class="scroll-view-wrapper redpack-view">
       <div class="redpack-bg" v-if="redpackImage" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="invite-title">
           <div class="invite-left-tit-bg">
           </div>
           <div class="invite-title-txt">
-            <p>邀请{{needHelpCount}}位好友帮忙拆红包</p>
+            <p>邀请2位好友帮忙拆红包</p>
           </div>
           <div class="invite-right-tit-bg">
           </div>
         </div>
-        <div class="redpack-share-btn invite-share-btn" @click="weixinShare('click')">
+        <div class="redpack-share-btn invite-share-btn" @click="weixinShare">
           <span>立即分享</span>
         </div>
       </div>
@@ -68,7 +61,7 @@
         shareConfig,
         redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v=' + config.getTime,
         couponMoney: "",
-        needHelpCount: 0
+        redpackCode: ''
       }
     },
     components: {
@@ -88,8 +81,7 @@
 
       this.updatePageView(false)
       this.showLoading()
-      this.getRedPackDetail()
-      this.weixinShare()
+      this.getRedPackInfo()
     },
     methods: {
       ...mapActions([
@@ -97,6 +89,78 @@
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
+      getRedPackInfo () {
+        const { orderCode,redpackCode } = this.$route.query
+        if (redpackCode) {
+          this.redpackCode = redpackCode
+          this.getRedPackDetail()
+        } else {
+          this.$hideLoading()
+          this.updatePageView(true)
+        }
+      },
+      getRedPackCode () {
+        const { orderCode } = this.$route.query
+        return Model.getRedPackCode({
+          type: 'POST',
+          data: {
+            orderCode
+          }
+        }).then((result) => {
+          this.$hideLoading()
+          const data = result.data
+
+          if (result.code == 0) {
+            this.updatePageView(true)
+            this.redpackCode = data.shareCode
+            return data
+          } else {
+            this.$toast(result.message)
+          }
+
+        })
+      },
+      getRedPackDetail () {
+
+        Model.getRedPackDetail({
+          type: 'POST',
+          data: {
+            shareCode: this.redpackCode
+          }
+        }).then((result) => {
+
+          this.$hideLoading()
+          const data = result.data
+          if (result.code == 0 && data) {
+            this.updatePageView(true)
+            const {
+              activityStatus,
+              role
+            } = data
+
+            const searchPrams = location.search
+            if (role == 2 && activityStatus == 0) {
+              this.pageAction('/activity/redpack/receive' + searchPrams)
+
+            } else if (activityStatus == 0) {  //进行中
+              this.pageAction('/activity/redpack/start' + searchPrams)
+            } else if (activityStatus == 1) {
+              this.$toast('活动已超时')
+            } else if (activityStatus == 2) {
+              this.pageAction('/activity/redpack/finished' + searchPrams)
+            } else if (activityStatus == 3) {
+              this.pageAction('/activity/redpack/success' + searchPrams)
+            } else if (activityStatus == 4) {
+              this.pageAction('/activity/redpack/stop' + searchPrams)
+            } else if (activityStatus == 5) {
+              this.pageAction('/activity/redpack/invalid' + searchPrams)
+            }
+
+          } else {
+            this.$toast(result.message)
+          }
+        })
+      },
       backAction () {
         const from = this.$route.query.from
         if (utils.isApp()) {
@@ -116,57 +180,15 @@
           this.updateHeaderMenu(true)
         }
       },
-      getRedPackDetail () {
-        const {redpackCode} = this.$route.query
-        Model.getRedPackDetail({
-          type: 'POST',
-          data: {
-            shareCode: redpackCode
-          }
-        }).then((result) => {
-          this.$hideLoading()
-          const data = result.data
-          if (result.code == 0 && data) {
-            this.updatePageView(true)
-            const {
-              activityStatus,
-              userCouponList,
-              needHelpCount,
-              role
-            } = data
-            const searchPrams = location.search
-            if (role == 0 || role == 1) {
-              this.couponMoney = userCouponList[0].couponMoney
-              this.needHelpCount = needHelpCount
-            }
-            if (role == 2) {
-              //this.pageAction('/activity/redpack/receive' + searchPrams)
-
-            } else if(activityStatus == 0) {  //进行中
-
-              this.pageAction('/activity/redpack/start' + searchPrams)
-
-            } else if (activityStatus == 2) {
-              this.pageAction('/activity/redpack/finished' + searchPrams)
-            } else if (activityStatus == 3) {
-              this.pageAction('/activity/redpack/success' + searchPrams)
-            } else if (activityStatus == 4) {
-              this.pageAction('/activity/redpack/stop' +  searchPrams)
-            } else if (activityStatus == 5) {
-              this.pageAction('/activity/redpack/invalid' + searchPrams)
-            }
-
-          } else {
-            this.$toast(result.message)
-          }
-
-        })
-      },
       pageAction (url) {
         this.$router.push(url)
       },
       weixinShare (type) {
-        wx_share.weixinShare.call(this,type)
+        this.getRedPackCode().then((data) => {
+          if (data) {
+            wx_share.weixinShare.call(this, type)
+          }
+        })
       }
     }
   }

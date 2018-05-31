@@ -1,15 +1,8 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
-      <div class="ui-header-right-icon" @click="toggleHeaderMenu">
-        <i :class="{'active': headerMenu}"></i>
-        <svg class="icon icon-gengduo" aria-hidden="true">
-          <use xlink:href="#icon-gengduo"></use>
-        </svg>
-      </div>
     </AppHeader>
-    <HeaderNav @weixinShare="weixinShare"></HeaderNav>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView,scroll_view_hidden: imageValidate}">
+    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView,'scroll_view_hidden': imageValidate}">
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="receive-tips">
@@ -33,7 +26,6 @@
       <div class="redpack-view-bg1"></div>
       <div class="redpack-view-bg2"></div>
       <div class="redpack-view-bg3"></div>
-      <UIShare :config="shareConfig"></UIShare>
       <ImageValidate  @startCountTime="startCountTime"
                       :mobile="params.mobile">
       </ImageValidate>
@@ -43,11 +35,7 @@
 
 <script type="text/javascript">
 
-  import HeaderNav from '@/components/common/header_nav'
-
   import AppHeader from '@/components/common/header'
-
-  import UIShare from '@/components/widget/ui-share'
 
   import RedPackRule from '@/components/redpack/rule'
 
@@ -65,11 +53,7 @@
 
   import { countTime, getSystemTimes, redpackShareConfig } from './common'
 
-  import wx_share from './weixin_share'
-
   import * as Model from '@/model/redpack'
-
-  const shareConfig = redpackShareConfig()
 
   export default {
     data () {
@@ -86,7 +70,6 @@
         },
         isFixed: false,
         showCountTime: '',
-        shareConfig,
         redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v='+ config.getTime
       }
     },
@@ -100,8 +83,6 @@
     mixin: ['loading'],
     components: {
       AppHeader,
-      HeaderNav,
-      UIShare,
       RedPackRule,
       ImageValidate
     },
@@ -109,12 +90,14 @@
 
       this.updatePageView(false)
       this.showLoading()
-      this.weixinShare()
       this.getRedPackDetail().then((result) => {
         this.$hideLoading()
-        this.startShowCountTime(result)
+
         if (result) {
+          this.startShowCountTime(result)
           this.updatePageView(true)
+        } else {
+          this.showCountTime = '00:00:00'
         }
       })
 
@@ -151,11 +134,13 @@
       startShowCountTime (activityTimes,serverTimes) {
         const showCountTime = countTime(activityTimes,serverTimes)
         this.showCountTime = showCountTime
+        const searchPrams = location.search
 
         if (countTime(activityTimes,serverTimes) <= 0) {
           clearInterval(this.countTimer)
           this.showCountTime = '00:00:00'
-          this.pageAction('/activity/redpack/invalid')
+          this.$toast('活动已超时')
+          return
         }
 
         this.countTimer = setInterval(() => {
@@ -179,11 +164,11 @@
               overTime
             } = data
             this.overTime = overTime
+            return data.overTime
 
           } else {
             this.$toast(result.message)
           }
-          return data.overTime
         })
       },
       /**
@@ -240,9 +225,6 @@
         utils.appViewFixed()
 
       },
-      weixinShare(type) {
-        wx_share.weixinShare.call(this,type)
-      },
       pageAction (url) {
         this.$router.push(url)
       },
@@ -290,7 +272,9 @@
 
               this.pageAction('/activity/redpack/start'+ searchPrams)
 
-            }else if (activityStatus == 2) {
+            } else if (activityStatus == 1) {
+              this.$toast('活动已超时')
+            } else if (activityStatus == 2) {
               this.pageAction('/activity/redpack/finish' + searchPrams)
             } else if (activityStatus == 3) {
               this.pageAction('/activity/redpack/success' + searchPrams)

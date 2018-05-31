@@ -1,14 +1,7 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
-      <div class="ui-header-right-icon" @click="toggleHeaderMenu">
-        <i :class="{'active': headerMenu}"></i>
-        <svg class="icon icon-gengduo" aria-hidden="true">
-          <use xlink:href="#icon-gengduo"></use>
-        </svg>
-      </div>
     </AppHeader>
-    <HeaderNav @weixinShare="weixinShare"></HeaderNav>
     <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView}">
       <div class="redpack-bg" v-if="redpackImage" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
@@ -17,7 +10,7 @@
           <p class="c3" v-for="(item) in friendCouponList"><b>{{item.hideMobile}}</b>已帮您拆红包</p>
           <p class="c3" v-if="needHelpCount">还需{{needHelpCount}}位好友</p>
         </div>
-        <div class="redpack-share-btn start-share-btn" @click="weixinShare('click')">
+        <div class="redpack-share-btn start-share-btn" @click="weixinShare">
           <span>立即分享</span>
         </div>
       </div>
@@ -31,8 +24,6 @@
 </template>
 
 <script type="text/javascript">
-
-  import HeaderNav from '@/components/common/header_nav'
 
   import AppHeader from '@/components/common/header'
 
@@ -72,7 +63,6 @@
     },
     components: {
       AppHeader,
-      HeaderNav,
       UIShare,
       inviteRule
     },
@@ -86,7 +76,6 @@
     created () {
       this.updatePageView(false)
       this.showLoading()
-      this.weixinShare()
 
       Promise.all([
         this.getRedPackDetail(),
@@ -96,7 +85,11 @@
         this.updatePageView(true)
         const activityTimes = result[0]
         const serverTimes = result[1]
-        this.startShowCountTime(activityTimes,serverTimes)
+        if (activityTimes) {
+          this.startShowCountTime(activityTimes,serverTimes)
+        } else {
+          this.showCountTime = '00:00:00'
+        }
       })
 
     },
@@ -128,7 +121,8 @@
         if (countTime(activityTimes,serverTimes) <= 0) {
           clearInterval(this.countTimer)
           this.showCountTime = '00:00:00'
-          this.pageAction('/activity/redpack/invalid')
+          this.$toast('活动已超时')
+          return
         }
 
         this.countTimer = setInterval(() => {
@@ -171,14 +165,12 @@
             this.friendCouponList = friendCouponList
             const searchPrams = location.search
 
-            if (role == 2) {
+            if (role == 2 && activityStatus == 0) {
               this.pageAction('/activity/redpack/receive' + searchPrams)
 
-            } else if (activityStatus == 0) {  //进行中
-
-              this.pageAction('/activity/redpack/start' + searchPrams)
-
-            }else if (activityStatus == 2) {
+            } else if (activityStatus == 1) {
+              this.$toast('活动已超时')
+            } else if (activityStatus == 2) {
               this.pageAction('/activity/redpack/finished' + searchPrams)
             } else if (activityStatus == 3) {
               this.pageAction('/activity/redpack/success' +  searchPrams)
@@ -187,18 +179,51 @@
             } else if (activityStatus == 5) {
               this.pageAction('/activity/redpack/invalid' + searchPrams)
             }
+            return data.overTime
 
           } else {
             this.$toast(result.message)
           }
-          return data.overTime
+
         })
       },
       pageAction (url) {
         this.$router.push(url)
       },
-      weixinShare (type) {
-        wx_share.weixinShare.call(this,type)
+      getRedPackCode () {
+        const { orderCode } = this.$route.query
+        return Model.getRedPackCode({
+          type: 'POST',
+          data: {
+            orderCode
+          }
+        }).then((result) => {
+          this.$hideLoading()
+          const data = result.data
+
+          if (result.code == 0) {
+            this.updatePageView(true)
+            this.redpackCode = data.shareCode
+            return data
+          } else {
+            this.$toast(result.message)
+          }
+
+        })
+      },
+      weixinShare () {
+
+        const { redpackCode } = this.$route.query
+
+        if (redpackCode) {
+           wx_share.weixinShare.call(this, type)
+        } else {
+         this.getRedPackCode().then((data) => {
+          if (data) {
+            wx_share.weixinShare.call(this)
+          }
+         })
+        }
       }
     },
     beforeDestroy () {
