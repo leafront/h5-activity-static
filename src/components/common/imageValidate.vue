@@ -4,7 +4,7 @@
     <div class="ui-image" :class="{'active': imageValidate}">
       <h4 class="c3">请输入图片验证码</h4>
       <div class="ui-image-cont">
-        <input type="tel" class="ui-image-code" v-model="verifyCode" maxlength="6" placeholder="请输入验证码"/>
+        <input type="tel" autofocus="autofocus" class="ui-image-code" v-model="verifyCode" maxlength="6" placeholder="请输入验证码"/>
         <div class="ui-image-close" :class="{'active': verifyCode}" @click="deleteVerifyCode">
           <svg class="icon icon-close" aria-hidden="true">
             <use xlink:href="#icon-close"></use>
@@ -25,6 +25,8 @@
   import * as Model from '@/model/common'
 
   import validate from '@/widget/validate'
+
+  import utils from '@/widget/utils'
 
   import {mapGetters, mapActions} from 'vuex'
 
@@ -92,6 +94,7 @@
       cancel () {
         this.updateImageValidate(false)
         this.verifyCode = ''
+        utils.removeAppViewFixed()
       },
 
       confirm () {
@@ -117,7 +120,7 @@
         }).then((result) => {
           const data = result.data
 
-          if (result.code == 0 && data) {
+          if (result.code == 0) {
 
             if (data.needImgCaptcha) {
               this.needImgCaptcha = true
@@ -178,7 +181,7 @@
           const data = result.data
           this.verifyCode = ''
 
-          if (result.code == 0 && data) {  // 24小时内一个手机号最多发送30条短信，多则不发
+          if (result.code == 0) {  // 24小时内一个手机号最多发送30条短信，多则不发
             this.$toast(result.message)
             this.$emit('startCountTime')
           } else if (result.code == 913) {

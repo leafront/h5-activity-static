@@ -24,7 +24,7 @@
         <div class="invite-help">
           <p>邀请{{needHelpCount}}位好友帮忙拆红包</p>
         </div>
-        <div class="redpack-share-btn invite-share-btn" @click="weixinShare">
+        <div class="redpack-share-btn invite-share-btn" @click="weixinShare('click')">
           <span>立即分享</span>
         </div>
       </div>
@@ -57,7 +57,7 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import weixin_share from '@/common/weixin_share'
+  import wx_share from './weixin_share'
 
   import { redpackShareConfig } from './common'
 
@@ -86,12 +86,13 @@
         'headerMenu': 'getHeaderMenu'
       })
     },
+    mixin: ['loading'],
     created () {
 
       this.updatePageView(false)
-      this.$showLoading()
+      this.showLoading()
       this.getRedPackDetail()
-
+      this.weixinShare()
     },
     methods: {
       ...mapActions([
@@ -121,7 +122,7 @@
       getRedPackDetail () {
         const {redpackCode} = this.$route.query
         Model.getRedPackDetail({
-          type: 'GET',
+          type: 'POST',
           data: {
             shareCode: redpackCode
           }
@@ -133,22 +134,27 @@
             const {
               activityStatus,
               userCouponList,
-              needHelpCount
+              needHelpCount,
+              role
             } = data
             this.couponMoney = userCouponList[0].couponMoney
             this.needHelpCount = needHelpCount
-            if (activityStatus == 0) {  //进行中
+            const searchPrams = location.search
+            if (role == 2) {
+              this.pageAction('/activity/redpack/receive' + searchPrams)
 
-              this.pageAction('/activity/redpack/start')
+            } else if(activityStatus == 0) {  //进行中
+
+              this.pageAction('/activity/redpack/start' + searchPrams)
 
             }else if (activityStatus == 2) {
-              this.pageAction('/activity/redpack/finished')
+              this.pageAction('/activity/redpack/finished' + searchPrams)
             } else if (activityStatus == 3) {
-              this.pageAction('/activity/redpack/success')
+              this.pageAction('/activity/redpack/success' + searchPrams)
             } else if (activityStatus == 4) {
-              this.pageAction('/activity/redpack/stop')
+              this.pageAction('/activity/redpack/stop' +  searchPrams)
             } else if (activityStatus == 5) {
-              this.pageAction('/activity/redpack/invalid')
+              this.pageAction('/activity/redpack/invalid' + searchPrams)
             }
 
           } else {
@@ -160,28 +166,8 @@
       pageAction (url) {
         this.$router.push(url)
       },
-      weixinShare () {
-        const config = this.shareConfig
-
-        if (utils.isApp()) {
-          app.postMessage('share',{
-            url: config.url,
-            title: config.title,
-            description: config.description,
-            url160x160: config.pic,
-            pic: config.pic
-          },() => {
-            this.updateHeaderMenu(false)
-          })
-        } else {
-
-          if (utils.weixin()) {
-            weixin_share.weixinShare(this.shareConfig)
-          }
-
-          this.updateShareMenu(true)
-          this.updateHeaderMenu(false)
-        }
+      weixinShare (type) {
+        wx_share.weixinShare.call(this,type)
       }
     }
   }

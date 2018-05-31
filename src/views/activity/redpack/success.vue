@@ -63,7 +63,7 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import weixin_share from '@/common/weixin_share'
+  import wx_share from './weixin_share'
 
   import * as Model from '@/model/redpack'
 
@@ -93,6 +93,7 @@
       UIShare,
       inviteRule
     },
+    mixin: ['loading'],
     computed: {
       ...mapGetters({
         'pageView': 'getPageView',
@@ -102,10 +103,10 @@
     created () {
 
       this.updatePageView(false)
-      this.$showLoading()
-
+      this.showLoading()
       this.getDownloadLink()
       this.getRedPackDetail()
+      this.weixinShare()
 
     },
     methods: {
@@ -145,7 +146,7 @@
       getRedPackDetail () {
         const {redpackCode} = this.$route.query
         Model.getRedPackDetail({
-          type: 'GET',
+          type: 'POST',
           data: {
             shareCode: redpackCode
           }
@@ -163,10 +164,11 @@
               friendCouponList,
               startTime,
               endTime,
-              userId
+              userId,
+              role
             } = data
 
-            this.couponMoney = userCouponList[0].couponMoney
+            this.couponMoney = (userCouponList.length && userCouponList[0].couponMoney) || ""
             this.startTime = startTime
             this.endTime = endTime
             let couponAmount = ''
@@ -181,18 +183,24 @@
             })
 
             this.couponAmount = couponAmount
+            const searchPrams = location.search
 
-            if (activityStatus == 0) {  //进行中
+            if (role == 2) {
 
-              this.pageAction('/activity/redpack/start')
+              this.pageAction('/activity/redpack/receive' + searchPrams)
 
-            }else if (activityStatus == 2) {
-              this.pageAction('/activity/redpack/finished')
+            } else if (activityStatus == 0) {  //进行中
+
+              this.pageAction('/activity/redpack/start' + searchPrams)
+
+            } else if (activityStatus == 2) {
+              this.pageAction('/activity/redpack/finished' + searchPrams)
             } else if (activityStatus == 3) {
+
             } else if (activityStatus == 4) {
-              this.pageAction('/activity/redpack/stop')
+              this.pageAction('/activity/redpack/stop' + searchPrams)
             } else if (activityStatus == 5) {
-              this.pageAction('/activity/redpack/invalid')
+              this.pageAction('/activity/redpack/invalid' + searchPrams)
             }
 
           } else {
@@ -216,32 +224,13 @@
           const data = result.data
 
           if (result.code ==  0 && data) {
+
             this.downloadLink = data.float_tail[0].linkUrl
           }
         })
       },
-      weixinShare () {
-        const config = this.shareConfig
-
-        if (utils.isApp()) {
-          app.postMessage('share',{
-            url: config.url,
-            title: config.title,
-            description: config.description,
-            url160x160: config.pic,
-            pic: config.pic
-          },() => {
-            this.updateHeaderMenu(false)
-          })
-        } else {
-
-          if (utils.weixin()) {
-            weixin_share.weixinShare(this.shareConfig)
-          }
-
-          this.updateShareMenu(true)
-          this.updateHeaderMenu(false)
-        }
+      weixinShare (type) {
+        wx_share.weixinShare.call(this,type)
       }
     }
   }

@@ -1,12 +1,14 @@
 <template>
-  <div class="ui-header" :class="{'ui-header-border':isBorder}">
-    <div class="ui-header-back" @click="backAction">
-      <svg class="icon ui-header-back_btn" aria-hidden="true">
-        <use xlink:href="#icon-back"></use>
-      </svg>
+  <div class="ui-header-wrapper">
+    <div class="ui-header" :class="{'ui-header-border':isBorder}">
+      <div class="ui-header-back" @click="backAction">
+        <svg class="icon ui-header-back_btn" aria-hidden="true">
+          <use xlink:href="#icon-back"></use>
+        </svg>
+      </div>
+      <h4 class="ui-header-title">{{title}}</h4>
+      <slot></slot>
     </div>
-    <h4 class="ui-header-title">{{title}}</h4>
-    <slot></slot>
   </div>
 </template>
 
@@ -61,12 +63,20 @@
     }
   }
 
+  .ui-header-wrapper{
+    width:100%;
+    height: .88rem;
+  }
+
   .ui-header {
+    width: 100%;
     height: .88rem;
     background: #fff;
     display: flex;
     align-items: center;
-    position: relative;
+    position: fixed;
+    left: 0;
+    top:0;
     z-index:999;
     &.ui-header-border{
       border-bottom: .01rem solid #ddd;

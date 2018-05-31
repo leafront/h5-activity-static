@@ -65,6 +65,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       staticPath: 'http://m.stg.laiyifen.com',
+      getTime: new Date().getTime(),
       filename: process.env.NODE_ENV === 'testing'
         ? 'index.html'
         : config.release.index,

@@ -9,7 +9,7 @@
       </div>
     </AppHeader>
     <HeaderNav @weixinShare="weixinShare"></HeaderNav>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView}">
+    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView,scroll_view_hidden: imageValidate}">
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="receive-tips">
@@ -65,7 +65,7 @@
 
   import { countTime, getSystemTimes, redpackShareConfig } from './common'
 
-  import weixin_share from '@/common/weixin_share'
+  import wx_share from './weixin_share'
 
   import * as Model from '@/model/redpack'
 
@@ -84,6 +84,7 @@
           smsCode: '',
           shareCode: this.$route.query.redpackCode
         },
+        isFixed: false,
         showCountTime: '',
         shareConfig,
         redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v='+ config.getTime
@@ -92,9 +93,11 @@
     computed: {
       ...mapGetters({
         'pageView': 'getPageView',
-        'headerMenu': 'getHeaderMenu'
+        'headerMenu': 'getHeaderMenu',
+        'imageValidate': 'getImageValidate'
       })
     },
+    mixin: ['loading'],
     components: {
       AppHeader,
       HeaderNav,
@@ -105,12 +108,15 @@
     created () {
 
       this.updatePageView(false)
-      this.$showLoading()
-      this.getRedPackDetail().then(((result) => {
+      this.showLoading()
+      this.weixinShare()
+      this.getRedPackDetail().then((result) => {
         this.$hideLoading()
         this.startShowCountTime(result)
-        this.updatePageView(true)
-      }))
+        if (result) {
+          this.updatePageView(true)
+        }
+      })
 
     },
     methods: {
@@ -161,7 +167,7 @@
       getRedPackDetail () {
         const {redpackCode} = this.$route.query
         return Model.getRedPackDetail({
-          type: 'GET',
+          type: 'POST',
           data: {
             shareCode: redpackCode
           }
@@ -209,6 +215,8 @@
         this.updateImageValidate(false)
 
         this.countTimeTimer = countTimeTimer
+
+        utils.removeAppViewFixed()
       },
       openImageValidate () {
         const {
@@ -229,29 +237,11 @@
 
         this.updateImageValidate(true)
 
+        utils.appViewFixed()
+
       },
-      weixinShare() {
-        const config = this.shareConfig
-
-        if (utils.isApp()) {
-          app.postMessage('share', {
-            url: config.url,
-            title: config.title,
-            description: config.description,
-            url160x160: config.pic,
-            pic: config.pic
-          }, () => {
-            this.updateHeaderMenu(false)
-          })
-        } else {
-
-          if (utils.weixin()) {
-            weixin_share.weixinShare(this.shareConfig)
-          }
-
-          this.updateShareMenu(true)
-          this.updateHeaderMenu(false)
-        }
+      weixinShare(type) {
+        wx_share.weixinShare.call(this,type)
       },
       pageAction (url) {
         this.$router.push(url)
@@ -293,20 +283,21 @@
           const data = result.data
           if (result.code == 0 && data) {
 
+            const searchPrams = location.search
             const activityStatus = data.activityStatus
 
             if (activityStatus == 0) {  //进行中
 
-              this.pageAction('/activity/redpack/start')
+              this.pageAction('/activity/redpack/start'+ searchPrams)
 
             }else if (activityStatus == 2) {
-              this.pageAction('/activity/redpack/finish')
+              this.pageAction('/activity/redpack/finish' + searchPrams)
             } else if (activityStatus == 3) {
-              this.pageAction('/activity/redpack/success')
+              this.pageAction('/activity/redpack/success' + searchPrams)
             } else if (activityStatus == 4) {
-              this.pageAction('/activity/redpack/stop')
+              this.pageAction('/activity/redpack/stop' + searchPrams)
             } else if (activityStatus == 5) {
-              this.pageAction('/activity/redpack/invalid')
+              this.pageAction('/activity/redpack/invalid' + searchPrams)
             }
 
           } else {

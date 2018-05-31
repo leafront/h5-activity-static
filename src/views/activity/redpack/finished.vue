@@ -59,9 +59,9 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import weixin_share from '@/common/weixin_share'
-
   import { redpackShareConfig } from './common'
+
+  import wx_share from './weixin_share'
 
   const shareConfig = redpackShareConfig()
 
@@ -83,6 +83,7 @@
       UIShare,
       inviteRule
     },
+    mixin: ['loading'],
     computed: {
       ...mapGetters({
         'pageView': 'getPageView',
@@ -92,9 +93,10 @@
     created () {
 
       this.updatePageView(false)
-      this.$showLoading()
+      this.showLoading()
       this.getDownloadLink()
       this.getRedPackDetail()
+      this.weixinShare()
 
     },
     methods: {
@@ -154,7 +156,7 @@
       getRedPackDetail () {
         const {redpackCode} = this.$route.query
         Model.getRedPackDetail({
-          type: 'GET',
+          type: 'POST',
           data: {
             shareCode: redpackCode
           }
@@ -167,20 +169,27 @@
             const {
               activityStatus,
               friendCouponList,
-              userCouponList
+              userCouponList,
+              role
             } = data
             this.friendCouponList = friendCouponList
             this.couponMoney = userCouponList[0].couponMoney
-            if (activityStatus == 0) {  //进行中
-              this.pageAction('/activity/redpack/start')
+
+            const searchPrams = location.search
+
+            if (role == 2) {
+              this.pageAction('/activity/redpack/receive' + searchPrams)
+
+            } else if(activityStatus == 0) {  //进行中
+              this.pageAction('/activity/redpack/start' + searchPrams)
             } else if (activityStatus == 2) {
 
             } else if (activityStatus == 3) {
-              this.pageAction('/activity/redpack/success')
+              this.pageAction('/activity/redpack/success' + searchPrams)
             } else if (activityStatus == 4) {
-              this.pageAction('/activity/redpack/stop')
+              this.pageAction('/activity/redpack/stop' + searchPrams)
             } else if (activityStatus == 5) {
-              this.pageAction('/activity/redpack/invalid')
+              this.pageAction('/activity/redpack/invalid' + searchPrams)
             }
 
           } else {
@@ -188,28 +197,8 @@
           }
         })
       },
-      weixinShare () {
-        const config = this.shareConfig
-
-        if (utils.isApp()) {
-          app.postMessage('share',{
-            url: config.url,
-            title: config.title,
-            description: config.description,
-            url160x160: config.pic,
-            pic: config.pic
-          },() => {
-            this.updateHeaderMenu(false)
-          })
-        } else {
-
-          if (utils.weixin()) {
-            weixin_share.weixinShare(this.shareConfig)
-          }
-
-          this.updateShareMenu(true)
-          this.updateHeaderMenu(false)
-        }
+      weixinShare (type) {
+        wx_share.weixinShare.call(this, type)
       }
     }
   }

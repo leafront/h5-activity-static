@@ -22,6 +22,10 @@ module.exports = {
       '/ouser-web': {
         target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
+      },
+      '/opay-web': {
+        target: 'http://m.lyf.edu.laiyifen.com',
+        changeOrigin: true
       }
     },
     // Various Dev Server settings

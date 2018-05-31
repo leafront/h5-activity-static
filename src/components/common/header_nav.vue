@@ -2,7 +2,7 @@
   <div class="ui-header-nav" :class="{'active': headerMenu}">
     <i class="ui-header-arrow"></i>
     <ul class="ui-header-nav-list">
-      <li>
+      <li @click="linkAction('/index.html')">
         <svg class="icon icon-home" aria-hidden="true">
           <use xlink:href="#icon-home"></use>
         </svg>
@@ -15,7 +15,7 @@
         </svg>
         <span class="font">分享</span>
       </li>
-      <li>
+      <li @click="linkAction('/my/home.html')">
         <svg class="icon icon-my" aria-hidden="true">
           <use xlink:href="#icon-wode"></use>
         </svg>
@@ -86,11 +86,6 @@
   import {mapGetters, mapActions} from 'vuex'
 
   export default {
-    data () {
-      return {
-
-      }
-    },
     computed: {
       ...mapGetters({
         'headerMenu': 'getHeaderMenu'
@@ -101,11 +96,14 @@
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
+      linkAction (url) {
+        location.href = url
+      },
       pageAction (url){
         location.href = ''
       },
       showShareMenu () {
-       this.$emit('weixinShare')
+       this.$emit('weixinShare','click')
       }
     }
   }
