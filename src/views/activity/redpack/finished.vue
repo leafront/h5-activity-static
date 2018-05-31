@@ -172,8 +172,11 @@
               userCouponList,
               role
             } = data
-            this.friendCouponList = friendCouponList
-            this.couponMoney = userCouponList[0].couponMoney
+
+            if (role == 0 || role == 1) {
+              this.friendCouponList = friendCouponList
+              this.couponMoney = userCouponList[0].couponMoney
+            }
 
             const searchPrams = location.search
 

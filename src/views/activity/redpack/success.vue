@@ -162,20 +162,20 @@
               userCouponList,
               activityStatus,
               friendCouponList,
-              startTime,
-              endTime,
               userId,
               role
             } = data
 
-            this.couponMoney = (userCouponList.length && userCouponList[0].couponMoney) || ""
-            this.startTime = startTime
-            this.endTime = endTime
-            let couponAmount = ''
+            if (role == 0 || role == 1) {
+              this.couponMoney = userCouponList[0].couponMoney
+            }
 
+            let couponAmount = ''
             friendCouponList.some((item) => {
               if (userId == item.userId) {
                 couponAmount = item.couponMoney
+                this.startTime = item.startTime
+                this.endTime = item.endTime
                 return true
               } else {
                 return false

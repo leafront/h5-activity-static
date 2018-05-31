@@ -10,19 +10,16 @@
     </AppHeader>
     <HeaderNav @weixinShare="weixinShare"></HeaderNav>
     <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView}">
-      <div class="redpack-bg"  v-if="redpackImage" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
+      <div class="redpack-bg" v-if="redpackImage" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="invite-title">
           <div class="invite-left-tit-bg">
           </div>
           <div class="invite-title-txt">
-            <p>恭喜您获得{{couponMoney}}元红包</p>
+            <p>邀请{{needHelpCount}}位好友帮忙拆红包</p>
           </div>
           <div class="invite-right-tit-bg">
           </div>
-        </div>
-        <div class="invite-help">
-          <p>邀请{{needHelpCount}}位好友帮忙拆红包</p>
         </div>
         <div class="redpack-share-btn invite-share-btn" @click="weixinShare('click')">
           <span>立即分享</span>
@@ -137,17 +134,19 @@
               needHelpCount,
               role
             } = data
-            this.couponMoney = userCouponList[0].couponMoney
-            this.needHelpCount = needHelpCount
             const searchPrams = location.search
+            if (role == 0 || role == 1) {
+              this.couponMoney = userCouponList[0].couponMoney
+              this.needHelpCount = needHelpCount
+            }
             if (role == 2) {
-              this.pageAction('/activity/redpack/receive' + searchPrams)
+              //this.pageAction('/activity/redpack/receive' + searchPrams)
 
             } else if(activityStatus == 0) {  //进行中
 
               this.pageAction('/activity/redpack/start' + searchPrams)
 
-            }else if (activityStatus == 2) {
+            } else if (activityStatus == 2) {
               this.pageAction('/activity/redpack/finished' + searchPrams)
             } else if (activityStatus == 3) {
               this.pageAction('/activity/redpack/success' + searchPrams)
@@ -190,7 +189,7 @@
     justify-content: center;
     p{
       color: #fde284;
-      font-size: .48rem;
+      font-size: .4rem;
     }
 
   }

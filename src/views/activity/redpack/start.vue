@@ -15,7 +15,7 @@
         <div class="start-tips">
           <h4 class="c3">还有<strong>{{showCountTime}}</strong>即将失效</h4>
           <p class="c3" v-for="(item) in friendCouponList"><b>{{item.hideMobile}}</b>已帮您拆红包</p>
-          <p class="c3">还需{{needHelpCount}}位好友</p>
+          <p class="c3" v-if="needHelpCount">还需{{needHelpCount}}位好友</p>
         </div>
         <div class="redpack-share-btn start-share-btn" @click="weixinShare('click')">
           <span>立即分享</span>

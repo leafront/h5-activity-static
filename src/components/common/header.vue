@@ -22,8 +22,7 @@
     props:['backFn','title','isBorder'],
     data () {
       return {
-        isApp: utils.isApp(),
-        isWeixin: utils.weixin()
+        isApp: utils.isApp()
       }
     },
     created () {
