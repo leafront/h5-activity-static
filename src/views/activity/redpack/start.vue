@@ -74,6 +74,7 @@
     created () {
       this.updatePageView(false)
       this.showLoading()
+      this.shareConfig = wx_share.shareConfig.call(this)
 
       Promise.all([
         this.getRedPackDetail(),
@@ -128,13 +129,6 @@
           this.showCountTime = showCountTimeStr == -1 ? '00:00:00' : showCountTimeStr
         },1000)
       },
-      toggleHeaderMenu () {
-        if (this.headerMenu) {
-          this.updateHeaderMenu(false)
-        } else {
-          this.updateHeaderMenu(true)
-        }
-      },
       getSystemTimes () {
         return getSystemTimes.call(this)
       },
@@ -167,7 +161,7 @@
               this.pageAction('/activity/redpack/receive' + searchPrams)
 
             } else if (activityStatus == 1) {
-              this.$toast('活动已超时')
+              this.pageAction('/activity/redpack/invalid' + searchPrams)
             } else if (activityStatus == 2) {
               this.pageAction('/activity/redpack/finished' + searchPrams)
             } else if (activityStatus == 3) {
@@ -186,7 +180,7 @@
         })
       },
       pageAction (url) {
-        this.$router.push(url)
+        this.$router.replace(url)
       },
       getRedPackCode () {
         const { orderCode } = this.$route.query

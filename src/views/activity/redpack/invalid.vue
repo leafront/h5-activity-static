@@ -16,7 +16,6 @@
       <div class="redpack-view-bg1"></div>
       <div class="redpack-view-bg2"></div>
       <div class="redpack-view-bg3"></div>
-      <UIShare :config="shareConfig"></UIShare>
     </div>
   </div>
 </template>
@@ -39,8 +38,6 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import { countTime } from './common'
-
   export default {
     data () {
       return {
@@ -53,7 +50,6 @@
     },
     components: {
       AppHeader,
-      HeaderNav,
       inviteRule
     },
     mixin: ['loading'],
@@ -94,7 +90,7 @@
         }
       },
       pageAction (url) {
-        this.$router.push(url)
+        this.$router.replace(url)
       },
       getRedPackDetail () {
         const {redpackCode} = this.$route.query
@@ -125,8 +121,6 @@
 
             } else if (activityStatus == 0) {  //进行中
               this.pageAction('/activity/redpack/start' + searchPrams)
-            } else if (activityStatus == 1) {
-              this.$toast('活动已超时')
             } else if (activityStatus == 2) {
               this.pageAction('/activity/redpack/finished' + searchPrams)
             } else if (activityStatus == 3) {
@@ -161,13 +155,6 @@
             this.$toast(result.message)
           }
         })
-      },
-      toggleHeaderMenu () {
-        if (this.headerMenu) {
-          this.updateHeaderMenu(false)
-        } else {
-          this.updateHeaderMenu(true)
-        }
       }
     }
   }

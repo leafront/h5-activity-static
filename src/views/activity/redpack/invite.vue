@@ -29,8 +29,6 @@
 
 <script type="text/javascript">
 
-  import HeaderNav from '@/components/common/header_nav'
-
   import AppHeader from '@/components/common/header'
 
   import UIShare from '@/components/widget/ui-share'
@@ -62,7 +60,6 @@
     },
     components: {
       AppHeader,
-      HeaderNav,
       UIShare,
       inviteRule
     },
@@ -92,6 +89,7 @@
           this.shareConfig = wx_share.shareConfig.call(this)
           this.getRedPackDetail()
         } else {
+          this.shareConfig = wx_share.shareConfig.call(this)
           this.$hideLoading()
           this.updatePageView(true)
         }
@@ -143,7 +141,7 @@
             } else if (activityStatus == 0) {  //进行中
               this.pageAction('/activity/redpack/start' + searchPrams)
             } else if (activityStatus == 1) {
-              this.$toast('活动已超时')
+              this.pageAction('/activity/redpack/invalid' + searchPrams)
             } else if (activityStatus == 2) {
               this.pageAction('/activity/redpack/finished' + searchPrams)
             } else if (activityStatus == 3) {
@@ -171,15 +169,8 @@
           }
         }
       },
-      toggleHeaderMenu () {
-        if (this.headerMenu) {
-          this.updateHeaderMenu(false)
-        } else {
-          this.updateHeaderMenu(true)
-        }
-      },
       pageAction (url) {
-        this.$router.push(url)
+        this.$router.replace(url)
       },
       weixinShare () {
         this.getRedPackCode().then((data) => {

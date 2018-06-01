@@ -25,6 +25,8 @@ import dialog from '@/components/dialog'
 
 import { loading } from '@/mixins/loading'
 
+require('@/widget/H5EventEmit')
+
 Vue.mixin(loading)
 
 Vue.use(dialog)

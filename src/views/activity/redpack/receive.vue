@@ -121,13 +121,6 @@
           }
         }
       },
-      toggleHeaderMenu() {
-        if (this.headerMenu) {
-          this.updateHeaderMenu(false)
-        } else {
-          this.updateHeaderMenu(true)
-        }
-      },
       /**
        * 显示倒计时时间
        */
@@ -159,10 +152,25 @@
         }).then((result) => {
 
           const data = result.data
+          const {
+            overTime,
+            activityStatus
+          } = data
+          const searchPrams = location.search
           if (result.code == 0 && data) {
-            const {
-              overTime
-            } = data
+            if (activityStatus == 0) {  //进行中
+              this.pageAction('/activity/redpack/start' + searchPrams)
+            } else if (activityStatus == 1) {
+              this.pageAction('/activity/redpack/invalid' + searchPrams)
+            } else if (activityStatus == 2) {
+              this.pageAction('/activity/redpack/finished' + searchPrams)
+            } else if (activityStatus == 3) {
+              this.pageAction('/activity/redpack/success' +  searchPrams)
+            } else if (activityStatus == 4) {
+              this.pageAction('/activity/redpack/stop')
+            } else if (activityStatus == 5) {
+              this.pageAction('/activity/redpack/invalid' + searchPrams)
+            }
             this.overTime = overTime
             return data.overTime
 
@@ -226,7 +234,7 @@
 
       },
       pageAction (url) {
-        this.$router.push(url)
+        this.$router.replace(url)
       },
       /**
        * 拆开启红包
@@ -274,7 +282,7 @@
               this.pageAction('/activity/redpack/start'+ searchPrams)
 
             } else if (activityStatus == 1) {
-              this.$toast('活动已超时')
+              this.pageAction('/activity/redpack/invalid' + searchPrams)
             } else if (activityStatus == 2) {
               this.pageAction('/activity/redpack/finish' + searchPrams)
             } else if (activityStatus == 3) {

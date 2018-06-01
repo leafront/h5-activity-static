@@ -101,14 +101,7 @@
         }
       },
       pageAction (url) {
-        this.$router.push(url)
-      },
-      toggleHeaderMenu () {
-        if (this.headerMenu) {
-          this.updateHeaderMenu(false)
-        } else {
-          this.updateHeaderMenu(true)
-        }
+        this.$router.replace(url)
       },
       getDownloadLink () {
         const areaCode = common.getAreaCode().areaCode
@@ -164,7 +157,7 @@
             } else if(activityStatus == 0) {  //进行中
               this.pageAction('/activity/redpack/start' + searchPrams)
             } else if (activityStatus == 1) {
-              this.$toast('活动已超时')
+              this.pageAction('/activity/redpack/invalid' + searchPrams)
             } else if (activityStatus == 3) {
               this.pageAction('/activity/redpack/success' + searchPrams)
             } else if (activityStatus == 4) {

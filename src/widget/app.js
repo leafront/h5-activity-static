@@ -53,8 +53,6 @@ const app = {
       // console.log("callback:" + funcName)
     }
 
-    console.log(msgParams)
-
     if (utils.ios()) {
       window.webkit.messageHandlers.mobileAPI.postMessage(msgParams);
     } else if (utils.android()) {

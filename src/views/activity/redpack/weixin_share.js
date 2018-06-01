@@ -2,6 +2,8 @@ import weixin_share from '@/common/weixin_share'
 
 import utils from '@/widget/utils'
 
+import app from '@/widget/app'
+
 import config from '@/config/index'
 
 
@@ -38,16 +40,13 @@ const wx_share = {
         url160x160: shareConfig.pic,
         pic: shareConfig.pic
       },() => {
-        this.updateHeaderMenu(false)
       })
     } else {
 
       if (utils.weixin()) {
         weixin_share.weixinShare(this.shareConfig)
       }
-
       this.updateShareMenu(true)
-      this.updateHeaderMenu(false)
     }
   }
 }

@@ -153,7 +153,7 @@
 
         const data = {
           mobile,
-          captchasType: 1,
+          captchasType: 3,
           imageKey
         }
 
