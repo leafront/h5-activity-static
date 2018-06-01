@@ -97,12 +97,12 @@
         'updateShareMenu'
       ]),
       backAction () {
-        const from = this.$route.query.from
+        const returnurl = this.$route.query.returnurl
         if (utils.isApp()) {
           app.back('refresh','forceBack')
         } else {
-          if (from) {
-            location.replace(from)
+          if (returnurl) {
+            location.replace(returnurl)
           } else {
             location.href = '/index.html'
           }

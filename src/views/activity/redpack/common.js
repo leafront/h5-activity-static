@@ -6,7 +6,7 @@ import * as Model from '@/model/common'
 import utils from '@/widget/utils'
 
 const checkTime = (i)=> {
-  if (i<10) {
+  if (i < 10) {
     i = "0" + i
   }
   return i
@@ -29,19 +29,6 @@ export const countTime = (activityTimes,self) => {
     return hoursStr + ":" + minutesStr + ":" + secondsStr
 }
 
-export const redpackShareConfig = () => {
-  const redpackCode = utils.query('redpackCode')
-  const shareConfig = {
-    link: config.hostPath + `/activity/redpack/receive?redpackCode=${redpackCode}`,
-    url: config.hostPath + `/activity/redpack/receive?redpackCode=${redpackCode}`,
-    title:'速来！来伊份618狂欢，瓜分1亿红包',
-    desc: '我刚领到一个大红包，快帮我拆一下！拆者有份，你也有红包拿哦~',
-    description: '我刚领到一个大红包，快帮我拆一下！拆者有份，你也有红包拿哦~',
-    imgUrl: config.staticPath + '/images/redpack_icon.png?v=' + config.getTime,
-    pic: config.staticPath + '/images/redpack_icon.png?v=' + config.getTime
-  }
-  return shareConfig
-}
 
 export const getSystemTimes = () => {
   return Model.getSystemTime({

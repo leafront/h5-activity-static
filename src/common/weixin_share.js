@@ -296,7 +296,7 @@ weixin_share.initWeixinShare();
 //默认分享内容
 weixin_share.weixinShare({
     link: window.location.href,
-    title: Vue.mallSettings.getMallName(),
+    title: mall_setting.getMallName(),
     desc: window.location.href,
     imgUrl: 'http://cdn.oudianyun.com/lyf/prod/back-cms/1497702554228_508_32.png@base@tag=imgScale&q=80'
 })

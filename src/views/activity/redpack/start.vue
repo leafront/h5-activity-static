@@ -43,22 +43,20 @@
 
   import wx_share from './weixin_share'
 
-  import { getSystemTimes, countTime, redpackShareConfig, linkInfo } from './common'
-
-  const shareConfig = redpackShareConfig()
+  import { getSystemTimes, countTime, linkInfo } from './common'
 
   export default {
     data () {
       return {
         title: '拆红包',
         isBorder: true,
-        shareConfig,
         redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v=' + config.getTime,
         friendCouponList: [],
         overTime: '',
         showCountTime: '',
         countTimer:  null,
-        needHelpCount: 0
+        needHelpCount: 0,
+        shareConfig: {}
       }
     },
     components: {
@@ -91,7 +89,6 @@
           this.showCountTime = '00:00:00'
         }
       })
-
     },
     methods: {
       ...mapActions([
@@ -100,12 +97,12 @@
         'updateShareMenu'
       ]),
       backAction () {
-        const from = this.$route.query.from
+        const returnurl = this.$route.query.returnurl
         if (utils.isApp()) {
           app.back('refresh','forceBack')
         } else {
-          if (from) {
-            location.replace(from)
+          if (returnurl) {
+            location.replace(returnurl)
           } else {
             location.href = '/index.html'
           }
@@ -142,7 +139,8 @@
         return getSystemTimes.call(this)
       },
       getRedPackDetail () {
-        const {redpackCode} = this.$route.query
+        const { redpackCode } = this.$route.query
+
         return Model.getRedPackDetail({
           type: 'POST',
           data: {
@@ -204,6 +202,7 @@
           if (result.code == 0) {
             this.updatePageView(true)
             this.redpackCode = data.shareCode
+            this.shareConfig = wx_share.shareConfig.call(this)
             return data
           } else {
             this.$toast(result.message)
@@ -216,7 +215,7 @@
         const { redpackCode } = this.$route.query
 
         if (redpackCode) {
-           wx_share.weixinShare.call(this, type)
+           wx_share.weixinShare.call(this)
         } else {
          this.getRedPackCode().then((data) => {
           if (data) {

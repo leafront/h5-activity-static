@@ -51,7 +51,7 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import { countTime, getSystemTimes, redpackShareConfig } from './common'
+  import { countTime, getSystemTimes } from './common'
 
   import * as Model from '@/model/redpack'
 
@@ -110,12 +110,12 @@
         'updateImageValidate'
       ]),
       backAction () {
-        const from = this.$route.query.from
+        const returnurl = this.$route.query.returnurl
         if (utils.isApp()) {
           app.back('refresh','forceBack')
         } else {
-          if (from) {
-            location.replace(from)
+          if (returnurl) {
+            location.replace(returnurl)
           } else {
             location.href = '/index.html'
           }
@@ -265,6 +265,7 @@
           const data = result.data
           if (result.code == 0 && data) {
 
+            app.setUserToken(data.ut)
             const searchPrams = location.search
             const activityStatus = data.activityStatus
 

@@ -3,10 +3,10 @@
     <div class="ui-mask" :class="{'active': shareMenu}" @click="updateShareMenu(false)"></div>
     <div class="ui-share-cont" :class="{'active':shareMenu}">
       <ul class="ui-share-list" id="shares">
-        <li><i class="ui-share-weixin-icon -mob-share-weixin"></i><span class="c3">微信</span></li>
-        <li><i class="ui-share-qq-icon -mob-share-qq"></i><span class="c3">QQ</span></li>
-        <li><i class="ui-share-qzone-icon -mob-share-qzone"></i><span class="c3">QQ空间</span></li>
-        <li><i class="ui-share-weibo-icon -mob-share-weibo"></i><span class="c3">新浪微博</span></li>
+        <li><i class="ui-share-icon ui-share-weixin-icon -mob-share-weixin"></i><span class="c3">微信</span></li>
+        <li><i class="ui-share-icon ui-share-qq-icon -mob-share-qq"></i><span class="c3">QQ</span></li>
+        <li><i class="ui-share-icon ui-share-qzone-icon -mob-share-qzone"></i><span class="c3">QQ空间</span></li>
+        <li><i class="ui-share-icon ui-share-weibo-icon -mob-share-weibo"></i><span class="c3">新浪微博</span></li>
       </ul>
       <button class="ui-cancel-button" @click="updateShareMenu(false)">取消分享</button>
     </div>
@@ -126,29 +126,19 @@
   .ui-share-icon {
     width: 1rem;
     height: 1rem;
+    background:url(../../images/share_sprite.png) no-repeat;
+    background-size: 4.29rem auto;
   }
   .ui-share-weixin-icon{
-    background:url(../../images/ui-share-weixin-icon.png) no-repeat;
-    background-size: 1rem auto;
-    width: 1rem;
-    height: 1rem;
+    background-position: -.03rem -.02rem;
   }
   .ui-share-qq-icon{
-    background:url(../../images/ui-share-qq-icon.png) no-repeat;
-    background-size: 1rem auto;
-    width: 1rem;
-    height: 1rem;
+    background-position: -1.1rem -.02rem;
   }
   .ui-share-qzone-icon{
-    background:url(../../images/ui-share-qzone-icon.png) no-repeat;
-    background-size: 1rem auto;
-    width: 1rem;
-    height: 1rem;
+    background-position: -2.17rem -.02rem;
   }
   .ui-share-weibo-icon{
-    background:url(../../images/ui-share-weibo-icon.png) no-repeat;
-    background-size: 1rem auto;
-    width: 1rem;
-    height: 1rem;
+   background-position: -3.24rem -.02rem;
   }
 </style>

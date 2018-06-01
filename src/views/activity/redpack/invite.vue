@@ -49,19 +49,15 @@
 
   import wx_share from './weixin_share'
 
-  import { redpackShareConfig } from './common'
-
-  const shareConfig = redpackShareConfig()
-
   export default {
     data () {
       return {
         title: '拆红包',
         isBorder: true,
-        shareConfig,
         redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v=' + config.getTime,
         couponMoney: "",
-        redpackCode: ''
+        redpackCode: '',
+        shareConfig: {}
       }
     },
     components: {
@@ -93,6 +89,7 @@
         const { orderCode,redpackCode } = this.$route.query
         if (redpackCode) {
           this.redpackCode = redpackCode
+          this.shareConfig = wx_share.shareConfig.call(this)
           this.getRedPackDetail()
         } else {
           this.$hideLoading()
@@ -113,6 +110,7 @@
           if (result.code == 0) {
             this.updatePageView(true)
             this.redpackCode = data.shareCode
+            this.shareConfig = wx_share.shareConfig.call(this)
             return data
           } else {
             this.$toast(result.message)
@@ -162,12 +160,12 @@
         })
       },
       backAction () {
-        const from = this.$route.query.from
+        const returnurl = this.$route.query.returnurl
         if (utils.isApp()) {
           app.back('refresh','forceBack')
         } else {
-          if (from) {
-            location.replace(from)
+          if (returnurl) {
+            location.replace(returnurl)
           } else {
             location.href = '/index.html'
           }
@@ -183,10 +181,10 @@
       pageAction (url) {
         this.$router.push(url)
       },
-      weixinShare (type) {
+      weixinShare () {
         this.getRedPackCode().then((data) => {
           if (data) {
-            wx_share.weixinShare.call(this, type)
+            wx_share.weixinShare.call(this)
           }
         })
       }

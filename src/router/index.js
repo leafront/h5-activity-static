@@ -19,7 +19,7 @@ const redPackSuccess = r => require.ensure([], () =>  r(require('@/views/activit
 
 const redPackStop = r => require.ensure([], () =>  r(require('@/views/activity/redpack/stop.vue')),'redPackStop')
 
-const redPackOvertime = r => require.ensure([], () =>  r(require('@/views/activity/redpack/overtime.vue')),'redPackOvertime')
+// const redPackOvertime = r => require.ensure([], () =>  r(require('@/views/activity/redpack/overtime.vue')),'redPackOvertime')
 
 Vue.use(Router)
 
@@ -79,13 +79,6 @@ export default new Router({
       path: '/activity/redpack/invalid',
       name: 'redPackInvalid',
       component: redPackInvalid,
-      meta: {
-        title: '拆红包'
-      }
-    },{
-      path: '/activity/redpack/overtime',
-      name: 'redPackOvertime',
-      component: redPackOvertime,
       meta: {
         title: '拆红包'
       }

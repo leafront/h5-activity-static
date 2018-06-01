@@ -153,7 +153,7 @@
 
         const data = {
           mobile,
-          captchasType: 3,
+          captchasType: 1,
           imageKey
         }
 
@@ -185,7 +185,6 @@
             this.$toast(result.message)
             this.$emit('startCountTime')
           } else if (result.code == 913) {
-
             this.$toast('您今天发送的短信验证码已超限了哦')
 
           } else if (result.code == 914) {   // 每小时内一个手机号发送超过10条，则需要图片验证码
@@ -200,6 +199,7 @@
             this.getImageKey()
             this.$toast(result.message)
           } else {
+            this.getImageKey()
             this.$toast(result.message)
           }
         })
