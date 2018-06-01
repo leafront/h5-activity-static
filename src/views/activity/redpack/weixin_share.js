@@ -10,12 +10,12 @@ import config from '@/config/index'
 const wx_share = {
   shareConfig  () {
     const redpackCode = this.redpackCode || utils.query('redpackCode')
-    const orderCode = utils.query('orderCode')
     let link = ''
+    const searchPath = location.search
     if (redpackCode) {
-      link = config.hostPath + `/activity/redpack/receive?orderCode=${orderCode}&redpackCode=${redpackCode}`
+      link = config.hostPath + `/activity/redpack/receive${searchPath}&redpackCode=${redpackCode}`
     } else {
-      link = config.hostPath + `/activity/redpack/receive?orderCode=${orderCode}`
+      link = config.hostPath + `/activity/redpack/receive${searchPath}`
     }
     const shareConfig = {
       link: link,

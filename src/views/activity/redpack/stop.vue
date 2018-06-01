@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper invite-view" :class="{'visibility': !pageView}">
+    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView}">
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="stop-tips">

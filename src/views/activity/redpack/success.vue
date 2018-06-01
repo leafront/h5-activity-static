@@ -147,8 +147,8 @@
             friendCouponList.some((item) => {
               if (userId == item.userId) {
                 couponAmount = item.couponMoney
-                this.startTime = item.startTime.slice(0,-9)
-                this.endTime = item.endTime.slice(0,-9)
+                this.startTime = item.startTime.slice(0,-9).replace(/\-/ig,'/')
+                this.endTime = item.endTime.slice(0,-9).replace(/\-/ig,'/')
                 return true
               } else {
                 return false
@@ -239,7 +239,7 @@
   }
 
   .redpack-success-money {
-    width: 1.4rem;
+    width: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -263,7 +263,7 @@
     flex-direction: column;
     color:#fde284;
     p{
-      font-size: .48rem;
+      font-size: .44rem;
       line-height: .6rem;
 
     }

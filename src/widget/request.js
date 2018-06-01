@@ -55,7 +55,7 @@ export default function request (url,options){
     ajax(defaults).then((results) => {
 
       if (results.code == "99" && process.env.NODE_ENV != 'develop') {
-
+        app.deleteUserToken()
         if (utils.isApp()) {
           app.login()
         } else {

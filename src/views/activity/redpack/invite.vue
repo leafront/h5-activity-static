@@ -83,7 +83,7 @@
         'updateShareMenu'
       ]),
       getRedPackInfo () {
-        const { orderCode,redpackCode } = this.$route.query
+        const { redpackCode } = this.$route.query
         if (redpackCode) {
           this.redpackCode = redpackCode
           this.shareConfig = wx_share.shareConfig.call(this)
@@ -173,11 +173,17 @@
         this.$router.replace(url)
       },
       weixinShare () {
-        this.getRedPackCode().then((data) => {
-          if (data) {
-            wx_share.weixinShare.call(this)
-          }
-        })
+        const { orderCode } = this.$route.query
+        if (!orderCode) {
+          this.$toast('获取分享失败订单号缺失')
+          return
+        } else {
+          this.getRedPackCode().then((data) => {
+            if (data) {
+              wx_share.weixinShare.call(this)
+            }
+          })
+        }
       }
     }
   }
