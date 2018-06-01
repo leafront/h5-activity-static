@@ -170,7 +170,7 @@
               } else if (activityStatus == 3) {
                 this.pageAction('/activity/redpack/success' + searchPrams)
               } else if (activityStatus == 4) {
-                this.pageAction('/activity/redpack/stop' + searchPrams)
+                //this.pageAction('/activity/redpack/stop' + searchPrams)
               } else if (activityStatus == 5) {
                 this.pageAction('/activity/redpack/invalid' + searchPrams)
               }
@@ -270,11 +270,14 @@
         if (!validate.isMessageCode(smsCodeStr)) {
           this.$toast('请输入正确的短信验证码')
         }
+
+        this.$showPageLoading()
         Model.openRedPack({
           type: 'POST',
           data
         }).then((result) => {
           const data = result.data
+          this.$hidePageLoading()
           if (result.code == 0 && data) {
 
             const  {
