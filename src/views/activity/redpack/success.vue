@@ -6,8 +6,8 @@
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="redpack-success">
-          <p class="c3">恭喜您！</p>
-          <p class="c3">成功帮好友获得一张<b>{{couponMoney}}</b>元优惠券</p>
+          <p class="c3" v-if="couponMoney">恭喜您！</p>
+          <p class="c3" v-if="couponMoney">成功帮好友获得一张<b>{{couponMoney}}</b>元优惠券</p>
           <h4 v-if="couponAmount">同时奖励您一张</h4>
         </div>
         <div class="invite-title" v-if="couponAmount">
@@ -19,7 +19,7 @@
             </div>
             <div class="redpack-success-discount">
               <p>{{couponAmount}}元无门槛券</p>
-              <span>{{startTime}}-{{startTime}}可用</span>
+              <span>{{startTime}}-{{endTime}}可用</span>
             </div>
           </div>
           <div class="invite-right-tit-bg">
@@ -51,8 +51,6 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import wx_share from './weixin_share'
-
   import * as Model from '@/model/redpack'
 
   import config from '@/config/index'
@@ -62,7 +60,6 @@
       return {
         title: '拆红包',
         isBorder: true,
-        shareConfig,
         redpackImage: config.staticPath + '/activity-static/images/redpack_finished_bg.jpg?v=' + config.getTime,
         downloadLink: '',
         couponMoney: '',
@@ -150,8 +147,8 @@
             friendCouponList.some((item) => {
               if (userId == item.userId) {
                 couponAmount = item.couponMoney
-                this.startTime = item.startTime
-                this.endTime = item.endTime
+                this.startTime = item.startTime.slice(0,-9)
+                this.endTime = item.endTime.slice(0,-9)
                 return true
               } else {
                 return false
@@ -161,24 +158,20 @@
             this.couponAmount = couponAmount
             const searchPrams = location.search
 
-            if (role == 2 && activityStatus == 0) {
-
-              this.pageAction('/activity/redpack/receive' + searchPrams)
-
-            } else if (activityStatus == 0) {  //进行中
-
-              this.pageAction('/activity/redpack/start' + searchPrams)
-
-            } else if (activityStatus == 1) {
-              this.pageAction('/activity/redpack/invalid' + searchPrams)
-            } else if (activityStatus == 2) {
-              this.pageAction('/activity/redpack/finished' + searchPrams)
-            } else if (activityStatus == 3) {
-
-            } else if (activityStatus == 4) {
-              this.pageAction('/activity/redpack/stop' + searchPrams)
-            } else if (activityStatus == 5) {
-              this.pageAction('/activity/redpack/invalid' + searchPrams)
+            if (role == 2) {
+              this.pageAction('/activity/redpack/receive'+ searchPrams)
+            } else {
+              if (activityStatus == 0) {
+                this.pageAction('/activity/redpack/start'+ searchPrams)
+              } else if (activityStatus == 1) {
+                this.pageAction('/activity/redpack/invalid' + searchPrams)
+              } else if (activityStatus == 2) {
+                this.pageAction('/activity/redpack/finished' + searchPrams)
+              } else if (activityStatus == 4) {
+                this.pageAction('/activity/redpack/stop' + searchPrams)
+              } else if (activityStatus == 5) {
+                this.pageAction('/activity/redpack/invalid' + searchPrams)
+              }
             }
 
           } else {

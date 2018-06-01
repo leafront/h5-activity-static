@@ -135,7 +135,7 @@
             } = data
 
             const searchPrams = location.search
-            if (role == 2 && activityStatus == 0) {
+            if (role == 2) {
               this.pageAction('/activity/redpack/receive' + searchPrams)
 
             } else if (activityStatus == 0) {  //进行中

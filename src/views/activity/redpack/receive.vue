@@ -154,22 +154,26 @@
           const data = result.data
           const {
             overTime,
-            activityStatus
+            activityStatus,
+            role
           } = data
           const searchPrams = location.search
           if (result.code == 0 && data) {
-            if (activityStatus == 0) {  //进行中
-              this.pageAction('/activity/redpack/start' + searchPrams)
-            } else if (activityStatus == 1) {
-              this.pageAction('/activity/redpack/invalid' + searchPrams)
-            } else if (activityStatus == 2) {
-              this.pageAction('/activity/redpack/finished' + searchPrams)
-            } else if (activityStatus == 3) {
-              this.pageAction('/activity/redpack/success' +  searchPrams)
-            } else if (activityStatus == 4) {
-              this.pageAction('/activity/redpack/stop')
-            } else if (activityStatus == 5) {
-              this.pageAction('/activity/redpack/invalid' + searchPrams)
+            if (role == 2) {
+            } else {
+              if (activityStatus == 0) {
+                this.pageAction('/activity/redpack/start'+ searchPrams)
+              } else if (activityStatus == 1) {
+                this.pageAction('/activity/redpack/invalid' + searchPrams)
+              } else if (activityStatus == 2) {
+                this.pageAction('/activity/redpack/finish' + searchPrams)
+              } else if (activityStatus == 3) {
+                this.pageAction('/activity/redpack/success' + searchPrams)
+              } else if (activityStatus == 4) {
+                this.pageAction('/activity/redpack/stop' + searchPrams)
+              } else if (activityStatus == 5) {
+                this.pageAction('/activity/redpack/invalid' + searchPrams)
+              }
             }
             this.overTime = overTime
             return data.overTime
@@ -273,24 +277,29 @@
           const data = result.data
           if (result.code == 0 && data) {
 
-            app.setUserToken(data.ut)
+            const  {
+              role,
+              activityStatus
+            } = data
+            utils.setCookie('lyfh5ut', data.ut);
+            utils.setCookie('ut', data.ut);
             const searchPrams = location.search
-            const activityStatus = data.activityStatus
 
-            if (activityStatus == 0) {  //进行中
-
-              this.pageAction('/activity/redpack/start'+ searchPrams)
-
-            } else if (activityStatus == 1) {
-              this.pageAction('/activity/redpack/invalid' + searchPrams)
-            } else if (activityStatus == 2) {
-              this.pageAction('/activity/redpack/finish' + searchPrams)
-            } else if (activityStatus == 3) {
-              this.pageAction('/activity/redpack/success' + searchPrams)
-            } else if (activityStatus == 4) {
-              this.pageAction('/activity/redpack/stop' + searchPrams)
-            } else if (activityStatus == 5) {
-              this.pageAction('/activity/redpack/invalid' + searchPrams)
+            if (role == 2) {  //进行中
+            } else {
+              if (activityStatus == 0) {
+                this.pageAction('/activity/redpack/start'+ searchPrams)
+              } else if (activityStatus == 1) {
+                this.pageAction('/activity/redpack/invalid' + searchPrams)
+              } else if (activityStatus == 2) {
+                this.pageAction('/activity/redpack/finished' + searchPrams)
+              } else if (activityStatus == 3) {
+                this.pageAction('/activity/redpack/success' + searchPrams)
+              } else if (activityStatus == 4) {
+                this.pageAction('/activity/redpack/stop' + searchPrams)
+              } else if (activityStatus == 5) {
+                this.pageAction('/activity/redpack/invalid' + searchPrams)
+              }
             }
 
           } else {

@@ -151,21 +151,21 @@
             }
             const searchPrams = location.search
 
-            if (role == 2 && activityStatus == 0) {
+            if (role == 2) {
               this.pageAction('/activity/redpack/receive' + searchPrams)
-
-            } else if(activityStatus == 0) {  //进行中
-              this.pageAction('/activity/redpack/start' + searchPrams)
-            } else if (activityStatus == 1) {
-              this.pageAction('/activity/redpack/invalid' + searchPrams)
-            } else if (activityStatus == 3) {
-              this.pageAction('/activity/redpack/success' + searchPrams)
-            } else if (activityStatus == 4) {
-              this.pageAction('/activity/redpack/stop' + searchPrams)
-            } else if (activityStatus == 5) {
-              this.pageAction('/activity/redpack/invalid' + searchPrams)
+            } else {
+              if (activityStatus == 0) {
+                this.pageAction('/activity/redpack/start' + searchPrams)
+              } else if (activityStatus == 1) {
+                this.pageAction('/activity/redpack/invalid' + searchPrams)
+              } else if (activityStatus == 3) {
+                this.pageAction('/activity/redpack/success' + searchPrams)
+              } else if (activityStatus == 4) {
+                this.pageAction('/activity/redpack/stop' + searchPrams)
+              } else if (activityStatus == 5) {
+                this.pageAction('/activity/redpack/invalid' + searchPrams)
+              }
             }
-
           } else {
             this.$toast(result.message)
           }

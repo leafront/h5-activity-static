@@ -23,8 +23,8 @@ const wx_share = {
       title:'速来！来伊份618狂欢，瓜分1亿红包',
       desc: '我刚领到一个大红包，快帮我拆一下！拆者有份，你也有红包拿哦~',
       description: '我刚领到一个大红包，快帮我拆一下！拆者有份，你也有红包拿哦~',
-      imgUrl: config.staticPath + '/images/redpack_icon.png?v=' + config.getTime,
-      pic: config.staticPath + '/images/redpack_icon.png?v=' + config.getTime
+      imgUrl: config.staticPath + '/activity-static/images/redpack_icon.png?v=' + config.getTime,
+      pic: config.staticPath + '/activity-static/images/redpack_icon.png?v=' + config.getTime
     }
     return shareConfig
   },

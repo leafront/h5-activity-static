@@ -116,17 +116,18 @@
             this.friendCouponList = data.friendCouponList
             this.overTime = overTime
             const searchPrams = location.search
-            if (role == 2 && activityStatus == 0) {
-              this.pageAction('/activity/redpack/receive' + searchPrams)
-
-            } else if (activityStatus == 0) {  //进行中
-              this.pageAction('/activity/redpack/start' + searchPrams)
-            } else if (activityStatus == 2) {
-              this.pageAction('/activity/redpack/finished' + searchPrams)
-            } else if (activityStatus == 3) {
-              this.pageAction('/activity/redpack/success' + searchPrams)
-            } else if (activityStatus == 4) {
-              this.pageAction('/activity/redpack/stop' + searchPrams)
+            if (role == 2) {  //进行中
+              this.pageAction('/activity/redpack/receive'+ searchPrams)
+            } else {
+              if (activityStatus == 0) {
+                this.pageAction('/activity/redpack/start'+ searchPrams)
+              } else if (activityStatus == 2) {
+                this.pageAction('/activity/redpack/finished' + searchPrams)
+              } else if (activityStatus == 3) {
+                this.pageAction('/activity/redpack/success' + searchPrams)
+              } else if (activityStatus == 4) {
+                this.pageAction('/activity/redpack/stop' + searchPrams)
+              }
             }
 
           } else {

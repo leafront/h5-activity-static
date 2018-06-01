@@ -39,14 +39,11 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import { countTime } from './common'
-
   export default {
     data () {
       return {
         title: '拆红包',
         isBorder: true,
-        shareConfig,
         redpackImage: config.staticPath + '/activity-static/images/redpack_stop_bg.jpg?v=' + config.getTime,
         downloadLink: '',
         couponMoney: '',
@@ -129,21 +126,20 @@
             this.friendCouponList = friendCouponList
             const searchPrams = location.search
 
-            if (role == 2 && activityStatus == 0) {
-              this.pageAction('/activity/redpack/receive' + searchPrams)
-
-            } else if (activityStatus == 0) {  //进行中
-
-              this.pageAction('/activity/redpack/start' + searchPrams)
-
-            } else if (activityStatus == 1) {
-              this.pageAction('/activity/redpack/invalid' + searchPrams)
-            } else if (activityStatus == 2) {
-              this.pageAction('/activity/redpack/finished' + searchPrams)
-            } else if (activityStatus == 3) {
-              this.pageAction('/activity/redpack/success' + searchPrams)
-            } else if (activityStatus == 5) {
-              this.pageAction('/activity/redpack/invalid' + searchPrams)
+            if (role == 2) {
+              this.pageAction('/activity/redpack/receive'+ searchPrams)
+            } else {
+              if (activityStatus == 0) {
+                this.pageAction('/activity/redpack/start'+ searchPrams)
+              } else if (activityStatus == 1) {
+                this.pageAction('/activity/redpack/invalid' + searchPrams)
+              } else if (activityStatus == 2) {
+                this.pageAction('/activity/redpack/finished' + searchPrams)
+              } else if (activityStatus == 3) {
+                this.pageAction('/activity/redpack/success' + searchPrams)
+              } else if (activityStatus == 5) {
+                this.pageAction('/activity/redpack/invalid' + searchPrams)
+              }
             }
 
           } else {
