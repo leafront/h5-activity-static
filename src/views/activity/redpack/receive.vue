@@ -170,7 +170,7 @@
               } else if (activityStatus == 3) {
                 this.pageAction('/activity/redpack/success' + searchPrams)
               } else if (activityStatus == 4) {
-                //this.pageAction('/activity/redpack/stop' + searchPrams)
+                this.pageAction('/activity/redpack/stop' + searchPrams)
               } else if (activityStatus == 5) {
                 this.pageAction('/activity/redpack/invalid' + searchPrams)
               }
