@@ -89,8 +89,12 @@
       },
       linkAction (url) {
 
-        if (url) {
-          location.href = url
+        if (utils.isApp()) {
+          location.href = 'lyf:home'
+        } else {
+          if (url) {
+            location.href = url
+          }
         }
       },
       pageAction (url) {

@@ -107,8 +107,12 @@
       },
       linkAction (url) {
 
-        if (url) {
-          location.href = url
+        if (utils.isApp()) {
+          location.href = 'my/coupons-list.html'
+        } else {
+          if (url) {
+            location.href = url
+          }
         }
       },
       pageAction (url) {
