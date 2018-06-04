@@ -53,10 +53,10 @@ module.exports = {
   },
   edu: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../target/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, '../target'),
     assetsSubDirectory: 'activity-static',
     assetsPublicPath: 'http://m.lyf.edu.laiyifen.com/',
 
@@ -84,10 +84,10 @@ module.exports = {
 
   release: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../target/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, '../target'),
     assetsSubDirectory: 'activity-static',
     assetsPublicPath: 'http://m.stg.laiyifen.com/',
 
@@ -114,10 +114,10 @@ module.exports = {
   },
   production: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../target/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, '../target'),
     assetsSubDirectory: 'activity-static',
     assetsPublicPath: 'http://m.static.laiyifen.com/',
 

@@ -3,7 +3,7 @@
     <AppHeader :title="title" :isBorder="isBorder"></AppHeader>
     <div class="scroll-view-wrapper">
       <div class="svip_error">
-        <img src="../images/svip_error.png"/>
+        <img src="../images/error.png"/>
       </div>
     </div>
   </div>
