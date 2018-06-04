@@ -149,6 +149,7 @@
           data: {
             shareCode: redpackCode
           }
+
         }).then((result) => {
 
           const data = result.data
