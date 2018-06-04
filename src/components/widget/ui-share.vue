@@ -19,7 +19,9 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  require('@/libs/mob-share')
+  import utils from '@/widget/utils'
+
+  import * as Model from '@/model/common'
 
   export default {
     data () {
@@ -42,6 +44,9 @@
           this.updateShareMenu(false)
         }
       }
+    },
+    created () {
+      utils.loadScript('/activity-static/mob-share/index.js')
     },
     methods: {
       ...mapActions([

@@ -1,3 +1,4 @@
+import config from '@/config/index'
 
 const utils = {
   ua: navigator.userAgent,
@@ -401,8 +402,18 @@ const utils = {
     }
   },
   trim (text) {
-    return  text.replace(/\s+/g,"");
+    return text.replace(/\s+/g, "")
+  },
+  loadScript (url,success) {
+    const script = document.createElement("script")
+    script.type = 'text/javascript'
+    script.src = config.staticPath + url
+    script.defer = 'defer'
+    document.getElementsByTagName('head')[0].appendChild(script)
+    script.onload = () => {
+      success && success()
+    }
   }
 }
 
-export default utils;
+export default utils
