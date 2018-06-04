@@ -167,7 +167,7 @@
               } else if (activityStatus == 1) {
                 this.pageAction('/activity/redpack/invalid' + searchPrams)
               } else if (activityStatus == 2) {
-                this.pageAction('/activity/redpack/finish' + searchPrams)
+                this.pageAction('/activity/redpack/finished' + searchPrams)
               } else if (activityStatus == 3) {
                 this.pageAction('/activity/redpack/success' + searchPrams)
               } else if (activityStatus == 4) {
