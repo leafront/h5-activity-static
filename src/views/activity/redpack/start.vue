@@ -18,6 +18,7 @@
       <div class="redpack-view-bg1"></div>
       <div class="redpack-view-bg2"></div>
       <div class="redpack-view-bg3"></div>
+	    <UIShare :config="shareConfig"></UIShare>
     </div>
   </div>
 </template>

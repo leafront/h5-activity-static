@@ -22,6 +22,7 @@
       <div class="redpack-view-bg2"></div>
       <div class="redpack-view-bg3"></div>
       <inviteRule></inviteRule>
+	    <UIShare :config="shareConfig"></UIShare>
     </div>
   </div>
 </template>
@@ -172,19 +173,24 @@
       pageAction (url) {
         this.$router.replace(url)
       },
-      weixinShare () {
-        const { orderCode } = this.$route.query
-        if (!orderCode) {
-          this.$toast('获取分享失败订单号缺失')
-          return
-        } else {
-          this.getRedPackCode().then((data) => {
-            if (data) {
-              wx_share.weixinShare.call(this)
-            }
-          })
-        }
-      }
+			weixinShare () {
+
+				const {redpackCode, orderCode} = this.$route.query
+
+				if (redpackCode) {
+					wx_share.weixinShare.call(this)
+				} else {
+					if (!orderCode) {
+						this.$toast('获取分享失败订单号缺失')
+						return
+					}
+					this.getRedPackCode().then((data) => {
+						if (data) {
+							wx_share.weixinShare.call(this)
+						}
+					})
+				}
+			}
     }
   }
 </script>
