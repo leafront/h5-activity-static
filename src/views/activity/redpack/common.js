@@ -1,6 +1,4 @@
 
-import config from '@/config/index'
-
 import * as Model from '@/model/common'
 
 import utils from '@/widget/utils'
