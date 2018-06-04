@@ -119,7 +119,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../target'),
     assetsSubDirectory: 'activity-static',
-    assetsPublicPath: 'http://m.static.laiyifen.com/',
+    assetsPublicPath: 'https://mstatic.laiyifen.com/',
 
     /**
      * Source Maps
