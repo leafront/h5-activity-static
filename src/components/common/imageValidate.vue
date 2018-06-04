@@ -4,7 +4,7 @@
     <div class="ui-image" :class="{'active': imageValidate}">
       <h4 class="c3">请输入图片验证码</h4>
       <div class="ui-image-cont">
-        <input type="tel" autofocus="autofocus" class="ui-image-code" v-model="verifyCode" maxlength="6" placeholder="请输入验证码"/>
+        <input type="tel" class="ui-image-code" v-model="verifyCode" maxlength="6" placeholder="请输入验证码"/>
         <div class="ui-image-close" :class="{'active': verifyCode}" @click="deleteVerifyCode">
           <svg class="icon icon-close" aria-hidden="true">
             <use xlink:href="#icon-close"></use>

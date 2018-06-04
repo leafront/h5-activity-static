@@ -90,7 +90,7 @@
       linkAction (url) {
 
         if (utils.isApp()) {
-          location.href = 'lyf:home'
+          location.href = 'lyf://home'
         } else {
           if (url) {
             location.href = url

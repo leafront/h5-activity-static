@@ -108,7 +108,7 @@
       linkAction (url) {
 
         if (utils.isApp()) {
-          location.href = 'my/coupons-list.html'
+          location.href = '/my/coupons-list.html'
         } else {
           if (url) {
             location.href = url

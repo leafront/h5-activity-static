@@ -14,7 +14,7 @@
           <div class="invite-right-tit-bg">
           </div>
         </div>
-        <div class="redpack-share-btn invite-share-btn" @click="weixinShare">
+        <div class="redpack-share-btn invite-share-btn" v-if="isApp" @click="weixinShare">
           <span>立即分享</span>
         </div>
       </div>
@@ -22,7 +22,6 @@
       <div class="redpack-view-bg2"></div>
       <div class="redpack-view-bg3"></div>
       <inviteRule></inviteRule>
-      <UIShare :config="shareConfig"></UIShare>
     </div>
   </div>
 </template>
@@ -55,7 +54,8 @@
         redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v=' + config.getTime,
         couponMoney: "",
         redpackCode: '',
-        shareConfig: {}
+        shareConfig: {},
+        isApp: utils.isApp()
       }
     },
     components: {
