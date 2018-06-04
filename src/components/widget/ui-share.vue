@@ -22,6 +22,8 @@
   import utils from '@/widget/utils'
 
   import * as Model from '@/model/common'
+  
+  require('@/libs/mob-share')
 
   export default {
     data () {
@@ -44,9 +46,6 @@
           this.updateShareMenu(false)
         }
       }
-    },
-    created () {
-      utils.loadScript('/activity-static/mob-share/index.js')
     },
     methods: {
       ...mapActions([
