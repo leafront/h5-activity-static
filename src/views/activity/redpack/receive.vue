@@ -153,13 +153,13 @@
         }).then((result) => {
 
           const data = result.data
-          const {
-            overTime,
-            activityStatus,
-            role
-          } = data
           const searchPrams = location.search
           if (result.code == 0 && data) {
+            const {
+              overTime,
+              activityStatus,
+              role
+            } = data
             if (role == 2) {
             } else {
               if (activityStatus == 0) {
