@@ -124,7 +124,7 @@
               this.pageAction('/activity/redpack/receive'+ searchPrams)
             } else {
               if (activityStatus == 0) {
-                this.pageAction('/activity/redpack/start'+ searchPrams)
+								location.href = '/activity/redpack/start' + searchPrams
               } else if (activityStatus == 2) {
                 this.pageAction('/activity/redpack/finished' + searchPrams)
               } else if (activityStatus == 3) {

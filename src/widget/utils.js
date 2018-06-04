@@ -408,7 +408,6 @@ const utils = {
     const script = document.createElement("script")
     script.type = 'text/javascript'
     script.src = config.staticPath + url
-    script.defer = 'defer'
     document.getElementsByTagName('head')[0].appendChild(script)
     script.onload = () => {
       success && success()

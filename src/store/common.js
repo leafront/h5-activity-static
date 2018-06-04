@@ -13,7 +13,6 @@ const getters = {
   getHeaderMenu: state => state.headerMenu,
   getShareMenu: state => state.shareMenu,
   getImageValidate: state => state.imageValidate
-
 }
 
 const actions = {
