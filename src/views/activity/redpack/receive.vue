@@ -90,16 +90,21 @@
 
       this.updatePageView(false)
       this.showLoading()
-      this.getRedPackDetail().then((result) => {
-        this.$hideLoading()
+      this.getRedPackCode().then((data) => {
+        if (data) {
+          this.getRedPackDetail(data).then((result) => {
+            this.$hideLoading()
 
-        if (result) {
-          this.startShowCountTime(result)
-          this.updatePageView(true)
-        } else {
-          this.showCountTime = '00:00:00'
+            if (result) {
+              this.startShowCountTime(result)
+              this.updatePageView(true)
+            } else {
+              this.showCountTime = '00:00:00'
+            }
+          })
         }
       })
+
 
     },
     methods: {
@@ -141,18 +146,41 @@
           this.showCountTime = showCountTimeStr == -1 ? '00:00:00' : showCountTimeStr
         },1000)
       },
-      getRedPackDetail () {
-        const {redpackCode} = this.$route.query
+      getRedPackCode () {
+        const { orderCode, redpackCode } = this.$route.query
+        return new Promise ((resolve,reject) => {
+          if (redpackCode) {
+            resolve(redpackCode)
+          } else {
+            Model.getRedPackCode({
+              type: 'POST',
+              data: {
+                orderCode
+              }
+            }).then((result) => {
+              const data = result.data
+
+              if (result.code == 0) {
+                this.redpackCode = data.shareCode
+                resolve(data.shareCode)
+              } else {
+                this.$toast(result.message)
+              }
+            })
+          }
+        })
+      },
+      getRedPackDetail (redpackCode) {
         return Model.getRedPackDetail({
           type: 'POST',
           data: {
             shareCode: redpackCode
           }
-
         }).then((result) => {
 
           const data = result.data
           const searchPrams = location.search
+          const searchPramsStr = location.search.indexOf('redpackCode') > -1 ? searchPrams : searchPrams + '&redpackCode=' + redpackCode
           if (result.code == 0 && data) {
             const {
               overTime,
@@ -162,17 +190,17 @@
             if (role == 2) {
             } else {
               if (activityStatus == 0) {
-                location.replace('/activity/redpack/start'+ searchPrams)
+                location.replace('/activity/redpack/start'+ searchPramsStr )
               } else if (activityStatus == 1) {
-                this.pageAction('/activity/redpack/invalid' + searchPrams)
+                this.pageAction('/activity/redpack/invalid' + searchPramsStr)
               } else if (activityStatus == 2) {
-                this.pageAction('/activity/redpack/finished' + searchPrams)
+                this.pageAction('/activity/redpack/finished' + searchPramsStr)
               } else if (activityStatus == 3) {
-                this.pageAction('/activity/redpack/success' + searchPrams)
+                this.pageAction('/activity/redpack/success' + searchPramsStr)
               } else if (activityStatus == 4) {
-                this.pageAction('/activity/redpack/stop' + searchPrams)
+                this.pageAction('/activity/redpack/stop' + searchPramsStr)
               } else if (activityStatus == 5) {
-                this.pageAction('/activity/redpack/invalid' + searchPrams)
+                this.pageAction('/activity/redpack/invalid' + searchPramsStr)
               }
             }
             this.overTime = overTime
@@ -287,21 +315,22 @@
             utils.setCookie('lyfh5ut', data.ut);
             utils.setCookie('ut', data.ut);
             const searchPrams = location.search
+            const searchPramsStr = location.search.indexOf('redpackCode') > -1 ? searchPrams : searchPrams + '&redpackCode=' + this.redpackCode
 
             if (role == 2) {  //进行中
             } else {
               if (activityStatus == 0) {
-              	location.replace('/activity/redpack/start'+ searchPrams)
+              	location.replace('/activity/redpack/start'+ searchPramsStr)
               } else if (activityStatus == 1) {
-                this.pageAction('/activity/redpack/invalid' + searchPrams)
+                this.pageAction('/activity/redpack/invalid' + searchPramsStr)
               } else if (activityStatus == 2) {
-                this.pageAction('/activity/redpack/finished' + searchPrams)
+                this.pageAction('/activity/redpack/finished' + searchPramsStr)
               } else if (activityStatus == 3) {
-                this.pageAction('/activity/redpack/success' + searchPrams)
+                this.pageAction('/activity/redpack/success' + searchPramsStr)
               } else if (activityStatus == 4) {
-                this.pageAction('/activity/redpack/stop' + searchPrams)
+                this.pageAction('/activity/redpack/stop' + searchPramsStr)
               } else if (activityStatus == 5) {
-                this.pageAction('/activity/redpack/invalid' + searchPrams)
+                this.pageAction('/activity/redpack/invalid' + searchPramsStr)
               }
             }
 

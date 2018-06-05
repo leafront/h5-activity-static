@@ -15,8 +15,6 @@ import utils from '@/widget/utils'
 
 import filter from '@/filters'
 
-import VueClipboards from 'vue-clipboards'
-
 import Toast from '@/components/toast'
 
 import showLoading from '@/components/loading'
@@ -27,7 +25,9 @@ import dialog from '@/components/dialog'
 
 import { loading } from '@/mixins/loading'
 
-Vue.use(VueClipboards)
+import VueClipboard from 'vue-clipboard2'
+
+Vue.use(VueClipboard)
 
 require('@/widget/H5EventEmit')
 

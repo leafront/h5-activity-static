@@ -14,7 +14,10 @@
           <div class="invite-right-tit-bg">
           </div>
         </div>
-        <div class="redpack-share-btn invite-share-btn" id="share_copy" @click="weixinShare">
+        <div class="redpack-share-btn invite-share-btn"
+             v-clipboard:copy="shareConfig.url"
+             v-clipboard:success="weixinShare"
+             v-clipboard:error="onError">
           <span>立即分享</span>
         </div>
       </div>
@@ -175,41 +178,32 @@
       pageAction (url) {
         this.$router.replace(url)
       },
+      onError () {
+        this.$toast('链接复制失败')
+      },
       copyShare () {
         if (!utils.weixin() && !utils.isApp()) {
-          const clipboard = new ClipboardJS('#share_copy',{
-            text: () => {
-              return this.shareConfig.url
-            }
-          })
-          clipboard.on('success', (e) => {
-            this.$toast('链接已复制到粘贴板')
-          })
-
-          clipboard.on('error',(e)=>{
-            this.$toast('链接复制失败')
-          })
+          this.$toast('链接已复制到粘贴板')
         }
       },
-			weixinShare () {
-
-				const {redpackCode, orderCode} = this.$route.query
-				if (redpackCode) {
-					wx_share.weixinShare.call(this)
+      weixinShare () {
+        const {redpackCode, orderCode} = this.$route.query
+        if (redpackCode) {
+          wx_share.weixinShare.call(this)
           this.copyShare()
-				} else {
-					if (!orderCode) {
-						this.$toast('获取分享失败订单号缺失')
-						return
-					}
-					this.getRedPackCode().then((data) => {
-						if (data) {
-							wx_share.weixinShare.call(this)
+        } else {
+          if (!orderCode) {
+            this.$toast('获取分享失败订单号缺失')
+            return
+          }
+          this.getRedPackCode().then((data) => {
+            if (data) {
+              wx_share.weixinShare.call(this)
               this.copyShare()
-						}
-					})
-				}
-			}
+            }
+          })
+        }
+      }
     }
   }
 </script>

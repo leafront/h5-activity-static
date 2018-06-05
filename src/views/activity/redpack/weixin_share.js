@@ -8,9 +8,9 @@ import config from '@/config/index'
 
 const wx_share = {
   shareConfig  () {
+    const searchPath = location.search
     const redpackCode = this.redpackCode || utils.query('redpackCode')
     let link = config.hostPath + `/activity/redpack/receive${searchPath}`
-    const searchPath = location.search
     if (redpackCode) {
       if ((searchPath.indexOf('redpackCode') > -1)) {
         link = config.hostPath + `/activity/redpack/receive${searchPath}`
