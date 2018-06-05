@@ -190,7 +190,7 @@
             if (role == 2) {
             } else {
               if (activityStatus == 0) {
-                location.replace('/activity/redpack/start'+ searchPramsStr )
+								this.pageAction('/activity/redpack/start'+ searchPramsStr )
               } else if (activityStatus == 1) {
                 this.pageAction('/activity/redpack/invalid' + searchPramsStr)
               } else if (activityStatus == 2) {
@@ -320,7 +320,7 @@
             if (role == 2) {  //进行中
             } else {
               if (activityStatus == 0) {
-              	location.replace('/activity/redpack/start'+ searchPramsStr)
+								this.pageAction('/activity/redpack/start'+ searchPramsStr)
               } else if (activityStatus == 1) {
                 this.pageAction('/activity/redpack/invalid' + searchPramsStr)
               } else if (activityStatus == 2) {

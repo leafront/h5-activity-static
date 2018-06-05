@@ -159,7 +159,7 @@
               this.pageAction('/activity/redpack/receive' + searchPrams)
             } else {
               if (activityStatus == 0) {
-                location.replace('/activity/redpack/start'+ searchPrams)
+								this.pageAction('/activity/redpack/start'+ searchPrams)
               } else if (activityStatus == 1) {
                 this.pageAction('/activity/redpack/invalid' + searchPrams)
               } else if (activityStatus == 3) {
