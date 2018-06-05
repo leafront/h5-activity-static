@@ -14,7 +14,8 @@
           <div class="invite-right-tit-bg">
           </div>
         </div>
-        <div class="redpack-share-btn invite-share-btn" v-if="isApp" @click="weixinShare">
+        <input type="text" id="share_copy_url" class="share_copy_url" :value="shareConfig.url"/>
+        <div class="redpack-share-btn invite-share-btn" id="share_copy" data-clipboard-action="copy" data-clipboard-target="#share_copy_url" @click="weixinShare">
           <span>立即分享</span>
         </div>
       </div>
@@ -46,6 +47,8 @@
   import {mapGetters, mapActions} from 'vuex'
 
   import wx_share from './weixin_share'
+
+  import ClipboardJS from 'clipboard'
 
   export default {
     data () {
@@ -140,7 +143,7 @@
               this.pageAction('/activity/redpack/receive' + searchPrams)
 
             } else if (activityStatus == 0) {  //进行中
-              location.href = '/activity/redpack/start' + searchPrams
+              location.replace('/activity/redpack/start'+ searchPrams)
             } else if (activityStatus == 1) {
               this.pageAction('/activity/redpack/invalid' + searchPrams)
             } else if (activityStatus == 2) {
@@ -176,7 +179,6 @@
 			weixinShare () {
 
 				const {redpackCode, orderCode} = this.$route.query
-
 				if (redpackCode) {
 					wx_share.weixinShare.call(this)
 				} else {
@@ -187,6 +189,17 @@
 					this.getRedPackCode().then((data) => {
 						if (data) {
 							wx_share.weixinShare.call(this)
+              if (!utils.weixin() && !utils.isApp()) {
+                const clipboard = new ClipboardJS('#share_copy')
+
+                clipboard.on('success', (e) => {
+                  this.$toast('链接已复制到粘贴板')
+                })
+
+                clipboard.on('error',(e)=>{
+                  this.$toast('链接复制失败')
+                })
+              }
 						}
 					})
 				}
@@ -214,7 +227,6 @@
       color: #fde284;
       font-size: .4rem;
     }
-
   }
   .invite-left-tit-bg{
     width: .07rem;
@@ -242,6 +254,12 @@
   }
   .invite-share-btn {
     margin-top: .55rem;
+  }
+
+  .share_copy_url{
+    position: absolute;
+    left:-100%;
+    top: -100%;
   }
 
 </style>

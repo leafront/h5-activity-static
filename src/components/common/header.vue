@@ -26,9 +26,6 @@
         isWeixin: utils.weixin()
       }
     },
-    created () {
-
-    },
     methods: {
       backAction () {
 

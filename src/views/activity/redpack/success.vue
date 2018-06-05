@@ -8,7 +8,7 @@
         <div class="redpack-success">
           <p class="c3" v-if="couponMoney">恭喜您！</p>
           <p class="c3" v-if="couponMoney">成功帮好友获得一张<b>{{couponMoney}}</b>元优惠券</p>
-          <h4 v-if="couponAmount">同时奖励您一张</h4>
+          <h4 v-if="couponAmount">恭喜奖励您一张</h4>
         </div>
         <div class="invite-title" v-if="couponAmount">
           <div class="invite-left-tit-bg">
@@ -166,7 +166,7 @@
               this.pageAction('/activity/redpack/receive'+ searchPrams)
             } else {
               if (activityStatus == 0) {
-								location.href = '/activity/redpack/start' + searchPrams
+                location.replace('/activity/redpack/start'+ searchPrams)
               } else if (activityStatus == 1) {
                 this.pageAction('/activity/redpack/invalid' + searchPrams)
               } else if (activityStatus == 2) {

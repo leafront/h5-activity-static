@@ -6,7 +6,6 @@ import app from '@/widget/app'
 
 import config from '@/config/index'
 
-
 const wx_share = {
   shareConfig  () {
     const redpackCode = this.redpackCode || utils.query('redpackCode')
@@ -44,11 +43,10 @@ const wx_share = {
       },() => {
       })
     } else {
-
       if (utils.weixin()) {
+        this.updateShareMenu(true)
         weixin_share.weixinShare(this.shareConfig)
       }
-      this.updateShareMenu(true)
     }
   }
 }

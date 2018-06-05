@@ -119,7 +119,6 @@
         if (countTime(activityTimes,serverTimes) <= 0) {
           clearInterval(this.countTimer)
           this.showCountTime = '00:00:00'
-          this.$toast('活动已超时')
           return
         }
 
@@ -210,21 +209,30 @@
         })
       },
       weixinShare () {
-
-        const { redpackCode, orderCode } = this.$route.query
-
+        const {redpackCode, orderCode} = this.$route.query
         if (redpackCode) {
-           wx_share.weixinShare.call(this)
+          wx_share.weixinShare.call(this)
         } else {
-         if (!orderCode) {
-           this.$toast('获取分享失败订单号缺失')
-           return
-         }
-         this.getRedPackCode().then((data) => {
-          if (data) {
-            wx_share.weixinShare.call(this)
+          if (!orderCode) {
+            this.$toast('获取分享失败订单号缺失')
+            return
           }
-         })
+          this.getRedPackCode().then((data) => {
+            if (data) {
+              wx_share.weixinShare.call(this)
+              if (!utils.weixin() && !utils.isApp()) {
+                const clipboard = new ClipboardJS('#share_copy')
+
+                clipboard.on('success', (e) => {
+                  this.$toast('链接已复制到粘贴板')
+                })
+
+                clipboard.on('error',(e)=>{
+                  this.$toast('链接复制失败')
+                })
+              }
+            }
+          })
         }
       }
     },

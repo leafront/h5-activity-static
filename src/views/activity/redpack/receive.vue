@@ -132,7 +132,6 @@
         if (countTime(activityTimes,serverTimes) <= 0) {
           clearInterval(this.countTimer)
           this.showCountTime = '00:00:00'
-          this.$toast('活动已超时')
           return
         }
 
@@ -163,7 +162,7 @@
             if (role == 2) {
             } else {
               if (activityStatus == 0) {
-                this.pageAction('/activity/redpack/start'+ searchPrams)
+                location.replace('/activity/redpack/start'+ searchPrams)
               } else if (activityStatus == 1) {
                 this.pageAction('/activity/redpack/invalid' + searchPrams)
               } else if (activityStatus == 2) {
