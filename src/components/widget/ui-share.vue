@@ -32,19 +32,9 @@
       })
     },
     props:['config'],
-    watch: {
-      shareMenu (val,oldVal) {
-        if (val) {
-          this.updateShareMenu(true)
-        } else {
-          this.updateShareMenu(false)
-        }
-      }
-    },
     methods: {
       ...mapActions([
-        'updateShareMenu',
-	      'updateMobShare'
+        'updateShareMenu'
       ])
     }
   }

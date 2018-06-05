@@ -10,7 +10,7 @@
           <p class="c3" v-for="(item) in friendCouponList"><b>{{item.hideMobile}}</b>已帮您拆红包</p>
           <p class="c3" v-if="needHelpCount">还需{{needHelpCount}}位好友</p>
         </div>
-        <div class="redpack-share-btn start-share-btn" @click="weixinShare">
+        <div class="redpack-share-btn start-share-btn" @click="weixinShare" id="share_copy">
           <span>立即分享</span>
         </div>
       </div>
@@ -42,6 +42,8 @@
   import {mapGetters, mapActions} from 'vuex'
 
   import wx_share from './weixin_share'
+
+  import ClipboardJS from 'clipboard'
 
   import { getSystemTimes, countTime, linkInfo } from './common'
 
@@ -208,10 +210,27 @@
 
         })
       },
+      copyShare () {
+        if (!utils.weixin() && !utils.isApp()) {
+          const clipboard = new ClipboardJS('#share_copy',{
+            text: () => {
+              return this.shareConfig.url
+            }
+          })
+          clipboard.on('success', (e) => {
+            this.$toast('链接已复制到粘贴板')
+          })
+
+          clipboard.on('error',(e)=>{
+            this.$toast('链接复制失败')
+          })
+        }
+      },
       weixinShare () {
         const {redpackCode, orderCode} = this.$route.query
         if (redpackCode) {
           wx_share.weixinShare.call(this)
+          this.copyShare()
         } else {
           if (!orderCode) {
             this.$toast('获取分享失败订单号缺失')
@@ -220,17 +239,7 @@
           this.getRedPackCode().then((data) => {
             if (data) {
               wx_share.weixinShare.call(this)
-              if (!utils.weixin() && !utils.isApp()) {
-                const clipboard = new ClipboardJS('#share_copy')
-
-                clipboard.on('success', (e) => {
-                  this.$toast('链接已复制到粘贴板')
-                })
-
-                clipboard.on('error',(e)=>{
-                  this.$toast('链接复制失败')
-                })
-              }
+              this.copyShare()
             }
           })
         }
@@ -275,6 +284,5 @@
       }
     }
   }
-
 
 </style>

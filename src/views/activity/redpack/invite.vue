@@ -14,16 +14,15 @@
           <div class="invite-right-tit-bg">
           </div>
         </div>
-        <input type="text" id="share_copy_url" class="share_copy_url" :value="shareConfig.url"/>
-        <div class="redpack-share-btn invite-share-btn" id="share_copy" data-clipboard-action="copy" data-clipboard-target="#share_copy_url" @click="weixinShare">
+        <div class="redpack-share-btn invite-share-btn" id="share_copy" @click="weixinShare">
           <span>立即分享</span>
         </div>
       </div>
       <div class="redpack-view-bg1"></div>
       <div class="redpack-view-bg2"></div>
       <div class="redpack-view-bg3"></div>
+      <UIShare :config="shareConfig"></UIShare>
       <inviteRule></inviteRule>
-	    <UIShare :config="shareConfig"></UIShare>
     </div>
   </div>
 </template>
@@ -176,11 +175,28 @@
       pageAction (url) {
         this.$router.replace(url)
       },
+      copyShare () {
+        if (!utils.weixin() && !utils.isApp()) {
+          const clipboard = new ClipboardJS('#share_copy',{
+            text: () => {
+              return this.shareConfig.url
+            }
+          })
+          clipboard.on('success', (e) => {
+            this.$toast('链接已复制到粘贴板')
+          })
+
+          clipboard.on('error',(e)=>{
+            this.$toast('链接复制失败')
+          })
+        }
+      },
 			weixinShare () {
 
 				const {redpackCode, orderCode} = this.$route.query
 				if (redpackCode) {
 					wx_share.weixinShare.call(this)
+          this.copyShare()
 				} else {
 					if (!orderCode) {
 						this.$toast('获取分享失败订单号缺失')
@@ -189,17 +205,7 @@
 					this.getRedPackCode().then((data) => {
 						if (data) {
 							wx_share.weixinShare.call(this)
-              if (!utils.weixin() && !utils.isApp()) {
-                const clipboard = new ClipboardJS('#share_copy')
-
-                clipboard.on('success', (e) => {
-                  this.$toast('链接已复制到粘贴板')
-                })
-
-                clipboard.on('error',(e)=>{
-                  this.$toast('链接复制失败')
-                })
-              }
+              this.copyShare()
 						}
 					})
 				}
@@ -254,12 +260,6 @@
   }
   .invite-share-btn {
     margin-top: .55rem;
-  }
-
-  .share_copy_url{
-    position: absolute;
-    left:-100%;
-    top: -100%;
   }
 
 </style>

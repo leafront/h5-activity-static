@@ -23,7 +23,8 @@
     data () {
       return {
         isApp: utils.isApp(),
-        isWeixin: utils.weixin()
+        isWeixin: utils.weixin(),
+        isQQ: utils.qq()
       }
     },
     methods: {
