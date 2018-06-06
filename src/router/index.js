@@ -2,7 +2,6 @@ import Vue from 'vue'
 
 import Router from 'vue-router'
 
-
 const PageError = r => require.ensure([], () => r(require('@/views/activity/error/404.vue')),'PageError')
 
 const redPackInvite = r => require.ensure([], () => r(require('@/views/activity/redpack/invite.vue')),'redPackInvite')
@@ -19,7 +18,7 @@ const redPackSuccess = r => require.ensure([], () =>  r(require('@/views/activit
 
 const redPackStop = r => require.ensure([], () =>  r(require('@/views/activity/redpack/stop.vue')),'redPackStop')
 
-// const redPackOvertime = r => require.ensure([], () =>  r(require('@/views/activity/redpack/overtime.vue')),'redPackOvertime')
+const worldCupPrize = r => require.ensure([], () =>  r(require('@/views/activity/worldcup/prize.vue')),'worldCupPrize')
 
 Vue.use(Router)
 
@@ -82,6 +81,13 @@ export default new Router({
       meta: {
         title: '拆红包'
       }
-    }
+    },{
+  	  path: '/activity/worldcup/prize',
+			name: 'worldCupPrize',
+			component: worldCupPrize,
+			meta: {
+  	  	title: '我的奖品'
+			}
+		}
   ]
 })
