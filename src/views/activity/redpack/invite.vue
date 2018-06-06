@@ -9,10 +9,13 @@
           <div class="invite-left-tit-bg">
           </div>
           <div class="invite-title-txt">
-            <p>邀请2位好友帮忙拆红包</p>
+            <p>您有一个无门槛红包待拆</p>
           </div>
           <div class="invite-right-tit-bg">
           </div>
+        </div>
+        <div class="invite-help">
+          <p>邀请2位好友帮忙拆5-15元随机红包</p>
         </div>
         <div class="redpack-share-btn invite-share-btn"
              v-clipboard:copy="shareConfig.url"
@@ -253,5 +256,6 @@
   .invite-share-btn {
     margin-top: .55rem;
   }
+
 
 </style>

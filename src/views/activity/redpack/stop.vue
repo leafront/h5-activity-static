@@ -6,7 +6,7 @@
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="stop-tips">
-          <h4 class="c3">您的好友已获得一张<strong>{{couponMoney}}</strong>元优惠券</h4>
+          <h4 class="c3">来晚一步~您的好友红包已拆成功</h4>
           <p class="c3" v-for="item in friendCouponList"><b>{{item.hideMobile}}</b>帮忙拆红包获得一张{{item.couponMoney}}优惠券</p>
         </div>
         <div class="redpack-share-btn start-share-btn" @click="linkAction(downloadLink)">

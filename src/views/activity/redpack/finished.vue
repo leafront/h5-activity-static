@@ -9,7 +9,7 @@
           <div class="invite-left-tit-bg">
           </div>
           <div class="invite-title-txt">
-            <p>恭喜获得一张{{couponMoney}}元优惠券</p>
+            <p>您成功获得一张{{couponMoney}}元无门槛券</p>
           </div>
           <div class="invite-right-tit-bg">
           </div>
