@@ -50,8 +50,6 @@
 
   import wx_share from './weixin_share'
 
-  import ClipboardJS from 'clipboard'
-
   export default {
     data () {
       return {

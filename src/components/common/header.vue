@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-header-wrapper" v-if="!isWeixin">
+  <div class="ui-header-wrapper" v-if="showHeader">
     <div class="ui-header" :class="{'ui-header-border':isBorder}">
       <div class="ui-header-back" @click="backAction">
         <svg class="icon ui-header-back_btn" aria-hidden="true">
@@ -20,11 +20,9 @@
 
   export default {
     props:['backFn','title','isBorder'],
-    data () {
-      return {
-        isApp: utils.isApp(),
-        isWeixin: utils.weixin(),
-        isQQ: utils.qq()
+    computed: {
+      showHeader () {
+        return !(utils.weixin() || utils.nativeQQ())
       }
     },
     methods: {

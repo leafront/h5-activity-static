@@ -23,6 +23,9 @@ const utils = {
   qq () {
     return this.ua.indexOf('QQBrowser') > -1;
   },
+  nativeQQ () {
+    return this.ua.indexOf('QBWebView') > -1 ||  this.ua.indexOf('Mobile MQQBrowser') > -1;
+  },
   weixin () {
     return this.ua.indexOf('MicroMessenger') > -1;
   },
