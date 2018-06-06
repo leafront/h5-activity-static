@@ -201,7 +201,6 @@
           const data = result.data
 
           if (result.code == 0) {
-            this.updatePageView(true)
             this.redpackCode = data.shareCode
             this.shareConfig = wx_share.shareConfig.call(this)
             return data

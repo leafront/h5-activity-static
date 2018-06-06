@@ -18,7 +18,7 @@
               <p><i>¥</i>{{couponAmount}}</p>
             </div>
             <div class="redpack-success-discount">
-              <p>{{couponAmount}}元无门槛券</p>
+              <p>{{couponName}}</p>
               <span>{{startTime}}-{{endTime}}可用</span>
             </div>
           </div>
@@ -64,6 +64,7 @@
         downloadLink: '',
         couponMoney: '',
         couponAmount: '',
+        couponName: '',
         startTime: '',
         endTime: ''
       }
@@ -131,7 +132,6 @@
 
           const data = result.data
           if (result.code == 0 && data) {
-            this.updatePageView(true)
 
             const {
               userCouponList,
@@ -153,6 +153,7 @@
                 couponAmount = item.couponMoney
                 this.startTime = item.startTime.slice(0,-9).replace(/\-/ig,'/')
                 this.endTime = item.endTime.slice(0,-9).replace(/\-/ig,'/')
+                this.couponName = item.couponName
                 return true
               } else {
                 return false
@@ -177,6 +178,8 @@
                 this.pageAction('/activity/redpack/invalid' + searchPrams)
               }
             }
+
+            this.updatePageView(true)
 
           } else {
             this.$toast(result.message)

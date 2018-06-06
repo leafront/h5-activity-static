@@ -139,7 +139,6 @@
           const data = result.data
           this.$hideLoading()
           if (result.code == 0 && data) {
-            this.updatePageView(true)
             const {
               activityStatus,
               friendCouponList,
@@ -170,6 +169,7 @@
                 this.pageAction('/activity/redpack/invalid' + searchPrams)
               }
             }
+            this.updatePageView(true)
           } else {
             this.$toast(result.message)
           }

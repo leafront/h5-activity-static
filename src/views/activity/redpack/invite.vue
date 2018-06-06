@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view">
+    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView}">
       <div class="redpack-bg" v-if="redpackImage" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="invite-title">
@@ -112,7 +112,6 @@
           const data = result.data
 
           if (result.code == 0) {
-            this.updatePageView(true)
             this.redpackCode = data.shareCode
             this.shareConfig = wx_share.shareConfig.call(this)
             return data
@@ -134,7 +133,6 @@
           this.$hideLoading()
           const data = result.data
           if (result.code == 0 && data) {
-            this.updatePageView(true)
             const {
               activityStatus,
               role
@@ -157,6 +155,8 @@
             } else if (activityStatus == 5) {
               this.pageAction('/activity/redpack/invalid' + searchPrams)
             }
+
+            this.updatePageView(true)
 
           } else {
             this.$toast(result.message)
