@@ -1,7 +1,7 @@
 <template>
   <div class="redpack-rule">
     <div class="redpack-rule-title">
-      <h4 class="font-s">拆红包活动细则：</h4>
+      <h4 class="font-s">拆红包活动细则</h4>
     </div>
     <p>1. 拆红包活动时间：2018年6月8日-2018年6月20日。</p>
     <p>2. 订单支付成功后，您将获得一次拆红包的机会，订单取消则红包将失效；每位用户每天至多可以领取5个红包。</p>
@@ -34,7 +34,7 @@
         height:.01rem;
         position: absolute;
         background:#a0a0a0;
-        width: 2.36rem;
+        width: 2rem;
         left: .12rem;
         top: 48%;
       }
@@ -44,7 +44,7 @@
         height:.01rem;
         position: absolute;
         background:#a0a0a0;
-        width: 2.36rem;
+        width: 2rem;
         right: .12rem;
         top: 48%;
       }
