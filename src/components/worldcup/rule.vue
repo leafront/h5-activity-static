@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="ui-mask" :class="{'active': rulePopup}"></div>
+    <div class="ui-mask" id="worldcup-rule-mask" :class="{'active': rulePopup}"></div>
     <span class="ui-worldcup-close" :class="{'active': rulePopup}" @click="closeRulePopup"></span>
-    <div class="ui-worldcup-rule" :class="{'active': rulePopup}">
+    <div class="ui-worldcup-rule" id="worldcup-rule" :class="{'active': rulePopup}">
       <h4>活动规则</h4>
       <p>a)	活动对象：来伊份会员；</p>
       <p>b)	参与渠道：用户可通过首页banner、专区入口进入活动专区页面；</p>
@@ -114,9 +114,35 @@
         default: false
       }
     },
+    watch: {
+      rulePopup () {
+
+        /**
+         *
+         * 阻止弹层外的元素滚动
+         */
+        document.getElementById('worldcup-rule-mask').addEventListener('touchmove',(event) => {
+
+          if (!utils.isPassive()) {
+
+            event.preventDefault()
+
+          }
+        })
+
+        document.getElementById('worldcup-rule').addEventListener('touchmove',(event) => {
+
+          event.stopPropagation()
+        },utils.isPassive() ? {passive: true} : false)
+
+        document.getElementById('worldcup-rule').addEventListener('scroll',(event) => {
+
+          event.stopPropagation()
+        },utils.isPassive() ? {passive: true} : false)
+      }
+    },
     methods: {
       closeRulePopup () {
-        utils.removeAppViewFixed()
         this.$emit('toggleRulePopup',false)
       }
     }

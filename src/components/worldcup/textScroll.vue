@@ -12,7 +12,8 @@
     data () {
       return {
         index: 0,
-        iNow: 0
+        iNow: 0,
+        timer: null
       }
     },
     props: {
@@ -39,7 +40,7 @@
         const firstChildEle = el.firstElementChild.cloneNode(true)
         el.appendChild(firstChildEle)
         this.eleLen = liEl.length
-        setInterval(() => {
+        this.timer = setInterval(() => {
           this.autoScroll()
         },this.autoTime)
       },
@@ -62,6 +63,9 @@
         },310)
 
       }
+    },
+    beforeDestroy () {
+      clearInterval(this.timer)
     }
   }
 
