@@ -2,6 +2,8 @@ import Vue from 'vue'
 
 import Router from 'vue-router'
 
+Vue.use(Router)
+
 const PageError = r => require.ensure([], () => r(require('@/views/activity/error/404.vue')),'PageError')
 
 const redPackInvite = r => require.ensure([], () => r(require('@/views/activity/redpack/invite.vue')),'redPackInvite')
@@ -20,7 +22,7 @@ const redPackStop = r => require.ensure([], () =>  r(require('@/views/activity/r
 
 const worldCupPrize = r => require.ensure([], () =>  r(require('@/views/activity/worldcup/prize.vue')),'worldCupPrize')
 
-Vue.use(Router)
+const worldCupAllTeam = r => require.ensure([], () =>  r(require('@/views/activity/worldcup/allteam.vue')),'worldCupAllTeam')
 
 export default new Router({
   mode:'history',
@@ -89,6 +91,14 @@ export default new Router({
   	  	title: '我的奖品',
         requireLogin: true
 			}
-		}
+		},{
+      path: '/activity/worldcup/allteam',
+      name: 'worldCupAllTeam',
+      component: worldCupAllTeam,
+      meta: {
+        title: '我的球队',
+        requireLogin: true
+      }
+    }
   ]
 })

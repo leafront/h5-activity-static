@@ -1,8 +1,8 @@
 <template>
-	<div class="pageView">
-		<AppHeader :title="title" :isBorder="isBorder">
-		</AppHeader>
-		<div class="scroll-view-wrapper worldcup-view" :class="{'visibility': !pageView,'scroll_view_hidden': rulePopup}">
+  <div class="pageView">
+    <AppHeader :title="title" :isBorder="isBorder">
+    </AppHeader>
+    <div class="scroll-view-wrapper worldcup-view" :class="{'visibility': !pageView,'scroll_view_hidden': rulePopup}">
       <div class="worldcup-bg"></div>
       <div class="worldcup-rule" @click="toggleRulePopup(true)">
         <button>活动规则</button>
@@ -32,8 +32,8 @@
       <div class="worldcup-scroll-text">
         <TextScroll :list="prizeList"></TextScroll>
       </div>
-		</div>
-	</div>
+    </div>
+  </div>
 </template>
 
 <script type="text/javascript">
@@ -120,23 +120,7 @@
 </script>
 
 <style lang="scss">
-  .worldcup-view{
-    background: #002655;
-  }
-  .worldcup-bg{
-    width: 100%;
-    height: 11.62rem;
-    background:url(http://images2.laiyifen.com/imagespace/2018060710/289f0260-7286-4da4-920b-72099156db73.jpg) #002655 no-repeat;
-    background-size: 100% auto;
-  }
-  .worldcup-scroll-text{
-    position: absolute;
-    left:.24rem;
-    top:.6rem;
-    z-index:99;
-    width: 4.5rem;
-    height: .54rem;
-  }
+  @import './styles/common.scss';
   .worldcup-prize-times{
     background: #920916;
     border-radius: .25rem;
@@ -178,11 +162,7 @@
       }
     }
   }
-  .worldcup-prize-wrapper{
-    position: absolute;
-    width:100%;
-    top:6.22rem;
-  }
+
   .worldcup-prize{
     margin: .46rem auto 0;
     width: 6.12rem;
@@ -209,45 +189,6 @@
     align-items: center;
     color:#fff;
   }
-  .worldcup-rule {
-    position: absolute;
-    right: .7rem;
-    top: .7rem;
-    button{
-      border-radius: .1rem;
-      width: 1.44rem;
-      height: .42rem;
-      background:#ffb605;
-      color:#640208;
-      font-size: .27rem;
-      box-shadow:  .03rem .06rem 0 0 #fe7716;
-    }
-  }
-  .worldcup-btn{
-    display: flex;
-    justify-content: center;
-    position: relative;
-    .worldcup_ball_pic{
-      width: .81rem;
-      height: .73rem;
-      background: url(./images/worldcup_ball_pic.png) no-repeat;
-      background-size: .81rem auto;
-      display:block;
-      position: absolute;
-      margin-left: -1.2rem;
-      left: 50%;
-      top: -.24rem;
-    }
-    button{
-      padding-left: 1.1rem;
-      padding-right: .35rem;
-      border-radius: .3rem;
-      height: .6rem;
-      font-size: .4rem;
-      color:#c3040f;
-      background: linear-gradient(top,#fff3cb,#d99400);
-      background: -webkit-linear-gradient(top,#fff3cb,#d99400);
-      box-shadow: 0 .03rem .03rem 0 #650006;
-    }
-  }
+
+
 </style>
