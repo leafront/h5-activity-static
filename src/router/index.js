@@ -86,7 +86,8 @@ export default new Router({
 			name: 'worldCupPrize',
 			component: worldCupPrize,
 			meta: {
-  	  	title: '我的奖品'
+  	  	title: '我的奖品',
+        requireLogin: true
 			}
 		}
   ]
