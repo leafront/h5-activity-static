@@ -215,6 +215,7 @@
   }
   .worldcup-team-not{
     overflow: hidden;
+    text-align: center;
   }
   .worldcup-team-has{
     overflow: hidden;
