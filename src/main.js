@@ -67,7 +67,7 @@ router.beforeEach((to, from, next) => {
 
         const from = utils.getRelatedUrl()
 
-        window.location.href = `/login.html?from=` + encodeURIComponent(from);
+        window.location.href = `/login.html?from=` + encodeURIComponent(from)
       }
     }
 
