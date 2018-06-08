@@ -9,7 +9,7 @@
       </div>
       <div class="worldcup-prize-wrapper">
         <div class="worldcup-btn">
-          <button>我的奖品</button>
+          <button>我的球队</button>
           <i class="worldcup_ball_pic"></i>
         </div>
         <div class="worldcup-team">
