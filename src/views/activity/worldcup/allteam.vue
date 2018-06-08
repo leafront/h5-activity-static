@@ -218,15 +218,12 @@
   }
   .worldcup-team-has{
     overflow: hidden;
+    text-align: center;
   }
   .worldcup-team-item{
     margin-top: .36rem;
     width: 33.33%;
     float:left;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     position: relative;
     span{
       position: absolute;
