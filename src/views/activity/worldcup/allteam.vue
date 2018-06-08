@@ -223,7 +223,7 @@
   .worldcup-team-item{
     margin-top: .36rem;
     width: 33.33%;
-    float:left;
+    display: inline-block;
     position: relative;
     span{
       position: absolute;
@@ -248,6 +248,8 @@
     img{
       width: 1.32rem;
       height: 1.32rem;
+      margin: 0 auto;
+      display: block;
     }
     p{
       margin-top: .2rem;
