@@ -195,8 +195,7 @@
             adCode: 'float_tail',
             companyId: config.companyId,
             areaCode,
-            pageCode: 'H5_HOME',
-            platformId: config.platformId
+            pageCode: 'H5_HOME'
           }
         }).then((result) => {
           const data = result.data
