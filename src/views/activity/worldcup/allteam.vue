@@ -25,7 +25,7 @@
               <div class="worldcup-team-item" v-for="item in has_use_list">
                 <img :src="wcImgUrl[item.teamCode]"/>
                 <p>{{item.teamName}}</p>
-                <span class="not-prize">可兑换</span>
+                <span class="not-prize">已兑换</span>
               </div>
             </div>
           </div>

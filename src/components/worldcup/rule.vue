@@ -44,7 +44,7 @@
     position: absolute;
     border-radius: 50%;
     right:12%;
-    top: .8rem;
+    top: 6%;
     z-index:10000;
     display: none;
     &.active{
