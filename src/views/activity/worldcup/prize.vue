@@ -75,6 +75,9 @@
 			...mapActions([
 				'updatePageView'
 			]),
+      /**
+       * 获取个人获得的奖品列表
+       */
       getWorldCupPrize () {
 			  Model.getWorldCupPrize({
           type: 'GET'
@@ -92,10 +95,17 @@
           }
         })
       },
+      /**
+       * 切换规则弹层信息
+       * params {Boolean} val
+       */
       toggleRulePopup (val) {
 			  this.rulePopup = val
         utils.appViewFixed()
       },
+      /**
+       * 获取滚动奖品文字内容
+       */
       getQueryRollModel () {
 			  Model.getQueryRollModel({
           type: 'GET'

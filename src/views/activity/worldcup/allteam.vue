@@ -134,10 +134,17 @@
       pageAction (url) {
         this.$router.push(url)
       },
+      /**
+       * 切换规则弹层信息
+       * params {Boolean} val
+       */
       toggleRulePopup (val) {
         this.rulePopup = val
         utils.appViewFixed()
       },
+      /**
+       * 获取滚动奖品文字内容
+       */
       getQueryRollModel () {
         Model.getQueryRollModel({
           type: 'GET'
@@ -151,6 +158,9 @@
           }
         })
       },
+      /**
+       * 获取球队兑奖列表
+       */
       getQueryTeamCard () {
         Model.getQueryTeamCard({
           type: 'GET'
