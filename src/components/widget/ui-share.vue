@@ -21,11 +21,6 @@
   import utils from '@/widget/utils'
 
   export default {
-    data () {
-      return {
-        tipsImg: config.staticPath + '/activity-static/images/weixin_tips.png'
-      }
-    },
     computed: {
       ...mapGetters({
         'shareMenu': 'getShareMenu'
@@ -64,7 +59,7 @@
     }
   }
   .ui-share-arrow{
-    background: url('/activity-static/images/weixin_tips.png') no-repeat;
+    background: url(../../images/weixin_tips.png) no-repeat;
     background-size: 1.13rem auto;
     width: 1.13rem;
     height: 1.39rem;
