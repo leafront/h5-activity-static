@@ -3,8 +3,6 @@ import store from '@/widget/store'
 
 import utils from '@/widget/utils'
 
-import config from '@/config/index'
-
 import distribution from './distribution'
 
 import * as Model from '@/model/wx_share'
@@ -157,7 +155,7 @@ const weixin_share = {
 
     if (utils.weixin()) {
 
-      const returnURL = window.encodeURIComponent(config.hostPath + location.pathname)
+      const returnURL = location.href.split('#')[0]
       Model.getSign({
         type: 'GET',
         data: {
@@ -295,12 +293,12 @@ if (utils.weixin()) {
   //初始化微信分享
   weixin_share.initWeixinShare()
   //默认分享内容
-  weixin_share.weixinShare({
-    link: window.location.href,
-    title: mall_setting.getMallName(),
-    desc: window.location.href,
-    imgUrl: 'http://cdn.oudianyun.com/lyf/prod/back-cms/1497702554228_508_32.png@base@tag=imgScale&q=80'
-  })
+  // weixin_share.weixinShare({
+  //   link: window.location.href,
+  //   title: mall_setting.getMallName(),
+  //   desc: window.location.href,
+  //   imgUrl: 'http://cdn.oudianyun.com/lyf/prod/back-cms/1497702554228_508_32.png@base@tag=imgScale&q=80'
+  // })
   //初始化微信分享
    weixin_share.checkShareCode()
   })
