@@ -138,29 +138,30 @@ const MallSettings = {
           expired = true
         }
       }
-
+      
       if (appId && !expired) {  //优先使用本地存储的内容(未过期时)
         this.settings['appId'] = appId
         resolve(appId)
+      } else {
+        Model.getWxpayAppId({
+          type: 'POST',
+          data:  { companyId }
+        }).then((result) => {
+          const data = result.data
+          if (result.code == 0 && data) {
+            const {
+              appId
+            } = data
+            this.settings['appId'] = appId
+            store.set(this.appIdKey, appId,'local')
+            store.set(this.appIdexpireDateKey, this._getExpireDate(),'local')
+            resolve(appId)
+          } else {
+            reject('')
+          }
+        })
       }
 
-      Model.getWxpayAppId({
-        type: 'POST',
-        data:  { companyId }
-      }).then((result) => {
-        const data = result.data
-        if (result.code == 0 && data) {
-          const {
-            appId
-          } = data
-          this.settings['appId'] = appId
-          store.set(this.appIdKey, appId,'local')
-          store.set(this.appIdexpireDateKey, this._getExpireDate(),'local')
-          resolve(appId)
-        } else {
-          reject('')
-        }
-      })
     })
 
   },

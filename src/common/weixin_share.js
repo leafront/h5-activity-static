@@ -164,39 +164,37 @@ const weixin_share = {
       }).then((data) => {
         return data
       }).then((result) => {
-        mall_setting._getWeixinAppId().then(() => {
-          const {
+        const {
+          data: {
             data: {
-              data: {
-                timestamp,
-                nonceStr,
-                signature
-              }
+              timestamp,
+              nonceStr,
+              signature
             }
-          } = result
+          }
+        } = result
 
-          const appId = mall_setting.getAppId()
-          wx.config({
-            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId, // 必填，公众号的唯一标识
-            timestamp, // 必填，生成签名的时间戳
-            nonceStr, // 必填，生成签名的随机串
-            signature,// 必填，签名，见附录1
-            jsApiList: [
-              'showAllNonBaseMenuItem',
-              'hideAllNonBaseMenuItem',
-              'showMenuItems',
-              'hideMenuItems',
-              'onMenuShareTimeline',
-              'onMenuShareAppMessage',
-              'onMenuShareQQ',
-              'onMenuShareWeibo',
-              'onMenuShareQZone'
-            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-          })
+        const appId = mall_setting.getAppId()
+
+        wx.config({
+          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          appId, // 必填，公众号的唯一标识
+          timestamp, // 必填，生成签名的时间戳
+          nonceStr, // 必填，生成签名的随机串
+          signature,// 必填，签名，见附录1
+          jsApiList: [
+            'showAllNonBaseMenuItem',
+            'hideAllNonBaseMenuItem',
+            'showMenuItems',
+            'hideMenuItems',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'onMenuShareQZone'
+          ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
       })
-
     }
   },
 
@@ -289,9 +287,9 @@ const weixin_share = {
 
 if (utils.weixin()) {
   utils.loadScript('/activity-static/weixin-js-sdk/index.js',() => {
-
-  //初始化微信分享
-   weixin_share.checkShareCode()
+    weixin_share.initWeixinShare()
+    //初始化微信分享
+     weixin_share.checkShareCode()
   })
 }
 
