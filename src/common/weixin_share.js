@@ -291,15 +291,6 @@ if (utils.weixin()) {
   utils.loadScript('/activity-static/weixin-js-sdk/index.js',() => {
 
   //初始化微信分享
-  weixin_share.initWeixinShare()
-  //默认分享内容
-  // weixin_share.weixinShare({
-  //   link: window.location.href,
-  //   title: mall_setting.getMallName(),
-  //   desc: window.location.href,
-  //   imgUrl: 'http://cdn.oudianyun.com/lyf/prod/back-cms/1497702554228_508_32.png@base@tag=imgScale&q=80'
-  // })
-  //初始化微信分享
    weixin_share.checkShareCode()
   })
 }
