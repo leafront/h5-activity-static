@@ -89,7 +89,7 @@
     created () {
 
       this.updatePageView(false)
-      this.showLoading()
+      this.$showLoading()
       this.getRedPackCode().then((data) => {
         if (data) {
           this.getRedPackDetail(data).then((result) => {

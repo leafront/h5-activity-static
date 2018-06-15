@@ -80,7 +80,7 @@
     created () {
 
       this.updatePageView(false)
-      this.showLoading()
+      this.$showLoading()
       this.getRedPackInfo()
     },
     methods: {
