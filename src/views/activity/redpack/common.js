@@ -10,8 +10,8 @@ const checkTime = (i)=> {
   return i
 }
 
-export const countTime = (activityTimes,self) => {
-    const leftTimes = new Date(activityTimes) - new Date()//计算剩余的毫秒数
+export const countTime = (activityTimes,serverTimes) => {
+    const leftTimes = new Date(activityTimes) - new Date(serverTimes)//计算剩余的毫秒数
     if (leftTimes <= 0) {
       return -1
     }
