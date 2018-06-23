@@ -62,8 +62,6 @@
     },
     mixin: ['loading'],
     created () {
-      this.updatePageView(false)
-
       this.$showLoading()
 
       this.getDownloadLink()

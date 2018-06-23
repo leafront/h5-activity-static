@@ -75,7 +75,6 @@
     },
     mixin: ['loading'],
     created () {
-      this.updatePageView(false)
       this.$showLoading()
       this.shareConfig = wx_share.shareConfig.call(this)
 

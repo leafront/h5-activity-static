@@ -87,8 +87,6 @@
       ImageValidate
     },
     created () {
-
-      this.updatePageView(false)
       this.$showLoading()
       this.getRedPackCode().then((data) => {
         if (data) {

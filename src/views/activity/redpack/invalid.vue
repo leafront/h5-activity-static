@@ -60,7 +60,6 @@
       })
     },
     created () {
-      this.updatePageView(false)
       this.$showLoading()
       this.getRedPackDetail()
       this.getDownloadLink()
