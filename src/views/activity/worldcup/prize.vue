@@ -122,6 +122,7 @@
 		},
 		created () {
       this.$showLoading()
+			this.updatePageView(false)
       this.getQueryRollModel()
       this.getWorldCupPrize()
 		}

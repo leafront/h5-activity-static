@@ -33,7 +33,6 @@ export default {
   },
   watch: {
     '$route'() {
-      this.updatePageView(false)
       this.$nextTick(() => {
        utils.fixedBottom()
       })

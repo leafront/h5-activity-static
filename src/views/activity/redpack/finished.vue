@@ -71,6 +71,7 @@
     },
     created () {
 
+      this.updatePageView(false)
       this.$showLoading()
       this.getDownloadLink()
       this.getRedPackDetail()
