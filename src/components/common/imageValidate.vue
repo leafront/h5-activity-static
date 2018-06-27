@@ -151,13 +151,13 @@
           imageKey
         } = this
 
+        const encryptMobile = encryptKey(mobile)
+
         const data = {
-          mobile,
+          mobile: encryptMobile,
           captchasType: 3,
           imageKey
         }
-
-        const encryptMobile = encryptKey(mobile)
 
         if (type == 0) {
           if (!this.verifyCode) {

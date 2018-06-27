@@ -4,7 +4,7 @@
  * arguments
  * type:'GET',
  * timeout: 3000,
- * hostPath: 'http://m.laiyifen.com'
+ * hostPath: 'https://m.laiyifen.com'
  * headers:{
 	 *  Content-Type:'application/json'
 	 * },
