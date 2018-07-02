@@ -182,6 +182,7 @@
           this.verifyCode = ''
 
           if (result.code == 0) {  // 24小时内一个手机号最多发送30条短信，多则不发
+            this.deleteVerifyCode()
             this.$toast(result.message)
             this.$emit('startCountTime')
           } else if (result.code == 913) {
