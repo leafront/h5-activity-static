@@ -58,9 +58,20 @@
     <script type="text/javascript" defer="defer" src="<%= htmlWebpackPlugin.options.staticPath %>/activity-static/fastclick/index.js"></script>
     <!--<script type="text/javascript" src="/activity-static/vconsole/index.js"></script>-->
     <script type="text/javascript">
+      (function() {
+        function isPassive() {
 
-			(function() {
-        window.RS_BLOCK_TABLE = null
+          let supportsPassiveOption = false
+          try {
+            addEventListener("test", null, Object.defineProperty({}, 'passive', {
+              get: function () {
+                supportsPassiveOption = true
+              }
+            }));
+          } catch(e) {}
+          return supportsPassiveOption;   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
+
+        }
         function bodyScroll (evt) {
 
           //In this case, the default behavior is scrolling the body, which
@@ -75,10 +86,10 @@
         if ('addEventListener' in document) {
           document.addEventListener('DOMContentLoaded', function() {
             FastClick.attach(document.body);
-          }, false);
+          }, isPassive() ? { passive: false } : false);
         }
         // var vConsole = new VConsole()
-			}());
+      }());
     </script>
   </body>
 </html>

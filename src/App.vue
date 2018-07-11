@@ -8,8 +8,6 @@
 
 import utils from '@/widget/utils'
 
-import config from '@/config/index'
-
 import app from '@/widget/app'
 
 import { mapActions } from 'vuex'

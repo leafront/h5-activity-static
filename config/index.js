@@ -62,7 +62,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../target'),
     assetsSubDirectory: 'activity-static',
-    assetsPublicPath: 'https://static.lyf.edu.laiyifen.com/',
+    assetsPublicPath: 'http://static.lyf.edu.laiyifen.com/',
 
     /**
      * Source Maps

@@ -64,7 +64,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      staticPath: 'https://static.lyf.edu.laiyifen.com',
+      staticPath: 'http://static.lyf.edu.laiyifen.com',
       getTime: new Date().getTime(),
       filename: process.env.NODE_ENV === 'testing'
         ? 'index.html'
