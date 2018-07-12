@@ -266,7 +266,6 @@
   .worldcup-team-prize-item{
     height: .44rem;
     line-height: .44rem;
-    color:red;
     display: flex;
     span{
       width: 3.8rem;
