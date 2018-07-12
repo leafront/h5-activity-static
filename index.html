@@ -9,7 +9,6 @@
 	  <meta name="env" content="production">
 	  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>活动页面</title>
-    <script type="text/javascript" src="/activity-static/vconsole/index.js"></script>
 	  <script type="text/javascript">
 			(function (win) {
 				var flex = function flex(normal, baseFontSize, fontscale) {
@@ -49,7 +48,6 @@
 				};
 
 				flex(false, 100, 1);
-        var vConsole = new VConsole()
 			})(window);
 	  </script>
   </head>
@@ -58,6 +56,7 @@
     <!-- built files will be auto injected -->
     <script type="text/javascript" defer="defer" src="<%= htmlWebpackPlugin.options.staticPath %>/activity-static/iconfont.js?v=<%= htmlWebpackPlugin.options.getTime %>"></script>
     <script type="text/javascript" defer="defer" src="<%= htmlWebpackPlugin.options.staticPath %>/activity-static/fastclick/index.js"></script>
+    <script type="text/javascript" src="/activity-static/vconsole/index.js"></script>
     <script type="text/javascript">
       (function() {
         function isPassive() {
@@ -88,6 +87,7 @@
             FastClick.attach(document.body);
           }, isPassive() ? { passive: false } : false);
         }
+        var vConsole = new VConsole()
       }());
     </script>
   </body>

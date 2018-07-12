@@ -1,16 +1,19 @@
 
 .scroll-view-wrapper{
-	position: relative;
-	overflow-y: scroll;
-	flex: 1;
-	-webkit-overflow-scrolling: touch;
-	overflow-scrolling: touch;
+  position: relative;
+  overflow-y: scroll;
+  -webkit-box-flex:1;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
   background: #f0f0f0;
+  padding-top: 1px;
+  margin-top: -1px;
 }
 
 .visibility{
 
-	visibility: hidden;
+  visibility: hidden;
 }
 
 
@@ -30,44 +33,44 @@
 
   width:100%;
 
-	height:100%;
+  height:100%;
 
-	background: #fff;
+  background: #fff;
 
 }
 
 .ico{
-	fill: currentColor;
-	overflow: hidden;
+  fill: currentColor;
+  overflow: hidden;
 }
 
 
 body,html{
-	height:100%;
-	overflow: hidden;
-	text-size-adjust: 100%;
+  height:100%;
+  overflow: hidden;
+  text-size-adjust: 100%;
 }
 
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color: #bbb; }
 
 input {
 
-	color: #333;
+  color: #333;
 
 }
 
 body{
-	color:#666;
-	font-size: .24rem;
+  color:#666;
+  font-size: .24rem;
 }
 
 .pageView{
 
-	.page_bottom{
+  .page_bottom{
 
-		padding-bottom: .68rem;
+    padding-bottom: .68rem;
 
-	}
+  }
 
 }
 
@@ -76,11 +79,14 @@ body{
 }
 
 .pageView{
-	width: 100%;
-	height:100%;
-	overflow-x:hidden;
-	display: flex;
-	flex-direction: column;
+  width: 100%;
+  height:100%;
+  overflow-x:hidden;
+  display: -webkit-box;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  display: flex;
+  flex-direction: column;
 }
 .ui-mask{
   width: 100%;
@@ -99,6 +105,9 @@ body{
   background: linear-gradient(top,#ff7c20,#ff7900);
   background: -webkit-linear-gradient(top,#ff7c20,#ff7900);
   height: 1rem;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
