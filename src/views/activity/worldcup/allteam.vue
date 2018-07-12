@@ -60,7 +60,7 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import utils from "@/widget/utils";
+  import utils from '@/widget/utils'
 
   export default {
     data () {
