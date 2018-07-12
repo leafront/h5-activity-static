@@ -132,7 +132,6 @@
     border-radius: .25rem;
     padding: .35rem .4rem .35rem;
     width: 6.12rem;
-    height: 2000px;
     margin: .26rem auto .6rem;
 
     p{
