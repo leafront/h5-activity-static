@@ -5,8 +5,6 @@ import Application from './App'
 
 import app from '@/widget/app'
 
-import config from '@/config'
-
 import router from './router'
 
 import store from './store'
@@ -17,21 +15,15 @@ import filter from '@/filters'
 
 import Toast from '@/components/toast'
 
-import showLoading from '@/components/loading'
-
 import pageLoading from '@/components/pageLoading'
 
 import dialog from '@/components/dialog'
-
-import { loading } from '@/mixins/loading'
 
 import VueClipboard from 'vue-clipboard2'
 
 Vue.use(VueClipboard)
 
 require('@/widget/H5EventEmit')
-
-Vue.mixin(loading)
 
 Vue.use(dialog)
 
@@ -42,8 +34,6 @@ Object.keys(filter).forEach(key => {
 Vue.use(Toast,{    //支持全局配置
 	duration: "1500"
 })
-
-Vue.use(showLoading)
 
 Vue.use(pageLoading)
 

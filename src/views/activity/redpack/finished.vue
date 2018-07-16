@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility':!pageView}">
+    <div class="scroll-view-wrapper redpack-view" :class="{'visibility':pageView}">
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="invite-title">
@@ -45,7 +45,7 @@
 
   import * as Model from '@/model/redpack'
 
-  import {mapGetters, mapActions} from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
 
   export default {
     data () {
@@ -55,7 +55,8 @@
         redpackImage: config.staticPath + '/activity-static/images/redpack_finished_bg.jpg?v=' + config.getTime,
         downloadLink: '',
         couponMoney: "",
-        friendCouponList: []
+        friendCouponList: [],
+        pageView: false
       }
     },
     components: {
@@ -65,20 +66,15 @@
     mixin: ['loading'],
     computed: {
       ...mapGetters({
-        'pageView': 'getPageView',
         'headerMenu': 'getHeaderMenu'
       })
     },
     created () {
-
-      this.updatePageView(false)
-      this.$showLoading()
       this.getDownloadLink()
       this.getRedPackDetail()
     },
     methods: {
       ...mapActions([
-        'updatePageView',
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
@@ -136,7 +132,7 @@
         }).then((result) => {
 
           const data = result.data
-          this.$hideLoading()
+
           if (result.code == 0 && data) {
             const {
               activityStatus,
@@ -168,7 +164,7 @@
                 this.pageAction('/activity/redpack/invalid' + searchPrams)
               }
             }
-            this.updatePageView(true)
+            this.pageView = true
           } else {
             this.$toast(result.message)
           }

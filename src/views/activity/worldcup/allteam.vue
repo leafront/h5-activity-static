@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder">
     </AppHeader>
-    <div class="scroll-view-wrapper worldcup-view" :class="{'visibility': !pageView,'scroll_view_hidden': rulePopup}">
+    <div class="scroll-view-wrapper worldcup-view" :class="{'visibility': pageView,'scroll_view_hidden': rulePopup}">
       <div class="worldcup-bg"></div>
       <div class="worldcup-rule" @click="toggleRulePopup(true)">
         <button>活动规则</button>
@@ -58,8 +58,6 @@
 
   import * as Model from '@/model/worldcup'
 
-  import {mapGetters, mapActions} from 'vuex'
-
   import utils from '@/widget/utils'
 
   export default {
@@ -80,6 +78,7 @@
           "3": "门店消费",
           "4": "客服发卡"
         },
+        pageView: false,
         wcImgUrl: {
           1: 'https://images3.laiyifen.com/imagespace/2018060517/2cba2d04-6cce-424b-89c2-c02d12a7b362.png',
           2: 'https://images2.laiyifen.com/imagespace/2018060517/4c367e5b-40d8-4c90-88be-21541c9e6c81.png',
@@ -121,16 +120,7 @@
       WorldCupRule,
       TextScroll
     },
-    computed: {
-      ...mapGetters({
-        'pageView': 'getPageView'
-      })
-    },
-    mixin: ['loading'],
     methods: {
-      ...mapActions([
-        'updatePageView'
-      ]),
       pageAction (url) {
         this.$router.push(url)
       },
@@ -168,8 +158,7 @@
           const data = result.data
 
           if (result.code == 0 && data) {
-            this.$hideLoading()
-            this.updatePageView(true)
+            this.pageView = true
             let not_use_list  = data.not_use_list || []
             let has_use_list = data.has_use_list || []
 
@@ -191,8 +180,6 @@
       }
     },
     created () {
-      this.$showLoading()
-      this.updatePageView(false)
       this.getQueryRollModel()
       this.getQueryTeamCard()
     }

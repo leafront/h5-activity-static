@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder">
     </AppHeader>
-    <div class="scroll-view-wrapper worldcup-view" :class="{'visibility': !pageView,'scroll_view_hidden': rulePopup}">
+    <div class="scroll-view-wrapper worldcup-view" :class="{'visibility': pageView,'scroll_view_hidden': rulePopup}">
       <div class="worldcup-bg"></div>
       <div class="worldcup-rule" @click="toggleRulePopup(true)">
         <button>活动规则</button>
@@ -42,8 +42,6 @@
 
   import * as Model from '@/model/worldcup'
 
-	import {mapGetters, mapActions} from 'vuex'
-
   import utils from '@/widget/utils'
 
 	export default {
@@ -53,7 +51,8 @@
 				title: '我的奖品',
         list: [],
         rulePopup: false,
-        prizeList: []
+        prizeList: [],
+        pageView: false
 			}
 		},
 		components: {
@@ -61,16 +60,7 @@
       WorldCupRule,
       TextScroll
 		},
-		computed: {
-			...mapGetters({
-				'pageView': 'getPageView'
-			})
-		},
-		mixin: ['loading'],
 		methods: {
-			...mapActions([
-				'updatePageView'
-			]),
       /**
        * 获取个人获得的奖品列表
        */
@@ -81,8 +71,7 @@
         .then((result) => {
           const data = result.data
           if (result.code == 0 ) {
-            this.$hideLoading()
-            this.updatePageView(true)
+            this.pageView = true
             if (data.prizeList) {
               this.list = data.prizeList
             }
@@ -117,8 +106,6 @@
       }
 		},
 		created () {
-      this.$showLoading()
-			this.updatePageView(false)
       this.getQueryRollModel()
       this.getWorldCupPrize()
 		}

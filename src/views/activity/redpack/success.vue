@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView}">
+    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': pageView}">
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="redpack-success">
@@ -66,31 +66,26 @@
         couponAmount: '',
         couponName: '',
         startTime: '',
-        endTime: ''
+        endTime: '',
+        pageView: false
       }
     },
     components: {
       AppHeader,
       inviteRule
     },
-    mixin: ['loading'],
     computed: {
       ...mapGetters({
-        'pageView': 'getPageView',
         'headerMenu': 'getHeaderMenu'
       })
     },
     created () {
-
-      this.updatePageView(false)
-      this.$showLoading()
       this.getDownloadLink()
       this.getRedPackDetail()
 
     },
     methods: {
       ...mapActions([
-        'updatePageView',
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
@@ -127,8 +122,6 @@
             shareCode: redpackCode
           }
         }).then((result) => {
-
-          this.$hideLoading()
 
           const data = result.data
           if (result.code == 0 && data) {
@@ -179,7 +172,7 @@
               }
             }
 
-            this.updatePageView(true)
+            this.pageView = true
 
           } else {
             this.$toast(result.message)

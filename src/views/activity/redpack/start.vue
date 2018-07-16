@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView}">
+    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': pageView}">
       <div class="redpack-bg" v-if="redpackImage" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="start-tips">
@@ -59,7 +59,8 @@
         showCountTime: '',
         countTimer:  null,
         needHelpCount: 0,
-        shareConfig: {}
+        shareConfig: {},
+        pageView: false
       }
     },
     components: {
@@ -69,22 +70,17 @@
     },
     computed: {
       ...mapGetters({
-        'pageView': 'getPageView',
         'headerMenu': 'getHeaderMenu'
       })
     },
-    mixin: ['loading'],
     created () {
-      this.updatePageView(false)
-      this.$showLoading()
       this.shareConfig = wx_share.shareConfig.call(this)
 
       Promise.all([
         this.getRedPackDetail(),
         this.getSystemTimes()
       ]).then((result) => {
-        this.$hideLoading()
-        this.updatePageView(true)
+        this.pageView = true
         const activityTimes = result[0]
         const serverTimes = result[1]
         if (activityTimes) {
@@ -96,7 +92,6 @@
     },
     methods: {
       ...mapActions([
-        'updatePageView',
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
@@ -197,7 +192,6 @@
             orderCode
           }
         }).then((result) => {
-          this.$hideLoading()
           const data = result.data
 
           if (result.code == 0) {

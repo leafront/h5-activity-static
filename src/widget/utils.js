@@ -122,47 +122,6 @@ const utils = {
 
 		return (isWeixin && isPhoneX)
 	},
-
-	fixedBottom () {
-
-		var scrollEl = document.querySelector('.scroll-view-wrapper');
-
-		var overscroll = () => {
-			scrollEl.addEventListener('touchstart', topScroll,  this.isPassive() ? {passive: true} : false);
-			scrollEl.addEventListener('touchmove', botScroll, this.isPassive() ? {passive: true} : false);
-		}
-
-		overscroll()
-
-		function topScroll () {
-
-			var top = scrollEl.scrollTop
-				, totalScroll = scrollEl.scrollHeight
-				, currentScroll = top + scrollEl.offsetHeight;
-			//If we're at the top or the bottom of the containers
-			//scroll, push up or down one pixel.
-			//
-			//this prevents the scroll from "passing through" to
-			//the body.
-			if(top === 0) {
-				scrollEl.scrollTop = 1;
-			} else if(currentScroll === totalScroll) {
-				scrollEl.scrollTop = top - 1;
-			}
-
-		}
-
-		function  botScroll (evt) {
-			//if the content is actually scrollable, i.e. the content is long enough
-			//that scrolling can occur
-
-			if(scrollEl.offsetHeight < scrollEl.scrollHeight)
-
-				evt._isScroller = true;
-
-		}
-
-	},
 	/**
 	 * @param {Object} obj
 	 * @returns {string}

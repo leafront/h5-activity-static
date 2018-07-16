@@ -28,13 +28,6 @@ export default {
         app.postMessage('hiddenHead',{'isHidden':'1'});
       }
     }
-  },
-  watch: {
-    '$route'() {
-      this.$nextTick(() => {
-       utils.fixedBottom()
-      })
-    }
   }
 }
 </script>

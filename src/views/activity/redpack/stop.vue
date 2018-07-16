@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView}">
+    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': pageView}">
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="stop-tips">
@@ -47,7 +47,8 @@
         redpackImage: config.staticPath + '/activity-static/images/redpack_stop_bg.jpg?v=' + config.getTime,
         downloadLink: '',
         couponMoney: '',
-        friendCouponList: []
+        friendCouponList: [],
+        pageView: false
       }
     },
     components: {
@@ -56,22 +57,16 @@
     },
     computed: {
       ...mapGetters({
-        'pageView': 'getPageView',
         'headerMenu': 'getHeaderMenu'
       })
     },
-    mixin: ['loading'],
     created () {
-      this.updatePageView(false)
-
-      this.$showLoading()
 
       this.getDownloadLink()
       this.getRedPackDetail()
     },
     methods: {
       ...mapActions([
-        'updatePageView',
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
@@ -109,8 +104,6 @@
           }
         }).then((result) => {
 
-          this.$hideLoading()
-
           const data = result.data
           if (result.code == 0 && data) {
             const {
@@ -144,7 +137,7 @@
               }
             }
 
-            this.updatePageView(true)
+            this.pageView = true
 
           } else {
             this.$toast(result.message)

@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView}">
+    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': pageView}">
       <div class="redpack-bg" v-if="redpackImage" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="invite-title">
@@ -62,7 +62,7 @@
         couponMoney: "",
         redpackCode: '',
         shareConfig: {},
-        isApp: utils.isApp()
+        pageView: false
       }
     },
     components: {
@@ -72,20 +72,14 @@
     },
     computed: {
       ...mapGetters({
-        'pageView': 'getPageView',
         'headerMenu': 'getHeaderMenu'
       })
     },
-    mixin: ['loading'],
     created () {
-
-      this.updatePageView(false)
-      this.$showLoading()
       this.getRedPackInfo()
     },
     methods: {
       ...mapActions([
-        'updatePageView',
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
@@ -97,8 +91,7 @@
           this.getRedPackDetail()
         } else {
           this.shareConfig = wx_share.shareConfig.call(this)
-          this.$hideLoading()
-          this.updatePageView(true)
+          this.pageView = true
         }
       },
       getRedPackCode () {
@@ -109,7 +102,6 @@
             orderCode
           }
         }).then((result) => {
-          this.$hideLoading()
           const data = result.data
 
           if (result.code == 0) {
@@ -131,7 +123,6 @@
           }
         }).then((result) => {
 
-          this.$hideLoading()
           const data = result.data
           if (result.code == 0 && data) {
             const {

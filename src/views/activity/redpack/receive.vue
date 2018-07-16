@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView,'scroll_view_hidden': imageValidate}">
+    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': pageView,'scroll_view_hidden': imageValidate}">
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="receive-tips">
@@ -70,34 +70,29 @@
         },
         isFixed: false,
         showCountTime: '',
-        redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v='+ config.getTime
+        redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v='+ config.getTime,
+        pageView: false
       }
     },
     computed: {
       ...mapGetters({
-        'pageView': 'getPageView',
         'headerMenu': 'getHeaderMenu',
         'imageValidate': 'getImageValidate'
       })
     },
-    mixin: ['loading'],
     components: {
       AppHeader,
       RedPackRule,
       ImageValidate
     },
     created () {
-
-      this.updatePageView(false)
-      this.$showLoading()
       this.getRedPackCode().then((data) => {
         if (data) {
           this.getRedPackDetail(data).then((result) => {
-            this.$hideLoading()
 
             if (result) {
               this.startShowCountTime(result)
-              this.updatePageView(true)
+              this.pageView = true
             } else {
               this.showCountTime = '00:00:00'
             }
@@ -109,7 +104,6 @@
     },
     methods: {
       ...mapActions([
-        'updatePageView',
         'updateHeaderMenu',
         'updateShareMenu',
         'updateImageValidate'

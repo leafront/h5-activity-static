@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': !pageView}">
+    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': pageView}">
       <div class="redpack-bg" v-if="redpackImage" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
       <div class="redpack-content">
         <div class="invalid-tips" v-for="item in friendCouponList">
@@ -45,7 +45,8 @@
         isBorder: true,
         redpackImage: config.staticPath + '/activity-static/images/redpack_invalid_bg.jpg?v=' + config.getTime,
         downloadLink: '',
-        friendCouponList: []
+        friendCouponList: [],
+        pageView: false
       }
     },
     components: {
@@ -55,19 +56,16 @@
     mixin: ['loading'],
     computed: {
       ...mapGetters({
-        'pageView': 'getPageView',
         'headerMenu': 'getHeaderMenu'
       })
     },
     created () {
-      this.updatePageView(false)
       this.$showLoading()
       this.getRedPackDetail()
       this.getDownloadLink()
     },
     methods: {
       ...mapActions([
-        'updatePageView',
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
@@ -105,13 +103,10 @@
           }
         }).then((result) => {
 
-          this.$hideLoading()
           const data = result.data
-          this.$hideLoading()
           if (result.code == 0 && data) {
             const {
               activityStatus,
-              friendCouponList,
               overTime,
               role
             } = data
@@ -123,7 +118,7 @@
               this.pageAction('/activity/redpack/receive'+ searchPrams)
             } else {
               if (activityStatus == 0) {
-								this.pageAction('/activity/redpack/start'+ searchPrams)
+                this.pageAction('/activity/redpack/start'+ searchPrams)
               } else if (activityStatus == 2) {
                 this.pageAction('/activity/redpack/finished' + searchPrams)
               } else if (activityStatus == 3) {
@@ -132,7 +127,7 @@
                 this.pageAction('/activity/redpack/stop' + searchPrams)
               }
             }
-            this.updatePageView(true)
+            this.pageView = true
 
           } else {
             this.$toast(result.message)
