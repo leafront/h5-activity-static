@@ -124,18 +124,18 @@
        * @param event
        */
       scrollLoadList (event) {
+
         const pageViewHeight = event.target.clientHeight
         const scrollTop = event.target.scrollTop
         const pageHeight = document.getElementById('coupon-list-view').clientHeight
-        console.log(pageViewHeight + scrollTop , pageHeight)
         if (pageViewHeight + scrollTop > pageHeight && this.list.length < this.totalPage) {
-          if (!this.isScrollLoad) {
-            return
-          }
-          this.isScrollLoad = false
-          this.showLoading = true
-          this.currentPage += 1
           utils.throttle(() => {
+            if (!this.isScrollLoad) {
+              return
+            }
+            this.isScrollLoad = false
+            this.showLoading = true
+            this.currentPage += 1
             this.getCouponList()
           })()
         }
@@ -198,9 +198,6 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: .01rem solid #e0e0e0;
-    &:last-child{
-      border-bottom: 0;
-    }
     &.disabled{
       .coupon-item-info{
         background-image:url(./images/coupon-disable.png);
