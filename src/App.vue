@@ -39,4 +39,5 @@ export default {
   @import './styles/toast.scss';
   @import './styles/dialog.scss';
   @import './styles/mob-share.scss';
+  @import './styles/slidershow.scss';
 </style>

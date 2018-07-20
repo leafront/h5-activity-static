@@ -1,7 +1,9 @@
-const pageLoading = {
+import loadingImg from './images/page-loading.gif'
+
+const Loading = {
   installed: false,
-  install (Vue, options) {
-    if(pageLoading.installed) return
+  install (Vue,options) {
+    if(Loading.installed) return
     let opt = {
       // 默认持续时间
       duration: "3000"
@@ -10,20 +12,15 @@ const pageLoading = {
     for(let i in options) {
       opt[i] = options[i]
     }
-    Vue.prototype.$showPageLoading = () => {
+    Vue.prototype.$showLoading = () => {
 
       // 如果页面有toast则不继续执行
-      if(document.querySelector('.ui-pageLoading-mask')) return
+      if(document.querySelector('.ui-showLoading')) return
       // 1、创建构造器，定义好提示信息的模板
       let toastTip = Vue.extend({
         template: `
-			<div class="ui-pageLoading-mask">
-			 <div class="ui-mask-cont">
-         <svg class="pageLoading-icon" aria-hidden="true">
-            <use xlink:href="#icon-loading"></use>
-          </svg>
-          <p>努力加载中...</p>
-			 </div>   
+			<div class="ui-showLoading">
+			  <img class="ui-showLoading-gif" src="${loadingImg}"/>
 			 </div>
 			`
       })
@@ -38,13 +35,13 @@ const pageLoading = {
         e.preventDefault()
       })
 
-      pageLoading.installed = true
+      Loading.installed = true
 
     }
 
-    Vue.prototype.$hidePageLoading = () => {
+    Vue.prototype.$hideLoading = () => {
 
-      const maskUi = document.querySelector('.ui-pageLoading-mask')
+      const maskUi = document.querySelector('.ui-showLoading')
 
       if (maskUi) {
         maskUi.parentNode.removeChild(maskUi)
@@ -53,4 +50,4 @@ const pageLoading = {
   }
 }
 
-export default pageLoading
+export default Loading

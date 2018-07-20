@@ -41,7 +41,7 @@
         </div>
       </div>
       <WorldCupRule :rulePopup="rulePopup" @toggleRulePopup="toggleRulePopup"></WorldCupRule>
-      <div class="worldcup-scroll-text">
+      <div class="worldcup-scroll-text" v-if="prizeList.length">
         <TextScroll :list="prizeList"></TextScroll>
       </div>
     </div>

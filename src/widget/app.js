@@ -143,7 +143,6 @@ const app = {
     }
     return  ut;
   },
-
   //获取distributorId 分销商ID
   getDistributorId () {
     return  store.get(this.distributorId,'session');
@@ -222,6 +221,28 @@ const app = {
     // 清除
     nodes = null
     fragment = null
+  },
+  loginAction () {
+
+    if (app.loggedIn()) {
+      return 
+    } else {
+
+      if (utils.isApp()) {
+
+        app.login()
+
+      } else {
+
+        const from = utils.getRelatedUrl()
+
+        if (from) {
+          window.location.href = `/login.html?from=` + encodeURIComponent(from)
+        } else {
+          window.location.href = '/login.html'
+        }
+      }
+    }
   }
 }
 

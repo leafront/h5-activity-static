@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/osc-api': {
@@ -29,6 +29,10 @@ module.exports = {
       },
       '/customer': {
         target: 'https://m.laiyifen.com',
+        changeOrigin: true
+      },
+      '/cms': {
+        target: 'http://m.laiyifen.com',
         changeOrigin: true
       }
     },

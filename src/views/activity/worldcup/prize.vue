@@ -28,6 +28,10 @@
           <p>	b)实物奖品，将根据用户预留的联系地址送出（配送区域仅限中国境内除港澳台以外的地区），于5-7个工作日内送达。此期间，请用户保持手机畅通。若用户提供的联系方式和地址有误，将影响配送时间或配送失败，此后果由用户自行承担责任若因不可抗力因素造成配送延迟，请用户耐心等待，给您带来不便，尽情谅解</p>
         </div>
       </div>
+      <WorldCupRule :rulePopup="rulePopup" @toggleRulePopup="toggleRulePopup"></WorldCupRule>
+      <div class="worldcup-scroll-text" v-if="prizeList.length">
+        <TextScroll :list="prizeList"></TextScroll>
+      </div>
     </div>
   </div>
 </template>

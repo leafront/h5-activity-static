@@ -9,3 +9,5 @@ export const getSystemTime = (data) => request('/api/realTime/getTimestamp',data
 export const getAreaInfo = (data) => request('/api/commondata/getConfig',data)
 
 export const getAreaCode = (data) => request('/api/location/getCompleteAreaInfo',data)
+
+export const getDolphinList = (data) => request('/api/dolphin/list', data)

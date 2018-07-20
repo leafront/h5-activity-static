@@ -3,14 +3,14 @@ const Dialog = {
   installed: false,
   install (Vue,options) {
     if(Dialog.installed) return
-    Vue.prototype.$dialog = (options) => {
+    Vue.prototype.$showModal = (options) => {
 
       // 如果页面有toast则不继续执行
       if(document.querySelector('.dialog-container')) return
       // 1、创建构造器，定义好提示信息的模板
-      const cancelBtn = options.cancelText || '取消'
-      const buttonText = options.buttonText || '确定'
-      const toast = options.cancelText ? 'block' : 'none'
+      const cancelText = options.cancelText || '取消'
+      const confirmText = options.confirmText || '确定'
+      const toast = options.showCancel == false ? 'none' : 'block'
 
       let toastTip = Vue.extend({
         template: `
@@ -19,8 +19,8 @@ const Dialog = {
 					<div class="ui-dialog-container">
 						<div class="ui-dialog__bd" id = "dialog-content">${options.content}</div>
 						<div class="ui-dialog__ft">
-							<span id = "ui-dialog-cancel" style="display:${toast}" class="ui-dialog__btn ui-dialog__btn_default">${cancelBtn}</span>
-							<span id = "ui-dialog-confirm" class="ui-dialog__btn">${buttonText}</span>
+							<span id = "ui-dialog-cancel" style="display:${toast}" class="ui-dialog__btn ui-dialog__btn_default">${cancelText}</span>
+							<span id = "ui-dialog-confirm" class="ui-dialog__btn">${confirmText}</span>
 						</div>
 					</div>
 				</div>`

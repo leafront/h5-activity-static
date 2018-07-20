@@ -9,7 +9,7 @@ import config from '@/config/index'
 export default function request (url,options){
 
   const ut = app.getUserToken()
-  const data = Object.assign({ ut, platformId: config.platformId },options.data)
+  const data = Object.assign({ ut, platform: config.platform, companyId: config.companyId, platformId: config.platformId },options.data)
   const defaults = {
     isHeader:true,
     type: options.type,

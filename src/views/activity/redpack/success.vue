@@ -184,9 +184,7 @@
         Model.getDownloadLink({
           type: 'GET',
           data: {
-            platform: config.platform,
             adCode: 'float_tail',
-            companyId: config.companyId,
             areaCode,
             pageCode: 'H5_HOME'
           }

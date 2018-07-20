@@ -1,4 +1,4 @@
-import config from '@/config/index'
+
 
 const utils = {
   ua: navigator.userAgent,
@@ -366,14 +366,28 @@ const utils = {
   trim (text) {
     return text.replace(/\s+/g, "")
   },
-  loadScript (url,success) {
-    const script = document.createElement("script")
-    script.type = 'text/javascript'
-    script.src = config.staticPath + url
-    document.getElementsByTagName('head')[0].appendChild(script)
-    script.onload = () => {
-      success && success()
+  imgScale (url,q = 95){
+    const getDeviceWidth = document.documentElement.clientWidth > 750 ? 750 : document.documentElement.clientWidth
+    const pattern = /http:\/\/.*?(gif|png|jpg)/gi
+    if (url.indexOf('.jpg') > -1 || url.indexOf('.png') > -1) {
+      const scaleImage = url.replace(pattern,(res) => {
+        if (res.indexOf('http://cdn.oudianyun.com') > -1) {
+          return `${res}@base@tag=imgScale&q=${q}&m=1&w=${getDeviceWidth}`
+        } else {
+          return res
+        }
+      })
+      return scaleImage
+    } else {
+      return url
     }
+  },
+  divisionArr (data) {
+    const result = []
+    data.forEach((item,index) => {
+      result.push(data.slice(index,index+2))
+    })
+    return result
   }
 }
 
