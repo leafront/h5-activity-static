@@ -23,8 +23,6 @@ import VueClipboard from 'vue-clipboard2'
 
 Vue.use(VueClipboard)
 
-require('@/widget/H5EventEmit')
-
 Vue.use(showModal)
 
 Vue.use(showLoading)

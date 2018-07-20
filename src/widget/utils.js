@@ -80,38 +80,40 @@ const utils = {
 		}
 	},
 
-	/**
-	 *
-	 * @param {Function} func
-	 * @param {Boolean} wait
-	 * @param {Boolean} mustRun
-	 * @returns {Function}
-	 */
-	throttle (func, wait, mustRun) {
-		var timeout,
-			startTime = new Date();
+  /**
+   *
+   * @param {Function} func
+   * @param {Boolean} wait
+   * @param {Boolean} mustRun
+   * @returns {Function}
+   */
+  throttle (func, wait, mustRun) {
+    var wait = wait || 200
+    var mustRun = mustRun || 100
+    var timeout,
+      startTime = new Date();
 
-		return function() {
-			var context = this,
-				args = arguments,
-				curTime = new Date();
+    return function() {
+      var context = this,
+        args = arguments,
+        curTime = new Date();
 
-			clearTimeout(timeout);
-			// 如果达到了规定的触发时间间隔，触发 handler
-			if(curTime - startTime >= mustRun){
+      clearTimeout(timeout);
+      // 如果达到了规定的触发时间间隔，触发 handler
+      if(curTime - startTime >= mustRun){
 
-				func.apply(context,args);
+        func.apply(context,args);
 
-				startTime = curTime;
+        startTime = curTime;
 
-				// 没达到触发间隔，重新设定定时器
-			}else{
+        // 没达到触发间隔，重新设定定时器
+      }else{
 
-				timeout = setTimeout(func, wait);
+        timeout = setTimeout(func, wait);
 
-			}
-		}
-	},
+      }
+    }
+  },
 	isWeixinIphoneX (){
 
 		const isWeixin = this.weixin()

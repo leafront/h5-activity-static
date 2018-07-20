@@ -1,8 +1,8 @@
 
-const Dialog = {
+const ShowModal = {
   installed: false,
   install (Vue,options) {
-    if(Dialog.installed) return
+    if(ShowModal.installed) return
     Vue.prototype.$showModal = (options) => {
 
       // 如果页面有toast则不继续执行
@@ -50,9 +50,9 @@ const Dialog = {
 
       })
 
-      Dialog.installed = true
+      ShowModal.installed = true
     }
   }
 }
 
-export default Dialog
+export default ShowModal
