@@ -16,8 +16,10 @@
 <style lang="scss">
   .redpack-rule{
     padding: 0 .16rem .2rem;
-    margin: -.01rem .28rem .3rem;
+    margin: -.01rem 0 .3rem;
     background: #fff;
+    position: relative;
+    z-index:10;
     p{
       line-height: .4rem;
     }

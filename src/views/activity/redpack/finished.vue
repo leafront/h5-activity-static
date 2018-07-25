@@ -2,29 +2,32 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility':pageView}">
+    <div class="scroll-view-wrapper" :class="{'visibility':pageView}">
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
-      <div class="redpack-content">
-        <div class="invite-title">
-          <div class="invite-left-tit-bg">
+      <div class="redpack-view">
+        <div class="redpack-content">
+          <div class="invite-title">
+            <div class="invite-left-tit-bg">
+            </div>
+            <div class="invite-title-txt">
+              <p>您成功获得一张{{couponMoney}}元无门槛券</p>
+            </div>
+            <div class="invite-right-tit-bg">
+            </div>
           </div>
-          <div class="invite-title-txt">
-            <p>您成功获得一张{{couponMoney}}元无门槛券</p>
+          <div class="finish-list">
+            <p class="c3 font" v-for="item in friendCouponList"><b>{{item.hideMobile}}</b>已帮您拆红包</p>
           </div>
-          <div class="invite-right-tit-bg">
+          <div class="redpack-share-btn" @click="linkAction(downloadLink)">
+            <span>前往APP查看</span>
           </div>
         </div>
-        <div class="finish-list">
-          <p class="c3 font" v-for="item in friendCouponList"><b>{{item.hideMobile}}</b>已帮您拆红包</p>
-        </div>
-        <div class="redpack-share-btn" @click="linkAction(downloadLink)">
-          <span>前往APP查看</span>
+        <RedPackRule></RedPackRule>
+        <div class="redpack-view-bg1"></div>
+        <div class="redpack-view-bg2">
+          <span></span>
         </div>
       </div>
-      <inviteRule></inviteRule>
-      <div class="redpack-view-bg1"></div>
-      <div class="redpack-view-bg2"></div>
-      <div class="redpack-view-bg3"></div>
     </div>
   </div>
 </template>
@@ -33,7 +36,7 @@
 
   import AppHeader from '@/components/common/header'
 
-  import inviteRule from '@/components/redpack/rule'
+  import RedPackRule from '@/components/redpack/rule'
 
   import common from '@/widget/common'
 
@@ -61,7 +64,7 @@
     },
     components: {
       AppHeader,
-      inviteRule
+      RedPackRule
     },
     mixin: ['loading'],
     computed: {

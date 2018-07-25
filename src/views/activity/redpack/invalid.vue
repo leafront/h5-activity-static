@@ -2,20 +2,23 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': pageView}">
+    <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="redpack-bg" v-if="redpackImage" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
-      <div class="redpack-content">
-        <div class="invalid-tips" v-for="item in friendCouponList">
-          <p class="c3"><b>{{item.hideMobile}}</b>帮忙拆红包获得一张{{item.couponMoney}}优惠券</p>
+      <div class="redpack-view">
+        <div class="redpack-content">
+          <div class="invalid-tips" v-for="item in friendCouponList">
+            <p class="c3"><b>{{item.hideMobile}}</b>帮忙拆红包获得一张{{item.couponMoney}}优惠券</p>
+          </div>
+          <div class="redpack-share-btn start-share-btn" @click="linkAction(downloadLink)">
+            <span>前往APP下单，您也可以得红包</span>
+          </div>
         </div>
-        <div class="redpack-share-btn start-share-btn" @click="linkAction(downloadLink)">
-          <span>前往APP下单，您也可以得红包</span>
+        <RedPackRule></RedPackRule>
+        <div class="redpack-view-bg1"></div>
+        <div class="redpack-view-bg2">
+          <span></span>
         </div>
       </div>
-      <inviteRule></inviteRule>
-      <div class="redpack-view-bg1"></div>
-      <div class="redpack-view-bg2"></div>
-      <div class="redpack-view-bg3"></div>
     </div>
   </div>
 </template>
@@ -24,7 +27,7 @@
 
   import AppHeader from '@/components/common/header'
 
-  import inviteRule from '@/components/redpack/rule'
+  import RedPackRule from '@/components/redpack/rule'
 
   import utils from '@/widget/utils'
 
@@ -51,7 +54,7 @@
     },
     components: {
       AppHeader,
-      inviteRule
+      RedPackRule
     },
     mixin: ['loading'],
     computed: {

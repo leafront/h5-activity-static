@@ -390,6 +390,15 @@ const utils = {
       result.push(data.slice(index,index+2))
     })
     return result
+  },
+  loadScript (url,success) {
+    const script = document.createElement("script")
+    script.type = 'text/javascript'
+    script.src = config.staticPath + url
+    document.getElementsByTagName('head')[0].appendChild(script)
+    script.onload = () => {
+      success && success()
+    }
   }
 }
 

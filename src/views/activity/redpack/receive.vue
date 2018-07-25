@@ -2,30 +2,33 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': pageView,'scroll_view_hidden': imageValidate}">
+    <div class="scroll-view-wrapper" :class="{'visibility': pageView,'scroll_view_hidden': imageValidate}">
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
-      <div class="redpack-content">
-        <div class="receive-tips">
-          <span class="c3">您的好友有一个来伊份红包需要您帮助拆开</span>
-          <p class="c3">还有<strong>{{showCountTime}}</strong>即将失效</p>
+      <div class="redpack-view">
+        <div class="redpack-content">
+          <div class="receive-tips">
+            <span class="c3">您的好友有一个来伊份红包需要您帮助拆开</span>
+            <p class="c3">还有<strong>{{showCountTime}}</strong>即将失效</p>
+          </div>
+          <div class="receive-form">
+            <div class="receive-form-item">
+              <input type="tel" class="receive-form-input font" maxlength="11" v-model.trim="params.mobile" placeholder="请输入手机号"/>
+              <button class="receive-form-btn" :disabled="!isClickCode" @click="openImageValidate">{{codeText}}</button>
+            </div>
+            <div class="receive-form-item">
+              <input type="tel" class="receive-form-input font" maxlength="6" v-model.trim="params.smsCode" placeholder="请输入验证码"/>
+            </div>
+            <div class="receive-form-submit redpack-share-btn" @click="openRedPack">
+              <span>领取红包</span>
+            </div>
+          </div>
         </div>
-        <div class="receive-form">
-          <div class="receive-form-item">
-            <input type="tel" class="receive-form-input font" maxlength="11" v-model.trim="params.mobile" placeholder="请输入手机号"/>
-            <button class="receive-form-btn" :disabled="!isClickCode" @click="openImageValidate">{{codeText}}</button>
-          </div>
-          <div class="receive-form-item">
-            <input type="tel" class="receive-form-input font" maxlength="6" v-model.trim="params.smsCode" placeholder="请输入验证码"/>
-          </div>
-          <div class="receive-form-submit redpack-share-btn" @click="openRedPack">
-            <span>领取红包</span>
-          </div>
+        <RedPackRule></RedPackRule>
+        <div class="redpack-view-bg1"></div>
+        <div class="redpack-view-bg2">
+          <span></span>
         </div>
       </div>
-      <RedPackRule></RedPackRule>
-      <div class="redpack-view-bg1"></div>
-      <div class="redpack-view-bg2"></div>
-      <div class="redpack-view-bg3"></div>
       <ImageValidate  @startCountTime="startCountTime"
                       :mobile="params.mobile">
       </ImageValidate>

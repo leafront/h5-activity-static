@@ -2,33 +2,36 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': pageView}">
+    <div class="scroll-view-wrapper " :class="{'visibility': pageView}">
       <div class="redpack-bg" v-if="redpackImage" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
-      <div class="redpack-content">
-        <div class="invite-title">
-          <div class="invite-left-tit-bg">
+      <div class="redpack-view">
+        <div class="redpack-content">
+          <div class="invite-title">
+            <div class="invite-left-tit-bg">
+            </div>
+            <div class="invite-title-txt">
+              <p>您有一个无门槛红包待拆</p>
+            </div>
+            <div class="invite-right-tit-bg">
+            </div>
           </div>
-          <div class="invite-title-txt">
-            <p>您有一个无门槛红包待拆</p>
+          <div class="invite-help">
+            <p>邀请2位好友帮忙拆5-15元随机红包</p>
           </div>
-          <div class="invite-right-tit-bg">
+          <div class="redpack-share-btn invite-share-btn"
+               v-clipboard:copy="shareConfig.url"
+               v-clipboard:success="weixinShare"
+               v-clipboard:error="onError">
+            <span>立即分享</span>
           </div>
         </div>
-        <div class="invite-help">
-          <p>邀请2位好友帮忙拆5-15元随机红包</p>
-        </div>
-        <div class="redpack-share-btn invite-share-btn"
-             v-clipboard:copy="shareConfig.url"
-             v-clipboard:success="weixinShare"
-             v-clipboard:error="onError">
-          <span>立即分享</span>
+        <RedPackRule></RedPackRule>
+        <div class="redpack-view-bg1"></div>
+        <div class="redpack-view-bg2">
+          <span></span>
         </div>
       </div>
-      <div class="redpack-view-bg1"></div>
-      <div class="redpack-view-bg2"></div>
-      <div class="redpack-view-bg3"></div>
       <UIShare :config="shareConfig"></UIShare>
-      <inviteRule></inviteRule>
     </div>
   </div>
 </template>
@@ -39,7 +42,7 @@
 
   import UIShare from '@/components/widget/ui-share'
 
-  import inviteRule from '@/components/redpack/rule'
+  import RedPackRule from '@/components/redpack/rule'
 
   import utils from '@/widget/utils'
 
@@ -68,7 +71,7 @@
     components: {
       AppHeader,
       UIShare,
-      inviteRule
+      RedPackRule
     },
     computed: {
       ...mapGetters({

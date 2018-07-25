@@ -2,37 +2,40 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper redpack-view" :class="{'visibility': pageView}">
+    <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="redpack-bg" :style="{'backgroundImage': 'url('+redpackImage+')'}"></div>
-      <div class="redpack-content">
-        <div class="redpack-success">
-          <p class="c3" v-if="couponMoney">恭喜您！</p>
-          <p class="c3" v-if="couponMoney">成功帮好友获得一张<b>{{couponMoney}}</b>元优惠券</p>
-          <h4 v-if="couponAmount">奖励您一张</h4>
-        </div>
-        <div class="invite-title" v-if="couponAmount">
-          <div class="invite-left-tit-bg">
+      <div class="redpack-view">
+        <div class="redpack-content">
+          <div class="redpack-success">
+            <p class="c3" v-if="couponMoney">恭喜您！</p>
+            <p class="c3" v-if="couponMoney">成功帮好友获得一张<b>{{couponMoney}}</b>元优惠券</p>
+            <h4 v-if="couponAmount">奖励您一张</h4>
           </div>
-          <div class="invite-success-txt">
-            <div class="redpack-success-money">
-              <p><i>¥</i>{{couponAmount}}</p>
+          <div class="invite-title" v-if="couponAmount">
+            <div class="invite-left-tit-bg">
             </div>
-            <div class="redpack-success-discount">
-              <p>{{couponName}}</p>
-              <span>{{startTime}}-{{endTime}}可用</span>
+            <div class="invite-success-txt">
+              <div class="redpack-success-money">
+                <p><i>¥</i>{{couponAmount}}</p>
+              </div>
+              <div class="redpack-success-discount">
+                <p>{{couponName}}</p>
+                <span>{{startTime}}-{{endTime}}可用</span>
+              </div>
+            </div>
+            <div class="invite-right-tit-bg">
             </div>
           </div>
-          <div class="invite-right-tit-bg">
+          <div class="redpack-share-btn redpack-success-btn" @click="linkAction(downloadLink)">
+            <span>前往APP查看</span>
           </div>
         </div>
-        <div class="redpack-share-btn redpack-success-btn" @click="linkAction(downloadLink)">
-          <span>前往APP查看</span>
+        <RedPackRule></RedPackRule>
+        <div class="redpack-view-bg1"></div>
+        <div class="redpack-view-bg2">
+          <span></span>
         </div>
       </div>
-      <inviteRule></inviteRule>
-      <div class="redpack-view-bg1"></div>
-      <div class="redpack-view-bg2"></div>
-      <div class="redpack-view-bg3"></div>
     </div>
   </div>
 </template>
@@ -41,7 +44,7 @@
 
   import AppHeader from '@/components/common/header'
 
-  import inviteRule from '@/components/redpack/rule'
+  import RedPackRule from '@/components/redpack/rule'
 
   import utils from '@/widget/utils'
 
@@ -72,7 +75,7 @@
     },
     components: {
       AppHeader,
-      inviteRule
+      RedPackRule
     },
     computed: {
       ...mapGetters({
