@@ -79,6 +79,7 @@
       })
     },
     created () {
+      this.$showLoading()
       this.getRedPackInfo()
     },
     methods: {
@@ -127,6 +128,7 @@
         }).then((result) => {
 
           const data = result.data
+          this.$hideLoading()
           if (result.code == 0 && data) {
             const {
               activityStatus,
@@ -151,7 +153,7 @@
               this.pageAction('/activity/redpack/invalid' + searchPrams)
             }
 
-            this.updatePageView(true)
+            this.pageView = true
 
           } else {
             this.$toast(result.message)

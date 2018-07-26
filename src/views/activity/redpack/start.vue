@@ -78,7 +78,7 @@
     },
     created () {
       this.shareConfig = wx_share.shareConfig.call(this)
-
+      this.$showLoading()
       Promise.all([
         this.getRedPackDetail(),
         this.getSystemTimes()
@@ -86,6 +86,7 @@
         this.pageView = true
         const activityTimes = result[0]
         const serverTimes = result[1]
+        this.$hideLoading()
         if (activityTimes) {
           this.startShowCountTime(activityTimes,serverTimes)
         } else {

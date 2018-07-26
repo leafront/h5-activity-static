@@ -1,4 +1,5 @@
 
+import config from '@/config/index'
 
 const utils = {
   ua: navigator.userAgent,

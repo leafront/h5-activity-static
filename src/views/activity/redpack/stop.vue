@@ -64,7 +64,7 @@
       })
     },
     created () {
-
+      this.$showLoading()
       this.getDownloadLink()
       this.getRedPackDetail()
     },
@@ -106,7 +106,7 @@
             shareCode: redpackCode
           }
         }).then((result) => {
-
+          this.$hideLoading()
           const data = result.data
           if (result.code == 0 && data) {
             const {

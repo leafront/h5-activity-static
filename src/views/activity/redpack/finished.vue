@@ -73,6 +73,7 @@
       })
     },
     created () {
+      this.$showLoading()
       this.getDownloadLink()
       this.getRedPackDetail()
     },
@@ -133,6 +134,7 @@
         }).then((result) => {
 
           const data = result.data
+          this.$hideLoading()
 
           if (result.code == 0 && data) {
             const {

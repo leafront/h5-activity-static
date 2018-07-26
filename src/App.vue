@@ -10,15 +10,8 @@ import utils from '@/widget/utils'
 
 import app from '@/widget/app'
 
-import { mapActions } from 'vuex'
-
 export default {
   name: 'App',
-  methods: {
-    ...mapActions([
-      'updatePageView',
-    ])
-  },
   created () {
     //统一隐藏app头部
     if(utils.isApp()) {

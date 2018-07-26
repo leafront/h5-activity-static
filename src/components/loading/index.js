@@ -1,9 +1,7 @@
-import loadingImg from './images/page-loading.gif'
-
-const Loading = {
+const pageLoading = {
   installed: false,
-  install (Vue,options) {
-    if(Loading.installed) return
+  install (Vue, options) {
+    if(pageLoading.installed) return
     let opt = {
       // 默认持续时间
       duration: "3000"
@@ -15,14 +13,13 @@ const Loading = {
     Vue.prototype.$showLoading = () => {
 
       // 如果页面有toast则不继续执行
-      if(document.querySelector('.ui-showLoading')) return
+      if(document.getElementById('showLoading')) return
       // 1、创建构造器，定义好提示信息的模板
       let toastTip = Vue.extend({
         template: `
-			<div class="ui-showLoading">
-			  <img class="ui-showLoading-gif" src="${loadingImg}"/>
-			 </div>
-			`
+        <div class="ui-showLoading" id="showLoading">
+          <div class="ui-showLoading-gif"></div>
+        </div>`
       })
       // 2、创建实例，挂载到文档以后的地方
       let tpl = new toastTip().$mount().$el
@@ -35,13 +32,13 @@ const Loading = {
         e.preventDefault()
       })
 
-      Loading.installed = true
+      pageLoading.installed = true
 
     }
 
     Vue.prototype.$hideLoading = () => {
 
-      const maskUi = document.querySelector('.ui-showLoading')
+      const maskUi = document.getElementById('showLoading')
 
       if (maskUi) {
         maskUi.parentNode.removeChild(maskUi)
@@ -50,4 +47,4 @@ const Loading = {
   }
 }
 
-export default Loading
+export default pageLoading

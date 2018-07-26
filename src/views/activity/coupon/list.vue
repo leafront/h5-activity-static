@@ -85,7 +85,7 @@
           return result
         })
       },
-      getCouponList () {
+      getCouponList (type) {
         const {
           currentPage
         } = this
@@ -107,7 +107,11 @@
               }, 1000)
             }
             this.totalPage = data.total
-            this.list = this.list.concat(data.listObj)
+            if (type == 1) {
+              this.list = this.list.concat(data.listObj)
+            } else {
+              this.list = data.listObj
+            }
           } else {
             if (currentPage > 1) {
               setTimeout(() => {
@@ -136,7 +140,7 @@
             this.isScrollLoad = false
             this.showLoading = true
             this.currentPage += 1
-            this.getCouponList()
+            this.getCouponList(1)
           })()
         }
       },
@@ -158,9 +162,7 @@
 
           if (result.code == 0 && data) {
             this.currentPage = 1
-            this.list = []
             this.getCouponList()
-
             this.$toast('领取成功')
           } else {
             this.$toast(result.message)
@@ -169,15 +171,17 @@
       }
     },
     created () {
+      this.$showLoading()
       Promise.all([
         this.getBannerList(),
-        this.getCouponList()
+        this.getCouponList(1)
       ]).then((result) => {
         if (result) {
           let isSendSuccess = result.every((item) => {
             return item.code == 0
           })
           if (isSendSuccess) {
+            this.$hideLoading()
             this.pageView = true
           }
         }

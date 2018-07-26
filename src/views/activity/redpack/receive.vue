@@ -89,12 +89,18 @@
       ImageValidate
     },
     created () {
+      this.$showLoading()
       this.getRedPackCode().then((data) => {
         if (data) {
-          this.getRedPackDetail(data).then((result) => {
-
-            if (result) {
-              this.startShowCountTime(result)
+          Promise.all([
+            this.getRedPackDetail(data),
+            this.getSystemTimes()
+          ]).then((result) => {
+            this.$hideLoading()
+            const activityTimes = result[0]
+            const serverTimes = result[1]
+            if (activityTimes) {
+              this.startShowCountTime(activityTimes, serverTimes)
               this.pageView = true
             } else {
               this.showCountTime = '00:00:00'
@@ -102,7 +108,6 @@
           })
         }
       })
-
 
     },
     methods: {
