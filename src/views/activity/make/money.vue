@@ -175,7 +175,7 @@
         if (isDistributor == 1 || distributorType == 3) {
           location.href = '/placeChannel/index.html'
         } else {
-          location.href = apply_for_distributor[0].imageUrl
+          location.href = apply_for_distributor[0].linkUrl
         }
       },
       /**
