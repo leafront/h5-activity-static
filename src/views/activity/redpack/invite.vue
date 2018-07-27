@@ -94,6 +94,7 @@
           this.shareConfig = wx_share.shareConfig.call(this)
           this.getRedPackDetail()
         } else {
+          this.$hideLoading()
           this.shareConfig = wx_share.shareConfig.call(this)
           this.pageView = true
         }
