@@ -9,7 +9,7 @@
     </AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <Banner :bannerList="bannerList"></Banner>
-      <UIHeaderNav></UIHeaderNav>
+      <UIHeaderNav @shareAction="shareAction"></UIHeaderNav>
       <div class="group-hot">
         <div class="group-hot-item" v-for="item in goodsHot" @click="pageAction(item.link.data)">
           <img class="pic-lazyLoad" :src="item.imgUrl"/>
@@ -45,6 +45,203 @@
     </div>
   </div>
 </template>
+
+<script type="text/javascript">
+
+  import AppHeader from '@/components/common/header'
+
+  import utils from '@/widget/utils'
+
+  import app from '@/widget/app'
+
+  import Banner from '@/components/common/banner'
+
+  import UIShare from '@/components/widget/ui-share'
+
+  import UIHeaderNav from '@/components/common/header_nav'
+
+  import * as Model from '@/model/group'
+
+  import config from '@/config/index'
+
+  import weixin_share from '@/common/weixin_share'
+
+  import {mapGetters, mapActions} from 'vuex'
+
+  export default {
+    data () {
+     return {
+       title: '伊起拼',
+       isBorder: true,
+       pageView: false,
+       bannerList: [],
+       goodsList: [],
+       goodsHot: [],
+       shareConfig: null
+     }
+    },
+    components: {
+      AppHeader,
+      Banner,
+      UIHeaderNav,
+      UIShare
+    },
+    computed: {
+      ...mapGetters({
+        'headerMenu': 'getHeaderMenu'
+      })
+    },
+    methods: {
+      ...mapActions([
+        'updateHeaderMenu'
+      ]),
+      backAction () {
+        if (utils.isApp()) {
+          app.back('refresh')
+        } else {
+          this.$router.back()
+        }
+      },
+      toggleMenu () {
+        if (this.headerMenu) {
+          this.updateHeaderMenu(false)
+        } else {
+          this.updateHeaderMenu(true)
+        }
+      },
+      /**
+       * 获取商品列表
+       */
+      getGoodsList (moduleId) {
+
+        return Model.getGoodsList({
+          type: 'GET',
+          data: {
+            pageNo: 1,
+            pageSize: 50,
+            moduleId
+          }
+        }).then((result) => {
+
+          const data = result.data
+          if (result.code == 0 && data) {
+
+            if (data.obj && data.obj.refDataList) {
+              const goodsList = data.obj.refDataList
+              this.goodsList = goodsList
+            }
+          } else {
+            this.$toast(result.message)
+          }
+          return result
+
+        })
+      },
+      getModuleList () {
+
+        return Model.getModuleList({
+          type: 'GET',
+          data: {
+            pageId: config.pageId
+          }
+        }).then((result) => {
+
+          const data = result.data
+
+          if (result.code == 0 && data) {
+            let listId = ''
+            data.dataList.forEach((item) => {
+
+              if (item.templateCode == 'slider') {
+                if (item.staticData && item.staticData.images) {
+                  const bannerList = item.staticData.images
+                  bannerList.forEach((child) => {
+                    child.imageUrl = child.src
+                    child.linkUrl = child.url
+                  })
+                  this.bannerList = bannerList
+                }
+              }
+              if (item.templateCode == 'cube') {
+                if (item.staticData.cdata && item.staticData.cdata.children)
+                  this.goodsHot = item.staticData.cdata.children
+              }
+
+              if (item.templateCode == 'distribut-pintuan') {
+
+                listId = item.moduleId
+              }
+            })
+            this.setShareInfo(data.pageInfo)
+            if (listId) {
+              this.getGoodsModules(listId)
+            }
+          } else {
+            this.$toast(result.message)
+          }
+          return result
+        })
+      },
+      getGoodsModules (listId) {
+        Promise.all([
+          this.getGoodsList(listId)
+        ]).then((result) => {
+          if (result) {
+            let isSendSuccess = result.every((item) => {
+              return item.code == 0
+            })
+            if (isSendSuccess) {
+              this.pageView = true
+              this.$hideLoading()
+            }
+          }
+        })
+      },
+      pageAction (url) {
+        location.href = url
+      },
+      shareAction () {
+        const shareConfig = this.shareConfig
+        if (utils.isApp()) {
+          app.postMessage('share',{
+            url: shareConfig.url,
+            title: shareConfig.title,
+            description: shareConfig.description,
+            url160x160: shareConfig.pic,
+            pic: shareConfig.pic
+          },() => {
+
+          })
+        }
+      },
+      setShareInfo (config) {
+        const link = location.href
+        this.shareConfig = {
+          link: link,
+          url: link,
+          title: config.shareTitle,
+          desc: config.shareDesc,
+          description: config.shareDesc,
+          imgUrl: config.shareImg,
+          pic: config.shareImg
+        }
+      },
+      weixinShareAction() {
+        const shareConfig = this.shareConfig
+        if (utils.weixin()) {
+          weixin_share.weixinShare(shareConfig)
+        }
+      }
+    },
+    created ()  {
+      this.$showLoading()
+      this.getModuleList()
+      this.weixinShareAction()
+    }
+  }
+
+</script>
+
 
 <style lang="scss">
   .group-hot {
@@ -175,160 +372,3 @@
   }
 
 </style>
-
-
-<script type="text/javascript">
-
-  import AppHeader from '@/components/common/header'
-
-  import utils from '@/widget/utils'
-
-  import app from '@/widget/app'
-
-  import Banner from '@/components/common/banner'
-
-  import UIHeaderNav from '@/components/common/header_nav'
-
-  import * as Model from '@/model/group'
-
-  import config from '@/config/index'
-
-  import {mapGetters, mapActions} from 'vuex'
-
-  export default {
-    data () {
-     return {
-       title: '伊起拼',
-       isBorder: true,
-       pageView: false,
-       bannerList: [],
-       goodsList: [],
-       goodsHot: []
-     }
-    },
-    components: {
-      AppHeader,
-      Banner,
-      UIHeaderNav
-    },
-    computed: {
-      ...mapGetters({
-        'headerMenu': 'getHeaderMenu'
-      })
-    },
-    methods: {
-      ...mapActions([
-        'updateHeaderMenu'
-      ]),
-      backAction () {
-        if (utils.isApp()) {
-          app.back('refresh')
-        } else {
-          this.$route.back()
-        }
-      },
-      toggleMenu () {
-        if (this.headerMenu) {
-          this.updateHeaderMenu(false)
-        } else {
-          this.updateHeaderMenu(true)
-        }
-      },
-      /**
-       * 获取商品列表
-       */
-      getGoodsList (moduleId) {
-
-        return Model.getGoodsList({
-          type: 'GET',
-          data: {
-            pageNo: 1,
-            pageSize: 50,
-            moduleId
-          }
-        }).then((result) => {
-
-          const data = result.data
-          if (result.code == 0 && data) {
-
-            if (data.obj && data.obj.refDataList) {
-              const goodsList = data.obj.refDataList
-              this.goodsList = goodsList
-            }
-          } else {
-            this.$toast(result.message)
-          }
-          return result
-
-        })
-      },
-      getModuleList () {
-
-        return Model.getModuleList({
-          type: 'GET',
-          data: {
-            pageId: config.pageId
-          }
-        }).then((result) => {
-
-          const data = result.data
-
-          if (result.code == 0 && data) {
-            let listId = ''
-            data.dataList.forEach((item) => {
-
-              if (item.templateCode == 'slider') {
-                if (item.staticData && item.staticData.images) {
-                  const bannerList = item.staticData.images
-                  bannerList.forEach((child) => {
-                    child.imageUrl = child.src
-                    child.linkUrl = child.url
-                  })
-                  this.bannerList = bannerList
-                }
-              }
-              if (item.templateCode == 'cube') {
-                if (item.staticData.cdata && item.staticData.cdata.children)
-                  this.goodsHot = item.staticData.cdata.children
-              }
-
-              if (item.templateCode == 'distribut-pintuan') {
-
-                listId = item.moduleId
-              }
-            })
-            if (listId) {
-              this.getGoodsModules(listId)
-            }
-          } else {
-            this.$toast(result.message)
-          }
-          return result
-        })
-      },
-      getGoodsModules (listId) {
-        Promise.all([
-          this.getGoodsList(listId)
-        ]).then((result) => {
-          if (result) {
-            let isSendSuccess = result.every((item) => {
-              return item.code == 0
-            })
-            if (isSendSuccess) {
-              this.pageView = true
-              this.$hideLoading()
-            }
-          }
-        })
-      },
-      pageAction (url) {
-        location.href = url
-      }
-    },
-    created ()  {
-      this.$showLoading()
-      this.getModuleList()
-    }
-  }
-
-</script>

@@ -25,6 +25,32 @@
   </div>
 </template>
 
+
+<script type="text/javascript">
+
+  import {mapGetters, mapActions} from 'vuex'
+
+  export default {
+    computed: {
+      ...mapGetters({
+        'headerMenu': 'getHeaderMenu'
+      })
+    },
+    methods: {
+      ...mapActions([
+        'updateHeaderMenu',
+        'updateShareMenu'
+      ]),
+      linkAction (url) {
+        location.href = url
+      },
+      showShareMenu () {
+        this.$emit('shareAction')
+      }
+    }
+  }
+</script>
+
 <style lang="scss">
 
   .ui-header-nav{
@@ -80,30 +106,3 @@
     }
   }
 </style>
-
-<script type="text/javascript">
-
-  import {mapGetters, mapActions} from 'vuex'
-
-  export default {
-    computed: {
-      ...mapGetters({
-        'headerMenu': 'getHeaderMenu'
-      })
-    },
-    methods: {
-      ...mapActions([
-        'updateHeaderMenu',
-      ]),
-      linkAction (url) {
-        location.href = url
-      },
-      pageAction (url){
-        location.href = ''
-      },
-      showShareMenu () {
-       this.$emit('weixinShare','click')
-      }
-    }
-  }
-</script>

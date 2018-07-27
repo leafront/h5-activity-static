@@ -136,7 +136,7 @@
         if (utils.isApp()) {
           app.back('refresh')
         } else {
-          this.$route.back()
+          this.$router.back()
         }
       },
       /**

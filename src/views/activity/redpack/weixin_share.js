@@ -45,7 +45,7 @@ const wx_share = {
     } else {
       if (utils.weixin()) {
         this.updateShareMenu(true)
-        weixin_share.weixinShare(this.shareConfig)
+        weixin_share.weixinShare(shareConfig)
       }
     }
   }

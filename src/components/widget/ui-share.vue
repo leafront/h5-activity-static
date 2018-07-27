@@ -18,8 +18,6 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import utils from '@/widget/utils'
-
   export default {
     computed: {
       ...mapGetters({

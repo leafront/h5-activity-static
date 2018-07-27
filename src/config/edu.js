@@ -7,7 +7,7 @@ const config = JSON.stringify({
   "appKey": "9ca572cc88e6",
   "platform": 2,
   "getTime": new Date().getTime(),
-  "pageId": 1003070101000191
+  "pageId": 1007069601000003
 })
 
 module.exports = config

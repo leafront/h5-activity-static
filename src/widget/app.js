@@ -225,7 +225,7 @@ const app = {
   loginAction () {
 
     if (app.loggedIn()) {
-      return 
+      return
     } else {
 
       if (utils.isApp()) {
