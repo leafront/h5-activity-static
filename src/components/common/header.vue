@@ -114,7 +114,7 @@
     .icon-gengduo{
       font-size: .5rem;
       color:#999;
-      transition: transform .4s linear;
+      transition: transform .3s linear;
       &.active{
         transform: rotate(90deg);
       }

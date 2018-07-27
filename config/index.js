@@ -34,6 +34,10 @@ module.exports = {
       '/cms': {
         target: 'http://m.laiyifen.com',
         changeOrigin: true
+      },
+      '/page': {
+        target: 'http://m.laiyifen.com',
+        changeOrigin: true
       }
     },
     // Various Dev Server settings

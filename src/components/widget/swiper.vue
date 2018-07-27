@@ -1,5 +1,5 @@
 <template>
-	<div class="slideshow-wrap">
+	<div class="slideshow-wrap pic-lazyLoad">
 		<slot></slot>
 		<ul class="slideshow-dots">
 			<li v-for="(item,$index) in list" :class="{'active':$index == index-1}">

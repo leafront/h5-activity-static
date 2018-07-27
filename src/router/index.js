@@ -28,6 +28,8 @@ const makeMoney = r => require.ensure([], () =>  r(require('@/views/activity/mak
 
 const couponList = r => require.ensure([], () =>  r(require('@/views/activity/coupon/list.vue')),'couponList')
 
+const groupList = r => require.ensure([], () =>  r(require('@/views/activity/group/list.vue')),'groupList')
+
 export default new Router({
   mode:'history',
   routes: [
@@ -116,6 +118,13 @@ export default new Router({
       component: couponList,
       meta: {
         title: '领券专区'
+      }
+    }, {
+      path: '/activity/group/list',
+      name: 'groupList',
+      component: groupList,
+      meta: {
+        title: '伊起拼'
       }
     }
   ]

@@ -5,7 +5,8 @@ const config = JSON.stringify({
   "staticPath": "",
   "appKey": "9ca572cc88e6",
   "platform": 2,
-  "getTime": new Date().getTime()
+  "getTime": new Date().getTime(),
+  "pageId": 1003070101000191
 })
 
 module.exports = config

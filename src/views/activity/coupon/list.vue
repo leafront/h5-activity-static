@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder">
+    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
     <div class="scroll-view-wrapper" @scroll="scrollLoadList" :class="{'visibility': pageView}">
       <div class="coupon-list-view" id="coupon-list-view">
@@ -66,6 +66,13 @@
       PageLoading
     },
     methods: {
+      backAction () {
+        if (utils.isApp()) {
+          app.back('refresh')
+        } else {
+          this.$route.back()
+        }
+      },
       getBannerList () {
         return common.getDolphinList({
           pageCode: 'H5_COUPON_ZONE_PAGE',

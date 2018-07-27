@@ -37,7 +37,7 @@
     opacity: .8;
     z-index:1000;
     transform: translateX(120%);
-    transition: all .5s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+    transition: all .3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
     &.active{
       transform: translateY(0);
     }
@@ -94,7 +94,6 @@
     methods: {
       ...mapActions([
         'updateHeaderMenu',
-        'updateShareMenu'
       ]),
       linkAction (url) {
         location.href = url

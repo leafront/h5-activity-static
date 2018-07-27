@@ -67,4 +67,8 @@ const imgScale = function (url, width){
   }
 }
 
-export default { dateFormat, imgScale }
+const price = (value) => {
+  return parseFloat(isNaN(value) ? '' : value).toFixed(2)
+}
+
+export default { dateFormat, imgScale, price }

@@ -1,7 +1,7 @@
 <template>
 	<swiper :list="bannerList" :style="{'height':itemHeight}">
 		<ul class="slideshow-item">
-			<li v-for="item in bannerList" class="pic-lazyLoad" :style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
+			<li v-for="item in bannerList":style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
 				<img :src="item.imageUrl" :style="{'width':itemWidth, 'height':itemHeight}">
 			</li>
 		</ul>

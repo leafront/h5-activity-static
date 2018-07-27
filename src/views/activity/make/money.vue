@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder" @backFn="backAction">
+    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <Banner :bannerList="yiqizhuan_banner"></Banner>
