@@ -9,7 +9,7 @@
         <span class="font">首页</span>
 
       </li>
-      <li @click="showShareMenu">
+      <li @click="showShareMenu" v-if="isApp">
         <svg class="icon icon-share" aria-hidden="true">
           <use xlink:href="#icon-connection"></use>
         </svg>
@@ -30,7 +30,14 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
+  import utils from '@/widget/utils'
+
   export default {
+    data () {
+      return {
+        isApp: utils.isApp()
+      }
+    },
     computed: {
       ...mapGetters({
         'headerMenu': 'getHeaderMenu'
@@ -56,7 +63,6 @@
   .ui-header-nav{
     position: fixed;
     width: 1.6rem;
-    height: 2.4rem;
     right: .2rem;
     top: .88rem;
     background: #3d3d3d;

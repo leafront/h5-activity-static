@@ -116,6 +116,7 @@
 
         return Model.getGoodsList({
           type: 'GET',
+          cache: true,
           data: {
             pageNo: 1,
             pageSize: 50,
@@ -141,6 +142,7 @@
 
         return Model.getModuleList({
           type: 'GET',
+          cache: true,
           data: {
             pageId: config.pageId
           }
@@ -225,6 +227,7 @@
           imgUrl: config.shareImg,
           pic: config.shareImg
         }
+        this.weixinShareAction()
       },
       weixinShareAction() {
         const shareConfig = this.shareConfig
@@ -236,7 +239,6 @@
     created ()  {
       this.$showLoading()
       this.getModuleList()
-      this.weixinShareAction()
     }
   }
 
@@ -303,7 +305,7 @@
     strong {
       text-decoration: line-through;
       padding-left: 0.1rem;
-      font-size: .2rem;
+      font-size: .24rem;
     }
     .group-shop-tag {
       padding-top: .1rem;

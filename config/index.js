@@ -38,6 +38,10 @@ module.exports = {
       '/page': {
         target: 'http://m.laiyifen.com',
         changeOrigin: true
+      },
+      '/agent-fx-web': {
+        target: 'http://m.laiyifen.com',
+        changeOrigin: true
       }
     },
     // Various Dev Server settings

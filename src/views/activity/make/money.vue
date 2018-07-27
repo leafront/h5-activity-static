@@ -144,7 +144,8 @@
        */
       getUserInfo () {
         Model.getUserInfo({
-          type: 'GET'
+          type: 'GET',
+          cache: true
         }).then((result) => {
 
           const data = result.data
@@ -305,6 +306,7 @@
       getHeadLineList () {
         Model.getHeadLineList({
           type: 'GET',
+          cache: true,
           data: {
             categoryType : 2,
             currentPage : 1,
@@ -327,19 +329,16 @@
       getUserBroadcast () {
 
         Model.getUserBroadcast({
-          type: 'POST'
+          type: 'POST',
+          cache: true
         }).then((result) => {
 
           const data = result.data
 
           if (result.code == 0 && data) {
             this.userBroadcast = data
-          } else {
-            this.$toast(result.message)
           }
-
         })
-
       },
       pageAction (url) {
         if (url) {
