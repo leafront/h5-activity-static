@@ -12,7 +12,13 @@ const validate = {
   },
   isMessageCode (text){
 
-	  const pattern = /^[0-9]{6}$/
+	  const pattern = /^[0-9]{4}$/
+
+    return pattern.test(text)
+  },
+  isPicMessageCode (text){
+
+    const pattern = /^[0-9]{6}$/
 
     return pattern.test(text)
   },

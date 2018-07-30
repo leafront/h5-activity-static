@@ -16,7 +16,7 @@
               <button class="receive-form-btn" :disabled="!isClickCode" @click="openImageValidate">{{codeText}}</button>
             </div>
             <div class="receive-form-item">
-              <input type="tel" class="receive-form-input font" maxlength="6" v-model.trim="params.smsCode" placeholder="请输入验证码"/>
+              <input type="tel" class="receive-form-input font" maxlength="4" v-model.trim="params.smsCode" placeholder="请输入验证码"/>
             </div>
             <div class="receive-form-submit redpack-share-btn" @click="openRedPack">
               <span>领取红包</span>

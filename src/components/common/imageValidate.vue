@@ -165,7 +165,7 @@
             return
           }
 
-          if (!validate.isMessageCode(verifyCode)) {
+          if (!validate.isPicMessageCode(verifyCode)) {
             this.$toast('请输入正确的图形验证码')
             return
           }

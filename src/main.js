@@ -17,6 +17,8 @@ import Toast from '@/components/toast'
 
 import showLoading from '@/components/loading'
 
+import pageLoading from '@/components/pageLoading'
+
 import showModal from '@/components/showModal'
 
 import VueClipboard from 'vue-clipboard2'
@@ -26,6 +28,8 @@ Vue.use(VueClipboard)
 Vue.use(showModal)
 
 Vue.use(showLoading)
+
+Vue.use(pageLoading)
 
 Object.keys(filter).forEach(key => {
 	Vue.filter(key, filter[key])
