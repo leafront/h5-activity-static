@@ -21,7 +21,7 @@ const wx_share = {
     const shareConfig = {
       link: link,
       url: link,
-      title:'速来！来伊份618狂欢，瓜分1亿红包',
+      title:'来伊份会员狂欢福利，拿红包拼手气！戳！',
       desc: '我刚领到一个大红包，快帮我拆一下！拆者有份，你也有红包拿哦~',
       description: '我刚领到一个大红包，快帮我拆一下！拆者有份，你也有红包拿哦~',
       imgUrl: config.staticPath + '/activity-static/images/redpack_icon.png?v=' + config.getTime,
