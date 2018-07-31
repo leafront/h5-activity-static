@@ -304,6 +304,13 @@
        * 滚动头条文字
        */
       getHeadLineList () {
+        const divisionArr = (data) => {
+          const result = []
+          data.forEach((item,index) => {
+            result.push(data.slice(index,index+2))
+          })
+          return result
+        }
         Model.getHeadLineList({
           type: 'GET',
           cache: true,
@@ -319,7 +326,7 @@
           if (result.code == 0 && data) {
             if (data.pageResult && data.pageResult.listObj) {
               this.categoryLink = data.categoryLink
-              this.noticeText = utils.divisionArr(data.pageResult.listObj)
+              this.noticeText = divisionArr(data.pageResult.listObj)
             }
           } else {
             this.$toast(result.message)

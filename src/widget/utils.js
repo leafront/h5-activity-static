@@ -396,13 +396,6 @@ const utils = {
       return url
     }
   },
-  divisionArr (data) {
-    const result = []
-    data.forEach((item,index) => {
-      result.push(data.slice(index,index+2))
-    })
-    return result
-  },
   loadScript (url,success) {
     const script = document.createElement("script")
     script.type = 'text/javascript'

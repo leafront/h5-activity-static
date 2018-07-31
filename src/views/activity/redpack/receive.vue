@@ -143,7 +143,7 @@
         }
 
         this.countTimer = setInterval(() => {
-          serverTimes -= 1000 * 1
+          serverTimes += 1000 * 1
           const showCountTimeStr =  countTime(activityTimes,serverTimes)
           this.showCountTime = showCountTimeStr == -1 ? '00:00:00' : showCountTimeStr
         },1000)
