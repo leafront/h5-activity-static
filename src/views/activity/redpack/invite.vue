@@ -31,7 +31,7 @@
           <span></span>
         </div>
       </div>
-      <UIShare :config="shareConfig"></UIShare>
+      <UIShare></UIShare>
     </div>
   </div>
 </template>

@@ -115,7 +115,7 @@
             }
             this.totalPage = data.total
             if (type == 1) {
-              this.list = this.list.concat(data.listObj)
+              this.list = this.list.concat(data.listObj || [])
             } else {
               this.list = data.listObj
             }

@@ -93,7 +93,8 @@
     },
     methods: {
       ...mapActions([
-        'updateHeaderMenu'
+        'updateHeaderMenu',
+        'updateShareMenu'
       ]),
       backAction () {
         if (utils.isApp()) {
@@ -214,6 +215,9 @@
           },() => {
 
           })
+        } else if (utils.weixin()) {
+          this.updateShareMenu(true)
+          this.weixinShareAction()
         }
       },
       setShareInfo (config) {
@@ -227,7 +231,6 @@
           imgUrl: config.shareImg,
           pic: config.shareImg
         }
-        this.weixinShareAction()
       },
       weixinShareAction() {
         const shareConfig = this.shareConfig

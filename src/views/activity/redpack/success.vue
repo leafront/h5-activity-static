@@ -20,7 +20,7 @@
               </div>
               <div class="redpack-success-discount">
                 <p>{{couponName}}</p>
-                <span>{{startTime}}-{{endTime}}可用</span>
+                <span>{{validityTime}}</span>
               </div>
             </div>
             <div class="invite-right-tit-bg">
@@ -68,9 +68,8 @@
         couponMoney: '',
         couponAmount: '',
         couponName: '',
-        startTime: '',
-        endTime: '',
-        pageView: false
+        pageView: false,
+        validityTime: ''
       }
     },
     components: {
@@ -148,8 +147,7 @@
             friendCouponList.some((item) => {
               if (userId == item.userId) {
                 couponAmount = item.couponMoney
-                this.startTime = item.startTime.slice(0,-9).replace(/\-/ig,'/')
-                this.endTime = item.endTime.slice(0,-9).replace(/\-/ig,'/')
+                this.validityTime = item.validityTime
                 this.couponName = item.couponName
                 return true
               } else {
