@@ -216,7 +216,6 @@
 
           })
         } else if (utils.weixin()) {
-          this.updateShareMenu(true)
           this.weixinShareAction()
         }
       },
@@ -235,6 +234,7 @@
       weixinShareAction() {
         const shareConfig = this.shareConfig
         if (utils.weixin()) {
+          this.updateShareMenu(true)
           weixin_share.weixinShare(shareConfig)
         }
       }
