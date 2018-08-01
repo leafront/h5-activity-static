@@ -7,7 +7,7 @@
         </svg>
       </div>
     </AppHeader>
-    <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
+    <div class="scroll-view-wrapper" id="activity-group-scroll" :class="{'visibility': pageView}">
       <Banner :bannerList="bannerList"></Banner>
       <UIHeaderNav @shareAction="shareAction"></UIHeaderNav>
       <div class="group-hot">
@@ -21,27 +21,29 @@
           <p>拼团专享</p>
         </div>
       </div>
-      <div class="group-shop">
-        <ul class="group-shop-list">
-          <li v-for="item in goodsList" @click="pageAction(item.h5Link)">
-            <img class="goods_pic pic-lazyLoad" :src="item.pic"/>
-            <div class="group-shop-item">
-              <span class="group-shop-name">{{item.mpName}}</span>
-              <p>已拼{{item.volume4sale}}件</p>
-              <div class="group-shop-tag">
-                <span>{{item.iconTexts[0]}}</span>
-                <span>{{item.groupMembers}}人团</span>
-              </div>
-              <div class="group-shop-des">
-                <p>￥{{item.grouponPrice | price}}<strong class="c9">￥{{item.salePrice | price}}</strong></p>
-                <div class="group-info-button">
-                  <span>去拼团</span>
+      <LazyLoad :list="goodsList" :options="{ele:'goods_pic',scrollEle: 'activity-group-scroll'}">
+        <div class="group-shop">
+          <ul class="group-shop-list">
+            <li v-for="item in goodsList" @click="pageAction(item.h5Link)">
+              <img class="goods_pic pic-lazyLoad" :data-src="item.pic"/>
+              <div class="group-shop-item">
+                <span class="group-shop-name">{{item.mpName}}</span>
+                <p>已拼{{item.volume4sale}}件</p>
+                <div class="group-shop-tag">
+                  <span>{{item.iconTexts[0]}}</span>
+                  <span>{{item.groupMembers}}人团</span>
+                </div>
+                <div class="group-shop-des">
+                  <p>￥{{item.grouponPrice | price}}<strong class="c9">￥{{item.salePrice | price}}</strong></p>
+                  <div class="group-info-button">
+                    <span>去拼团</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+            </li>
+          </ul>
+        </div>
+      </LazyLoad>
     </div>
   </div>
 </template>
@@ -59,6 +61,8 @@
   import UIShare from '@/components/widget/ui-share'
 
   import UIHeaderNav from '@/components/common/header_nav'
+
+  import LazyLoad from '@/components/widget/lazyLoad'
 
   import * as Model from '@/model/group'
 
@@ -84,7 +88,8 @@
       AppHeader,
       Banner,
       UIHeaderNav,
-      UIShare
+      UIShare,
+      LazyLoad
     },
     computed: {
       ...mapGetters({
