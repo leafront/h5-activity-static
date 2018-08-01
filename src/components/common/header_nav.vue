@@ -9,7 +9,7 @@
         <span class="font">首页</span>
 
       </li>
-      <li @click="showShareMenu" v-if="isApp">
+      <li @click="showShareMenu" v-if="isApp && isWeixin">
         <svg class="icon icon-share" aria-hidden="true">
           <use xlink:href="#icon-connection"></use>
         </svg>
@@ -35,7 +35,8 @@
   export default {
     data () {
       return {
-        isApp: utils.isApp()
+        isApp: utils.isApp(),
+        isWeixin: utils.weixin()
       }
     },
     computed: {

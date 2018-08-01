@@ -216,7 +216,8 @@
 
           })
         } else if (utils.weixin()) {
-          this.weixinShareAction()
+          this.updateShareMenu(true)
+          weixin_share.weixinShare(shareConfig)
         }
       },
       setShareInfo (config) {
@@ -229,13 +230,6 @@
           description: config.shareDesc,
           imgUrl: config.shareImg,
           pic: config.shareImg
-        }
-      },
-      weixinShareAction() {
-        const shareConfig = this.shareConfig
-        if (utils.weixin()) {
-          this.updateShareMenu(true)
-          weixin_share.weixinShare(shareConfig)
         }
       }
     },
