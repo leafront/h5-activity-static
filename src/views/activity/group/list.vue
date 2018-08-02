@@ -36,7 +36,7 @@
                 <div class="group-shop-des">
                   <p>￥{{item.grouponPrice | price}}<strong class="c9">￥{{item.salePrice | price}}</strong></p>
                   <div class="group-info-button">
-                    <span>去拼团goods_pic</span>
+                    <span>去拼团</span>
                   </div>
                 </div>
               </div>
