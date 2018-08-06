@@ -19,7 +19,7 @@
         index: 0,
         iNow: 0,
         timer: null,
-        headImg: config.staticPath + '/activity-static/images/logo-laiyifen.png'
+        headImg: config.staticPath + '/webapp-static/images/logo-laiyifen.png'
       }
     },
     props: {

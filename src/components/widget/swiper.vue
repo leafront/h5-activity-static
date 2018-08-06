@@ -5,12 +5,9 @@
 			<li v-for="(item,$index) in list" :class="{'active':$index == index-1}">
 			</li>
 		</ul>
-
 	</div>
 </template>
 <script>
-
-	import utils from '@/widget/utils'
 
 	export default {
 		props:{
@@ -232,7 +229,7 @@
 
 				setTimeout(() => {
 
-					this.init();
+					this.init()
 
 				},0)
 

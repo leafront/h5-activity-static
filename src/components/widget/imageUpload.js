@@ -1,5 +1,7 @@
 import EXIF from 'exif-js'
 
+
+
 window.URL = window.URL || window.webkitURL;
 /*
 
@@ -249,175 +251,217 @@ var XBlob = blobConstruct ? window.Blob : function (parts, opts) {
 }
 
 
-function ImageUpload(file, options) {
+const ImageUpload = function (file,options) {
+
   options = Object.assign({
     quality: .8,
     imageMinZoomWidth: 540,
-    onUpload: function(){},
-    onError: function(){},
+    onUpload (){},
+    onError (){},
     fileKey: 'file',
     data: {}
-  }, options);
-
-  this.options = options;
-  this.file = file;
+  }, options)
+  this.options = options
+  this.file = file
 }
 
 ImageUpload.prototype = {
   constructor: ImageUpload,
-  // 创建图片对象
-  start: function() {
-
-    this.img = document.createElement('img');
-    this.img.onload = this.imgLoaded.bind(this)
-    this.img.src = URL.createObjectURL(this.file);
-
+  start (imageUploadDatabase) {
+    imageUploadDatabase.img = document.createElement('img')
+    imageUploadDatabase.img.onload = this.imageLoad.bind(this,imageUploadDatabase)
+    imageUploadDatabase.img.src = URL.createObjectURL(imageUploadDatabase.file)
   },
-  getBlob: function() {
-    return this.img.src;
-  },
-  // 压缩图片，然后上传
-  imgLoaded: function() {
-    this.compress();
-  },
-  compress: function() {
+  imageLoad(imageUploadDatabase) {
 
-    var This = this;
+    const img = imageUploadDatabase.img
+    const self = this
 
-    var img = this.img;
+    EXIF.getData(imageUploadDatabase.file, function () {
 
-    EXIF.getData(this.file, function() {
-
-      var orientation = EXIF.getTag(this, "Orientation");
-      This.drawImage(img, orientation);
+      var orientation = EXIF.getTag(this, "Orientation")
+      self.drawImage(img, orientation,imageUploadDatabase)
 
     })
-
   },
-  drawImage: function(img,orientation){
+  getBlob (imageUploadDatabase) {
+    return  imageUploadDatabase.img.src;
+  },
+  drawImage(img,orientation,imageUploadDatabase) {
+
+    const options = imageUploadDatabase
+
     //生成比例
 
     var w = img.width,
       h = img.height,
-      scale = w / h;
-    w = w > this.options.imageMinZoomWidth ? this.options.imageMinZoomWidth : w;
-    h = w / scale;
+      scale = w / h
+    w = w > options.imageMinZoomWidth ? options.imageMinZoomWidth : w
+    h = w / scale
     //生成canvas
-    var canvas = document.createElement('canvas');
-    var ctx = canvas.getContext('2d');
-    canvas.width = w;
-    canvas.height = h;
-    var styleWidth  = canvas.style.width;
-    var styleHeight = canvas.style.height;
+
+    var canvas = document.createElement('canvas')
+    var ctx = canvas.getContext('2d')
+    canvas.width = w
+    canvas.height = h
+    var styleWidth = canvas.style.width
+    var styleHeight = canvas.style.height
     if (orientation > 4) {
-      canvas.width  = h;
-      canvas.style.width  = styleHeight;
+
+      canvas.width = h;
+      canvas.style.width = styleHeight
       canvas.height = w;
-      canvas.style.height = styleWidth;
+      canvas.style.height = styleWidth
     }
     switch (orientation) {
       case 2:
-        ctx.translate(w, 0);
-        ctx.scale(-1,1);
+        ctx.translate(w, 0)
+        ctx.scale(-1, 1)
         break;
       case 3:
-        ctx.translate(w,h);
-        ctx.rotate(Math.PI);
+        ctx.translate(w, h)
+        ctx.rotate(Math.PI)
         break;
       case 4:
-        ctx.translate(0,h);
-        ctx.scale(1,-1);
+        ctx.translate(0, h)
+        ctx.scale(1, -1)
         break;
       case 5:
-        ctx.rotate(0.5 * Math.PI);
-        ctx.scale(1,-1);
+        ctx.rotate(0.5 * Math.PI)
+        ctx.scale(1, -1);
         break;
       case 6:
-        ctx.rotate(0.5 * Math.PI);
+        ctx.rotate(0.5 * Math.PI)
 
-        ctx.translate(0,-h);
+        ctx.translate(0, -h)
 
         break;
       case 7:
-        ctx.rotate(0.5 * Math.PI);
-        ctx.translate(w,-h);
-        ctx.scale(-1,1);
+        ctx.rotate(0.5 * Math.PI)
+        ctx.translate(w, -h)
+        ctx.scale(-1, 1)
         break;
       case 8:
-        ctx.rotate(-0.5 * Math.PI);
-        ctx.translate(-w,0);
+        ctx.rotate(-0.5 * Math.PI)
+        ctx.translate(-w, 0)
         break;
     }
 
-    var base64;
+    var base64
 
     // 修复IOS
     if (isIOS) {
 
-      drawImageIOSFix(ctx, img, 0, 0, img.width, img.height, 0, 0, w, h);
-      base64 = canvas.toDataURL('image/jpeg', this.options.quality);
-      this.formBlob = this.getSource(base64);
+      drawImageIOSFix(ctx, img, 0, 0, img.width, img.height, 0, 0, w, h)
+      base64 = canvas.toDataURL('image/jpeg', options.quality)
+      options.formBlob = this.getSource(base64,imageUploadDatabase)
     }
 
     // 修复android
     if (isAndroid) {
-      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, w, h);
-      var encoder = new JPEGEncoder();
-      base64 = encoder.encode(ctx.getImageData(0, 0, w, h), this.options.quality * 100);
-      this.formBlob = this.getSource(base64);
 
+      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, w, h)
+      var encoder = new JPEGEncoder()
+      base64 = encoder.encode(ctx.getImageData(0, 0, w, h), options.quality * 100)
+      options.formBlob = this.getSource(base64,imageUploadDatabase)
     }
-    this.upload();
+    this.upload(imageUploadDatabase)
   },
-  getSource:function(base64) {
-    var blob = dataURL2Blob(base64);
+  upload (imageUploadDatabase) {
 
-    if (blob.size < this.file.size) {
+    var xhr = new XMLHttpRequest()
 
-      return blob;
-    } else {
-      this.uploadFile = true;
-      return this.file;
-    }
-  },
-  upload: function() {
+    var fd = new FormData
 
-    var xhr = new XMLHttpRequest();
-
-    var fd = new FormData;
-
-    var options = this.options;
-
-    xhr.open("POST", options.url, true);
+    const options = imageUploadDatabase.options
+    xhr.open("POST", options.url, true)
 
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4 && xhr.status == 200) {
         if (xhr.status == 200) {
           var res = JSON.parse(xhr.responseText);
-          options.onUpload(res);
+          options.onUpload(res)
         } else {
-          options.onError();
+          options.onError()
         }
       }
-    };
+    }
 
-    const fileName = this.file.name.replace(/\.png|\.jpg|\.gif|\.webp/,'.jpeg')
+    const fileName = imageUploadDatabase.file.name.replace(/\.png|\.jpg|\.gif|\.webp/,'.jpeg')
 
-    options.data[this.options.fileKey] = this.formBlob;
+    options.data[options.fileKey] = imageUploadDatabase.formBlob
 
     for (var i in options.data) {
 
-      fd.append(i,options.data[i]);
+      fd.append(i,options.data[i])
     }
 
-    fd.append('file',this.formBlob)
+    fd.append('files',imageUploadDatabase.formBlob)
+    xhr.send(fd)
 
-    xhr.send(fd);
+    return xhr
+  },
+  getSource (base64,imageUploadDatabase) {
 
-    return xhr;
+    var blob = dataURL2Blob(base64)
+    if (blob.size < imageUploadDatabase.file.size) {
+
+      return blob
+    } else {
+
+      return imageUploadDatabase.file
+    }
   }
+
 }
 
-export default ImageUpload
+function isEmptyObject (object) {
+  for (let attr in object) {
+    return false
+  }
+
+  return true
+}
+
+const ImageUploadFactory = (function () {
+
+  let exitsImageUploads = {}
+
+  return {
+    createImageUpload (file,options) {
+
+      if (isEmptyObject(exitsImageUploads)) {
+        const imageUpload = new ImageUpload(file,options)
+        exitsImageUploads = imageUpload
+        return imageUpload
+      } else {
+        return exitsImageUploads
+      }
+    }
+  }
+})()
+
+
+const ImageUploadManager = (function () {
+
+  let imageUploadDatabase = {}
+
+  return {
+
+    start (file, options) {
+
+      const imageUpload = ImageUploadFactory.createImageUpload(file, options)
+
+      imageUploadDatabase = {
+        file,
+        options
+      }
+
+      imageUpload.start(imageUploadDatabase)
+    }
+  }
+})()
+
+export default ImageUploadManager
 
 

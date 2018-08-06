@@ -73,7 +73,7 @@ export default function request (url,options){
           window.location.href = `/login.html?from=` + encodeURIComponent(from);
         }
       } else {
-        if (results.code == 0) {
+        if (results.code == 0 && cache) {
           store.set(url, cacheData,'local')
         }
       }
@@ -106,6 +106,7 @@ export default function request (url,options){
     } else {
 
       sendAjax (resolve)
+
     }
   })
 }

@@ -81,8 +81,6 @@
 
   import Banner from '@/components/common/banner'
 
-  import common from '@/widget/common'
-
   import NoticeScroll from '@/components/make/noticeScroll'
 
   import TextScroll from '@/components/make/textScroll'
@@ -220,9 +218,12 @@
           'distributor_common_problem', //获取广告获取帮助
           'apply_for_distributor', //获取广告申请推客
         ]
-        return common.getDolphinList({
-          pageCode : 'H5_YIQIZHUAN_ARER_PAGE',
-          adCode : ADCODE.join(',')
+        return Model.getDolphinList({
+          type: 'GET',
+          data:{
+            pageCode : 'H5_YIQIZHUAN_ARER_PAGE',
+            adCode : ADCODE.join(',')
+          }
         }).then((result) => {
           const data = result.data
 
@@ -273,9 +274,13 @@
           'wonderful_activity03', //获取广告精彩活动
           'wonderful_activity04', //获取广告精彩活动
         ]
-        return common.getDolphinList({
-          pageCode : 'H5_YIQIZHUAN_ARER_PAGE',
-          adCode : ADCODE_ACTIVES.join(',')
+
+        return Model.getDolphinList({
+          type: 'GET',
+          data:{
+            pageCode : 'H5_YIQIZHUAN_ARER_PAGE',
+            adCode : ADCODE_ACTIVES.join(',')
+          }
         }).then((result) => {
           const data = result.data
 
@@ -336,8 +341,7 @@
       getUserBroadcast () {
 
         Model.getUserBroadcast({
-          type: 'POST',
-          cache: true
+          type: 'POST'
         }).then((result) => {
 
           const data = result.data

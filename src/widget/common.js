@@ -33,14 +33,6 @@ const common = {
       })
     })
   },
-  getDolphinList (data) {
-    return Model.getDolphinList({
-      type: 'GET',
-      data
-    }).then((result) => {
-      return result
-    })
-  },
   /**
    *
    * 获取区域信息保存storage

@@ -38,9 +38,9 @@
 
   import utils from '@/widget/utils'
 
-  import common from '@/widget/common'
-
   import * as Model from '@/model/coupon'
+
+  import common from '@/widget/common'
 
   import app from '@/widget/app'
 
@@ -74,10 +74,13 @@
         }
       },
       getBannerList () {
-        return common.getDolphinList({
-          pageCode: 'H5_COUPON_ZONE_PAGE',
-          adCode: 'coupons_banner',
-          areaCode: common.getAreaCode().areaCode
+        return Model.getDolphinList({
+          type: 'GET',
+          data: {
+            pageCode: 'H5_COUPON_ZONE_PAGE',
+            adCode: 'coupons_banner',
+            areaCode: common.getAreaCode().areaCode
+          }
         }).then((result) => {
           const data = result.data
           if (result.code == 0 && data) {
