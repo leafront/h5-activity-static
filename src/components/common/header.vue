@@ -19,7 +19,20 @@
   import utils from '@/widget/utils'
 
   export default {
-    props:['backFn','title','isBorder'],
+    props: {
+      backFn: {
+        default: null,
+        type: Function
+      },
+      title: {
+        default:'',
+        type: String
+      },
+      isBorder: {
+        default: false,
+        type: Boolean
+      }
+    },
     computed: {
       showHeader () {
         return !(utils.weixin() || utils.nativeQQ())
@@ -27,8 +40,7 @@
     },
     methods: {
       backAction () {
-
-        if (typeof this.backFn == 'function') {
+        if (this.backFn && typeof this.backFn == 'function') {
           this.backFn()
         } else {
           if (utils.isApp()) {
@@ -97,7 +109,7 @@
       top:0;
       transform: translateX(-50%);
       font-size: .36rem;
-      color:#333;
+      color:#030303;
       text-align: center;
     }
   }
@@ -114,7 +126,7 @@
     .icon-gengduo{
       font-size: .5rem;
       color:#999;
-      transition: transform .3s linear;
+      transition: transform .4s linear;
       &.active{
         transform: rotate(90deg);
       }
