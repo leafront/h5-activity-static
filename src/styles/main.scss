@@ -14,8 +14,8 @@
 .visibility{
 
   visibility: visible;
+  animation: fadeIn .3s ease-out backwards;
 }
-
 
 .scroll_view_hidden{
 
@@ -103,6 +103,30 @@ body{
     display: block;
   }
 }
+
+.ui-right-bottom{
+  position:relative;
+  width: .24rem;
+  height: .32rem;
+  &:before,&:after{
+    content: '';
+    width: .2rem;
+    height: .02rem;
+    background: #999;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    transform-origin: right top;
+  }
+  &:before{
+    transform: rotate(42.5deg);
+  }
+  &:after{
+    transform: rotate(-42.5deg);
+  }
+}
 .ui-submit {
   background: linear-gradient(top,#ff7c20,#ff7900);
   background: -webkit-linear-gradient(top,#ff7c20,#ff7900);
@@ -157,5 +181,29 @@ body{
 
   100% {
     transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
+
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(.02rem);
+
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(.02rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

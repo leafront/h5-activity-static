@@ -12,35 +12,35 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/osc-api': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/ouser-web': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/opay-web': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/customer': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/cms': {
-        target: 'http://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/page': {
-        target: 'http://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/agent-fx-web': {
-        target: 'http://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       }
     },
