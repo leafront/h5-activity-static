@@ -252,11 +252,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 46.3%;
+    height: 1.5rem;
     margin-right: 7.2%;
     border: .01rem solid #ccc;
     border-radius:  .04rem;
-    padding: .36rem 0;
     margin-bottom: .3rem;
     &.active{
       border: .03rem solid #FF6900;
