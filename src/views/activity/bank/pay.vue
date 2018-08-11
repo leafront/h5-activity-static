@@ -8,7 +8,7 @@
       </div>
       <div class="bank-pay-list">
         <div class="bank-pay-tit">
-          <p class="font c3">其他支付方式</p>
+          <p class="font c3">支付方式</p>
         </div>
         <div class="bank-pay-item" @click="payAction">
           <i class="bank_pay_icon"></i>

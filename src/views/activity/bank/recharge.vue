@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="bank-recharge-discount">
-        <div class="bank-recharge-des">
+        <div class="bank-recharge-des" @click="toggleBankPopup(true)">
           <div class="bank-recharge-tit">
             <h3>充值特惠悠点卡</h3>
             <i class="icon_question"></i>
@@ -43,6 +43,18 @@
       <div class="bank-recharge-submit" @click="submitAction">
         <div class="ui-submit">
           <span>充值</span>
+        </div>
+      </div>
+    </div>
+    <div class="bank-popup ui-mask" :class="{'active': isBankPopup}">
+      <div class="bank-popup-cont">
+        <h3>悠点卡说明</h3>
+        <p class="font">悠点卡内金额无有效期，只可在消费
+          时使用，不提现，不透支。</p>
+        <p class="font">悠点卡内金额无有效期，只可在消费
+          时使用，不提现，不透支。</p>
+        <div class="bank-popup-button" @click="toggleBankPopup(false)">
+          <span>我知道了</span>
         </div>
       </div>
     </div>
@@ -86,7 +98,8 @@
           "rechargeAmount": "500",
           "activityContent": "送满500减20优惠券1张"
         }],
-        rechargeIndex: 0
+        rechargeIndex: 0,
+        isBankPopup: false
       }
     },
     components: {
@@ -189,6 +202,9 @@
       },
       pageAction (url) {
         this.$router.push(url)
+      },
+      toggleBankPopup (val) {
+        this.isBankPopup = val
       }
     },
     created () {
@@ -200,8 +216,43 @@
 
 </script>
 
-
 <style lang="scss">
+  .bank-popup{
+    align-items: center;
+    justify-content: center;
+    display: none;
+    &.active{
+      display: flex;
+    }
+  }
+  .bank-popup-button{
+    border-top: .01rem solid #ddd;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span{
+      font-size: .32rem;
+      color: #2CB2FF;
+    }
+  }
+  .bank-popup-cont{
+    width: 5.62rem;
+    border-radius: .1rem;
+    background: #fff;
+    position: absolute;
+    padding: 0 .5rem;
+    animation: scaleIn .4s;
+    h3{
+      padding: .44rem 0;
+      color: #333;
+      font-size: .36rem;
+      text-align: center;
+    }
+    p{
+      padding-bottom: .45rem;
+    }
+  }
   .bank-recharge-submit{
     padding: .48rem .3rem 0;
   }
@@ -281,6 +332,8 @@
   .bank-recharge-tit{
     display: flex;
     align-items: center;
+    padding-top: .4rem;
+    padding-bottom: .16rem;
     h3 {
       color: #333;
       font-size: .32rem;
@@ -292,15 +345,15 @@
       background: url(./images/bank_question.png) no-repeat;
       background-size: .3rem auto;
     }
-  }
-  .bank-recharge-des{
-    padding: .4rem 4% .2rem;
     p{
-      padding-top: .16rem;
       color: #808080;
     }
   }
+  .bank-recharge-des{
+    padding: 0 4% .2rem;
+  }
   .bank-recharge-discount{
+
     padding-bottom: .2rem;
     background: #fff;
   }
