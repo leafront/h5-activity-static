@@ -13,7 +13,7 @@
                 <span>优惠券</span>
               </div>
               <div class="coupon-item-des">
-                <p class="c3">{{item.themeTitle}}</p>
+                <h4 class="c3">{{item.themeTitle}}</h4>
                 <p class="c9">{{item.themeDesc||'暂无说明'}}</p>
               </div>
             </div>
@@ -250,6 +250,12 @@
     flex:1;
     p{
       line-height: .4rem;
+      display: flex;
+      max-height: .8rem;
+      -webkit-line-clamp: 2;
+      flex-direction: column;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   .coupon-item-info{
