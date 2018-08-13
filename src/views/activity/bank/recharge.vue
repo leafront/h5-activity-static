@@ -249,6 +249,7 @@
       padding: .44rem 0;
       color: #333;
       font-size: .36rem;
+      text-align: center;
     }
     p{
       padding-bottom: .45rem;
