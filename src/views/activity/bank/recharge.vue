@@ -14,8 +14,8 @@
         </div>
       </div>
       <div class="bank-recharge-discount">
-        <div class="bank-recharge-des" @click="toggleBankPopup(true)">
-          <div class="bank-recharge-tit">
+        <div class="bank-recharge-des">
+          <div class="bank-recharge-tit" @click="toggleBankPopup(true)">
             <h3>充值特惠悠点卡</h3>
             <i class="icon_question"></i>
           </div>
@@ -29,8 +29,8 @@
           </div>
         </div>
       </div>
-      <div class="bank-recharge-input">
-        <div class="bank-recharge-input-wrapper">
+      <div class="bank-recharge-input" >
+        <div class="bank-recharge-input-wrapper" @click="scrollInput($event)">
           <span>金额</span>
           <input type="tel" v-model.trim="money" placeholder="请输入充值金额"/>
         </div>
@@ -96,6 +96,13 @@
       AppHeader
     },
     methods: {
+      scrollInput (event) {
+        if (utils.android()) {
+          setTimeout(() => {
+            event.target.scrollIntoViewIfNeeded()
+          },400)
+        }
+      },
       backAction () {
         if (utils.isApp()) {
           app.back()
@@ -126,7 +133,10 @@
       },
       getRechargeList () {
         Model.getRechargeList({
-          type: 'GET'
+          type: 'GET',
+          data: {
+            paymentConfigId: 1024026000000006
+          }
         }).then((result) => {
           const data = result.data
           this.$hideLoading()
@@ -215,11 +225,9 @@
 
 <style lang="scss">
   .bank-popup{
-    align-items: center;
-    justify-content: center;
     display: none;
     &.active{
-      display: flex;
+      display: block;
     }
   }
   .bank-popup-button{
@@ -250,8 +258,12 @@
     width: 5.62rem;
     border-radius: .1rem;
     background: #fff;
-    position: absolute;
     animation: scaleIn .4s;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -2.81rem;
+    margin-top: -2.44rem;
   }
   .bank-recharge-submit{
     padding: .48rem .3rem 0;

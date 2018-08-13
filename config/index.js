@@ -27,6 +27,10 @@ module.exports = {
         target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
+      '/ouser-center': {
+        target: 'http://m.lyf.edu.laiyifen.com',
+        changeOrigin: true
+      },
       '/customer': {
         target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true

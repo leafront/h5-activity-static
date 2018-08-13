@@ -164,28 +164,32 @@ body{
   animation: loading 1s steps(12, end) infinite;
 }
 
-@-webkit-keyframes loading {
-  0% {
-    transform: rotate3d(0, 0, 1, 0deg);
-  }
-
-  100% {
-    transform: rotate3d(0, 0, 1, 360deg);
-  }
-}
 
 @keyframes loading {
   0% {
     transform: rotate3d(0, 0, 1, 0deg);
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
   }
 
   100% {
     transform: rotate3d(0, 0, 1, 360deg);
+    -webkit-transform: rotate3d(0, 0, 1, 360deg);
   }
 }
 
+@-webkit-keyframes loading {
+  0% {
+    transform: rotate3d(0, 0, 1, 0deg);
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
+  }
 
-@-webkit-keyframes fadeIn {
+  100% {
+    transform: rotate3d(0, 0, 1, 360deg);
+    -webkit-transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
+
+@keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(.02rem);
@@ -198,7 +202,7 @@ body{
   }
 }
 
-@keyframes fadeIn {
+@-webkit-keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(.02rem);
