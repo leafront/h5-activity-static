@@ -159,10 +159,10 @@
           return
         }
 
-        if (!validate.isNumber(money)) {
-          this.$toast('请输入正确的充值金额')
-          return
-        }
+        // if (!validate.isNumber(money)) {
+        //   this.$toast('请输入正确的充值金额')
+        //   return
+        // }
 
         this.createPay()
       },
