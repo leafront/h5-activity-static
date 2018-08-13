@@ -1,7 +1,7 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder">
-      <div class="ui-header-right">
+      <div class="ui-header-right" @click="pageAction('/activity/bank/recharge')">
         <span class="bank-success-right-btn">完成</span>
       </div>
     </AppHeader>
@@ -16,13 +16,37 @@
           <p>优惠券已发送，请至<b>来伊份APP</b></p>
           <p><b>"我的"-"优惠券"</b>查收</p>
         </div>
-        <div class="bank-success-btn">
+        <div class="bank-success-btn" @click="pageAction('/activity/bank/recharge')">
           <span>返回</span>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script type="text/javascript">
+
+  import AppHeader from '@/components/common/header'
+
+  export default {
+    data () {
+      return {
+        title: '交易结果',
+        isBorder: true,
+        pageView: true
+      }
+    },
+    components: {
+      AppHeader
+    },
+    methods: {
+      pageAction (url) {
+        this.$router.replace(url)
+      }
+    }
+  }
+
+</script>
 
 <style lang="scss">
   .bank-success-des{
@@ -81,30 +105,3 @@
     }
   }
 </style>
-
-
-<script type="text/javascript">
-
-  import AppHeader from '@/components/common/header'
-
-  export default {
-    data () {
-      return {
-        title: '交易结果',
-        isBorder: true,
-        pageView: true
-      }
-    },
-    components: {
-      AppHeader
-    },
-    methods: {
-
-    },
-    created () {
-
-    }
-  }
-
-</script>
-

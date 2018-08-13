@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder">
+    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
       <!--<div class="ui-header-right">-->
         <!--<span>充值记录</span>-->
       <!--</div>-->
@@ -48,11 +48,13 @@
     </div>
     <div class="bank-popup ui-mask" :class="{'active': isBankPopup}">
       <div class="bank-popup-cont">
-        <h3>悠点卡说明</h3>
-        <p class="font">悠点卡内金额无有效期，只可在消费
-          时使用，不提现，不透支。</p>
-        <p class="font">悠点卡内金额无有效期，只可在消费
-          时使用，不提现，不透支。</p>
+        <div class="bank-popup-des">
+          <h3>悠点卡说明</h3>
+          <p class="font">悠点卡内金额无有效期，只可在消费
+            时使用，不提现，不透支。</p>
+          <p class="font">悠点卡内金额无有效期，只可在消费
+            时使用，不提现，不透支。</p>
+        </div>
         <div class="bank-popup-button" @click="toggleBankPopup(false)">
           <span>我知道了</span>
         </div>
@@ -82,22 +84,10 @@
       return {
         title: '悠点卡',
         isBorder: true,
-        pageView: true,
+        pageView: false,
         yCardBalance: 0,
         money: '',
-        rechargeList:  [{
-          "rechargeAmount": "100",
-          "activityContent": "送满50减10优惠券1张"
-        }, {
-          "rechargeAmount": "200",
-          "activityContent": "送满100减20优惠券1张"
-        },{
-          "rechargeAmount": "300",
-          "activityContent": "送满250减10优惠券1张"
-        }, {
-          "rechargeAmount": "500",
-          "activityContent": "送满500减20优惠券1张"
-        }],
+        rechargeList:  [],
         rechargeIndex: 0,
         isBankPopup: false
       }
@@ -106,6 +96,13 @@
       AppHeader
     },
     methods: {
+      backAction () {
+        if (utils.isApp()) {
+          app.back()
+        } else {
+          location.href = '/index.html'
+        }
+      },
       /**
        * 获取悠点卡金额
        */
@@ -132,15 +129,15 @@
           type: 'GET'
         }).then((result) => {
           const data = result.data
-          //this.$hideLoading()
+          this.$hideLoading()
           if (result.code == 0 && data) {
-            //this.pageView = true
+            this.pageView = true
             this.rechargeList = data || []
+            this.money = this.rechargeList[0].rechargeAmount
           } else {
             this.$toast(result.message)
           }
         })
-        this.money = this.rechargeList[0].rechargeAmount
       },
       submitAction () {
         const {
@@ -208,7 +205,7 @@
       }
     },
     created () {
-      //this.$showLoading()
+      this.$showLoading()
       this.getWalletInfo()
       this.getRechargeList()
     }
@@ -236,22 +233,25 @@
       color: #2CB2FF;
     }
   }
+  .bank-popup-des{
+    padding: 0 .3rem;
+    display: flex;
+    flex-direction: column;
+    h3{
+      padding: .44rem 0;
+      color: #333;
+      font-size: .36rem;
+    }
+    p{
+      padding-bottom: .45rem;
+    }
+  }
   .bank-popup-cont{
     width: 5.62rem;
     border-radius: .1rem;
     background: #fff;
     position: absolute;
-    padding: 0 .5rem;
     animation: scaleIn .4s;
-    h3{
-      padding: .44rem 0;
-      color: #333;
-      font-size: .36rem;
-      text-align: center;
-    }
-    p{
-      padding-bottom: .45rem;
-    }
   }
   .bank-recharge-submit{
     padding: .48rem .3rem 0;
