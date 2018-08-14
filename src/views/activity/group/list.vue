@@ -12,7 +12,7 @@
       <UIHeaderNav @shareAction="shareAction"></UIHeaderNav>
       <div class="group-hot">
         <div class="group-hot-item" v-for="item in goodsHot" @click="pageAction(item.link.data)">
-          <img class="pic-lazyLoad" :src="item.imgUrl"/>
+          <img class="group-hot-pic pic-lazyLoad" :src="item.imgUrl"/>
         </div>
       </div>
       <div class="group-share-title">

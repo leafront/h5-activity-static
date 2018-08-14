@@ -36,11 +36,11 @@ module.exports = {
         changeOrigin: true
       },
       '/cms': {
-        target: 'http://m.lyf.edu.laiyifen.com',
+        target: 'http://m.laiyifen.com',
         changeOrigin: true
       },
       '/page': {
-        target: 'http://m.lyf.edu.laiyifen.com',
+        target: 'http://m.laiyifen.com',
         changeOrigin: true
       },
       '/agent-fx-web': {
