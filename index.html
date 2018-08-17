@@ -7,12 +7,11 @@
 	  <meta http-equiv="cache-control" content="no-cache">
 	  <meta http-equiv="expires" content="0">
 	  <meta name="env" content="production">
-	  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,viewport-fit=cover" >
     <title>活动页面</title>
 	  <script type="text/javascript">
       (function (win) {
         var flex = function flex() {
-          var doc = win.document;
           var ua = navigator.userAgent;
           var matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i);
           var UCversion = ua.match(/U3\/((\d+|\.){5,})/i);
@@ -24,13 +23,14 @@
             dpr = 1;
           }
           var scale =  1 / dpr;
-          var metaEl = doc.querySelector('meta[name="viewport"]');
+          var metaEl = document.querySelector('meta[name="viewport"]');
           if (!metaEl) {
-            metaEl = doc.createElement('meta');
+            metaEl = document.createElement('meta');
             metaEl.setAttribute('name', 'viewport');
-            doc.head.appendChild(metaEl);
+            document.head.appendChild(metaEl);
           }
-          var clientWidth = doc.documentElement.clientWidth;
+
+          var clientWidth = document.documentElement.clientWidth || 375
 
           var docFontSize = 50 + 'px'
           if (clientWidth <= 1200) {
@@ -40,7 +40,7 @@
             }
           }
           metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale);
-          doc.documentElement.style.fontSize = docFontSize;
+          document.documentElement.style.fontSize = docFontSize;
         };
         flex();
       })(window);
@@ -51,9 +51,9 @@
     <!-- built files will be auto injected -->
     <script type="text/javascript" defer="defer" src="<%= htmlWebpackPlugin.options.staticPath %>/activity-static/iconfont.js?v=<%= htmlWebpackPlugin.options.getTime %>"></script>
     <script type="text/javascript" defer="defer" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/fastclick/index.js"></script>
-    <!--<script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>-->
-    <!--<script>-->
-      <!--var vconsole = new VConsole()-->
-    <!--</script>-->
+    <script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>
+    <script>
+      var vconsole = new VConsole()
+    </script>
   </body>
 </html>
