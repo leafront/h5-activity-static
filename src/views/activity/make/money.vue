@@ -25,7 +25,7 @@
           <img :src="distribution_commodity[0].imageUrl | imgScale(100)">
           <p>{{distribution_commodity[0].name}}</p>
         </div>
-        <div class="make-money-item" v-if="invite_friend.length" @click="pageAction(invite_friend[0].linkUrl)">
+        <div class="make-money-item" v-if="invite_friend.length" @click="inviteAction(invite_friend[0].linkUrl)">
           <img :src="invite_friend[0].imageUrl | imgScale(100)">
           <p>{{invite_friend[0].name}}</p>
         </div>
@@ -354,6 +354,30 @@
       pageAction (url) {
         if (url) {
           location.href = url
+        }
+      },
+      inviteAction (url) {
+        app.loginAction()
+        const {
+          isDistributor,
+          distributorType
+        } = this.userInfo  // 如果是分销商或者代言人
+
+        if (isDistributor == 1 || distributorType == 3) {
+          if (utils.isApp()) {
+            location.href = 'lyf://inviteFriend'
+          } else {
+            location.href = this[parmas][0].linkUrl
+          }
+        } else {
+          this.$showModal({
+            content: '您还不是推客！',
+            cancelText: '取消',
+            confirmText: '申请推客',
+            success() {
+              location.href = '/applyToTuike.html'
+            }
+          })
         }
       }
     },
