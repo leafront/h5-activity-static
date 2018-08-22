@@ -356,7 +356,7 @@
           location.href = url
         }
       },
-      inviteAction (parmas) {
+      inviteAction (url) {
         app.loginAction()
         const {
           isDistributor,
@@ -367,7 +367,7 @@
           if (utils.isApp()) {
             location.href = 'lyf://inviteFriend'
           } else {
-            location.href = this[parmas][0].linkUrl
+            location.href = url
           }
         } else {
           this.$showModal({
