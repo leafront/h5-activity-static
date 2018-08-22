@@ -356,7 +356,7 @@
           location.href = url
         }
       },
-      inviteAction (url) {
+      inviteAction (parmas) {
         app.loginAction()
         const {
           isDistributor,
