@@ -253,6 +253,13 @@
     flex:1;
     p{
       line-height: .4rem;
+      display: flex;
+      max-height: .8rem;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+      flex-direction: column;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   .coupon-item-info{
