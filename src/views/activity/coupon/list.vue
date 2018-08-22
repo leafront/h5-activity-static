@@ -190,9 +190,11 @@
           let isSendSuccess = result.every((item) => {
             return item.code == 0
           })
+          console.log('success:' + isSendSuccess)
           if (isSendSuccess) {
             this.$hideLoading()
             this.pageView = true
+            console.log('pageView: ' + this.pageView)
           }
         }
       })
@@ -205,6 +207,7 @@
   .coupon-list{
     margin-top: .2rem;
     background: #fff;
+    width:100%;
   }
   .coupon-item{
     padding: .3rem;
