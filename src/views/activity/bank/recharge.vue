@@ -302,8 +302,8 @@
     right: 0;
     top:0;
     .icon{
-      font-size: .4rem;
-      color: #999;
+      width: .4rem;
+      height: .4rem;
     }
   }
   .bank-recharge-input{
