@@ -255,7 +255,7 @@
       line-height: .4rem;
       display: flex;
       max-height: .8rem;
-      -webkit-line-clamp: 2;
+      line-clamp: 2;
       flex-direction: column;
       overflow: hidden;
       text-overflow: ellipsis;

@@ -103,9 +103,9 @@
       ]),
       backAction () {
         if (utils.isApp()) {
-          app.back('refresh')
+          location.href = 'lyf://home'
         } else {
-          this.$router.back()
+          location.href = '/index.html'
         }
       },
       toggleMenu () {
