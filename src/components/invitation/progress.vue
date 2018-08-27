@@ -80,7 +80,7 @@ export default {
   methods: {
     dynamicPro() {
       console.log(123);
-      var activityNumber = 15;
+      var activityNumber = 7;
       var totaNumber = 16;
       var firstNumber = 4;
       var secondNumber = 8;
