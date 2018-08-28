@@ -148,7 +148,6 @@
           this.$toast('请输入充值金额')
           return
         }
-
         this.createPay()
       },
       deleteRecharge () {
