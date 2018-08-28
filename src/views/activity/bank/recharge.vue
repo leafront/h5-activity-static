@@ -32,12 +32,7 @@
       <div class="bank-recharge-input" >
         <div class="bank-recharge-input-wrapper" @click="scrollInput($event)">
           <span>金额</span>
-          <input type="tel" v-model.trim="money" placeholder="请输入充值金额"/>
-        </div>
-        <div class="bank-recharge-close" @click="deleteRecharge">
-          <svg class="icon" aria-hidden="true" v-show="money">
-            <use xlink:href="#icon-close"></use>
-          </svg>
+          <p>{{money}}</p>
         </div>
       </div>
       <div class="bank-recharge-submit" @click="submitAction">
@@ -280,30 +275,12 @@
     span{
       font-size: .32rem;
     }
-    input {
+    p {
       padding-left: .42rem;
       color: #333;
       font-size: .34rem;
       height: .45rem;
       flex: 1;
-      &::-webkit-input-placeholder{
-        color: #DEDEDE;
-        font-size: .3rem;
-      }
-    }
-  }
-  .bank-recharge-close{
-    height: 1rem;
-    padding: 0 .3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: 0;
-    top:0;
-    .icon{
-      width: .4rem;
-      height: .4rem;
     }
   }
   .bank-recharge-input{
