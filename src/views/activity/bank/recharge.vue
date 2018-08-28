@@ -19,8 +19,6 @@
             <h3>充值特惠悠点卡</h3>
             <i class="icon_question"></i>
           </div>
-          <p>自2018年6月20日起，充值累计3次以上且单词充值金额大于100元，送
-            满200减10元优惠券3张</p>
         </div>
         <div class="bank-recharge-list clearfix">
           <div class="bank-recharge-item" @click="checkedRecharge(item,index)" :class="{'active': rechargeIndex == index}" v-for="(item,index) in rechargeList">
@@ -45,10 +43,8 @@
       <div class="bank-popup-cont">
         <div class="bank-popup-des">
           <h3>悠点卡说明</h3>
-          <p class="font">悠点卡内金额无有效期，只可在消费
-            时使用，不提现，不透支。</p>
-          <p class="font">悠点卡内金额无有效期，只可在消费
-            时使用，不提现，不透支。</p>
+          <p class="font">"悠点卡"内金额无有效期，只可在消费时使用，不提现，不透支。</p>
+          <p class="font">卡内所存金额可在全国来伊份门店或来伊份APP购物使用。</p>
         </div>
         <div class="bank-popup-button" @click="toggleBankPopup(false)">
           <span>我知道了</span>
@@ -113,7 +109,6 @@
           type: 'GET'
         }).then((result) => {
 
-
           const data = result.data
           if (result.code == 0 && data) {
             this.yCardBalance = data.yCardBalance || 0
@@ -153,11 +148,6 @@
           this.$toast('请输入充值金额')
           return
         }
-
-        // if (!validate.isNumber(money)) {
-        //   this.$toast('请输入正确的充值金额')
-        //   return
-        // }
 
         this.createPay()
       },
