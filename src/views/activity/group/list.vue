@@ -2,9 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
       <div class="ui-header-right-icon" @click="toggleMenu">
-        <svg class="icon icon-gengduo" :class="{'active': headerMenu}" aria-hidden="true">
-          <use xlink:href="#icon-gengduo"></use>
-        </svg>
+        <i class="icon-gengduo" :class="{'active': headerMenu}"></i>
       </div>
     </AppHeader>
     <div class="scroll-view-wrapper" id="activity-group-scroll" :class="{'visibility': pageView}">

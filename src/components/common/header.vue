@@ -121,7 +121,10 @@
     padding-right: .2rem;
     justify-content: flex-end;
     .icon-gengduo{
-      font-size: .5rem;
+      width: .42rem;
+      height: .11rem;
+      background: url(../../images/header_sprite.png) no-repeat -.05rem -.1rem;
+      background-size: 1.65rem auto;
       color:#999;
       transition: transform .4s linear;
       &.active{

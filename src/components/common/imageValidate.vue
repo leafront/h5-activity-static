@@ -6,9 +6,7 @@
       <div class="ui-image-cont">
         <input type="tel" class="ui-image-code" v-model="verifyCode" maxlength="6" placeholder="请输入验证码"/>
         <div class="ui-image-close" :class="{'active': verifyCode}" @click="deleteVerifyCode">
-          <svg class="icon icon-close" aria-hidden="true">
-            <use xlink:href="#icon-close"></use>
-          </svg>
+          <i class="icon-close"></i>
         </div>
         <div class="ui-image-pic" @click="getImageKey" :style="{'backgroundImage': 'url(data:image/png;base64,'+imageVerifyCode+')' }"></div>
       </div>
@@ -238,8 +236,10 @@
       visibility: visible;
     }
     .icon-close{
-      font-size: .4rem;
-      color:#999;
+      background: url('../../images/close.png') no-repeat;
+      background-size: .4rem auto;
+      width:.4rem;
+      height: .4rem;
     }
   }
   .ui-image-cont{
