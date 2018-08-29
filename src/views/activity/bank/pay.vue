@@ -29,6 +29,10 @@
 
   import store from '@/widget/store'
 
+  import app from '@/widget/app'
+
+  import utils from '@/widget/utils'
+
   export default {
     data () {
       return {
@@ -46,6 +50,11 @@
       payAction () {
         const orderUrl = store.get('BANK_RECHARGE_INFO', 'session')
         location.href = 'https://ibsbjstar.ccb.com.cn/CCBIS/ccbMain?' + orderUrl
+        if (utils.isApp()) {
+          setTimeout(() => {
+            app.postMessage('hiddenHead',{'isHidden':'0'})
+          },1500)
+        }
       }
     },
     created () {
