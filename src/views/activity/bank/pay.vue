@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder"></AppHeader>
+    <AppHeader :title="title" v-show="showHeader" :isBorder="isBorder"></AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="bank-pay-money">
         <span class="font-b">应付金额</span>
@@ -40,7 +40,8 @@
         isBorder: true,
         pageView: true,
         orderUrl: '',
-        money: ''
+        money: '',
+        showHeader: true
       }
     },
     components: {
@@ -49,15 +50,15 @@
     methods: {
       payAction () {
         const orderUrl = store.get('BANK_RECHARGE_INFO', 'session')
-        location.href = 'https://ibsbjstar.ccb.com.cn/CCBIS/ccbMain?' + orderUrl
         if (utils.isApp()) {
-          setTimeout(() => {
-            app.postMessage('hiddenHead',{'isHidden':'0'})
-          },1500)
+          this.showHeader = false
+          app.postMessage('hiddenHead',{'isHidden':'0'})
         }
+        location.href = 'https://ibsbjstar.ccb.com.cn/CCBIS/ccbMain?' + orderUrl
       }
     },
     created () {
+      this.showHeader = true
       const money = store.get('BANK_RECHARGE_MONEY', 'session')
       this.money = money
     }
