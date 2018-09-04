@@ -33,18 +33,6 @@ const utils = {
   isApp () {
     return this.ua.indexOf('ody') > -1;
   },
-  setTimeout (callback,times) {
-
-    this.timer = setTimeout(() => {
-      callback()
-    },times)
-
-  },
-  clearTimeout () {
-
-    clearTimeout(this.timer)
-
-  },
 	serialize(value) {
 		return JSON.stringify(value);
 	},
