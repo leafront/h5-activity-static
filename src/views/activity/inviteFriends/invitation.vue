@@ -203,6 +203,8 @@ export default {
   showPoster(){
     this.rulePopup = true
   },
+
+
   /*
   *好友页面请求
   */
