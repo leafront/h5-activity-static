@@ -134,7 +134,7 @@
       </div>
 
     </div>
-  <ShareImg :rulePopup="rulePopup" @toggleRulePopup="toggleRulePopup"></ShareImg>
+  <ShareImg :rulePopup="rulePopup"  :invitationShareC = "invitationShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
   </div>
 </div>
 </template>
