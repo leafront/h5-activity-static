@@ -13,7 +13,7 @@
                 <span>优惠券</span>
               </div>
               <div class="coupon-item-des">
-                <p class="c3">{{item.themeTitle}}</p>
+                <h4 class="c3">{{item.themeTitle}}</h4>
                 <p class="c9">{{item.themeDesc||'暂无说明'}}</p>
               </div>
             </div>
@@ -190,9 +190,11 @@
           let isSendSuccess = result.every((item) => {
             return item.code == 0
           })
+          console.log('success:' + isSendSuccess)
           if (isSendSuccess) {
             this.$hideLoading()
             this.pageView = true
+            console.log('pageView: ' + this.pageView)
           }
         }
       })
@@ -205,6 +207,7 @@
   .coupon-list{
     margin-top: .2rem;
     background: #fff;
+    width:100%;
   }
   .coupon-item{
     padding: .3rem;
@@ -250,6 +253,12 @@
     flex:1;
     p{
       line-height: .4rem;
+      display: flex;
+      max-height: .8rem;
+      line-clamp: 2;
+      flex-direction: column;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   .coupon-item-info{

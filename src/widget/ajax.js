@@ -19,7 +19,7 @@ import config from '@/config/index'
 
 export default function ajax (options){
 
-  const baseHostPath = options.hostPath || config.hostPath
+  const baseHostPath = options.hostPath || location.origin
 
 	return new Promise((resolve, reject) => {
 
@@ -27,7 +27,7 @@ export default function ajax (options){
 
 		xhr.open(options.type, baseHostPath + options.url, options.async)
 
-		xhr.timeout = options.timeout
+		xhr.timeout = options.timeout || 10000
 
 		//设置请求头
 		for (var k in options.headers) {

@@ -3,7 +3,7 @@ html{
 }
 body {
 	background-color: #fff;
-	font-family:Microsoft Yahei,PingFangSC-Regular, Helvetica, Arial, "Lucida Grande", Verdana, STXihei, Sans-serif;
+	font-family: PingFangSC-Regular, Microsoft Yahei, Helvetica, Arial, "Lucida Grande", Verdana, STXihei, Sans-serif;
 }
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
 	display: block;
@@ -91,6 +91,10 @@ b, strong,h1,h2,h3,h4,h5,h6 {
 	font-weight: normal;
 }
 
+.font-b{
+  font-size: .3rem;
+}
+
 .font {
 	font-size: .28rem;
 }
@@ -111,51 +115,15 @@ b, strong,h1,h2,h3,h4,h5,h6 {
 .c9{
   color: #999;
 }
-.weui-mask_transparent{
-	position: fixed;
-	z-index: 1000;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
+
+.ff6900 {
+  color: #ff6900;
 }
 
-.weui-toast {
-	position: fixed;
-	z-index: 5000;
-	width: 2.4rem;
-	min-height:2.4rem;
-	top: 50%;
-	transform:translateY(-50%);
-	-webkit-transform:translateY(-50%);
-	left: 50%;
-	margin-left: -1.2rem;
-	background: rgba(17,17,17,0.7);
-	text-align: center;
-	border-radius: .1rem;
+.mt20{
+  margin-top: .2rem;
 }
 
-.weui-icon_toast {
-	margin: .44rem 0 0;
-	display: block;
-
-}
-
-.weui-icon-success-no-circle :before {
-	color: #FFFFFF;
-	font-size: 55px;
-
-}
-
-.weui-toast__content {
-	margin: 0 0 .7rem;
-	color:#fff;
-	font-size:.32rem;
-}
-
-.weui-loading{
-	width: .76rem;
-	height: .76rem;
-	display: block;
-	margin:.5rem auto .1rem;
+.mt30 {
+  margin-top: .3rem;
 }
