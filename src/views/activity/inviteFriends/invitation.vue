@@ -155,7 +155,7 @@ export default {
   data() {
     return {
       title: "邀请好友",
-      rulePopup: true,
+      rulePopup: false,
       dynamicProgress: {},
       dynamicReward: {},
       registerRewardAmount: null,
