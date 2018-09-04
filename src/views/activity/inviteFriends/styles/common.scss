@@ -1,0 +1,75 @@
+img {
+  display: block;
+  width: 100%;
+}
+p{
+  box-sizing: border-box;
+  display: block;
+}
+.f_h{
+
+  position: relative;
+  width: 60%;
+  margin: 0 auto;
+  margin-bottom: -.6rem;
+
+}
+.header_t{
+  position: absolute;
+  left: 50%;
+  top:50%;
+transform:translate(-50%,-50%);
+color: white;
+  width: max-content;
+  text-align: center;
+  font-size: .3rem;
+  line-height: 1.5;
+}
+.first_t{
+  width: max-content;
+  font-size: .4rem;
+  line-height: 1.5;
+  margin: auto;
+  padding: .1rem 1.5rem ;
+  border-radius: .5rem;
+  margin-top: .5rem;
+}
+.l_title{
+  font-size: .35rem;
+  color: #FF6D00;
+  width: 50%;
+}
+.r_title , .join_nu {
+  text-align: center;
+  width: 30%;
+}
+.winner_title , .winner_c{
+  padding: .3rem;
+}
+.wc_l{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+
+}
+.l_wc_img{
+  width: .75rem;
+}
+.l_wc_num{
+  font-size: .3rem;
+  text-align: center;
+  line-height: .35rem;
+  margin: .2rem .2rem;
+  width: .35rem;
+  height: .35rem;
+  border-radius: 50%;
+  background: linear-gradient(#FAD961,#F76B1C);
+}
+.bottom_li{
+  width: max-content;
+  margin: .3rem auto 0;
+  color: white;
+  font-size: .25rem;
+
+}
