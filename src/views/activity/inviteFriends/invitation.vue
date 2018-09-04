@@ -134,7 +134,7 @@
       </div>
 
     </div>
-  <ShareImg :rulePopup="rulePopup" @toggleRulePopup="toggleRulePopup"></ShareImg>
+  <ShareImg :rulePopup="rulePopup"  :invitationShareC = "invitationShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
   </div>
 </div>
 </template>
@@ -204,7 +204,7 @@ export default {
   showPoster(){
     this.rulePopup = true
   },
-  ajaxShareCode(){
+   ajaxShareCode(){
      Model.getShareCode({
        type: 'GET'
      }).then((result) => {
