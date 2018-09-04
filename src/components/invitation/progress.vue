@@ -8,13 +8,13 @@
         <img src="./img/5.png" alt="">
       </div>
       <div class="flag_t">
-        1人
+        {{this.dynamicProgress.activityNumber}}人
       </div>
     </div>
 
     <div class="in_content positioning">
       <div class="im_text">
-        <p class="t_size">10 <span>￥</span></p>
+        <p class="t_size">{{this.dynamicReward.ladderOneRewardAmount}} <span>￥</span></p>
         <p class="t_size">满减券</p>
         <p class="t_size">3大爷</p>
       </div>
@@ -22,13 +22,13 @@
         <span></span>
       </div>
       <div class="p_num">
-        <span>2人</span>
+        <span>{{this.dynamicProgress.firstNumber}}人</span>
       </div>
     </div>
 
     <div class="in_content positioning">
       <div class="im_text">
-        <p class="t_size">10 <span>￥</span></p>
+        <p class="t_size">{{this.dynamicReward.ladderTwoRewardAmount}} <span>￥</span></p>
         <p class="t_size">满减券</p>
         <p class="t_size">3大爷</p>
       </div>
@@ -36,13 +36,13 @@
         <span></span>
       </div>
       <div class="p_num">
-        <span>2人</span>
+        <span>{{this.dynamicProgress.secondNumber}}人</span>
       </div>
     </div>
 
     <div class="in_content positioning">
       <div class="im_text">
-        <p class="t_size">10 <span>￥</span></p>
+        <p class="t_size">{{this.dynamicReward.ladderThreeRewardAmount}} <span>￥</span></p>
         <p class="t_size">满减券</p>
         <p class="t_size">3大爷</p>
       </div>
@@ -50,7 +50,7 @@
         <span></span>
       </div>
       <div class="p_num">
-        <span>2人</span>
+        <span>{{this.dynamicProgress.totaNumber}}人</span>
       </div>
     </div>
 
@@ -64,31 +64,34 @@
 <script>
 export default {
   props: {
-    dynamicProgress: Object
-  },
-  components: {
-
+    dynamicProgress: {
+      default: {},
+      type: Object
+    },
+    dynamicReward: {
+      default: null,
+      type: Object
+    }
   },
   data() {
     return {
-     isActive : false,
-     isActive1 : false,
-     isActive2 : false,
+     isActive: false,
+     isActive1: false,
+     isActive2: false,
      flagView: false
     }
   },
   methods: {
     dynamicPro() {
-      console.log(123);
-      var activityNumber = 7;
-      var totaNumber = 16;
-      var firstNumber = 4;
-      var secondNumber = 8;
-      var first_location = Math.round(firstNumber / totaNumber * 0.85 * 10000) / 100;
-      var section_location = Math.round(secondNumber / totaNumber * 0.85 * 10000) / 100;
-      var last_location = 85;
-      var activity_location = Math.round(activityNumber / totaNumber * 0.85 * 10000) / 100;
-      var e_progress_color = document.getElementsByClassName("progress_color"),
+      let activityNumber = this.dynamicProgress.activityNumber;
+      let totaNumber = this.dynamicProgress.totaNumber;
+      let firstNumber = this.dynamicProgress.firstNumber;
+      let secondNumber = this.dynamicProgress.secondNumber;
+      let first_location = Math.round(firstNumber / totaNumber * 0.85 * 10000) / 100;
+      let section_location = Math.round(secondNumber / totaNumber * 0.85 * 10000) / 100;
+      let last_location = 85;
+      let activity_location = Math.round(activityNumber / totaNumber * 0.85 * 10000) / 100;
+      let e_progress_color = document.getElementsByClassName("progress_color"),
         e_in_content = document.getElementsByClassName("in_content"),
         e_flag_c = document.getElementsByClassName("flag_c");
       // barWidth = document.getElementsByClassName("progress")[0].scrollWidth;
@@ -103,7 +106,6 @@ export default {
 
 
       if (activityNumber > totaNumber) {
-        console.log(1);
         this.isActive = true;
         this.isActive1 = true;
         this.isActive2 = true;
@@ -111,13 +113,12 @@ export default {
         e_progress_color[0].style.width = "98%";
         e_flag_c[0].style.left = "98%";
       } else if (activityNumber == totaNumber) {
-        console.log(2);
+
         this.isActive = true;
         this.isActive1 = true;
         this.isActive2 = true;
         this.flagView = false;
-      }else if (secondNumber <= activityNumber && activityNumber < totaNumber) {
-        console.log(3);
+      } else if (secondNumber <= activityNumber && activityNumber < totaNumber) {
 
          if(secondNumber == activityNumber){
            this.isActive = true;
@@ -131,21 +132,19 @@ export default {
            this.flagView = true;
          }
       }else if (firstNumber <= activityNumber && activityNumber < secondNumber) {
-        console.log(4);
-        if(firstNumber == activityNumber){
+        if (firstNumber == activityNumber) {
           this.isActive = true;
           this.isActive1 = false;
           this.isActive2 = false;
           this.flagView = false;
-        }else {
+        } else {
           this.isActive = true;
           this.isActive1 = false;
           this.isActive2 = false;
           this.flagView = true;
         }
       } else if (activityNumber < firstNumber) {
-        console.log(5);
-        console.log('nima');
+
         this.isActive = false;
         this.isActive1 = false;
         this.isActive2 = false;
@@ -155,12 +154,12 @@ export default {
     }
 
   },
-  created() {
-    // this.dynamicPro()
-
-    setTimeout(() => {
+  watch: {
+    dynamicProgress (newVal, oldVal) {
       this.dynamicPro()
-    }, 0)
+    }
+  },
+  created() {
 
   }
 }
@@ -293,6 +292,6 @@ span {
 
 .im_text p:first-child {
     margin-top: 0.1rem;
-    font-size: 0.45rem;
+    font-size: 0.4rem;
 }
 </style>

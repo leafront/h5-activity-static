@@ -40,7 +40,7 @@ module.exports = {
         changeOrigin: true
       },
       '/agent-fx-web': {
-        target: 'http://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       }
     },
