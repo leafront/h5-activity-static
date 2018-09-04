@@ -143,11 +143,10 @@
 import AppHeader from '@/components/common/header'
 import ProgressBar from '@/components/invitation/progress'
 import ShareImg from '@/components/invitation/shareImg'
-
 import * as Model from '@/model/invitation'
-
 import utils from '@/widget/utils'
 import config from '@/config/index'
+import weixin_share from '@/common/weixin_share'
 let img1 = config.hostPath + '/activity-static/images/invitationimg1.png'
 let img2 = config.hostPath + '/activity-static/images/invitationimg1.png'
 let img3 = config.hostPath + '/activity-static/images/invitationimg1.png'
