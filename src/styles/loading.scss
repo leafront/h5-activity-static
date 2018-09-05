@@ -42,5 +42,14 @@
   transform: translate(-50%, -50%);
   color: #fff;
   font-size: .28rem;
-  font-family: "PingFang SC", Helvetica, Arial, "Lucida Grande", Verdana, "Microsoft Yahei", STXihei, Sans-serif;
 }
+
+.pageLoading-icon{
+  background: url('/activity-static/images/pageLoading.png') no-repeat;
+  background-size: .45rem auto;
+  width: .45rem;
+  height: .45rem;
+  margin-right: 0.15rem;
+  animation: loading 1s steps(12, end) infinite;
+}
+

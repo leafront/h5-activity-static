@@ -3,22 +3,15 @@
     <i class="ui-header-arrow"></i>
     <ul class="ui-header-nav-list">
       <li @click="linkAction('/index.html')">
-        <svg class="icon icon-home" aria-hidden="true">
-          <use xlink:href="#icon-home"></use>
-        </svg>
+        <i class="home-icon"></i>
         <span class="font">首页</span>
-
       </li>
       <li @click="showShareMenu" v-if="isApp && isWeixin">
-        <svg class="icon icon-share" aria-hidden="true">
-          <use xlink:href="#icon-connection"></use>
-        </svg>
+        <i class="share-icon"></i>
         <span class="font">分享</span>
       </li>
       <li @click="linkAction('/my/home.html')">
-        <svg class="icon icon-my" aria-hidden="true">
-          <use xlink:href="#icon-wode"></use>
-        </svg>
+        <i class="my-icon"></i>
         <span class="font">我&nbsp;&nbsp;</span>
       </li>
     </ul>
@@ -98,17 +91,22 @@
         color: #fff;
         padding-left: .15rem;
       }
-      .icon-home{
-        font-size: .3rem;
-        color:#999;
-      }
-      .icon-share {
-        font-size: .3rem;
-        color:#999;
-      }
-      .icon-my {
-        font-size: .34rem;
-        color:#999;
+      i{
+        background: url(../../images/header_sprite.png) no-repeat;
+        background-size: 1.65rem auto;
+        width: .34rem;
+        height: .34rem;
+        &.home-icon{
+          background-position: -.53rem 0;
+        }
+        &.share-icon{
+          width: .3rem;
+          background-position: -.9rem .01rem;
+        }
+        &.my-icon{
+          height: .38rem;
+          background-position: -1.22rem .01rem;
+        }
       }
     }
   }
