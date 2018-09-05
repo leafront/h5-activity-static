@@ -88,7 +88,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: 'activity-static/js/vendor.js?v=1.0',
+      filename: 'activity-static/js/vendor.js?v=1.1',
       minChunks (module) {
         // any required modules inside node_modules are extracted to vendor
 
