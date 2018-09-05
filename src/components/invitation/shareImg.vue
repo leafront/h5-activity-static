@@ -134,7 +134,7 @@ export default {
   watch: {
 
       invitationShareC (newVal, oldVal) {
-        console.log(oldVal)
+        console.log(111111111);
         this.qrcode()
         this.drawingCanvas()
       },
@@ -219,6 +219,7 @@ export default {
         let qrChild = qrEle.querySelector('img')
         qrChild.onload = () =>{
           let qrSrc = qrChild.src
+          console.log(qrSrc);
           if(qrSrc){
             let qrImg = new Image()
             qrImg.src = qrSrc
@@ -250,10 +251,10 @@ export default {
   },
   created() {
 
-    setTimeout(() => {
-      this.qrcode()
-      this.drawingCanvas()
-    }, 0)
+    // setTimeout(() => {
+    //   this.qrcode()
+    //   this.drawingCanvas()
+    // }, 0)
   }
 }
 </script>
