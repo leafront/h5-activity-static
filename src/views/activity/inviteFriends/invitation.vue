@@ -22,7 +22,7 @@
           <p class="b_text2" v-show = "completionOne">再邀请 {{invationToFirst}} 人，可额外获得 {{dynamicReward.ladderOneRewardAmount}}元优惠券</p>
           <p class="b_text2" v-show = "completionZero">您还没有邀请好友，快去邀请好友吧~</p>
 
-          <p class="b_text3 first_t">立即邀请</p>
+          <p class="b_text3 first_t" @click="weixinShare" >立即邀请</p>
           <p @click="showPoster" class="b_text4 first_t">生成我的邀请码</p>
         </div>
       </div>
@@ -135,21 +135,33 @@
 
     </div>
   <ShareImg :rulePopup="rulePopup"  :invitationShareC = "invitationShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
+  <UIShare></UIShare>
   </div>
 </div>
 </template>
 
 <script type="text/javascript">
 import AppHeader from '@/components/common/header'
+
 import ProgressBar from '@/components/invitation/progress'
+
 import ShareImg from '@/components/invitation/shareImg'
+
 import * as Model from '@/model/invitation'
+
 import utils from '@/widget/utils'
+
 import config from '@/config/index'
-import weixin_share from '@/common/weixin_share'
-let img1 = config.hostPath + '/activity-static/images/invitationimg1.png'
-let img2 = config.hostPath + '/activity-static/images/invitationimg1.png'
-let img3 = config.hostPath + '/activity-static/images/invitationimg1.png'
+
+import wx_share from './weixin_share'
+
+import {mapGetters, mapActions} from 'vuex'
+
+import UIShare from '@/components/widget/ui-share'
+
+let img1 = config.staticPath + '/activity-static/images/invitationimg1.png'
+let img2 = config.staticPath + '/activity-static/images/invitationimg1.png'
+let img3 = config.staticPath + '/activity-static/images/invitationimg1.png'
 export default {
   data() {
     return {
@@ -174,6 +186,7 @@ export default {
       invationToSecond:null,
       invationToFirst:null,
       invitationShareC:"",//获取sharecode
+      shareConfig: {},
 
 
 
@@ -182,9 +195,19 @@ export default {
   components: {
     AppHeader,
     ProgressBar,
-    ShareImg
+    ShareImg,
+    UIShare
+  },
+  computed: {
+    ...mapGetters({
+      'headerMenu': 'getHeaderMenu'
+    })
   },
   methods: {
+    ...mapActions([
+      'updateHeaderMenu',
+      'updateShareMenu'
+    ]),
     /**
      * 获取个人获得的奖品列表
      */
@@ -213,6 +236,17 @@ export default {
          this.invitationShareC = data.shareCode
        }
 })
+  },
+  /*
+  *分享
+  */
+  weixinShare () {
+
+    this.shareConfig = wx_share.shareConfig.call(this)
+    console.log(this.shareConfig);
+      wx_share.weixinShare.call(this)
+
+
   },
 
   /*
