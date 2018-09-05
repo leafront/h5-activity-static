@@ -195,7 +195,7 @@ export default {
       let canvas = document.getElementById("canvas")
       let ctx = canvas.getContext("2d")
       let img = new Image()
-      img.src = config.hostPath + '/activity-static/images/invite_qrcode.png'
+      img.src = config.staticPath + '/activity-static/images/invite_qrcode.png'
 
       // const scalePx = parseInt(document.documentElement.style.fontSize)
 
@@ -232,7 +232,7 @@ export default {
     },0)
     //第三张图
     let imgLogo = new Image()
-    imgLogo.src = config.hostPath + '/activity-static/images/qrcodelogo.png'
+    imgLogo.src = config.staticPath + '/activity-static/images/qrcodelogo.png'
     imgLogo.onload = () => {
       const logoScale = imgLogo.height / imgLogo.width
       let l_positionx = self.clientWidth * .8/2 - (self.scalePx * 2.5)/2
