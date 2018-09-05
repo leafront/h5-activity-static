@@ -2,9 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
       <div class="ui-header-right-icon" @click="toggleMenu">
-        <svg class="icon icon-gengduo" :class="{'active': headerMenu}" aria-hidden="true">
-          <use xlink:href="#icon-gengduo"></use>
-        </svg>
+        <i class="icon-gengduo" :class="{'active': headerMenu}"></i>
       </div>
     </AppHeader>
     <div class="scroll-view-wrapper" id="activity-group-scroll" :class="{'visibility': pageView}">
@@ -12,7 +10,7 @@
       <UIHeaderNav @shareAction="shareAction"></UIHeaderNav>
       <div class="group-hot">
         <div class="group-hot-item" v-for="item in goodsHot" @click="pageAction(item.link.data)">
-          <img class="pic-lazyLoad" :src="item.imgUrl"/>
+          <img class="group-hot-pic pic-lazyLoad" :src="item.imgUrl"/>
         </div>
       </div>
       <div class="group-share-title">

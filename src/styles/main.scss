@@ -16,7 +16,6 @@
   animation: fadeIn .5s ease-out backwards;
 }
 
-
 .scroll_view_hidden{
 
   overflow:hidden;
@@ -94,11 +93,35 @@ body{
   position: fixed;
   left: 0;
   top: 0;
-  background: rgba(0,0,0,.7);
+  background: rgba(0,0,0,.85);
   z-index:100;
   display: none;
   &.active{
     display: block;
+  }
+}
+
+.ui-right-bottom{
+  position:relative;
+  width: .24rem;
+  height: .32rem;
+  &:before,&:after{
+    content: '';
+    width: .2rem;
+    height: .02rem;
+    background: #999;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    transform-origin: right top;
+  }
+  &:before{
+    transform: rotate(42.5deg);
+  }
+  &:after{
+    transform: rotate(-42.5deg);
   }
 }
 .ui-submit {
@@ -115,35 +138,48 @@ body{
   }
 }
 
-
-.icon {
-  /* 通过设置 font-size 来改变图标大小 */
-  width: 1em; height: 1em;
-  /* 图标和文字相邻时，垂直对齐 */
-  vertical-align: -0.15em;
-  /* 通过设置 color 来改变 SVG 的颜色/fill */
-  fill: currentColor;
-  /* path 和 stroke 溢出 viewBox 部分在 IE 下会显示
-     normalize.css 中也包含这行 */
-  overflow: hidden;
-}
-
-@-webkit-keyframes loading {
-  0% {
-    transform: rotate3d(0, 0, 1, 0deg);
-  }
-
-  100% {
-    transform: rotate3d(0, 0, 1, 360deg);
-  }
-}
-
 @keyframes loading {
   0% {
     transform: rotate3d(0, 0, 1, 0deg);
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
   }
 
   100% {
     transform: rotate3d(0, 0, 1, 360deg);
+    -webkit-transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(.02rem);
+    -webkit-transform: translateY(.02rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    opacity: 1;
   }
 }
