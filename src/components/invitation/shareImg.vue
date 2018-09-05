@@ -116,6 +116,10 @@ export default {
     rulePopup: {
       type: Boolean,
       default: false
+    },
+    invitationShareC:{
+      type: String,
+      default: ""
     }
   },
   data() {
@@ -129,13 +133,20 @@ export default {
   },
   watch: {
 
+      invitationShareC (newVal, oldVal) {
+        console.log(oldVal)
+        this.qrcode()
+        this.drawingCanvas()
+      },
+
+
     rulePopup() {
 
       /**
        *
        * 阻止弹层外的元素滚动
        */
-  
+
       document.getElementById('worldcup-rule-mask').addEventListener('touchmove', (event) => {
 
 
@@ -167,10 +178,11 @@ export default {
      * 二维码生成
      */
     qrcode() {
+         let url = "http://m.lyf.edu.laiyifen.com/actives/online/invitationfriends/index.html" + "?" + "shareCode" + "=" + this.invitationShareC
          new QRCode('qrcode', {
           width: this.scalePx * 1.4, // 设置宽度
           height: this.scalePx * 1.4, // 设置高度
-          text: 'https://m.laiyifen.com'
+          text: url
         })
 
     },

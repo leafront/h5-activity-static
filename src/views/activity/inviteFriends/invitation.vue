@@ -134,7 +134,7 @@
       </div>
 
     </div>
-  <ShareImg :rulePopup="rulePopup" @toggleRulePopup="toggleRulePopup"></ShareImg>
+  <ShareImg :rulePopup="rulePopup"  :invitationShareC = "invitationShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
   </div>
 </div>
 </template>
@@ -173,6 +173,7 @@ export default {
       completionZero:false,
       invationToSecond:null,
       invationToFirst:null,
+      invitationShareC:"",//获取sharecode
 
 
 
@@ -203,6 +204,17 @@ export default {
   showPoster(){
     this.rulePopup = true
   },
+   ajaxShareCode(){
+     Model.getShareCode({
+       type: 'GET'
+     }).then((result) => {
+       const data = result.data
+       if (result.code == 0 ) {
+         this.invitationShareC = data.shareCode
+       }
+})
+  },
+
   /*
   *好友页面请求
   */
@@ -292,6 +304,7 @@ export default {
   created() {
     this.$showLoading()
     this.ajaxRecommend()
+    this.ajaxShareCode()
 
   }
 }
