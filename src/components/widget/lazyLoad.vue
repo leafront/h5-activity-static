@@ -173,7 +173,7 @@
               el.dataset.LazyLoadImgState = 'success'
 
               el.classList.add('successImg')
-            },300)
+            },200)
 
           }, false)
 
