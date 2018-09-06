@@ -183,7 +183,9 @@ export default {
      */
    generateImg(){
      let imgUrl = this.canvas.toDataURL("image/png")
+     console.log(3333);
      if (utils.isApp()) {
+
        app.postMessage('storgeQRcode',{
          imgUrl,
        },() => {
