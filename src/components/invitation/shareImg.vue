@@ -5,7 +5,7 @@
 
   <div class="ui-shareimg-content" id="worldcup-rule" :class="{'active': rulePopup}">
     <canvas class="cas" id="canvas"></canvas>
-    <div class="img_bottom">
+    <div class="img_bottom" @click="generateImg">
       保存图片
     </div>
     <span class="ui-shareimg-close" :class="{'active': rulePopup}" @click="closeRulePopup"></span>
@@ -92,7 +92,7 @@
 }
 .cas {
     display: block;
-    background: #fff;
+    // background: #fff;
     border-radius: 0.2rem;
 
 }
@@ -104,7 +104,10 @@
 <script type="text/javascript">
 import utils from '@/widget/utils'
 
+import app from '@/widget/app'
+
 import config from '@/config/index'
+
 import QRCode from 'qrcodejs2'
 // import {QRCode} from '@/widget/qrcode'
 //
@@ -128,6 +131,7 @@ export default {
     clientWidth: document.documentElement.clientWidth,
     clientHeight:document.documentElement.clientHeight,
     scaleWH: 0.65,
+    canvas:{},
 
     }
   },
@@ -175,10 +179,24 @@ export default {
   },
   methods: {
     /**
+     * 生出图片
+     */
+   generateImg(){
+     let imgUrl = this.canvas.toDataURL("image/png")
+     if (utils.isApp()) {
+       app.postMessage('storgeQRcode',{
+         imgUrl,
+       },() => {
+         this.$toast("保存成功")
+       })
+     }
+   },
+
+    /**
      * 二维码生成
      */
     qrcode() {
-         let url = "http://m.lyf.edu.laiyifen.com/actives/online/invitationfriends/index.html" + "?" + "shareCode" + "=" + this.invitationShareC
+         let url = "http://m.lyf.edu.laiyifen.com/actives/online/invitationfriends/index.html" + "?" + "originCode" + "=" + this.invitationShareC
          new QRCode('qrcode', {
           width: this.scalePx * 1.4, // 设置宽度
           height: this.scalePx * 1.4, // 设置高度
@@ -193,7 +211,12 @@ export default {
        */
        const self = this
       let canvas = document.getElementById("canvas")
+      canvas.width = this.clientWidth * .8
+      canvas.height = canvas.width / self.scaleWH
+      this.canvas = canvas
       let ctx = canvas.getContext("2d")
+      ctx.fillStyle = "#fff"
+      ctx.fillRect(0,0,canvas.width,canvas.height)
       let img = new Image()
       img.src = config.staticPath + '/activity-static/images/invite_qrcode.png'
 
@@ -205,8 +228,8 @@ export default {
       // console.log(clientWidth);
       //
       // console.log(clientHeight);
-      canvas.width = this.clientWidth * .8
-      canvas.height = canvas.width / self.scaleWH
+      // canvas.width = this.clientWidth * .8
+      // canvas.height = canvas.width / self.scaleWH
       img.onload = () => {
         const imgScale = img.height / img.width
 

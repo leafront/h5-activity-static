@@ -10,7 +10,7 @@ const wx_share = {
   shareConfig  () {
     const searchPath = location.search
     // const redpackCode = this.redpackCode || utils.query('redpackCode')
-    let link = config.hostPath + `/activity/inviteFriends/invitation`
+    let link = config.hostPath + `/actives/online/invitationfriends/index.html` + "?" + "originCode" + "=" + this.invitationShareC
     // if (redpackCode) {
     //   if ((searchPath.indexOf('redpackCode') > -1)) {
     //     link = config.hostPath + `/activity/redpack/receive${searchPath}`
