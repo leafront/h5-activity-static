@@ -39,6 +39,12 @@ Vue.use(Toast,{    //支持全局配置
 	duration: "1500"
 })
 
+if ('addEventListener' in document) {
+  document.addEventListener('DOMContentLoaded', function() {
+    window.FastClick.attach(document.body)
+  }, false)
+}
+
 router.beforeEach((to, from, next) => {
 
   document.title = to.meta.title
