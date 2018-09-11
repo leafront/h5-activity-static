@@ -14,7 +14,7 @@
           <i class="bank_pay_icon"></i>
           <div class="bank-pay-info">
             <p class="c3 font">建行龙支付</p>
-            <span>中国建设银行快捷支付</span>
+            <span>中国建设银行账号支付</span>
           </div>
           <div class="ui-right-bottom"></div>
         </div>
