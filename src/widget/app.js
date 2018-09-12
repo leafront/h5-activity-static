@@ -167,6 +167,7 @@ const app = {
   //因为在iphone6 se版本的微信里无法删除cookie，所以只能通过设置为空来标识用户退出登录状态。
   deleteUserToken () {
     utils.setCookie(this.utName, "");
+    utils.setCookie('ut', "");
   },
   requireLogin (from) {
     if (utils.isApp()) {
