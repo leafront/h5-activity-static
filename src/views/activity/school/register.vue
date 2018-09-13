@@ -4,14 +4,14 @@
     </AppHeader>
     <div class="scroll-view-wrapper " :class="{'visibility': pageView}">
       <div class="school-pic school-pic1">
-        <img class="school-pic-bg1" src="./images/school_bg1.jpg"/>
+        <img class="pic-lazyLoad school-pic-bg1" src="./images/school_bg1.jpg"/>
         <h4 class="font-b">活动说明</h4>
       </div>
       <div class="school-pic">
-        <img class="school-pic-bg2" src="./images/school_bg2.jpg"/>
+        <img class="pic-lazyLoad school-pic-bg2" src="./images/school_bg2.jpg"/>
       </div>
       <div class="school-pic">
-        <img class="school-pic-bg3" src="./images/school_bg3.jpg"/>
+        <img class="pic-lazyLoad school-pic-bg3" src="./images/school_bg3.jpg"/>
       </div>
       <div class="school-pic school-pic4">
         <div class="school-register-input">
@@ -26,10 +26,10 @@
         <span></span>
       </div>
       <div class="school-pic">
-        <img class="school-pic-bg6" src="./images/school_bg6.jpg"/>
+        <img class="pic-lazyLoad school-pic-bg6" src="./images/school_bg6.jpg"/>
       </div>
       <div class="school-pic">
-        <img class="school-pic-bg7" src="./images/school_bg7.jpg"/>
+        <img class="pic-lazyLoad school-pic-bg7" src="./images/school_bg7.jpg"/>
       </div>
     </div>
   </div>
