@@ -31,7 +31,7 @@ const validate = {
 
   isNumber (text) {
 
-	  const pattern = /^[0-9]\d{0,8}$/
+	  const pattern = /^[1-9]\d{0,8}$/
 
     return pattern.test(text)
 

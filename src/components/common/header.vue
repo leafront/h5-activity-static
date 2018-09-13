@@ -2,9 +2,8 @@
   <div class="ui-header-wrapper" v-if="showHeader">
     <div class="ui-header" :class="{'ui-header-border':isBorder}">
       <div class="ui-header-back" @click="backAction">
-        <svg class="icon ui-header-back_btn" aria-hidden="true">
-          <use xlink:href="#icon-back"></use>
-        </svg>
+        <div class="ui-header-back_btn">
+        </div>
       </div>
       <h4 class="ui-header-title">{{title}}</h4>
       <slot></slot>
@@ -31,11 +30,15 @@
       isBorder: {
         default: false,
         type: Boolean
+      },
+      isShowHeader: {
+        default: false,
+        type: Boolean
       }
     },
     computed: {
       showHeader () {
-        return !(utils.weixin() || utils.nativeQQ())
+        return this.isShowHeader || !(utils.weixin() || utils.nativeQQ())
       }
     },
     methods: {
@@ -67,7 +70,6 @@
     top:0;
     span{
       font-size: .3rem;
-      color: #333;
     }
   }
 
@@ -91,14 +93,9 @@
     }
     .ui-header-back{
       height: .88rem;
-      padding: 0 .3rem 0 .15rem;
+      padding: 0 .3rem 0 .28rem;
       display: flex;
       align-items: center;
-    }
-    .ui-header-back_btn{
-      font-size: .46rem;
-      color:#ff6900;
-      font-weight: bold;
     }
     .ui-header-title{
       height:.88rem;
@@ -109,7 +106,7 @@
       top:0;
       transform: translateX(-50%);
       font-size: .36rem;
-      color:#030303;
+      color:#333;
       text-align: center;
     }
   }
@@ -124,12 +121,46 @@
     padding-right: .2rem;
     justify-content: flex-end;
     .icon-gengduo{
-      font-size: .5rem;
+      width: .42rem;
+      height: .11rem;
+      background: url(../../images/header_sprite.png) no-repeat -.05rem -.1rem;
+      background-size: 1.65rem auto;
       color:#999;
       transition: transform .4s linear;
       &.active{
         transform: rotate(90deg);
       }
+    }
+  }
+
+  .ui-header-back_btn{
+    position:relative;
+    width: .48rem;
+    height: .48rem;
+    &:before,&:after{
+      content: '';
+      height: .03rem;
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      background: #ff6900;
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      transform-origin: left top;
+    }
+    &:before {
+      width: .24rem;
+    }
+    &:after{
+      width: .26rem;
+    }
+    &:before{
+      transform: rotate(-45deg);
+    }
+    &:after{
+      transform: rotate(45deg);
     }
   }
 

@@ -33,18 +33,6 @@ const utils = {
   isApp () {
     return this.ua.indexOf('ody') > -1;
   },
-  setTimeout (callback,times) {
-
-    this.timer = setTimeout(() => {
-      callback()
-    },times)
-
-  },
-  clearTimeout () {
-
-    clearTimeout(this.timer)
-
-  },
 	serialize(value) {
 		return JSON.stringify(value);
 	},
@@ -343,12 +331,6 @@ const utils = {
     url += `/pay/pay-success.html?orderCode=${orderCode}`
 
     return url
-  },
-
-  //清空用户登录UT
-  //因为在iphone6 se版本的微信里无法删除cookie，所以只能通过设置为空来标识用户退出登录状态。
-  deleteUserToken () {
-    this.setCookie('lyfh5ut', "");
   },
   isPhoneX (){
 

@@ -382,6 +382,7 @@ export default {
               this.completionTwo = true
               this.invationToSecond = secondNumber - activityNumber
         } else if (activityNumber < firstNumber && activityNumber != 0) {
+
           this.completionOne = true
           this.invationToFirst = firstNumber - activityNumber
 

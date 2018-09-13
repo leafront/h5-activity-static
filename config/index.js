@@ -16,19 +16,23 @@ module.exports = {
         changeOrigin: true
       },
       '/osc-api': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/ouser-web': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/opay-web': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
+        changeOrigin: true
+      },
+      '/ouser-center': {
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/customer': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/cms': {

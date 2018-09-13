@@ -7,7 +7,6 @@
 		</ul>
 	</swiper>
 </template>
-
 <script>
 
 	import swiper from '@/components/widget/swiper.vue'
