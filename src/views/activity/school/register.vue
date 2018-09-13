@@ -5,7 +5,7 @@
     <div class="scroll-view-wrapper " :class="{'visibility': pageView, 'scroll_view_hidden': imageValidate}">
       <div class="school-pic school-pic1">
         <img class="school-pic-bg1" src="./images/school_bg1.jpg"/>
-        <h4 class="font-b">活动说明</h4>
+        <h4 class="font-b" @click="showPopup(true)">活动说明</h4>
       </div>
       <div class="school-pic school-pic2">
         <img class="school-pic-bg2" src="./images/school_bg2.jpg"/>
@@ -92,6 +92,12 @@
       ...mapActions([
         'updateImageValidate'
       ]),
+      /**
+       * 显示活动说明
+       */
+      showPopup (val) {
+        this.isPopup = val
+      },
       backAction () {
         if (utils.isApp()) {
           app.back()
