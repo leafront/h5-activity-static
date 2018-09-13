@@ -20,9 +20,9 @@ const redPackSuccess = r => require.ensure([], () =>  r(require('@/views/activit
 
 const redPackStop = r => require.ensure([], () =>  r(require('@/views/activity/redpack/stop.vue')),'redPackStop')
 
-const worldCupPrize = r => require.ensure([], () =>  r(require('@/views/activity/worldcup/prize.vue')),'worldCupPrize')
+// const worldCupPrize = r => require.ensure([], () =>  r(require('@/views/activity/worldcup/prize.vue')),'worldCupPrize')
 
-const worldCupAllTeam = r => require.ensure([], () =>  r(require('@/views/activity/worldcup/allteam.vue')),'worldCupAllTeam')
+// const worldCupAllTeam = r => require.ensure([], () =>  r(require('@/views/activity/worldcup/allteam.vue')),'worldCupAllTeam')
 
 const makeMoney = r => require.ensure([], () =>  r(require('@/views/activity/make/money.vue')),'makeMoney')
 
@@ -93,23 +93,8 @@ export default new Router({
       meta: {
         title: '拆红包'
       }
-    },{
-  	  path: '/activity/worldcup/prize',
-			name: 'worldCupPrize',
-			component: worldCupPrize,
-			meta: {
-  	  	title: '我的奖品',
-        requireLogin: true
-			}
-		},{
-      path: '/activity/worldcup/allteam',
-      name: 'worldCupAllTeam',
-      component: worldCupAllTeam,
-      meta: {
-        title: '我的球队',
-        requireLogin: true
-      }
-    },{
+    },
+    {
       path: '/activity/make/money',
       name: 'makeMoney',
       component: makeMoney,
