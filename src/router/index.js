@@ -97,7 +97,8 @@ export default new Router({
       meta: {
         title: '拆红包'
       }
-    },{
+    },
+    {
       path: '/activity/make/money',
       name: 'makeMoney',
       component: makeMoney,

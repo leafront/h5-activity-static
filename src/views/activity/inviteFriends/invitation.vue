@@ -141,7 +141,7 @@
     </div>
   <ShareImg :rulePopup="rulePopup"  :invitationShareC = "invitationShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
   <UIShare></UIShare>
-  <Rule :ruleText="ruleText" :bannerList="bannerList" @toggleRuleText="toggleRuleText"></Rule>
+  <Rule :ruleText="ruleText" :addList="addList" @toggleRuleText="toggleRuleText"></Rule>
   <Imglayer :imgLayer="imgLayer" @toggleImgLayer="toggleImgLayer"></Imglayer>
   </div>
 </div>
@@ -202,7 +202,7 @@ export default {
       invationToFirst:null,
       invitationShareC:"",//获取sharecode
       shareConfig: {},
-      bannerList: [],
+      addList: [],
 
 
 
@@ -247,7 +247,7 @@ export default {
           coupons_banner.forEach((item) => {
             item.imageUrl = utils.imgScale(item.imageUrl,85)
           })
-          this.bannerList = coupons_banner
+          this.addList = coupons_banner
         } else {
           this.$toast(result.message)
         }

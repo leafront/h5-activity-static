@@ -4,9 +4,9 @@
     <!-- <span class="ui-invite-close" :class="{'active': ruleText}" @click="closeRuleText"></span> -->
     <div class="ui-invite-rule" id="worldcup-rule" :class="{'active': ruleText}">
       <div class="rule_child">
-        <img v-for = "(item, index) in bannerList" :src="item.imageUrl" alt="">
+        <img v-for = "(item, index) in addList" :src="item.imageUrl" alt="">
       </div>
-      <!-- <img v-for = "(item, index) in bannerList" :src="item.imageUrl" alt=""> -->
+      <!-- <img v-for = "(item, index) in addList" :src="item.imageUrl" alt=""> -->
       <span class="ui-invite-close" :class="{'active': ruleText}" @click="closeRuleText"></span>
     </div>
 
@@ -93,18 +93,14 @@
   import * as Model from '@/model/invitation'
 
   export default {
-    data () {
-      return {
-        bannerList: [],
-      }
-    },
+    
 
     props: {
       ruleText: {
         type: Boolean,
         default: false
       },
-      bannerList:{
+      addList:{
         type: Array,
         default: []
       }
