@@ -71,7 +71,6 @@
           smsCode: '',
           shareCode: this.$route.query.redpackCode
         },
-        isFixed: false,
         showCountTime: '',
         redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v='+ config.getTime,
         pageView: false

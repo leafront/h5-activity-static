@@ -2,35 +2,38 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper " :class="{'visibility': pageView}">
+    <div class="scroll-view-wrapper " :class="{'visibility': pageView, 'scroll_view_hidden': imageValidate}">
       <div class="school-pic school-pic1">
-        <img class="pic-lazyLoad school-pic-bg1" src="./images/school_bg1.jpg"/>
+        <img class="school-pic-bg1" src="./images/school_bg1.jpg"/>
         <h4 class="font-b">活动说明</h4>
       </div>
-      <div class="school-pic">
-        <img class="pic-lazyLoad school-pic-bg2" src="./images/school_bg2.jpg"/>
+      <div class="school-pic school-pic2">
+        <img class="school-pic-bg2" src="./images/school_bg2.jpg"/>
       </div>
-      <div class="school-pic">
-        <img class="pic-lazyLoad school-pic-bg3" src="./images/school_bg3.jpg"/>
+      <div class="school-pic school-pic3">
+        <img class="school-pic-bg3" src="./images/school_bg3.jpg"/>
       </div>
       <div class="school-pic school-pic4">
         <div class="school-register-input">
-          <input type="tel" class="font-b" placeholder="输入手机号"/>
+          <input type="tel" maxlength="11" v-model.trim="params.mobile" class="font-b" placeholder="输入手机号"/>
         </div>
         <div class="school-register-input">
-          <input type="tel" maxlength="4" minlength="4" class="font school-register-msg" placeholder="输入验证码"/>
-          <button class="font">获取验证码</button>
+          <input type="tel" maxlength="4" v-model.trim="params.smsCode" class="font school-register-msg" placeholder="验证码"/>
+          <button class="font" :disabled="!isClickCode" @click="openImageValidate">{{codeText}}</button>
         </div>
       </div>
       <div class="school-pic school-pic5">
         <span></span>
       </div>
       <div class="school-pic">
-        <img class="pic-lazyLoad school-pic-bg6" src="./images/school_bg6.jpg"/>
+        <img class="school-pic-bg6" src="./images/school_bg6.jpg"/>
       </div>
       <div class="school-pic">
-        <img class="pic-lazyLoad school-pic-bg7" src="./images/school_bg7.jpg"/>
+        <img class="school-pic-bg7" src="./images/school_bg7.jpg"/>
       </div>
+      <ImageValidate  @startCountTime="startCountTime"
+                      :mobile="params.mobile">
+      </ImageValidate>
     </div>
   </div>
 </template>
@@ -39,6 +42,7 @@
   .school-pic{
     img {
       width: 100%;
+      background: #f5f5f5;
     }
   }
   .school-pic1 {
@@ -67,12 +71,15 @@
     background: #fff;
     justify-content: space-between;
     button{
-      width: 2rem;
+      width: 1.4rem;
       height: .56rem;
       line-height: .56rem;
       background: #b1313d;
       border-radius: .1rem;
       color: #fff;
+      &:disabled{
+        background: #888888;
+      }
     }
     &:last-child{
       margin-top: .36rem;
@@ -88,6 +95,12 @@
       width: 2rem;
       letter-spacing: .05rem;
     }
+  }
+  .school-pic2{
+    height: 2.48rem;
+  }
+  .school-pic3{
+    height: 3.54rem;
   }
   .school-pic5{
     padding-top: .27rem;
@@ -114,25 +127,95 @@
 
   import utils from '@/widget/utils'
 
+  import ImageValidate from '@/components/common/imageValidate'
+
+  import validate from '@/widget/validate'
+
+  import {mapGetters, mapActions} from 'vuex'
+
   export default {
     data() {
       return {
         title: '开学季',
         isBorder: true,
-        pageView: true
+        pageView: true,
+        isClickCode: true,
+        codeText: '验证码',
+        params: {
+          mobile: '',
+          smsCode: '',
+        },
       }
     },
+    computed: {
+      ...mapGetters({
+        'headerMenu': 'getHeaderMenu',
+        'imageValidate': 'getImageValidate'
+      })
+    },
     components: {
-      AppHeader
+      AppHeader,
+      ImageValidate
     },
     methods: {
+      ...mapActions([
+        'updateImageValidate'
+      ]),
       backAction () {
         if (utils.isApp()) {
           app.back()
         } else {
           location.href = '/index.html'
         }
-      }
+      },
+      startCountTime () {
+        if (!this.isClickCode) {
+          return
+        }
+        this.isClickCode = false
+
+        let times = 60
+
+        this.codeText = times + 's'
+        const countTimeTimer = setInterval(() => {
+          times--
+          this.codeText = times+'s'
+
+          if(times == 0) {
+            this.isClickCode = true
+            this.codeText = '验证码'
+            clearInterval(countTimeTimer)
+          }
+        },1000)
+
+        this.updateImageValidate(false)
+
+        this.countTimeTimer = countTimeTimer
+
+        utils.removeAppViewFixed()
+      },
+      openImageValidate () {
+        const {
+          mobile
+        } = this.params
+
+        const mobileStr = utils.trim(mobile)
+
+        if (!mobileStr) {
+          this.$toast('请输入手机号码')
+          return
+        }
+
+        if (!validate.isMobile(mobileStr)) {
+          this.$toast('请输入正确的手机号码')
+          return
+        }
+
+        this.updateImageValidate(true)
+
+        utils.appViewFixed()
+
+      },
     },
     created () {
 
