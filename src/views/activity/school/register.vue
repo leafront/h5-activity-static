@@ -31,12 +31,174 @@
       <div class="school-pic">
         <img class="school-pic-bg7" src="./images/school_bg7.jpg"/>
       </div>
-      <ImageValidate  @startCountTime="startCountTime"
-                      :mobile="params.mobile">
+      <ImageValidate
+        @startCountTime="startCountTime"
+        :mobile="params.mobile">
       </ImageValidate>
+      <SchoolRule
+        :isPopup="isPopup">
+      </SchoolRule>
     </div>
   </div>
 </template>
+
+<script type="text/javascript">
+
+  import {mapGetters, mapActions} from 'vuex'
+
+  import AppHeader from '@/components/common/header'
+
+  import app from '@/widget/app'
+
+  import utils from '@/widget/utils'
+
+  import ImageValidate from '@/components/common/imageValidate'
+
+  import validate from '@/widget/validate'
+
+  import * as Model from '@/model/coupon'
+
+  import config from '@/config/index'
+
+  import SchoolRule from '@/components/school/rule'
+
+  export default {
+    data() {
+      return {
+        title: '开学季',
+        isBorder: true,
+        pageView: true,
+        isClickCode: true,
+        codeText: '验证码',
+        params: {
+          mobile: '',
+          smsCode: '',
+        },
+        isPopup: false
+      }
+    },
+    computed: {
+      ...mapGetters({
+        'headerMenu': 'getHeaderMenu',
+        'imageValidate': 'getImageValidate'
+      })
+    },
+    components: {
+      AppHeader,
+      ImageValidate,
+      SchoolRule
+    },
+    methods: {
+      ...mapActions([
+        'updateImageValidate'
+      ]),
+      backAction () {
+        if (utils.isApp()) {
+          app.back()
+        } else {
+          location.href = '/index.html'
+        }
+      },
+      startCountTime () {
+        if (!this.isClickCode) {
+          return
+        }
+        this.isClickCode = false
+
+        let times = 60
+
+        this.codeText = times + 's'
+        const countTimeTimer = setInterval(() => {
+          times--
+          this.codeText = times+'s'
+
+          if(times == 0) {
+            this.isClickCode = true
+            this.codeText = '验证码'
+            clearInterval(countTimeTimer)
+          }
+        },1000)
+
+        this.updateImageValidate(false)
+
+        this.countTimeTimer = countTimeTimer
+
+        utils.removeAppViewFixed()
+      },
+      openImageValidate () {
+        const {
+          mobile
+        } = this.params
+
+        const mobileStr = utils.trim(mobile)
+
+        if (!mobileStr) {
+          this.$toast('请输入手机号码')
+          return
+        }
+
+        if (!validate.isMobile(mobileStr)) {
+          this.$toast('请输入正确的手机号码')
+          return
+        }
+
+        this.updateImageValidate(true)
+
+        utils.appViewFixed()
+
+      },
+      submitAction () {
+        const {
+          mobile,
+          smsCode
+        } = this.params
+
+        const mobileStr = utils.trim(mobile)
+        const smsCodeStr = utils.trim(smsCode)
+
+        if (!mobileStr) {
+          this.$toast('请输入手机号码')
+          return
+        }
+
+        if (!validate.isMobile(mobileStr)) {
+          this.$toast('请输入正确的手机号码')
+          return
+        }
+        if (!smsCodeStr) {
+          this.$toast('请输入短信验证码')
+          return
+        }
+
+        if (!validate.isMessageCode(smsCodeStr)) {
+          this.$toast('请输入正确的短信验证码')
+        }
+      },
+      /**
+       * 获取活动优惠券
+       */
+      receiveCoupon () {
+        const {
+          mobile,
+          smsCode
+        } = this.params
+        Model.receiveCoupon({
+          type: 'POST',
+          data: {
+            phone: mobile,
+            code: smsCode,
+            id: config.schoolId,
+            source: config.source
+          }
+        }).then((result) => {
+          const data = result.data
+          this.$toast(result.message)
+        })
+      }
+    }
+  }
+
+</script>
 
 <style lang="scss">
   .school-pic{
@@ -118,108 +280,3 @@
   }
 
 </style>
-
-<script type="text/javascript">
-
-  import AppHeader from '@/components/common/header'
-
-  import app from '@/widget/app'
-
-  import utils from '@/widget/utils'
-
-  import ImageValidate from '@/components/common/imageValidate'
-
-  import validate from '@/widget/validate'
-
-  import {mapGetters, mapActions} from 'vuex'
-
-  export default {
-    data() {
-      return {
-        title: '开学季',
-        isBorder: true,
-        pageView: true,
-        isClickCode: true,
-        codeText: '验证码',
-        params: {
-          mobile: '',
-          smsCode: '',
-        },
-      }
-    },
-    computed: {
-      ...mapGetters({
-        'headerMenu': 'getHeaderMenu',
-        'imageValidate': 'getImageValidate'
-      })
-    },
-    components: {
-      AppHeader,
-      ImageValidate
-    },
-    methods: {
-      ...mapActions([
-        'updateImageValidate'
-      ]),
-      backAction () {
-        if (utils.isApp()) {
-          app.back()
-        } else {
-          location.href = '/index.html'
-        }
-      },
-      startCountTime () {
-        if (!this.isClickCode) {
-          return
-        }
-        this.isClickCode = false
-
-        let times = 60
-
-        this.codeText = times + 's'
-        const countTimeTimer = setInterval(() => {
-          times--
-          this.codeText = times+'s'
-
-          if(times == 0) {
-            this.isClickCode = true
-            this.codeText = '验证码'
-            clearInterval(countTimeTimer)
-          }
-        },1000)
-
-        this.updateImageValidate(false)
-
-        this.countTimeTimer = countTimeTimer
-
-        utils.removeAppViewFixed()
-      },
-      openImageValidate () {
-        const {
-          mobile
-        } = this.params
-
-        const mobileStr = utils.trim(mobile)
-
-        if (!mobileStr) {
-          this.$toast('请输入手机号码')
-          return
-        }
-
-        if (!validate.isMobile(mobileStr)) {
-          this.$toast('请输入正确的手机号码')
-          return
-        }
-
-        this.updateImageValidate(true)
-
-        utils.appViewFixed()
-
-      },
-    },
-    created () {
-
-    }
-  }
-
-</script>

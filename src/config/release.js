@@ -7,7 +7,8 @@ const config = JSON.stringify({
   "platform": 2,
   "getTime": new Date().getTime(),
   "pageId": 1003070101000191,
-  "schoolId": ""
+  "schoolId": "b1a0a8de32a5f6870521bb77df59a6f2",
+  "source": "h5"
 })
 
 module.exports = config
