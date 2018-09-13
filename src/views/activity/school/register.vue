@@ -39,7 +39,7 @@
   .school-pic{
     img {
       width: 100%;
-      background: #ccc;
+      background: #f5f5f5;
     }
   }
   .school-pic1 {
