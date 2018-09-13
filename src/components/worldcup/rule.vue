@@ -3,6 +3,7 @@
     <div class="ui-mask" id="worldcup-rule-mask" :class="{'active': rulePopup}"></div>
     <span class="ui-worldcup-close" :class="{'active': rulePopup}" @click="closeRulePopup"></span>
     <div class="ui-worldcup-rule" id="worldcup-rule" :class="{'active': rulePopup}">
+  
     </div>
   </div>
 </template>

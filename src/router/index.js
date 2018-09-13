@@ -29,7 +29,10 @@ const makeMoney = r => require.ensure([], () =>  r(require('@/views/activity/mak
 const couponList = r => require.ensure([], () =>  r(require('@/views/activity/coupon/list.vue')),'couponList')
 
 const groupList = r => require.ensure([], () =>  r(require('@/views/activity/group/list.vue')),'groupList')
+
 const invitation = r => require.ensure([], () =>  r(require('@/views/activity/inviteFriends/invitation.vue')),'invitation')
+
+const invitedsuccess = r => require.ensure([], () =>  r(require('@/views/activity/inviteFriends/invitedsuccess.vue')),'invitedsuccess')
 
 export default new Router({
   mode:'history',
@@ -136,6 +139,16 @@ export default new Router({
         title: 'invitation',
         requireLogin: true
       }
-    }
+    },
+    {
+      path: '/activity/inviteFriends/invitedsuccess',
+      name: 'invitation',
+      component: invitedsuccess,
+      meta: {
+        title: 'invitedsuccess',
+        requireLogin: true
+      }
+    },
+
   ]
 })

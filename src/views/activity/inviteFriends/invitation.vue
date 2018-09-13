@@ -7,6 +7,11 @@
       <div class="head_img">
         <img src="./images/1.png" alt="">
       </div>
+      <!-- 活动规则 -->
+      <div class="activity_rule" @click="toggleRuleText(true)">
+        <button>活动规则></button>
+      </div>
+
       <div class="section_f">
         <div class="f_h">
           <img src="./images/2.png" alt="">
@@ -14,7 +19,7 @@
 
         </div>
         <div class="f_b">
-          <p class="b_text1 ">每邀请1人 获赠一张{{registerRewardAmount}}元优惠券</p>
+          <p class="b_text1 "></p>
           <ProgressBar :dynamicProgress="dynamicProgress" :dynamicReward="dynamicReward" ></ProgressBar>
           <p class="b_text2" v-show = "completionThree">再邀请 {{invationToC}} 人，可额外获得 {{dynamicReward.ladderThreeRewardAmount}}元优惠券</p>
           <p class="b_text2" v-show = "completion">恭喜完成！继续邀请冲击榜单赢取大礼~</p>
@@ -52,7 +57,7 @@
         </div>
 
         <div class="f_b third_b">
-          <div class="f_b_img">
+          <div class="f_b_img" @click = "toggleImgLayer(true)">
             <img src="./images/3.png" alt="">
           </div>
           <div class="winner_title">
@@ -136,6 +141,8 @@
     </div>
   <ShareImg :rulePopup="rulePopup"  :invitationShareC = "invitationShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
   <UIShare></UIShare>
+  <Rule :ruleText="ruleText" :bannerList="bannerList" @toggleRuleText="toggleRuleText"></Rule>
+  <Imglayer :imgLayer="imgLayer" @toggleImgLayer="toggleImgLayer"></Imglayer>
   </div>
 </div>
 </template>
@@ -147,6 +154,10 @@ import ProgressBar from '@/components/invitation/progress'
 
 import ShareImg from '@/components/invitation/shareImg'
 
+import Rule from '@/components/invitation/rule'
+
+import Imglayer from '@/components/invitation/imglayer'
+
 import * as Model from '@/model/invitation'
 
 import utils from '@/widget/utils'
@@ -157,24 +168,28 @@ import wx_share from './weixin_share'
 
 import {mapGetters, mapActions} from 'vuex'
 
+import common from '@/widget/common'
+
 import UIShare from '@/components/widget/ui-share'
 
 let img1 = config.staticPath + '/activity-static/images/invitationimg1.png'
-let img2 = config.staticPath + '/activity-static/images/invitationimg1.png'
-let img3 = config.staticPath + '/activity-static/images/invitationimg1.png'
+let img2 = config.staticPath + '/activity-static/images/invitationimg2.png'
+let img3 = config.staticPath + '/activity-static/images/invitationimg3.png'
 export default {
   data() {
     return {
       title: "邀请好友",
+      imgLayer:false,
+      ruleText: false,
       rulePopup: false,
       dynamicProgress: {},
       dynamicReward: {},
       registerRewardAmount: null,
-      pageView: true,
+      pageView: false,
       thirdImgSrc:[img1,img2,img3],
       rankThird:[],
       rankOther:[],
-      pageView: false,
+
       personNu:null,
       tatalMon:null,
       completion:false,
@@ -187,6 +202,7 @@ export default {
       invationToFirst:null,
       invitationShareC:"",//获取sharecode
       shareConfig: {},
+      bannerList: [],
 
 
 
@@ -196,7 +212,9 @@ export default {
     AppHeader,
     ProgressBar,
     ShareImg,
-    UIShare
+    UIShare,
+    Rule,
+    Imglayer
   },
   computed: {
     ...mapGetters({
@@ -208,9 +226,52 @@ export default {
       'updateHeaderMenu',
       'updateShareMenu'
     ]),
+
+    /*
+    *获取广告位
+    */
+
+    getAdImg () {
+      return Model.getAdImg({
+        type: 'GET',
+        data: {
+          pageCode: 'H5_COUPON_ZONE_PAGE',
+          adCode: 'coupons_banner',
+          areaCode: common.getAreaCode().areaCode
+        }
+      }).then((result) => {
+        console.log(777777);
+        const data = result.data
+        if (result.code == 0 && data) {
+          const coupons_banner = data.coupons_banner
+          coupons_banner.forEach((item) => {
+            item.imageUrl = utils.imgScale(item.imageUrl,85)
+          })
+          this.bannerList = coupons_banner
+        } else {
+          this.$toast(result.message)
+        }
+        return result
+      })
+    },
     /**
      * 获取个人获得的奖品列表
      */
+     /**
+      * 奖品弹层
+      */
+    toggleImgLayer(val){
+      this.imgLayer = val
+      utils.appViewFixed()
+    },
+
+     /**
+      * 活动规则
+      */
+      toggleRuleText(val){
+        this.ruleText = val
+        utils.appViewFixed()
+      },
 
      /**
       * 切换规则弹层信息
@@ -337,8 +398,10 @@ export default {
   },
   created() {
     this.$showLoading()
+    this.getAdImg()
     this.ajaxRecommend()
     this.ajaxShareCode()
+
 
   }
 }
@@ -347,8 +410,24 @@ export default {
 <style lang="scss">
 @import './styles/common.scss';
 .invitation_c {
+   position: relative;
     background: #FF6D00;
     padding-bottom: .45rem;
+
+}
+.activity_rule{
+
+ top:.5rem;
+ right:.2rem;
+  position: absolute;
+  font-size: .2rem;
+    button{
+     padding: .1rem .25rem;
+     color: white;
+     border-radius: .2rem;
+     background: linear-gradient(to right,#FCBF2D,#FCB72C,#FCA129,#FC7E24,#FC7923)
+
+   }
 
 }
 .section_f{

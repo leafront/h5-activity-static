@@ -16,7 +16,7 @@
       <div class="im_text">
         <p class="t_size">{{this.dynamicReward.ladderOneRewardAmount}} <span>￥</span></p>
         <p class="t_size">满减券</p>
-        <p class="t_size">3大爷</p>
+        <p class="t_size">{{this.dynamicProgress.firstNumber}}大爷</p>
       </div>
       <div class="p_circle " v-bind:class="{ ac_color: isActive }" >
         <span></span>
@@ -30,7 +30,7 @@
       <div class="im_text">
         <p class="t_size">{{this.dynamicReward.ladderTwoRewardAmount}} <span>￥</span></p>
         <p class="t_size">满减券</p>
-        <p class="t_size">3大爷</p>
+        <p class="t_size">{{this.dynamicProgress.secondNumber}}大爷</p>
       </div>
       <div class="p_circle " v-bind:class="{ ac_color1: isActive1 }">
         <span></span>
@@ -44,7 +44,7 @@
       <div class="im_text">
         <p class="t_size">{{this.dynamicReward.ladderThreeRewardAmount}} <span>￥</span></p>
         <p class="t_size">满减券</p>
-        <p class="t_size">3大爷</p>
+        <p class="t_size">{{this.dynamicProgress.totaNumber}}大爷</p>
       </div>
       <div class="p_circle " v-bind:class="{ ac_color2: isActive2 }">
         <span></span>
