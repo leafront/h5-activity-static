@@ -4,15 +4,10 @@
     </AppHeader>
     <div class="scroll-view-wrapper " :class="{'visibility': pageView, 'scroll_view_hidden': imageValidate}">
       <div class="school-pic school-pic1">
-        <img class="school-pic-bg1" src="./images/school_bg1.jpg"/>
         <h4 class="font-b" @click="togglePopup(true)">活动说明</h4>
       </div>
-      <div class="school-pic school-pic2">
-        <img class="school-pic-bg2" src="./images/school_bg2.jpg"/>
-      </div>
-      <div class="school-pic school-pic3">
-        <img class="school-pic-bg3" src="./images/school_bg3.jpg"/>
-      </div>
+      <div class="school-pic school-pic2"></div>
+      <div class="school-pic school-pic3"></div>
       <div class="school-pic school-pic4">
         <div class="school-register-input" @click="scrollViewInto($event)">
           <input type="tel"  maxlength="11" autocomplete="off" v-model.trim="params.mobile" class="font-b" placeholder="输入手机号"/>
@@ -266,10 +261,8 @@
   .school-pic1 {
     position: relative;
     height: 3.15rem;
-    img{
-      width: 100%;
-      height: 3.15rem;
-    }
+    background: url(./images/school_bg1.jpg) no-repeat;
+    background-size: 100% auto;
     h4 {
       position: absolute;
       top: .6rem;
@@ -323,17 +316,13 @@
   }
   .school-pic2{
     height: 2.48rem;
-    img{
-      width: 100%;
-      height: 2.48rem;
-    }
+    background: url(./images/school_bg2.jpg) no-repeat;
+    background-size: 100% auto;
   }
   .school-pic3{
     height: 3.54rem;
-    img{
-      width: 100%;
-      height: 3.54rem;
-    }
+    background: url(./images/school_bg3.jpg) no-repeat;
+    background-size: 100% auto;
   }
   .school-pic5{
     padding-top: .27rem;
