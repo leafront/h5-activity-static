@@ -1,3 +1,4 @@
+
 import request from '@/widget/request'
 
 export const getBannerList = (data) => request('/api/dolphin/list', data)
