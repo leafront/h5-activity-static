@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper " :class="{'visibility': pageView, 'scroll_view_hidden': imageValidate}">
+    <div class="scroll-view-wrapper " :class="{'visibility': pageView, 'scroll_view_hidden': imageValidate || isPopup}">
       <div class="school-pic school-pic1">
         <h4 class="font-b" @click="togglePopup(true)">活动说明</h4>
       </div>
