@@ -28,27 +28,6 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import CryptoJS from 'crypto-js'
-
-  const encryptKey = (val) => {
-
-    const key = CryptoJS.enc.Utf8.parse("1fi;qPa7utddahWy")
-
-    const srcs = CryptoJS.enc.Utf8.parse(val)
-
-    const ciphertext = CryptoJS.AES.encrypt(srcs, key, {
-      mode: CryptoJS.mode.ECB,
-      padding: CryptoJS.pad.Pkcs7
-
-    })
-
-    const symbolStr = '@%^*'
-
-    const cipherVal = symbolStr + ciphertext.toString()
-
-    return cipherVal
-  }
-
   export default {
     data () {
       return {
@@ -149,10 +128,8 @@
           imageKey
         } = this
 
-        const encryptMobile = encryptKey(mobile)
-
         const data = {
-          mobile: encryptMobile,
+          mobile,
           captchasType: 3,
           imageKey
         }
