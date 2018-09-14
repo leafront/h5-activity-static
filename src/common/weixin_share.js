@@ -206,7 +206,6 @@ const weixin_share = {
     if (utils.weixin()) {
       wx.ready(() => {
         return new Promise ((resolve,reject) => {
-          console.log(data)
           wx.onMenuShareTimeline({
             title: data.title, // 分享标题
             desc: data.desc, // 分享描述
