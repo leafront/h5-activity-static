@@ -68,7 +68,7 @@
       return {
         title: '开学季',
         isBorder: true,
-        pageView: true,
+        pageView: false,
         isClickCode: true,
         codeText: '验证码',
         params: {
@@ -204,6 +204,13 @@
           this.$toast(result.message)
         })
       }
+    },
+    created () {
+      this.$showLoading()
+      setTimeout(() => {
+        this.$hideLoading()
+        this.pageView = true
+      },300)
     }
   }
 
