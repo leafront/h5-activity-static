@@ -71,7 +71,6 @@
           smsCode: '',
           shareCode: this.$route.query.redpackCode
         },
-        isFixed: false,
         showCountTime: '',
         redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v='+ config.getTime,
         pageView: false
@@ -299,6 +298,7 @@
 
         if (!validate.isMessageCode(smsCodeStr)) {
           this.$toast('请输入正确的短信验证码')
+          return
         }
 
         this.$showPageLoading()
