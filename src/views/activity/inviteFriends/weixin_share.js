@@ -30,7 +30,7 @@ const wx_share = {
     return shareConfig
   },
   weixinShare () {
-    console.log(222222);
+
     const shareConfig = this.shareConfig
 
     if (utils.isApp()) {

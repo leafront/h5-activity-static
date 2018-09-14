@@ -15,7 +15,7 @@
       <div class="section_f">
         <div class="f_h">
           <img src="./images/2.png" alt="">
-          <p class="header_t">新人专享88元优惠</p>
+          <p class="header_t">邀请赢豪礼</p>
 
         </div>
         <div class="f_b">
@@ -236,7 +236,7 @@ export default {
         type: 'GET',
         data: {
           pageCode: 'H5_COUPON_ZONE_PAGE',
-          adCode: 'coupons_banner',
+          adCode: 'invited_rule',
           areaCode: common.getAreaCode().areaCode
         }
       }).then((result) => {
@@ -418,14 +418,15 @@ export default {
 }
 .activity_rule{
 
- top:.5rem;
+ top:1rem;
  right:.2rem;
   position: absolute;
-  font-size: .2rem;
+  font-size: .25rem;
     button{
      padding: .1rem .25rem;
+     line-height: 1;
      color: white;
-     border-radius: .2rem;
+     border-radius: .3rem;
      background: linear-gradient(to right,#FCBF2D,#FCB72C,#FCA129,#FC7E24,#FC7923)
 
    }
@@ -440,14 +441,17 @@ export default {
     background: #FFFFFF;
     width: 90%;
     margin: auto;
-    border-radius: 0.3rem;
+    border-radius: 0.2rem;
     padding-bottom: 0.5rem;
 }
 .f_ele , .winner_title , .winner_c{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: .8rem;
+  padding-top: .6rem;
+}
+.winner_title{
+  padding-top: .3rem;
 }
 .winner_c{
   padding-top: .1rem;
@@ -456,7 +460,7 @@ export default {
  .text_p{
   width: max-content;
   font-size: .3rem;
-  margin: 0   auto .3rem;
+  margin: 0   auto .1rem;
   line-height: 1.5;
 }
 .color_p{
@@ -474,13 +478,13 @@ export default {
     width: max-content;
     font-size: 0.25rem;
     margin: auto;
-    padding-top: 0.7rem;
+    padding-top: 0.3rem;
     color: #FF6D00;
 }
 .b_text2 {
 
     width: max-content;
-    font-size: 0.25rem;
+    font-size: 0.3rem;
     margin: 1rem auto auto;
 }
 .b_text3 {
@@ -495,7 +499,7 @@ export default {
 .b_text4 {
     color: #FF7C00;
     border: solid 2px #FF7C00;
-    padding: 0.1rem 1rem;
+    padding: 0.1rem 1.3rem;
 
 }
 .third_b{
