@@ -13,10 +13,10 @@
     </div>
 
     <div class="in_content positioning">
-      <div class="im_text">
+      <div class="im_text  im_text_1">
         <p class="t_size">{{this.dynamicReward.ladderOneRewardAmount}} <span>￥</span></p>
         <p class="t_size">满减券</p>
-        <p class="t_size">{{this.dynamicProgress.firstNumber}}大爷</p>
+        <p class="t_size">邀请{{this.dynamicProgress.firstNumber}}人得</p>
       </div>
       <div class="p_circle " v-bind:class="{ ac_color: isActive }" >
         <span></span>
@@ -27,10 +27,10 @@
     </div>
 
     <div class="in_content positioning">
-      <div class="im_text">
+      <div class="im_text im_text_2">
         <p class="t_size">{{this.dynamicReward.ladderTwoRewardAmount}} <span>￥</span></p>
         <p class="t_size">满减券</p>
-        <p class="t_size">{{this.dynamicProgress.secondNumber}}大爷</p>
+        <p class="t_size">邀请{{this.dynamicProgress.secondNumber}}人得</p>
       </div>
       <div class="p_circle " v-bind:class="{ ac_color1: isActive1 }">
         <span></span>
@@ -41,10 +41,10 @@
     </div>
 
     <div class="in_content positioning">
-      <div class="im_text">
+      <div class="im_text im_text_3">
         <p class="t_size">{{this.dynamicReward.ladderThreeRewardAmount}} <span>￥</span></p>
         <p class="t_size">满减券</p>
-        <p class="t_size">{{this.dynamicProgress.totaNumber}}大爷</p>
+        <p class="t_size ">邀请{{this.dynamicProgress.totaNumber}}人得</p>
       </div>
       <div class="p_circle " v-bind:class="{ ac_color2: isActive2 }">
         <span></span>
@@ -274,15 +274,24 @@ height: .12rem;
     height: 1.5rem;
     text-align: center;
     color: white;
-    background-image: url("./img/1.png");
+    // background-image: url("./img/1.png");
     background-size: 100%;
     background-repeat: no-repeat;
 
 }
+.im_text_1{
+  background-image: url("./img/1.png");
+}
+.im_text_2{
+  background-image: url("./img/2.png");
+}
+.im_text_3{
+  background-image: url("./img/3.png");
+}
 .im_text .t_size {
     line-height: 1;
     padding: 0.01rem 0;
-    font-size: 0.2rem;
+    font-size: 0.17rem;
     margin: 0;
 
 }
