@@ -1,7 +1,7 @@
 <template>
     <div class="ui-mask" :class="{'active': isPopup}">
       <div class="school-rule">
-        <span class="school-close-btn"></span>
+        <span class="school-close-btn" @click="togglePopup(false)"></span>
         <h4>活动规则</h4>
         <div class="school-rule-tag">
           <span class="font">优惠券使用规则：</span>
@@ -21,6 +21,22 @@
       </div>
     </div>
 </template>
+
+<script type="text/javascript">
+  export default {
+    props: {
+      isPopup: {
+        type: Boolean,
+        default: false
+      }
+    },
+    methods: {
+      togglePopup (val) {
+        this.$emit('togglePopup', val)
+      }
+    }
+  }
+</script>
 
 <style lang="scss">
   .school-close-btn{
@@ -72,9 +88,8 @@
     position: fixed;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
     width: 6rem;
-    margin: .74rem -3rem 0 -3rem;
+    margin: -4.73rem -3rem 0 -3rem;
     height: 10.34rem;
     overflow-scrolling: touch;
     -webkit-overflow-scrolling: touch;
@@ -103,14 +118,3 @@
     }
   }
 </style>
-
-<script type="text/javascript">
-  export default {
-    props: {
-      isPopup: {
-        type: Boolean,
-        default: false
-      }
-    }
-  }
-</script>

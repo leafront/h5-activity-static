@@ -5,7 +5,7 @@
     <div class="scroll-view-wrapper " :class="{'visibility': pageView, 'scroll_view_hidden': imageValidate}">
       <div class="school-pic school-pic1">
         <img class="school-pic-bg1" src="./images/school_bg1.jpg"/>
-        <h4 class="font-b" @click="showPopup(true)">活动说明</h4>
+        <h4 class="font-b" @click="togglePopup(true)">活动说明</h4>
       </div>
       <div class="school-pic school-pic2">
         <img class="school-pic-bg2" src="./images/school_bg2.jpg"/>
@@ -36,6 +36,7 @@
         :mobile="params.mobile">
       </ImageValidate>
       <SchoolRule
+        @togglePopup="togglePopup"
         :isPopup="isPopup">
       </SchoolRule>
     </div>
@@ -56,7 +57,7 @@
 
   import validate from '@/widget/validate'
 
-  import * as Model from '@/model/coupon'
+  import * as Model from '@/model/activity'
 
   import config from '@/config/index'
 
@@ -95,7 +96,7 @@
       /**
        * 显示活动说明
        */
-      showPopup (val) {
+      togglePopup (val) {
         this.isPopup = val
       },
       backAction () {
