@@ -262,7 +262,7 @@
   .school-pic1 {
     position: relative;
     height: 3.15rem;
-    background: url(./images/school_bg1.jpg) #f4f4f8 no-repeat;
+    background: url(./images/school_bg1.jpg) no-repeat;
     background-size: 100% auto;
     h4 {
       position: absolute;
@@ -274,7 +274,7 @@
   }
   .school-pic4{
     padding: .16rem .9rem 0;
-    background: url(./images/school_bg4.jpg) #f4f4f8 no-repeat;
+    background: url(./images/school_bg4.jpg) no-repeat;
     background-size: 100% auto;
     height: 2.59rem;
   }
@@ -317,17 +317,18 @@
   }
   .school-pic2{
     height: 2.48rem;
-    background: url(./images/school_bg2.jpg) #f4f4f8 no-repeat;
+    background: url(./images/school_bg2.jpg) no-repeat;
     background-size: 100% auto;
   }
   .school-pic3{
+    margin-top: -1px;
     height: 3.54rem;
-    background: url(./images/school_bg3.jpg) #f4f4f8 no-repeat;
+    background: url(./images/school_bg3.jpg) no-repeat;
     background-size: 100% auto;
   }
   .school-pic5{
     padding-top: .27rem;
-    background: url(./images/school_bg5.jpg) #f4f4f8 no-repeat;
+    background: url(./images/school_bg5.jpg) no-repeat;
     background-size: 100% auto;
     display: flex;
     justify-content: center;

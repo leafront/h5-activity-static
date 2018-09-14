@@ -63,8 +63,8 @@
     },
     created () {
       const docEle = document.documentElement
-      const relativeWidth = docEle.clientWidth * .75
-      const ruleHeight = Math.ceil(relativeWidth * 1.72)
+      const relativeWidth = docEle.clientWidth * .8
+      const ruleHeight = Math.ceil(relativeWidth * 1.62)
       this.ruleHeight = ruleHeight + 'px'
       const headerHeight = utils.weixin() ? 0 : (0.44 * parseInt(docEle.style.fontSize))
       const ruleTop = Math.ceil(-(ruleHeight * .5) + headerHeight)
@@ -125,9 +125,9 @@
   }
   .school-rule{
     position: fixed;
-    left: 12.5%;
+    left: 10%;
     top: 50%;
-    width: 75%;
+    width: 80%;
     margin-top: .44rem;
     height: 10.34rem;
     overflow-scrolling: touch;
