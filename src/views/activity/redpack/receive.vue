@@ -242,7 +242,7 @@
 
         this.countTimeTimer = countTimeTimer
 
-        utils.removeAppViewFixed()
+        utils.appViewFixed()
       },
       openImageValidate () {
         const {

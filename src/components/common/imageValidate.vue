@@ -92,7 +92,7 @@
       cancel () {
         this.updateImageValidate(false)
         this.verifyCode = ''
-        utils.removeAppViewFixed()
+        utils.appViewFixed()
       },
 
       confirm () {
