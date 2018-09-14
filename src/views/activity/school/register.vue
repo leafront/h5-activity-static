@@ -14,10 +14,10 @@
         <img class="school-pic-bg3" src="./images/school_bg3.jpg"/>
       </div>
       <div class="school-pic school-pic4">
-        <div class="school-register-input">
-          <input type="tel" maxlength="11" v-model.trim="params.mobile" class="font-b" placeholder="输入手机号"/>
+        <div class="school-register-input" @click="scrollViewInto($event)">
+          <input type="tel"  maxlength="11" v-model.trim="params.mobile" class="font-b" placeholder="输入手机号"/>
         </div>
-        <div class="school-register-input">
+        <div class="school-register-input" @click="scrollViewInto($event)">
           <input type="tel" maxlength="4" v-model.trim="params.smsCode" class="font school-register-msg" placeholder="验证码"/>
           <button class="font" :disabled="!isClickCode" @click="openImageValidate">{{codeText}}</button>
         </div>
@@ -233,6 +233,16 @@
           }
         })
       },
+      scrollViewInto (event) {
+
+        if (utils.android()) {
+          const ele = event.target
+          setTimeout(() => {
+            ele.scrollIntoViewIfNeeded(true)
+          },200)
+        }
+      }
+
     },
     created () {
       this.$showLoading()
@@ -255,6 +265,11 @@
   }
   .school-pic1 {
     position: relative;
+    height: 3.15rem;
+    img{
+      width: 100%;
+      height: 3.15rem;
+    }
     h4 {
       position: absolute;
       top: .6rem;
@@ -308,9 +323,17 @@
   }
   .school-pic2{
     height: 2.48rem;
+    img{
+      width: 100%;
+      height: 2.48rem;
+    }
   }
   .school-pic3{
     height: 3.54rem;
+    img{
+      width: 100%;
+      height: 3.54rem;
+    }
   }
   .school-pic5{
     padding-top: .27rem;

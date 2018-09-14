@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="ui-mask" :class="{'active': isPopup}"></div>
-    <div class="school-rule" :class="{'active': isPopup}">
+    <div class="school-rule" :style="{'height': ruleHeight, 'marginTop': ruleTop}" :class="{'active': isPopup}">
       <span class="school-close-btn" @click="togglePopup(false)"></span>
       <h4>活动规则</h4>
       <div class="school-rule-tag">
@@ -24,6 +24,9 @@
 </template>
 
 <script type="text/javascript">
+
+  import utils from '@/widget/utils'
+
   export default {
     props: {
       isPopup: {
@@ -31,10 +34,25 @@
         default: false
       }
     },
+    data () {
+      return {
+        ruleHeight: '1200px',
+        ruleTop: '400px'
+      }
+    },
     methods: {
       togglePopup (val) {
         this.$emit('togglePopup', val)
       }
+    },
+    created () {
+      const docEle = document.documentElement
+      const relativeWidth = docEle.clientWidth * .8
+      const ruleHeight = Math.ceil(relativeWidth * 1.723)
+      this.ruleHeight = ruleHeight + 'px'
+      const headerHeight = utils.weixin() ? 0 : (0.44 * parseInt(docEle.style.fontSize))
+      const ruleTop = Math.ceil(-(ruleHeight * .5) + headerHeight)
+      this.ruleTop = ruleTop + 'px'
     }
   }
 </script>
@@ -87,15 +105,15 @@
   }
   .school-rule{
     position: fixed;
-    left: 50%;
+    left: 10%;
     top: 50%;
-    width: 6rem;
-    margin: -4.73rem -3rem 0 -3rem;
+    width: 80%;
+    margin-top: .44rem;
     height: 10.34rem;
     overflow-scrolling: touch;
     -webkit-overflow-scrolling: touch;
     background: url(./images/school_rule_bg.jpg) #fff no-repeat;
-    background-size: 6rem auto;
+    background-size: 100% auto;
     z-index: -10;
     padding: 0 .3rem;
     border-radius: .15rem;
