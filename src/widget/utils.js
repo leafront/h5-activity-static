@@ -341,11 +341,6 @@ const utils = {
     return (isWeixin && isPhoneX ) || (isApp && isPhoneX)
 
   },
-  removeAppViewFixed: function () {
-    const appView = document.getElementById('app')
-    appView.classList.remove('app_fixed')
-
-  },
   appViewFixed () {
 
     const appView = document.getElementById('app')
