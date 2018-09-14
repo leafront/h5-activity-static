@@ -210,7 +210,7 @@
       setTimeout(() => {
         this.$hideLoading()
         this.pageView = true
-      },300)
+      },500)
     }
   }
 
