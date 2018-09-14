@@ -232,6 +232,8 @@
   .ui-image-close{
     padding: .2rem;
     visibility: hidden;
+    position: absolute;
+    left: 2rem;
     &.active{
       visibility: visible;
     }
@@ -240,6 +242,7 @@
       background-size: .4rem auto;
       width:.4rem;
       height: .4rem;
+      display: block;
     }
   }
   .ui-image-cont{
@@ -248,10 +251,11 @@
     padding: .2rem .2rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background: #fff;
+    position: relative;
     .ui-image-code{
       height: .6rem;
-      line-height:.6rem;
       width: 1.88rem;
       position: relative;
       box-sizing: border-box;

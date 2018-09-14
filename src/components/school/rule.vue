@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="ui-mask" :class="{'active': isPopup}"></div>
+    <div class="ui-mask" id="school-rule-mask" :class="{'active': isPopup}"></div>
     <div class="school-rule" :style="{'height': ruleHeight, 'marginTop': ruleTop}" :class="{'active': isPopup}">
       <span class="school-close-btn" @click="togglePopup(false)"></span>
       <h4>活动规则</h4>
@@ -32,6 +32,19 @@
       isPopup: {
         type: Boolean,
         default: false
+      }
+    },
+    watch: {
+      isPopup (newVal,oldVal) {
+        if (newVal) {
+          document.getElementById('school-rule-mask').addEventListener('touchmove',(event) => {
+            if (!utils.isPassive()) {
+
+              event.preventDefault()
+
+            }
+          })
+        }
       }
     },
     data () {
