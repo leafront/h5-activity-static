@@ -73,8 +73,8 @@
 
 <style lang="scss">
   .school-close-btn{
-    width: .64rem;
-    height: .64rem;
+    width: .4rem;
+    height: .4rem;
     background: #00ac9b;
     position: absolute;
     border-radius: 50%;
@@ -87,7 +87,7 @@
       position: absolute;
       left:50%;
       top:50%;
-      width: .32rem;
+      width: .2rem;
       height: .02rem;
       background: #fff;
       transform: translateX(-50%) rotate(45deg);
@@ -98,7 +98,7 @@
       position: absolute;
       left:50%;
       top:50%;
-      width: .32rem;
+      width: .2rem;
       height: .02rem;
       background: #fff;
       transform: translateX(-50%) rotate(-45deg);
