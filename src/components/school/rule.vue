@@ -96,13 +96,14 @@
     -webkit-overflow-scrolling: touch;
     background: url(./images/school_rule_bg.jpg) no-repeat;
     background-size: 6rem auto;
-    z-index: 999;
+    z-index: -10;
     padding: 0 .3rem;
     border-radius: .15rem;
-    display: none;
+    visibility: hidden;
     &.active {
       animation: scaleIn .4s;
-      display: block;
+      visibility: visible;
+      z-index: 999;
     }
     h4{
       text-align: center;
