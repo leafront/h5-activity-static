@@ -78,7 +78,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    padding: .14rem .14rem .3rem .3rem;
+    padding: .25rem .25rem .3rem .3rem;
   }
   .school-close-btn{
     width: .4rem;
