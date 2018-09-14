@@ -2,7 +2,9 @@
   <div>
     <div class="ui-mask" id="school-rule-mask" :class="{'active': isPopup}"></div>
     <div class="school-rule" :style="{'height': ruleHeight, 'marginTop': ruleTop}" :class="{'active': isPopup}">
-      <span class="school-close-btn" @click="togglePopup(false)"></span>
+      <div class="school-close"  @click="togglePopup(false)">
+        <span class="school-close-btn"></span>
+      </div>
       <h4>活动规则</h4>
       <div class="school-rule-tag">
         <span class="font">优惠券使用规则：</span>
@@ -72,14 +74,18 @@
 </script>
 
 <style lang="scss">
+  .school-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .14rem .14rem .3rem .3rem;
+  }
   .school-close-btn{
     width: .4rem;
     height: .4rem;
     background: #00ac9b;
-    position: absolute;
+    position: relative;
     border-radius: 50%;
-    top: .14rem;
-    right: .14rem;
     display: block;
     &:before{
       content: '';
