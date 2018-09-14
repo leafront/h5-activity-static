@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="school-pic school-pic5">
-        <span></span>
+        <span @click="submitAction"></span>
       </div>
       <div class="school-pic">
         <img class="school-pic-bg6" src="./images/school_bg6.jpg"/>
@@ -179,7 +179,9 @@
 
         if (!validate.isMessageCode(smsCodeStr)) {
           this.$toast('请输入正确的短信验证码')
+          return
         }
+        this.receiveCoupon()
       },
       /**
        * 获取活动优惠券
@@ -234,11 +236,11 @@
     height: .98rem;
     border-radius: .15rem;
     border: .05rem solid #3aa7a2;
-    padding: .2rem .27rem;
     display: flex;
     align-items: center;
     background: #fff;
     justify-content: space-between;
+    padding-right: .27rem;
     button{
       width: 1.4rem;
       height: .56rem;
@@ -255,13 +257,15 @@
     }
     input{
       width: 100%;
+      padding: .2rem 0 .2rem .27rem;
+      height: 100%;
       &::-webkit-input-placeholder{
         color: #afafaf;
         letter-spacing: 0;
       }
     }
     .school-register-msg{
-      width: 2rem;
+      flex:1;
       letter-spacing: .05rem;
     }
   }

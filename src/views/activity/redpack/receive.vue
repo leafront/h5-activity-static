@@ -298,6 +298,7 @@
 
         if (!validate.isMessageCode(smsCodeStr)) {
           this.$toast('请输入正确的短信验证码')
+          return
         }
 
         this.$showPageLoading()

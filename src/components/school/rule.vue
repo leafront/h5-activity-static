@@ -1,25 +1,26 @@
 <template>
-    <div class="ui-mask" :class="{'active': isPopup}">
-      <div class="school-rule">
-        <span class="school-close-btn" @click="togglePopup(false)"></span>
-        <h4>活动规则</h4>
-        <div class="school-rule-tag">
-          <span class="font">优惠券使用规则：</span>
-        </div>
-        <p>1.本活动仅限APP新用户参与，非新人用户无法享受优惠，优惠券只限APP使用</p>
-        <p>2."点击领取"-"输入手机号+验证码"即可获得88元新人大礼包;</p>
-        <p>3.领券完成即视为注册完成;</p>
-        <p>4.同一ID，同一手机号，同一设备视为同一用户，每位用户限各领一份优惠券;</p>
-        <p>5.优惠券效期及使用范围参照优惠券说明。</p>
-        <div class="school-rule-tag">
-          <span class="font">优惠券使用方法：</span>
-        </div>
-        <p>下载来伊份APP-进入“我的”-点击“优惠券”，即可查看优惠券，在APP使用；</p>
-        <p>如有问题，可洽询APP客服;</p>
-        <p>如有用户刷券等恶意行为，来伊份将取消其活动权益;</p>
-        <strong>活动最终解释权归来伊份所有。</strong>
+  <div>
+    <div class="ui-mask" :class="{'active': isPopup}"></div>
+    <div class="school-rule" :class="{'active': isPopup}">
+      <span class="school-close-btn" @click="togglePopup(false)"></span>
+      <h4>活动规则</h4>
+      <div class="school-rule-tag">
+        <span class="font">优惠券使用规则：</span>
       </div>
+      <p>1.本活动仅限APP新用户参与，非新人用户无法享受优惠，优惠券只限APP使用</p>
+      <p>2."点击领取"-"输入手机号+验证码"即可获得88元新人大礼包;</p>
+      <p>3.领券完成即视为注册完成;</p>
+      <p>4.同一ID，同一手机号，同一设备视为同一用户，每位用户限各领一份优惠券;</p>
+      <p>5.优惠券效期及使用范围参照优惠券说明。</p>
+      <div class="school-rule-tag">
+        <span class="font">优惠券使用方法：</span>
+      </div>
+      <p>下载来伊份APP-进入“我的”-点击“优惠券”，即可查看优惠券，在APP使用；</p>
+      <p>如有问题，可洽询APP客服;</p>
+      <p>如有用户刷券等恶意行为，来伊份将取消其活动权益;</p>
+      <strong>活动最终解释权归来伊份所有。</strong>
     </div>
+  </div>
 </template>
 
 <script type="text/javascript">
@@ -98,7 +99,11 @@
     z-index: 999;
     padding: 0 .3rem;
     border-radius: .15rem;
-    animation: scaleIn .4s;
+    display: none;
+    &.active {
+      animation: scaleIn .4s;
+      display: block;
+    }
     h4{
       text-align: center;
       margin-top: .35rem;
