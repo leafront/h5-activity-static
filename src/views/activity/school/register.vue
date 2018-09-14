@@ -15,10 +15,10 @@
       </div>
       <div class="school-pic school-pic4">
         <div class="school-register-input" @click="scrollViewInto($event)">
-          <input type="tel"  maxlength="11" v-model.trim="params.mobile" class="font-b" placeholder="输入手机号"/>
+          <input type="tel"  maxlength="11" autocomplete="off" v-model.trim="params.mobile" class="font-b" placeholder="输入手机号"/>
         </div>
         <div class="school-register-input" @click="scrollViewInto($event)">
-          <input type="tel" maxlength="4" v-model.trim="params.smsCode" class="font school-register-msg" placeholder="验证码"/>
+          <input type="tel" maxlength="4" autocomplete="off" v-model.trim="params.smsCode" class="font school-register-msg" placeholder="验证码"/>
           <button class="font" :disabled="!isClickCode" @click="openImageValidate">{{codeText}}</button>
         </div>
       </div>
