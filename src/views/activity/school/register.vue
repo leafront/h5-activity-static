@@ -63,6 +63,8 @@
 
   import SchoolRule from '@/components/school/rule'
 
+  import common from '@/widget/common'
+
   export default {
     data() {
       return {
@@ -75,7 +77,8 @@
           mobile: '',
           smsCode: '',
         },
-        isPopup: false
+        isPopup: false,
+        downloadLink: ''
       }
     },
     computed: {
@@ -202,11 +205,38 @@
         }).then((result) => {
           const data = result.data
           this.$toast(result.message)
+          const downloadLink = this.downloadLink
+          setTimeout(() => {
+            if (downloadLink) {
+              location.href = downloadLink
+            }
+          },2000)
         })
-      }
+      },
+      /**
+       * 获取下载app链接
+       */
+      getDownloadLink () {
+        const areaCode = common.getAreaCode().areaCode
+        Model.getDownloadLink({
+          type: 'GET',
+          data: {
+            adCode: 'float_tail',
+            areaCode,
+            pageCode: 'H5_HOME'
+          }
+        }).then((result) => {
+          const data = result.data
+
+          if (result.code ==  0 && data) {
+            this.downloadLink = data.float_tail[0].linkUrl
+          }
+        })
+      },
     },
     created () {
       this.$showLoading()
+      this.getDownloadLink()
       setTimeout(() => {
         this.$hideLoading()
         this.pageView = true
