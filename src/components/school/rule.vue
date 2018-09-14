@@ -94,7 +94,7 @@
     height: 10.34rem;
     overflow-scrolling: touch;
     -webkit-overflow-scrolling: touch;
-    background: url(./images/school_rule_bg.jpg) no-repeat;
+    background: url(./images/school_rule_bg.jpg) #fff no-repeat;
     background-size: 6rem auto;
     z-index: -10;
     padding: 0 .3rem;
