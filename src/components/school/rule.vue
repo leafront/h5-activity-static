@@ -75,7 +75,7 @@
   .school-close-btn{
     width: .64rem;
     height: .64rem;
-    background: #0591d9;
+    background: #00ac9b;
     position: absolute;
     border-radius: 50%;
     top: .14rem;
