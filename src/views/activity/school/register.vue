@@ -309,7 +309,7 @@
     }
     input{
       width: 100%;
-      padding: .18rem 0 .2rem .27rem;
+      padding: .16rem 0 .2rem .27rem;
       height: 100%;
       &::-webkit-input-placeholder{
         color: #afafaf;
