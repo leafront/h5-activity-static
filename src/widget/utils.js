@@ -378,7 +378,7 @@ const utils = {
    * @returns {String} text
    */
   replaceMobile (text) {
-    const pattern = /(\d{3}){1}(\d){1,4}?(\d*$)/g
+    const pattern = /(\d{3}){1}(\d){1,4}?(?=\d*$)/g
     return text.replace(pattern,'$1 $2')
   },
   loadScript (url,success) {
