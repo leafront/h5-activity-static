@@ -127,9 +127,9 @@
           verifyCode,
           imageKey
         } = this
-
+        const mobileStr = utils.trim(mobile)
         const data = {
-          mobile,
+          mobile: mobileStr,
           captchasType: 3,
           imageKey
         }

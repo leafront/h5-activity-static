@@ -10,7 +10,7 @@
       <div class="school-pic school-pic3"></div>
       <div class="school-pic school-pic4">
         <div class="school-register-input" @click="scrollViewInto($event)">
-          <input type="tel"  maxlength="11" autocomplete="off" v-model.trim="params.mobile" class="font-b" placeholder="输入手机号"/>
+          <input type="tel"  maxlength="13" autocomplete="off" v-model="mobile" class="font-b" placeholder="输入手机号"/>
         </div>
         <div class="school-register-input" @click="scrollViewInto($event)">
           <input type="tel" maxlength="4" autocomplete="off" v-model.trim="params.smsCode" class="font school-register-msg" placeholder="验证码"/>
@@ -80,7 +80,16 @@
       ...mapGetters({
         'headerMenu': 'getHeaderMenu',
         'imageValidate': 'getImageValidate'
-      })
+      }),
+      mobile: {
+        get () {
+          return this.params.mobile
+        },
+        set (val) {
+          const newVal = utils.trim(val)
+          return this.params.mobile = utils.replaceMobile(newVal)
+        }
+      }
     },
     components: {
       AppHeader,
@@ -286,7 +295,7 @@
     align-items: center;
     background: #fff;
     justify-content: space-between;
-    padding-right: .27rem;
+    padding: 0 .27rem;
     button{
       width: 1.4rem;
       height: .56rem;
@@ -303,7 +312,7 @@
     }
     input{
       width: 100%;
-      padding: .16rem 0 .2rem .27rem;
+      padding: .16rem 0 .2rem 0;
       height: 100%;
       &::-webkit-input-placeholder{
         color: #afafaf;

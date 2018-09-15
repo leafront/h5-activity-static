@@ -373,6 +373,14 @@ const utils = {
       return url
     }
   },
+  /**
+   * @param {String} text
+   * @returns {String} text
+   */
+  replaceMobile (text) {
+    const pattern = /(\d{3}){1}(\d){1,4}?(?=\d*$)/g
+    return text.replace(pattern,'$1 $2')
+  },
   loadScript (url,success) {
     const script = document.createElement("script")
     script.type = 'text/javascript'
