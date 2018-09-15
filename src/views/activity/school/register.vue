@@ -10,7 +10,7 @@
       <div class="school-pic school-pic3"></div>
       <div class="school-pic school-pic4">
         <div class="school-register-input" @click="scrollViewInto($event)">
-          <input type="tel"  maxlength="13" autocomplete="off" v-model="mobile" class="font-b" placeholder="输入手机号"/>
+          <input type="tel" maxlength="13" autocomplete="off" v-model="mobile" class="font-b" placeholder="输入手机号"/>
         </div>
         <div class="school-register-input" @click="scrollViewInto($event)">
           <input type="tel" maxlength="4" autocomplete="off" v-model.trim="params.smsCode" class="font school-register-msg" placeholder="验证码"/>

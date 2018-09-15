@@ -59,9 +59,9 @@
     },
     watch: {
       imageValidate (val,oldVal) {
-       if (val) {
-         this.getImageKey()
-       }
+        if (val) {
+          this.getImageKey()
+        }
       }
     },
     methods: {
