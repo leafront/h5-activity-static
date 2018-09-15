@@ -59,9 +59,9 @@
     },
     watch: {
       imageValidate (val,oldVal) {
-       if (val) {
-         this.getImageKey()
-       }
+        if (val) {
+          this.getImageKey()
+        }
       }
     },
     methods: {
@@ -127,9 +127,9 @@
           verifyCode,
           imageKey
         } = this
-
+        const mobileStr = utils.trim(mobile)
         const data = {
-          mobile,
+          mobile: mobileStr,
           captchasType: 3,
           imageKey
         }

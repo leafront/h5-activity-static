@@ -33,21 +33,21 @@ const utils = {
   isApp () {
     return this.ua.indexOf('ody') > -1;
   },
-	serialize(value) {
-		return JSON.stringify(value);
-	},
+  serialize(value) {
+    return JSON.stringify(value);
+  },
 
-	deserialize(value) {
+  deserialize(value) {
 
-		if (typeof value != 'string' || value == '') return '';
+    if (typeof value != 'string' || value == '') return '';
 
-		try {
-			return JSON.parse(value);
-		} catch (e) {
+    try {
+      return JSON.parse(value);
+    } catch (e) {
 
-			return '';
-		}
-	},
+      return '';
+    }
+  },
   /**
    * 获得主机名
    * 如果当前完整url是：http://pintuan.test.odianyun.com/my-center/home.html?p=1
@@ -57,17 +57,17 @@ const utils = {
     var url = location.protocol + "//" + location.host
     return url
   },
-	isLocalStorageSupported() {
-		var testKey = 'test',
-			storage = window.sessionStorage;
-		try {
-			storage.setItem(testKey, 'testValue');
-			storage.removeItem(testKey);
-			return true;
-		} catch (error) {
-			return false;
-		}
-	},
+  isLocalStorageSupported() {
+    var testKey = 'test',
+      storage = window.sessionStorage;
+    try {
+      storage.setItem(testKey, 'testValue');
+      storage.removeItem(testKey);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  },
 
   /**
    *
@@ -114,70 +114,70 @@ const utils = {
       }
     }
   },
-	isWeixinIphoneX (){
+  isWeixinIphoneX (){
 
-		const isWeixin = this.weixin()
+    const isWeixin = this.weixin()
 
-		const ua = window.navigator.userAgent.toLowerCase()
+    const ua = window.navigator.userAgent.toLowerCase()
 
-		const isPhoneX = /iphone/gi.test(ua) && (screen.height == 812 && screen.width == 375)
+    const isPhoneX = /iphone/gi.test(ua) && (screen.height == 812 && screen.width == 375)
 
-		return (isWeixin && isPhoneX)
-	},
-	/**
-	 * @param {Object} obj
-	 * @returns {string}
-	 * @example
-	 * util.queryStringify({name:'leafront',age:23}) =>  'name=leafront&age=23'
-	 *
-	 */
+    return (isWeixin && isPhoneX)
+  },
+  /**
+   * @param {Object} obj
+   * @returns {string}
+   * @example
+   * util.queryStringify({name:'leafront',age:23}) =>  'name=leafront&age=23'
+   *
+   */
 
-	queryStringify (obj) {
+  queryStringify (obj) {
 
-		function toQueryPair(key,value) {
+    function toQueryPair(key,value) {
 
-			if (value==='') {
+      if (value==='') {
 
-				return key;
+        return key;
 
-			}
+      }
 
-			return key + '=' + encodeURIComponent(value==='' ? '' : String(value));
+      return key + '=' + encodeURIComponent(value==='' ? '' : String(value));
 
-		}
+    }
 
-		var result = [];
+    var result = [];
 
-		for (var key in obj) {
+    for (var key in obj) {
 
-			key = encodeURIComponent(key);
+      key = encodeURIComponent(key);
 
-			var values = obj[key];
+      var values = obj[key];
 
-			if (values && values.constructor == Array) {
+      if (values && values.constructor == Array) {
 
-				var queryValues = [];
+        var queryValues = [];
 
-				for (var i = 0, len = values.length; i < len; i++) {
+        for (var i = 0, len = values.length; i < len; i++) {
 
-					queryValues.push(toQueryPair(key, values[i]));
+          queryValues.push(toQueryPair(key, values[i]));
 
-				}
+        }
 
-				result = result.concat(queryValues);
+        result = result.concat(queryValues);
 
-			} else {
+      } else {
 
-				result.push(toQueryPair(key,values));
+        result.push(toQueryPair(key,values));
 
-			}
+      }
 
-		}
+    }
 
 
-		return result.join('&');
+    return result.join('&');
 
-	},
+  },
   /**
    *
    * @param {String || null } text
@@ -243,28 +243,28 @@ const utils = {
 
     return hashObj;
   },
-	isPassive() {
+  isPassive() {
 
-		let supportsPassiveOption = false
-		try {
-			addEventListener("test", null, Object.defineProperty({}, 'passive', {
-				get: function () {
-					supportsPassiveOption = true
-				}
-			}));
-		} catch(e) {}
-		return supportsPassiveOption;   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
+    let supportsPassiveOption = false
+    try {
+      addEventListener("test", null, Object.defineProperty({}, 'passive', {
+        get: function () {
+          supportsPassiveOption = true
+        }
+      }));
+    } catch(e) {}
+    return supportsPassiveOption;   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
 
-	},
-	isContained (arr1,arr2){
-		if(!(arr1 instanceof Array) || !(arr2 instanceof Array)) return false;
-		if(arr1.length < arr2.length) return false;
-		var aStr = arr1.toString();
-		for(var i = 0, len = arr2.length; i < len; i++){
-			if(aStr.indexOf(b[i]) == -1) return false;
-		}
-		return true;
-	},
+  },
+  isContained (arr1,arr2){
+    if(!(arr1 instanceof Array) || !(arr2 instanceof Array)) return false;
+    if(arr1.length < arr2.length) return false;
+    var aStr = arr1.toString();
+    for(var i = 0, len = arr2.length; i < len; i++){
+      if(aStr.indexOf(b[i]) == -1) return false;
+    }
+    return true;
+  },
 
   setCookie (name, value, options ) {
     var Days = (options && options.day) || 365;
@@ -372,6 +372,14 @@ const utils = {
     } else {
       return url
     }
+  },
+  /**
+   * @param {String} text
+   * @returns {String} text
+   */
+  replaceMobile (text) {
+    const pattern = /(\d{3}){1}(\d){1,4}?(\d*$)/g
+    return text.replace(pattern,'$1 $2')
   },
   loadScript (url,success) {
     const script = document.createElement("script")
