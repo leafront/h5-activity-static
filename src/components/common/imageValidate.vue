@@ -90,7 +90,7 @@
         const fontSize = parseInt(document.documentElement.style.fontSize)
         data.width = parseInt(String(1.6 * fontSize),10)
         data.height = parseInt(String(.6 * fontSize),10)
-        data.mobile = this.mobile
+        data.mobile = utils.trim(this.mobile)
         Model.getImageKey({
           type: 'POST',
           data

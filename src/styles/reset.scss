@@ -41,14 +41,6 @@ input {
 	font-size: 100%;
   font-family: "Microsoft Yahei";
 }
-input[autocomplete="off"]::-webkit-contacts-auto-fill-button {
-  visibility: hidden;
-  display: none !important;
-  pointer-events: none;
-  height: 0;
-  width: 0;
-  margin: 0;
-}
 
 i{
 	font-style: normal;
