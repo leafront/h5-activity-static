@@ -36,7 +36,7 @@ const bankPay = r => require.ensure([], () =>  r(require('@/views/activity/bank/
 
 const bankSuccess = r => require.ensure([], () =>  r(require('@/views/activity/bank/success.vue')),'bankSuccess')
 
-const schoolRegister = r => require.ensure([], () =>  r(require('@/views/activity/school/register.vue')),'schoolRegister')
+const schoolStart = r => require.ensure([], () =>  r(require('@/views/activity/school/start.vue')),'schoolStart')
 
 export default new Router({
   mode:'history',
@@ -151,9 +151,9 @@ export default new Router({
         requireLogin: true
       }
     }, {
-      path: '/activity/school/register',
-      name: 'schoolRegister',
-      component: schoolRegister,
+      path: '/activity/school/start',
+      name: 'schoolStart',
+      component: schoolStart,
       meta: {
         title: '开学季'
       }
