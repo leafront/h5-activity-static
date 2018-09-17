@@ -10,7 +10,7 @@
         </div>
 
         <div class="old_user_seconde">
-          <span class="c_f" @click="weixinShare">立即邀请</span>
+          <span class="c_f" @click="weixinShare" v-if = "!utils.qq">立即邀请</span>
           <span class="c_t" @click="jump">前往APP</span>
         </div>
       </div>
@@ -89,7 +89,8 @@ export default {
 */
     ajaxShareCode(){
       Model.getShareCode({
-        type: 'GET'
+        type: 'GET',
+        ut : app.getUserToken()
       }).then((result) => {
         const data = result.data
         if (result.code == 0 ) {
