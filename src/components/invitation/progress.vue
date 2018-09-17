@@ -110,8 +110,8 @@ export default {
         this.isActive1 = true;
         this.isActive2 = true;
         this.flagView = true;
-        e_progress_color[0].style.width = "98%";
-        e_flag_c[0].style.left = "98%";
+        e_progress_color[0].style.width = "92%";
+        e_flag_c[0].style.left = "92%";
       } else if (activityNumber == totaNumber) {
 
         this.isActive = true;
