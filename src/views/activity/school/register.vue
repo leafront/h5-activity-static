@@ -28,6 +28,7 @@
       </div>
       <ImageValidate
         @startCountTime="startCountTime"
+        :captchasType="captchasType"
         :mobile="params.mobile">
       </ImageValidate>
       <SchoolRule
@@ -73,6 +74,7 @@
           smsCode: '',
         },
         isPopup: false,
+        captchasType: 1,
         downloadLink: ''
       }
     },

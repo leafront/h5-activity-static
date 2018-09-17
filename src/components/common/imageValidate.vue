@@ -50,6 +50,10 @@
       codeText: {
         type: String,
         default: ''
+      },
+      captchasType: {
+        type: Number,
+        default: 3
       }
     },
     computed: {
@@ -125,12 +129,13 @@
         const {
           mobile,
           verifyCode,
-          imageKey
+          imageKey,
+          captchasType
         } = this
         const mobileStr = utils.trim(mobile)
         const data = {
           mobile: mobileStr,
-          captchasType: 3,
+          captchasType,
           imageKey
         }
 
