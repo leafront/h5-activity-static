@@ -38,6 +38,13 @@
           <span>充值</span>
         </div>
       </div>
+      <div class="bank-rule">
+        <p>活动规则：</p>
+        <p>1、活动时间：2018年9月10日-2018年12月31日。</p>
+        <p>2、悠点卡一经充值，不接受退款。充值金额可在来伊份APP或来伊份全国门店使用。</p>
+        <p>3、在法律许可的范围内，来伊份保留调整、暂停和终止本活动的权利，并经公告后生效。</p>
+        <p>4、持卡人参与活动即视为理解并同意本活动细则。对于活动规则如有任何疑问可咨询95533或来伊份APP客服。</p>
+      </div>
     </div>
     <div class="bank-popup ui-mask" :class="{'active': isBankPopup}">
       <div class="bank-popup-cont">
@@ -208,6 +215,13 @@
 </script>
 
 <style lang="scss">
+  .bank-rule{
+    padding: .27rem .3rem;
+    p{
+      font-size: .26rem;
+      color: #666;
+    }
+  }
   .bank-popup{
     display: none;
     &.active{
