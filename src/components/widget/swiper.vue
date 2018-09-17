@@ -224,13 +224,10 @@
 
 		},
 		watch: {
-
 			list () {
 
 				setTimeout(() => {
-
 					this.init()
-
 				},0)
 
 				this.$el.addEventListener('touchstart',(e) => {

@@ -1,3 +1,6 @@
+
+import utils from '@/widget/utils'
+
 const pageLoading = {
   installed: false,
   install (Vue, options) {
@@ -15,22 +18,24 @@ const pageLoading = {
       // 如果页面有toast则不继续执行
       if(document.getElementById('showLoading')) return
       // 1、创建构造器，定义好提示信息的模板
-      let toastTip = Vue.extend({
+      let loadingTpl = Vue.extend({
         template: `
         <div class="ui-showLoading" id="showLoading">
           <div class="ui-showLoading-gif"></div>
         </div>`
       })
       // 2、创建实例，挂载到文档以后的地方
-      let tpl = new toastTip().$mount().$el
+      let tpl = new loadingTpl().$mount().$el
       // 3、把创建的实例添加到body中
       document.body.appendChild(tpl)
 
       //阻止遮罩滑动
-      tpl.addEventListener("touchmove", function(e) {
+      tpl.addEventListener('touchmove', function(e) {
+        if (!utils.isPassive()) {
+          e.preventDefault()
+        }
         e.stopPropagation()
-        e.preventDefault()
-      })
+      },utils.isPassive() ? {passive: true} : false)
 
       pageLoading.installed = true
 
