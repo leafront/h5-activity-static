@@ -127,7 +127,7 @@ export default new Router({
     },
     {
       path: '/activity/inviteFriends/invitedsuccess',
-      name: 'invitation',
+      name: 'invitedsuccess',
       component: invitedsuccess,
       meta: {
         title: 'invitedsuccess',
