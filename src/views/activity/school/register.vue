@@ -2,20 +2,15 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper " :class="{'visibility': pageView, 'scroll_view_hidden': imageValidate}">
+    <div class="scroll-view-wrapper" :class="{'visibility': pageView, 'scroll_view_hidden': imageValidate || isPopup}">
       <div class="school-pic school-pic1">
-        <img class="school-pic-bg1" src="./images/school_bg1.jpg"/>
         <h4 class="font-b" @click="togglePopup(true)">活动说明</h4>
       </div>
-      <div class="school-pic school-pic2">
-        <img class="school-pic-bg2" src="./images/school_bg2.jpg"/>
-      </div>
-      <div class="school-pic school-pic3">
-        <img class="school-pic-bg3" src="./images/school_bg3.jpg"/>
-      </div>
+      <div class="school-pic school-pic2"></div>
+      <div class="school-pic school-pic3"></div>
       <div class="school-pic school-pic4">
         <div class="school-register-input" @click="scrollViewInto($event)">
-          <input type="tel"  maxlength="11" autocomplete="off" v-model.trim="params.mobile" class="font-b" placeholder="输入手机号"/>
+          <input type="tel" maxlength="13" autocomplete="off" v-model="mobile" class="font-b" placeholder="输入手机号"/>
         </div>
         <div class="school-register-input" @click="scrollViewInto($event)">
           <input type="tel" maxlength="4" autocomplete="off" v-model.trim="params.smsCode" class="font school-register-msg" placeholder="验证码"/>
@@ -85,7 +80,16 @@
       ...mapGetters({
         'headerMenu': 'getHeaderMenu',
         'imageValidate': 'getImageValidate'
-      })
+      }),
+      mobile: {
+        get () {
+          return this.params.mobile
+        },
+        set (val) {
+          const newVal = utils.trim(val)
+          return this.params.mobile = utils.replaceMobile(newVal)
+        }
+      }
     },
     components: {
       AppHeader,
@@ -100,6 +104,7 @@
        * 显示活动说明
        */
       togglePopup (val) {
+        utils.appViewFixed()
         this.isPopup = val
       },
       backAction () {
@@ -133,7 +138,7 @@
 
         this.countTimeTimer = countTimeTimer
 
-        utils.removeAppViewFixed()
+        utils.appViewFixed()
       },
       openImageValidate () {
         const {
@@ -260,16 +265,14 @@
   .school-pic{
     img {
       width: 100%;
-      background: #f5f5f5;
+      background: #f4f4f8;
     }
   }
   .school-pic1 {
     position: relative;
     height: 3.15rem;
-    img{
-      width: 100%;
-      height: 3.15rem;
-    }
+    background: url(./images/school_bg1.jpg) no-repeat;
+    background-size: 100% auto;
     h4 {
       position: absolute;
       top: .6rem;
@@ -292,7 +295,7 @@
     align-items: center;
     background: #fff;
     justify-content: space-between;
-    padding-right: .27rem;
+    padding: 0 .27rem;
     button{
       width: 1.4rem;
       height: .56rem;
@@ -309,7 +312,7 @@
     }
     input{
       width: 100%;
-      padding: .16rem 0 .2rem .27rem;
+      padding: .16rem 0 .2rem 0;
       height: 100%;
       &::-webkit-input-placeholder{
         color: #afafaf;
@@ -323,17 +326,14 @@
   }
   .school-pic2{
     height: 2.48rem;
-    img{
-      width: 100%;
-      height: 2.48rem;
-    }
+    background: url(./images/school_bg2.jpg) no-repeat;
+    background-size: 100% auto;
   }
   .school-pic3{
+    margin-top: -1px;
     height: 3.54rem;
-    img{
-      width: 100%;
-      height: 3.54rem;
-    }
+    background: url(./images/school_bg3.jpg) no-repeat;
+    background-size: 100% auto;
   }
   .school-pic5{
     padding-top: .27rem;

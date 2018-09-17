@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div class="ui-mask" :class="{'active': isPopup}"></div>
+    <div class="ui-mask" id="school-rule-mask" :class="{'active': isPopup}"></div>
     <div class="school-rule" :style="{'height': ruleHeight, 'marginTop': ruleTop}" :class="{'active': isPopup}">
-      <span class="school-close-btn" @click="togglePopup(false)"></span>
+      <div class="school-close"  @click="togglePopup(false)">
+        <span class="school-close-btn"></span>
+      </div>
       <h4>活动规则</h4>
       <div class="school-rule-tag">
         <span class="font">优惠券使用规则：</span>
@@ -34,6 +36,20 @@
         default: false
       }
     },
+    watch: {
+      isPopup (newVal,oldVal) {
+        if (newVal) {
+          document.getElementById('school-rule-mask').addEventListener('touchmove',(event) => {
+            if (!utils.isPassive()) {
+
+              event.preventDefault()
+
+            }
+            event.stopPropagation()
+          })
+        }
+      }
+    },
     data () {
       return {
         ruleHeight: '1200px',
@@ -48,7 +64,7 @@
     created () {
       const docEle = document.documentElement
       const relativeWidth = docEle.clientWidth * .8
-      const ruleHeight = Math.ceil(relativeWidth * 1.723)
+      const ruleHeight = Math.ceil(relativeWidth * 1.62)
       this.ruleHeight = ruleHeight + 'px'
       const headerHeight = utils.weixin() ? 0 : (0.44 * parseInt(docEle.style.fontSize))
       const ruleTop = Math.ceil(-(ruleHeight * .5) + headerHeight)
@@ -58,14 +74,18 @@
 </script>
 
 <style lang="scss">
-  .school-close-btn{
-    width: .64rem;
-    height: .64rem;
-    background: #0591d9;
+  .school-close{
     position: absolute;
+    top: 0;
+    right: 0;
+    padding: .25rem .25rem .3rem .3rem;
+  }
+  .school-close-btn{
+    width: .4rem;
+    height: .4rem;
+    background: #00ac9b;
+    position: relative;
     border-radius: 50%;
-    top: .14rem;
-    right: .14rem;
     display: block;
     &:before{
       content: '';
@@ -73,7 +93,7 @@
       position: absolute;
       left:50%;
       top:50%;
-      width: .32rem;
+      width: .2rem;
       height: .02rem;
       background: #fff;
       transform: translateX(-50%) rotate(45deg);
@@ -84,7 +104,7 @@
       position: absolute;
       left:50%;
       top:50%;
-      width: .32rem;
+      width: .2rem;
       height: .02rem;
       background: #fff;
       transform: translateX(-50%) rotate(-45deg);

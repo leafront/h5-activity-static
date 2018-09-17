@@ -35,12 +35,11 @@ li{
 }
 
 input {
-	background: transparent;
 	border: none;
 	box-shadow: none;
 	border-radius: 0;
-
 	font-size: 100%;
+  font-family: "Microsoft Yahei";
 }
 
 i{
@@ -75,7 +74,7 @@ button {
 }
 
 input:-webkit-autofill {
-	-webkit-box-shadow: 0 0 0px 1000px white inset;
+	-webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
 input:focus {
