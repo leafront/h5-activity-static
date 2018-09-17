@@ -4,7 +4,30 @@
     <!-- <span class="ui-invite-close" :class="{'active': ruleText}" @click="closeRuleText"></span> -->
     <div class="ui-invite-rule" id="worldcup-rule" :class="{'active': ruleText}">
       <div class="rule_child">
-        <img v-for = "(item, index) in addList" :src="item.imageUrl" alt="">
+        <h4 class="">规则详情</h4>
+    <h5>一、活动规则：</h5>
+    <p>单个自然月内，老用户邀请好友注册来伊份会员，即可享受对应奖励。</p>
+    <h5>二、邀请规则</h5>
+    <p>好友通过您分享的链接，填写手机号及验证码后注册成为来伊份会员，即可确认本次邀请成功。同一手机号，同一终端设备号，统一登录账号均视为同一用户。</p>
+    <h5>二、奖励规则</h5>
+    <p>1.受邀好友：88元新人礼包</p>
+    <p>2.邀请人：</p>
+    <p>①每邀请1人，邀请人获赠5元无门槛券</p>
+    <p>②累计邀请2人，邀请人额外获赠40减10优惠券</p>
+    <p>③累计邀请5人，邀请人额外获赠满80减20优惠券</p>
+    <p>④累计邀请10人，邀请人额外获赠满199减100优惠券</p>
+    <p>⑤被邀请人首次消费下单，邀请人获赠满80减20元券</p>
+    <p>⑥邀请人数月榜第1名，邀请人额外获赠价值200元以上热门零食礼盒。</p>
+    <h5>四、奖品领取规则：</h5>
+    <p>①成功邀请好友注册来伊份会员后，优惠券自动到账。</p>
+    <p>②邀请人邀请人数达到对应奖励阶段，优惠券自动到账。</p>
+    <p>③月榜第1所获奖品，会有工作人员主动联系并发放奖品。</p>
+    <p>提示：</p>
+    <p>①优惠券不可叠加使用，商城部分活动与商品不可使用优惠券。</p>
+    <p>②如有发现恶意刷单以非正规手段获得奖励者，官方运营组有权取消获奖资格。</p>
+    <p>此活动最终解释权归来伊份伊起赚所有</p>
+
+
       </div>
       <!-- <img v-for = "(item, index) in addList" :src="item.imageUrl" alt=""> -->
       <span class="ui-invite-close" :class="{'active': ruleText}" @click="closeRuleText"></span>
@@ -60,7 +83,7 @@
     width: 80%;
     max-height: 70%;
     z-index:999;
-    padding: 0 .4rem .3rem;
+    // padding: 0 .4rem .3rem;
     border-radius: .2rem;
     color:#fff;
     overflow-scrolling: touch;
@@ -79,9 +102,12 @@
   .rule_child{
     background:linear-gradient(to bottom,#FC8B3A,#FC8337,#FC7933,#FB6D2E,#FB5123);
     padding: .2rem .3rem;
-   image{
-     display: block;
-   }
+    overflow-y: scroll;
+    color: white;
+    width: 100%;
+    height: 8rem;
+    border-radius: .2rem;
+
   }
 
 </style>
@@ -93,17 +119,14 @@
   import * as Model from '@/model/invitation'
 
   export default {
-    
+
 
     props: {
       ruleText: {
         type: Boolean,
         default: false
       },
-      addList:{
-        type: Array,
-        default: []
-      }
+
     },
 
     watch: {
