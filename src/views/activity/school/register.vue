@@ -199,10 +199,11 @@
           mobile,
           smsCode
         } = this.params
+        const phone = utils.trim(mobile)
         Model.receiveCoupon({
           type: 'POST',
           data: {
-            phone: mobile,
+            phone,
             code: smsCode,
             id: config.schoolId,
             source: config.source
