@@ -10,12 +10,12 @@
         </div>
 
         <div class="old_user_seconde">
-          <span class="c_f" @click="weixinShare">立即邀请</span>
+          <span class="c_f" @click="weixinShare" v-if = "!jugementQQ">立即邀请</span>
           <span class="c_t" @click="jump">前往APP</span>
         </div>
       </div>
       <div class="section_f">
-        <img  v-for = "(item, index) in bannerList" :src="item.imageUrl" alt="">
+        <img   alt="">
       </div>
     </div>
     <UIShare></UIShare>
@@ -50,7 +50,7 @@ export default {
       title: "邀请好友",
       pageView: true,
       invitationShareC:"",
-      bannerList: [],
+      jugementQQ:utils.qq()
     }
   },
   components: {
@@ -65,7 +65,7 @@ export default {
   created() {
     // this.$showLoading()
     this.ajaxShareCode()
-    this.getAdImg()
+  
 
 
 
@@ -113,28 +113,28 @@ export default {
     *获取广告位
     */
 
-    getAdImg () {
-      return Model.getAdImg({
-        type: 'GET',
-        data: {
-          pageCode: 'H5_COUPON_ZONE_PAGE',
-          adCode: 'coupons_banner',
-          areaCode: common.getAreaCode().areaCode
-        }
-      }).then((result) => {
-        const data = result.data
-        if (result.code == 0 && data) {
-          const coupons_banner = data.coupons_banner
-          coupons_banner.forEach((item) => {
-            item.imageUrl = utils.imgScale(item.imageUrl,85)
-          })
-          this.bannerList = coupons_banner
-        } else {
-          this.$toast(result.message)
-        }
-        return result
-      })
-    },
+    // getAdImg () {
+    //   return Model.getAdImg({
+    //     type: 'GET',
+    //     data: {
+    //       pageCode: 'H5_COUPON_ZONE_PAGE',
+    //       adCode: 'coupons_banner',
+    //       areaCode: common.getAreaCode().areaCode
+    //     }
+    //   }).then((result) => {
+    //     const data = result.data
+    //     if (result.code == 0 && data) {
+    //       const coupons_banner = data.coupons_banner
+    //       coupons_banner.forEach((item) => {
+    //         item.imageUrl = utils.imgScale(item.imageUrl,85)
+    //       })
+    //       this.bannerList = coupons_banner
+    //     } else {
+    //       this.$toast(result.message)
+    //     }
+    //     return result
+    //   })
+    // },
 
 
   }
