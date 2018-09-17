@@ -141,7 +141,7 @@
     </div>
   <ShareImg :rulePopup="rulePopup"  :invitationShareC = "invitationShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
   <UIShare></UIShare>
-  <Rule :ruleText="ruleText" :addList="addList" @toggleRuleText="toggleRuleText"></Rule>
+  <Rule :ruleText="ruleText"  @toggleRuleText="toggleRuleText"></Rule>
   <Imglayer :imgLayer="imgLayer" @toggleImgLayer="toggleImgLayer"></Imglayer>
   </div>
 </div>
@@ -202,7 +202,7 @@ export default {
       invationToFirst:null,
       invitationShareC:"",//获取sharecode
       shareConfig: {},
-      addList: [],
+
 
 
 
@@ -231,30 +231,30 @@ export default {
     *获取广告位
     */
 
-    getAdImg () {
-      return Model.getAdImg({
-        type: 'GET',
-        data: {
-          pageCode: 'H5_INVITE_FRIEND_PAGE',
-          adCode: 'invited_rule',
-          areaCode: common.getAreaCode().areaCode
-        }
-      }).then((result) => {
-        console.log(777777);
-        const data = result.data
-        if (result.code == 0 && data) {
-          const invited_rule = data.invited_rule
-          console.log("啥",invited_rule);
-          invited_rule.forEach((item) => {
-            item.imageUrl = utils.imgScale(item.imageUrl,85)
-          })
-          this.addList = invited_rule
-        } else {
-          this.$toast(result.message)
-        }
-        return result
-      })
-    },
+    // getAdImg () {
+    //   return Model.getAdImg({
+    //     type: 'GET',
+    //     data: {
+    //       pageCode: 'H5_INVITE_FRIEND_PAGE',
+    //       adCode: 'invited_rule',
+    //       areaCode: common.getAreaCode().areaCode
+    //     }
+    //   }).then((result) => {
+    //     console.log(777777);
+    //     const data = result.data
+    //     if (result.code == 0 && data) {
+    //       const invited_rule = data.invited_rule
+    //       console.log("啥",invited_rule);
+    //       invited_rule.forEach((item) => {
+    //         item.imageUrl = utils.imgScale(item.imageUrl,85)
+    //       })
+    //       this.addList = invited_rule
+    //     } else {
+    //       this.$toast(result.message)
+    //     }
+    //     return result
+    //   })
+    // },
     /**
      * 获取个人获得的奖品列表
      */
@@ -355,7 +355,7 @@ export default {
           this.calculationCoupon()
 
        } else {
-         this.$toast(result.message)
+         // this.$toast(result.message)
        }
      })
 
@@ -400,7 +400,7 @@ export default {
   },
   created() {
     this.$showLoading()
-    this.getAdImg()
+    // this.getAdImg()
     this.ajaxRecommend()
     this.ajaxShareCode()
 
