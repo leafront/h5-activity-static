@@ -155,8 +155,7 @@ export default new Router({
       name: 'schoolRegister',
       component: schoolRegister,
       meta: {
-        title: '开学季',
-        requireLogin: true
+        title: '开学季'
       }
     },
     {
