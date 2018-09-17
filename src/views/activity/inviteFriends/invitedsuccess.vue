@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="section_f">
-        <img   alt="">
+        <img  src=" /activity-static/images/invitedAdPosition.png" alt="">
       </div>
     </div>
     <UIShare></UIShare>
@@ -65,7 +65,7 @@ export default {
   created() {
     // this.$showLoading()
     this.ajaxShareCode()
-  
+
 
 
 
