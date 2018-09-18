@@ -124,6 +124,7 @@ export default new Router({
       name: 'invitation',
       component: invitation,
       meta: {
+<<<<<<< HEAD
         title: 'invitation'
       }
     }, {
@@ -132,6 +133,9 @@ export default new Router({
       component: bankRecharge,
       meta: {
         title: '悠点卡',
+=======
+        title: '邀请好友',
+>>>>>>> feature_inviteFrieds
         requireLogin: true
       }
     }, {
@@ -163,7 +167,7 @@ export default new Router({
       name: 'invitedsuccess',
       component: invitedsuccess,
       meta: {
-        title: 'invitedsuccess',
+        title: '邀请好友',
         requireLogin: true
       }
     }

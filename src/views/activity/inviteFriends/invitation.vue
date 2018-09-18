@@ -319,7 +319,7 @@ export default {
      }).then((result) => {
        const data = result.data
        if (result.code == 0 ) {
-         this.$hideLoading()
+         // this.$hideLoading()
          this.pageView = true
 
            const {
@@ -398,7 +398,7 @@ export default {
 
   },
   created() {
-    this.$showLoading()
+    // this.$showLoading()
     // this.getAdImg()
     this.ajaxRecommend()
     this.ajaxShareCode()
