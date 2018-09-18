@@ -124,21 +124,18 @@ export default new Router({
       name: 'invitation',
       component: invitation,
       meta: {
-<<<<<<< HEAD
-        title: 'invitation'
+        title: '邀请好友',
+        requireLogin: true
       }
-    }, {
+    },{
       path: '/activity/bank/recharge',
       name: 'bankRecharge',
       component: bankRecharge,
       meta: {
         title: '悠点卡',
-=======
-        title: '邀请好友',
->>>>>>> feature_inviteFrieds
         requireLogin: true
       }
-    }, {
+     },{
       path: '/activity/bank/pay',
       name: 'bankPay',
       component: bankPay,
