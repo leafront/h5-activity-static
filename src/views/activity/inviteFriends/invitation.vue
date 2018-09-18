@@ -448,7 +448,14 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: .8rem;
+  padding-top: .5rem;
+}
+.f_ele {
+ padding-top: .5rem;
+ padding-bottom: .1rem;
+}
+.winner_title{
+  padding-top: .2rem;
 }
 .winner_c{
   padding-top: .1rem;

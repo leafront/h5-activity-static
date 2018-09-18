@@ -21,11 +21,11 @@ const wx_share = {
     const shareConfig = {
       link: link,
       url: link,
-      title:'来伊份会员狂欢福利，拿红包拼手气！戳！',
-      desc: '我刚领到一个大红包，快帮我拆一下！拆者有份，你也有红包拿哦~',
-      description: '我刚领到一个大红包，快帮我拆一下！拆者有份，你也有红包拿哦~',
-      imgUrl: config.staticPath + '/activity-static/images/redpack_icon.png?v=' + config.getTime,
-      pic: config.staticPath + '/activity-static/images/redpack_icon.png?v=' + config.getTime
+      title:'【来伊份】送你88元大礼包！',
+      desc: '全球优质美食，分享给同样爱生活的你，88元红包让你买的更开心！',
+      description: '全球优质美食，分享给同样爱生活的你，88元红包让你买的更开心！',
+      imgUrl: config.staticPath + '/activity-static/images/invitation_icon.png?v=' + config.getTime,
+      pic: config.staticPath + '/activity-static/images/invitation_icon.png?v=' + config.getTime
     }
     return shareConfig
   },
