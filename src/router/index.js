@@ -20,10 +20,6 @@ const redPackSuccess = r => require.ensure([], () =>  r(require('@/views/activit
 
 const redPackStop = r => require.ensure([], () =>  r(require('@/views/activity/redpack/stop.vue')),'redPackStop')
 
-// const worldCupPrize = r => require.ensure([], () =>  r(require('@/views/activity/worldcup/prize.vue')),'worldCupPrize')
-
-// const worldCupAllTeam = r => require.ensure([], () =>  r(require('@/views/activity/worldcup/allteam.vue')),'worldCupAllTeam')
-
 const makeMoney = r => require.ensure([], () =>  r(require('@/views/activity/make/money.vue')),'makeMoney')
 
 const couponList = r => require.ensure([], () =>  r(require('@/views/activity/coupon/list.vue')),'couponList')
@@ -33,6 +29,14 @@ const groupList = r => require.ensure([], () =>  r(require('@/views/activity/gro
 const invitation = r => require.ensure([], () =>  r(require('@/views/activity/inviteFriends/invitation.vue')),'invitation')
 
 const invitedsuccess = r => require.ensure([], () =>  r(require('@/views/activity/inviteFriends/invitedsuccess.vue')),'invitedsuccess')
+
+const bankRecharge = r => require.ensure([], () =>  r(require('@/views/activity/bank/recharge.vue')),'bankRecharge')
+
+const bankPay = r => require.ensure([], () =>  r(require('@/views/activity/bank/pay.vue')),'bankPay')
+
+const bankSuccess = r => require.ensure([], () =>  r(require('@/views/activity/bank/success.vue')),'bankSuccess')
+
+const schoolStart = r => require.ensure([], () =>  r(require('@/views/activity/school/start.vue')),'schoolStart')
 
 export default new Router({
   mode:'history',
@@ -115,14 +119,44 @@ export default new Router({
       meta: {
         title: '伊起拼'
       }
-    },
-    {
+    },{
       path: '/activity/inviteFriends/invitation',
       name: 'invitation',
       component: invitation,
       meta: {
         title: '邀请好友',
         requireLogin: true
+      }
+    }, {
+      path: '/activity/bank/recharge',
+      name: 'bankRecharge',
+      component: bankRecharge,
+      meta: {
+        title: '悠点卡',
+        requireLogin: true
+      }
+    }, {
+      path: '/activity/bank/pay',
+      name: 'bankPay',
+      component: bankPay,
+      meta: {
+        title: '收银台',
+        requireLogin: true
+      }
+    }, {
+      path: '/activity/bank/success',
+      name: 'bankSuccess',
+      component: bankSuccess,
+      meta: {
+        title: '交易结果',
+        requireLogin: true
+      }
+    }, {
+      path: '/activity/school/start',
+      name: 'schoolStart',
+      component: schoolStart,
+      meta: {
+        title: '开学季'
       }
     },
     {
@@ -133,7 +167,6 @@ export default new Router({
         title: '邀请好友',
         requireLogin: true
       }
-    },
-
+    }
   ]
 })
