@@ -305,7 +305,6 @@ export default {
   weixinShare () {
 
     this.shareConfig = wx_share.shareConfig.call(this)
-    console.log(this.shareConfig);
       wx_share.weixinShare.call(this)
 
 
