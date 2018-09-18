@@ -30,13 +30,9 @@ const invitation = r => require.ensure([], () =>  r(require('@/views/activity/in
 
 const invitedsuccess = r => require.ensure([], () =>  r(require('@/views/activity/inviteFriends/invitedsuccess.vue')),'invitedsuccess')
 
-const bankRecharge = r => require.ensure([], () =>  r(require('@/views/activity/bank/recharge.vue')),'bankRecharge')
 
-const bankPay = r => require.ensure([], () =>  r(require('@/views/activity/bank/pay.vue')),'bankPay')
 
-const bankSuccess = r => require.ensure([], () =>  r(require('@/views/activity/bank/success.vue')),'bankSuccess')
 
-const schoolStart = r => require.ensure([], () =>  r(require('@/views/activity/school/start.vue')),'schoolStart')
 
 export default new Router({
   mode:'history',
@@ -126,37 +122,6 @@ export default new Router({
       meta: {
         title: '邀请好友',
         requireLogin: true
-      }
-    }, {
-      path: '/activity/bank/recharge',
-      name: 'bankRecharge',
-      component: bankRecharge,
-      meta: {
-        title: '悠点卡',
-        requireLogin: true
-      }
-    }, {
-      path: '/activity/bank/pay',
-      name: 'bankPay',
-      component: bankPay,
-      meta: {
-        title: '收银台',
-        requireLogin: true
-      }
-    }, {
-      path: '/activity/bank/success',
-      name: 'bankSuccess',
-      component: bankSuccess,
-      meta: {
-        title: '交易结果',
-        requireLogin: true
-      }
-    }, {
-      path: '/activity/school/start',
-      name: 'schoolStart',
-      component: schoolStart,
-      meta: {
-        title: '开学季'
       }
     },
     {
