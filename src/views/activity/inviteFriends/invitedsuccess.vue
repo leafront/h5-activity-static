@@ -95,7 +95,6 @@ export default {
         const data = result.data
         if (result.code == 0 ) {
           this.invitationShareC = data.shareCode
-          console.log("啥:",this.invitationShareC);
         }
  })
    },
