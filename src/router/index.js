@@ -124,9 +124,10 @@ export default new Router({
       name: 'invitation',
       component: invitation,
       meta: {
-        title: 'invitation'
+        title: '邀请好友',
+        requireLogin: true
       }
-    }, {
+    },{
       path: '/activity/bank/recharge',
       name: 'bankRecharge',
       component: bankRecharge,
@@ -134,7 +135,7 @@ export default new Router({
         title: '悠点卡',
         requireLogin: true
       }
-    }, {
+     },{
       path: '/activity/bank/pay',
       name: 'bankPay',
       component: bankPay,
