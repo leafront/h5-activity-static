@@ -204,6 +204,7 @@
           smsCode
         } = this.params
         const phone = utils.trim(mobile)
+        this.$showPageLoading()
         Model.receiveCoupon({
           type: 'POST',
           data: {
@@ -216,6 +217,7 @@
           const data = result.data
           this.$toast(result.message)
           const downloadLink = this.downloadLink
+          this.$hidePageLoading()
           setTimeout(() => {
             if (downloadLink) {
               location.href = downloadLink
