@@ -418,14 +418,14 @@ export default {
 }
 .activity_rule{
 
- top:.5rem;
+ top:.8rem;
  right:.2rem;
   position: absolute;
   font-size: .2rem;
     button{
-     padding: .1rem .25rem;
+     padding: .05rem .25rem;
      color: white;
-     border-radius: .2rem;
+     border-radius: .5rem;
      background: linear-gradient(to right,#FCBF2D,#FCB72C,#FCA129,#FC7E24,#FC7923)
 
    }
@@ -441,7 +441,7 @@ export default {
     width: 90%;
     margin: auto;
     border-radius: 0.3rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
 }
 .f_ele , .winner_title , .winner_c{
   display: flex;
@@ -450,26 +450,27 @@ export default {
   padding-top: .5rem;
 }
 .f_ele {
- padding-top: .5rem;
- padding-bottom: .1rem;
+ padding-top: .7rem;
+ padding-bottom: .3rem;
 }
 .winner_title{
   padding-top: .2rem;
+  padding-bottom: .1rem;
 }
 .winner_c{
-  padding-top: .1rem;
-  padding-bottom: .1rem;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
 }
  .text_p{
   width: max-content;
-  font-size: .3rem;
-  margin: 0   auto .3rem;
+  font-size: .25rem;
+  margin: 0   auto 0;
   line-height: 1.5;
   font-weight: 500;
 }
 .color_p{
   color: #FF7C00;
-  font-size: .4rem;
+  font-size: .35rem;
 }
 .r_cont{
   border-left: solid 2px #EAEAEA;
@@ -489,7 +490,7 @@ export default {
 
     width: max-content;
     font-size: 0.25rem;
-    margin: 1rem auto auto;
+    margin: .8rem auto auto;
 }
 .b_text3 {
 
@@ -497,7 +498,7 @@ export default {
 
     background: linear-gradient(to right , #FCBF2D,#FCB72C,#FCA129,#FC7E24,#FC7923);
     border-radius: 0.5rem;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
     font-weight: 500;
     letter-spacing: 2px;
 }

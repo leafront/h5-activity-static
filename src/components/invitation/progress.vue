@@ -182,7 +182,7 @@ img {
     position: relative;
     width: 85%;
     height: 0.2rem;
-    margin: 2.5rem auto 0;
+    margin: 2rem auto 0;
     border-radius: 1rem;
 }
 
@@ -226,7 +226,7 @@ height: .12rem;
 .p_circle span:after,.p_circle span:before {
     content: "";
     position: absolute;
-    background: #EAEAEA;
+    background: #fff;
     border-radius: .02rem
 }
 
