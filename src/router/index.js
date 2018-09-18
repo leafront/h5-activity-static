@@ -121,7 +121,7 @@ export default new Router({
       name: 'invitation',
       component: invitation,
       meta: {
-        title: 'invitation',
+        title: '邀请好友',
         requireLogin: true
       }
     },
@@ -130,7 +130,7 @@ export default new Router({
       name: 'invitedsuccess',
       component: invitedsuccess,
       meta: {
-        title: 'invitedsuccess',
+        title: '邀请好友',
         requireLogin: true
       }
     },
