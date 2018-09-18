@@ -28,27 +28,6 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import CryptoJS from 'crypto-js'
-
-  const encryptKey = (val) => {
-
-    const key = CryptoJS.enc.Utf8.parse("1fi;qPa7utddahWy")
-
-    const srcs = CryptoJS.enc.Utf8.parse(val)
-
-    const ciphertext = CryptoJS.AES.encrypt(srcs, key, {
-      mode: CryptoJS.mode.ECB,
-      padding: CryptoJS.pad.Pkcs7
-
-    })
-
-    const symbolStr = '@%^*'
-
-    const cipherVal = symbolStr + ciphertext.toString()
-
-    return cipherVal
-  }
-
   export default {
     data () {
       return {
@@ -80,9 +59,9 @@
     },
     watch: {
       imageValidate (val,oldVal) {
-       if (val) {
-         this.getImageKey()
-       }
+        if (val) {
+          this.getImageKey()
+        }
       }
     },
     methods: {
@@ -92,7 +71,7 @@
       cancel () {
         this.updateImageValidate(false)
         this.verifyCode = ''
-        utils.removeAppViewFixed()
+        utils.appViewFixed()
       },
 
       confirm () {
@@ -148,11 +127,9 @@
           verifyCode,
           imageKey
         } = this
-
-        const encryptMobile = encryptKey(mobile)
-
+        const mobileStr = utils.trim(mobile)
         const data = {
-          mobile: encryptMobile,
+          mobile: mobileStr,
           captchasType: 3,
           imageKey
         }
@@ -232,6 +209,8 @@
   .ui-image-close{
     padding: .2rem;
     visibility: hidden;
+    position: absolute;
+    left: 2rem;
     &.active{
       visibility: visible;
     }
@@ -240,6 +219,7 @@
       background-size: .4rem auto;
       width:.4rem;
       height: .4rem;
+      display: block;
     }
   }
   .ui-image-cont{
@@ -248,10 +228,11 @@
     padding: .2rem .2rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background: #fff;
+    position: relative;
     .ui-image-code{
       height: .6rem;
-      line-height:.6rem;
       width: 1.88rem;
       position: relative;
       box-sizing: border-box;
