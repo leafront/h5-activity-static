@@ -450,13 +450,6 @@ export default {
   align-items: center;
   padding-top: .5rem;
 }
-.f_ele {
- padding-top: .5rem;
- padding-bottom: .1rem;
-}
-.winner_title{
-  padding-top: .2rem;
-}
 .winner_c{
   padding-top: .1rem;
   padding-bottom: .1rem;
