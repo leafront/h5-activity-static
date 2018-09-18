@@ -3,28 +3,30 @@
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView, 'scroll_view_hidden': imageValidate || isPopup}">
-      <div class="school-pic school-pic1">
-        <h4 class="font-b" @click="togglePopup(true)">活动说明</h4>
-      </div>
-      <div class="school-pic school-pic2"></div>
-      <div class="school-pic school-pic3"></div>
-      <div class="school-pic school-pic4">
-        <div class="school-register-input" @click="scrollViewInto($event)">
-          <input type="tel" maxlength="13" autocomplete="off" v-model="mobile" class="font-b" placeholder="输入手机号"/>
+      <div class="school-wrapper" id="schoolWrapper">
+        <div class="school-pic school-pic1">
+          <h4 class="font-b" @click="togglePopup(true)">活动说明</h4>
         </div>
-        <div class="school-register-input" @click="scrollViewInto($event)">
-          <input type="tel" maxlength="4" autocomplete="off" v-model.trim="params.smsCode" class="font school-register-msg" placeholder="验证码"/>
-          <button class="font" :disabled="!isClickCode" @click="openImageValidate">{{codeText}}</button>
+        <div class="school-pic school-pic2"></div>
+        <div class="school-pic school-pic3"></div>
+        <div class="school-pic school-pic4">
+          <div class="school-register-input">
+            <input type="tel" maxlength="13" autocomplete="off" v-model="mobile" class="font-b" placeholder="输入手机号"/>
+          </div>
+          <div class="school-register-input">
+            <input type="tel" maxlength="4" autocomplete="off" v-model.trim="params.smsCode" class="font school-register-msg" placeholder="验证码"/>
+            <button class="font" :disabled="!isClickCode" @click="openImageValidate">{{codeText}}</button>
+          </div>
         </div>
-      </div>
-      <div class="school-pic school-pic5">
-        <span @click="submitAction"></span>
-      </div>
-      <div class="school-pic">
-        <img class="school-pic-bg6" src="./images/school_bg6.jpg"/>
-      </div>
-      <div class="school-pic">
-        <img class="school-pic-bg7" src="./images/school_bg7.jpg"/>
+        <div class="school-pic school-pic5">
+          <span @click="submitAction"></span>
+        </div>
+        <div class="school-pic">
+          <img class="school-pic-bg6" src="./images/school_bg6.jpg"/>
+        </div>
+        <div class="school-pic">
+          <img class="school-pic-bg7" src="./images/school_bg7.jpg"/>
+        </div>
       </div>
       <ImageValidate
         @startCountTime="startCountTime"
@@ -240,15 +242,6 @@
             this.downloadLink = data.float_tail[0].linkUrl
           }
         })
-      },
-      scrollViewInto (event) {
-
-        if (utils.android()) {
-          const ele = event.target
-          setTimeout(() => {
-            ele.scrollIntoViewIfNeeded(true)
-          },200)
-        }
       }
 
     },
@@ -259,6 +252,9 @@
         this.$hideLoading()
         this.pageView = true
       },400)
+    },
+    mounted () {
+      utils.scrollInput('schoolWrapper')
     }
   }
 
