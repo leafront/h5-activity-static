@@ -26,13 +26,13 @@ const couponList = r => require.ensure([], () =>  r(require('@/views/activity/co
 
 const groupList = r => require.ensure([], () =>  r(require('@/views/activity/group/list.vue')),'groupList')
 
-const bankRecharge = r => require.ensure([], () =>  r(require('@/views/activity/bank/recharge.vue')),'bankRecharge')
+const invitation = r => require.ensure([], () =>  r(require('@/views/activity/inviteFriends/invitation.vue')),'invitation')
 
-const bankPay = r => require.ensure([], () =>  r(require('@/views/activity/bank/pay.vue')),'bankPay')
+const invitedsuccess = r => require.ensure([], () =>  r(require('@/views/activity/inviteFriends/invitedsuccess.vue')),'invitedsuccess')
 
-const bankSuccess = r => require.ensure([], () =>  r(require('@/views/activity/bank/success.vue')),'bankSuccess')
 
-const schoolRegister = r => require.ensure([], () =>  r(require('@/views/activity/school/register.vue')),'schoolRegister')
+
+
 
 export default new Router({
   mode:'history',
@@ -93,7 +93,8 @@ export default new Router({
       meta: {
         title: '拆红包'
       }
-    },{
+    },
+    {
       path: '/activity/make/money',
       name: 'makeMoney',
       component: makeMoney,
@@ -114,36 +115,21 @@ export default new Router({
       meta: {
         title: '伊起拼'
       }
-    }, {
-      path: '/activity/bank/recharge',
-      name: 'bankRecharge',
-      component: bankRecharge,
+    },{
+      path: '/activity/inviteFriends/invitation',
+      name: 'invitation',
+      component: invitation,
       meta: {
-        title: '悠点卡',
+        title: '邀请好友',
         requireLogin: true
       }
-    }, {
-      path: '/activity/bank/pay',
-      name: 'bankPay',
-      component: bankPay,
+    },
+    {
+      path: '/activity/inviteFriends/invitedsuccess',
+      name: 'invitedsuccess',
+      component: invitedsuccess,
       meta: {
-        title: '收银台',
-        requireLogin: true
-      }
-    }, {
-      path: '/activity/bank/success',
-      name: 'bankSuccess',
-      component: bankSuccess,
-      meta: {
-        title: '交易结果',
-        requireLogin: true
-      }
-    }, {
-      path: '/activity/school/register',
-      name: 'schoolRegister',
-      component: schoolRegister,
-      meta: {
-        title: '开学季',
+        title: '邀请好友',
         requireLogin: true
       }
     }
