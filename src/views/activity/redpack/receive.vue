@@ -29,8 +29,10 @@
           <span></span>
         </div>
       </div>
-      <ImageValidate  @startCountTime="startCountTime"
-                      :mobile="params.mobile">
+      <ImageValidate
+        @startCountTime="startCountTime"
+        :captchasTyp="captchasType"
+        :mobile="params.mobile">
       </ImageValidate>
     </div>
   </div>
@@ -73,7 +75,8 @@
         },
         showCountTime: '',
         redpackImage: config.staticPath + '/activity-static/images/redpack_invite_bg.jpg?v='+ config.getTime,
-        pageView: false
+        pageView: false,
+        captchasType: 3
       }
     },
     computed: {

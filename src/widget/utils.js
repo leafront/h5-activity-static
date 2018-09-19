@@ -389,6 +389,22 @@ const utils = {
     script.onload = () => {
       success && success()
     }
+  },
+  scrollInput (ele) {
+    const pageH = window.innerHeight
+    if (this.android()) {
+      window.addEventListener('resize', function () {
+        const scrollView = document.getElementById(ele)
+        if (document.activeElement.tagName == 'INPUT') {
+          const scrollHeight = window.innerHeight - pageH
+          scrollView.style.transform = 'translateY('+scrollHeight+'px)'
+          scrollView.style.WebkitTransform = 'translateY('+scrollHeight+'px)'
+        } else{
+          scrollView.style.transform = 'translateY(0)'
+          scrollView.style.WebkitTransform = 'translateY(0)'
+        }
+      })
+    }
   }
 }
 
