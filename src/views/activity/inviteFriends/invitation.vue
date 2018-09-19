@@ -498,7 +498,7 @@ export default {
 
     background: linear-gradient(to right , #FCBF2D,#FCB72C,#FCA129,#FC7E24,#FC7923);
     border-radius: 0.5rem;
-    margin-top: 0.3rem;
+    margin-top: 0.8rem;
     font-weight: 500;
     letter-spacing: 2px;
 }
