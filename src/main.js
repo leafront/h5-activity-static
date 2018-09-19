@@ -58,9 +58,7 @@ router.beforeEach((to, from, next) => {
     } else {
 
       if (utils.isApp()) {
-
         app.login()
-        next()
 
       } else {
 

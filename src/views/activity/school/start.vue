@@ -233,15 +233,13 @@
         Model.getDownloadLink({
           type: 'GET',
           data: {
-            adCode: 'float_tail',
-            areaCode,
-            pageCode: 'H5_HOME'
+            id: config.schoolId
           }
         }).then((result) => {
           const data = result.data
 
           if (result.code ==  0 && data) {
-            this.downloadLink = data.float_tail[0].linkUrl
+            this.downloadLink = data.download_url
           }
         })
       }
