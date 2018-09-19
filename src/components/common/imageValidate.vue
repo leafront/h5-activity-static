@@ -108,6 +108,7 @@
               this.verifyCode = ''
               this.imageVerifyCode = data.image
               this.imageKey = data.imageKey
+              utils.appViewFixed()
             } else {
               this.imageKey = data.imageKey
               this.getMessageCode(1)
