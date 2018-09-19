@@ -198,7 +198,7 @@ export default {
      * 二维码生成
      */
     qrcode() {
-         let url = "http://m.lyf.edu.laiyifen.com/actives/online/invitationfriends/index.html" + "?" + "originCode" + "=" + this.invitationShareC
+         let url =  config.hostPath + "/actives/online/invitationfriends/index.html" + "?" + "originCode" + "=" + this.invitationShareC
          new QRCode('qrcode', {
           width: this.scalePx * 1.4, // 设置宽度
           height: this.scalePx * 1.4, // 设置高度
