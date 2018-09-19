@@ -27,7 +27,7 @@ const app = {
      *  });
    */
   postMessage (func, params, callback) {
-    //只有在app才执行
+    // 只有在app才执行
     if (!utils.isApp()) {
       return;
     }

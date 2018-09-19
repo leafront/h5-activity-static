@@ -36,7 +36,7 @@
           if (clientWidth <= 1200) {
             docFontSize = (clientWidth * dpr) / 7.5 + 'px';
             if (clientWidth < 375 && !isIos && dpr <= 2) {
-              docFontSize = (clientWidth * dpr * 1.04167) / 7.5 + 'px';
+              docFontSize = parseInt((clientWidth * dpr * 1.04167) / 7.5) + 'px';
             }
           }
           metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale);
@@ -50,9 +50,9 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
     <script type="text/javascript" defer="defer" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/fastclick/index.js"></script>
-    <!--<script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>-->
-    <!--<script>-->
-      <!--var vconsole = new VConsole()-->
-    <!--</script>-->
+    <!-- <script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>
+    <script>
+      var vconsole = new VConsole()
+    </script> -->
   </body>
 </html>

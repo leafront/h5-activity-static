@@ -1,8 +1,6 @@
 
 import * as Model from '@/model/common'
 
-import utils from '@/widget/utils'
-
 const checkTime = (i)=> {
   if (i < 10) {
     i = "0" + i
