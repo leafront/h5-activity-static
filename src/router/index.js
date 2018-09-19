@@ -30,9 +30,7 @@ const invitation = r => require.ensure([], () =>  r(require('@/views/activity/in
 
 const invitedsuccess = r => require.ensure([], () =>  r(require('@/views/activity/inviteFriends/invitedsuccess.vue')),'invitedsuccess')
 
-
-
-
+const schoolStart = r => require.ensure([], () =>  r(require('@/views/activity/school/start.vue')),'schoolStart')
 
 export default new Router({
   mode:'history',
@@ -123,14 +121,20 @@ export default new Router({
         title: '邀请好友',
         requireLogin: true
       }
-    },
-    {
+    }, {
       path: '/activity/inviteFriends/invitedsuccess',
       name: 'invitedsuccess',
       component: invitedsuccess,
       meta: {
         title: '邀请好友',
         requireLogin: true
+      }
+    }, {
+      path: '/activity/school/start',
+      name: 'schoolStart',
+      component: schoolStart,
+      meta: {
+        title: '开学季'
       }
     }
   ]

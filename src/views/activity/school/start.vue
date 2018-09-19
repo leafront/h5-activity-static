@@ -3,31 +3,34 @@
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView, 'scroll_view_hidden': imageValidate || isPopup}">
-      <div class="school-pic school-pic1">
-        <h4 class="font-b" @click="togglePopup(true)">活动说明</h4>
-      </div>
-      <div class="school-pic school-pic2"></div>
-      <div class="school-pic school-pic3"></div>
-      <div class="school-pic school-pic4">
-        <div class="school-register-input" @click="scrollViewInto($event)">
-          <input type="tel" maxlength="13" autocomplete="off" v-model="mobile" class="font-b" placeholder="输入手机号"/>
+      <div class="school-wrapper" id="schoolWrapper">
+        <div class="school-pic school-pic1">
+          <h4 class="font-b" @click="togglePopup(true)">活动说明</h4>
         </div>
-        <div class="school-register-input" @click="scrollViewInto($event)">
-          <input type="tel" maxlength="4" autocomplete="off" v-model.trim="params.smsCode" class="font school-register-msg" placeholder="验证码"/>
-          <button class="font" :disabled="!isClickCode" @click="openImageValidate">{{codeText}}</button>
+        <div class="school-pic school-pic2"></div>
+        <div class="school-pic school-pic3"></div>
+        <div class="school-pic school-pic4">
+          <div class="school-register-input">
+            <input type="tel" maxlength="13" autocomplete="off" v-model="mobile" class="font-b" placeholder="输入手机号"/>
+          </div>
+          <div class="school-register-input">
+            <input type="tel" maxlength="4" autocomplete="off" v-model.trim="params.smsCode" class="font school-register-msg" placeholder="验证码"/>
+            <button class="font" :disabled="!isClickCode" @click="openImageValidate">{{codeText}}</button>
+          </div>
         </div>
-      </div>
-      <div class="school-pic school-pic5">
-        <span @click="submitAction"></span>
-      </div>
-      <div class="school-pic">
-        <img class="school-pic-bg6" src="./images/school_bg6.jpg"/>
-      </div>
-      <div class="school-pic">
-        <img class="school-pic-bg7" src="./images/school_bg7.jpg"/>
+        <div class="school-pic school-pic5">
+          <span @click="submitAction"></span>
+        </div>
+        <div class="school-pic">
+          <img class="school-pic-bg6" src="./images/school_bg6.jpg"/>
+        </div>
+        <div class="school-pic">
+          <img class="school-pic-bg7" src="./images/school_bg7.jpg"/>
+        </div>
       </div>
       <ImageValidate
         @startCountTime="startCountTime"
+        :captchasType="captchasType"
         :mobile="params.mobile">
       </ImageValidate>
       <SchoolRule
@@ -73,6 +76,7 @@
           smsCode: '',
         },
         isPopup: false,
+        captchasType: 1,
         downloadLink: ''
       }
     },
@@ -199,10 +203,12 @@
           mobile,
           smsCode
         } = this.params
+        const phone = utils.trim(mobile)
+        this.$showPageLoading()
         Model.receiveCoupon({
           type: 'POST',
           data: {
-            phone: mobile,
+            phone,
             code: smsCode,
             id: config.schoolId,
             source: config.source
@@ -211,6 +217,7 @@
           const data = result.data
           this.$toast(result.message)
           const downloadLink = this.downloadLink
+          this.$hidePageLoading()
           setTimeout(() => {
             if (downloadLink) {
               location.href = downloadLink
@@ -226,26 +233,15 @@
         Model.getDownloadLink({
           type: 'GET',
           data: {
-            adCode: 'float_tail',
-            areaCode,
-            pageCode: 'H5_HOME'
+            id: config.schoolId
           }
         }).then((result) => {
           const data = result.data
 
           if (result.code ==  0 && data) {
-            this.downloadLink = data.float_tail[0].linkUrl
+            this.downloadLink = data.download_url
           }
         })
-      },
-      scrollViewInto (event) {
-
-        if (utils.android()) {
-          const ele = event.target
-          setTimeout(() => {
-            ele.scrollIntoViewIfNeeded(true)
-          },200)
-        }
       }
 
     },
@@ -256,6 +252,9 @@
         this.$hideLoading()
         this.pageView = true
       },400)
+    },
+    mounted () {
+      utils.scrollInput('schoolWrapper')
     }
   }
 
@@ -272,7 +271,7 @@
     position: relative;
     height: 3.15rem;
     background: url(./images/school_bg1.jpg) no-repeat;
-    background-size: 100% auto;
+    background-size: cover;
     h4 {
       position: absolute;
       top: .6rem;
@@ -284,7 +283,7 @@
   .school-pic4{
     padding: .16rem .9rem 0;
     background: url(./images/school_bg4.jpg) no-repeat;
-    background-size: 100% auto;
+    background-size: cover;
     height: 2.59rem;
   }
   .school-register-input{
@@ -327,18 +326,18 @@
   .school-pic2{
     height: 2.48rem;
     background: url(./images/school_bg2.jpg) no-repeat;
-    background-size: 100% auto;
+    background-size: cover;
   }
   .school-pic3{
     margin-top: -1px;
     height: 3.54rem;
     background: url(./images/school_bg3.jpg) no-repeat;
-    background-size: 100% auto;
+    background-size: cover;
   }
   .school-pic5{
     padding-top: .27rem;
     background: url(./images/school_bg5.jpg) no-repeat;
-    background-size: 100% auto;
+    background-size: cover;
     display: flex;
     justify-content: center;
     height: 3.65rem;
