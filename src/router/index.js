@@ -30,6 +30,12 @@ const invitation = r => require.ensure([], () =>  r(require('@/views/activity/in
 
 const invitedsuccess = r => require.ensure([], () =>  r(require('@/views/activity/inviteFriends/invitedsuccess.vue')),'invitedsuccess')
 
+const bankRecharge = r => require.ensure([], () =>  r(require('@/views/activity/bank/recharge.vue')),'bankRecharge')
+
+const bankPay = r => require.ensure([], () =>  r(require('@/views/activity/bank/pay.vue')),'bankPay')
+
+const bankSuccess = r => require.ensure([], () =>  r(require('@/views/activity/bank/success.vue')),'bankSuccess')
+
 const schoolStart = r => require.ensure([], () =>  r(require('@/views/activity/school/start.vue')),'schoolStart')
 
 export default new Router({
