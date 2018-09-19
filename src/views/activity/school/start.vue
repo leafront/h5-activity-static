@@ -129,7 +129,7 @@
         this.codeText = times + 's'
         const countTimeTimer = setInterval(() => {
           times--
-          this.codeText = times+'s'
+          this.codeText = times + 's'
 
           if(times == 0) {
             this.isClickCode = true
@@ -141,8 +141,6 @@
         this.updateImageValidate(false)
 
         this.countTimeTimer = countTimeTimer
-
-        utils.appViewFixed()
       },
       openImageValidate () {
         const {
@@ -162,8 +160,6 @@
         }
 
         this.updateImageValidate(true)
-
-        utils.appViewFixed()
 
       },
       submitAction () {
