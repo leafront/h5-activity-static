@@ -190,11 +190,9 @@
           let isSendSuccess = result.every((item) => {
             return item.code == 0
           })
-          console.log('success:' + isSendSuccess)
           if (isSendSuccess) {
             this.$hideLoading()
             this.pageView = true
-            console.log('pageView: ' + this.pageView)
           }
         }
       })

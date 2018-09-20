@@ -127,45 +127,44 @@ export default new Router({
         title: '邀请好友',
         requireLogin: true
       }
-    },{
-      path: '/activity/bank/recharge',
-      name: 'bankRecharge',
-      component: bankRecharge,
-      meta: {
-        title: '悠点卡',
-        requireLogin: true
-      }
-     },{
-      path: '/activity/bank/pay',
-      name: 'bankPay',
-      component: bankPay,
-      meta: {
-        title: '收银台',
-        requireLogin: true
-      }
     }, {
-      path: '/activity/bank/success',
-      name: 'bankSuccess',
-      component: bankSuccess,
-      meta: {
-        title: '交易结果',
-        requireLogin: true
-      }
-    }, {
-      path: '/activity/school/start',
-      name: 'schoolStart',
-      component: schoolStart,
-      meta: {
-        title: '开学季'
-      }
-    },
-    {
       path: '/activity/inviteFriends/invitedsuccess',
       name: 'invitedsuccess',
       component: invitedsuccess,
       meta: {
         title: '邀请好友',
         requireLogin: true
+      }
+    }, {
+			path: '/activity/bank/recharge',
+			name: 'bankRecharge',
+			component: bankRecharge,
+			meta: {
+				title: '悠点卡',
+				requireLogin: true
+			}
+		}, {
+			path: '/activity/bank/pay',
+			name: 'bankPay',
+			component: bankPay,
+			meta: {
+				title: '收银台',
+				requireLogin: true
+			}
+		}, {
+			path: '/activity/bank/success',
+			name: 'bankSuccess',
+			component: bankSuccess,
+			meta: {
+				title: '交易结果',
+				requireLogin: true
+			}
+		}, {
+      path: '/activity/school/start',
+      name: 'schoolStart',
+      component: schoolStart,
+      meta: {
+        title: '开学季'
       }
     }
   ]
