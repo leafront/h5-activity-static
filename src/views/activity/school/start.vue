@@ -260,7 +260,6 @@
   .school-pic{
     img {
       width: 100%;
-      background: #f4f4f8;
     }
   }
   .school-pic1 {
