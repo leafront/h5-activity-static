@@ -28,7 +28,7 @@
           <p class="b_text2" v-show = "completionZero">您还没有邀请好友，快去邀请好友吧~</p>
 
           <p class="b_text3 first_t" @click="weixinShare" >立即邀请</p>
-          <p @click="showPoster" class="b_text4 first_t">生成我的邀请码</p>
+          <p @click="ajaxShareCode(1)" class="b_text4 first_t">生成我的邀请码</p>
         </div>
       </div>
 <!-- 第二部分 -->
@@ -286,16 +286,33 @@ export default {
      * 获取滚动奖品文字内容
      */
 
-  showPoster(){
-    this.rulePopup = true
-  },
-   ajaxShareCode(){
+  // showPoster(){
+  //   this.rulePopup = true
+  // },
+   ajaxShareCode(type){
+     if(type===1 && this.invitationShareC){
+        this.rulePopup = true
+        return;
+     }
+   let self = this
      Model.getShareCode({
        type: 'GET'
      }).then((result) => {
        const data = result.data
        if (result.code == 0 ) {
          this.invitationShareC = data.shareCode
+
+          if(type===1 && this.invitationShareC){
+             this.rulePopup = true
+
+          }else if (type===2 && this.invitationShareC) {
+            this.shareConfig = wx_share.shareConfig.call(self)
+              wx_share.weixinShare.call(self)
+
+
+          }else if (type===1 || type===2) {
+            this.$toast("网络繁忙，请稍后再试!")
+          }
        }
 })
   },
@@ -303,9 +320,14 @@ export default {
   *分享
   */
   weixinShare () {
+    if(this.invitationShareC){
 
     this.shareConfig = wx_share.shareConfig.call(this)
       wx_share.weixinShare.call(this)
+    }else {
+
+      this.ajaxShareCode(2)
+    }
 
 
   },
@@ -343,6 +365,7 @@ export default {
           this.personNu = data.myInvitationNum
           this.tatalMon = data.couponTotal
           let rank = data.rank
+          if(!data.rank)return;
           if (rank.length > 3) {
             this.rankThird = rank.splice(0,3)
             this.rankOther = rank
