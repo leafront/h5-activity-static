@@ -1,5 +1,5 @@
 <template>
-	<swiper :list="bannerList" :style="{'height':itemHeight}">
+	<swiper :list="bannerList" :index="index" @toggleIndex="toggleIndex" :style="{'height':itemHeight}">
 		<ul slot="banner" class="slideshow-item">
 			<li v-for="item in bannerList":style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
 				<img :src="item.imageUrl" :style="{'width':itemWidth, 'height':itemHeight}">
@@ -40,10 +40,11 @@
 				if (url) {
 
 					location.href = url
-
 				}
-
-			}
+			},
+      toggleIndex (val) {
+        this.index = val
+      }
 		}
 	}
 </script>
