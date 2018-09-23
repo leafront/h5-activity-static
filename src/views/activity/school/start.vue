@@ -258,8 +258,7 @@
 
 <style lang="scss">
   .school-wrapper{
-    background: url(./images/school_start_line_bg.png) #b1d5cb repeat-y;
-    background-size: 100% auto;
+    background: #b1d5cb;
   }
   .school-pic{
     img {
