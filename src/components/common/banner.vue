@@ -1,10 +1,13 @@
 <template>
 	<swiper :list="bannerList" :style="{'height':itemHeight}">
-		<ul class="slideshow-item">
+		<ul slot="banner" class="slideshow-item">
 			<li v-for="item in bannerList":style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
 				<img :src="item.imageUrl" :style="{'width':itemWidth, 'height':itemHeight}">
 			</li>
 		</ul>
+    <ul slot="dot" class="slideshow-dots">
+      <li v-for="(item,$index) in bannerList" :class="{'active':$index == index-1}"></li>
+    </ul>
 	</swiper>
 </template>
 <script>
@@ -12,6 +15,13 @@
 	import swiper from '@/components/widget/swiper.vue'
 
 	export default {
+    data () {
+      return {
+        index: 1,
+        itemWidth: document.documentElement.clientWidth + 'px',
+        itemHeight: document.documentElement.clientWidth * 0.4 + 'px',
+      }
+    },
 		props: {
 			bannerList: {
 				type: Array,
@@ -22,12 +32,6 @@
 		},
 		components:{
 			swiper
-		},
-		data () {
-			return {
-				itemWidth: document.documentElement.clientWidth + 'px',
-				itemHeight: document.documentElement.clientWidth * 0.4 + 'px',
-			}
 		},
 		methods: {
 
