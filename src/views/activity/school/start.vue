@@ -257,6 +257,9 @@
 </script>
 
 <style lang="scss">
+  .school-wrapper{
+    background: #00ac9b;
+  }
   .school-pic{
     img {
       width: 100%;
