@@ -17,46 +17,53 @@
 
 import config from '@/config/index'
 
-export default function ajax (options){
+export default function ajax ({
+  hostPath = location.origin,
+  url,
+  async = true,
+  timeout = 30000,
+  type,
+  headers,
+  dataType = 'json',
+  data
+}){
 
-  const baseHostPath = options.hostPath || location.origin
+  return new Promise((resolve, reject) => {
 
-	return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest()
 
-		const xhr = new XMLHttpRequest()
+    xhr.open(type, hostPath + url, async)
 
-		xhr.open(options.type, baseHostPath + options.url, options.async)
+    xhr.timeout = timeout
 
-		xhr.timeout = options.timeout || 10000
+    //设置请求头
+    for (var k in headers) {
 
-		//设置请求头
-		for (var k in options.headers) {
+      xhr.setRequestHeader(k, headers[k])
+    }
 
-			xhr.setRequestHeader(k, options.headers[k])
-		}
+    xhr.responseType = dataType
 
-		xhr.responseType = options.dataType
+    xhr.onreadystatechange = () => {
 
-		xhr.onreadystatechange = () => {
+      if(xhr.readyState == 4){
 
-			if(xhr.readyState == 4){
+        if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
 
-				if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+          resolve(xhr.response)
 
-					resolve(xhr.response)
+        } else {
 
-				} else {
-
-					resolve({
-						data:[],
-						status: -500,
+          resolve({
+            data:[],
+            status: -500,
             message: '请求出错，请稍后再试'
-					})
-				}
-			}
-		}
+          })
+        }
+      }
+    }
 
-    options.type == "GET" ? xhr.send(null) : 	xhr.send(options.data)
+    type == "GET" ? xhr.send(null) : 	xhr.send(data)
 
-	})
+  })
 }
