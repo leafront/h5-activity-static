@@ -17,7 +17,6 @@ export default function request (url,{
   expires = 30 * 60 * 1000,
   headers
 }){
-
   const ut = app.getUserToken()
   const options = {
     isHeader:true,
@@ -57,7 +56,7 @@ export default function request (url,{
   }
   if (type == "GET") {
 
-    options.url =  data ?  url + '?' + options.data: url
+    options.url = options.data ?  url + '?' + options.data: url
   }
 
   function httpRequest (resolve) {
