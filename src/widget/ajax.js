@@ -1,62 +1,57 @@
 /**
  *
  * @param {Object} options
- * arguments
- * type:'GET',
- * timeout: 3000,
- * hostPath: 'http://m.laiyifen.com'
- * headers:{
-	 *  Content-Type:'application/json'
-	 * },
- * data:{
-	 *  name:'leafront'
-	 * }
  *
  * @returns {Promise}
  */
 
-import config from '@/config/index'
+export default function ajax ({
+  hostPath = location.origin,
+  url,
+  async = true,
+  timeout = 30000,
+  type,
+  headers,
+  dataType = 'json',
+  data
+}){
 
-export default function ajax (options){
+  return new Promise((resolve, reject) => {
 
-  const baseHostPath = options.hostPath || location.origin
+    const xhr = new XMLHttpRequest()
 
-	return new Promise((resolve, reject) => {
+    xhr.open(type, hostPath + url, async)
 
-		const xhr = new XMLHttpRequest()
+    xhr.timeout = timeout
 
-		xhr.open(options.type, baseHostPath + options.url, options.async)
+    //设置请求头
+    for (var k in headers) {
 
-		xhr.timeout = options.timeout || 10000
+      xhr.setRequestHeader(k, headers[k])
+    }
 
-		//设置请求头
-		for (var k in options.headers) {
+    xhr.responseType = dataType
 
-			xhr.setRequestHeader(k, options.headers[k])
-		}
+    xhr.onreadystatechange = () => {
 
-		xhr.responseType = options.dataType
+      if(xhr.readyState == 4){
 
-		xhr.onreadystatechange = () => {
+        if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
 
-			if(xhr.readyState == 4){
+          resolve(xhr.response)
 
-				if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+        } else {
 
-					resolve(xhr.response)
-
-				} else {
-
-					resolve({
-						data:[],
-						status: -500,
+          resolve({
+            data:[],
+            status: -500,
             message: '请求出错，请稍后再试'
-					})
-				}
-			}
-		}
+          })
+        }
+      }
+    }
 
-    options.type == "GET" ? xhr.send(null) : 	xhr.send(options.data)
+    type == "GET" ? xhr.send(null) : 	xhr.send(data)
 
-	})
+  })
 }
