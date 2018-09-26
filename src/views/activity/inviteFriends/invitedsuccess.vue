@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="section_f">
-        <img  src=" /activity-static/images/invitedAdPosition.png" alt="">
+        <img  src=" /activity-static/images/invitedAdPosition1.jpg" alt="">
       </div>
     </div>
     <UIShare></UIShare>
