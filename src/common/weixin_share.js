@@ -102,53 +102,6 @@ const weixin_share = {
     this.rewrite()
   },
   /**
-   * 重写url-在hash中添加shareCode参数（复制分享需要）
-   * 注意：因微信中无法复制history.replaceState修改后的url，这里通过location.hash来记录这些值
-   */
-  rewriteUrl () {
-
-    //有可能包含的是上家的shareCode
-    var hashParams = utils.hashFormat(location.href)
-    var urlParams = utils.query()
-    delete urlParams.shareCode
-    delete hashParams.shareCode
-    //本地有缓存，或者接口返回成功才有
-    var shareCode = store.get(SKEY_SHARECODE, 'session')
-    if (shareCode) {
-      // hashParams.shareCode = shareCode;
-      urlParams.shareCode = shareCode
-
-      var hashStr = utils.queryStringify(hashParams)
-      if (hashStr) {
-        //微信里只能更改hash的值，这里使用hash追踪分享人的信息
-        location.hash = "#" + hashStr
-      }
-
-      var urlStr = utils.queryStringify(urlParams)
-      if (urlStr) {
-        var url = utils.getHost() + location.pathname + '?' + urlStr
-        history.replaceState(null, "", url)
-
-        this.initWeixinShare()
-      }
-    }
-  },
-  /**
-   * 重写url
-   * 需要初始化用户的shareCode信息
-   */
-  rewrite ( ) {
-    this.loadCurrentDistributionData()
-    .then((result) => {
-      const data = result.data
-      if (result.code == 0) {
-        this.rewriteUrl()
-      } else {
-        app.toast('当前分享功能异常，建议刷新页面')
-      }
-    })
-  },
-  /**
    * 初始化微信分享
    */
   initWeixinShare () {
@@ -289,7 +242,6 @@ if (utils.weixin()) {
   utils.loadScript('/webapp-static/weixin-js-sdk/index.js',() => {
     weixin_share.initWeixinShare()
     //初始化微信分享
-     weixin_share.checkShareCode()
   })
 }
 
