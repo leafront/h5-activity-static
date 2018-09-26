@@ -25,83 +25,6 @@ const SKEY_SHARECODE = "s_currentsharecode"
 
 const weixin_share = {
   /**
-   * 获取当前用户微信unionid
-   * @return {String} unionid
-   */
-  getUnionid () {
-    if(!utils.weixin()) {
-      return ""
-    }
-
-    return this.getWxUserInfo().unionId || ""
-  },
-  /**
-   * 当前用户是否已关注了微信公众号
-   */
-  isSubscribe () {
-    if(!utils.weixin()) {
-      return false
-    }
-
-    //如果session里没有值，默认返回已关注
-    const subscribe = this.getWxUserInfo().subscribe
-    if (subscribe == undefined) {
-      return true
-    }
-    return subscribe == 1
-  },
-
-  /**
-   * 获取微信的用户信息
-   * @return Object
-   */
-  getWxUserInfo () {
-    return store.get(SKEY_WXUSERINFO,'session') || {}
-  },
-
-  //处理url里的上家分享码并保存进cookie
-  processInviterShareCode () {
-
-    var urlParams = utils.query()   //缓存的上家的shareCode
-
-    var hashParams = utils.hashFormat(location.href)
-
-    var s_shareCode = distribution.getInviterShareCode()  //1. 获取url里的sharecode，复制链接的shareCode是在hash里，分享朋友圈的shareCode是在url里的
-
-    // 当前url里带的上家的shareCode
-    var shareCode= hashParams.shareCode || urlParams.shareCode
-    //2.  本人的shareCode要和url里的shareCode比较，如果相同就不处理
-    //自己的shareCode
-
-    var ownShareCode = distribution.getCurUserShareCode()
-
-    //如果url里有上家的shareCode，且自己本地没有存shareCode，就保存上家的shareCode，在注册，预绑定，联合登录场景使用
-    if(shareCode && shareCode != ownShareCode) {
-
-      distribution.setInviterShareCode(shareCode)
-    }
-  },
-  //处理url里的上家分享码并保存进cookie
-  checkShareCode () {
-    var urlParams = utils.query()
-    var hashParams = utils.hashFormat(location.href)
-    //缓存的上家的shareCode
-    //上家的sharecode key要用常量并注释
-
-    var s_shareCode = utils.getCookie("shareCode");
-    //1. 获取url里的sharecode，复制链接的shareCode是在hash里，分享朋友圈的shareCode是在url里的
-    // 上家的shareCode
-    var shareCode = hashParams.shareCode || urlParams.shareCode
-    // 本人的shareCode要和url里的shareCode比较，如果相同就不处理
-    //自己的shareCode的
-    var ownShareCode = store.get(SKEY_SHARECODE,'session')
-    //如果url里有上家的shareCode，且自己本地没有存shareCode，就保存上家的shareCode，在注册，预绑定，联合登录场景使用
-    if(shareCode && shareCode != ownShareCode) {
-      utils.setCookie("shareCode", shareCode , {day:1})
-    }
-    this.rewrite()
-  },
-  /**
    * 初始化微信分享
    */
   initWeixinShare () {
@@ -207,34 +130,6 @@ const weixin_share = {
         })
       })
     }
-  },
-  /**
-   * 重新获取并设置用户的分销商信息
-   */
-  loadCurrentDistributionData () {
-
-    const unionid = this.getUnionid()
-    const shareCode = utils.getCookie('shareCode') || ""
-
-    return Model.getCurrDistributor({
-      type: 'GET',
-      data: {
-        unionid,
-        shareCode
-      }
-    }).then((result) => {
-      const data = result.data
-
-      if (result.code == 0 && data && data.id) {
-        app.setDistributorId(2, data.id)
-        store.set('currDistributor', data,'session')
-
-        if (data.shareCode) {
-          store.set('s_currentsharecode', data.shareCode,'session')
-        }
-      }
-      return result
-    })
   }
 }
 
