@@ -87,8 +87,7 @@ export default {
 /*
 * 获取sharecode
 */
-    ajaxShareCode(type){
-       let self = this
+    ajaxShareCode(){
       Model.getShareCode({
         type: 'GET',
         ut : app.getUserToken()
@@ -96,14 +95,6 @@ export default {
         const data = result.data
         if (result.code == 0 ) {
           this.invitationShareC = data.shareCode
-         if (type===2 && this.invitationShareC) {
-            this.shareConfig = wx_share.shareConfig.call(self)
-              wx_share.weixinShare.call(self)
-
-
-          }else if (type===2) {
-            this.$toast("网络繁忙，请稍后再试!")
-          }
         }
  })
    },
@@ -113,14 +104,9 @@ export default {
     */
     weixinShare () {
 
-      if(this.invitationShareC){
-
       this.shareConfig = wx_share.shareConfig.call(this)
-        wx_share.weixinShare.call(this)
-      }else {
 
-        this.ajaxShareCode(2)
-      }
+        wx_share.weixinShare.call(this)
     },
     /*
     *获取广告位
