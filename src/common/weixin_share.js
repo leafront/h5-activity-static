@@ -1,27 +1,11 @@
 
-import store from '@/widget/store'
-
 import utils from '@/widget/utils'
-
-import distribution from './distribution'
 
 import * as Model from '@/model/wx_share'
 
 import mall_setting from '@/widget/mall_setting'
 
 import wx from 'weixin-js-sdk'
-
-import app from '@/widget/app'
-
-//调用getUnionId的页面
-const SKEY_INVOLKEPAGE = "s_invokepage";
-//是否是在微信里首次打开h5页面
-const SKEY_ACCESSED = "s_accessed";
-//微信用户信息
-const SKEY_WXUSERINFO = "s_wxuserinfo";
-
-//当前用户的shareCode
-const SKEY_SHARECODE = "s_currentsharecode"
 
 const weixin_share = {
   /**
