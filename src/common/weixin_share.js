@@ -15,7 +15,7 @@ const weixin_share = {
 
     if (utils.weixin()) {
 
-      const returnURL = location.href.split('#')[0]
+      const returnURL = location.href
       Model.getSign({
         type: 'GET',
         data: {
