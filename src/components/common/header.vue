@@ -137,7 +137,7 @@
     position:relative;
     width: .26rem;
     height: .44rem;
-    background: url(./images/header_back_icon.png) no-repeat;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAsCAMAAABMt1hMAAAAS1BMVEUAAAD/aQD/awD/Zwr/eQn/hgb/agD/aQD/aQD/bAD/cQb/aQD/bAD/agD/bAD/agD/YAD/aQD/Zgb/aQD/aQD/YwD/cQD/bQD/aQCzIa9cAAAAGHRSTlMA9IREFAyz6+N3NNm/opJsUiokzcZjV6ujvjAmAAAAmUlEQVQ4y63QSRaEIAxFUUQaARUbtLL/lVYy/5FjnXrTO0m++VuuUcXiT6KIpRFRgDKznB5REHGaFCgLy6TLgWRliTsSyzLokpEkkRFJJQ7KJbIhuUVuJJvIhWQUqVAGloQkY5EKizWwARzXeUmqD5bASL1pJduz/N7WjsX9vS1ih26TYp8HC2JOt6LYrJsXa0Y3o1gga37tC5M/D6HaFNTnAAAAAElFTkSuQmCC) no-repeat;
     background-size: .26rem auto;
   }
 
