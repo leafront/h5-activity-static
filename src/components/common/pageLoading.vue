@@ -27,6 +27,7 @@
     justify-content: center;
     padding-bottom: .2rem;
     .ui-showLoading-gif{
+      background:url('/activity-static/images/loading.png') no-repeat;
       width: 2.5rem;
       height: 1.13rem;
       background-size: 2.5rem auto;
