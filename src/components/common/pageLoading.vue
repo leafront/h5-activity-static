@@ -1,6 +1,6 @@
 <template>
   <div class="pageLoading" v-show="showLoading">
-    <div class="ui-showLoading-gif"></div>
+    <div class="ui-pageLoading-gif"></div>
   </div>
 
 </template>
@@ -26,7 +26,7 @@
     align-items: center;
     justify-content: center;
     padding-bottom: .2rem;
-    .ui-showLoading-gif{
+    .ui-pageLoading-gif{
       background:url('/activity-static/images/loading.png') no-repeat;
       width: 2.5rem;
       height: 1.13rem;
