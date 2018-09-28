@@ -1,5 +1,5 @@
 <template>
-	<swiper :list="bannerList" :index="index" @toggleIndex="toggleIndex" :style="{'height':itemHeight}">
+	<swiper :list="bannerList" :index="index" :preventDefault="true" @toggleIndex="toggleIndex" :itemWidth="wrapperWidth" :style="{'height':itemHeight}">
 		<ul slot="banner" class="slideshow-item">
 			<li v-for="item in bannerList":style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
 				<img :src="item.imageUrl" :style="{'width':itemWidth, 'height':itemHeight}">
@@ -14,12 +14,15 @@
 
 	import swiper from '@/components/widget/swiper.vue'
 
+  const docWidth = document.documentElement.clientWidth
+
 	export default {
     data () {
       return {
         index: 1,
-        itemWidth: document.documentElement.clientWidth + 'px',
-        itemHeight: document.documentElement.clientWidth * 0.4 + 'px',
+        wrapperWidth: docWidth,
+        itemWidth: docWidth + 'px',
+        itemHeight: docWidth * 0.4 + 'px',
       }
     },
 		props: {
