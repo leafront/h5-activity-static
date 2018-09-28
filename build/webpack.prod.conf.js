@@ -89,32 +89,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.optimize.ModuleConcatenationPlugin(),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'activity-static/js/vendor.js?v=' + new Date().getTime(),
-      minChunks (module) {
-        // any required modules inside node_modules are extracted to vendor
-
-        const pathName = path.join(__dirname, '../node_modules')
-
-        const baseName = path.join(__dirname, '../src')
-
-        const moduleList = [
-          pathName + 'vue',
-          pathName + 'vuex',
-          pathName + 'vue-router',
-          baseName + '/widget/store.js',
-          baseName + '/widget/ajax.js',
-          baseName + '/widget/request.js',
-          baseName + '/widget/utils.js',
-          baseName +'/widget/common.js',
-          baseName +'/widget/app.js'
-        ]
-        return (
-          module.resource &&
-          /\.js$/.test(module.resource) &&
-          moduleList.indexOf(module.resource) > -1
-        )
-      }
+      name: 'app',
+      async: 'vendor-async',
+      children: true,
+      minChunks: 3
     }),
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated

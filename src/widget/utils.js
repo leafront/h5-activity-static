@@ -48,15 +48,6 @@ const utils = {
       return '';
     }
   },
-  /**
-   * 获得主机名
-   * 如果当前完整url是：http://pintuan.test.odianyun.com/my-center/home.html?p=1
-   * 返回：http://pintuan.test.odianyun.com
-   */
-  getHost () {
-    var url = location.protocol + "//" + location.host
-    return url
-  },
   isLocalStorageSupported() {
     var testKey = 'test',
       storage = window.sessionStorage;
@@ -114,16 +105,6 @@ const utils = {
       }
     }
   },
-  isWeixinIphoneX (){
-
-    const isWeixin = this.weixin()
-
-    const ua = window.navigator.userAgent.toLowerCase()
-
-    const isPhoneX = /iphone/gi.test(ua) && (screen.height == 812 && screen.width == 375)
-
-    return (isWeixin && isPhoneX)
-  },
   /**
    * @param {Object} obj
    * @returns {string}
@@ -135,48 +116,31 @@ const utils = {
   queryStringify (obj) {
 
     function toQueryPair(key,value) {
-
       if (value==='') {
-
         return key;
-
       }
-
-      return key + '=' + encodeURIComponent(value==='' ? '' : String(value));
-
+      return key + '=' + encodeURIComponent(value==='' ? '' : String(value))
     }
 
-    var result = [];
-
+    let result = []
     for (var key in obj) {
 
-      key = encodeURIComponent(key);
-
-      var values = obj[key];
-
+      key = encodeURIComponent(key)
+      const values = obj[key]
       if (values && values.constructor == Array) {
 
-        var queryValues = [];
-
-        for (var i = 0, len = values.length; i < len; i++) {
-
-          queryValues.push(toQueryPair(key, values[i]));
-
+        const queryValues = []
+        for (let i = 0, len = values.length; i < len; i++) {
+          queryValues.push(toQueryPair(key, values[i]))
         }
-
-        result = result.concat(queryValues);
+        result = result.concat(queryValues)
 
       } else {
-
-        result.push(toQueryPair(key,values));
-
+        result.push(toQueryPair(key,values))
       }
-
     }
 
-
     return result.join('&');
-
   },
   /**
    *
@@ -185,63 +149,32 @@ const utils = {
    * @return {Object}
    */
 
-  query (){
+  query (strName){
 
-    var strParame = arguments[0]
+    const queryObj = {}
+    const query = location.search.substring(1) // Get query string
 
-    var args = {};
+    const pairs = query.split("&") // Break at ampersand
 
-    var query = location.search.substring(1); // Get query string
+    for (let i = 0; i < pairs.length; i++) {
 
-    var pairs = query.split("&") // Break at ampersand
-
-    for (var i = 0; i < pairs.length; i++) {
-
-      var pos = pairs[i].indexOf('=') // Look for "name=value"
+      const pos = pairs[i].indexOf('=') // Look for "name=value"
 
       if (pos == -1) continue // If not found, skip
 
-      var argname = pairs[i].substring(0, pos); // Extract the name
+      const paramsName = pairs[i].substring(0, pos) // Extract the name
 
-      var value = pairs[i].substring(pos + 1); // Extract the value
+      let value = pairs[i].substring(pos + 1) // Extract the value
 
-      value = decodeURIComponent(value); // Decode it, if needed
+      value = decodeURIComponent(value) // Decode it, if needed
 
-      args[argname] = value // Store as a property
+      queryObj[paramsName] = value // Store as a property
     }
-    if (strParame == undefined) {
-
-      return args
-
-    }else {
-
-      return args[strParame] // Return the object
+    if (strName) {
+      return queryObj[strName] // Return the object
+    } else {
+      return queryObj
     }
-  },
-
-  /**
-   * 获取url hash的值
-   * 例：/details.html?itemid=1#sort=asc&price=100
-   * 返回: {sort: "asc", price: 100 }
-   */
-  hashFormat (url) {
-    var hashObj = {};
-    var sind = url.indexOf('#');
-    if (sind >= 0) {
-      var hstr = url.substring(sind+1);
-      var paramsList = hstr.split("&");
-      for(var i=0; i<paramsList.length; i++) {
-        var param = paramsList[i];
-        var pind = param.indexOf("=");
-        if (pind>=0) {
-          hashObj[param.substring(0, pind)] = param.substr(pind + 1);
-        } else {
-          hashObj[param] = "";
-        }
-      }
-    }
-
-    return hashObj;
   },
   isPassive() {
 
@@ -255,15 +188,6 @@ const utils = {
     } catch(e) {}
     return supportsPassiveOption;   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
 
-  },
-  isContained (arr1,arr2){
-    if(!(arr1 instanceof Array) || !(arr2 instanceof Array)) return false;
-    if(arr1.length < arr2.length) return false;
-    var aStr = arr1.toString();
-    for(var i = 0, len = arr2.length; i < len; i++){
-      if(aStr.indexOf(b[i]) == -1) return false;
-    }
-    return true;
   },
 
   setCookie (name, value, options ) {
@@ -295,13 +219,20 @@ const utils = {
     return {};
 
   },
+  getVersion () {
+    let version =  utils.getUaParams().version
+    if (version) {
+      version = version.replace(/\./g,'')
+    }
+    return version
+  },
   /**
    * 获得相对url
    * 如果当前完整url是：http://pintuan.test.odianyun.com/my-center/home.html?p=1
    * 返回：/my-center/home.html?p=1
    */
   getRelatedUrl () {
-    return location.pathname + (location.search || "") + (location.hash || "");
+    return location.pathname + (location.search || "")
   },
   getSessionId () {
     if (utils.isApp()){
@@ -320,26 +251,6 @@ const utils = {
     }
 
     return sid;
-  },
-  /**
-   * 根据团单号构造支付成功的返回的页面url
-   * {String} orderCode
-   */
-  getPayBackUrl (orderCode) {
-    var url = location.protocol + "//" + location.host
-
-    url += `/pay/pay-success.html?orderCode=${orderCode}`
-
-    return url
-  },
-  isPhoneX (){
-
-    const isWeixin = this.weixin()
-    const isApp = this.isApp()
-    const ua = window.navigator.userAgent.toLowerCase();
-    const isPhoneX = /iphone/gi.test(ua) && (screen.height == 812 && screen.width == 375)
-    return (isWeixin && isPhoneX ) || (isApp && isPhoneX)
-
   },
   appViewFixed () {
 
