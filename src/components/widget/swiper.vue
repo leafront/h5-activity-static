@@ -46,6 +46,10 @@
       autoTime: {
         type: Number,
         default: 5000
+      },
+      itemWidth: {
+        type: Number,
+        default: 750
       }
     },
 
@@ -54,7 +58,6 @@
       return {
         startTime: 0,
         itemLength: 0,
-        itemWidth:0,
         wrapper: null,
         pagination: null,
         startX: 0,
@@ -128,8 +131,6 @@
         firstElement.insertAdjacentElement('beforebegin',lastEleClone)
 
         lastElement.insertAdjacentElement('afterend',firstEleClone)
-
-        this.itemWidth = this.$el.offsetWidth
 
         this.setWrapperPos(-this.index * this.itemWidth)
 
