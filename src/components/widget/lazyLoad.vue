@@ -113,7 +113,7 @@
 
         if (!list.length && this.default.complete) {
 
-          this.appView.removeEventListener('scroll',this.scrollImg,false)
+          this.appView.removeEventListener('scroll',this.scrollImg,utils.isPassive() ? {passive: true} : false)
 
         } else {
 
@@ -142,7 +142,7 @@
 
         this.scrollLoad()
 
-        this.appView.addEventListener('scroll',this.scrollImg,false)
+        this.appView.addEventListener('scroll',this.scrollImg,utils.isPassive() ? {passive: true} : false)
 
       },
       /**
@@ -166,14 +166,18 @@
           img.addEventListener('load', () => {
 
             setTimeout(() => {
+
               el.style.backgroundImage = 'url('+imgUrl+')'
+
+              el.style.backgroundSize = '100% auto'
 
               delete el.dataset.src
 
               el.dataset.LazyLoadImgState = 'success'
 
               el.classList.add('successImg')
-            },200)
+
+            },150)
 
           }, false)
 
@@ -191,12 +195,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-
-  .successImg {
-    -webkit-animation: fadeIn 1s ease 0.2s 1 both;
-    animation: fadeIn 1s ease 0.2s 1 both;
-  }
-
-</style>
