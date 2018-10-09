@@ -82,8 +82,6 @@
 
   import * as Model from '@/model/bank'
 
-  import validate from '@/widget/validate'
-
   export default {
     data () {
       return {
