@@ -7,7 +7,7 @@ const config = JSON.stringify({
   "appKey": "9ca572cc88e6",
   "platform": 2,
   "getTime": new Date().getTime(),
-  "pageId": 1007069601000003,
+  "pageId": 1003031600000012,
   "schoolId": "4c27ddc7ee0f9044545b66e8988b169f",
   "source": "h5"
 })

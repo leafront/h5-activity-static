@@ -29,6 +29,8 @@ export default function ajax ({
 
       xhr.setRequestHeader(k, headers[k])
     }
+    xhr.setRequestHeader("If-Modified-Since","0")
+    xhr.setRequestHeader("Cache-Control","no-cache")
 
     xhr.responseType = dataType
 

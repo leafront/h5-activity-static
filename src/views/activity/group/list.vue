@@ -173,7 +173,7 @@
                   this.goodsHot = item.staticData.cdata.children
               }
 
-              if (item.templateCode == 'distribut-pintuan') {
+              if (item.templateCode == 'pintuan') {
 
                 listId = item.moduleId
               }
