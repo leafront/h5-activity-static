@@ -14,7 +14,7 @@ export default function request (url,{
   dataType,
   data,
   cache = false,
-  expires = 30 * 60 * 1000,
+  expires = 5 * 60 * 1000,
   headers
 }){
 
@@ -35,7 +35,6 @@ export default function request (url,{
     }
   }
   options.data = Object.assign({
-    ut,
     platform: config.platform,
     companyId: config.companyId,
     platformId: config.platformId
@@ -97,19 +96,14 @@ export default function request (url,{
       const getCacheTime = cacheData.times
 
       if (currentTime < getCacheTime) {
-
         resolve(cacheData.results)
-
       } else {
-
         store.remove(options.url,'local')
-
         httpRequest(resolve,reject)
-
       }
-
     } else {
 
+      store.remove(options.url,'local')
       httpRequest (resolve,reject)
 
     }

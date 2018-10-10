@@ -220,6 +220,7 @@
         ]
         return Model.getDolphinList({
           type: 'GET',
+          cache: true,
           data:{
             pageCode : 'H5_YIQIZHUAN_ARER_PAGE',
             adCode : ADCODE.join(',')
@@ -277,6 +278,7 @@
 
         return Model.getDolphinList({
           type: 'GET',
+          cache: true,
           data:{
             pageCode : 'H5_YIQIZHUAN_ARER_PAGE',
             adCode : ADCODE_ACTIVES.join(',')
@@ -341,7 +343,8 @@
       getUserBroadcast () {
 
         Model.getUserBroadcast({
-          type: 'POST'
+          type: 'POST',
+          cache: true
         }).then((result) => {
 
           const data = result.data
