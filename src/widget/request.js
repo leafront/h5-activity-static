@@ -34,7 +34,7 @@ export default function request (url,{
       "Accept": "application/json"
     }
   }
-  if (dataType == 'json') {
+  if (dataType !== 'text') {
     options.data = Object.assign({
       platform: config.platform,
       companyId: config.companyId,
