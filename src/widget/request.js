@@ -14,7 +14,7 @@ export default function request (url,{
   dataType,
   data,
   cache = false,
-  expires = 30 * 60 * 1000,
+  expires = 5 * 60 * 1000,
   headers
 }){
 
@@ -35,7 +35,6 @@ export default function request (url,{
     }
   }
   options.data = Object.assign({
-    ut,
     platform: config.platform,
     companyId: config.companyId,
     platformId: config.platformId
@@ -44,11 +43,6 @@ export default function request (url,{
   if (app.loggedIn()) {
     options.headers.ut = ut
   }
-
-  if (type == 'GET') {
-    options.data.cashe = new Date().getTime()
-  }
-
   if (headers &&
     headers['Content-Type'] == 'application/json'
   ) {
@@ -83,7 +77,7 @@ export default function request (url,{
         reject(results)
       } else {
         if (results.code == 0 && cache) {
-          store.set(url, cacheData,'local')
+          store.set(options.url, cacheData,'local')
         }
       }
       resolve(results)
@@ -95,24 +89,21 @@ export default function request (url,{
 
     let currentTime = new Date().getTime()
 
-    if (cache && store.get(url,'local')) {
+    const cacheData = store.get(options.url,'local')
 
-      const getCacheTime = store.get(url,'local').times
+    if (cache && cacheData) {
+
+      const getCacheTime = cacheData.times
 
       if (currentTime < getCacheTime) {
-
-        resolve(store.get(url,'local').results)
-
+        resolve(cacheData.results)
       } else {
-
-        store.remove(url,'local')
-
+        store.remove(options.url,'local')
         httpRequest(resolve,reject)
-
       }
-
     } else {
 
+      store.remove(options.url,'local')
       httpRequest (resolve,reject)
 
     }
