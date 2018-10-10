@@ -61,8 +61,6 @@
 
   import SchoolRule from '@/components/school/rule'
 
-  import common from '@/widget/common'
-
   export default {
     data() {
       return {
@@ -225,9 +223,10 @@
        * 获取下载app链接
        */
       getDownloadLink () {
-        const areaCode = common.getAreaCode().areaCode
         Model.getDownloadLink({
           type: 'GET',
+          cache: true,
+          expires: 60 * 60 * 1000,
           data: {
             id: config.schoolId
           }
