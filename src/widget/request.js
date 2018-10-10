@@ -34,11 +34,13 @@ export default function request (url,{
       "Accept": "application/json"
     }
   }
-  options.data = Object.assign({
-    platform: config.platform,
-    companyId: config.companyId,
-    platformId: config.platformId
-  },data)
+  if (dataType == 'json') {
+    options.data = Object.assign({
+      platform: config.platform,
+      companyId: config.companyId,
+      platformId: config.platformId
+    },data)
+  }
 
   if (app.loggedIn()) {
     options.headers.ut = ut
