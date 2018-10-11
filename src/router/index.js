@@ -38,6 +38,10 @@ const bankSuccess = r => require.ensure([], () =>  r(require('@/views/activity/b
 
 const schoolStart = r => require.ensure([], () =>  r(require('@/views/activity/school/start.vue')),'schoolStart')
 
+const koiIndex = r => require.ensure([], () =>  r(require('@/views/activity/koi/index.vue')),'koiIndex')
+
+const koiRule = r => require.ensure([], () =>  r(require('@/views/activity/koi/rule.vue')),'koiRule')
+
 export default new Router({
   mode:'history',
   routes: [
@@ -165,6 +169,20 @@ export default new Router({
       component: schoolStart,
       meta: {
         title: '开学季'
+      }
+    }, {
+      path: '/activity/koi/index',
+      name: 'koiIndex',
+      component: koiIndex,
+      meta: {
+        title: '锦鲤券'
+      }
+    }, {
+      path: '/activity/koi/rule',
+      name: 'koiRule',
+      component: koiRule,
+      meta: {
+        title: '活动规则'
       }
     }
   ]
