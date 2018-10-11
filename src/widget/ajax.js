@@ -6,15 +6,15 @@
  */
 
 export default function ajax ({
-                                hostPath = location.origin,
-                                url,
-                                async = true,
-                                timeout = 30000,
-                                type,
-                                headers,
-                                dataType = 'json',
-                                data
-                              }){
+  hostPath = location.origin,
+  url,
+  async = true,
+  timeout = 30000,
+  type,
+  headers,
+  dataType,
+  data
+}){
 
   return new Promise((resolve, reject) => {
 

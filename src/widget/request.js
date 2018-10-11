@@ -11,7 +11,7 @@ import config from '@/config/index'
 export default function request (url,{
   type,
   timeout,
-  dataType,
+  dataType = 'json',
   data,
   cache = false,
   expires = 5 * 60 * 1000,
@@ -54,7 +54,6 @@ export default function request (url,{
   if (app.loggedIn()) {
     options.headers.ut = ut
   }
-
   if (headers &&
     headers['Content-Type'] == 'application/json'
   ) {
@@ -66,7 +65,7 @@ export default function request (url,{
   }
 
   let cacheUrl = url
-  if (type == "GET") {
+  if (type == "GET" && dataType == 'json') {
     options.url =  options.data ?  url + '?' + options.data: url
     cacheUrl =  optionData ?  url + '?' + optionData: url
   }
