@@ -15,7 +15,8 @@ export default function request (url,{
   data,
   cache = false,
   expires = 5 * 60 * 1000,
-  headers
+  headers,
+  hostPath
 }){
 
   const ut = app.getUserToken()
@@ -32,19 +33,28 @@ export default function request (url,{
       "Content-Type": "application/x-www-form-urlencoded",
       "X-Requested-With": "XMLHttpRequest",
       "Accept": "application/json"
-    }
+    },
+    hostPath
   }
-  if (dataType == 'json') {
+  if (dataType !== 'text') {
     options.data = Object.assign({
+      ut,
       platform: config.platform,
       companyId: config.companyId,
       platformId: config.platformId
     },data)
   }
 
+  let optionData = Object.assign({
+    platform: config.platform,
+    companyId: config.companyId,
+    platformId: config.platformId
+  },data)
+
   if (app.loggedIn()) {
     options.headers.ut = ut
   }
+
   if (headers &&
     headers['Content-Type'] == 'application/json'
   ) {
@@ -52,10 +62,13 @@ export default function request (url,{
     options.data = JSON.stringify(options.data)
   } else {
     options.data = utils.queryStringify(options.data)
+    optionData = utils.queryStringify(optionData)
   }
-  if (type == "GET") {
 
+  let cacheUrl = url
+  if (type == "GET") {
     options.url =  options.data ?  url + '?' + options.data: url
+    cacheUrl =  optionData ?  url + '?' + optionData: url
   }
 
   function httpRequest (resolve,reject) {
@@ -79,7 +92,7 @@ export default function request (url,{
         reject(results)
       } else {
         if (results.code == 0 && cache) {
-          store.set(options.url, cacheData,'local')
+          store.set(cacheUrl, cacheData,'local')
         }
       }
       resolve(results)
@@ -91,21 +104,21 @@ export default function request (url,{
 
     let currentTime = new Date().getTime()
 
-    const cacheData = store.get(options.url,'local')
+    const cacheData = store.get(cacheUrl,'local')
 
     if (cache && cacheData) {
 
       const getCacheTime = cacheData.times
-
       if (currentTime < getCacheTime) {
         resolve(cacheData.results)
       } else {
-        store.remove(options.url,'local')
+        store.remove(cacheUrl,'local')
+
         httpRequest(resolve,reject)
       }
     } else {
 
-      store.remove(options.url,'local')
+      store.remove(cacheUrl,'local')
       httpRequest (resolve,reject)
 
     }
