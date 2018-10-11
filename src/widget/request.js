@@ -65,7 +65,7 @@ export default function request (url,{
   }
 
   let cacheUrl = url
-  if (type == "GET" && dataType == 'json') {
+  if (type == 'GET' && dataType == 'json') {
     options.url =  options.data ?  url + '?' + options.data: url
     cacheUrl =  optionData ?  url + '?' + optionData: url
   }
