@@ -3,9 +3,25 @@
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
+      <div class="koi">
+        <div class="koi-banner__top">
+          <div class="koi-banner__top--color"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
+
+<style lang="scss">
+  .koi-banner {
+    &__top {
+      background: green;
+      &--color{
+        color: red;
+      }
+    }
+  }
+</style>
 
 <script type="text/javascript">
 
