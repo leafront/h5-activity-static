@@ -217,10 +217,22 @@
           <span>券</span>
         </div>
         <div class="koi-seed__pic">
-          <img src="./images/koi_discount_amount_01.png"/>
-          <img src="./images/koi_discount_amount_02.png"/>
-          <img src="./images/koi_discount_amount_03.png"/>
-          <img src="./images/koi_discount_amount_04.png"/>
+          <div class="koi-seed__item">
+            <img src="./images/koi_discount_amount_01.png"/>
+            <span>1</span>
+          </div>
+          <div class="koi-seed__item">
+            <img src="./images/koi_discount_amount_02.png"/>
+            <span>0</span>
+          </div>
+          <div class="koi-seed__item">
+            <img src="./images/koi_discount_amount_03.png"/>
+            <span>0</span>
+          </div>
+          <div class="koi-seed__item">
+            <img src="./images/koi_discount_amount_04.png"/>
+            <span>4</span>
+          </div>
         </div>
         <div class="koi-seed__des">
           <span>已获得种子券 12 张</span>
@@ -297,9 +309,27 @@
     &__pic{
       display: flex;
       justify-content: space-around;
+    }
+    &__item{
+      position: relative;
       img{
         width: 1.42rem;
         height: 1.42rem;
+      }
+      span{
+        display: block;
+        width: .4rem;
+        height: .4rem;
+        background: #ffd6a4;
+        border-radius: 50%;
+        position: absolute;
+        transform: translate(50%,-50%);
+        right: 0;
+        top: 0;
+        font-size: .25rem;
+        color: #804922;
+        text-align: center;
+        line-height: .4rem;
       }
     }
     &__title{
@@ -522,7 +552,7 @@
         background: #c40000;
         border-radius: .1rem;
         &.disabled{
-          background: #D4D3D3;
+          background: #dd8862;
           &:after{
             display: none;
           }
