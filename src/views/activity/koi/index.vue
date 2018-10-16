@@ -61,11 +61,11 @@
             <div class="koi-discount__cont">
               <div class="koi-discount__price">
                 <i class="font-xb">¥</i>
-                <p>200</p>
+                <p>100</p>
               </div>
               <div class="koi-discount__price--des">
-                <span>满299元可用</span>
-                <p>种子券¥100以上可合成</p>
+                <span>满100元可用</span>
+                <p>种子券¥120以上可合成</p>
               </div>
             </div>
           </div>
@@ -94,11 +94,11 @@
             <div class="koi-discount__cont">
               <div class="koi-discount__price">
                 <i class="font-xb">¥</i>
-                <p>200</p>
+                <p>100</p>
               </div>
               <div class="koi-discount__price--des">
-                <span>满299元可用</span>
-                <p>种子券¥100以上可合成</p>
+                <span>满199元可用</span>
+                <p>种子券¥50以上可合成</p>
               </div>
             </div>
           </div>
@@ -110,11 +110,11 @@
             <div class="koi-discount__cont">
               <div class="koi-discount__price">
                 <i class="font-xb">¥</i>
-                <p>200</p>
+                <p>70</p>
               </div>
               <div class="koi-discount__price--des">
-                <span>满299元可用</span>
-                <p>种子券¥100以上可合成</p>
+                <span>满199元可用</span>
+                <p>种子券¥35以上可合成</p>
               </div>
             </div>
           </div>
@@ -126,11 +126,11 @@
             <div class="koi-discount__cont">
               <div class="koi-discount__price">
                 <i class="font-xb">¥</i>
-                <p>200</p>
+                <p>50</p>
               </div>
               <div class="koi-discount__price--des">
-                <span>满299元可用</span>
-                <p>种子券¥100以上可合成</p>
+                <span>满149元可用</span>
+                <p>种子券¥25以上可合成</p>
               </div>
             </div>
           </div>
@@ -142,11 +142,11 @@
             <div class="koi-discount__cont">
               <div class="koi-discount__price">
                 <i class="font-xb">¥</i>
-                <p>200</p>
+                <p>30</p>
               </div>
               <div class="koi-discount__price--des">
-                <span>满299元可用</span>
-                <p>种子券¥100以上可合成</p>
+                <span>满99元可用</span>
+                <p>种子券¥15以上可合成</p>
               </div>
             </div>
           </div>
@@ -181,7 +181,7 @@
               <p>每天限领一次 </p>
             </div>
             <div class="koi-strategy__action">
-              <span class="font-b">去分享</span>
+              <span class="font-b">去签到</span>
             </div>
           </div>
         </div>
@@ -203,7 +203,7 @@
             <i>(外卖,团购订单除外）</i>
             <p>APP 内订单支付成功1次,返10元无门槛券</p>
           </div>
-          <div class="koi-strategy-four__action">
+          <div class="koi-strategy-four__action" @click="cartAction">
             <span class="font-xb">去购物</span>
           </div>
         </div>
@@ -217,28 +217,16 @@
           <span>券</span>
         </div>
         <div class="koi-seed__pic">
-          <div class="koi-seed__item">
-            <img src="./images/koi_discount_amount_01.png"/>
-            <span>1</span>
-          </div>
-          <div class="koi-seed__item">
-            <img src="./images/koi_discount_amount_02.png"/>
-            <span>0</span>
-          </div>
-          <div class="koi-seed__item">
-            <img src="./images/koi_discount_amount_03.png"/>
-            <span>0</span>
-          </div>
-          <div class="koi-seed__item">
-            <img src="./images/koi_discount_amount_04.png"/>
-            <span>4</span>
+          <div class="koi-seed__item" v-for="(item,index) in couponAmount">
+            <img :src="couponPic[index]"/>
+            <span>{{item}}</span>
           </div>
         </div>
         <div class="koi-seed__des">
-          <span>已获得种子券 12 张</span>
-          <strong>共计 62 元</strong>
+          <span>已获得种子券 {{couponNum}} 张</span>
+          <strong>共计 {{couponSum}} 元</strong>
         </div>
-        <div class="koi-seed__action">
+        <div class="koi-seed__action" @click="pageAction('/activity/koi/merge')">
           <span>立即合成</span>
         </div>
       </div>
@@ -256,12 +244,23 @@
 
   import * as Model from '@/model/koi'
 
+  import config from '@/config/index'
+
   export default {
     data () {
       return {
         title: '翻倍锦鲤券',
         pageView: true,
-        isBorder: true
+        isBorder: true,
+        couponAmount: [0,0,0,0],
+        couponPic: [
+          config.staticPath + '/activity-static/images/koi_discount_amount_01.png',
+          config.staticPath + '/activity-static/images/koi_discount_amount_02.png',
+          config.staticPath + '/activity-static/images/koi_discount_amount_03.png',
+          config.staticPath + '/activity-static/images/koi_discount_amount_04.png',
+        ],
+        couponNum: 0,
+        couponSum: 0
       }
     },
     components: {
@@ -275,22 +274,40 @@
           location.href = '/index.html'
         }
       },
-      getKoiIndex () {
-        Model.getKoiIndex({
+      getKoiCouponNum () {
+        Model.getKoiCouponNum({
           type: 'GET'
         }).then((result) => {
           const data = result.data
 
           if (result.code == 0 && data) {
-
-          } else {
-
+            const {
+              couponList,
+              couponNum,
+              couponSum
+            } = data
+            this.couponAmount = couponList
+            this.couponNum = couponNum
+            this.couponSum = couponSum
           }
         })
+      },
+      pageAction (url) {
+        this.$router.push(url)
+      },
+      /**
+       * cart page location
+       */
+      cartAction () {
+        if (utils.isApp()) {
+          location.href = 'lyf://shoppingCar'
+        } else {
+          location.href = '/cart.html'
+        }
       }
     },
     created () {
-
+      this.getKoiCouponNum()
     }
   }
 

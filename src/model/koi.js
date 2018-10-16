@@ -1,4 +1,4 @@
 
 import request from '@/widget/request'
 
-export const getKoiIndex = (data) => request('/api/my/user/info', data)
+export const getKoiCouponNum = (data) => request('/activity-static/dragonball/coupons.json', data)
