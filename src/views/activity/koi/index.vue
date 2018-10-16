@@ -357,7 +357,11 @@
     border: .06rem solid #850002;
     border-radius: .1rem;
     position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     &__pic{
+      width: 6.8rem;
       display: flex;
       justify-content: space-around;
     }
@@ -374,7 +378,7 @@
         background: #ffd6a4;
         border-radius: 50%;
         position: absolute;
-        transform: translate(50%,-50%);
+        transform: translate(35%,-40%);
         right: 0;
         top: 0;
         font-size: .25rem;
