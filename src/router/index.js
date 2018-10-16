@@ -173,7 +173,7 @@ export default new Router({
       name: 'koiIndex',
       component: koiIndex,
       meta: {
-        title: '锦鲤券'
+        title: '翻倍锦鲤券'
       }
     }
   ]
