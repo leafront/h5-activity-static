@@ -362,6 +362,7 @@
     flex-direction: column;
     &__pic{
       width: 6.8rem;
+      width: 90vw;
       display: flex;
       justify-content: space-around;
     }
