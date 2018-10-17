@@ -166,6 +166,7 @@
           <span>攻</span>
           <span>略</span>
         </div>
+        <i class="koi-strategy--color"></i>
         <div class="koi-strategy__list">
           <div class="koi-strategy__item">
             <strong class="koi-strategy__tag">攻略1</strong>
@@ -735,6 +736,15 @@
     border-radius: .2rem;
     border: .02rem solid #e5764a;
     position: relative;
+    &--color{
+      background:url(./images/koi_index_sprite.png) no-repeat -1.2rem -.01rem;
+      background-size: 2.1rem auto;
+      width: .9rem;
+      height: .9rem;
+      position: absolute;
+      right: -.03rem;
+      top: -.65rem;
+    }
     &__tag{
       position: absolute;
       left: .09rem;
