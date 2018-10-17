@@ -208,7 +208,6 @@
             source: config.source
           }
         }).then((result) => {
-          const data = result.data
           this.$toast(result.message)
           const downloadLink = this.downloadLink
           this.$hidePageLoading()
