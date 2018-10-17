@@ -1,7 +1,5 @@
 import ajax from './ajax'
 
-import app from '@/widget/app'
-
 import store from '@/widget/store'
 
 import utils from './utils'
@@ -20,7 +18,7 @@ export default function request (url,{
   ignoreLogin = false
 }){
 
-  const ut = app.getUserToken()
+  const ut = utils.getUserToken()
   const errorCode = 99
   const options = {
     isHeader:true,
@@ -52,7 +50,7 @@ export default function request (url,{
     platformId: config.platformId
   },data)
 
-  if (app.loggedIn()) {
+  if (utils.loggedIn()) {
     options.headers.ut = ut
   }
   if (headers &&
@@ -82,10 +80,10 @@ export default function request (url,{
       if (results.code == errorCode &&
         process.env.NODE_ENV != 'develop'
       ) {
-        app.deleteUserToken()
+        utils.deleteUserToken()
         if (!ignoreLogin) {
           if (utils.isApp()) {
-            app.login()
+            utils.login()
           } else {
             const from = utils.getRelatedUrl()
             location.href = `/login.html?from=` + encodeURIComponent(from)
