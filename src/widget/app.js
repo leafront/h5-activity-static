@@ -2,6 +2,8 @@ import utils from './utils'
 
 import store from './store'
 
+import weixin_share from '@/common/weixin_share'
+
 //回调函数计数
 var count = 0;
 
@@ -222,24 +224,49 @@ const app = {
     fragment = null
   },
   loginAction () {
-
     if (app.loggedIn()) {
       return
     } else {
-
       if (utils.isApp()) {
-
         app.login()
-
       } else {
-
         const from = utils.getRelatedUrl()
-
         if (from) {
           window.location.href = `/login.html?from=` + encodeURIComponent(from)
         } else {
           window.location.href = '/login.html'
         }
+      }
+    }
+  },
+  shareAction ({
+    link,
+    title,
+    description,
+    imgUrl
+  }) {
+    const shareConfig = {
+      link: link,
+      url: link,
+      title,
+      desc: description,
+      description,
+      imgUrl,
+      pic: imgUrl
+    }
+    if (utils.isApp()) {
+      app.postMessage('share',{
+        url: shareConfig.url,
+        title: shareConfig.title,
+        description: shareConfig.description,
+        url160x160: shareConfig.pic,
+        pic: shareConfig.pic
+      },() => {
+      })
+    } else {
+      if (utils.weixin()) {
+        this.updateShareMenu(true)
+        weixin_share.weixinShare(shareConfig)
       }
     }
   }

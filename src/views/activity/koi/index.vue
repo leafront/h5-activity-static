@@ -1,13 +1,12 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
-    </AppHeader>
+    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction"></AppHeader>
     <div class="scroll-view-wrapper koi-view" :class="{'visibility': pageView}">
       <div class="koi__banner">
         <img class="koi__banner--pic" src="./images/koi_bg.jpg"/>
         <h4 class="koi__banner--tit font-xb">11.11超值券获取攻略</h4>
         <p class="koi__banner--txt font-s">种子券收集时间:10.22～11.13</p>
-        <div class="koi__banner--rule">
+        <div class="koi__banner--rule" @click="ruleAction">
           <i>!</i>
           <span>规则</span>
         </div>
@@ -175,7 +174,7 @@
               <p>分享一次 即可获得20张¥1种子券 </p>
             </div>
             <div class="koi-strategy__action">
-              <span class="font-b" v-if="firstStrategyButtonStatus == 0">去分享</span>
+              <span class="font-b" v-if="firstStrategyButtonStatus == 0" @click="shareAction">去分享</span>
               <span class="disabled font-b" v-else>今日已分享</span>
             </div>
           </div>
@@ -224,7 +223,7 @@
           <span>券</span>
         </div>
         <div class="koi-seed__pic">
-          <div class="koi-seed__item" v-for="(item,index) in couponAmount">
+          <div class="koi-seed__item" v-for="(item,index) in couponList">
             <img :src="couponPic[index]"/>
             <span>{{item}}</span>
           </div>
@@ -238,7 +237,8 @@
           <span v-else>11月7日10:00 开始合成 敬请期待</span>
         </div>
       </div>
-      <KoiPopup :isPopup="isPopup" @togglePopup="togglePopup" @submitCouponExchange="submitCouponExchange"></KoiPopup>
+      <KoiPopup :isPopup="isPopup" @togglePopup="togglePopup"></KoiPopup>
+      <UIShare></UIShare>
     </div>
   </div>
 </template>
@@ -257,13 +257,14 @@
 
   import config from '@/config/index'
 
+  import UIShare from '@/components/widget/ui-share'
+
   export default {
     data () {
       return {
         title: '翻倍锦鲤券',
         pageView: true,
         isBorder: true,
-        couponAmount: [0,0,0,0],
         couponPic: [
           config.staticPath + '/activity-static/images/koi_discount_amount_01.png',
           config.staticPath + '/activity-static/images/koi_discount_amount_02.png',
@@ -280,12 +281,14 @@
         firstStrategyUrl: '',               //攻略4跳转营销页链接                 (无需登陆)
         thirdStrategyRemainCount: 0,       //攻略3剩余优惠券数量                 （无需登陆）
         isMergeBtn: 0,
-        timestamp: new Date().getTime()
+        timestamp: new Date().getTime(),
+        couponList: [0,0,0,0]
       }
     },
     components: {
       AppHeader,
-      KoiPopup
+      KoiPopup,
+      UIShare
     },
     methods: {
       togglePopup (val) {
@@ -298,22 +301,27 @@
           location.href = '/index.html'
         }
       },
+      ruleAction () {
+
+      },
       routerAction (url) {
         location.href = url
       },
-      getKoiCouponNum () {
-        Model.getKoiCouponNum({
-          type: 'GET'
-        }).then((result) => {
-          const data = result.data
-
-          if (result.code == 0 && data) {
-            const {
-              couponList
-            } = data
-            this.couponAmount = couponList
-          }
-        })
+      /**
+       * 分享操作
+       */
+      shareAction () {
+        if (!utils.isApp() || !utils.weixin()) {
+          this.$toast('请在APP中打开分享')
+          return
+        }
+        const shareConfig = {
+          link: '',
+          title: '',
+          description: '',
+          imgUrl: ''
+        }
+        app.shareAction.call(this,shareConfig)
       },
       /**
        * 兑换锦鲤优惠券
@@ -321,7 +329,7 @@
       submitCouponExchange () {
         this.$showPageLoading()
         Model.submitCouponExchange({
-          type: 'GET',
+          type: 'POST',
           data: {
             type: 2    //type 2 积分    3 分享
           }
@@ -341,6 +349,7 @@
       getCouponExchange () {
         Model.getCouponExchange({
           type: 'GET',
+          ignoreLogin: true,
           data: {
             type: 2  //type 2 积分    3 分享
           }
@@ -358,7 +367,8 @@
        */
       getKoiInfo () {
         Model.getKoiInfo({
-          type: 'GET'
+          type: 'GET',
+          ignoreLogin: true
         }).then((result) => {
           const data = result.data
           if (result.code == 0 && data) {
@@ -370,7 +380,8 @@
               thirdStrategyButtonStatus,
               mergeButtonStatus,
               firstStrategyUrl,
-              thirdStrategyRemainCount
+              thirdStrategyRemainCount,
+              couponList
             } = data
             this.sumCouponMoney = sumCouponMoney
             this.sumCouponCount = sumCouponCount
@@ -380,6 +391,9 @@
             this.mergeButtonStatus = mergeButtonStatus
             this.firstStrategyUrl = firstStrategyUrl
             this.thirdStrategyRemainCount = thirdStrategyRemainCount
+            if (couponList && couponList.length > 0) {
+              this.couponList = couponList
+            }
           }
         })
       },
@@ -398,7 +412,6 @@
           if (result.code == 0) {
             this.timestamp = data.timestamp
           }
-
           const currentTimestamp = new Date('2018/11/07 10:00:00').getTime()
 
           if (this.timestamp > currentTimestamp) {
@@ -414,9 +427,9 @@
       }
     },
     created () {
-      this.getKoiCouponNum()
       this.getKoiInfo()
       this.getCouponExchange()
+      this.getSystemTime()
     }
   }
 

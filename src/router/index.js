@@ -40,6 +40,8 @@ const schoolStart = r => require.ensure([], () =>  r(require('@/views/activity/s
 
 const koiIndex = r => require.ensure([], () =>  r(require('@/views/activity/koi/index.vue')),'koiIndex')
 
+const koiEnd = r => require.ensure([], () =>  r(require('@/views/activity/koi/end.vue')),'koiEnd')
+
 export default new Router({
   mode:'history',
   routes: [
@@ -172,6 +174,13 @@ export default new Router({
       path: '/activity/koi/index',
       name: 'koiIndex',
       component: koiIndex,
+      meta: {
+        title: '翻倍锦鲤券'
+      }
+    }, {
+      path: '/activity/koi/end',
+      name: 'koiEnd',
+      component: koiEnd,
       meta: {
         title: '翻倍锦鲤券'
       }

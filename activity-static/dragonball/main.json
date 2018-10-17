@@ -8,12 +8,13 @@
     "forthStrategyCouponCount": 20,
     "sumCouponMoney": 100,
     "sumCouponCount": 20,
-    "firstStrategyButtonStatus": 1,
+    "firstStrategyButtonStatus": 0,
     "secondStrategyButtonStatus": 0,
     "thirdStrategyButtonStatus": 1,
     "mergeButtonStatus": 1,
     "firstStrategyUrl": "http://m.laiyifen.com/activity/school/start",
     "thirdStrategyRemainCount": 22,
-    "points": 20
+    "points": 20,
+    "couponList": [3,0,7,12]
   }
 }

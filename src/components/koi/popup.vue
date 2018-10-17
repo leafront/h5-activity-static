@@ -73,11 +73,9 @@
     top: 50%;
     margin-top: -2.7rem;
     left: 0;
-    z-index: 100;
+    height: 5rem;
     opacity: 0;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    z-index: -10;
     &--action{
       width: 3.2rem;
       height: 1rem;
@@ -123,11 +121,13 @@
     img{
       width: 6.89rem;
       height: 5.03rem;
+      margin: 0 auto;
+      display: block;
     }
     &.active {
-     animation: scaleIn .4s;
-     opacity: 1;
-     z-index: 999;
+      animation: scaleIn .4s;
+      opacity: 1;
+      z-index: 999;
     }
   }
 </style>
