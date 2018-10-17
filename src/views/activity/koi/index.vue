@@ -299,6 +299,9 @@
       ...mapActions([
         'updateShareMenu'
       ]),
+      /**
+       * @param {Boolean} val
+       */
       togglePopup (val) {
         this.isPopup = val
       },
@@ -315,6 +318,9 @@
           location.href = shareStrategyUrl
         }
       },
+      /**
+       * @param {String} url
+       */
       routerAction (url) {
         location.href = url
       },
@@ -413,6 +419,10 @@
           }
         })
       },
+      /**
+       * page location
+       * @param {String} url
+       */
       pageAction (url) {
         this.$router.push(url)
       },
@@ -1143,7 +1153,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    //  animation: scaleIn .4s infinite;
+      animation: scaleIn .4s infinite;
       i{
         width: .26rem;
         height: .26rem;
