@@ -84,7 +84,6 @@
     },
     methods: {
       ...mapActions([
-        'updateHeaderMenu',
         'updateShareMenu'
       ]),
       getRedPackInfo () {

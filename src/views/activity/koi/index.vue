@@ -293,6 +293,9 @@
       UIShare
     },
     methods: {
+      ...mapActions([
+        'updateShareMenu'
+      ]),
       togglePopup (val) {
         this.isPopup = val
       },
@@ -316,15 +319,15 @@
        * 分享操作
        */
       shareAction () {
-        if (!utils.isApp() || !utils.weixin()) {
-          this.$toast('请在APP中打开分享')
-          return
+        if (!(utils.isApp() || utils.weixin())) {
+          //this.$toast('请在APP中打开分享')
+          //return
         }
         const shareConfig = {
           link: this.shareStrategyUrl,
           title: '官宣 锦鲤和双十一更配哦',
           description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
-          imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png'
+          imgUrl: config.staticPath + '/activity-static/images/invitation_icon.png'
         }
         app.shareAction.call(this, shareConfig)
       },
