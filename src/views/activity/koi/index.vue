@@ -337,6 +337,7 @@
           const data = result.data
           this.$hidePageLoading()
           if (result.code == 0 && data) {
+            this.thirdStrategyRemainCount = data.thirdStrategyRemainCount
             this.$toast('兑换成功')
           } else {
             this.$toast(result.message)
