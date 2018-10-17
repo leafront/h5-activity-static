@@ -71,7 +71,7 @@
     position: fixed;
     width: 100%;
     top: 50%;
-    margin-top: -2.7rem;
+    margin-top: -2.8rem;
     left: 0;
     height: 5rem;
     opacity: 0;

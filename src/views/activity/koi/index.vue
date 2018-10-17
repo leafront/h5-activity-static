@@ -237,9 +237,9 @@
           <span v-else>11月7日10:00 开始合成 敬请期待</span>
         </div>
       </div>
-      <KoiPopup :isPopup="isPopup" @togglePopup="togglePopup"></KoiPopup>
       <UIShare></UIShare>
     </div>
+    <KoiPopup :isPopup="isPopup" @togglePopup="togglePopup"></KoiPopup>
   </div>
 </template>
 
