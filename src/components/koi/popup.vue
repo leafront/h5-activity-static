@@ -74,7 +74,7 @@
     margin-top: -2.7rem;
     left: 0;
     z-index: 100;
-    visibility: hidden;
+    opacity: 0;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -126,7 +126,7 @@
     }
     &.active {
      animation: scaleIn .4s;
-     visibility: visible;
+     opacity: 1;
      z-index: 999;
     }
   }
