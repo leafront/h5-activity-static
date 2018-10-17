@@ -282,7 +282,9 @@
         thirdStrategyRemainCount: 0,       //攻略3剩余优惠券数量                 （无需登陆）
         isMergeBtn: 0,
         timestamp: new Date().getTime(),
-        couponList: [0,0,0,0]
+        couponList: [0,0,0,0],
+        points: 0,
+        shareStrategyUrl: ''
       }
     },
     components: {
@@ -302,7 +304,10 @@
         }
       },
       ruleAction () {
-
+        const shareStrategyUrl = this.shareStrategyUrl
+        if (shareStrategyUrl) {
+          location.href = shareStrategyUrl
+        }
       },
       routerAction (url) {
         location.href = url
@@ -316,10 +321,10 @@
           return
         }
         const shareConfig = {
-          link: '',
-          title: '',
-          description: '',
-          imgUrl: ''
+          link: this.shareStrategyUrl,
+          title: '官宣 锦鲤和双十一更配哦',
+          description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
+          imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png'
         }
         app.shareAction.call(this, shareConfig)
       },
@@ -382,7 +387,9 @@
               mergeButtonStatus,
               firstStrategyUrl,
               thirdStrategyRemainCount,
-              couponList
+              couponList,
+              shareStrategyUrl,
+              points
             } = data
             this.sumCouponMoney = sumCouponMoney
             this.sumCouponCount = sumCouponCount
@@ -392,6 +399,8 @@
             this.mergeButtonStatus = mergeButtonStatus
             this.firstStrategyUrl = firstStrategyUrl
             this.thirdStrategyRemainCount = thirdStrategyRemainCount
+            this.points = points
+            this.shareStrategyUrl = shareStrategyUrl
             if (couponList && couponList.length > 0) {
               this.couponList = couponList
             }
