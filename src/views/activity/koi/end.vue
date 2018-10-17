@@ -4,6 +4,7 @@
     </AppHeader>
     <div class="scroll-view-wrapper koi-end-view" :class="{'visibility': pageView}">
       <div class="koi-end">
+        <img src="./images/koi_end.png"/>
         <h4>翻倍锦鲤券活动结束啦～</h4>
         <p class="font-b cfff">{{times}} 秒后自动跳转到首页</p>
       </div>
@@ -20,6 +21,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    img{
+      width: 2.88rem;
+      height: 2.88rem;
+    }
     h4{
       font-size: .36rem;
       color: #fff;
