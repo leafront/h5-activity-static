@@ -259,6 +259,8 @@
 
   import UIShare from '@/components/widget/ui-share'
 
+  import {mapActions} from 'vuex'
+
   export default {
     data () {
       return {
