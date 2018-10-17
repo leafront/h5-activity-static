@@ -34,8 +34,6 @@ export const getSystemTimes = () => {
 
     if (result.code == 0) {
       return data.timestamp
-    } else {
-      this.$toast(result.message)
     }
   })
 }
