@@ -323,8 +323,8 @@
        */
       shareAction () {
         if (!(utils.isApp() || utils.weixin())) {
-          //this.$toast('请在APP中打开分享')
-          //return
+          this.$toast('请在APP中打开分享')
+          return
         }
         const shareConfig = {
           link: this.shareStrategyUrl,
