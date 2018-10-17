@@ -175,14 +175,16 @@ export default new Router({
       name: 'koiIndex',
       component: koiIndex,
       meta: {
-        title: '翻倍锦鲤券'
+        title: '翻倍锦鲤券',
+        bgColor: '#bd0004'
       }
     }, {
       path: '/activity/koi/end',
       name: 'koiEnd',
       component: koiEnd,
       meta: {
-        title: '翻倍锦鲤券'
+        title: '翻倍锦鲤券',
+        bgColor: '#bd0004'
       }
     }
   ]
