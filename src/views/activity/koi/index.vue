@@ -7,6 +7,10 @@
         <img class="koi__banner--pic" src="./images/koi_bg.jpg"/>
         <h4 class="koi__banner--tit font-xb">11.11超值券获取攻略</h4>
         <p class="koi__banner--txt font-s">种子券收集时间:10.22～11.13</p>
+        <div class="koi__banner--rule">
+          <i>!</i>
+          <span>规则</span>
+        </div>
       </div>
       <div class="koi-nav">
         <div class="koi-nav__item">
@@ -171,7 +175,8 @@
               <p>分享一次 即可获得20张¥1种子券 </p>
             </div>
             <div class="koi-strategy__action">
-              <span class="disabled font-b">去分享</span>
+              <span class="font-b" v-if="firstStrategyButtonStatus == 0">去分享</span>
+              <span class="disabled font-b" v-else>今日已分享</span>
             </div>
           </div>
           <div class="koi-strategy__item">
@@ -181,7 +186,8 @@
               <p>每天限领一次 </p>
             </div>
             <div class="koi-strategy__action">
-              <span class="font-b">去签到</span>
+              <span class="font-b" v-if="secondStrategyButtonStatus == 0" @click="routerAction('/actives/signEvent/index.html')">去签到</span>
+              <span class="disabled font-b" v-else>今日已签到</span>
             </div>
           </div>
         </div>
@@ -190,10 +196,11 @@
           <div class="koi-strategy-three__txt">
             <h5>3积分兑换3元种子券</h5>
             <span>(每日限兑换一次)</span>
-            <p class="font">今日剩余 <i>320</i> 张</p>
+            <p class="font">今日剩余 <i>{{thirdStrategyRemainCount}}</i> 张</p>
           </div>
           <div class="koi-strategy-three__action">
-            <span class="font-xb">兑换</span>
+            <span class="font-xb" v-if="thirdStrategyButtonStatus == 0" @click="submitCouponExchange">去兑换</span>
+            <span class="disabled font-xb" v-else>今日已兑换</span>
           </div>
         </div>
         <div class="koi-strategy-four">
@@ -213,7 +220,7 @@
           <span>我</span>
           <span>的</span>
           <span>种</span>
-          <span>字</span>
+          <span>子</span>
           <span>券</span>
         </div>
         <div class="koi-seed__pic">
@@ -223,13 +230,15 @@
           </div>
         </div>
         <div class="koi-seed__des">
-          <span>已获得种子券 {{couponNum}} 张</span>
-          <strong>共计 {{couponSum}} 元</strong>
+          <span>已获得种子券 {{sumCouponMoney}} 张</span>
+          <strong>共计 {{sumCouponCount}} 元</strong>
         </div>
-        <div class="koi-seed__action" @click="pageAction('/activity/koi/merge')">
-          <span>立即合成</span>
+        <div class="koi-seed__action">
+          <span v-if="isMergeBtn == 1" @click="pageAction('/activity/koi/merge')">立即合成</span>
+          <span v-else>11月7日10:00 开始合成 敬请期待</span>
         </div>
       </div>
+      <KoiPopup :isPopup="isPopup" @togglePopup="togglePopup" @submitCouponExchange="submitCouponExchange"></KoiPopup>
     </div>
   </div>
 </template>
@@ -237,6 +246,8 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
+
+  import KoiPopup from '@/components/koi/popup'
 
   import app from '@/widget/app'
 
@@ -259,20 +270,36 @@
           config.staticPath + '/activity-static/images/koi_discount_amount_03.png',
           config.staticPath + '/activity-static/images/koi_discount_amount_04.png',
         ],
-        couponNum: 0,
-        couponSum: 0
+        isPopup: false,
+        sumCouponMoney: 0,                  //累计无门槛优惠券总额
+        sumCouponCount: 0,                  //累计无门槛优惠券数量
+        firstStrategyButtonStatus: 0,      //攻略1按钮状态   0 可点击  1 灰显 (今日已分享)
+        secondStrategyButtonStatus: 0,      //攻略2按钮状态    0 可点击  1 灰显 (今日已签到)
+        thirdStrategyButtonStatus: 0,       //攻略3按钮状态    0 可点击  1 灰显 (积分兑换)
+        mergeButtonStatus: 0,               //合成龙珠券按钮状态 0 可点击  1 灰显
+        firstStrategyUrl: '',               //攻略4跳转营销页链接                 (无需登陆)
+        thirdStrategyRemainCount: 0,       //攻略3剩余优惠券数量                 （无需登陆）
+        isMergeBtn: 0,
+        timestamp: new Date().getTime()
       }
     },
     components: {
-      AppHeader
+      AppHeader,
+      KoiPopup
     },
     methods: {
+      togglePopup (val) {
+        this.isPopup = val
+      },
       backAction () {
         if (utils.isApp()) {
           app.back()
         } else {
           location.href = '/index.html'
         }
+      },
+      routerAction (url) {
+        location.href = url
       },
       getKoiCouponNum () {
         Model.getKoiCouponNum({
@@ -282,13 +309,77 @@
 
           if (result.code == 0 && data) {
             const {
-              couponList,
-              couponNum,
-              couponSum
+              couponList
             } = data
             this.couponAmount = couponList
-            this.couponNum = couponNum
-            this.couponSum = couponSum
+          }
+        })
+      },
+      /**
+       * 兑换锦鲤优惠券
+       */
+      submitCouponExchange () {
+        this.$showPageLoading()
+        Model.submitCouponExchange({
+          type: 'GET',
+          data: {
+            type: 2    //type 2 积分    3 分享
+          }
+        }).then((result) => {
+          const data = result.data
+          this.$hidePageLoading()
+          if (result.code == 0 && data) {
+            this.$toast('兑换成功')
+          } else {
+            this.$toast(result.message)
+          }
+        })
+      },
+      /**
+       * 获取优惠券
+       */
+      getCouponExchange () {
+        Model.getCouponExchange({
+          type: 'GET',
+          data: {
+            type: 2  //type 2 积分    3 分享
+          }
+        }).then((result) => {
+          const code = result.code
+          if (code == 0) {
+            this.isPopup = true
+          } else if (code == -4) {
+            this.pageAction('/activity/koi/end')
+          }
+        })
+      },
+      /**
+       * 获取锦鲤券状态和优惠券数量
+       */
+      getKoiInfo () {
+        Model.getKoiInfo({
+          type: 'GET'
+        }).then((result) => {
+          const data = result.data
+          if (result.code == 0 && data) {
+            const {
+              sumCouponMoney,
+              sumCouponCount,
+              firstStrategyButtonStatus,
+              secondStrategyButtonStatus,
+              thirdStrategyButtonStatus,
+              mergeButtonStatus,
+              firstStrategyUrl,
+              thirdStrategyRemainCount
+            } = data
+            this.sumCouponMoney = sumCouponMoney
+            this.sumCouponCount = sumCouponCount
+            this.firstStrategyButtonStatus = firstStrategyButtonStatus
+            this.secondStrategyButtonStatus = secondStrategyButtonStatus
+            this.thirdStrategyButtonStatus = thirdStrategyButtonStatus
+            this.mergeButtonStatus = mergeButtonStatus
+            this.firstStrategyUrl = firstStrategyUrl
+            this.thirdStrategyRemainCount = thirdStrategyRemainCount
           }
         })
       },
@@ -296,18 +387,36 @@
         this.$router.push(url)
       },
       /**
+       * 获取当前系统时间
+       */
+      getSystemTime () {
+        Model.getSystemTime({
+          type: 'GET'
+        }).then((result) => {
+          const data = result.data
+
+          if (result.code == 0) {
+            this.timestamp = data.timestamp
+          }
+
+          const currentTimestamp = new Date('2018/11/07 10:00:00').getTime()
+
+          if (this.timestamp > currentTimestamp) {
+            this.isMergeBtn = 1
+          }
+        })
+      },
+      /**
        * cart page location
        */
       cartAction () {
-        if (utils.isApp()) {
-          location.href = 'lyf://shoppingCar'
-        } else {
-          location.href = '/cart.html'
-        }
+       location.href = this.firstStrategyUrl
       }
     },
     created () {
       this.getKoiCouponNum()
+      this.getKoiInfo()
+      this.getCouponExchange()
     }
   }
 
@@ -320,12 +429,12 @@
     display: flex;
     justify-content: center;
     span{
-      width: 2.82rem;
+      padding: 0 .3rem;
       height: .65rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: .38rem;
+      font-size: .37rem;
       color: #a30001;
       background: linear-gradient(to top,#F1AE5D,#F5C786);
       border-radius: .1rem;
@@ -448,7 +557,7 @@
         background: #c60000;
         border-radius: .1rem;
         &.disabled {
-          background: #D4D3D3;
+          background: #dd8862;
           &:after {
             display: none;
           }
@@ -518,7 +627,8 @@
         background: #febf6e;
         border-radius: .1rem;
         &.disabled{
-          background: #D4D3D3;
+          background: #dd8862;
+          color: #fff;
           &:after{
             display: none;
           }
@@ -983,6 +1093,32 @@
       transform: translateX(-50%);
       color: #EBB282;
       text-align: center;
+    }
+    &--rule{
+      position: absolute;
+      right: .58rem;
+      top: .84rem;
+      width: 1rem;
+      height: .4rem;
+      border-radius: .1rem;
+      background: #ca221a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: scaleIn .4s infinite;
+      i{
+        width: .26rem;
+        height: .26rem;
+        border-radius: 50%;
+        background: #faf0d2;
+        color: #ca231b;
+        line-height: .26rem;
+        text-align: center;
+        margin-right: .06rem;
+      }
+      span{
+        color: #faefd2;
+      }
     }
   }
 </style>

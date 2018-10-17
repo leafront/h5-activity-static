@@ -16,7 +16,8 @@ export default function request (url,{
   cache = false,
   expires = 5 * 60 * 1000,
   headers,
-  hostPath
+  hostPath,
+  ignoreLogin = false
 }){
 
   const ut = app.getUserToken()
@@ -82,13 +83,16 @@ export default function request (url,{
         process.env.NODE_ENV != 'develop'
       ) {
         app.deleteUserToken()
-        if (utils.isApp()) {
-          app.login()
-        } else {
-          const from = utils.getRelatedUrl()
-          location.href = `/login.html?from=` + encodeURIComponent(from)
+        if (!ignoreLogin) {
+          if (utils.isApp()) {
+            app.login()
+          } else {
+            const from = utils.getRelatedUrl()
+            location.href = `/login.html?from=` + encodeURIComponent(from)
+          }
         }
-        reject(results)
+        resolve(results)
+
       } else {
         if (results.code == 0 && cache) {
           store.set(cacheUrl, cacheData,'local')

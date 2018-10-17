@@ -1,6 +1,7 @@
 {
   "code": 0,
+  "message": "错误",
   "data": {
-    "couponList": [3,0,7,12]
+
   }
 }
