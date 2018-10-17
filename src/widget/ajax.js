@@ -12,7 +12,7 @@ export default function ajax ({
   timeout = 30000,
   type,
   headers,
-  dataType = 'json',
+  dataType,
   data
 }){
 
@@ -43,7 +43,6 @@ export default function ajax ({
           resolve(xhr.response)
 
         } else {
-
           resolve({
             data:[],
             status: -500,

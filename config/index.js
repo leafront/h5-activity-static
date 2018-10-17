@@ -46,6 +46,10 @@ module.exports = {
       '/agent-fx-web': {
         target: 'http://m.laiyifen.com',
         changeOrigin: true
+      },
+      '/webapp-static': {
+        target: 'https://m.laiyifen.com',
+        changeOrigin: true
       }
     },
     // Various Dev Server settings

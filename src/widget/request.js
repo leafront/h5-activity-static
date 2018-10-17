@@ -1,7 +1,5 @@
 import ajax from './ajax'
 
-import app from '@/widget/app'
-
 import store from '@/widget/store'
 
 import utils from './utils'
@@ -11,14 +9,16 @@ import config from '@/config/index'
 export default function request (url,{
   type,
   timeout,
-  dataType,
+  dataType = 'json',
   data,
   cache = false,
   expires = 5 * 60 * 1000,
-  headers
+  headers,
+  hostPath,
+  ignoreLogin = false
 }){
 
-  const ut = app.getUserToken()
+  const ut = utils.getUserToken()
   const errorCode = 99
   const options = {
     isHeader:true,
@@ -32,17 +32,25 @@ export default function request (url,{
       "Content-Type": "application/x-www-form-urlencoded",
       "X-Requested-With": "XMLHttpRequest",
       "Accept": "application/json"
-    }
+    },
+    hostPath
   }
-  if (dataType == 'json') {
+  if (dataType !== 'text') {
     options.data = Object.assign({
+      ut,
       platform: config.platform,
       companyId: config.companyId,
       platformId: config.platformId
     },data)
   }
 
-  if (app.loggedIn()) {
+  let optionData = Object.assign({
+    platform: config.platform,
+    companyId: config.companyId,
+    platformId: config.platformId
+  },data)
+
+  if (utils.loggedIn()) {
     options.headers.ut = ut
   }
   if (headers &&
@@ -52,10 +60,13 @@ export default function request (url,{
     options.data = JSON.stringify(options.data)
   } else {
     options.data = utils.queryStringify(options.data)
+    optionData = utils.queryStringify(optionData)
   }
-  if (type == "GET") {
 
+  let cacheUrl = url
+  if (type == 'GET' && dataType == 'json') {
     options.url =  options.data ?  url + '?' + options.data: url
+    cacheUrl =  optionData ?  url + '?' + optionData: url
   }
 
   function httpRequest (resolve,reject) {
@@ -69,17 +80,20 @@ export default function request (url,{
       if (results.code == errorCode &&
         process.env.NODE_ENV != 'develop'
       ) {
-        app.deleteUserToken()
-        if (utils.isApp()) {
-          app.login()
-        } else {
-          const from = utils.getRelatedUrl()
-          location.href = `/login.html?from=` + encodeURIComponent(from)
+        utils.deleteUserToken()
+        if (!ignoreLogin) {
+          if (utils.isApp()) {
+            utils.login()
+          } else {
+            const from = utils.getRelatedUrl()
+            location.href = `/login.html?from=` + encodeURIComponent(from)
+          }
         }
-        reject(results)
+        resolve(results)
+
       } else {
         if (results.code == 0 && cache) {
-          store.set(options.url, cacheData,'local')
+          store.set(cacheUrl, cacheData,'local')
         }
       }
       resolve(results)
@@ -91,21 +105,21 @@ export default function request (url,{
 
     let currentTime = new Date().getTime()
 
-    const cacheData = store.get(options.url,'local')
+    const cacheData = store.get(cacheUrl,'local')
 
     if (cache && cacheData) {
 
       const getCacheTime = cacheData.times
-
       if (currentTime < getCacheTime) {
         resolve(cacheData.results)
       } else {
-        store.remove(options.url,'local')
+        store.remove(cacheUrl,'local')
+
         httpRequest(resolve,reject)
       }
     } else {
 
-      store.remove(options.url,'local')
+      store.remove(cacheUrl,'local')
       httpRequest (resolve,reject)
 
     }

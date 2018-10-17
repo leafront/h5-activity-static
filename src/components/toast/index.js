@@ -1,15 +1,7 @@
 const Toast = {
   installed: false,
-  install (Vue, options) {
+  install (Vue, duration = 2000) {
     if(Toast.installed) return
-    let opt = {
-      // 默认持续时间
-      duration: "2000"
-    }
-    // 使用options的配置
-    for(let i in options) {
-      opt[i] = options[i]
-    }
     Vue.prototype.$toast = (toast) => {
 
       // 如果页面有toast则不继续执行
@@ -33,10 +25,9 @@ const Toast = {
       // 4.三秒后移除
       setTimeout(() => {
         document.body.removeChild(tpl)
-      }, opt.duration)
+      }, duration)
 
       Toast.installed = true
-
     }
   }
 }
