@@ -31,11 +31,11 @@ router.beforeEach((to, from, next) => {
     process.env.NODE_ENV != 'develop'
   ) {
     //判断用户已经登录
-    if (app.loggedIn()) {
+    if (utils.loggedIn()) {
       next()
     } else {
       if (utils.isApp()) {
-        app.login()
+        utils.login()
       } else {
         const from = utils.getRelatedUrl()
         location.href = `/login.html?from=` + encodeURIComponent(from)

@@ -321,7 +321,7 @@
           description: '',
           imgUrl: ''
         }
-        app.shareAction.call(this,shareConfig)
+        app.shareAction.call(this, shareConfig)
       },
       /**
        * 兑换锦鲤优惠券
