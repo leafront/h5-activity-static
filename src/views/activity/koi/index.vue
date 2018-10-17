@@ -1,7 +1,7 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction"></AppHeader>
-    <div class="scroll-view-wrapper koi-view" :class="{'visibility': pageView}">
+    <div class="scroll-view-wrapper koi-view" :class="{'visibility': pageView,'scroll_view_hidden': isPopup}">
       <div class="koi__banner">
         <img class="koi__banner--pic" src="./images/koi_bg.jpg"/>
         <h4 class="koi__banner--tit font-xb">11.11超值券获取攻略</h4>
@@ -1119,7 +1119,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: scaleIn .4s infinite;
+    //  animation: scaleIn .4s infinite;
       i{
         width: .26rem;
         height: .26rem;
