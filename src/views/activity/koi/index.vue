@@ -377,6 +377,7 @@
           const code = result.code
           if (code == 0) {
             this.isPopup = true
+            utils.appViewFixed()
           } else if (code == -4) {
             this.pageAction('/activity/koi/end')
           }
