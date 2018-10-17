@@ -28,6 +28,7 @@
       isPopup (newVal,oldVal) {
         if (newVal) {
           document.getElementById('koi-rule-mask').addEventListener('touchmove',(event) => {
+            console.log(newVal)
             if (!utils.isPassive()) {
               event.preventDefault()
             }

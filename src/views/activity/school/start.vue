@@ -80,7 +80,6 @@
     },
     computed: {
       ...mapGetters({
-        'headerMenu': 'getHeaderMenu',
         'imageValidate': 'getImageValidate'
       }),
       mobile: {

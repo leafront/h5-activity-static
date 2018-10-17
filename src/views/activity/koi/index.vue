@@ -304,6 +304,7 @@
        */
       togglePopup (val) {
         this.isPopup = val
+        utils.appViewFixed()
       },
       backAction () {
         if (utils.isApp()) {
