@@ -156,6 +156,13 @@ const app = {
       }
     }
   },
+  /**
+   * 分享操作
+   * @param {String} link
+   * @param {String} title
+   * @param {String} description
+   * @param {String} imgUrl
+   */
   shareAction ({
     link,
     title,

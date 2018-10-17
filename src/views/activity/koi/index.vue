@@ -6,7 +6,7 @@
         <img class="koi__banner--pic" src="./images/koi_bg.jpg"/>
         <h4 class="koi__banner--tit font-xb">11.11超值券获取攻略</h4>
         <p class="koi__banner--txt font-s">种子券收集时间:10.22～11.13</p>
-        <div class="koi__banner--rule" @click="ruleAction">
+        <div class="koi__banner--rule" @click="routerAction(shareStrategyUrl)">
           <i>!</i>
           <span>规则</span>
         </div>
@@ -210,7 +210,7 @@
             <i>(外卖,团购订单除外）</i>
             <p>APP 内订单支付成功1次,返10元无门槛券</p>
           </div>
-          <div class="koi-strategy-four__action" @click="cartAction">
+          <div class="koi-strategy-four__action" @click="routerAction(forthStrategyUrl)">
             <span class="font-xb">去购物</span>
           </div>
         </div>
@@ -281,13 +281,13 @@
         secondStrategyButtonStatus: 0,      //攻略2按钮状态    0 可点击  1 灰显 (今日已签到)
         thirdStrategyButtonStatus: 0,       //攻略3按钮状态    0 可点击  1 灰显 (积分兑换)
         mergeButtonStatus: 0,               //合成龙珠券按钮状态 0 可点击  1 灰显
-        firstStrategyUrl: '',               //攻略4跳转营销页链接                 (无需登陆)
-        thirdStrategyRemainCount: 0,       //攻略3剩余优惠券数量                 （无需登陆）
+        forthStrategyUrl: '',               //攻略4跳转营销页链接
+        thirdStrategyRemainCount: 0,       //攻略3剩余优惠券数量
         isMergeBtn: 0,
         timestamp: new Date().getTime(),
         couponList: [0,0,0,0],
         points: 0,
-        shareStrategyUrl: ''
+        shareStrategyUrl: '' //分享规则链接
       }
     },
     components: {
@@ -312,11 +312,12 @@
           location.href = '/index.html'
         }
       },
-      ruleAction () {
-        const shareStrategyUrl = this.shareStrategyUrl
-        if (shareStrategyUrl) {
-          location.href = shareStrategyUrl
-        }
+      /**
+       * page location
+       * @param {String} url
+       */
+      pageAction (url) {
+        this.$router.push(url)
       },
       /**
        * @param {String} url
@@ -325,7 +326,7 @@
         location.href = url
       },
       /**
-       * 分享操作
+       * share operation
        */
       shareAction () {
         if (!(utils.isApp() || utils.weixin())) {
@@ -341,7 +342,7 @@
         app.shareAction.call(this, shareConfig)
       },
       /**
-       * 兑换锦鲤优惠券
+       * exchange coupon
        */
       submitCouponExchange () {
         this.$showPageLoading()
@@ -362,7 +363,7 @@
         })
       },
       /**
-       * 获取优惠券
+       * get coupon info
        */
       getCouponExchange () {
         Model.getCouponExchange({
@@ -381,7 +382,7 @@
         })
       },
       /**
-       * 获取锦鲤券状态和优惠券数量
+       * get koi info status and data
        */
       getKoiInfo () {
         Model.getKoiInfo({
@@ -397,7 +398,7 @@
               secondStrategyButtonStatus,
               thirdStrategyButtonStatus,
               mergeButtonStatus,
-              firstStrategyUrl,
+              forthStrategyUrl,
               thirdStrategyRemainCount,
               couponList,
               shareStrategyUrl,
@@ -409,7 +410,7 @@
             this.secondStrategyButtonStatus = secondStrategyButtonStatus
             this.thirdStrategyButtonStatus = thirdStrategyButtonStatus
             this.mergeButtonStatus = mergeButtonStatus
-            this.firstStrategyUrl = firstStrategyUrl
+            this.forthStrategyUrl = forthStrategyUrl
             this.thirdStrategyRemainCount = thirdStrategyRemainCount
             this.points = points
             this.shareStrategyUrl = shareStrategyUrl
@@ -420,14 +421,7 @@
         })
       },
       /**
-       * page location
-       * @param {String} url
-       */
-      pageAction (url) {
-        this.$router.push(url)
-      },
-      /**
-       * 获取当前系统时间
+       * get current system times
        */
       getSystemTime () {
         Model.getSystemTime({
@@ -444,12 +438,6 @@
             this.isMergeBtn = 1
           }
         })
-      },
-      /**
-       * cart page location
-       */
-      cartAction () {
-       location.href = this.firstStrategyUrl
       }
     },
     created () {
