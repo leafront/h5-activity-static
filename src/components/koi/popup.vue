@@ -3,7 +3,7 @@
     <div class="ui-mask" id="koi-rule-mask" :class="{'active': isPopup}"></div>
     <div class="koi__popup" :class="{'active': isPopup}">
       <img src="./images/popup.png"/>
-      <div class="koi__popup--action" @click="getCouponExchange"></div>
+      <div class="koi__popup--action" @click="submitCouponExchange"></div>
       <div class="koi__popup--close" @click="togglePopup">
         <span class="koi__popup--btn"></span>
       </div>
@@ -44,9 +44,9 @@
       /**
        * exchange coupon
        */
-      getCouponExchange () {
+      submitCouponExchange () {
         this.$showPageLoading()
-        Model.getCouponExchange({
+        Model.submitCouponExchange({
           type: 'GET',
           data: {
             type: 0    //0 首次访问页面  1 分享  3 积分
