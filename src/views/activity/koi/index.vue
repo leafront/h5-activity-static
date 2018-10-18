@@ -352,7 +352,7 @@
         Model.submitCouponExchange({
           type: 'POST',
           data: {
-            type: 2    //type 2 积分    3 分享
+            type: 0    //0 首次访问页面  1 分享  3 积分
           }
         }).then((result) => {
           const data = result.data
@@ -373,7 +373,7 @@
           type: 'GET',
           ignoreLogin: true,
           data: {
-            type: 2  //type 2 积分    3 分享
+            type: 3  //0 首次访问页面  1 分享  3 积分
           }
         }).then((result) => {
           const code = result.code
@@ -394,7 +394,7 @@
           ignoreLogin: true
         }).then((result) => {
           const data = result.data
-          if (result.code == 0 && data) {
+          if ((result.code == 0 || result.code == 99) && data) {
             const {
               sumCouponMoney,
               sumCouponCount,
