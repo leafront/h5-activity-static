@@ -168,7 +168,7 @@ const app = {
     title,
     description,
     imgUrl
-  }) {
+  },callback) {
     const shareConfig = {
       link: link,
       url: link,
@@ -186,11 +186,14 @@ const app = {
         url160x160: shareConfig.pic,
         pic: shareConfig.pic
       },() => {
+        callback && callback()
       })
     } else {
       if (utils.weixin()) {
         this.updateShareMenu(true)
-        weixin_share.weixinShare(shareConfig)
+        weixin_share.weixinShare(shareConfig).then(() => {
+          callback && callback()
+        })
       }
     }
   }

@@ -340,7 +340,16 @@
           description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
           imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png'
         }
-        app.shareAction.call(this, shareConfig)
+        app.shareAction.call(this, shareConfig, () => {
+          Model.submitCouponExchange({
+            type: 'POST',
+            data: {
+              type: 1    //0 首次访问页面  1 分享  3 积分
+            }
+          }).then((result) => {
+            this.$toast(result.message)
+          })
+        })
       },
       /**
        * exchange coupon
@@ -355,11 +364,9 @@
         }).then((result) => {
           const data = result.data
           this.$hidePageLoading()
+          this.$toast(result.message)
           if (result.code == 0) {
             this.thirdStrategyRemainCount = data.thirdStrategyRemainCount
-            this.$toast(result.message)
-          } else {
-            this.$toast(result.message)
           }
         })
       },
