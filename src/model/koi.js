@@ -8,5 +8,3 @@ export const submitCouponExchange = (data) => request('/api/promotion/dragonball
 export const getCouponExchange = (data) => request('/api/promotion/dragonball/getCoupon',data)
 
 export const getKoiInfo = (data) => request('/api/promotion/dragonball/main',data)
-
-export const getSystemTime = (data) => request('/api/realTime/getTimestamp',data)

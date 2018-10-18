@@ -234,7 +234,7 @@
           <strong>共计 {{couponSum}} 元</strong>
         </div>
         <div class="koi-seed__action">
-          <span v-if="isMergeBtn == 1" @click="pageAction('/activity/koi/merge')">立即合成</span>
+          <span v-if="mergeButtonStatus == 0" @click="pageAction('/activity/koi/merge')">立即合成</span>
           <span v-else>11月7日10:00 开始合成 敬请期待</span>
         </div>
       </div>
@@ -280,11 +280,9 @@
         firstStrategyButtonStatus: 0,      //攻略1按钮状态   0 可点击  1 灰显 (今日已分享)
         secondStrategyButtonStatus: 0,      //攻略2按钮状态    0 可点击  1 灰显 (今日已签到)
         thirdStrategyButtonStatus: 0,       //攻略3按钮状态    0 可点击  1 灰显 (积分兑换)
-        mergeButtonStatus: 0,               //合成龙珠券按钮状态 0 可点击  1 灰显
+        mergeButtonStatus: 1,               //合成龙珠券按钮状态 0 可点击  1 灰显
         forthStrategyUrl: '',               //攻略4跳转营销页链接
         thirdStrategyRemainCount: 0,       //攻略3剩余优惠券数量
-        isMergeBtn: 0,
-        timestamp: new Date().getTime(),
         couponList: [0,0,0,0],
         points: 0,
         shareStrategyUrl: '' //分享规则链接
@@ -423,31 +421,11 @@
             }
           }
         })
-      },
-      /**
-       * get current system times
-       */
-      getSystemTime () {
-        Model.getSystemTime({
-          type: 'GET'
-        }).then((result) => {
-          const data = result.data
-
-          if (result.code == 0) {
-            this.timestamp = data.timestamp
-          }
-          const currentTimestamp = new Date('2018/11/07 10:00:00').getTime()
-
-          if (this.timestamp > currentTimestamp) {
-            this.isMergeBtn = 1
-          }
-        })
       }
     },
     created () {
       this.getKoiInfo()
       this.getCouponExchange()
-      this.getSystemTime()
     }
   }
 
