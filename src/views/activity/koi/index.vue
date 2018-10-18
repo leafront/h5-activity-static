@@ -275,8 +275,8 @@
           config.staticPath + '/activity-static/images/koi_discount_amount_04.png',
         ],
         isPopup: false,
-        couponSum: 0,                  //累计无门槛优惠券总额
-        couponNum: 0,                  //累计无门槛优惠券数量
+        couponSum: 0,                      //累计无门槛优惠券总额
+        couponNum: 0,                      //累计无门槛优惠券数量
         firstStrategyButtonStatus: 0,      //攻略1按钮状态   0 可点击  1 灰显 (今日已分享)
         secondStrategyButtonStatus: 0,      //攻略2按钮状态    0 可点击  1 灰显 (今日已签到)
         thirdStrategyButtonStatus: 0,       //攻略3按钮状态    0 可点击  1 灰显 (积分兑换)
@@ -285,7 +285,7 @@
         thirdStrategyRemainCount: 0,       //攻略3剩余优惠券数量
         couponList: [0,0,0,0],
         points: 0,
-        shareStrategyUrl: '' //分享规则链接
+        shareStrategyUrl: ''              //分享规则链接
       }
     },
     components: {
