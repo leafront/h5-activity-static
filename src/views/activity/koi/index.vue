@@ -596,7 +596,7 @@
         &:after {
           content: '';
           display: inline-block;
-          margin-left: .13rem;
+          margin-left: .03rem;
           width: .15rem;
           height: .23rem;
           background: url(./images/koi_index_sprite.png) no-repeat -1.18rem -3.13rem;
@@ -667,7 +667,7 @@
         &:after{
           content: '';
           display: inline-block;
-          margin-left: .13rem;
+          margin-left: .03rem;
           width: .15rem;
           height: .23rem;
           background: url(./images/koi_index_sprite.png) no-repeat -1.37rem -3.14rem;
@@ -780,7 +780,7 @@
         &:after{
           content: '';
           display: inline-block;
-          margin-left: .13rem;
+          margin-left: .03rem;
           width: .15rem;
           height: .23rem;
           background: url(./images/koi_index_sprite.png) no-repeat -1.18rem -3.13rem;
