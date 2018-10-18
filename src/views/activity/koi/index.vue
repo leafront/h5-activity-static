@@ -62,6 +62,7 @@
           <i class="koi-discount--icon koi-discount--icon3"></i>
           <div class="koi-discount__cont--wrapper">
             <div class="koi-discount__cont">
+              <i class="koi-discount__cont--tag">免单券</i>
               <div class="koi-discount__price">
                 <i class="font-xb">¥</i>
                 <p>100</p>
@@ -78,7 +79,6 @@
           <i class="koi-discount--icon koi-discount--icon3"></i>
           <div class="koi-discount__cont--wrapper">
             <div class="koi-discount__cont">
-              <i class="koi-discount__cont--tag">免单券</i>
               <div class="koi-discount__price">
                 <i class="font-xb">¥</i>
                 <p>200</p>
@@ -324,7 +324,9 @@
        * @param {String} url
        */
       routerAction (url) {
-        location.href = url
+        if (url) {
+          location.href = url
+        }
       },
       /**
        * share operation
@@ -483,13 +485,12 @@
     padding: 0 .14rem;
     color: #fbfaf9;
     &:before,&:after{
-      bottom: 98%;
+      bottom: 100%;
       left: 50%;
       border: solid transparent;
       content: " ";
       height: 0;
       width: 0;
-      margin-top: .02rem;
       position: absolute;
     }
     &:after{
@@ -497,12 +498,13 @@
       border-bottom-color: #960508;
       border-width: .2rem;
       margin-left: -.2rem;
+      margin-top: .2rem;
     }
     &:before{
       border-color: rgba(224, 147, 108, 0);
       border-bottom-color: #e0936c;
-      border-width: .24rem;
-      margin-left: -.24rem;
+      border-width: .22rem;
+      margin-left: -.22rem;
     }
   }
   .koi-seed{
@@ -823,11 +825,11 @@
   .koi-discount__price--des{
     padding-left: .08rem;
     border-left: 2px dashed #bd0004;
-    width: 100%;
     position: relative;
     display: flex;
     height: .6rem;
     margin-left: -.02rem;
+    padding-right: .08rem;
     span{
       color: #bd0004;
       display: block;
@@ -858,9 +860,11 @@
     &__price{
       color: #bd0004;
       display: flex;
+      flex:1;
       position: relative;
       left: -.08rem;
-      padding-top: .05rem;
+      width: 1.35rem;
+      justify-content: center;
       i{
         position: relative;
         top: .3rem;
