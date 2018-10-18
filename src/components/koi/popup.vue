@@ -42,7 +42,7 @@
         this.$emit('togglePopup', false)
       },
       /**
-       * 兑换锦鲤优惠券
+       * exchange coupon
        */
       getCouponExchange () {
         this.$showPageLoading()
