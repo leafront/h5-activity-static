@@ -230,8 +230,8 @@
           </div>
         </div>
         <div class="koi-seed__des">
-          <span>已获得种子券 {{sumCouponMoney}} 张</span>
-          <strong>共计 {{sumCouponCount}} 元</strong>
+          <span>已获得种子券 {{couponNum}} 张</span>
+          <strong>共计 {{couponSum}} 元</strong>
         </div>
         <div class="koi-seed__action">
           <span v-if="isMergeBtn == 1" @click="pageAction('/activity/koi/merge')">立即合成</span>
@@ -275,8 +275,8 @@
           config.staticPath + '/activity-static/images/koi_discount_amount_04.png',
         ],
         isPopup: false,
-        sumCouponMoney: 0,                  //累计无门槛优惠券总额
-        sumCouponCount: 0,                  //累计无门槛优惠券数量
+        couponSum: 0,                  //累计无门槛优惠券总额
+        couponNum: 0,                  //累计无门槛优惠券数量
         firstStrategyButtonStatus: 0,      //攻略1按钮状态   0 可点击  1 灰显 (今日已分享)
         secondStrategyButtonStatus: 0,      //攻略2按钮状态    0 可点击  1 灰显 (今日已签到)
         thirdStrategyButtonStatus: 0,       //攻略3按钮状态    0 可点击  1 灰显 (积分兑换)
@@ -396,8 +396,8 @@
           const data = result.data
           if ((result.code == 0 || result.code == 99) && data) {
             const {
-              sumCouponMoney,
-              sumCouponCount,
+              couponNum,
+              couponSum,
               firstStrategyButtonStatus,
               secondStrategyButtonStatus,
               thirdStrategyButtonStatus,
@@ -408,8 +408,8 @@
               shareStrategyUrl,
               points
             } = data
-            this.sumCouponMoney = sumCouponMoney
-            this.sumCouponCount = sumCouponCount
+            this.couponNum = couponNum
+            this.couponSum = couponSum
             this.firstStrategyButtonStatus = firstStrategyButtonStatus
             this.secondStrategyButtonStatus = secondStrategyButtonStatus
             this.thirdStrategyButtonStatus = thirdStrategyButtonStatus
