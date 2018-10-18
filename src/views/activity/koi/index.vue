@@ -208,7 +208,7 @@
           <div class="koi-strategy-four__txt">
             <h5>下单返券</h5>
             <i>(外卖,团购订单除外）</i>
-            <p>APP 内订单支付成功1次,返10元无门槛券</p>
+            <p>APP 内订单支付成功1次,返¥10元种子券</p>
           </div>
           <div class="koi-strategy-four__action" @click="routerAction(forthStrategyUrl)">
             <span class="font-xb">去购物</span>
