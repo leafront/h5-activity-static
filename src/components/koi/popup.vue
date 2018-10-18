@@ -62,7 +62,7 @@
             this.$toast(result.message)
           }
         })
-      },
+      }
     }
   }
 
