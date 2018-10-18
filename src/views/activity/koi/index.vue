@@ -972,7 +972,7 @@
       width: .52rem;
       height: 2.61rem;
       background-position: -.59rem -.88rem;
-      margin-left: -1px;
+      margin-left: -.01rem;
     }
     &--icon3{
       width: .25rem;
@@ -980,6 +980,7 @@
       background-position: -1.15rem -1rem;
     }
     &--icon4{
+      margin-left: -.01rem;
       width: .25rem;
       height: 1.34rem;
       background-position: -1.43rem -1rem;
