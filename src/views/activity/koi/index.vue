@@ -1147,7 +1147,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: scaleIn .4s infinite;
+      animation: scaleIn 1s infinite;
       i{
         width: .26rem;
         height: .26rem;
