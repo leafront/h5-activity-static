@@ -380,7 +380,7 @@
           if (code == 0) {
             this.isPopup = true
             utils.appViewFixed()
-          } else if (code == -4) {
+          } else if (code == -3) {
             this.pageAction('/activity/koi/end')
           }
         })
