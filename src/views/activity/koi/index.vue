@@ -498,7 +498,7 @@
       border-bottom-color: #960508;
       border-width: .2rem;
       margin-left: -.2rem;
-      margin-top: .2rem;
+      bottom: 99%;
     }
     &:before{
       border-color: rgba(224, 147, 108, 0);
