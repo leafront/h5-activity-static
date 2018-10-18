@@ -55,7 +55,7 @@
           const data = result.data
           this.$hidePageLoading()
           if (result.code == 0 && data) {
-            this.$toast('兑换成功')
+            this.$toast(result.message)
             this.thirdStrategyRemainCount = data.thirdStrategyRemainCount
             this.$emit('togglePopup', false)
           } else {
