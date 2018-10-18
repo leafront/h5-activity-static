@@ -49,13 +49,14 @@
         Model.getCouponExchange({
           type: 'GET',
           data: {
-            type: 2    //type 2 积分    3 分享
+            type: 0    //0 首次访问页面  1 分享  3 积分
           }
         }).then((result) => {
           const data = result.data
           this.$hidePageLoading()
           if (result.code == 0 && data) {
             this.$toast('兑换成功')
+            this.thirdStrategyRemainCount = data.thirdStrategyRemainCount
             this.$emit('togglePopup', false)
           } else {
             this.$toast(result.message)
