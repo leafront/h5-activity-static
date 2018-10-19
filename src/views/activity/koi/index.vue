@@ -447,6 +447,9 @@
           }
         })
       },
+      /**
+       * get couponList
+       */
       getCouponList () {
         Model.getCouponList({
           type: 'GET'
