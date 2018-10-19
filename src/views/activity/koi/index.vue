@@ -342,8 +342,7 @@
           description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
           imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png'
         }
-        app.loginAction()
-        if (utils.getUserToken()) {
+        if (utils.loggedIn()) {
           app.shareAction.call(this, shareConfig, () => {
             Model.submitCouponExchange({
               type: 'POST',
@@ -358,6 +357,8 @@
               }
             })
           })
+        } else {
+					app.loginAction()
         }
       },
       /**
@@ -414,7 +415,7 @@
        * get koi info status and data
        */
       getKoiInfo () {
-        return Model.getKoiInfo({
+        Model.getKoiInfo({
           type: 'GET',
           ignoreLogin: true
         }).then((result) => {
@@ -444,11 +445,8 @@
             this.shareStrategyUrl = shareStrategyUrl
           }
           return result
-        })
-      },
-      getKoiHomeInfo () {
-        this.getKoiInfo().then((result) => {
-          if (result.code == 0) {
+        }).then((info) => {
+          if (info.code == 0) {
             this.getCouponExchange()
           }
         })
@@ -478,7 +476,7 @@
       }
     },
     created () {
-      this.getKoiHomeInfo()
+      this.getKoiInfo()
       this.getCouponList()
     }
   }
