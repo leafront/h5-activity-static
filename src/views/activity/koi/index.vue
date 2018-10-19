@@ -310,7 +310,7 @@
         if (utils.isApp()) {
           app.back()
         } else {
-          location.href = '/index.html'
+          history.back()
         }
       },
       /**
@@ -373,9 +373,11 @@
         }).then((result) => {
           const data = result.data
           this.$hidePageLoading()
-          this.$toast(result.message)
           if (result.code == 0) {
+            this.$toast(result.message)
             this.thirdStrategyRemainCount = data.thirdStrategyRemainCount
+          } else if (result.code == -1) {
+            this.$toast(result.message)
           }
         })
       },
@@ -394,8 +396,7 @@
           if (code == 0) {
             this.isPopup = true
             utils.appViewFixed()
-          } else if (code == -3) {
-            this.pageAction('/activity/koi/end')
+            this.getCouponList()
           } else if (code == -1) {
             this.$toast(result.message)
           }
@@ -424,7 +425,6 @@
               mergeButtonStatus,
               forthStrategyUrl,
               thirdStrategyRemainCount,
-              couponList,
               shareStrategyUrl,
               points
             } = data
@@ -438,9 +438,6 @@
             this.thirdStrategyRemainCount = thirdStrategyRemainCount
             this.points = points
             this.shareStrategyUrl = shareStrategyUrl
-            if (couponList && couponList.length > 0) {
-              this.couponList = couponList
-            }
           }
           return result
         }).then((info) => {
@@ -448,10 +445,25 @@
             this.getCouponExchange()
           }
         })
+      },
+      getCouponList () {
+        Model.getCouponList({
+          type: 'GET'
+        }).then((result) => {
+          const data = result.data
+
+          if (result.code == 0 && data) {
+            const couponList = data.couponList
+            if (couponList && couponList.length) {
+              this.couponList = couponList
+            }
+          }
+        })
       }
     },
     created () {
       this.getKoiInfo()
+      this.getCouponList()
     }
   }
 </script>
