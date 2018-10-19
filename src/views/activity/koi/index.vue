@@ -554,7 +554,7 @@
   .koi-strategy-four {
     background: linear-gradient(to top,#fea744,#fecd87);
     margin-top: .26rem;
-    padding: .3rem .2rem .3rem .45rem;
+    padding: .4rem .2rem .4rem .45rem;
     border-radius: .1rem;
     display: flex;
     justify-content: space-between;
