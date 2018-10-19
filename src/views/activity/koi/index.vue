@@ -176,8 +176,8 @@
             </div>
             <div class="koi-strategy__action">
               <span class="font-b" v-if="firstStrategyButtonStatus == 0" @click="shareAction">去分享</span>
-              <span class="disabled font-b" v-else-if="firstStrategyButtonStatus == 1">已分享</span>
-              <span class="disabled font-b" v-else-if="firstStrategyButtonStatus == 2">分享</span>
+              <span class="disabled font-b" v-else-if="firstStrategyButtonStatus == 1" @click="shareAction">已分享</span>
+              <span class="disabled font-b" v-else-if="firstStrategyButtonStatus == 2" @click="shareAction">分享</span>
             </div>
           </div>
           <div class="koi-strategy__item">
