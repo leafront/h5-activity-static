@@ -423,6 +423,7 @@
           const code = result.code
           if (code == 99) {
             this.isPopup = true
+            utils.appViewFixed()
           }
           if ((code == 0 || code == 99) && data) {
             const {
