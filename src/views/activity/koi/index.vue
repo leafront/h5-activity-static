@@ -172,7 +172,7 @@
             <strong class="koi-strategy__tag">攻略1</strong>
             <div class="koi-strategy__discount">
               <h5><i>¥</i>20<span>种子券</span></h5>
-              <p>分享一次 即可获得20张¥1种子券 </p>
+              <p>首次分享可获得20张¥1种子券</p>
             </div>
             <div class="koi-strategy__action">
               <span class="font-b" v-if="firstStrategyButtonStatus == 0" @click="shareAction">去分享</span>
@@ -184,7 +184,7 @@
             <strong class="koi-strategy__tag">攻略2</strong>
             <div class="koi-strategy__discount">
               <h5><i>¥</i>1<span>种子券</span></h5>
-              <p>每天限领一次 </p>
+              <p>签到返¥1种子券 每日限一次</p>
             </div>
             <div class="koi-strategy__action">
               <span class="font-b" v-if="secondStrategyButtonStatus == 0" @click="routerAction('/actives/signEvent/index.html')">去签到</span>
