@@ -197,7 +197,7 @@
           <div class="koi-strategy-three__txt">
             <h5>3积分兑换3元种子券</h5>
             <span>(每日限兑换一次)</span>
-            <p class="font">今日剩余 {{thirdStrategyRemainCount}} 张 已有积分 {{points}}</p>
+            <p class="font">今日剩余{{thirdStrategyRemainCount}}张 已有积分{{points}}</p>
           </div>
           <div class="koi-strategy-three__action">
             <span class="font-xb" v-if="thirdStrategyButtonStatus == 0" @click="submitCouponExchange">兑换</span>
@@ -376,6 +376,7 @@
           if (result.code == 0) {
             this.$toast(result.message)
             this.thirdStrategyRemainCount = data.thirdStrategyRemainCount
+            this.getKoiInfo()
             this.getCouponList()
           } else if (result.code == -1) {
             this.$toast(result.message)
@@ -407,7 +408,7 @@
        * get koi info status and data
        */
       getKoiInfo () {
-        Model.getKoiInfo({
+        return Model.getKoiInfo({
           type: 'GET',
           ignoreLogin: true
         }).then((result) => {
@@ -437,8 +438,11 @@
             this.shareStrategyUrl = shareStrategyUrl
           }
           return result
-        }).then((info) => {
-          if (info.code == 0) {
+        })
+      },
+      getKoiHomeInfo () {
+        this.getKoiInfo().then((result) => {
+          if (result.code == 0) {
             this.getCouponExchange()
           }
         })
@@ -465,7 +469,7 @@
       }
     },
     created () {
-      this.getKoiInfo()
+      this.getKoiHomeInfo()
       this.getCouponList()
     }
   }
@@ -987,7 +991,7 @@
       width: .52rem;
       height: 2.61rem;
       background-position: -.59rem -.88rem;
-      margin-left: -.01rem;
+      margin-left: -.02rem;
     }
     &--icon3{
       width: .25rem;
@@ -995,7 +999,7 @@
       background-position: -1.15rem -1rem;
     }
     &--icon4{
-      margin-left: -.01rem;
+      margin-left: -.02rem;
       width: .25rem;
       height: 1.34rem;
       background-position: -1.43rem -1rem;
