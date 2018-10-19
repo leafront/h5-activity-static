@@ -351,8 +351,11 @@
               type: 1    //0 首次访问页面  1 分享  3 积分
             }
           }).then((result) => {
-            this.$toast(result.message)
-
+            if (result.code == 0) {
+              this.$toast(result.message)
+            } else if (result.code == -1) {
+              this.$toast(result.message)
+            }
           })
         })
       },
