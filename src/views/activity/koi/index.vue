@@ -340,15 +340,14 @@
           description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
           imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png'
         }
-        app.shareAction.call(this, shareConfig, () => {
-          Model.submitCouponExchange({
-            type: 'POST',
-            data: {
-              type: 1    //0 首次访问页面  1 分享  3 积分
-            }
-          }).then((result) => {
-            this.$toast(result.message)
-          })
+        Model.submitCouponExchange({
+          type: 'POST',
+          data: {
+            type: 1    //0 首次访问页面  1 分享  3 积分
+          }
+        }).then((result) => {
+          this.$toast(result.message)
+          app.shareAction.call(this, shareConfig)
         })
       },
       /**
@@ -555,7 +554,7 @@
   .koi-strategy-four {
     background: linear-gradient(to top,#fea744,#fecd87);
     margin-top: .26rem;
-    padding: .4rem .2rem .24rem .45rem;
+    padding: .3rem .2rem .3rem .45rem;
     border-radius: .1rem;
     display: flex;
     justify-content: space-between;
@@ -597,7 +596,7 @@
         font-size: .34rem;
         color: #be0000;
         position: relative;
-        top: -.1rem;
+        top: 0;
       }
       i{
         color: #be0000;
@@ -608,7 +607,7 @@
         transform: scale(.5);
         position: absolute;
         left: 1.6rem;
-        top: 0;
+        top: .1rem;
       }
       p {
         width: 9rem;
@@ -618,7 +617,7 @@
         transform: scale(.5);
         position: absolute;
         left: 0;
-        top: .4rem;
+        top: .45rem;
       }
     }
   }
