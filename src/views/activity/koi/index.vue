@@ -376,6 +376,7 @@
           if (result.code == 0) {
             this.$toast(result.message)
             this.thirdStrategyRemainCount = data.thirdStrategyRemainCount
+            this.getCouponList()
           } else if (result.code == -1) {
             this.$toast(result.message)
           }
@@ -417,8 +418,6 @@
           }
           if ((code == 0 || code == 99) && data) {
             const {
-              couponNum,
-              couponSum,
               firstStrategyButtonStatus,
               secondStrategyButtonStatus,
               thirdStrategyButtonStatus,
@@ -428,8 +427,6 @@
               shareStrategyUrl,
               points
             } = data
-            this.couponNum = couponNum
-            this.couponSum = couponSum
             this.firstStrategyButtonStatus = firstStrategyButtonStatus
             this.secondStrategyButtonStatus = secondStrategyButtonStatus
             this.thirdStrategyButtonStatus = thirdStrategyButtonStatus
@@ -453,7 +450,13 @@
           const data = result.data
 
           if (result.code == 0 && data) {
-            const couponList = data.couponList
+            const {
+              couponList,
+              couponNum,
+              couponSum
+            } = data
+            this.couponNum = couponNum
+            this.couponSum = couponSum
             if (couponList && couponList.length) {
               this.couponList = couponList
             }
