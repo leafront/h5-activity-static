@@ -382,8 +382,8 @@
             this.thirdStrategyRemainCount = thirdStrategyRemainCount
             this.points = points
             this.thirdStrategyButtonStatus = thirdStrategyButtonStatus
-            this.getCouponList()
             this.$toast(result.message)
+            this.getCouponList()
           } else if (result.code == -1) {
             this.$toast(result.message)
           }
