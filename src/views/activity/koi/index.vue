@@ -334,7 +334,7 @@
        */
       shareAction () {
         if (!(utils.isApp() || utils.weixin())) {
-          this.$toast('请在APP中打开分享')
+          this.$toast('请在APP或微信中打开分享')
           return
         }
         const shareConfig = {
@@ -344,20 +344,22 @@
           imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png'
         }
         app.loginAction()
-        app.shareAction.call(this, shareConfig, () => {
-          Model.submitCouponExchange({
-            type: 'POST',
-            data: {
-              type: 1    //0 首次访问页面  1 分享  3 积分
-            }
-          }).then((result) => {
-            if (result.code == 0) {
-              this.$toast(result.message)
-            } else if (result.code == -1) {
-              this.$toast(result.message)
-            }
+        if (utils.getUserToken()) {
+          app.shareAction.call(this, shareConfig, () => {
+            Model.submitCouponExchange({
+              type: 'POST',
+              data: {
+                type: 1    //0 首次访问页面  1 分享  3 积分
+              }
+            }).then((result) => {
+              if (result.code == 0) {
+                this.$toast(result.message)
+              } else if (result.code == -1) {
+                this.$toast(result.message)
+              }
+            })
           })
-        })
+        }
       },
       /**
        * exchange coupon
