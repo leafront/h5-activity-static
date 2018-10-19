@@ -47,28 +47,14 @@
        * exchange coupon
        */
       submitCouponExchange () {
-        this.$showPageLoading()
-        app.loginAction()
-        Model.submitCouponExchange({
-          type: 'GET',
-          data: {
-            type: 0    //0 首次访问页面  1 分享  3 积分
-          }
-        }).then((result) => {
-          const data = result.data
-          this.$hidePageLoading()
-          if (result.code == 0 && data) {
-            this.$toast(result.message)
-            this.thirdStrategyRemainCount = data.thirdStrategyRemainCount
-            this.$emit('togglePopup', false)
-          } else {
-            this.$toast(result.message)
-          }
-        })
+        if (utils.getUserToken()) {
+          this.$emit('togglePopup', false)
+        } else {
+          app.loginAction()
+        }
       }
     }
   }
-
 </script>
 
 <style lang="scss">

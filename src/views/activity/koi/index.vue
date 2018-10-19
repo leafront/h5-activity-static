@@ -189,7 +189,6 @@
             <div class="koi-strategy__action">
               <span class="font-b" v-if="secondStrategyButtonStatus == 0" @click="routerAction('/actives/signEvent/index.html')">去签到</span>
               <span class="disabled font-b" v-else-if="secondStrategyButtonStatus == 1">今日已签到</span>
-              <span class="disabled font-b" v-else-if="secondStrategyButtonStatus == 2">签到</span>
             </div>
           </div>
         </div>
@@ -201,9 +200,9 @@
             <p class="font">今日剩余 {{thirdStrategyRemainCount}} 张 已有积分 {{points}}</p>
           </div>
           <div class="koi-strategy-three__action">
-            <span class="font-xb" v-if="thirdStrategyButtonStatus == 0" @click="submitCouponExchange">去兑换</span>
-            <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 1">今日已兑换</span>
-            <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 2">兑换</span>
+            <span class="font-xb" v-if="thirdStrategyButtonStatus == 0" @click="submitCouponExchange">兑换</span>
+            <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 1">兑换</span>
+            <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 2">今日已兑换</span>
           </div>
         </div>
         <div class="koi-strategy-four">
@@ -397,6 +396,8 @@
             utils.appViewFixed()
           } else if (code == -3) {
             this.pageAction('/activity/koi/end')
+          } else if (code == -1) {
+            this.$toast(result.message)
           }
         })
       },
@@ -410,6 +411,9 @@
         }).then((result) => {
           const data = result.data
           const code = result.code
+          if (code == 99) {
+            this.isPopup = true
+          }
           if ((code == 0 || code == 99) && data) {
             const {
               couponNum,
@@ -438,12 +442,16 @@
               this.couponList = couponList
             }
           }
+          return result
+        }).then((info) => {
+          if (info.code == 0) {
+            this.getCouponExchange()
+          }
         })
       }
     },
     created () {
       this.getKoiInfo()
-      this.getCouponExchange()
     }
   }
 </script>
