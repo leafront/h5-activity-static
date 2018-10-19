@@ -558,6 +558,7 @@
     border-radius: .1rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: relative;
     &__action {
       display: flex;
@@ -596,7 +597,7 @@
         font-size: .34rem;
         color: #be0000;
         position: relative;
-        top: 0;
+        top: -.1rem;
       }
       i{
         color: #be0000;
@@ -607,7 +608,7 @@
         transform: scale(.5);
         position: absolute;
         left: 1.6rem;
-        top: .1rem;
+        top: 0;
       }
       p {
         width: 9rem;
