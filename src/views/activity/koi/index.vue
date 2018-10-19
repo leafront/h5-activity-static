@@ -176,7 +176,8 @@
             </div>
             <div class="koi-strategy__action">
               <span class="font-b" v-if="firstStrategyButtonStatus == 0" @click="shareAction">去分享</span>
-              <span class="disabled font-b" v-else>已分享</span>
+              <span class="disabled font-b" v-else-if="firstStrategyButtonStatus == 1">已分享</span>
+              <span class="disabled font-b" v-else-if="firstStrategyButtonStatus == 2">分享</span>
             </div>
           </div>
           <div class="koi-strategy__item">
@@ -187,7 +188,8 @@
             </div>
             <div class="koi-strategy__action">
               <span class="font-b" v-if="secondStrategyButtonStatus == 0" @click="routerAction('/actives/signEvent/index.html')">去签到</span>
-              <span class="disabled font-b" v-else>今日已签到</span>
+              <span class="disabled font-b" v-else-if="secondStrategyButtonStatus == 1">今日已签到</span>
+              <span class="disabled font-b" v-else-if="secondStrategyButtonStatus == 2">签到</span>
             </div>
           </div>
         </div>
@@ -200,7 +202,8 @@
           </div>
           <div class="koi-strategy-three__action">
             <span class="font-xb" v-if="thirdStrategyButtonStatus == 0" @click="submitCouponExchange">去兑换</span>
-            <span class="disabled font-xb" v-else>今日已兑换</span>
+            <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 1">今日已兑换</span>
+            <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 2">兑换</span>
           </div>
         </div>
         <div class="koi-strategy-four">
@@ -285,7 +288,7 @@
         thirdStrategyRemainCount: 0,       //攻略3剩余优惠券数量
         couponList: [0,0,0,0],
         points: 0,
-        shareStrategyUrl: ''              //分享规则链接
+        shareStrategyUrl: ''             //分享规则链接
       }
     },
     components: {
@@ -340,14 +343,17 @@
           description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
           imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png'
         }
-        Model.submitCouponExchange({
-          type: 'POST',
-          data: {
-            type: 1    //0 首次访问页面  1 分享  3 积分
-          }
-        }).then((result) => {
-          this.$toast(result.message)
-          app.shareAction.call(this, shareConfig)
+        app.loginAction()
+        app.shareAction.call(this, shareConfig, () => {
+          Model.submitCouponExchange({
+            type: 'POST',
+            data: {
+              type: 1    //0 首次访问页面  1 分享  3 积分
+            }
+          }).then((result) => {
+            this.$toast(result.message)
+
+          })
         })
       },
       /**
@@ -358,7 +364,7 @@
         Model.submitCouponExchange({
           type: 'POST',
           data: {
-            type: 0    //0 首次访问页面  1 分享  3 积分
+            type: 3    //0 首次访问页面  1 分享  3 积分
           }
         }).then((result) => {
           const data = result.data
@@ -377,7 +383,7 @@
           type: 'GET',
           ignoreLogin: true,
           data: {
-            type: 3  //0 首次访问页面  1 分享  3 积分
+            type: 0  //0 首次访问页面  1 分享  3 积分
           }
         }).then((result) => {
           const code = result.code
@@ -398,7 +404,8 @@
           ignoreLogin: true
         }).then((result) => {
           const data = result.data
-          if ((result.code == 0 || result.code == 99) && data) {
+          const code = result.code
+          if ((code == 0 || code == 99) && data) {
             const {
               couponNum,
               couponSum,
@@ -434,9 +441,7 @@
       this.getCouponExchange()
     }
   }
-
 </script>
-
 
 <style lang="scss">
   .koi-seed__action{

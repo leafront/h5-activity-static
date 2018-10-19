@@ -17,6 +17,8 @@
 
   import utils from '@/widget/utils'
 
+  import app from '@/widget/app'
+
   export default {
     props: {
       isPopup: {
@@ -46,6 +48,7 @@
        */
       submitCouponExchange () {
         this.$showPageLoading()
+        app.loginAction()
         Model.submitCouponExchange({
           type: 'GET',
           data: {

@@ -226,14 +226,12 @@
           this.autoPlayTimer = null
         }
       }
-
     },
     watch: {
       list () {
         setTimeout(() => {
           this.init()
         },0)
-
         this.$el.addEventListener('touchstart',(e) => {
           this.touchstart(e)
         }, false)
@@ -244,14 +242,10 @@
           this.touchend(e)
         },false)
       }
-
     },
-    destroyed () {
-
+    beforeDestroy () {
       clearInterval(this.autoPlayTimer)
-
     }
-
   }
 
 </script>
