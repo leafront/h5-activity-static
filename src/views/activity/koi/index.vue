@@ -371,8 +371,8 @@
                   firstStrategyButtonStatus
                 } = data
                 this.firstStrategyButtonStatus = firstStrategyButtonStatus
-                this.getCouponList()
                 this.$toast(result.message)
+                this.getCouponList()
               } else if (result.code == -1) {
                 this.$toast(result.message)
               }

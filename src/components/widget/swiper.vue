@@ -37,7 +37,7 @@
       // 阻止页面上下滑动
       preventDefault: {
         type: Boolean,
-        default: false
+        default: true
       },
       autoTime: {
         type: Number,
