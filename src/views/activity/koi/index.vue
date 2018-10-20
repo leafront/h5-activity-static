@@ -368,7 +368,7 @@
           }).then((result) => {
             if (result.code == 0) {
               this.$toast(result.message)
-               this.getKoiInfo()
+              this.getKoiInfo()
               this.getCouponList()
             } else if (result.code == -1) {
               this.$toast(result.message)
