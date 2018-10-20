@@ -412,6 +412,7 @@
             } else if (result.code == -5) {
               this.$toast(result.message)
               this.getKoiInfo()
+              this.getCouponList()
             }
           })
         } else {
