@@ -187,7 +187,7 @@
               <p>签到返¥1种子券 每日限一次</p>
             </div>
             <div class="koi-strategy__action">
-              <span class="font-b" v-if="secondStrategyButtonStatus == 0" @click="routerAction('/actives/signEvent/index.html')">去签到</span>
+              <span class="font-b" v-if="secondStrategyButtonStatus == 0" @click="signAction('/actives/signEvent/index.html')">去签到</span>
               <span class="disabled font-b" v-else-if="secondStrategyButtonStatus == 1">今日已签到</span>
             </div>
           </div>
@@ -287,7 +287,8 @@
         thirdStrategyRemainCount: 0,       //攻略3剩余优惠券数量
         couponList: [0,0,0,0],
         points: 0,
-        shareStrategyUrl: ''             //分享规则链接
+        shareStrategyUrl: '',             //分享规则链接
+        couponTimer: null
       }
     },
     components: {
@@ -311,6 +312,17 @@
           app.back()
         } else {
           history.back()
+        }
+      },
+      /**
+       * page location
+       * @param {String} url
+       */
+      signAction (url) {
+        if (utils.loggedIn) {
+          location.href = url
+        } else {
+          utils.login()
         }
       },
       /**
@@ -479,6 +491,16 @@
     created () {
       this.getKoiInfo()
       this.getCouponList()
+      const query = utils.query()
+      const {
+        refresh,
+        time
+      } = query
+      if (refresh == 1 && time > 0) {
+        this.couponTimer = setTimeout(() => {
+          this.getCouponList()
+        }, time)
+      }
     }
   }
 </script>
