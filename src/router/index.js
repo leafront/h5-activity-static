@@ -42,6 +42,8 @@ const koiIndex = r => require.ensure([], () =>  r(require('@/views/activity/koi/
 
 const koiRule = r => require.ensure([], () =>  r(require('@/views/activity/koi/rule.vue')),'koiRule')
 
+const koiMerge = r => require.ensure([], () =>  r(require('@/views/activity/koi/koi_merge.vue')),'koiMerge')
+
 export default new Router({
   mode:'history',
   routes: [
@@ -184,6 +186,14 @@ export default new Router({
       meta: {
         title: '活动规则'
       }
+    },{
+      path: '/activity/koi/koi_merge',
+      name: 'koiMerge',
+      component: koiMerge,
+      meta: {
+        title: '锦鲤券'
+      }
     }
+
   ]
 })

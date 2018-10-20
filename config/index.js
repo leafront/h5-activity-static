@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/osc-api': {
