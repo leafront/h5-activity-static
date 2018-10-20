@@ -359,25 +359,25 @@
           imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png'
         }
         if (utils.loggedIn()) {
-          app.shareAction.call(this, shareConfig, () => {
-            Model.submitCouponExchange({
-              type: 'POST',
-              data: {
-                type: 1    //0 首次访问页面  1 分享  3 积分
-              }
-            }).then((result) => {
-              if (result.code == 0) {
-                const {
-                  firstStrategyButtonStatus
-                } = data
-                this.firstStrategyButtonStatus = firstStrategyButtonStatus
-                this.$toast(result.message)
-                this.getCouponList()
-              } else if (result.code == -1) {
-                this.$toast(result.message)
-              }
-            })
+          Model.submitCouponExchange({
+            type: 'POST',
+            data: {
+              type: 1    //0 首次访问页面  1 分享  3 积分
+            }
+          }).then((result) => {
+            if (result.code == 0) {
+              const data = result.data
+              const {
+                firstStrategyButtonStatus
+              } = data
+              this.firstStrategyButtonStatus = firstStrategyButtonStatus
+              this.$toast(result.message)
+              this.getCouponList()
+            } else if (result.code == -1) {
+              this.$toast(result.message)
+            }
           })
+          app.shareAction.call(this, shareConfig)
         } else {
 					app.loginAction()
         }
@@ -513,6 +513,12 @@
         this.couponTimer = setTimeout(() => {
           this.getCouponList()
         }, time)
+      }
+    },
+    beforeDestroy () {
+      const couponTimer = this.couponTimer
+      if (couponTimer) {
+        clearTimeout(couponTimer)
       }
     }
   }

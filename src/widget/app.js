@@ -190,7 +190,7 @@ const app = {
       })
       setTimeout(() => {
         callback && callback()
-      },3000)
+      },2000)
     } else {
       if (utils.weixin()) {
         this.updateShareMenu(true)
