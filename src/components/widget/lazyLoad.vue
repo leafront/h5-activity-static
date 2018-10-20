@@ -67,7 +67,6 @@
        *
        */
       scrollLoad () {
-
         const list = Array.prototype.slice.apply(this.appView.querySelectorAll('.' + this.default.ele + '[data-src]'))
 
         if (!list.length && this.default.complete) {
@@ -92,28 +91,24 @@
       },
       /**
        * @param {Object} el
-       *
-       *
        */
       loadImg(el) { //加载图片
 
         el.dataset.LazyLoadImgState = 'start'
-        const imgUrl = el.dataset.src
+        const picURL = el.dataset.src
 
-        if (imgUrl) {
+        if (picURL) {
           const img = new Image()
-          img.src = imgUrl
+          img.src = picURL
           img.addEventListener('load', () => {
             setTimeout(() => {
-              el.style.backgroundImage = 'url('+imgUrl+')'
+              el.style.backgroundImage = 'url('+picURL+')'
               el.style.backgroundSize = '100% auto'
               delete el.dataset.src
               el.dataset.LazyLoadImgState = 'success'
               el.classList.add('successImg')
             },150)
-
           }, false)
-
           img.addEventListener('error', () => {
             delete el.dataset.src
             el.dataset.LazyLoadImgState = 'error'
