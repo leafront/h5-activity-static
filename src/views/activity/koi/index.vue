@@ -409,12 +409,16 @@
               this.getCouponList()
             } else if (result.code == -1) {
               this.$toast(result.message)
+            } else if (result.code == -5) {
+              this.$toast(result.message)
+              this.getKoiInfo()
             }
           })
         } else {
           app.loginAction()
         }
       },
+
       /**
        * get coupon info
        */
