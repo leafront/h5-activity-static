@@ -319,10 +319,14 @@
        * @param {String} url
        */
       signAction (url) {
-        if (utils.loggedIn) {
+        if (utils.loggedIn()) {
           location.href = url
         } else {
-          utils.login()
+          if (utils.isApp()) {
+            utils.login()
+          } else {
+            location.href = url
+          }
         }
       },
       /**
@@ -363,6 +367,11 @@
               }
             }).then((result) => {
               if (result.code == 0) {
+                const {
+                  firstStrategyButtonStatus
+                } = data
+                this.firstStrategyButtonStatus = firstStrategyButtonStatus
+                this.getCouponList()
                 this.$toast(result.message)
               } else if (result.code == -1) {
                 this.$toast(result.message)
@@ -377,30 +386,34 @@
        * exchange coupon
        */
       submitCouponExchange () {
-        this.$showPageLoading()
-        Model.submitCouponExchange({
-          type: 'POST',
-          data: {
-            type: 3    //0 首次访问页面  1 分享  3 积分
-          }
-        }).then((result) => {
-          const data = result.data
-          this.$hidePageLoading()
-          if (result.code == 0) {
-            const {
-              thirdStrategyRemainCount,
-              points,
-              thirdStrategyButtonStatus
-            } = data
-            this.thirdStrategyRemainCount = thirdStrategyRemainCount
-            this.points = points
-            this.thirdStrategyButtonStatus = thirdStrategyButtonStatus
-            this.$toast(result.message)
-            this.getCouponList()
-          } else if (result.code == -1) {
-            this.$toast(result.message)
-          }
-        })
+        if (utils.loggedIn()) {
+          this.$showPageLoading()
+          Model.submitCouponExchange({
+            type: 'POST',
+            data: {
+              type: 3    //0 首次访问页面  1 分享  3 积分
+            }
+          }).then((result) => {
+            const data = result.data
+            this.$hidePageLoading()
+            if (result.code == 0) {
+              const {
+                thirdStrategyRemainCount,
+                points,
+                thirdStrategyButtonStatus
+              } = data
+              this.thirdStrategyRemainCount = thirdStrategyRemainCount
+              this.points = points
+              this.thirdStrategyButtonStatus = thirdStrategyButtonStatus
+              this.$toast(result.message)
+              this.getCouponList()
+            } else if (result.code == -1) {
+              this.$toast(result.message)
+            }
+          })
+        } else {
+          app.loginAction()
+        }
       },
       /**
        * get coupon info
