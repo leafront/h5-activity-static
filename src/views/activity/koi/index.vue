@@ -187,7 +187,7 @@
               <p>签到返¥1种子券 每日限一次</p>
             </div>
             <div class="koi-strategy__action">
-              <span class="font-b" v-if="secondStrategyButtonStatus == 0" @click="signAction('/actives/signEvent/index.html')">去签到</span>
+              <span class="font-b" v-if="secondStrategyButtonStatus == 0" @click="signAction(signUrl)">去签到</span>
               <span class="disabled font-b" v-else-if="secondStrategyButtonStatus == 1">今日已签到</span>
             </div>
           </div>
@@ -288,7 +288,8 @@
         couponList: [0,0,0,0],
         points: 0,
         shareStrategyUrl: '',             //分享规则链接
-        couponTimer: null
+        couponTimer: null,
+        signUrl: ''
       }
     },
     components: {
@@ -366,12 +367,8 @@
             }
           }).then((result) => {
             if (result.code == 0) {
-              const data = result.data
-              const {
-                firstStrategyButtonStatus
-              } = data
-              this.firstStrategyButtonStatus = firstStrategyButtonStatus
               this.$toast(result.message)
+               this.getKoiInfo()
               this.getCouponList()
             } else if (result.code == -1) {
               this.$toast(result.message)
@@ -397,15 +394,8 @@
             const data = result.data
             this.$hidePageLoading()
             if (result.code == 0) {
-              const {
-                thirdStrategyRemainCount,
-                points,
-                thirdStrategyButtonStatus
-              } = data
-              this.thirdStrategyRemainCount = thirdStrategyRemainCount
-              this.points = points
-              this.thirdStrategyButtonStatus = thirdStrategyButtonStatus
               this.$toast(result.message)
+              this.getKoiInfo()
               this.getCouponList()
             } else if (result.code == -1) {
               this.$toast(result.message)
@@ -464,7 +454,8 @@
               forthStrategyUrl,
               thirdStrategyRemainCount,
               shareStrategyUrl,
-              points
+              points,
+              signUrl
             } = data
             this.firstStrategyButtonStatus = firstStrategyButtonStatus
             this.secondStrategyButtonStatus = secondStrategyButtonStatus
@@ -474,6 +465,7 @@
             this.thirdStrategyRemainCount = thirdStrategyRemainCount
             this.points = points
             this.shareStrategyUrl = shareStrategyUrl
+            this.signUrl = signUrl
           }
           return result
         }).then((info) => {
