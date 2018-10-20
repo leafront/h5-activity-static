@@ -197,7 +197,7 @@
           <div class="koi-strategy-three__txt">
             <h5>3积分兑换3元种子券</h5>
             <span>(每日限兑换一次)</span>
-            <p class="font">今日剩余{{thirdStrategyRemainCount}}张 已有积分{{points}}</p>
+            <p class="font">今日剩余 {{thirdStrategyRemainCount}} 张 已有积分 {{points}}</p>
           </div>
           <div class="koi-strategy-three__action">
             <span class="font-xb" v-if="thirdStrategyButtonStatus == 0" @click="submitCouponExchange">兑换</span>
