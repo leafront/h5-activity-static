@@ -5,11 +5,11 @@
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <Banner :bannerList="yiqizhuan_banner"></Banner>
       <div class="make-money-list clearfix">
-        <div class="make-money-item" v-if="welfare_activity.length" @click="pageAction('/activity/inviteFriends/invitation')">
+        <div class="make-money-item" v-if="welfare_activity.length" @click="pageAction(this['welfare_activity'][0].linkUrl)">
           <img :src="welfare_activity[0].imageUrl | imgScale(100)">
           <p>{{welfare_activity[0].name}}</p>
         </div>
-        <div class="make-money-item" v-if="creative_material.length" @click="pageAction('/activity/inviteFriends/invitation')">
+        <div class="make-money-item" v-if="creative_material.length" @click="pageAction(this['creative_material'][0].linkUrl)">
           <img :src="creative_material[0].imageUrl | imgScale(100)">
           <p>{{creative_material[0].name}}</p>
         </div>
@@ -195,7 +195,8 @@
             cancelText: '取消',
             confirmText: '申请推客',
             success (){
-              location.href = '/activity/inviteFriends/invitation'
+              // location.href = '/applyToTuike.html'
+            location.href = '/activity/inviteFriends/invitation'
             }
           })
         }
@@ -380,7 +381,7 @@
             cancelText: '取消',
             confirmText: '申请推客',
             success() {
-              location.href = '/applyToTuike.html'
+              location.href = '/activity/inviteFriends/invitation'
             }
           })
         }
