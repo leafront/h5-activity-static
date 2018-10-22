@@ -5,11 +5,11 @@
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <Banner :bannerList="yiqizhuan_banner"></Banner>
       <div class="make-money-list clearfix">
-        <div class="make-money-item" v-if="welfare_activity.length" @click="checkTweetAction('welfare_activity')">
+        <div class="make-money-item" v-if="welfare_activity.length" @click="pageAction('/activity/inviteFriends/invitation')">
           <img :src="welfare_activity[0].imageUrl | imgScale(100)">
           <p>{{welfare_activity[0].name}}</p>
         </div>
-        <div class="make-money-item" v-if="creative_material.length" @click="checkTweetAction('creative_material')">
+        <div class="make-money-item" v-if="creative_material.length" @click="pageAction('/activity/inviteFriends/invitation')">
           <img :src="creative_material[0].imageUrl | imgScale(100)">
           <p>{{creative_material[0].name}}</p>
         </div>
@@ -195,7 +195,7 @@
             cancelText: '取消',
             confirmText: '申请推客',
             success (){
-              location.href = '/applyToTuike.html'
+              location.href = '/activity/inviteFriends/invitation'
             }
           })
         }
@@ -367,11 +367,13 @@
         } = this.userInfo  // 如果是分销商或者代言人
 
         if (isDistributor == 1 || distributorType == 3) {
-          if (utils.isApp()) {
-            location.href = 'lyf://inviteFriend'
-          } else {
-            location.href = url
-          }
+
+          location.href = url
+          // if (utils.isApp()) {
+          //   location.href = 'lyf://inviteFriend'
+          // } else {
+          //   location.href = url
+          // }
         } else {
           this.$showModal({
             content: '您还不是推客！',
