@@ -55,6 +55,8 @@ export default {
     if(utils.isApp()) {
       if (utils.getVersion() <= 5320) {
         app.postMessage('hiddenHead',{'isHidden':'1'})
+      } else if (utils.query('isHidden') == 1) {
+        app.postMessage('hiddenHead',{'isHidden':'0'})
       }
     }
   }
