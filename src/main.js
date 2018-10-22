@@ -30,6 +30,11 @@ router.beforeEach((to, from, next) => {
   } else {
     document.body.style.backgroundColor = '#f5f5f5'
   }
+
+  const isHidden = utils.query('isHidden')
+  if (isHidden == 1){
+    app.postMessage('hiddenHead',{'isHidden':'0'})
+  }
   if (
     to.matched.some(record => record.meta.requireLogin) &&
     process.env.NODE_ENV != 'develop'

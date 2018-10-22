@@ -38,15 +38,11 @@
     },
     computed: {
       showHeader () {
-        return this.isShowHeader || !(utils.weixin() || utils.nativeQQ() || utils.getVersion() >= 5320)
+        return this.isShowHeader || !(utils.weixin() || utils.nativeQQ() || utils.getVersion() >= 5320 || (utils.query('isHidden') == 1 && utils.isApp()))
       }
     },
     methods: {
       backAction () {
-        const isHidden = utils.query('isHidden')
-        if (isHidden == 1){
-          app.postMessage('hiddenHead',{'isHidden':'0'})
-        }
         if (this.backFn && typeof this.backFn == 'function') {
           this.backFn()
         } else {

@@ -52,7 +52,7 @@ export default {
   },
   created () {
     //统一隐藏app头部
-    if(utils.isApp()) {
+    if(utils.isApp() && utils.query('isHidden') !== 1) {
       if (utils.getVersion() <= 5320) {
         app.postMessage('hiddenHead',{'isHidden':'1'})
       }
