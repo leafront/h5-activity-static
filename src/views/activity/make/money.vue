@@ -5,11 +5,11 @@
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <Banner :bannerList="yiqizhuan_banner"></Banner>
       <div class="make-money-list clearfix">
-        <div class="make-money-item" v-if="welfare_activity.length" @click="pageAction(this['welfare_activity'][0].linkUrl)">
+        <div class="make-money-item" v-if="welfare_activity.length" @click="checkTweetAction1('welfare_activity')">
           <img :src="welfare_activity[0].imageUrl | imgScale(100)">
           <p>{{welfare_activity[0].name}}</p>
         </div>
-        <div class="make-money-item" v-if="creative_material.length" @click="pageAction(this['creative_material'][0].linkUrl)">
+        <div class="make-money-item" v-if="creative_material.length" @click="checkTweetAction1('creative_material')">
           <img :src="creative_material[0].imageUrl | imgScale(100)">
           <p>{{creative_material[0].name}}</p>
         </div>
@@ -180,6 +180,18 @@
       /**
        * 推客跳转
        */
+       checkTweetAction1 (parmas) {
+         app.loginAction()
+         const {
+           isDistributor,
+           distributorType
+         } = this.userInfo  // 如果是分销商或者代言人
+           location.href = this[parmas][0].linkUrl
+
+       },
+
+
+
       checkTweetAction (parmas) {
         app.loginAction()
         const {
