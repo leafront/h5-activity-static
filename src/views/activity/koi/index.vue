@@ -188,7 +188,7 @@
             </div>
             <div class="koi-strategy__action">
               <span class="font-b" v-if="secondStrategyButtonStatus == 0" @click="signAction(signUrl)">去签到</span>
-              <span class="disabled font-b" v-else-if="secondStrategyButtonStatus == 1">今日已签到</span>
+              <span class="disabled font-b" v-else-if="secondStrategyButtonStatus == 1" @click="signAction(signUrl)">今日已签到</span>
             </div>
           </div>
         </div>
