@@ -360,21 +360,22 @@
           imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png'
         }
         if (utils.loggedIn()) {
-          Model.submitCouponExchange({
-            type: 'POST',
-            data: {
-              type: 1    //0 首次访问页面  1 分享  3 积分
-            }
-          }).then((result) => {
-            if (result.code == 0) {
-              this.$toast(result.message)
-              this.getKoiInfo()
-              this.getCouponList()
-            } else if (result.code == -1) {
-              this.$toast(result.message)
-            }
+          app.shareAction.call(this, shareConfig, () => {
+            Model.submitCouponExchange({
+              type: 'POST',
+              data: {
+                type: 1    //0 首次访问页面  1 分享  3 积分
+              }
+            }).then((result) => {
+              if (result.code == 0) {
+                this.$toast(result.message)
+                this.getKoiInfo()
+                this.getCouponList()
+              } else if (result.code == -1) {
+                this.$toast(result.message)
+              }
+            })
           })
-          app.shareAction.call(this, shareConfig)
         } else {
 					app.loginAction()
         }
