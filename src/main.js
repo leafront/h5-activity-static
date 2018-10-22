@@ -1,6 +1,7 @@
 
 import Vue from 'vue'
 import Application from './App'
+import app from '@/widget/app'
 import router from './router'
 import store from './store'
 import utils from '@/widget/utils'
@@ -29,6 +30,11 @@ router.beforeEach((to, from, next) => {
     document.getElementById('app').backgroundColor = bgColor
   } else {
     document.body.style.backgroundColor = '#f5f5f5'
+  }
+
+  const isHidden = utils.query('isHidden')
+  if (isHidden == 1){
+    app.postMessage('hiddenHead',{'isHidden':'0'})
   }
   if (
     to.matched.some(record => record.meta.requireLogin) &&
