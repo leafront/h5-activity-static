@@ -43,6 +43,10 @@
     },
     methods: {
       backAction () {
+        const isHidden = utils.query('isHidden')
+        if (isHidden == 1){
+          app.postMessage('hiddenHead',{'isHidden':'0'})
+        }
         if (this.backFn && typeof this.backFn == 'function') {
           this.backFn()
         } else {
