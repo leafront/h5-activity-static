@@ -59,9 +59,9 @@ input {
   overflow-x:hidden;
   display: flex;
   flex-direction: column;
-  padding-top: .88rem;
   min-height: 100%;
   min-height: 100vh;
+  padding-top: .88rem;
 }
 .pic-lazyLoad {
   background:url('/activity-static/images/lazyLoad.jpeg') no-repeat #f5f5f5 center center;
