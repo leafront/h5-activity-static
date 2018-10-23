@@ -53,10 +53,10 @@ export default {
   watch: {
     '$route'() {
       const isHidden = utils.query('isHidden')
-      if (isHidden == 1){
+      if (isHidden == 1 || utils.weixin() || utils.nativeQQ()){
         document.getElementById('app').style.paddingTop = 0
       } else {
-         document.getElementById('app').style.paddingTop = '.88rem'
+        document.getElementById('app').style.paddingTop = '.88rem'
       }
     }
   },
