@@ -53,18 +53,25 @@ export default {
   watch: {
     '$route'() {
       const isHidden = utils.query('isHidden')
-      if (isHidden == 1 || utils.weixin() || utils.nativeQQ()){
+      if (utils.isApp()) {
+        if (utils.getVersion() <= 5320) {
+          if (isHidden == 1) {
+            document.getElementById('app').style.paddingTop = 0
+            app.postMessage('hiddenHead',{'isHidden':'0'})
+          } else {
+            document.getElementById('app').style.paddingTop = '.88rem'
+            app.postMessage('hiddenHead',{'isHidden':'1'})
+          }
+        } else {
+          document.getElementById('app').style.paddingTop = 0
+          app.postMessage('hiddenHead',{'isHidden':'0'})
+        }
+      } else if (utils.weixin() || utils.nativeQQ()){
         document.getElementById('app').style.paddingTop = 0
+      } else if (isHidden == 0) {
+        document.getElementById('app').style.paddingTop = '.88rem'
       } else {
         document.getElementById('app').style.paddingTop = '.88rem'
-      }
-    }
-  },
-  created () {
-    //统一隐藏app头部
-    if(utils.isApp() && utils.query('isHidden') == undefined) {
-      if (utils.getVersion() <= 5320) {
-        app.postMessage('hiddenHead',{'isHidden':'1'})
       }
     }
   }

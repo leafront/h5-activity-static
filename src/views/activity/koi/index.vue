@@ -396,11 +396,17 @@
             this.$hidePageLoading()
             if (result.code == 0) {
               this.$toast(result.message)
-              this.getKoiInfo()
+              const {
+                points,
+                thirdStrategyButtonStatus,
+                thirdStrategyRemainCount
+              } = data
+              this.points = points
+              this.thirdStrategyButtonStatus = thirdStrategyButtonStatus
+              this.thirdStrategyRemainCount = thirdStrategyRemainCount
               this.getCouponList()
             } else if (result.code == -1) {
               this.$toast(result.message)
-            } else if (result.code == -5) {
               this.$toast(result.message)
               this.getKoiInfo()
               this.getCouponList()
