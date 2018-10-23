@@ -27,7 +27,7 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title
   const bgColor = to.meta.bgColor
   if (bgColor) {
-    document.body.backgroundColor = bgColor
+    document.body.style.backgroundColor = bgColor
   } else {
     document.body.style.backgroundColor = '#f5f5f5'
   }
