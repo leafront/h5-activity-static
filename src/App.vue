@@ -55,6 +55,8 @@ export default {
       const isHidden = utils.query('isHidden')
       if (isHidden == 1){
         document.getElementById('app').style.paddingTop = 0
+      } else {
+         document.getElementById('app').style.paddingTop = '.88rem'
       }
     }
   },
