@@ -50,6 +50,14 @@ export default {
       }
     })
   },
+  watch: {
+    '$route'() {
+      const isHidden = utils.query('isHidden')
+      if (isHidden == 1){
+        document.getElementById('app').style.paddingTop = 0
+      }
+    }
+  },
   created () {
     //统一隐藏app头部
     if(utils.isApp() && utils.query('isHidden') == undefined) {
