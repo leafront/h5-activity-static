@@ -40,7 +40,7 @@ const schoolStart = r => require.ensure([], () =>  r(require('@/views/activity/s
 
 const koiIndex = r => require.ensure([], () =>  r(require('@/views/activity/koi/index.vue')),'koiIndex')
 
-const koiRule = r => require.ensure([], () =>  r(require('@/views/activity/koi/rule.vue')),'koiRule')
+const koiEnd = r => require.ensure([], () =>  r(require('@/views/activity/koi/end.vue')),'koiEnd')
 
 export default new Router({
   mode:'history',
@@ -175,14 +175,16 @@ export default new Router({
       name: 'koiIndex',
       component: koiIndex,
       meta: {
-        title: '锦鲤券'
+        title: '翻倍锦鲤券',
+        bgColor: '#bd0004'
       }
     }, {
-      path: '/activity/koi/rule',
-      name: 'koiRule',
-      component: koiRule,
+      path: '/activity/koi/end',
+      name: 'koiEnd',
+      component: koiEnd,
       meta: {
-        title: '活动规则'
+        title: '翻倍锦鲤券',
+        bgColor: '#bd0004'
       }
     }
   ]

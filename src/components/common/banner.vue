@@ -37,11 +37,8 @@
 			swiper
 		},
 		methods: {
-
 			pageAction (url) {
-
 				if (url) {
-
 					location.href = url
 				}
 			},

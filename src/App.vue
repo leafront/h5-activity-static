@@ -52,7 +52,7 @@ export default {
   },
   created () {
     //统一隐藏app头部
-    if(utils.isApp()) {
+    if(utils.isApp() && utils.query('isHidden') == undefined) {
       if (utils.getVersion() <= 5320) {
         app.postMessage('hiddenHead',{'isHidden':'1'})
       }
@@ -67,5 +67,4 @@ export default {
   @import './styles/loading.scss';
   @import './styles/toast.scss';
   @import './styles/dialog.scss';
-  @import './styles/slidershow.scss';
 </style>

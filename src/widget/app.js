@@ -2,6 +2,8 @@ import utils from './utils'
 
 import store from './store'
 
+import weixin_share from '@/common/weixin_share'
+
 //回调函数计数
 var count = 0;
 
@@ -70,77 +72,6 @@ const app = {
   back (refresh,forceBack) {
     this.postMessage("webViewBack", {refresh: refresh ? 1 : 0, forceBack: forceBack ? 1 : 0});
   },
-
-  //唤起app登录
-  login () {
-    window.location.href = "lyf://login";
-  },
-
-  //通知app退出
-  logout () {
-    window.location.href = "lyf://logout";
-  },
-  //user token name
-  utName: "lyfh5ut",
-
-  //判断用户是否已登录
-  loggedIn () {
-    // 优先判断后端写入的ut是否存在
-    let checkUt = utils.getCookie('ut');
-    let ut = utils.getCookie(this.utName);
-
-    //后端ut不存在，并且不是app，直接判断为未登录,并且将备份的lyfh5ut设置为‘’
-    if(!utils.isApp() && !checkUt){
-      // 微信端ut 有效期是session级别，微信退出后 会需要重新登录
-      if (utils.weixin()) {
-        return !!ut
-      }
-      utils.setCookie(this.utName, "");
-      return false;
-    }
-    //如果存在 后端有ut，但前端this.utName不存在的情况，将前端的this.utName，设置为后端的ut值
-    if(!ut && checkUt){
-      if(!utils.isApp()){
-        utils.setCookie(this.utName,checkUt);
-        ut = checkUt;
-      }
-    }
-    if(utils.isApp()){
-      if(!ut){//部分手机不能正常写入cookie
-        ut = utils.getUaParams().ut;
-      }
-    }
-    return ut && ut.length > 0;
-  },
-
-  //获取UT
-  getUserToken () {
-    // 优先判断后端写入的ut是否存在
-    let checkUt = utils.getCookie('ut');
-    let ut = utils.getCookie(this.utName);
-    //后端ut不存在，并且不是app，直接判断为未登录,并且将备份的lyfh5ut设置为‘’
-    if(!utils.isApp() && !checkUt){
-      // 微信端ut 有效期是session级别，微信退出后 会需要重新登录
-      if (utils.weixin() && !!ut) {
-        return ut
-      }
-      utils.setCookie(this.utName, "");
-      return '';
-    }
-    //如果存在 后端有ut，但前端this.utName不存在的情况，将前端的this.utName，设置为后端的ut值
-    if(!ut && checkUt){
-      if(!utils.isApp()){
-        utils.setCookie(this.utName,checkUt);
-        ut = checkUt;
-      }
-    }
-    if(utils.isApp()){
-      if(!ut){//部分手机不能正常写入cookie
-        ut = utils.getUaParams().ut;
-      }
-    }
-    return  ut;
-  },
   //获取distributorId 分销商ID
   getDistributorId () {
     return  store.get(this.distributorId,'session');
@@ -155,21 +86,9 @@ const app = {
       store.set(this.distributorId, id || '','session');//track 埋点需要
     }
   },
-
-  //设置UT
-  setUserToken (ut) {
-    utils.setCookie(this.utName, ut);
-  },
-
-  //清空用户登录UT
-  //因为在iphone6 se版本的微信里无法删除cookie，所以只能通过设置为空来标识用户退出登录状态。
-  deleteUserToken () {
-    utils.setCookie(this.utName, "");
-    utils.setCookie('ut', "");
-  },
   requireLogin (from) {
     if (utils.isApp()) {
-      app.login()
+      utils.login()
     } else {
 
       const from = utils.getRelatedUrl()
@@ -222,24 +141,62 @@ const app = {
     fragment = null
   },
   loginAction () {
-
-    if (app.loggedIn()) {
+    if (utils.loggedIn()) {
       return
     } else {
-
       if (utils.isApp()) {
-
-        app.login()
-
+        utils.login()
       } else {
-
         const from = utils.getRelatedUrl()
-
         if (from) {
           window.location.href = `/login.html?from=` + encodeURIComponent(from)
         } else {
           window.location.href = '/login.html'
         }
+      }
+    }
+  },
+  /**
+   * 分享操作
+   * @param {String} link
+   * @param {String} title
+   * @param {String} description
+   * @param {String} imgUrl
+   */
+  shareAction ({
+    link,
+    title,
+    description,
+    imgUrl
+  },callback) {
+    const shareConfig = {
+      link: link,
+      url: link,
+      title,
+      desc: description,
+      description,
+      imgUrl,
+      pic: imgUrl
+    }
+    if (utils.isApp()) {
+      app.postMessage('share',{
+        url: shareConfig.url,
+        title: shareConfig.title,
+        description: shareConfig.description,
+        url160x160: shareConfig.pic,
+        pic: shareConfig.pic
+      },() => {
+        callback && callback()
+      })
+      setTimeout(() => {
+        callback && callback()
+      },2000)
+    } else {
+      if (utils.weixin()) {
+        this.updateShareMenu(true)
+        weixin_share.weixinShare(shareConfig).then(() => {
+          callback && callback()
+        })
       }
     }
   }

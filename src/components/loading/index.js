@@ -3,19 +3,11 @@ import utils from '@/widget/utils'
 
 const pageLoading = {
   installed: false,
-  install (Vue, options) {
+  install (Vue) {
     if(pageLoading.installed) return
-    let opt = {
-      // 默认持续时间
-      duration: "3000"
-    }
-    // 使用options的配置
-    for(let i in options) {
-      opt[i] = options[i]
-    }
     Vue.prototype.$showLoading = () => {
 
-      // 如果页面有toast则不继续执行
+      // 如果页面有showLoading则不继续执行
       if(document.getElementById('showLoading')) return
       // 1、创建构造器，定义好提示信息的模板
       let loadingTpl = Vue.extend({

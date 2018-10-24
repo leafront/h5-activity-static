@@ -178,7 +178,7 @@
 
         this.$showPageLoading()
 
-        const ut = app.getUserToken()
+        const ut = utils.getUserToken()
 
         Model.createPay({
           type: 'POST',
