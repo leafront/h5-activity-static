@@ -6,6 +6,37 @@ import utils from './utils'
 
 import config from '@/config/index'
 
+const clearStorage = () => {
+
+  const currentTime = new Date().getTime()
+  if (utils.isLocalStorageSupported()) {
+
+    for (let i = 0; i < localStorage.length; i++) {
+
+      const key = localStorage.key(i);
+
+      const cacheData = store.get(key,'local')
+      if (cacheData && cacheData.times) {
+        if (currentTime > cacheData.times) {
+          store.remove(key,'local')
+        }
+      }
+    }
+  } else {
+    if (window.name) {
+      const storage = utils.deserialize(window.name)
+      for (let attr in storage) {
+        const cacheData = store.get(attr,'local')
+        if (cacheData && cacheData.times) {
+          if (currentTime > cacheData.times) {
+            store.remove(attr,'local')
+          }
+        }
+      }
+    }
+  }
+}
+
 export default function request (url,{
   type,
   timeout,
