@@ -2,9 +2,6 @@
 import Vue from 'vue'
 import Application from './App'
 import app from '@/widget/app'
-import {
-  sendTracker
-} from '@/widget/tracker'
 import router from './router'
 import store from './store'
 import utils from '@/widget/utils'
