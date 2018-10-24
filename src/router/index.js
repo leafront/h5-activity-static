@@ -176,7 +176,7 @@ export default new Router({
       component: koiIndex,
       meta: {
         title: '翻倍锦鲤券',
-        bgColor: 'bd0004'
+        bgColor: '#bd0004'
       }
     }, {
       path: '/activity/koi/end',
