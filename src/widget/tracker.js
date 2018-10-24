@@ -7,6 +7,19 @@ import utils from '@/widget/utils'
 
 const getTracker = (data) => request('/tracker/post', data)
 
+/**
+ * @parmas {String} uuid
+ */
+const generateUUID = () => {
+  let d = new Date().getTime()
+  let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    let r = (d + Math.random()*16)%16 | 0;
+    d = Math.floor(d/16);
+    return (c=='x' ? r : (r&0x3|0x8)).toString(16)
+  })
+  return uuid
+}
+
 const getParseUrl = (url) => {
   if (!url) {
     return
@@ -44,7 +57,7 @@ export const sendTracker = ({
 	  tv: '1.0',
 	  v: '', //version 客户端版本号
 	  ut: utils.getUserToken(),
-	  uid: utils.generateUUID(),
+	  uid: generateUUID(),
 	  pid, // 页面ID
 	  inf: '', // inFrom 内部来源 上一个页面的page id
 	  cha: 'H5', // channel 所属渠道编码：IOS／ANDROID／H5/APPLET（小程序）／WEBSITE（官网）
