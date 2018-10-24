@@ -23,7 +23,6 @@ Object.keys(filter).forEach(key => {
 })
 
 router.beforeEach((to, from, next) => {
-
   document.title = to.meta.title
   const bgColor = to.meta.bgColor
   if (bgColor) {
