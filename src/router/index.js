@@ -183,8 +183,7 @@ export default new Router({
       name: 'koiEnd',
       component: koiEnd,
       meta: {
-        title: '翻倍锦鲤券',
-        bgColor: '#bd0004'
+        title: '翻倍锦鲤券'
       }
     }
   ]

@@ -8,6 +8,7 @@ const config = JSON.stringify({
   "getTime": new Date().getTime(),
   "pageId": 1003070101000191,
   "schoolId": "b1a0a8de32a5f6870521bb77df59a6f2",
+  "trackerPath": "http://10.3.3.109:8080",
   "source": "h5"
 })
 

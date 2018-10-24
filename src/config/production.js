@@ -8,6 +8,7 @@ const config = JSON.stringify({
   "getTime": new Date().getTime(),
   "pageId": 1003069501000018,
   "schoolId": "5d56f59c981886694a66312ebdb23f34",
+  "trackerPath": "http://tracker.laiyifen.com"
   "source": "h5"
 })
 
