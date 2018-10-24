@@ -1,14 +1,9 @@
-
 import request from '@/widget/request'
-
 import config from '@/config/index'
-
 import utils from '@/widget/utils'
 
-const getTracker = (data) => request('/tracker/post', data)
-
 /**
- * @parmas {String} uuid
+ * @return {String} uuid
  */
 const generateUUID = () => {
   let d = new Date().getTime()
@@ -19,7 +14,10 @@ const generateUUID = () => {
   })
   return uuid
 }
-
+/**
+ * @param  {String} url
+ * @return {String} _obj
+ */
 const getParseUrl = (url) => {
   if (!url) {
     return
@@ -34,16 +32,19 @@ const getParseUrl = (url) => {
   return _obj
 }
 /**
- * params {Object} 	pdid {String} ppid {String}
- *   
+ * 页面埋点
+ * @param  {String} pid 页面埋点
+ * @param  {String} ppid 前序页面id
+ * @return {Null}
  */
 export const sendTracker = ({
 	pid = '',
-  ppid = ''  // 前序页面id  需要放在data中 先注释
+  ppid = ''
  } = {
  	pid: '',
  	ppid: ''
  }) => {
+ 	const getTracker = (data) => request('/tracker/post', data)
 	const referrer = document.referrer
 	const pageInfo = {
 	 'index.html': {
