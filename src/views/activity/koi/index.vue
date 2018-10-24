@@ -8,7 +8,7 @@
         <p class="koi__banner--txt font-s">种子券收集时间:10.22～11.13</p>
         <div class="koi__banner--rule" @click="routerAction(shareStrategyUrl)">
           <i>!</i>
-          <span>规则</span>
+          <span class="font">10秒玩转锦鲤券</span>
         </div>
       </div>
       <div class="koi-nav">
@@ -1213,8 +1213,8 @@
       position: absolute;
       right: .58rem;
       top: .84rem;
-      width: 1rem;
-      height: .4rem;
+      width: 2.6rem;
+      height: .5rem;
       border-radius: .1rem;
       background: #ca221a;
       display: flex;
