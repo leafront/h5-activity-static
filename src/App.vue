@@ -68,8 +68,6 @@ export default {
         }
       } else if (utils.weixin() || utils.nativeQQ()){
         document.getElementById('app').style.paddingTop = 0
-      } else if (isHidden == 0) {
-        document.getElementById('app').style.paddingTop = '.88rem'
       } else {
         document.getElementById('app').style.paddingTop = '.88rem'
       }
