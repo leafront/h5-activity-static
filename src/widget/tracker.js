@@ -82,7 +82,7 @@ export const sendTracker = ({
 	params.data = JSON.stringify(params.data)
 	getTracker({
 		type: 'POST',
-		data: parmas,
+		data: params,
 		hostPath: config.trackerPath
 	})
 }
