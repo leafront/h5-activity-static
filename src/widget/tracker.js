@@ -38,7 +38,7 @@ export const sendTracker = ({
 		p_id: 1
 	 }
   }
-	const parmas = {
+	const params = {
 	  ev: '17',
 	  did: '',
 	  tv: '1.0',
@@ -56,17 +56,17 @@ export const sendTracker = ({
 	  } 
 	}
 	if (ppid) {
-		parmas.data.ppid = ppid
+		params.data.ppid = ppid
 	}
 
 	if (referrer) {
 		const referrerPath = getParseUrl(referrer)
 		if (pageInfo[referrerPath.path]) {
-			parmas.inf = pageInfo[referrerPath.path].p_name
+			params.inf = pageInfo[referrerPath.path].p_name
 			params.data.ppid = pageInfo[referrerPath.path].p_id
 		}
 	}
-	parmas.data = JSON.stringify(parmas.data)
+	params.data = JSON.stringify(params.data)
 	getTracker({
 		type: 'POST',
 		data: parmas,

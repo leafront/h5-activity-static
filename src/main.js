@@ -2,6 +2,9 @@
 import Vue from 'vue'
 import Application from './App'
 import app from '@/widget/app'
+import {
+  sendTracker
+} from '@/widget/tracker'
 import router from './router'
 import store from './store'
 import utils from '@/widget/utils'
@@ -23,6 +26,8 @@ Object.keys(filter).forEach(key => {
 })
 
 router.beforeEach((to, from, next) => {
+
+  sendTracker()
 
   document.title = to.meta.title
   const bgColor = to.meta.bgColor
