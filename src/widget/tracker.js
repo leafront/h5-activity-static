@@ -20,7 +20,10 @@ const getParseUrl = (url) => {
   }
   return _obj
 }
-
+/**
+ * params {Object} 	pdid {String} ppid {String}
+ *   
+ */
 export const sendTracker = ({
 	pid = '',
   ppid = ''  // 前序页面id  需要放在data中 先注释
@@ -29,9 +32,10 @@ export const sendTracker = ({
  	ppid: ''
  }) => {
 	const referrer = document.referrer
-	const pageName = {
+	const pageInfo = {
 	 'index.html': {
-		name: 'home'
+		p_name: 'home',
+		p_id: 1
 	 }
   }
 	const parmas = {
@@ -57,8 +61,9 @@ export const sendTracker = ({
 
 	if (referrer) {
 		const referrerPath = getParseUrl(referrer)
-		if (pageName[referrerPath.path]) {
-			parmas.inf = pageName[referrerPath.path].name
+		if (pageInfo[referrerPath.path]) {
+			parmas.inf = pageInfo[referrerPath.path].p_name
+			params.data.ppid = pageInfo[referrerPath.path].p_id
 		}
 	}
 	parmas.data = JSON.stringify(parmas.data)
