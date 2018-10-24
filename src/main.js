@@ -25,6 +25,8 @@ Object.keys(filter).forEach(key => {
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title
   const bgColor = to.meta.bgColor
+  const shareConfig = to.meta.shareConfig
+
   if (bgColor) {
     document.body.style.backgroundColor = bgColor
   } else {
@@ -37,6 +39,9 @@ router.beforeEach((to, from, next) => {
     //判断用户已经登录
     if (utils.loggedIn()) {
       next()
+      if (shareConfig) {
+        app.setShareContent(shareConfig)
+      }
     } else {
       if (utils.isApp()) {
         utils.login()
@@ -47,6 +52,9 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     next()
+    if (shareConfig) {
+      app.setShareContent(shareConfig)
+    }
   }
 })
 

@@ -69,7 +69,7 @@ export const sendTracker = ({
 	  	cpu: location.href
 	  } 
 	}
-
+	
 	if (referrer) {
 		const referrerPath = getParseUrl(referrer)
 		if (pageInfo[referrerPath.path]) {

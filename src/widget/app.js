@@ -157,6 +157,30 @@ const app = {
     }
   },
   /**
+   * @param {String} link. 链接
+   * @param {String} title 标题
+   * @param {String} desc  描述
+   * @param {String} imgUrl 图片地址
+   */
+  setShareContent ({
+    link,
+    title,
+    desc,
+    imgUrl
+  }) {
+    if (utils.getVersion() >= 5320) {
+      app.postMessage('setShareContent', {
+        url: link,
+        title,
+        description: desc,
+        url160x160: imgUrl,
+        pic: imgUrl
+      }, () => {
+        
+      })
+    }
+  },
+  /**
    * 分享操作
    * @param {String} link
    * @param {String} title
@@ -179,7 +203,7 @@ const app = {
       pic: imgUrl
     }
     if (utils.isApp()) {
-      app.postMessage('share',{
+      app.postMessage('share', {
         url: shareConfig.url,
         title: shareConfig.title,
         description: shareConfig.description,
