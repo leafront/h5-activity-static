@@ -1,20 +1,15 @@
-import ajax from './ajax'
-
+import ajax from '@/widget/ajax'
 import store from '@/widget/store'
-
-import utils from './utils'
-
+import utils from '@/widget/utils'
 import config from '@/config/index'
 
 const clearStorage = () => {
-
   const currentTime = new Date().getTime()
   if (utils.isLocalStorageSupported()) {
 
     for (let i = 0; i < localStorage.length; i++) {
 
       const key = localStorage.key(i);
-
       const cacheData = store.get(key,'local')
       if (cacheData && cacheData.times) {
         if (currentTime > cacheData.times) {
@@ -135,11 +130,9 @@ export default function request (url,{
   return new Promise((resolve, reject) => {
 
     let currentTime = new Date().getTime()
-
     const cacheData = store.get(cacheUrl,'local')
 
     if (cache && cacheData) {
-
       const getCacheTime = cacheData.times
       if (currentTime < getCacheTime) {
         resolve(cacheData.results)
@@ -149,7 +142,6 @@ export default function request (url,{
         httpRequest(resolve,reject)
       }
     } else {
-
       store.remove(cacheUrl,'local')
       httpRequest (resolve,reject)
 
