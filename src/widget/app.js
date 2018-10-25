@@ -86,15 +86,6 @@ const app = {
       store.set(this.distributorId, id || '','session');//track 埋点需要
     }
   },
-  requireLogin (from) {
-    if (utils.isApp()) {
-      utils.login()
-    } else {
-
-      const from = utils.getRelatedUrl()
-      window.location.href = `/login.html?from=` + encodeURIComponent(from);
-    }
-  },
   toast (text,times = 1500) {
     const tpl = `
       <div class="ui-toast-mask">
