@@ -8,11 +8,15 @@
 
   import utils from '@/widget/utils'
 
+  import '@/widget/requestAnimationFrame'
+
   export default {
     props: ['options','list'],
     data () {
       return {
         appView: null,
+        ticking: false,
+        timer: null,
         default: {
           scrollEle: 'appView',
           ele:'pic-lazyLoad',
@@ -32,7 +36,6 @@
     },
     mounted () {
       this.appView = document.getElementById(this.default.scrollEle)
-
     },
     watch: {
       list () {
@@ -40,9 +43,6 @@
           this.startLoad()
         },0)
       }
-    },
-    beforeDestroy () {
-      window.removeEventListener('scroll',this.scrollImg,false)
     },
     methods: {
       /**
@@ -67,9 +67,10 @@
        *
        */
       scrollLoad () {
-        const list = Array.prototype.slice.apply(this.appView.querySelectorAll('.' + this.default.ele + '[data-src]'))
 
+        const list = Array.prototype.slice.apply(this.appView.querySelectorAll('.' + this.default.ele + '[data-src]'))
         if (!list.length && this.default.complete) {
+          cancelAnimationFrame(this.timer)
           window.removeEventListener('scroll',this.scrollImg,utils.isPassive() ? {passive: true} : false)
         } else {
           list.forEach((el) => {
@@ -80,10 +81,14 @@
         }
       },
       scrollImg () {
-
-        utils.throttle(() => {
-          this.scrollLoad()
-        },this.default.time)()
+        if(!this.ticking) {
+          this.timer = requestAnimationFrame(this.realFunc)
+          this.ticking = true
+        }
+      },
+      realFunc () {
+        this.scrollLoad()
+        this.ticking = false
       },
       startLoad (){
         this.scrollLoad()
@@ -91,24 +96,28 @@
       },
       /**
        * @param {Object} el
+       *
+       *
        */
       loadImg(el) { //加载图片
 
         el.dataset.LazyLoadImgState = 'start'
-        const picURL = el.dataset.src
+        const imgUrl = el.dataset.src
 
-        if (picURL) {
+        if (imgUrl) {
           const img = new Image()
-          img.src = picURL
+          img.src = imgUrl
           img.addEventListener('load', () => {
             setTimeout(() => {
-              el.style.backgroundImage = 'url('+picURL+')'
+              el.style.backgroundImage = 'url('+imgUrl+')'
               el.style.backgroundSize = '100% auto'
               delete el.dataset.src
               el.dataset.LazyLoadImgState = 'success'
               el.classList.add('successImg')
             },150)
+
           }, false)
+
           img.addEventListener('error', () => {
             delete el.dataset.src
             el.dataset.LazyLoadImgState = 'error'
@@ -117,6 +126,11 @@
           delete el.dataset.src
         }
       }
+    },
+    beforeDestroy () {
+      cancelAnimationFrame(this.timer)
+      window.removeEventListener('scroll',this.scrollImg,false)
     }
   }
 </script>
+ 
