@@ -1,6 +1,10 @@
 
 import request from '@/widget/request'
 
+export const getKoiMerge = (data) => request('/api/promotion/dragonball/unionInfo', data)
+
+export const union = (data) => request('/api/promotion/dragonball/union', data)
+
 export const submitCouponExchange = (data) => request('/api/promotion/dragonball/getCoupon', data)
 
 export const getCouponExchange = (data) => request('/api/promotion/dragonball/getCoupon', data)
