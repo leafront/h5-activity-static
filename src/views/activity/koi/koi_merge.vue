@@ -360,7 +360,12 @@ export default {
 
     getKoiMerge() {
       Model.getKoiMerge({
-        type: 'POST'
+        type: 'GET',
+        data:{
+          userId: "10009561",
+          ut: "406702f98a9b735d704af11d3bd7f9ef61"
+        }
+
       }).then((result) => {
         const data = result.data
         if (result.code == 0 && data) {
