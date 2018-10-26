@@ -151,7 +151,7 @@
             </div>
           </div>
         </div>
-        <div class="fst_bd_botton">
+        <div class="fst_bd_botton" @click = "union()">
           立即合成
         </div>
       </div>
@@ -334,6 +334,30 @@ export default {
         location.href = '/index.html'
       }
     },
+
+    /*
+    * 数据处理函数
+    */
+
+    handleData(unionMaxList,unionFullList,myCouponList,showUnionType){
+
+      this.myCouponList = myCouponList
+      this.decideShow(2)
+      if(unionMaxList.length && unionMaxList.length > 2){
+        this.prompt = true
+        this.arrSplit(unionMaxList,this.unionMaxList,this.unionMaxList1)
+      }else {
+        this.unionMaxList = unionMaxList
+      }
+      if(unionFullList.length && unionFullList.length > 2){
+        this.prompt1 = true
+        this.arrSplit(unionFullList,this.unionFullList,this.unionFullList1)
+      }else {
+         this.unionFullList = unionFullList
+      }
+    },
+
+
     getKoiMerge() {
       Model.getKoiMerge({
         type: 'POST'
@@ -341,25 +365,50 @@ export default {
         const data = result.data
         if (result.code == 0 && data) {
            let {unionMaxList,unionFullList,myCouponList,showUnionType} = data
-           this.myCouponList = myCouponList
-           this.decideShow(2)
-           if(unionMaxList.length > 2){
-             this.prompt = true
-             this.arrSplit(unionMaxList,this.unionMaxList,this.unionMaxList1)
-           }else {
-             this.unionMaxList = unionMaxList
-           }
-           if(unionFullList.length > 2){
-             this.prompt1 = true
-             this.arrSplit(unionFullList,this.unionFullList,this.unionFullList1)
-           }else {
-              this.unionFullList = unionFullList
-           }
+           this.handleData(unionMaxList,unionFullList,myCouponList,showUnionType);
+           // this.myCouponList = myCouponList
+           // this.decideShow(2)
+           // if(unionMaxList.length > 2){
+           //   this.prompt = true
+           //   this.arrSplit(unionMaxList,this.unionMaxList,this.unionMaxList1)
+           // }else {
+           //   this.unionMaxList = unionMaxList
+           // }
+           // if(unionFullList.length > 2){
+           //   this.prompt1 = true
+           //   this.arrSplit(unionFullList,this.unionFullList,this.unionFullList1)
+           // }else {
+           //    this.unionFullList = unionFullList
+           // }
         } else {
 
         }
       })
     },
+
+    /*
+    * 合成
+    */
+    union() {
+      if(!this.selectNum){
+        this.$toast("请选择合成方式")
+        return
+      }
+      Model.union({
+        type: 'POST',
+        unionType: this.selectNum
+      }).then((result) => {
+        const data = result.data
+        if (result.code == 0 && data) {
+           let {unionMaxList,unionFullList,myCouponList,showUnionType} = data
+           this.handleData(unionMaxList,unionFullList,myCouponList,showUnionType);
+        } else {
+
+        }
+      })
+    },
+
+
 
     /*
     * 判端合成内容的显示

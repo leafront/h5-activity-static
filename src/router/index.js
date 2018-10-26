@@ -187,7 +187,7 @@ export default new Router({
         title: '活动规则'
       }
     },{
-      path: '/activity/koi/koi_merge',
+      path: '/activity/koi/merge',
       name: 'koiMerge',
       component: koiMerge,
       meta: {
