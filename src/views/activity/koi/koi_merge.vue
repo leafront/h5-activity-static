@@ -319,7 +319,10 @@ export default {
       }
       Model.union({
         type: 'POST',
-        unionType: this.selectNum
+        data:{
+          unionType: this.selectNum
+        }
+
       }).then((result) => {
         const data = result.data
         if (result.code == 0 && data) {
