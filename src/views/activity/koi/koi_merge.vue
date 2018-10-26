@@ -260,7 +260,7 @@ export default {
     handleData(unionMaxList,unionFullList,myCouponList,showUnionType){
 
       this.myCouponList = myCouponList
-      this.decideShow(2)
+      this.decideShow(showUnionType)
       if(unionMaxList.length && unionMaxList.length > 2){
         this.prompt = true
         this.arrSplit(unionMaxList,this.unionMaxList,this.unionMaxList1)
