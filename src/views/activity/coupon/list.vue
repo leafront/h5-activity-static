@@ -2,30 +2,28 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper" @scroll="scrollLoadList" :class="{'visibility': pageView}">
-      <div class="coupon-list-view" id="coupon-list-view">
-        <Banner :bannerList="bannerList"></Banner>
-        <div class="coupon-list">
-          <div class="coupon-item" :class="{'disabled': item.overFlg == 1}" :key="index" v-for="(item,index) in list">
-            <div class="coupon-item-info">
-              <div class="coupon-item-info-txt">
-                <p>¥<strong>{{item.couponAmount}}</strong></p>
-                <span>优惠券</span>
-              </div>
-              <div class="coupon-item-des">
-                <h4 class="c3">{{item.themeTitle}}</h4>
-                <p class="c9">{{item.themeDesc||'暂无说明'}}</p>
-              </div>
+    <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
+      <Banner :bannerList="bannerList"></Banner>
+      <div class="coupon-list">
+        <div class="coupon-item" :class="{'disabled': item.overFlg == 1}" :key="index" v-for="(item,index) in list">
+          <div class="coupon-item-info">
+            <div class="coupon-item-info-txt">
+              <p>¥<strong>{{item.couponAmount}}</strong></p>
+              <span>优惠券</span>
             </div>
-            <div class="coupon-item-status">
-              <span class="font-s" @click="receiveCoupon(item.couponThemeId)" v-if="item.overFlg == 0 && item.userOverFlg == 0 && item.userDayOverFlg == 0">领取</span>
-              <span class="font-s" v-else-if="item.overFlg == 1">已领完</span>
-              <span class="font-s coupon-button-receive" v-else-if="item.overFlg == 0 && (item.userOverFlg == 1 || item.userDayOverFlg == 1)">已领取</span>
+            <div class="coupon-item-des">
+              <h4 class="c3">{{item.themeTitle}}</h4>
+              <p class="c9">{{item.themeDesc||'暂无说明'}}</p>
             </div>
           </div>
+          <div class="coupon-item-status">
+            <span class="font-s" @click="receiveCoupon(item.couponThemeId)" v-if="item.overFlg == 0 && item.userOverFlg == 0 && item.userDayOverFlg == 0">领取</span>
+            <span class="font-s" v-else-if="item.overFlg == 1">已领完</span>
+            <span class="font-s coupon-button-receive" v-else-if="item.overFlg == 0 && (item.userOverFlg == 1 || item.userDayOverFlg == 1)">已领取</span>
+          </div>
         </div>
-        <PageLoading :showLoading="showLoading"></PageLoading>
       </div>
+      <PageLoading :showLoading="showLoading"></PageLoading>
     </div>
   </div>
 </template>
@@ -46,6 +44,8 @@
 
   import PageLoading from '@/components/common/pageLoading'
 
+  import '@/widget/requestAnimationFrame'
+
   export default {
     data () {
       return {
@@ -56,8 +56,9 @@
         currentPage: 1,
         list: [],
         showLoading: false,
-        isScrollLoad: true,
-        totalPage: 1
+        isScrollLoad: false,
+        totalPage: 1,
+        timer: null
       }
     },
     components: {
@@ -113,7 +114,7 @@
             if (currentPage > 1) {
               setTimeout(() => {
                 this.showLoading = false
-                this.isScrollLoad = true
+                this.isScrollLoad = false
               }, 1000)
             }
             this.totalPage = data.total
@@ -125,7 +126,7 @@
           } else {
             if (currentPage > 1) {
               setTimeout(() => {
-                this.isScrollLoad = true
+                this.isScrollLoad = false
               }, 1000)
             }
             this.$toast(result.message)
@@ -133,25 +134,25 @@
           return result
         })
       },
-      /**
-       * 滚动加载优惠券
+       /**
+       * 滚动加载团列表
        * @param event
        */
-      scrollLoadList (event) {
-
-        const pageViewHeight = event.target.clientHeight
-        const scrollTop = event.target.scrollTop
-        const pageHeight = document.getElementById('coupon-list-view').clientHeight
-        if (pageViewHeight + scrollTop > pageHeight && this.list.length < this.totalPage) {
-          utils.throttle(() => {
-            if (!this.isScrollLoad) {
-              return
-            }
-            this.isScrollLoad = false
+      scrollLoadList () {
+        const pageViewHeight = window.innerHeight
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        const pageHeight = document.documentElement.offsetHeight
+        const realFunc = () => {
+          if (pageViewHeight + scrollTop >= pageHeight && this.list.length < this.totalPage) {
             this.showLoading = true
             this.currentPage += 1
             this.getCouponList(1)
-          })()
+          } 
+          this.isScrollLoad = false
+        }
+        if (!this.isScrollLoad) {
+          this.isScrollLoad = true
+          this.timer = requestAnimationFrame(realFunc)
         }
       },
       /**
@@ -196,6 +197,8 @@
           }
         }
       })
+      window.addEventListener('scroll',this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
+
     }
   }
 
