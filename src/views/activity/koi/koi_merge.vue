@@ -37,14 +37,6 @@
           <div class="fst_bd2_content ">
             <p class="bd2_cont_title">面额最大抵更多</p>
             <!-- 前两个 -->
-            <div class="bd2_cont_body">
-              <div class="list_circle">
-              </div>
-              <div class="list_text">
-                <p>随机戴森吹风机兑换券/100元免单券×1 张 </p>
-                <p>今日剩余<span class="text_style">888</span>张</p>
-              </div>
-            </div>
 
             <div class="bd2_cont_body"  v-for="(item, index) in unionMaxList" >
               <div class="list_circle">
@@ -57,14 +49,6 @@
             <!-- 前两个结束 -->
 
             <!-- 后面内容 -->
-            <div class="bd2_cont_body">
-              <div class="list_circle">
-              </div>
-              <div class="list_text">
-                <p>随机戴森吹风机兑换券/100元免单券×1 张 </p>
-                <p>今日剩余<span class="text_style">888</span>张</p>
-              </div>
-            </div>
 
             <div class="bd2_cont_body"  v-for="(item, index) in unionMaxList1" v-show = "otherArr" >
               <div class="list_circle">
@@ -95,14 +79,6 @@
           <div class="fst_bd2_content ">
             <p class="bd2_cont_title">精打细算不浪费</p>
             <!-- 前两个 -->
-            <div class="bd2_cont_body">
-              <div class="list_circle">
-              </div>
-              <div class="list_text">
-                <p>随机戴森吹风机兑换券/100元免单券×1 张 </p>
-                <p>今日剩余<span class="text_style">888</span>张</p>
-              </div>
-            </div>
 
             <div class="bd2_cont_body"  v-for="(item, index) in unionFullList" >
               <div class="list_circle">
@@ -116,15 +92,6 @@
             <!-- 前两个结束 -->
 
             <!-- 后面内容 -->
-            <div class="bd2_cont_body">
-              <div class="list_circle">
-              </div>
-              <div class="list_text">
-                <p>随机戴森吹风机兑换券/100元免单券×1 张 </p>
-                <p>今日剩余<span class="text_style">888</span>张</p>
-              </div>
-            </div>
-
             <div class="bd2_cont_body"  v-for="(item, index) in unionFullList1" v-show = "otherArr1" >
               <div class="list_circle">
               </div>
@@ -183,55 +150,6 @@
           已使用
         </div>
         <div class="b_right b_right1 " v-show = "item.type == 2">
-          未使用
-        </div>
-
-      </div>
-
-
-      <div class="regionSec_body">
-        <div class="b_left">
-          ￥<span class="lf_text">500</span>
-
-        </div>
-        <div class="b_center">
-          <p class="ct_text1">满149减50元优惠券</p>
-          <p class="ct_text2">生鲜、特价商品不可用 </p>
-          <p class="ct_text2">效期：2018-11-13 00：00</p>
-
-        </div>
-        <div class="b_right">
-          未使用
-        </div>
-
-      </div>
-      <div class="regionSec_body">
-        <div class="b_left">
-          ￥<span class="lf_text">500</span>
-
-        </div>
-        <div class="b_center">
-          <p class="ct_text1">满149减50元优惠券</p>
-          <p class="ct_text2">生鲜、特价商品不可用 </p>
-          <p class="ct_text2">效期：2018-11-13 00：00</p>
-
-        </div>
-        <div class="b_right">
-          未使用
-        </div>
-
-      </div>
-      <div class="regionSec_body">
-        <div class="b_left">
-          ￥<span class="lf_text">500</span>
-
-        </div>
-        <div class="b_center">
-          <p class="ct_text1">满149减50元优惠券</p>
-          <p class="ct_text2">生鲜、特价商品不可用 </p>
-          <p class="ct_text2">效期：2018-11-13 00：00</p>
-        </div>
-        <div class="b_right">
           未使用
         </div>
       </div>
