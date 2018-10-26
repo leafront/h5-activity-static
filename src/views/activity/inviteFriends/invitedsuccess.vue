@@ -90,8 +90,7 @@ export default {
     ajaxShareCode(type){
        let self = this
       Model.getShareCode({
-        type: 'GET',
-        ut : app.getUserToken()
+        type: 'GET'
       }).then((result) => {
         const data = result.data
         if (result.code == 0 ) {

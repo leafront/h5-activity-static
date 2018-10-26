@@ -50,11 +50,26 @@ export default {
       }
     })
   },
-  created () {
-    //统一隐藏app头部
-    if(utils.isApp()) {
-      if (utils.getVersion() <= 5320) {
-        app.postMessage('hiddenHead',{'isHidden':'1'})
+  watch: {
+    '$route'() {
+      const isHidden = utils.query('isHidden')
+      if (utils.isApp()) {
+        if (utils.getVersion() < 5320) {
+          if (isHidden == 1) {
+            document.getElementById('app').style.paddingTop = 0
+            app.postMessage('hiddenHead',{'isHidden':'0'})
+          } else {
+            document.getElementById('app').style.paddingTop = '.88rem'
+            app.postMessage('hiddenHead',{'isHidden':'1'})
+          }
+        } else {
+          document.getElementById('app').style.paddingTop = 0
+          app.postMessage('hiddenHead',{'isHidden':'0'})
+        }
+      } else if (utils.weixin() || utils.nativeQQ()){
+        document.getElementById('app').style.paddingTop = 0
+      } else {
+        document.getElementById('app').style.paddingTop = '.88rem'
       }
     }
   }
@@ -67,5 +82,4 @@ export default {
   @import './styles/loading.scss';
   @import './styles/toast.scss';
   @import './styles/dialog.scss';
-  @import './styles/slidershow.scss';
 </style>

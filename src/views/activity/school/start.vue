@@ -80,7 +80,6 @@
     },
     computed: {
       ...mapGetters({
-        'headerMenu': 'getHeaderMenu',
         'imageValidate': 'getImageValidate'
       }),
       mobile: {
@@ -208,15 +207,16 @@
             source: config.source
           }
         }).then((result) => {
-          const data = result.data
           this.$toast(result.message)
           const downloadLink = this.downloadLink
           this.$hidePageLoading()
-          setTimeout(() => {
-            if (downloadLink) {
-              location.href = downloadLink
-            }
-          },2000)
+          if (result.code == 0) {
+            setTimeout(() => {
+              if (downloadLink) {
+                location.href = downloadLink
+              }
+            },2000)
+          }
         })
       },
       /**

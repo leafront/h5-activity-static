@@ -64,8 +64,8 @@ const weixin_share = {
    */
   weixinShare (data) {
     if (utils.weixin()) {
-      wx.ready(() => {
-        return new Promise ((resolve,reject) => {
+      return new Promise ((resolve,reject) => {
+        wx.ready(() => {
           wx.onMenuShareTimeline({
             title: data.title, // 分享标题
             desc: data.desc, // 分享描述
