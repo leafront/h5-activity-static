@@ -1,13 +1,11 @@
 <template>
-  <div class="ui-header-wrapper" v-if="showHeader">
-    <div class="ui-header" :class="{'ui-header-border':isBorder}">
-      <div class="ui-header-back" @click="backAction">
-        <div class="ui-header-back_btn">
-        </div>
+  <div class="ui-header" :class="{'ui-header-border':isBorder}" v-if="showHeader">
+    <div class="ui-header-back" @click="backAction">
+      <div class="ui-header-back_btn">
       </div>
-      <h4 class="ui-header-title">{{title}}</h4>
-      <slot></slot>
     </div>
+    <h4 class="ui-header-title">{{title}}</h4>
+    <slot></slot>
   </div>
 </template>
 
@@ -38,7 +36,7 @@
     },
     computed: {
       showHeader () {
-        return this.isShowHeader || !(utils.weixin() || utils.nativeQQ() || utils.getVersion() >= 5320)
+        return this.isShowHeader || !(utils.weixin() || utils.nativeQQ() || utils.getVersion() > 5320 || (utils.query('isHidden') == 1 && utils.isApp()))
       }
     },
     methods: {
@@ -72,12 +70,6 @@
       font-size: .3rem;
     }
   }
-
-  .ui-header-wrapper{
-    width:100%;
-    height: .88rem;
-  }
-
   .ui-header {
     width: 100%;
     height: .88rem;

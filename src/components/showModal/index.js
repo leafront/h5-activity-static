@@ -12,7 +12,7 @@ const ShowModal = {
       const confirmText = options.confirmText || '确定'
       const toast = options.showCancel == false ? 'none' : 'block'
 
-      let toastTip = Vue.extend({
+      let showModalTpl = Vue.extend({
         template: `
 				<div class="ui-dialog">
 					<div class="ui-dialog-mask"></div>
@@ -27,11 +27,12 @@ const ShowModal = {
       })
 
       // 2、创建实例，挂载到文档以后的地方
-      let tpl = new toastTip().$mount().$el
+      let tpl = new showModalTpl().$mount().$el
 
       // 3、把创建的实例添加到body中
 
       const bodyElement = document.body
+
       bodyElement.appendChild(tpl)
 
       document.getElementById('ui-dialog-cancel').addEventListener('click',() => {

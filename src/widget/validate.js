@@ -26,7 +26,7 @@ const validate = {
   /**
    *
    * @param {string} text
-   * @returns {boolean}
+   * @return {boolean}
    */
 
   isNumber (text) {
@@ -39,7 +39,7 @@ const validate = {
 
   /**
    * @param {Number || String} text
-   * @returns {boolean}
+   * @return {boolean}
    */
 
   checkNumber (text) {
@@ -54,7 +54,7 @@ const validate = {
    *
    * @param {string} text
    *
-   * @returns {boolean}
+   * @return {boolean}
    */
 
   isPercent (text) {
@@ -81,7 +81,7 @@ const validate = {
   /**
    *
    * @param {string} password
-   * @returns {boolean}
+   * @return {boolean}
    */
   isPass (text){
 
