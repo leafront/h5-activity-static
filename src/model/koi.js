@@ -5,8 +5,6 @@ export const getKoiIndex = (data) => request('/api/my/user/info', data)
 
 export const getKoiMerge = (data) => request('/api/promotion/dragonball/unionInfo', data)
 
-export const getKoiCouponNum = (data) => request('/api/promotion/dragonball/coupons', data)
-
 export const submitCouponExchange = (data) => request('/api/promotion/dragonball/getCoupon', data)
 
 export const getCouponExchange = (data) => request('/api/promotion/dragonball/getCoupon', data)
