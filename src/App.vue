@@ -51,9 +51,9 @@ export default {
     })
   },
   created () {
-    const hiddenHead = utils.query('hiddenHead')
+    const hideHead = utils.query('hideHead')
     if (utils.isApp()) {
-      if (hiddenHead == 0) {
+      if (hideHead == 0) {
         app.postMessage('hiddenHead',{'isHidden':'1'})
         document.body.style.paddingTop = '.88rem'
       } else {
