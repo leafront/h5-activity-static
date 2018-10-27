@@ -37,7 +37,7 @@
     computed: {
       showHeader () {
         if (utils.isApp()) {
-          if (utils.query('hiddenHead') == 0) {
+          if (utils.query('hideHead') == 0) {
             return true
           } else {
             return false
