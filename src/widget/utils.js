@@ -394,7 +394,7 @@ const utils = {
   },
   scrollIntoView () {
     const pageH = window.innerHeight
-    const appView = document.getElementById('app')
+    const appView = document.body
     if (this.android()) {
       window.addEventListener('resize', function () {
         if (document.activeElement.tagName == 'INPUT') {
