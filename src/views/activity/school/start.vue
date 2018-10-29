@@ -249,7 +249,7 @@
       },400)
     },
     mounted () {
-      utils.scrollInput('schoolWrapper')
+      utils.scrollIntoView()
     }
   }
 
