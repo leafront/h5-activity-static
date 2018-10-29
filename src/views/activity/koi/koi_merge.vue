@@ -60,10 +60,10 @@
             </div>
             <!-- 后面内容结束 -->
 
-            <div class="bd2_cont_point" v-show="prompt">
+            <div class="bd2_cont_point" v-show="prompt"  @click = "promptClick(1)">
               <div class="point_arrow point_pt">提示</div>
             </div>
-            <div class="bd2_cont_point" v-show="promptI">
+            <div class="bd2_cont_point" v-show="promptI" @click = "promptClick()">
               <div class="point_arrow point_ptI">提示</div>
             </div>
           </div>
@@ -105,10 +105,10 @@
 
 
 
-            <div class="bd2_cont_point" v-show="prompt1">
+            <div class="bd2_cont_point" v-show="prompt1" @click = "promptClick1(1)">
               <div class="point_arrow point_pt">提示</div>
             </div>
-            <div class="bd2_cont_point" v-show="prompt1I">
+            <div class="bd2_cont_point" v-show="prompt1I" @click = "promptClick1()" >
               <div class="point_arrow point_ptI" >提示</div>
             </div>
 
@@ -258,18 +258,19 @@ export default {
     */
 
     handleData(unionMaxList,unionFullList,myCouponList,showUnionType){
-
       this.myCouponList = myCouponList
       this.decideShow(showUnionType)
       if(unionMaxList.length && unionMaxList.length > 2){
         this.prompt = true
-        this.arrSplit(unionMaxList,this.unionMaxList,this.unionMaxList1)
+        this.unionMaxList = unionMaxList.splice(0,2)
+        this.unionMaxList1 = unionMaxList
       }else {
         this.unionMaxList = unionMaxList
       }
       if(unionFullList.length && unionFullList.length > 2){
         this.prompt1 = true
-        this.arrSplit(unionFullList,this.unionFullList,this.unionFullList1)
+        this.unionFullList = unionFullList.splice(0,2)
+        this.unionFullList1 = unionFullList
       }else {
          this.unionFullList = unionFullList
       }
@@ -281,28 +282,13 @@ export default {
         type: 'GET',
         data:{
           userId: "10009561",
-          ut: "406702f98a9b735d704af11d3bd7f9ef61"
         }
 
       }).then((result) => {
         const data = result.data
         if (result.code == 0 && data) {
            let {unionMaxList,unionFullList,myCouponList,showUnionType} = data
-           this.handleData(unionMaxList,unionFullList,myCouponList,showUnionType);
-           // this.myCouponList = myCouponList
-           // this.decideShow(2)
-           // if(unionMaxList.length > 2){
-           //   this.prompt = true
-           //   this.arrSplit(unionMaxList,this.unionMaxList,this.unionMaxList1)
-           // }else {
-           //   this.unionMaxList = unionMaxList
-           // }
-           // if(unionFullList.length > 2){
-           //   this.prompt1 = true
-           //   this.arrSplit(unionFullList,this.unionFullList,this.unionFullList1)
-           // }else {
-           //    this.unionFullList = unionFullList
-           // }
+           this.handleData(unionMaxList,unionFullList,myCouponList,showUnionType)
         } else {
 
         }
@@ -313,6 +299,7 @@ export default {
     * 合成
     */
     union() {
+      let self = this
       if(!this.selectNum){
         this.$toast("请选择合成方式")
         return
@@ -322,12 +309,11 @@ export default {
         data:{
           unionType: this.selectNum
         }
-
       }).then((result) => {
         const data = result.data
         if (result.code == 0 && data) {
            let {unionMaxList,unionFullList,myCouponList,showUnionType} = data
-           this.handleData(unionMaxList,unionFullList,myCouponList,showUnionType);
+           self.handleData(unionMaxList,unionFullList,myCouponList,showUnionType);
         } else {
 
         }
@@ -357,13 +343,6 @@ export default {
 
      }
    },
-    /*
-    * 数组分割工具函数
-    */
-    arrSplit(a,b,c){
-      b = a.splice(0,2)
-      c = a
-    },
 
   },
   created() {
