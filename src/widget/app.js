@@ -200,7 +200,7 @@ const app = {
         description: shareConfig.description,
         url160x160: shareConfig.pic,
         pic: shareConfig.pic
-      },(res) => {
+      },() => {
         callback && callback()
       })
     } else {
