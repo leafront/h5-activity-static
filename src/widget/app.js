@@ -200,13 +200,9 @@ const app = {
         description: shareConfig.description,
         url160x160: shareConfig.pic,
         pic: shareConfig.pic
-      },() => {
-        alert(JSON.stringify(callback))
+      },(res) => {
         callback && callback()
       })
-      setTimeout(() => {
-        callback && callback()
-      },2000)
     } else {
       if (utils.weixin()) {
         this.updateShareMenu(true)
