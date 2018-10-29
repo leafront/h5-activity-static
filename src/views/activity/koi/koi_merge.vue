@@ -320,9 +320,9 @@ export default {
         }
       }).then((result) => {
         const data = result.data
-        if (result.code == 0 && data) {
-           let {unionMaxList,unionFullList,myCouponList,showUnionType} = data
-           self.handleData(unionMaxList,unionFullList,myCouponList,showUnionType);
+        if ((result.code == 0 || result.code == -1)&& data) {
+           this.getKoiMerge()
+           this.$toast(result.message)
         } else {
 
         }
