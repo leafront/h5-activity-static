@@ -42,8 +42,10 @@
               <div class="list_circle">
               </div>
               <div class="list_text">
-                <p>{{item.title}} </p>
-                <p>今日剩余<span class="text_style">{{item.num}}</span>张</p>
+                <p>{{item.title}}*{{item.couponNum}}张 </p>
+                <p v-if = "item.couponValue === 120">今日剩余<span class="text_style">{{limitNum120}}</span>张</p>
+                <p v-else-if= "item.couponValue === 100">今日剩余<span class="text_style">{{limitNum100}}</span>张</p>
+
               </div>
             </div>
             <!-- 前两个结束 -->
@@ -54,8 +56,9 @@
               <div class="list_circle">
               </div>
               <div class="list_text">
-                <p>{{item.title}} </p>
-                <p>今日剩余<span class="text_style">{{item.num}}</span>张</p>
+                <p>{{item.title}}*{{item.couponNum}}张 </p>
+                <p v-if = "item.couponValue === 120">今日剩余<span class="text_style">{{limitNum120}}</span>张</p>
+                <p v-else-if= "item.couponValue === 100">今日剩余<span class="text_style">{{limitNum100}}</span>张</p>
               </div>
             </div>
             <!-- 后面内容结束 -->
@@ -84,8 +87,9 @@
               <div class="list_circle">
               </div>
               <div class="list_text">
-                <p>{{item.title}} </p>
-                <p>今日剩余<span class="text_style">{{item.num}}</span>张</p>
+                <p>{{item.title}}*{{item.couponNum}}张 </p>
+                <p v-if = "item.couponValue === 120">今日剩余<span class="text_style">{{limitNum120}}</span>张</p>
+                <p v-else-if= "item.couponValue === 100">今日剩余<span class="text_style">{{limitNum100}}</span>张</p>
               </div>
             </div>
 
@@ -96,8 +100,9 @@
               <div class="list_circle">
               </div>
               <div class="list_text">
-                <p>{{item.title}} </p>
-                <p>今日剩余<span class="text_style">{{item.num}}</span>张</p>
+                <p>{{item.title}}*{{item.couponNum}}张 </p>
+                <p v-if = "item.couponValue === 120">今日剩余<span class="text_style">{{limitNum120}}</span>张</p>
+                <p v-else-if= "item.couponValue === 100">今日剩余<span class="text_style">{{limitNum100}}</span>张</p>
               </div>
             </div>
 
@@ -186,6 +191,8 @@ export default {
       unionFullList1:[],
       myCouponList:[],
       showUnionType:"",
+      limitNum100:"",
+      limitNum120:"",
       bdOther:false,
       bdOther1:false,
       selectNum :"",
@@ -257,8 +264,10 @@ export default {
     * 数据处理函数
     */
 
-    handleData(unionMaxList,unionFullList,myCouponList,showUnionType){
+    handleData(unionMaxList,unionFullList,myCouponList,showUnionType,limitNum120,limitNum100){
       this.myCouponList = myCouponList
+      this.limitNum100 = limitNum100
+      this.limitNum120 = limitNum120
       this.decideShow(showUnionType)
       if(unionMaxList.length && unionMaxList.length > 2){
         this.prompt = true
@@ -287,8 +296,8 @@ export default {
       }).then((result) => {
         const data = result.data
         if (result.code == 0 && data) {
-           let {unionMaxList,unionFullList,myCouponList,showUnionType} = data
-           this.handleData(unionMaxList,unionFullList,myCouponList,showUnionType)
+           let {unionMaxList,unionFullList,myCouponList,showUnionType,limitNum120,limitNum100} = data
+           this.handleData(unionMaxList,unionFullList,myCouponList,showUnionType,limitNum120,limitNum100)
         } else {
 
         }
