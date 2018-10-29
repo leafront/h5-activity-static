@@ -2,6 +2,8 @@ import Vue from 'vue'
 
 import Router from 'vue-router'
 
+import config from '@/config/index'
+
 Vue.use(Router)
 
 const PageError = r => require.ensure([], () => r(require('@/views/activity/error/404.vue')),'PageError')
@@ -181,7 +183,13 @@ export default new Router({
       component: koiIndex,
       meta: {
         title: '翻倍锦鲤券',
-        bgColor: '#bd0004'
+        bgColor: '#bd0004',
+        shareConfig: {
+          link: config.hostPath + '/activity/koi/index',
+          title: '官宣 锦鲤和双十一更配哦',
+          desc: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
+          imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png'
+        }
       }
     }, {
       path: '/activity/koi/end',
