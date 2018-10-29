@@ -391,22 +391,6 @@ const utils = {
     script.type = 'text/javascript'
     script.appendChild(document.createTextNode(res))
     document.head.appendChild(script)
-  },
-  scrollIntoView () {
-    const pageH = window.innerHeight
-    const appView = document.body
-    if (this.android()) {
-      window.addEventListener('resize', function () {
-        if (document.activeElement.tagName == 'INPUT') {
-          const scrollHeight = window.innerHeight - pageH
-          appView.style.transform = 'translateY('+scrollHeight+'px)'
-          appView.style.WebkitTransform = 'translateY('+scrollHeight+'px)'
-        } else{
-          appView.style.transform = 'translateY(0)'
-          appView.style.WebkitTransform = 'translateY(0)'
-        }
-      })
-    }
   }
 }
 
