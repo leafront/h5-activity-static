@@ -397,7 +397,6 @@ const utils = {
     const appView = document.getElementById('app')
     if (this.android()) {
       window.addEventListener('resize', function () {
-        const scrollView = document.getElementById(ele)
         if (document.activeElement.tagName == 'INPUT') {
           const scrollHeight = window.innerHeight - pageH
           appView.style.transform = 'translateY('+scrollHeight+'px)'
