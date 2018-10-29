@@ -247,9 +247,6 @@
         this.$hideLoading()
         this.pageView = true
       },400)
-    },
-    mounted () {
-      utils.scrollIntoView()
     }
   }
 
