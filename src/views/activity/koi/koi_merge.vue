@@ -64,10 +64,10 @@
             <!-- 后面内容结束 -->
 
             <div class="bd2_cont_point" v-show="prompt"  @click = "promptClick(1)">
-              <div class="point_arrow point_pt">提示</div>
+              <div class="point_arrow point_pt">展开</div>
             </div>
             <div class="bd2_cont_point" v-show="promptI" @click = "promptClick()">
-              <div class="point_arrow point_ptI">提示</div>
+              <div class="point_arrow point_ptI">收起</div>
             </div>
           </div>
 
@@ -111,10 +111,10 @@
 
 
             <div class="bd2_cont_point" v-show="prompt1" @click = "promptClick1(1)">
-              <div class="point_arrow point_pt">提示</div>
+              <div class="point_arrow point_pt">展开</div>
             </div>
             <div class="bd2_cont_point" v-show="prompt1I" @click = "promptClick1()" >
-              <div class="point_arrow point_ptI" >提示</div>
+              <div class="point_arrow point_ptI" >收起</div>
             </div>
 
           </div>
@@ -140,7 +140,14 @@
         <span>爷</span>
       </div>
 
-      <div class="regionSec_body" v-for="(item, index) in myCouponList" >
+      <div class="regionSec_body1" v-show = "myCouponList.length <= 0">
+        <div class="by1_image">
+
+        </div>
+        <p class="by1_description">您还未合成锦鲤券，快去合成吧！</p>
+      </div>
+
+      <div class="regionSec_body" v-for="(item, index) in myCouponList"  v-show = "myCouponList.length > 0">
         <div class="b_left">
           ￥<span class="lf_text">{{item.couponValue}}</span>
 
@@ -525,10 +532,10 @@ export default {
   transform: translate(0,-50%);
 }
 .point_pt:before{
-  background-image: url("/activity-static/images/koidown.png");
+  background-image: url("/activity-static/images/koldown.png");
 }
 .point_ptI:before{
-  background-image: url("/activity-static/images/koidown.png");
+  background-image: url("/activity-static/images/kolup.png");
 }
 
 // .point_arrow1 {
@@ -548,6 +555,25 @@ export default {
     margin-top: 1rem;
     padding-bottom: 0.5rem;
 }
+.by1_image{
+  width: 3rem;
+  height: 3rem;
+  margin: .5rem auto;
+
+   background-image: url("/activity-static/images/kolliyu.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.by1_description{
+  width: max-content;
+  margin: 0 auto;
+  font-size: .3rem;
+  color: #FFFFFF;
+  font-family: PingFangSC;
+}
+
+
+
 .regionSec_body {
     width: 6.26rem;
     height: 1.64rem;
