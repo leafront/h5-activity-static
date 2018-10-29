@@ -392,18 +392,19 @@ const utils = {
     script.appendChild(document.createTextNode(res))
     document.head.appendChild(script)
   },
-  scrollInput (ele) {
+  scrollIntoView () {
     const pageH = window.innerHeight
+    const appView = document.getElementById('app')
     if (this.android()) {
       window.addEventListener('resize', function () {
         const scrollView = document.getElementById(ele)
         if (document.activeElement.tagName == 'INPUT') {
           const scrollHeight = window.innerHeight - pageH
-          scrollView.style.transform = 'translateY('+scrollHeight+'px)'
-          scrollView.style.WebkitTransform = 'translateY('+scrollHeight+'px)'
+          appView.style.transform = 'translateY('+scrollHeight+'px)'
+          appView.style.WebkitTransform = 'translateY('+scrollHeight+'px)'
         } else{
-          scrollView.style.transform = 'translateY(0)'
-          scrollView.style.WebkitTransform = 'translateY(0)'
+          appView.style.transform = 'translateY(0)'
+          appView.style.WebkitTransform = 'translateY(0)'
         }
       })
     }
