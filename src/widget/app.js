@@ -201,7 +201,6 @@ const app = {
         url160x160: shareConfig.pic,
         pic: shareConfig.pic
       },() => {
-        alert(JSON.stringify(callback))
         callback && callback()
       })
       setTimeout(() => {
