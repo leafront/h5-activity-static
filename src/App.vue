@@ -86,6 +86,9 @@ export default {
     } else if (utils.weixin() || utils.nativeQQ()){
       document.body.style.paddingTop = 0
     } 
+  },
+  mounted () {
+    this.getLizardCode()
   }
 }
 </script>
