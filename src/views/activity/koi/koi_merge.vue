@@ -202,8 +202,8 @@ export default {
       limitNum120:"",
       bdOther:false,
       bdOther1:false,
-      selectNum :"",
-      innerCle:false,
+      selectNum :1,
+      innerCle:true,
       innerCle1:false,
 
 
