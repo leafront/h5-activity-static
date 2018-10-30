@@ -50,6 +50,30 @@ export default {
       }
     })
   },
+  methods: {
+    getLizardCode () {
+      const cacheTimes = 30 * 24 * 60 * 60 * 1000
+      Model.getLizardCode({
+        type: 'GET',
+        dataType: 'text',
+        cache: true,
+        expires: cacheTimes
+      }).then((res) => {
+
+        if (res && typeof res == 'string') {
+          if (utils.isLocalStorageSupported()) {
+            if (!store.get('/webapp-static/lizard/index.js'), 'local') {
+              let result = {
+                times: new Date().getTime() + cacheTimes,
+                results: res
+              }
+              store.set('/webapp-static/lizard/index.js', result, 'local')
+            }
+          }
+        }
+      })
+    }
+  },
   created () {
     const hideHead = utils.query('hideHead')
     if (utils.isApp()) {
