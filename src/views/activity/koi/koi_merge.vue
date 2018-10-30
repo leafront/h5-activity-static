@@ -12,12 +12,12 @@
     </div>
     <div class="region_first koi_common">
       <div class="region_first_header com_fst">
-        <span>你</span>
-        <span>大</span>
-        <span>爷</span>
-        <span>你</span>
-        <span>大</span>
-        <span>爷</span>
+        <span>翻</span>
+        <span>倍</span>
+        <span>合</span>
+        <span>成</span>
+        <span>推</span>
+        <span>荐</span>
       </div>
       <!-- 第一部分 -->
       <div class="region_first_body1" v-show= "regionFst">
@@ -132,12 +132,11 @@
 
     <div class="region_second koi_common">
       <div class="regionSec_header com_fst">
-        <span>你</span>
-        <span>大</span>
-        <span>爷</span>
-        <span>你</span>
-        <span>大</span>
-        <span>爷</span>
+        <span>我</span>
+        <span>的</span>
+        <span>锦</span>
+        <span>鲤</span>
+        <span>券</span>
       </div>
 
       <div class="regionSec_body1" v-show = "myCouponList.length <= 0">
@@ -154,8 +153,8 @@
         </div>
         <div class="b_center">
           <p class="ct_text1">{{item.title}}</p>
-          <p class="ct_text2">{{item.couponCode}} </p>
-          <p class="ct_text2">{{item.desc}}</p>
+          <p class="ct_text2">{{item.desc}} </p>
+          <p class="ct_text2">有效期:{{item.effectiveEndTimeStr}}</p>
 
         </div>
         <div class="b_right" v-show = "item.type == 1">
