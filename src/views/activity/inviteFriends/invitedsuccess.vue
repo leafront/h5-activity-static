@@ -81,7 +81,7 @@ export default {
 
     jump(){
 
-      location.href = "https://lnk0.com/easylink/ELMhYZpk"
+      location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.umaman.laiyifen"
     },
 
 /*
