@@ -157,10 +157,10 @@
           <p class="ct_text2">有效期:{{item.effectiveEndTimeStr}}</p>
 
         </div>
-        <div class="b_right" v-show = "item.type == 1">
+        <div class="b_right" v-show = "item.type == 2">
           已使用
         </div>
-        <div class="b_right b_right1 " v-show = "item.type == 2">
+        <div class="b_right b_right1 " v-show = "item.type == 1">
           未使用
         </div>
       </div>
