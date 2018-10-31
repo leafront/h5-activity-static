@@ -326,10 +326,12 @@ export default {
         }
       }).then((result) => {
         const data = result.data
-        if ((result.code == 0 || result.code == -1)&& data) {
+        if (result.code == 0 && data) {
            this.getKoiMerge()
            this.$toast(result.message)
-        } else {
+        }else if (result.code == -1 && data) {
+           this.$toast(result.message)
+        }else {
 
         }
       })
@@ -349,6 +351,7 @@ export default {
       case 1:
       this.regionFst = false
       this.bdOther = true
+      this.bdOther1 = false
       break;
       case 2:
       this.regionFst = false
