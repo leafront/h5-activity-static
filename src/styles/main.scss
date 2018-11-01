@@ -6,11 +6,11 @@ body{
   color:#666;
   font-size: .24rem;
   background: #f5f5f5;
+  padding-top: .88rem;
 }
 
 #app{
   width:100%;
-  padding-top: .88rem;
 }
 
 .scroll-view-wrapper{
@@ -55,11 +55,9 @@ input {
 .pageView{
   width: 100%;
   overflow-x:hidden;
-  padding-bottom: constant(safe-area-inset-bottom);
-  padding-bottom: env(safe-area-inset-bottom)
 }
 .pic-lazyLoad {
-  background:url('/activity-static/images/lazyLoad.jpeg') no-repeat #f5f5f5 center center;
+  background:url('/webapp-static/images/lazyLoad.jpeg') no-repeat #f5f5f5 center center;
   background-size: contain;
 }
 /**ui styles **/

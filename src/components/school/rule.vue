@@ -66,7 +66,7 @@
       const relativeWidth = docEle.clientWidth * .8
       const ruleHeight = Math.ceil(relativeWidth * 1.62)
       this.ruleHeight = ruleHeight + 'px'
-      const headerHeight = utils.weixin() ? 0 : (0.44 * parseInt(docEle.style.fontSize))
+      const headerHeight = utils.weixin() || utils.isApp() ? 0 : (0.44 * parseInt(docEle.style.fontSize))
       const ruleTop = Math.ceil(-(ruleHeight * .5) + headerHeight)
       this.ruleTop = ruleTop + 'px'
     }

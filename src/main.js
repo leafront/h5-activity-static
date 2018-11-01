@@ -10,9 +10,7 @@ import Toast from '@/components/toast'
 import loading from '@/components/loading'
 import pageLoading from '@/components/pageLoading'
 import showModal from '@/components/showModal'
-import VueClipboard from 'vue-clipboard2'
 
-Vue.use(VueClipboard)
 Vue.use(showModal)
 Vue.use(loading)
 Vue.use(pageLoading)

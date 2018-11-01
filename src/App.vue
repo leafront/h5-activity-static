@@ -50,28 +50,45 @@ export default {
       }
     })
   },
-  watch: {
-    '$route'() {
-      const isHidden = utils.query('isHidden')
-      if (utils.isApp()) {
-        if (utils.getVersion() < 5320) {
-          if (isHidden == 1) {
-            document.getElementById('app').style.paddingTop = 0
-            app.postMessage('hiddenHead',{'isHidden':'0'})
-          } else {
-            document.getElementById('app').style.paddingTop = '.88rem'
-            app.postMessage('hiddenHead',{'isHidden':'1'})
+  methods: {
+    getLizardCode () {
+      const cacheTimes = 30 * 24 * 60 * 60 * 1000
+      Model.getLizardCode({
+        type: 'GET',
+        dataType: 'text',
+        cache: true,
+        expires: cacheTimes
+      }).then((res) => {
+
+        if (res && typeof res == 'string') {
+          if (utils.isLocalStorageSupported()) {
+            if (!store.get('/webapp-static/lizard/index.js'), 'local') {
+              let result = {
+                times: new Date().getTime() + cacheTimes,
+                results: res
+              }
+              store.set('/webapp-static/lizard/index.js', result, 'local')
+            }
           }
-        } else {
-          document.getElementById('app').style.paddingTop = 0
-          app.postMessage('hiddenHead',{'isHidden':'0'})
         }
-      } else if (utils.weixin() || utils.nativeQQ()){
-        document.getElementById('app').style.paddingTop = 0
-      } else {
-        document.getElementById('app').style.paddingTop = '.88rem'
-      }
+      })
     }
+  },
+  created () {
+    const hideHead = utils.query('hideHead')
+    if (utils.isApp()) {
+      if (hideHead == 0) {
+        app.postMessage('hiddenHead',{'isHidden':'1'})
+        document.body.style.paddingTop = '.88rem'
+      } else {
+        document.body.style.paddingTop = 0
+      } 
+    } else if (utils.weixin() || utils.nativeQQ()){
+      document.body.style.paddingTop = 0
+    } 
+  },
+  mounted () {
+    this.getLizardCode()
   }
 }
 </script>

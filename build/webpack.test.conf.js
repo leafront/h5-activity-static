@@ -94,9 +94,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         const pathName = path.join(__dirname, '../node_modules')
         const baseName = path.join(__dirname, '../src')
         const moduleList = [
-          pathName + 'vue',
-          pathName + 'vuex',
-          pathName + 'vue-router',
           baseName + '/widget/store.js',
           baseName + '/widget/ajax.js',
           baseName + '/widget/request.js',

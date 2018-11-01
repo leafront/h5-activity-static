@@ -5,8 +5,6 @@ import * as Model from '@/model/wx_share'
 
 import mall_setting from '@/widget/mall_setting'
 
-import wx from 'weixin-js-sdk'
-
 const weixin_share = {
   /**
    * 初始化微信分享
