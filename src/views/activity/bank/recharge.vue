@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="bank-recharge-input" >
-        <div class="bank-recharge-input-wrapper" @click="scrollInput($event)">
+        <div class="bank-recharge-input-wrapper">
           <span>金额</span>
           <p>{{money}}</p>
         </div>
@@ -99,13 +99,6 @@
       AppHeader
     },
     methods: {
-      scrollInput (event) {
-        if (utils.android()) {
-          setTimeout(() => {
-            event.target.scrollIntoViewIfNeeded()
-          },400)
-        }
-      },
       backAction () {
         if (utils.isApp()) {
           app.back()
