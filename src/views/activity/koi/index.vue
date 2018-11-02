@@ -236,7 +236,7 @@
           <strong>共计 {{couponSum}} 元</strong>
         </div>
         <div class="koi-seed__action">
-          <span v-if="mergeButtonStatus == 0" @click="pageAction('/activity/koi/merge')">立即合成</span>
+          <span v-if="mergeButtonStatus == 0" @click="pageAction('/activity/koi/merge?hideHead=0')">立即合成</span>
           <span v-else>11月7日10:00 开始合成 敬请期待</span>
         </div>
       </div>
