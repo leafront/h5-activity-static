@@ -198,15 +198,7 @@ const utils = {
       var uaObj = JSON.parse(matchers[1])
       return uaObj;
     }
-    return {};
-
-  },
-  getVersion () {
-    let version =  utils.getUaParams().version
-    if (version) {
-      version = version.replace(/\./g,'')
-    }
-    return version
+    return {}
   },
   /**
    * @return {String} val
@@ -287,30 +279,6 @@ const utils = {
   trim (text) {
     return text.replace(/\s+/g, "")
   },
-  imgScale (url,q = 95){
-    const getDeviceWidth = document.documentElement.clientWidth > 750 ? 750 : document.documentElement.clientWidth
-    const pattern = /http:\/\/.*?(gif|png|jpg)/gi
-    if (url.indexOf('.jpg') > -1 || url.indexOf('.png') > -1) {
-      const scaleImage = url.replace(pattern,(res) => {
-        if (res.indexOf('http://cdn.oudianyun.com') > -1) {
-          return `${res}@base@tag=imgScale&q=${q}&m=1&w=${getDeviceWidth}`
-        } else {
-          return res
-        }
-      })
-      return scaleImage
-    } else {
-      return url
-    }
-  },
-  /**
-   * @param {String} text
-   * @return {String} text
-   */
-  replaceMobile (text) {
-    const pattern = /(\d{3}){1}(\d){1,4}?(?=\d*$)/g
-    return text.replace(pattern,'$1 $2')
-  },
   loadScript (url,success) {
     const script = document.createElement("script")
     script.type = 'text/javascript'
@@ -329,6 +297,37 @@ const utils = {
     script.type = 'text/javascript'
     script.appendChild(document.createTextNode(res))
     document.head.appendChild(script)
+  },
+  getVersion () {
+    let version =  utils.getUaParams().version
+    if (version) {
+      version = version.replace(/\./g,'')
+    }
+    return version
+  },
+  imgScale (url,q = 95){
+    const getDeviceWidth = document.documentElement.clientWidth > 750 ? 750 : document.documentElement.clientWidth
+    const pattern = /http:\/\/.*?(gif|png|jpg)/gi
+    if (url.indexOf('.jpg') > -1 || url.indexOf('.png') > -1) {
+      const scaleImage = url.replace(pattern,(res) => {
+        if (res.indexOf('http://cdn.oudianyun.com') > -1) {
+          return `${res}@base@tag=imgScale&q=${q}&m=1&w=${getDeviceWidth}`
+        } else {
+          return res
+        }
+      })
+      return scaleImage
+    } else {
+      return url
+    }
+  },
+    /**
+   * @param {String} text
+   * @return {String} text
+   */
+  replaceMobile (text) {
+    const pattern = /(\d{3}){1}(\d){1,4}?(?=\d*$)/g
+    return text.replace(pattern,'$1 $2')
   }
 }
 
