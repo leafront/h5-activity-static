@@ -9,7 +9,7 @@ const distribution = {
    * 获取当前用户的上家sharecode，目前上家的sharecode会存储在cookie里。
    * @return {String} shareCode
    */
-  getInviterShareCode() {
+  getInviterShareCode () {
     return utils.getCookie(SHANGJIA_SHARE_CODE || "")
   },
 
@@ -17,13 +17,11 @@ const distribution = {
    * 设置上家的
    * @param {String} sharecode
    */
-  setInviterShareCode(shareCode) {
+  setInviterShareCode (shareCode) {
     if (shareCode) {
-     utils.setCookie(SHANGJIA_SHARE_CODE, shareCode);
+     utils.setCookie(SHANGJIA_SHARE_CODE, shareCode)
     }
   }
-
 }
-
 
 export default distribution
