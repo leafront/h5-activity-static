@@ -328,7 +328,16 @@
        * @param {String} url
        */
       pageAction (url) {
-        this.$router.push(url)
+        if (utils.loggedIn()) {
+          this.$router.push(url)
+        } else {
+          if (utils.isApp()) {
+            utils.login()
+          } else {
+            location.href = url
+          }
+        }
+        
       },
       /**
        * @param {String} url

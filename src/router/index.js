@@ -49,7 +49,11 @@ const koiMerge = r => require.ensure([], () =>  r(require('@/views/activity/koi/
 export default new Router({
   mode:'history',
   scrollBehavior(to,from,savePosition){ 
-    return {x:0,y:0}
+    if (savePosition) {
+      return savePosition
+    } else{
+      return {x:0,y:0}
+    }
   },
   routes: [
     {
@@ -189,7 +193,7 @@ export default new Router({
           title: '官宣 锦鲤和双十一更配哦',
           desc: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
           imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png',
-          platforms: [
+          channel: [
            "WechatMoments",
            "Wechat",
            "QQ",
