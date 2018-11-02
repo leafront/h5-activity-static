@@ -187,7 +187,7 @@ export default new Router({
           title: '官宣 锦鲤和双十一更配哦',
           desc: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
           imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png',
-          platforms: [
+          channel: [
            "WechatMoments",
            "Wechat",
            "QQ",
