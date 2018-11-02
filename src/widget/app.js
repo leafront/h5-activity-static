@@ -1,91 +1,70 @@
 import utils from './utils'
-
 import store from './store'
-
 import weixin_share from '@/common/weixin_share'
 
-//回调函数计数
-var count = 0;
+var count = 0  //回调函数计数
 
-/**
- * 访问app的API工具类
- */
 const app = {
   /**
-   * 发送app消息，通过callback处理返回
-   *
-   * @param func app提供的消息名称 [必填]
-   * @param params 传递给app的参数 [非必填]
-   * @param callback 消息处理后的回调函数 [非必填]
-   *
-   * Example1:
-   * app.postMessage("getLocation", {x: 1, y: 2}, (data1, data2) => {
-     *          alert("x=" + data1 + ",y=" + data2 + ",z=" + this.pageSize);
-     *  });
-   *
-   * Example2:
-   * app.postMessage("getLocation",  (data1, data2) => {
-     *          alert("x=" + data1 + ",y=" + data2 + ",z=" + this.pageSize);
-     *  });
+   * @param {String} func
+   * @param {Object} params
+   * @param {Function} callback
    */
   postMessage (func, params, callback) {
     // 只有在app才执行
     if (!utils.isApp()) {
-      return;
+      return
     }
 
     if (!func) {
-      throw new Error("param [func]  is required");
+      throw new Error("param [func]  is required")
     }
 
     if (typeof params == "function") {
-      callback = params;
-      params = null;
+      callback = params
+      params = null
     }
 
-    var msgParams = {"function": func};
+    var msgParams = {"function": func}
     if (params) {
-      msgParams["param"] = params;
+      msgParams["param"] = params
     }
 
     if (callback) {
-      var funcName = this.getFunctionName(func);
-      window[funcName] = callback;
-      msgParams["callback"] = funcName;
-      // console.log("callback:" + funcName)
+      var funcName = this.getFunctionName(func)
+      window[funcName] = callback
+      msgParams["callback"] = funcName
     }
 
     if (utils.ios()) {
-      window.webkit.messageHandlers.mobileAPI.postMessage(msgParams);
+      window.webkit.messageHandlers.mobileAPI.postMessage(msgParams)
     } else if (utils.android()) {
-      window.mobileAPI.postMessage(JSON.stringify(msgParams));
+      window.mobileAPI.postMessage(JSON.stringify(msgParams))
     }
   },
-
-  //生成全局函数名字
+  /**
+   * 生成全局函数名字
+   * @param  {String} func
+   * @return {String} val
+   */
   getFunctionName (func) {
-    return "App_" + func + "_callback_" + (++count);
+    const val = "App_" + func + "_callback_" + (++count)
+    return val
   },
-
-  //通知app返回上一页，refresh指定是否刷新上一页内容。
-  //@params forceBack 是否强制app退出当前webview网页
+  /**
+   * forceBack 是否强制app退出当前webview网页
+   * 通知app返回上一页，refresh指定是否刷新上一页内容。
+   * @param  {String} refresh
+   * @param  {String} forceBack
+   */
   back (refresh,forceBack) {
     this.postMessage("webViewBack", {refresh: refresh ? 1 : 0, forceBack: forceBack ? 1 : 0});
   },
-  //获取distributorId 分销商ID
-  getDistributorId () {
-    return  store.get(this.distributorId,'session');
-  },
-
-  //设置分销商ID
-  setDistributorId (type, id) {
-    let dtype = store.get(this.distributorType);
-    if(type >= dtype) {//优先级按照type大小  覆盖原有值
-      store.set(this.distributorType, type,'session');
-      store.set(this.distributorId, id || '','session');
-      store.set(this.distributorId, id || '','session');//track 埋点需要
-    }
-  },
+  /**
+   * 提示框
+   * @param  {String} text
+   * @param  {Number} tims
+   */
   toast (text,times = 1500) {
     const tpl = `
       <div class="ui-toast-mask">
@@ -110,7 +89,6 @@ const app = {
    * @param {Object} el
    * @param {String} html
    */
-
   append (el, html) {
 
     var divTemp = document.createElement("div"),
@@ -140,9 +118,9 @@ const app = {
       } else {
         const from = utils.getRelatedUrl()
         if (from) {
-          window.location.href = `/login.html?from=` + encodeURIComponent(from)
+          location.href = `/login.html?from=` + encodeURIComponent(from)
         } else {
-          window.location.href = '/login.html'
+          location.href = '/login.html'
         }
       }
     }
