@@ -157,7 +157,8 @@ const app = {
     link,
     title,
     desc,
-    imgUrl
+    imgUrl,
+    platforms = null
   }) {
     if (utils.getVersion() >= 5320) {
       app.postMessage('setShareContent', {
@@ -165,7 +166,8 @@ const app = {
         title,
         description: desc,
         url160x160: imgUrl,
-        pic: imgUrl
+        pic: imgUrl,
+        platforms: platforms
       }, () => {
         
       })
