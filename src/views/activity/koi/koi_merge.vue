@@ -1,10 +1,10 @@
 <template>
 <div class="pageView">
-  <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
+  <AppHeader :title="title" :isBorder="isBorder" >
   </AppHeader>
   <div class="scroll-view-wrapper koi_bg" :class="{'visibility': pageView}">
     <div class="region_header">
-      <div class="region_rule">
+      <div class="region_rule" @click = "jumpRule">
         <span class="rule_style r_style1">!</span >
         <span class="rule_style r_style2">规则</span>
         <span class="rule_style r_style3"></span>
@@ -19,6 +19,18 @@
         <span>推</span>
         <span>荐</span>
       </div>
+
+      <div class="f_section_loading" v-show = "loadValue">
+
+       <div class="loading_img">
+
+       </div>
+
+       <p class="loading_des">方案计算中请稍等...</p>
+      </div>
+
+      <div class="f_section" v-show = "!loadValue">
+
       <!-- 第一部分 -->
       <div class="region_first_body1" v-show= "regionFst">
         <div class="fst_bd_description">
@@ -128,6 +140,9 @@
         </div>
       </div>
       <!-- 第二部分结束 -->
+        </div>
+
+
     </div>
 
     <div class="region_second koi_common">
@@ -181,7 +196,8 @@ import * as Model from '@/model/koi'
 export default {
   data() {
     return {
-      title: '锦鲤券',
+      title: '合成锦鲤券',
+      loadValue:true,
       pageView: true,
       isBorder: true,
       regionFst:false,
@@ -212,6 +228,11 @@ export default {
     AppHeader
   },
   methods: {
+
+
+    jumpRule(){
+      location.href = "http://m.laiyifen.com/view/h5/1003081001000067.html?1539920083525"
+    },
     /*
     * 选取合成方式
     */
@@ -257,15 +278,6 @@ export default {
  },
 
 
-
-    backAction() {
-      if (utils.isApp()) {
-        app.back()
-      } else {
-        location.href = '/index.html'
-      }
-    },
-
     /*
     * 数据处理函数
     */
@@ -302,6 +314,7 @@ export default {
       }).then((result) => {
         const data = result.data
         if (result.code == 0 && data) {
+           this.loadValue = false
            let {unionMaxList,unionFullList,myCouponList,showUnionType,limitNum120,limitNum100} = data
            this.handleData(unionMaxList,unionFullList,myCouponList,showUnionType,limitNum120,limitNum100)
         } else {
@@ -319,6 +332,7 @@ export default {
         this.$toast("请选择合成方式")
         return
       }
+      this.loadValue = true
       Model.union({
         type: 'POST',
         data:{
@@ -330,6 +344,7 @@ export default {
            this.getKoiMerge()
            this.$toast(result.message)
         }else if (result.code == -1 && data) {
+          this.loadValue = false
            this.$toast(result.message)
         }else {
 
@@ -369,6 +384,26 @@ export default {
 }
 </script>
 <style lang="scss">
+@keyframes mycycle{
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
+.loading_img{
+   width: .5rem;
+   height: .5rem;
+   margin: .6rem auto;
+   background-image: url("/activity-static/images/kol_loading.png");
+   background-size: 100%;
+   background-repeat: no-repeat;
+   transform: rotate(360deg);
+   animation: mycycle 2s linear infinite;
+}
+.loading_des{
+  width: max-content;
+  margin: .6rem auto;
+  font-size: .25rem;
+  color: #fff;
+}
 .region_header{
   display: flex;
   justify-content: flex-end;
@@ -476,6 +511,7 @@ export default {
 .fst_bd2_content {
     position: relative;
     flex: 1 1 auto;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
 .bd2_cont_body {
     display: flex;
