@@ -47,7 +47,11 @@ const koiEnd = r => require.ensure([], () =>  r(require('@/views/activity/koi/en
 export default new Router({
   mode:'history',
   scrollBehavior(to,from,savePosition){ 
-    return {x:0,y:0}
+    if (savePosition) {
+      return savePosition
+    } else{
+      return {x:0,y:0}
+    }
   },
   routes: [
     {
