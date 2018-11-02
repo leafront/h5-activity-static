@@ -415,8 +415,7 @@ export default {
 }
 .koi_bg {
    position: relative;
-   background: #BC0104;
-   box-sizing: border-box;
+   background: #bd0004;
 }
 .koi_common {
     width: 94%;

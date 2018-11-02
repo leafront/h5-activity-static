@@ -203,7 +203,8 @@ export default new Router({
       name: 'koiMerge',
       component: koiMerge,
       meta: {
-        title: '锦鲤券'
+        title: '锦鲤券',
+        bgColor: '#bd0004'
       }
     }
 
