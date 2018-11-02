@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction"></AppHeader>
+    <AppHeader :title="title" :isBorder="isBorder"></AppHeader>
     <div class="scroll-view-wrapper koi-view" :class="{'visibility': pageView,'scroll_view_hidden': isPopup}">
       <div class="koi__banner">
         <img class="koi__banner--pic" src="./images/koi_bg.jpg"/>
@@ -307,13 +307,6 @@
       togglePopup (val) {
         this.isPopup = val
         utils.appViewFixed()
-      },
-      backAction () {
-        if (utils.isApp()) {
-          app.back()
-        } else {
-          history.back()
-        }
       },
       /**
        * page location
