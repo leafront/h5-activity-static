@@ -1,6 +1,6 @@
 <template>
 <div class="pageView">
-  <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
+  <AppHeader :title="title" :isBorder="isBorder" >
   </AppHeader>
   <div class="scroll-view-wrapper koi_bg" :class="{'visibility': pageView}">
     <div class="region_header">
@@ -277,15 +277,6 @@ export default {
    }
  },
 
-
-
-    backAction() {
-      if (utils.isApp()) {
-        app.back()
-      } else {
-        location.href = '/index.html'
-      }
-    },
 
     /*
     * 数据处理函数
