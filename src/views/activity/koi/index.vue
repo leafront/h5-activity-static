@@ -361,7 +361,7 @@
           platforms: [
            "WechatMoments",
            "Wechat",
-           "QQ"
+           "QQ",
            "QZone"
           ]
         }
