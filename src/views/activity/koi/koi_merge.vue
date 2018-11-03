@@ -342,6 +342,7 @@ export default {
 
 
         } else {
+          this.loadValue = false
           this.$toast(result.message)
         }
       })
@@ -385,6 +386,7 @@ export default {
           }
 
         } else {
+          this.loadValue = false
           this.$toast(result.message)
         }
       })
