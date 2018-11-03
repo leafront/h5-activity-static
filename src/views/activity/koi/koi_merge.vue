@@ -57,6 +57,8 @@
                   <p>{{item.title}}*{{item.couponNum}}张 </p>
                   <p v-if="item.couponValue === 120">今日剩余<span class="text_style">{{limitNum120}}</span>张</p>
                   <p v-else-if="item.couponValue === 100">今日剩余<span class="text_style">{{limitNum100}}</span>张</p>
+                  <p v-else-if="item.couponValue === 50">今日剩余<span class="text_style">{{limitNum50}}</span>张</p>
+
 
                 </div>
               </div>
@@ -71,6 +73,8 @@
                   <p>{{item.title}}*{{item.couponNum}}张 </p>
                   <p v-if="item.couponValue === 120">今日剩余<span class="text_style">{{limitNum120}}</span>张</p>
                   <p v-else-if="item.couponValue === 100">今日剩余<span class="text_style">{{limitNum100}}</span>张</p>
+                  <p v-else-if="item.couponValue === 50">今日剩余<span class="text_style">{{limitNum50}}</span>张</p>
+
                 </div>
               </div>
               <!-- 后面内容结束 -->
@@ -102,6 +106,8 @@
                   <p>{{item.title}}*{{item.couponNum}}张 </p>
                   <p v-if="item.couponValue === 120">今日剩余<span class="text_style">{{limitNum120}}</span>张</p>
                   <p v-else-if="item.couponValue === 100">今日剩余<span class="text_style">{{limitNum100}}</span>张</p>
+                  <p v-else-if="item.couponValue === 50">今日剩余<span class="text_style">{{limitNum50}}</span>张</p>
+
                 </div>
               </div>
 
