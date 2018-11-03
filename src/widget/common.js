@@ -3,6 +3,8 @@ import * as Model from '@/model/common'
 
 import store from '@/widget/store'
 
+import utils from '@/widget/utils'
+
 const common = {
   /**
    * 获取用户地址区域信息
@@ -45,7 +47,13 @@ const common = {
     let pName = ''
     let aCode = ''
 
-    if (!getAreaInfo) {
+    if (getAreaInfo && getAreaInfo.times > new Date().getTime() && utils.isLocalStorageSupported() ) {
+      pName = getAreaInfo.results.province.name
+      aCode = getAreaInfo.results.region.code
+    } else {
+      if (getAreaInfo) {
+        store.remove('areaInfo', 'local')
+      }
       this.getAreaInfo().then((result) => {
         const {
           provinceName,
@@ -56,17 +64,20 @@ const common = {
           regionCode
         } = result
         const setAreaInfo = {
-          province: {
+          times: new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
+          results: {
+            province: {
             name: provinceName,
             code: provinceCode
-          },
-          city: {
-            name: cityName,
-            code: cityCode
-          },
-          region: {
-            name: regionName,
-            code: regionCode
+            },
+            city: {
+              name: cityName,
+              code: cityCode
+            },
+            region: {
+              name: regionName,
+              code: regionCode
+            }
           }
         }
         store.set('areaInfo',setAreaInfo,'local')
@@ -74,9 +85,6 @@ const common = {
         pName = provinceName
         aCode = regionCode
       })
-    } else {
-      pName = getAreaInfo.province.name
-      aCode = getAreaInfo.region.code
     }
 
     return {

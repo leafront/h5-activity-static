@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction"></AppHeader>
+    <AppHeader :title="title" :isBorder="isBorder"></AppHeader>
     <div class="scroll-view-wrapper koi-view" :class="{'visibility': pageView,'scroll_view_hidden': isPopup}">
       <div class="koi__banner">
         <img class="koi__banner--pic" src="./images/koi_bg.jpg"/>
@@ -236,7 +236,7 @@
           <strong>共计 {{couponSum}} 元</strong>
         </div>
         <div class="koi-seed__action">
-          <span v-if="mergeButtonStatus == 0" @click="pageAction('/activity/koi/merge')">立即合成</span>
+          <span v-if="mergeButtonStatus == 0" @click="pageAction('/activity/koi/merge?hideHead=0')">立即合成</span>
           <span v-else>11月7日10:00 开始合成 敬请期待</span>
         </div>
       </div>
@@ -308,13 +308,6 @@
         this.isPopup = val
         utils.appViewFixed()
       },
-      backAction () {
-        if (utils.isApp()) {
-          app.back()
-        } else {
-          history.back()
-        }
-      },
       /**
        * page location
        * @param {String} url
@@ -335,7 +328,16 @@
        * @param {String} url
        */
       pageAction (url) {
-        this.$router.push(url)
+        if (utils.loggedIn()) {
+          this.$router.push(url)
+        } else {
+          if (utils.isApp()) {
+            utils.login()
+          } else {
+            location.href = url
+          }
+        }
+        
       },
       /**
        * @param {String} url

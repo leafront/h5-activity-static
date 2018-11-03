@@ -115,6 +115,7 @@
                   <p>{{item.title}}*{{item.couponNum}}张 </p>
                   <p v-if="item.couponValue === 120">今日剩余<span class="text_style">{{limitNum120}}</span>张</p>
                   <p v-else-if="item.couponValue === 100">今日剩余<span class="text_style">{{limitNum100}}</span>张</p>
+                  <p v-else-if="item.couponValue === 50">今日剩余<span class="text_style">{{limitNum50}}</span>张</p>
                 </div>
               </div>
 
@@ -215,6 +216,7 @@ export default {
       showUnionType: "",
       limitNum100: "",
       limitNum120: "",
+      limitNum50:"",
       bdOther: false,
       bdOther1: false,
       selectNum: 1,
@@ -287,10 +289,11 @@ export default {
      * 数据处理函数
      */
 
-    handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100) {
+    handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100,limitNum50) {
       this.myCouponList = myCouponList
       this.limitNum100 = limitNum100
       this.limitNum120 = limitNum120
+      this.limitNum50 = limitNum50
       this.decideShow(showUnionType)
       if (unionMaxList.length && unionMaxList.length > 2) {
         this.prompt = true
@@ -326,9 +329,10 @@ export default {
             myCouponList,
             showUnionType,
             limitNum120,
-            limitNum100
+            limitNum100,
+            limitNum50
           } = data
-          this.handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100)
+          this.handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100,limitNum50)
         } else if (result.code == -3 || result.code == -4) {
           if (utils.isApp()) {
             location.href = 'lyf://home'
@@ -368,9 +372,10 @@ export default {
             myCouponList,
             showUnionType,
             limitNum120,
-            limitNum100
+            limitNum100,
+            limitNum50
           } = data
-          this.handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100)
+          this.handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100,limitNum50)
           this.$toast(result.message)
         } else if (result.code == -3 || result.code == -4) {
           if (utils.isApp()) {
@@ -485,11 +490,13 @@ export default {
         border-bottom: 0;
     }
 }
+
 .koi_bg {
     position: relative;
     background: #BC0104;
     box-sizing: border-box;
 }
+
 .koi_common {
     width: 94%;
     margin: 0.2rem auto;
