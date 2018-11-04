@@ -389,6 +389,20 @@
         }
       },
       /**
+       * 获取鲤券活动状态
+       */
+      getKoiStatus () {
+        Model.getKoiStatus({
+          type: 'GET',
+          ignoreLogin: true
+        }).then((result) => {
+          const data = reuslt.data
+          if (data && data.activityStatus == 3) {
+            this.$router.replace('/activity/koi/end')
+          }
+        })
+      },
+      /**
        * exchange coupon
        */
       submitCouponExchange () {
@@ -443,8 +457,6 @@
             this.getCouponList()
           } else if (code == -1) {
             this.$toast(result.message)
-          } else if (code == -3) {
-            this.$router.replace('/activity/koi/end')
           }
         })
       },
@@ -516,6 +528,7 @@
       }
     },
     created () {
+      this.getKoiStatus()
       this.getKoiInfo()
       this.getCouponList()
       const query = utils.query()
