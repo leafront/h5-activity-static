@@ -393,7 +393,8 @@
        */
       getKoiStatus () {
         Model.getKoiStatus({
-          type: 'GET'
+          type: 'GET',
+          ignoreLogin: true
         }).then((result) => {
           const data = reuslt.data
           if (data && data.activityStatus == 3) {
