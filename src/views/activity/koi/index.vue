@@ -396,7 +396,7 @@
           type: 'GET',
           ignoreLogin: true
         }).then((result) => {
-          const data = reuslt.data
+          const data = result.data
           if (data && data.activityStatus == 3) {
             this.$router.replace('/activity/koi/end')
           }
