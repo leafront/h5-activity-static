@@ -443,6 +443,8 @@
             this.getCouponList()
           } else if (code == -1) {
             this.$toast(result.message)
+          } else if (code == -3) {
+            this.$router.replace('/activity/koi/end')
           }
         })
       },
