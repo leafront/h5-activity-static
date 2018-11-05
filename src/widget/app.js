@@ -37,7 +37,6 @@ const app = {
     }
 
     if (utils.ios()) {
-      alert(JSON.stringify(msgParams))
       window.webkit.messageHandlers.mobileAPI.postMessage(msgParams)
     } else if (utils.android()) {
       window.mobileAPI.postMessage(JSON.stringify(msgParams))
