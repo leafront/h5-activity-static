@@ -54,10 +54,10 @@
                 <div class="list_circle">
                 </div>
                 <div class="list_text">
-                  <p>{{item.title}}*{{item.couponNum}}张 </p>
-                  <p v-if="item.couponValue === 120">今日剩余<span class="text_style">{{limitNum120}}</span>张</p>
-                  <p v-else-if="item.couponValue === 100">今日剩余<span class="text_style">{{limitNum100}}</span>张</p>
-                  <p v-else-if="item.couponValue === 50">今日剩余<span class="text_style">{{limitNum50}}</span>张</p>
+                  <p>{{item.title}}x{{item.couponNum}}张 </p>
+                  <p v-if="item.couponValue === 120">  今日剩余 <span class="text_style"> &nbsp {{limitNum120}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 100">  今日剩余 <span class="text_style"> &nbsp {{limitNum100}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 50">  今日剩余 <span class="text_style"> &nbsp {{limitNum50}}  &nbsp</span>张</p>
 
 
                 </div>
@@ -70,10 +70,10 @@
                 <div class="list_circle">
                 </div>
                 <div class="list_text">
-                  <p>{{item.title}}*{{item.couponNum}}张 </p>
-                  <p v-if="item.couponValue === 120">今日剩余<span class="text_style">{{limitNum120}}</span>张</p>
-                  <p v-else-if="item.couponValue === 100">今日剩余<span class="text_style">{{limitNum100}}</span>张</p>
-                  <p v-else-if="item.couponValue === 50">今日剩余<span class="text_style">{{limitNum50}}</span>张</p>
+                  <p>{{item.title}}x{{item.couponNum}}张 </p>
+                  <p v-if="item.couponValue === 120">  今日剩余 <span class="text_style"> &nbsp {{limitNum120}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 100"> 今日剩余 <span class="text_style"> &nbsp {{limitNum100}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 50">  今日剩余<span class="text_style"> &nbsp {{limitNum50}}  &nbsp</span>张</p>
 
                 </div>
               </div>
@@ -103,10 +103,10 @@
                 <div class="list_circle">
                 </div>
                 <div class="list_text">
-                  <p>{{item.title}}*{{item.couponNum}}张 </p>
-                  <p v-if="item.couponValue === 120">今日剩余<span class="text_style">{{limitNum120}}</span>张</p>
-                  <p v-else-if="item.couponValue === 100">今日剩余<span class="text_style">{{limitNum100}}</span>张</p>
-                  <p v-else-if="item.couponValue === 50">今日剩余<span class="text_style">{{limitNum50}}</span>张</p>
+                  <p>{{item.title}}x{{item.couponNum}}张 </p>
+                  <p v-if="item.couponValue === 120">  今日剩余 <span class="text_style"> &nbsp {{limitNum120}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 100">  今日剩余 <span class="text_style"> &nbsp {{limitNum100}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 50">  今日剩余 <span class="text_style"> &nbsp {{limitNum50}}  &nbsp</span>张</p>
 
                 </div>
               </div>
@@ -118,10 +118,10 @@
                 <div class="list_circle">
                 </div>
                 <div class="list_text">
-                  <p>{{item.title}}*{{item.couponNum}}张 </p>
-                  <p v-if="item.couponValue === 120">今日剩余<span class="text_style">{{limitNum120}}</span>张</p>
-                  <p v-else-if="item.couponValue === 100">今日剩余<span class="text_style">{{limitNum100}}</span>张</p>
-                  <p v-else-if="item.couponValue === 50">今日剩余<span class="text_style">{{limitNum50}}</span>张</p>
+                  <p>{{item.title}}x{{item.couponNum}}张 </p>
+                  <p v-if="item.couponValue === 120">  今日剩余 <span class="text_style">  &nbsp {{limitNum120}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 100">  今日剩余 <span class="text_style">  &nbsp {{limitNum100}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 50">  今日剩余 <span class="text_style"> &nbsp {{limitNum50}}  &nbsp</span>张</p>
                 </div>
               </div>
 
@@ -182,7 +182,7 @@
         <div class="b_right b_right1" v-show="item.type == 2">
           已使用
         </div>
-        <div class="b_right  " v-show="item.type == 1">
+        <div class="b_right  " v-show="item.type == 1" @click = "jumpPage()">
           未使用
         </div>
       </div>
@@ -228,6 +228,7 @@ export default {
       selectNum: 1,
       innerCle: true,
       innerCle1: false,
+      unUseUrl:"",
 
 
     }
@@ -236,6 +237,27 @@ export default {
     AppHeader
   },
   methods: {
+
+    jumpPage(){
+      location.href = this.unUseUrl
+
+    },
+    /*
+     * 跳转
+     */
+
+    unUseJump() {
+      Model.unUseJump({
+        type: 'GET',
+      }).then((result) => {
+        const data = result
+        if (result.code == 0 && data) {
+          this.unUseUrl = data.data
+        }else {
+        }
+      })
+    },
+
 
 
     jumpRule() {
@@ -426,6 +448,7 @@ export default {
   },
   created() {
     this.getKoiMerge()
+    this.unUseJump()
   }
 }
 </script>
@@ -482,7 +505,7 @@ export default {
         line-height: 0.3rem;
         border-radius: 50%;
         font-size: 0.25rem;
-        background: #fff;
+        background: #FAF0D2;
         color: #CA231B;
         text-align: center;
     }
@@ -572,6 +595,7 @@ export default {
 }
 
 .bd2_cont_title {
+    font-weight: 400;
     font-size: 0.32rem;
     color: #FEC275;
 }
@@ -583,8 +607,11 @@ export default {
     background: #ffff;
     margin-right: 0.1rem;
 }
+.list_text{
+  margin-bottom: .05rem;
+}
 .list_text P{
-  margin-bottom: .1rem;
+  margin-bottom: .03rem;
 }
 .text_style {
     color: #FEC275;
