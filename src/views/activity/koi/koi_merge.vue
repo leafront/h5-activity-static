@@ -488,6 +488,7 @@ export default {
     }
     .r_style2 {
         font-size: 0.3rem;
+        margin: auto .05rem;
     }
     .r_style3 {
         height: 0.1rem;
@@ -557,7 +558,7 @@ export default {
     padding: 0.2rem;
     color: #fff;
     font-size: 0.26rem;
-    border-radius: 0.2rem;
+    border-radius: 0.1rem;
 
 }
 .fst_bd2_content {
@@ -581,6 +582,9 @@ export default {
     border-radius: 50%;
     background: #ffff;
     margin-right: 0.1rem;
+}
+.list_text P{
+  margin-bottom: .1rem;
 }
 .text_style {
     color: #FEC275;
@@ -643,7 +647,7 @@ export default {
 
 .region_second {
     margin-top: 1rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.1rem;
 }
 .by1_image {
     width: 3rem;
