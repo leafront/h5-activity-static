@@ -168,7 +168,7 @@
         <p class="by1_description">您还未合成锦鲤券，快去合成吧！</p>
       </div>
 
-      <div class="regionSec_body" v-for="(item, index) in myCouponList" v-show="myCouponList.length > 0">
+      <div class="regionSec_body" v-for="(item, index) in myCouponList" v-show="myCouponList.length > 0" @click = "jumpPage(item.type)">
         <div class="b_left">
           ￥<span class="lf_text">{{item.couponValue}}</span>
 
@@ -182,7 +182,7 @@
         <div class="b_right b_right1" v-show="item.type == 2">
           已使用
         </div>
-        <div class="b_right  " v-show="item.type == 1" @click = "jumpPage()">
+        <div class="b_right  " v-show="item.type == 1" >
           未使用
         </div>
       </div>
@@ -238,9 +238,12 @@ export default {
   },
   methods: {
 
-    jumpPage(){
+    jumpPage(type){
+      if(type == 1){
       location.href = this.unUseUrl
-
+}else {
+  return
+}
     },
     /*
      * 跳转
