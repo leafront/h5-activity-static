@@ -232,11 +232,11 @@
           </div>
         </div>
         <div class="koi-seed__des">
-          <span>已获得种子券 {{couponNum}} 张</span>
+          <span>目前拥有种子券 {{couponNum}} 张</span>
           <strong>共计 {{couponSum}} 元</strong>
         </div>
         <div class="koi-seed__action">
-          <span v-if="mergeButtonStatus == 0" @click="pageAction('/activity/koi/merge?hideHead=0')">立即合成</span>
+          <span v-if="mergeButtonStatus == 0" @click="pageAction">立即合成</span>
           <span v-else>11月7日10:00 开始合成 敬请期待</span>
         </div>
       </div>
@@ -327,7 +327,12 @@
        * page location
        * @param {String} url
        */
-      pageAction (url) {
+      pageAction () {
+        const hideHead = utils.query('hideHead')
+        let url = '/activity/koi/merge'
+        if (hideHead !== undefined) {
+           url = `${url}?hideHead=${hideHead}`
+        }
         if (utils.loggedIn()) {
           this.$router.push(url)
         } else {
@@ -398,7 +403,6 @@
         }).then((result) => {
           const data = result.data
           const hideHead = utils.query('hideHead')
-          console.log(hideHead)
           if (data && data.activityStatus == 3) {
             if (hideHead !== undefined) {
               this.$router.replace(`/activity/koi/end?hideHead=${hideHead}`)

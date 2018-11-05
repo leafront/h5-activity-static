@@ -58,7 +58,7 @@
     methods: {
       backAction () {
         if (utils.isApp()) {
-          app.ostMessage("goBackHome")
+          app.postMessage("goBackHome")
         } else {
           location.href = '/index.html'
         }
@@ -72,7 +72,7 @@
           this.times = times
         } else {
           if (utils.isApp()) {
-             app.ostMessage("goBackHome")
+            app.postMessage("goBackHome")
           } else {
             location.href = '/index.html'
           }
