@@ -58,7 +58,7 @@
     methods: {
       backAction () {
         if (utils.isApp()) {
-          app.postMessage("goBackHome")
+          app.back('refresh','forceBack')
         } else {
           location.href = '/index.html'
         }
@@ -72,7 +72,7 @@
           this.times = times
         } else {
           if (utils.isApp()) {
-            app.postMessage("goBackHome")
+            app.back('refresh','forceBack')
           } else {
             location.href = '/index.html'
           }
