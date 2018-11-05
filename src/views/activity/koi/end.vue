@@ -40,6 +40,8 @@
 
   import utils from '@/widget/utils'
 
+  import app from '@/widget/app'
+
   export default {
     data () {
       return {
@@ -56,7 +58,7 @@
     methods: {
       backAction () {
         if (utils.isApp()) {
-          location.href = 'lyf://home'
+          app.ostMessage("goBackHome")
         } else {
           location.href = '/index.html'
         }
@@ -69,9 +71,8 @@
         if (times > 0) {
           this.times = times
         } else {
-          console.log(times)
           if (utils.isApp()) {
-            location.href = 'lyf://home'
+             app.ostMessage("goBackHome")
           } else {
             location.href = '/index.html'
           }
