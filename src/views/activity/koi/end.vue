@@ -69,6 +69,7 @@
         if (times > 0) {
           this.times = times
         } else {
+          console.log(times)
           if (utils.isApp()) {
             location.href = 'lyf://home'
           } else {
