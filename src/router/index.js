@@ -44,6 +44,8 @@ const koiIndex = r => require.ensure([], () =>  r(require('@/views/activity/koi/
 
 const koiEnd = r => require.ensure([], () =>  r(require('@/views/activity/koi/end.vue')),'koiEnd')
 
+const koiMerge = r => require.ensure([], () =>  r(require('@/views/activity/koi/koi_merge.vue')),'koiMerge')
+
 export default new Router({
   mode:'history',
   scrollBehavior(to,from,savePosition){ 
@@ -207,6 +209,15 @@ export default new Router({
         bgColor: '#bd0004',
         title: '翻倍锦鲤券'
       }
+    },{
+      path: '/activity/koi/merge',
+      name: 'koiMerge',
+      component: koiMerge,
+      meta: {
+        title: '锦鲤券',
+        bgColor: '#bd0004'
+      }
     }
+
   ]
 })
