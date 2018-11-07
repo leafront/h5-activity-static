@@ -48,7 +48,7 @@ const koiMerge = r => require.ensure([], () =>  r(require('@/views/activity/koi/
 
 export default new Router({
   mode:'history',
-  scrollBehavior(to,from,savePosition){ 
+  scrollBehavior(to,from,savePosition){
     if (savePosition) {
       return savePosition
     } else{
@@ -215,7 +215,8 @@ export default new Router({
       component: koiMerge,
       meta: {
         title: '锦鲤券',
-        bgColor: '#bd0004'
+        bgColor: '#bd0004',
+        requireLogin: true
       }
     }
 
