@@ -331,7 +331,7 @@
         const hideHead = utils.query('hideHead')
         let url = '/activity/koi/merge'
         if (hideHead !== undefined) {
-           url = `${url}?hideHead=${hideHead}`
+          url = `${url}?hideHead=${hideHead}`
         }
         if (utils.loggedIn()) {
           this.$router.push(url)
@@ -342,7 +342,6 @@
             location.href = url
           }
         }
-        
       },
       /**
        * @param {String} url
