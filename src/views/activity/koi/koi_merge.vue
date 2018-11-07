@@ -697,7 +697,7 @@ export default {
 
 .regionSec_body {
     width: 6.26rem;
-    height: 1.64rem;
+    height: 1.9rem;
     margin: 0.2rem auto;
     display: flex;
     justify-content: space-between;
@@ -705,7 +705,7 @@ export default {
     color: #BD0004;
     font-family: PingFangSC;
     background-image: url("/activity-static/images/koibg.png");
-    background-size: 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
@@ -725,6 +725,8 @@ export default {
 .b_center {
     border-left: dashed 1px #BA0000;
     padding-left: 0.2rem;
+    padding-top: .1rem;
+    padding-bottom: .1rem;
     flex: 1 1 auto;
     font-size: 0.23rem;
     .ct_text1 {
