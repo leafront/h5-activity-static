@@ -334,12 +334,12 @@
           url = `${url}?hideHead=${hideHead}`
         }
         if (utils.loggedIn()) {
-          this.$router.push(url)
+          location.href = url
         } else {
           if (utils.isApp()) {
             utils.login()
           } else {
-            location.href = url
+            this.$router.push(url)
           }
         }
       },
