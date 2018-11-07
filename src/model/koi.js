@@ -13,6 +13,6 @@ export const getKoiInfo = (data) => request('/api/promotion/dragonball/main', da
 
 export const getCouponList = (data) => request('/api/promotion/dragonball/coupons', data)
 
-export const getKoiStatus = (data) => request('/api/promotion/dragonball/status', data)
-
 export const unUseJump = (data) => request('/api/promotion/dragonball/getLinkUrl', data)
+
+export const getKoiStatus = (data) => request('/api/promotion/dragonball/status', data)

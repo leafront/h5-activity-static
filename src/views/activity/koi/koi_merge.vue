@@ -55,9 +55,9 @@
                 </div>
                 <div class="list_text">
                   <p>{{item.title}}x{{item.couponNum}}张 </p>
-                  <p v-if="item.couponValue === 120">  今日剩余 <span class="text_style"> &nbsp {{limitNum120}}  &nbsp</span>张</p>
-                  <p v-else-if="item.couponValue === 100">  今日剩余 <span class="text_style"> &nbsp {{limitNum100}}  &nbsp</span>张</p>
-                  <p v-else-if="item.couponValue === 50">  今日剩余 <span class="text_style"> &nbsp {{limitNum50}}  &nbsp</span>张</p>
+                  <p v-if="item.couponValue === 120"> 今日剩余 <span class="text_style"> &nbsp {{limitNum120}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 100"> 今日剩余 <span class="text_style"> &nbsp {{limitNum100}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 50"> 今日剩余 <span class="text_style"> &nbsp {{limitNum50}}  &nbsp</span>张</p>
 
 
                 </div>
@@ -71,9 +71,9 @@
                 </div>
                 <div class="list_text">
                   <p>{{item.title}}x{{item.couponNum}}张 </p>
-                  <p v-if="item.couponValue === 120">  今日剩余 <span class="text_style"> &nbsp {{limitNum120}}  &nbsp</span>张</p>
+                  <p v-if="item.couponValue === 120"> 今日剩余 <span class="text_style"> &nbsp {{limitNum120}}  &nbsp</span>张</p>
                   <p v-else-if="item.couponValue === 100"> 今日剩余 <span class="text_style"> &nbsp {{limitNum100}}  &nbsp</span>张</p>
-                  <p v-else-if="item.couponValue === 50">  今日剩余<span class="text_style"> &nbsp {{limitNum50}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 50"> 今日剩余<span class="text_style"> &nbsp {{limitNum50}}  &nbsp</span>张</p>
 
                 </div>
               </div>
@@ -104,9 +104,9 @@
                 </div>
                 <div class="list_text">
                   <p>{{item.title}}x{{item.couponNum}}张 </p>
-                  <p v-if="item.couponValue === 120">  今日剩余 <span class="text_style"> &nbsp {{limitNum120}}  &nbsp</span>张</p>
-                  <p v-else-if="item.couponValue === 100">  今日剩余 <span class="text_style"> &nbsp {{limitNum100}}  &nbsp</span>张</p>
-                  <p v-else-if="item.couponValue === 50">  今日剩余 <span class="text_style"> &nbsp {{limitNum50}}  &nbsp</span>张</p>
+                  <p v-if="item.couponValue === 120"> 今日剩余 <span class="text_style"> &nbsp {{limitNum120}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 100"> 今日剩余 <span class="text_style"> &nbsp {{limitNum100}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 50"> 今日剩余 <span class="text_style"> &nbsp {{limitNum50}}  &nbsp</span>张</p>
 
                 </div>
               </div>
@@ -119,9 +119,9 @@
                 </div>
                 <div class="list_text">
                   <p>{{item.title}}x{{item.couponNum}}张 </p>
-                  <p v-if="item.couponValue === 120">  今日剩余 <span class="text_style">  &nbsp {{limitNum120}}  &nbsp</span>张</p>
-                  <p v-else-if="item.couponValue === 100">  今日剩余 <span class="text_style">  &nbsp {{limitNum100}}  &nbsp</span>张</p>
-                  <p v-else-if="item.couponValue === 50">  今日剩余 <span class="text_style"> &nbsp {{limitNum50}}  &nbsp</span>张</p>
+                  <p v-if="item.couponValue === 120"> 今日剩余 <span class="text_style">  &nbsp {{limitNum120}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 100"> 今日剩余 <span class="text_style">  &nbsp {{limitNum100}}  &nbsp</span>张</p>
+                  <p v-else-if="item.couponValue === 50"> 今日剩余 <span class="text_style"> &nbsp {{limitNum50}}  &nbsp</span>张</p>
                 </div>
               </div>
 
@@ -168,7 +168,7 @@
         <p class="by1_description">您还未合成锦鲤券，快去合成吧！</p>
       </div>
 
-      <div class="regionSec_body" v-for="(item, index) in myCouponList" v-show="myCouponList.length > 0" @click = "jumpPage(item.type)">
+      <div class="regionSec_body" v-for="(item, index) in myCouponList" v-show="myCouponList.length > 0" @click="jumpPage(item.type)">
         <div class="b_left">
           ￥<span class="lf_text">{{item.couponValue}}</span>
 
@@ -182,7 +182,7 @@
         <div class="b_right b_right1" v-show="item.type == 2">
           已使用
         </div>
-        <div class="b_right  " v-show="item.type == 1" >
+        <div class="b_right  " v-show="item.type == 1">
           未使用
         </div>
       </div>
@@ -222,13 +222,13 @@ export default {
       showUnionType: "",
       limitNum100: "",
       limitNum120: "",
-      limitNum50:"",
+      limitNum50: "",
       bdOther: false,
       bdOther1: false,
       selectNum: 1,
       innerCle: true,
       innerCle1: false,
-      unUseUrl:"",
+      unUseUrl: "",
 
 
     }
@@ -238,12 +238,12 @@ export default {
   },
   methods: {
 
-    jumpPage(type){
-      if(type == 1){
-      location.href = this.unUseUrl
-}else {
-  return
-}
+    jumpPage(type) {
+      if (type == 1) {
+        location.href = this.unUseUrl
+      } else {
+        return
+      }
     },
     /*
      * 跳转
@@ -256,8 +256,7 @@ export default {
         const data = result
         if (result.code == 0 && data) {
           this.unUseUrl = data.data
-        }else {
-        }
+        } else {}
       })
     },
 
@@ -320,7 +319,7 @@ export default {
      * 数据处理函数
      */
 
-    handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100,limitNum50) {
+    handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100, limitNum50) {
       this.myCouponList = myCouponList
       this.limitNum100 = limitNum100
       this.limitNum120 = limitNum120
@@ -363,7 +362,7 @@ export default {
             limitNum100,
             limitNum50
           } = data
-          this.handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100,limitNum50)
+          this.handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100, limitNum50)
         } else if (result.code == -3 || result.code == -4) {
           if (utils.isApp()) {
             location.href = 'lyf://home'
@@ -407,7 +406,7 @@ export default {
             limitNum100,
             limitNum50
           } = data
-          this.handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100,limitNum50)
+          this.handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100, limitNum50)
           this.$toast(result.message)
         } else if (result.code == -3 || result.code == -4) {
           if (utils.isApp()) {
@@ -514,7 +513,7 @@ export default {
     }
     .r_style2 {
         font-size: 0.3rem;
-        margin: auto .05rem;
+        margin: auto 0.05rem;
     }
     .r_style3 {
         height: 0.1rem;
@@ -610,11 +609,11 @@ export default {
     background: #ffff;
     margin-right: 0.1rem;
 }
-.list_text{
-  margin-bottom: .05rem;
+.list_text {
+    margin-bottom: 0.05rem;
 }
-.list_text P{
-  margin-bottom: .03rem;
+.list_text P {
+    margin-bottom: 0.03rem;
 }
 .text_style {
     color: #FEC275;
@@ -698,7 +697,7 @@ export default {
 
 .regionSec_body {
     width: 6.26rem;
-    height: 1.64rem;
+    height: 1.9rem;
     margin: 0.2rem auto;
     display: flex;
     justify-content: space-between;
@@ -706,7 +705,7 @@ export default {
     color: #BD0004;
     font-family: PingFangSC;
     background-image: url("/activity-static/images/koibg.png");
-    background-size: 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
@@ -726,6 +725,8 @@ export default {
 .b_center {
     border-left: dashed 1px #BA0000;
     padding-left: 0.2rem;
+    padding-top: .1rem;
+    padding-bottom: .1rem;
     flex: 1 1 auto;
     font-size: 0.23rem;
     .ct_text1 {
