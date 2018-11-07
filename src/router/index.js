@@ -6,46 +6,6 @@ import config from '@/config/index'
 
 Vue.use(Router)
 
-const PageError = r => require.ensure([], () => r(require('@/views/activity/error/404.vue')),'PageError')
-
-const redPackInvite = r => require.ensure([], () => r(require('@/views/activity/redpack/invite.vue')),'redPackInvite')
-
-const redPackInvalid = r => require.ensure([], () => r(require('@/views/activity/redpack/invalid.vue')),'redPackInvalid')
-
-const redPackStart = r => require.ensure([], () => r(require('@/views/activity/redpack/start.vue')),'redPackStart')
-
-const redPackReceive = r => require.ensure([], () => r(require('@/views/activity/redpack/receive.vue')),'redPackReceive')
-
-const redPakFinished =  r => require.ensure([], () => r(require('@/views/activity/redpack/finished.vue')),'redPakFinished')
-
-const redPackSuccess = r => require.ensure([], () =>  r(require('@/views/activity/redpack/success.vue')),'redPackSuccess')
-
-const redPackStop = r => require.ensure([], () =>  r(require('@/views/activity/redpack/stop.vue')),'redPackStop')
-
-const makeMoney = r => require.ensure([], () =>  r(require('@/views/activity/make/money.vue')),'makeMoney')
-
-const couponList = r => require.ensure([], () =>  r(require('@/views/activity/coupon/list.vue')),'couponList')
-
-const groupList = r => require.ensure([], () =>  r(require('@/views/activity/group/list.vue')),'groupList')
-
-const invitation = r => require.ensure([], () =>  r(require('@/views/activity/inviteFriends/invitation.vue')),'invitation')
-
-const invitedsuccess = r => require.ensure([], () =>  r(require('@/views/activity/inviteFriends/invitedsuccess.vue')),'invitedsuccess')
-
-const bankRecharge = r => require.ensure([], () =>  r(require('@/views/activity/bank/recharge.vue')),'bankRecharge')
-
-const bankPay = r => require.ensure([], () =>  r(require('@/views/activity/bank/pay.vue')),'bankPay')
-
-const bankSuccess = r => require.ensure([], () =>  r(require('@/views/activity/bank/success.vue')),'bankSuccess')
-
-const schoolStart = r => require.ensure([], () =>  r(require('@/views/activity/school/start.vue')),'schoolStart')
-
-const koiIndex = r => require.ensure([], () =>  r(require('@/views/activity/koi/index.vue')),'koiIndex')
-
-const koiEnd = r => require.ensure([], () =>  r(require('@/views/activity/koi/end.vue')),'koiEnd')
-
-const koiMerge = r => require.ensure([], () =>  r(require('@/views/activity/koi/koi_merge.vue')),'koiMerge')
-
 export default new Router({
   mode:'history',
   scrollBehavior(to,from,savePosition){ 
@@ -59,56 +19,57 @@ export default new Router({
     {
       path: '*',
       name: 'PageError',
-      component: PageError,
+      component: () => import('@/views/activity/error/404.vue'),
       meta: {
-        title: '找不到页面'
+        title: '找不到页面',
+        bgColor: '#61b8ff'
       }
     },{
       path: '/activity/redpack/invite',
       name: 'redPackInvite',
-      component: redPackInvite,
+      component: () => import('@/views/activity/redpack/invite.vue'),
       meta: {
         title: '拆红包'
       }
     },{
       path: '/activity/redpack/receive',
       name: 'redPackReceive',
-      component: redPackReceive,
+      component: () => import('@/views/activity/redpack/receive.vue'),
       meta: {
         title: '拆红包'
       }
     },{
       path: '/activity/redpack/start',
       name: 'redPackStart',
-      component: redPackStart,
+      component: () => import('@/views/activity/redpack/start.vue'),
       meta: {
         title: '拆红包'
       }
     },{
       path: '/activity/redpack/finished',
       name: 'redPakFinished',
-      component: redPakFinished,
+      component: () => import('@/views/activity/redpack/finished.vue'),
       meta: {
         title: '拆红包'
       }
     },{
       path: '/activity/redpack/success',
       name: 'redPackSuccess',
-      component: redPackSuccess,
+      component: () => import('@/views/activity/redpack/success.vue'),
       meta: {
         title: '拆红包'
       }
     },{
       path: '/activity/redpack/stop',
       name: 'redPackStop',
-      component: redPackStop,
+      component: () => import('@/views/activity/redpack/stop.vue'),
       meta: {
         title: '拆红包'
       }
     },{
       path: '/activity/redpack/invalid',
       name: 'redPackInvalid',
-      component: redPackInvalid,
+      component: () => import('@/views/activity/redpack/invalid.vue'),
       meta: {
         title: '拆红包'
       }
@@ -116,28 +77,28 @@ export default new Router({
     {
       path: '/activity/make/money',
       name: 'makeMoney',
-      component: makeMoney,
+      component: () => import('@/views/activity/make/money.vue'),
       meta: {
         title: '伊起赚专区'
       }
     },{
       path: '/activity/coupon/list',
       name: 'couponList',
-      component: couponList,
+      component: () => import('@/views/activity/coupon/list.vue'),
       meta: {
         title: '领券专区'
       }
     }, {
       path: '/activity/group/list',
       name: 'groupList',
-      component: groupList,
+      component: () => import('@/views/activity/group/list.vue'),
       meta: {
         title: '伊起拼'
       }
     },{
       path: '/activity/inviteFriends/invitation',
       name: 'invitation',
-      component: invitation,
+      component: () => import('@/views/activity/inviteFriends/invitation.vue'),
       meta: {
         title: '邀请好友',
         requireLogin: true
@@ -145,7 +106,7 @@ export default new Router({
     }, {
       path: '/activity/inviteFriends/invitedsuccess',
       name: 'invitedsuccess',
-      component: invitedsuccess,
+      component: () => import('@/views/activity/inviteFriends/invitedsuccess.vue'),
       meta: {
         title: '邀请好友',
         requireLogin: true
@@ -153,7 +114,7 @@ export default new Router({
     }, {
 			path: '/activity/bank/recharge',
 			name: 'bankRecharge',
-			component: bankRecharge,
+			component: () => import('@/views/activity/bank/recharge.vue'),
 			meta: {
 				title: '悠点卡',
 				requireLogin: true
@@ -161,7 +122,7 @@ export default new Router({
 		}, {
 			path: '/activity/bank/pay',
 			name: 'bankPay',
-			component: bankPay,
+			component: () => import('@/views/activity/bank/pay.vue'),
 			meta: {
 				title: '收银台',
 				requireLogin: true
@@ -169,7 +130,7 @@ export default new Router({
 		}, {
 			path: '/activity/bank/success',
 			name: 'bankSuccess',
-			component: bankSuccess,
+			component: () => import('@/views/activity/bank/success.vue'),
 			meta: {
 				title: '交易结果',
 				requireLogin: true
@@ -177,14 +138,14 @@ export default new Router({
 		}, {
       path: '/activity/school/start',
       name: 'schoolStart',
-      component: schoolStart,
+      component: () => import('@/views/activity/school/start.vue'),
       meta: {
         title: '开学季'
       }
     }, {
       path: '/activity/koi/index',
       name: 'koiIndex',
-      component: koiIndex,
+      component: () => import('@/views/activity/koi/index.vue'),
       meta: {
         title: '翻倍锦鲤券',
         bgColor: '#bd0004',
@@ -204,7 +165,7 @@ export default new Router({
     }, {
       path: '/activity/koi/end',
       name: 'koiEnd',
-      component: koiEnd,
+      component: () => import('@/views/activity/koi/end.vue'),
       meta: {
         bgColor: '#bd0004',
         title: '翻倍锦鲤券'
@@ -212,7 +173,7 @@ export default new Router({
     },{
       path: '/activity/koi/merge',
       name: 'koiMerge',
-      component: koiMerge,
+      component: () => import('@/views/activity/koi/koi_merge.vue'),
       meta: {
         title: '锦鲤券',
         bgColor: '#bd0004'
