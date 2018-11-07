@@ -479,7 +479,7 @@ export default {
 .region_tip_r{
   flex: 1 1 auto;
   font-size: .24rem;
-  color: #ffff;
+  color: #fff;
 }
 
 
