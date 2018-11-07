@@ -3,6 +3,12 @@
   <AppHeader :title="title" :isBorder="isBorder">
   </AppHeader>
   <div class="scroll-view-wrapper koi_bg" :class="{'visibility': pageView}">
+    <div class="region_tip">
+      <div class="region_tip_l">
+      </div>
+      <p class="region_tip_r">锦鲤券免单券/锦鲤券299减200/锦鲤券199减100 每日10:00开抢，数量有限，先到先得。</p>
+    </div>
+
     <div class="region_header">
       <div class="region_rule" @click="jumpRule">
         <span class="rule_style r_style1">!</span >
@@ -455,6 +461,29 @@ export default {
 }
 </script>
 <style lang="scss">
+.region_tip{
+  display: flex;
+  align-items: center;
+  margin: .35rem .3rem .0rem;
+
+}
+.region_tip_l{
+  width: .4rem;
+  height: .4rem;
+  flex: 0 0 auto;
+  background-image: url("/activity-static/images/kolTip.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin-right: .2rem;
+}
+.region_tip_r{
+  flex: 1 1 auto;
+  font-size: .24rem;
+  color: #ffff;
+}
+
+
+
 @keyframes mycycle {
     from {
         transform: rotate(0deg);
