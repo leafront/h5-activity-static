@@ -92,10 +92,11 @@
     return supportsPassiveOption   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
 
   }
+  var scrollEl = document.body
 
   var overscroll = function () {
-    document.body.addEventListener('touchstart', topScroll, this.isPassive() ? {passive: true} : false)
-    document.body.addEventListener('touchmove', botScroll, this.isPassive() ? {passive: true} : false)
+    scrollEl.addEventListener('touchstart', topScroll, isPassive() ? {passive: true} : false)
+    scrollEl.addEventListener('touchmove', botScroll, isPassive() ? {passive: true} : false)
   }
 
   overscroll()
