@@ -147,6 +147,17 @@
           if (!utils.isPassive()) {
             event.preventDefault()
           }
+          event.stopPropagation()
+        },utils.isPassive() ? {passive: true} : false)
+
+        document.getElementById('worldcup-rule').addEventListener('touchmove',(event) => {
+
+          event.stopPropagation()
+        },utils.isPassive() ? {passive: true} : false)
+
+        document.getElementById('worldcup-rule').addEventListener('scroll',(event) => {
+
+          event.stopPropagation()
         },utils.isPassive() ? {passive: true} : false)
       }
     },
