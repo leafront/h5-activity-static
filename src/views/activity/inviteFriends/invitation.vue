@@ -201,11 +201,7 @@
         invationToSecond:null,
         invationToFirst:null,
         invitationShareC:"",//获取sharecode
-        shareConfig: {},
-
-
-
-
+        shareConfig: {}
       }
     },
     components: {
@@ -332,7 +328,7 @@
         }).then((result) => {
           const data = result.data
           if (result.code == 0 ) {
-            // this.$hideLoading()
+            this.$hideLoading()
             this.pageView = true
 
             const {
@@ -412,7 +408,7 @@
 
     },
     created() {
-      // this.$showLoading()
+      this.$showLoading()
       // this.getAdImg()
       this.ajaxRecommend()
       this.ajaxShareCode()
