@@ -42,7 +42,7 @@ const common = {
    */
   getAreaCode () {
 
-    const getAreaInfo = store.get('areaInfo','local')
+    const getAreaInfo = store.get('lyf_areaInfo','local')
 
     let pName = ''
     let aCode = ''
@@ -52,7 +52,7 @@ const common = {
       aCode = getAreaInfo.results.region.code
     } else {
       if (getAreaInfo) {
-        store.remove('areaInfo', 'local')
+        store.remove('lyf_areaInfo', 'local')
       }
       this.getAreaInfo().then((result) => {
         const {
@@ -80,8 +80,7 @@ const common = {
             }
           }
         }
-        store.set('areaInfo',setAreaInfo,'local')
-        store.set('curLocation',setAreaInfo,'local')
+        store.set('lyf_areaInfo',setAreaInfo,'local')
         pName = provinceName
         aCode = regionCode
       })
