@@ -78,6 +78,57 @@
       return false
     }
   }
+
+  function isPassive() {
+
+    var supportsPassiveOption = false
+    try {
+      addEventListener("test", null, Object.defineProperty({}, 'passive', {
+        get: function () {
+          supportsPassiveOption = true
+        }
+      }));
+    } catch(e) {}
+    return supportsPassiveOption   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
+
+  }
+  var scrollEl = document.body
+
+  var overscroll = function () {
+    scrollEl.addEventListener('touchstart', topScroll, isPassive() ? {passive: true} : false)
+    scrollEl.addEventListener('touchmove', botScroll, isPassive() ? {passive: true} : false)
+  }
+
+  overscroll()
+
+  function topScroll () {
+
+    var top = scrollEl.scrollTop
+      , totalScroll = scrollEl.scrollHeight
+      , currentScroll = top + scrollEl.offsetHeight
+    //If we're at the top or the bottom of the containers
+    //scroll, push up or down one pixel.
+    //
+    //this prevents the scroll from "passing through" to
+    //the body.
+
+    if(top === 0) {
+      scrollEl.scrollTop = 1
+    } else if(currentScroll === totalScroll) {
+      scrollEl.scrollTop = top - 1
+    }
+
+  }
+
+  function  botScroll (evt) {
+    //if the content is actually scrollable, i.e. the content is long enough
+    //that scrolling can occur
+
+    if(scrollEl.offsetHeight < scrollEl.scrollHeight) {
+      evt._isScroller = true
+    }
+
+  }
   function appendScript (res) {
     var script = document.createElement('script')
     script.type = 'text/javascript'
