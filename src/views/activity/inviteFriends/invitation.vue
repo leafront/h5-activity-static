@@ -271,7 +271,7 @@
        */
       toggleRuleText(val){
         this.ruleText = val
-        // utils.appViewFixed()
+        utils.appViewFixed()
       },
 
       /**
@@ -280,6 +280,7 @@
        */
       toggleRulePopup (val) {
         this.rulePopup = val
+
       },
       ajaxShareCode(type){
         if (type == 1 && this.invitationShareC) {
