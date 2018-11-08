@@ -280,7 +280,7 @@
        */
       toggleRulePopup (val) {
         this.rulePopup = val
-        utils.appViewFixed()
+
       },
       ajaxShareCode(type){
         if (type == 1 && this.invitationShareC) {
