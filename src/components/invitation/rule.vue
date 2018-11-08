@@ -145,11 +145,10 @@
         document.getElementById('worldcup-rule-mask').addEventListener('touchmove',(event) => {
 
           if (!utils.isPassive()) {
-
-            //event.preventDefault()
-
+            event.preventDefault()
           }
-        })
+          event.stopPropagation()
+        },utils.isPassive() ? {passive: true} : false)
 
         document.getElementById('worldcup-rule').addEventListener('touchmove',(event) => {
 
