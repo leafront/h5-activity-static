@@ -59,7 +59,7 @@ router.beforeEach((to, from, next) => {
       if (utils.isApp()) {
         utils.login()
       } else {
-        const from = utils.getRelatedUrl()
+        const from = to.fullPath
         location.href = `/login.html?from=` + encodeURIComponent(from)
       }
     }
