@@ -271,7 +271,7 @@
        */
       toggleRuleText(val){
         this.ruleText = val
-        utils.appViewFixed()
+        // utils.appViewFixed()
       },
 
       /**
