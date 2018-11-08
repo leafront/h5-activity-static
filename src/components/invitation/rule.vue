@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="ui-mask" id="worldcup-rule-mask" :class="{'active': ruleText}"></div>
+    <div class="ui-mask" id="invite-rule-mask" :class="{'active': ruleText}"></div>
     <!-- <span class="ui-invite-close" :class="{'active': ruleText}" @click="closeRuleText"></span> -->
-    <div class="ui-invite-rule" id="worldcup-rule" :class="{'active': ruleText}">
+    <div class="ui-invite-rule" id="invite-rule" :class="{'active': ruleText}">
       <div class="rule_child">
         <h4 class="">规则详情</h4>
     <h5>一、活动规则：</h5>
@@ -136,26 +136,25 @@
     },
 
     watch: {
-      rulePopup () {
+      ruleText () {
 
         /**
          *
          * 阻止弹层外的元素滚动
          */
-        document.getElementById('worldcup-rule-mask').addEventListener('touchmove',(event) => {
+        document.getElementById('invite-rule-mask').addEventListener('touchmove',(event) => {
 
-          if (!utils.isPassive()) {
-            event.preventDefault()
-          }
-          event.stopPropagation()
-        },utils.isPassive() ? {passive: true} : false)
-
-        document.getElementById('worldcup-rule').addEventListener('touchmove',(event) => {
+          event.preventDefault()
 
           event.stopPropagation()
-        },utils.isPassive() ? {passive: true} : false)
 
-        document.getElementById('worldcup-rule').addEventListener('scroll',(event) => {
+        },false)
+
+        document.getElementById('invite-rule').addEventListener('touchmove',(event) => {
+
+          event.stopPropagation()
+        },utils.isPassive() ? {passive: true} : false)
+        document.getElementById('invite-rule').addEventListener('scroll',(event) => {
 
           event.stopPropagation()
         },utils.isPassive() ? {passive: true} : false)

@@ -46,7 +46,7 @@
 
             }
             event.stopPropagation()
-          })
+          }, utils.isPassive() ? {passive: true} : false)
         }
       }
     },
