@@ -147,7 +147,6 @@
           if (!utils.isPassive()) {
             event.preventDefault()
           }
-          event.stopPropagation()
         },utils.isPassive() ? {passive: true} : false)
       }
     },
