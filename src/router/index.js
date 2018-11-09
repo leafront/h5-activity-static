@@ -24,64 +24,63 @@ export default new Router({
         title: '找不到页面',
         bgColor: '#61b8ff'
       }
-    },{
+    }, {
       path: '/activity/redpack/invite',
       name: 'redPackInvite',
       component: () => import('@/views/activity/redpack/invite.vue'),
       meta: {
         title: '拆红包'
       }
-    },{
+    }, {
       path: '/activity/redpack/receive',
       name: 'redPackReceive',
       component: () => import('@/views/activity/redpack/receive.vue'),
       meta: {
         title: '拆红包'
       }
-    },{
+    }, {
       path: '/activity/redpack/start',
       name: 'redPackStart',
       component: () => import('@/views/activity/redpack/start.vue'),
       meta: {
         title: '拆红包'
       }
-    },{
+    }, {
       path: '/activity/redpack/finished',
       name: 'redPakFinished',
       component: () => import('@/views/activity/redpack/finished.vue'),
       meta: {
         title: '拆红包'
       }
-    },{
+    }, {
       path: '/activity/redpack/success',
       name: 'redPackSuccess',
       component: () => import('@/views/activity/redpack/success.vue'),
       meta: {
         title: '拆红包'
       }
-    },{
+    }, {
       path: '/activity/redpack/stop',
       name: 'redPackStop',
       component: () => import('@/views/activity/redpack/stop.vue'),
       meta: {
         title: '拆红包'
       }
-    },{
+    }, {
       path: '/activity/redpack/invalid',
       name: 'redPackInvalid',
       component: () => import('@/views/activity/redpack/invalid.vue'),
       meta: {
         title: '拆红包'
       }
-    },
-    {
+    }, {
       path: '/activity/make/money',
       name: 'makeMoney',
       component: () => import('@/views/activity/make/money.vue'),
       meta: {
         title: '伊起赚专区'
       }
-    },{
+    }, {
       path: '/activity/coupon/list',
       name: 'couponList',
       component: () => import('@/views/activity/coupon/list.vue'),
@@ -89,13 +88,6 @@ export default new Router({
         title: '领券专区'
       }
     }, {
-      path: '/activity/group/list',
-      name: 'groupList',
-      component: () => import('@/views/activity/group/list.vue'),
-      meta: {
-        title: '伊起拼'
-      }
-    },{
       path: '/activity/inviteFriends/invitation',
       name: 'invitation',
       component: () => import('@/views/activity/inviteFriends/invitation.vue'),

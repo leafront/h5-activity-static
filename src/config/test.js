@@ -6,7 +6,6 @@ const config = JSON.stringify({
   "appKey": "9ca572cc88e6",
   "platform": 2,
   "getTime": new Date().getTime(),
-  "pageId": 1003070101000191,
   "schoolID": "b1a0a8de32a5f6870521bb77df59a6f2",
   "trackerPath": "http://10.3.3.109:8080",
   "source": "h5"
