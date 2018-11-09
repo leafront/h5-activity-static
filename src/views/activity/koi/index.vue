@@ -438,6 +438,9 @@
               this.getCouponList()
             } else if (result.code == -1) {
               this.$toast(result.message)
+              this.getKoiInfo()
+              this.getCouponList()
+            } else if (result.code == -5) {
               this.$toast(result.message)
               this.getKoiInfo()
               this.getCouponList()
