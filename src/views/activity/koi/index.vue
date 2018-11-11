@@ -313,15 +313,7 @@
        * @param {String} url
        */
       signAction (url) {
-        if (utils.loggedIn()) {
-          location.href = url
-        } else {
-          if (utils.isApp()) {
-            utils.login()
-          } else {
-            location.href = url
-          }
-        }
+        utils.loggedInAction(url)
       },
       /**
        * page location
@@ -333,15 +325,7 @@
         if (hideHead !== undefined) {
           url = `${url}?hideHead=${hideHead}`
         }
-        if (utils.loggedIn()) {
-          location.href = url
-        } else {
-          if (utils.isApp()) {
-            utils.login()
-          } else {
-            this.$router.push(url)
-          }
-        }
+        utils.loggedInAction(url)
       },
       /**
        * @param {String} url
