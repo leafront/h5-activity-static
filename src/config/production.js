@@ -7,7 +7,7 @@ const config = JSON.stringify({
   "platform": 2,
   "getTime": new Date().getTime(),
   "schoolId": "5d56f59c981886694a66312ebdb23f34",
-  "trackerPath": "http://tracker.laiyifen.com",
+  "trackerPath": "https://tracker.laiyifen.com",
   "source": "h5"
 })
 
