@@ -171,6 +171,15 @@ export default new Router({
         bgColor: '#bd0004',
         requireLogin: true
       }
+    },{
+      path: '/activity/receiveydka/ydka',
+      name: 'ydka',
+      component: () => import('@/views/activity/receiveydka/ydka.vue'),
+      meta: {
+        title: '伊点卡',
+        bgColor: '#ff9a37',
+
+      }
     }
 
   ]
