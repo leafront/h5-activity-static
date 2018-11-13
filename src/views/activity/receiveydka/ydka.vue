@@ -76,7 +76,7 @@
       return {
         title: '开学季',
         isBorder: true,
-        pageView: false,
+        pageView: true,
         isClickCode: true,
         codeText: '验证码',
         params: {
@@ -258,12 +258,8 @@
 
     },
     created () {
-      this.$showLoading()
       this.getDownloadLink()
-      setTimeout(() => {
-        this.$hideLoading()
-        this.pageView = true
-      },400)
+
     }
   }
 
