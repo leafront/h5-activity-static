@@ -74,7 +74,7 @@
   export default {
     data() {
       return {
-        title: '开学季',
+        title: '',
         isBorder: true,
         pageView: true,
         isClickCode: true,
