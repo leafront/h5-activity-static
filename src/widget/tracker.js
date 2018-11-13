@@ -4,6 +4,8 @@ import config from '@/config/index'
 
 import utils from '@/widget/utils'
 
+import store from '@/widget/store'
+
 /**
  * @return {String} uuid
  */
