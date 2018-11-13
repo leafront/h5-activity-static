@@ -313,7 +313,7 @@
        * @param {String} url
        */
       signAction (url) {
-        utils.loggedInAction(url)
+        app.loggedInAction(url)
       },
       /**
        * page location
@@ -325,7 +325,7 @@
         if (hideHead !== undefined) {
           url = `${url}?hideHead=${hideHead}`
         }
-        utils.loggedInAction(url)
+        app.loggedInAction(url)
       },
       /**
        * @param {String} url

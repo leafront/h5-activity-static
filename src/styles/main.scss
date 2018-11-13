@@ -6,7 +6,6 @@ body{
   color:#666;
   font-size: .24rem;
   background: #f5f5f5;
-  padding-top: .88rem;
 }
 
 #app{
@@ -21,6 +20,9 @@ body{
   padding-top: 1px;
   margin-top: -1px;
   visibility: hidden;
+}
+.ui-header + .scroll-view-wrapper{
+  padding-top: .88rem;
 }
 
 .visibility{
