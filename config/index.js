@@ -24,11 +24,11 @@ module.exports = {
         changeOrigin: true
       },
       '/opay-web': {
-        target: 'http://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/ouser-center': {
-        target: 'http://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/customer': {
