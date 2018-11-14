@@ -15,7 +15,7 @@
             <button class="font" :disabled="!isClickCode" @click="openImageValidate">{{codeText}}</button>
           </div>
           <div class="ydka-register-input">
-            <input type="number" maxlength="6" autocomplete="off" v-model="params.randomCode" class="font-b" placeholder="请输入随机码"/>
+            <input type="tel" maxlength="6" autocomplete="off" v-model="params.randomCode" class="font-b school-register-msg" placeholder="请输入随机码"/>
           </div>
           <div class="ydka-register-button" @click="submitAction">
            <p>我要来伊份</p>
