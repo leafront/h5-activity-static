@@ -57,6 +57,11 @@ export const sendTracker = ({
 	 }
   }
   const uid = store.get('lyfuid', 'local') || ''
+  let did = utils.getCookie('pika_did')
+  if (!did) {
+  	did = generateUUID()
+  	utils.setCookie('pika_did', did)
+  }
 	const params = {
 	  ev: '17',
 	  did: generateUUID(),
