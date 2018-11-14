@@ -64,7 +64,7 @@ export const sendTracker = ({
   }
 	const params = {
 	  ev: '17',
-	  did: generateUUID(),
+	  did: did,
 	  tv: '1.0',
 	  v: '', //version 客户端版本号
 	  ut: utils.getUserToken(),
