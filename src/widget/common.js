@@ -64,7 +64,7 @@ const common = {
           regionCode
         } = result
         const setAreaInfo = {
-          times: new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
+          times: new Date().getTime() + 5 * 60 * 1000,
           results: {
             province: {
             name: provinceName,

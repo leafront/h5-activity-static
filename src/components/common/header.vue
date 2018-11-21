@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-header" :class="{'ui-header-border':isBorder}" v-if="showHeader">
+  <div class="ui-header" :class="{'ui-header-border':isBorder}"  v-if="showHeader">
     <div class="ui-header-back" @click="backAction">
       <div class="ui-header-back_btn">
       </div>
@@ -26,7 +26,7 @@
         type: String
       },
       isBorder: {
-        default: false,
+        default: true,
         type: Boolean
       },
       isShowHeader: {
@@ -80,22 +80,23 @@
       font-size: .3rem;
     }
   }
+
   .ui-header {
     width: 100%;
     height: .88rem;
-    background: #fff;
     display: flex;
     align-items: center;
     position: fixed;
     left: 0;
     top:0;
     z-index:999;
+    background: #fff;
     &.ui-header-border{
       border-bottom: .01rem solid #ddd;
     }
     .ui-header-back{
       height: .88rem;
-      padding: 0 .3rem 0 .28rem;
+      padding: 0 .3rem 0 .3rem;
       display: flex;
       align-items: center;
     }
@@ -123,10 +124,7 @@
     padding-right: .2rem;
     justify-content: flex-end;
     .icon-gengduo{
-      width: .42rem;
-      height: .11rem;
-      background: url(../../images/header_sprite.png) no-repeat -.05rem -.1rem;
-      background-size: 1.65rem auto;
+      font-size: .5rem;
       color:#999;
       transition: transform .4s linear;
       &.active{
