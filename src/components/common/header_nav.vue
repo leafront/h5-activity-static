@@ -2,55 +2,21 @@
   <div class="ui-header-nav" :class="{'active': headerMenu}">
     <i class="ui-header-arrow"></i>
     <ul class="ui-header-nav-list">
-      <li @click="linkAction('/index.html')">
-        <i class="home-icon"></i>
+      <li @click="homeAction('/index.html')">
+        <i class="icon icon-home"></i>
         <span class="font">首页</span>
       </li>
-      <li @click="showShareMenu" v-if="isApp && isWeixin">
-        <i class="share-icon"></i>
+      <li @click="showShareMenu" v-if="isApp">
+        <i class="icon icon-share"></i>
         <span class="font">分享</span>
       </li>
-      <li @click="linkAction('/my/home.html')">
-        <i class="my-icon"></i>
+      <li @click="myAction('/my/index')">
+        <i class="icon icon-my"></i>
         <span class="font">我&nbsp;&nbsp;</span>
       </li>
     </ul>
   </div>
 </template>
-
-
-<script type="text/javascript">
-
-  import {mapGetters, mapActions} from 'vuex'
-
-  import utils from '@/widget/utils'
-
-  export default {
-    data () {
-      return {
-        isApp: utils.isApp(),
-        isWeixin: utils.weixin()
-      }
-    },
-    computed: {
-      ...mapGetters({
-        'headerMenu': 'getHeaderMenu'
-      })
-    },
-    methods: {
-      ...mapActions([
-        'updateHeaderMenu',
-        'updateShareMenu'
-      ]),
-      linkAction (url) {
-        location.href = url
-      },
-      showShareMenu () {
-        this.$emit('shareAction')
-      }
-    }
-  }
-</script>
 
 <style lang="scss">
 
@@ -63,7 +29,7 @@
     opacity: .8;
     z-index:1000;
     transform: translateX(120%);
-    transition: all .3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+    transition: all .5s cubic-bezier(0.4, 0.01, 0.165, 0.99);
     &.active{
       transform: translateY(0);
     }
@@ -91,23 +57,87 @@
         color: #fff;
         padding-left: .15rem;
       }
-      i{
-        background: url(../../images/header_sprite.png) no-repeat;
+      .icon {
+        background: url('/webapp-static/images/share_sprite.png') no-repeat;
         background-size: 1.65rem auto;
         width: .34rem;
         height: .34rem;
-        &.home-icon{
-          background-position: -.53rem 0;
-        }
-        &.share-icon{
-          width: .3rem;
-          background-position: -.9rem .01rem;
-        }
-        &.my-icon{
-          height: .38rem;
-          background-position: -1.22rem .01rem;
-        }
+      }
+      .icon-home{
+        background-position: -.53rem 0;
+      }
+      .icon-share {
+        width: .3rem;
+        background-position: -.9rem .01rem;
+      }
+      .icon-my {
+        height: .38rem;
+        background-position: -1.22rem .01rem;
+      }
+    }
+  }
+  .ui-header-right-icon{
+    position:absolute;
+    right:0;
+    top:0;
+    display: flex;
+    align-items: center;
+    height: .88rem;
+    width: 1.2rem;
+    padding-right: .3rem;
+    justify-content: flex-end;
+    i{
+      width: .42rem;
+      height: .11rem;
+      background: url('/webapp-static/images/share_sprite.png') no-repeat -.05rem -.1rem;
+      background-size: 1.65rem auto;
+      transition: transform .4s linear;
+      &.active{
+        transform: rotate(90deg);
       }
     }
   }
 </style>
+
+<script type="text/javascript">
+
+  import {mapGetters, mapActions} from 'vuex'
+
+  import utils from '@/widget/utils'
+
+  export default {
+    data () {
+      return {
+        isApp: utils.isApp()
+      }
+    },
+    computed: {
+      ...mapGetters({
+        'headerMenu': 'getHeaderMenu'
+      })
+    },
+    methods: {
+      ...mapActions([
+        'updateHeaderMenu',
+        'updateShareMenu'
+      ]),
+      homeAction (url) {
+        if (utils.isApp()) {
+          location.href = 'lyf://home'
+        } else {
+          location.href = url
+        }
+      },
+      myAction (url) {
+        if (utils.isApp()) {
+          location.href = 'lyf://myhome'
+        } else {
+          location.href = url
+        }
+      },
+      showShareMenu () {
+       this.$emit('weixinShare','click')
+      }
+    }
+  }
+</script>
