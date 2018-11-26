@@ -240,11 +240,9 @@ const utils = {
   getUserToken () {
     let ut = utils.getCookie('lyfh5ut')
     if (utils.isApp()) {
-      if (!ut) {//部分手机不能正常写入cookie
-        ut = utils.getUaParams().ut
-      }
+      ut = utils.getUaParams().ut
     }
-    return  ut
+    return ut
   },
   /**
    * @return {String} sid
