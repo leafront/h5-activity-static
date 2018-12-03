@@ -327,7 +327,9 @@
         const divisionArr = (data) => {
           const result = []
           data.forEach((item,index) => {
-            result.push(data.slice(index,index+2))
+            if (index % 2 == 0) {
+              result.push(data.slice(index, index + 2))
+            }
           })
           return result
         }
@@ -356,8 +358,7 @@
       getUserBroadcast () {
 
         Model.getUserBroadcast({
-          type: 'POST',
-          cache: true
+          type: 'POST'
         }).then((result) => {
 
           const data = result.data

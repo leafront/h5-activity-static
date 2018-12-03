@@ -63,8 +63,12 @@
           return
         }
         this.index ++
+        liEl[this.index].classList.add('active')
         el.style.transition = 'transform .3s ease-in'
         el.style.transform = 'translateY(' + (-liEl[0].offsetHeight * this.index) + 'px)'
+        setTimeout(() => {
+          liEl[this.index].classList.remove('active')
+        },1000)
         setTimeout(() => {
           if (this.index == this.eleLen - 1) {
             el.style.transition = 'none'
@@ -92,6 +96,9 @@
   }
   .user-broadcast-item{
     display: flex;
+    &.active {
+      animation: scaleIn 1s;
+    }
     img {
       width:.68rem;
       height:.68rem;
