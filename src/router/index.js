@@ -180,6 +180,13 @@ export default new Router({
         bgColor: '#ff9a37',
 
       }
+    },{
+      path: '/activity/bulk/incentive',
+      name: 'incentive',
+      component: () => import('@/views/activity/bulk/incentive.vue'),
+      meta: {
+        title: '奖励金'
+      }
     }
 
   ]
