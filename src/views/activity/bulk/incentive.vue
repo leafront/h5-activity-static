@@ -1,5 +1,11 @@
 <template>
   <div class="incentive">
+    <!--筛选时间选择-->
+    <time-picker
+      :selectvalue="selectvalue"
+      :ispicker="ispicker"
+      @confirm="confirm">
+    </time-picker>
     <div class="title">
       <div class="box">
         <div>
@@ -29,9 +35,8 @@
         <li>点击数 <span>￥10000</span></li>
         <li>支付笔数 <span>￥10000</span></li>
         <li>收入 <span>￥10000</span></li>
-        <li @click="selectDate">
-          📅
-        </li>
+        <li @click="selectDate">📅</li>
+        <button @click="selectDate">日期选择</button>
       </div>
     </div>
     <div class="list">
@@ -44,54 +49,35 @@
         +5
       </p>
     </div>
-    <!--筛选时间选择-->
-    <time-picker
-      :selectvalue="selectvalue"
-      :ispicker="ispicker"
-      @confirm="confirm">
-    </time-picker>
-
-    <date-picker v-on:picked="picked"></date-picker>
   </div>
 </template>
 
 <script>
    import timePicker from '../../../components/incentive/timePicker.vue'
-   import datePicker from '../../../components/incentive/datePicker.vue'
+   // import datePicker from '../../../components/incentive/datePicker.vue'
 
     export default {
         name: "incentive",
-        components: {timePicker, datePicker},
+        components: {timePicker},
         mounted () {
-          this.getList()
+          // this.getList()
         },
-        data: {
-          ispicker: false,
-          selectvalue: ['1990', '01', '10'],
-          freeMon:'',
+        data() {
+          return{
+            ispicker: false,
+            selectvalue: ['2018', '12'],
+          }
         },
         methods: {
           selectDate () {
             this.ispicker = true;
-            var alarmTime = '10-30';
+            console.log('ispicker', this.ispicker);
+            var alarmTime = '10-12';
             if (alarmTime) {
               alarmTime = alarmTime.split('-');
               this.selectvalue = alarmTime;
               console.log('this.selectvalue', this.selectvalue);
             }
-          },
-          picked(year, month, date) {
-            if(month < 10){
-              this.freeMon = `${year}-0${month}`;
-            }else{
-              this.freeMon = `${year}-${month}`;
-            }
-          },
-          getList(){
-
-          },
-          routerBack(){
-            this.$router.go(-1);
           }
       }
     }
