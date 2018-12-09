@@ -417,6 +417,9 @@
 
     <!--  商品部分结束-->
 
+    <ShareImg :rulePopup="rulePopup"   @toggleRulePopup="toggleRulePopup"></ShareImg>
+    <Rule :ruleText="ruleText"  @toggleRuleText="toggleRuleText"></Rule>
+
 
   </div>
 </div>
@@ -430,6 +433,9 @@ import * as Model from '@/model/peopleGroups'
 import utils from '@/widget/utils'
 
 import config from '@/config/index'
+
+import ShareImg from '@/components/peopleGroups/shareImg'
+import Rule from '@/components/peopleGroups/rule'
 
 import {
   mapGetters,
@@ -447,11 +453,16 @@ export default {
       firstSection:false,
       determineTitle:1,
       choose_botton:true,
+      rulePopup: false,
+      ruleText: true,
+
 
     }
   },
   components: {
     AppHeader,
+    ShareImg,
+    Rule,
   },
   computed: {
     ...mapGetters({
@@ -463,6 +474,10 @@ export default {
       'updateHeaderMenu',
       'updateShareMenu'
     ]),
+    toggleRulePopup (val) {
+      this.rulePopup = val
+
+    },
   },
   created() {
 
