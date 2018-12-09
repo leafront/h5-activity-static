@@ -190,7 +190,17 @@ export default new Router({
        requireLogin: true
 
       }
-    },
+    },{
+      path: '/activity/peopleGroups/detailGroups',
+      name: 'detailGroups',
+      component: () => import('@/views/activity/peopleGroups/detailGroups.vue'),
+      meta: {
+        title: '商品详情',
+        bgColor: '#fff',
+
+
+      }
+    }
 
   ]
 })
