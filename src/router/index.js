@@ -180,7 +180,17 @@ export default new Router({
         bgColor: '#ff9a37',
 
       }
-    }
+    },{
+      path: '/activity/peopleGroups/createGroups',
+      name: 'createGroups',
+      component: () => import('@/views/activity/peopleGroups/createGroups.vue'),
+      meta: {
+        title: '全民团购',
+        bgColor: '#F5F5F5',
+       requireLogin: true
+
+      }
+    },
 
   ]
 })
