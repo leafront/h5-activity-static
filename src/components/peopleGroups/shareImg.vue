@@ -250,22 +250,8 @@ export default {
       } : false)
     }
   },
+  
   methods: {
-    /**
-     * 生出图片
-     */
-   generateImg(){
-     let imgUrl = this.canvas.toDataURL("image/png")
-     console.log(3333);
-     if (utils.isApp()) {
-
-       app.postMessage('storgeQRcode',{
-         imgUrl,
-       },() => {
-         this.$toast("保存成功")
-       })
-     }
-   },
 
     /**
      * 二维码生成
