@@ -13,11 +13,11 @@
       @confirm="confirm">
     </UIMonthPicker>
 
-
+  <div class="scroll-view-wrapper" :class="{'visibility': true}">
       <div class="title" :style="{'marginTop': showHead ? '0.8rem' : '0'}">
         <div class="box">
           <div>
-            <p class="totalAmount">{{wholeSaleAward.totalAmount}}<span class="rule" :style="{'top': showHead ? '1.8rem' : '0.9rem'}">收入说明</span></p>
+            <p class="totalAmount">{{wholeSaleAward.totalAmount}}<span class="rule" :style="{'top': showHead ? '1.5rem' : '0.6rem'}">收入说明</span></p>
             <p>累计收益</p>
           </div>
         </div>
@@ -53,7 +53,7 @@
           +{{item.awardAmount}}
         </p>
       </div>
-
+  </div>
     <!--<div class="list">-->
       <!--<ul>-->
         <!--<li>{{483748738}}</li>-->
@@ -261,30 +261,32 @@
 
 <style lang="scss" scoped>
   .title {
-    height: 4.3rem;
+    height: 3.6rem;
     background: -webkit-linear-gradient(left, #FF7F1B , #FF4301); /* Safari 5.1 - 6.0 */
     background: -o-linear-gradient(right, #FF7F1B, #FF4301); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(right, #FF7F1B, #FF4301); /* Firefox 3.6 - 15 */
     background: linear-gradient(to right, #FF7F1B , #FF4301); /* 标准的语法（必须放在最后） */
   }
   .box {
-    height: 3rem;
+    height: 2.4rem;
     display: flex;
     justify-content:center;
     align-items:center;
   }
   .box .rule {
-    position: fixed;
+    color: #fff;
+    position: absolute;
     font-size: .3rem;
     right: 0;
-    top: 1.8rem;
-    background: black;
-    opacity: 0.6;
-    padding-top: .2rem;
-    padding-bottom: .2rem;
+    top: 1.5rem;
+    background: #E54807;
+    padding-top: .15rem;
+    padding-bottom: .15rem;
     padding-left: .7rem;
+    padding-right: .2rem;
     border-top-left-radius: .5rem;
     border-bottom-left-radius: .5rem;
+    opacity:0.9;
   }
   .box div p {
     color: #fff;
@@ -323,9 +325,10 @@
   .incentive {
     width: 100%;
     overflow-x:hidden;
-    /*background: #fff;*/
+    background: #fff;
   }
   .sub-title {
+    background: #F5F5F5;
     display: flex;
     padding: 10px 30px 10px 30px;
   }
