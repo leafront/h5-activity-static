@@ -12,9 +12,10 @@
       @togglePicker="togglePicker"
       @confirm="confirm">
     </UIMonthPicker>
+    <div class="loading_circles" :class="{'show-loading': showLoading}"><img src="./loading_circles.png"></div>
 
   <div class="scroll-view-wrapper" :class="{'visibility': true}">
-      <div class="title" :style="{'marginTop': showHead ? '0.8rem' : '0'}">
+      <div class="title" :style="{'marginTop': showHead ? '0.6rem' : '0'}">
         <div class="box">
           <div>
             <p class="totalAmount">{{wholeSaleAward.totalAmount}}<span class="rule" :style="{'top': showHead ? '1.5rem' : '0.6rem'}">收入说明</span></p>
@@ -109,7 +110,7 @@
         name: "incentive",
         components: {UIMonthPicker, AppHeader},
         create () {
-          this.$showLoading();
+
         },
         mounted () {
           this.showHeader();
@@ -154,11 +155,13 @@
               }
             },
             queryDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1),
+            showLoading: true,
           }
         },
         methods: {
           // 查询全民团购奖金汇总数据
           getWholeSaleAward () {
+            this.showLoading = true;
             Model.getWholeSaleAward({
               type: 'POST',
               data: {
@@ -168,6 +171,7 @@
               const data = result.data
 
               if (result.code == 0 && data) {
+                this.showLoading = false;
                 this.wholeSaleAward = data;
                 // 塞入数据
                 this.tab[0].value = this.wholeSaleAward.settledAmount;
@@ -185,6 +189,7 @@
           },
           // 查询个人团购明细
           queryWholeSaleDetailPage () {
+            this.showLoading = true;
             Model.queryWholeSaleDetailPage({
               type: 'POST',
               data: {
@@ -198,6 +203,7 @@
               const data = result.data
 
               if (result.code == 0 && data) {
+                this.showLoading = false;
                 this.wholeSaleDetail = data;
                 this.currentPage = 1
                 // this.getCouponList()
@@ -396,5 +402,34 @@
     text-align: center;
   }
 
+  .loading_circles {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin:-100px 0 0 -150px;
+    width:300px;
+    height:200px;
+    z-index:99;
+    text-align: center;
+    padding-top: 50px;
+    visibility: hidden;
+  }
+  .loading_circles img{
+    animation: rotateImg 2s linear 1s infinite;
+    -webkit-animation:rotateImg 2s linear infinite;
+  }
+
+  @keyframes rotateImg {
+    0% {transform : rotate(0deg);}
+    100% {transform : rotate(360deg);}
+  }
+
+  @-webkit-keyframes rotateImg {
+    0%{-webkit-transform : rotate(0deg);}
+    100%{-webkit-transform : rotate(360deg);}
+  }
+  .show-loading {
+    visibility: visible;
+  }
 
 </style>
