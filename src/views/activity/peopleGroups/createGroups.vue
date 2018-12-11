@@ -311,6 +311,7 @@
     <ShareImg :rulePopup="rulePopup" :cgShareC="cgShareC"   @toggleRulePopup="toggleRulePopup" ></ShareImg>
     <Rule :ruleText="ruleText" @toggleRuleText="toggleRuleText" @sendGroup="initiateGroup" ></Rule>
     <Sure :sureChoose="sureChoose" @toggleSureChoose="toggleSureChoose" @qrcodeShare="qrcodeShare" @shareAction="shareAction"></Sure>
+    <UIShare></UIShare>
 
 
   </div>
