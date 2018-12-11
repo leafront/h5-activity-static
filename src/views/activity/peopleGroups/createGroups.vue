@@ -311,6 +311,7 @@
     <ShareImg :rulePopup="rulePopup" :cgShareC="cgShareC"   @toggleRulePopup="toggleRulePopup" ></ShareImg>
     <Rule :ruleText="ruleText" @toggleRuleText="toggleRuleText" @sendGroup="initiateGroup" ></Rule>
     <Sure :sureChoose="sureChoose" @toggleSureChoose="toggleSureChoose" @qrcodeShare="qrcodeShare" @shareAction="shareAction"></Sure>
+    <UIShare></UIShare>
 
 
   </div>
@@ -335,6 +336,9 @@ import ShareImg from '@/components/peopleGroups/shareImg'
 import Rule from '@/components/peopleGroups/rule'
 
 import Sure from '@/components/peopleGroups/sure'
+
+import UIShare from '@/components/widget/ui-share'
+
 
 import {
   mapGetters,
@@ -370,7 +374,8 @@ export default {
     ShareImg,
     Rule,
     Sure,
-    LazyLoad
+    LazyLoad,
+    UIShare,
 
   },
   computed: {
