@@ -12,7 +12,9 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
+        // target: 'http://192.168.132.114:8090',
+
         changeOrigin: true
       },
       '/osc-api': {
@@ -50,7 +52,11 @@ module.exports = {
       '/webapp-static': {
         target: 'http://m.laiyifen.com',
         changeOrigin: true
-      }
+      },
+      '/frontier-trade-web': {
+        target: 'http://m.lyf.edu.laiyifen.com',
+        changeOrigin: true
+      },
     },
     // Various Dev Server settings
     host: '0.0.0.0', // can be overwritten by process.env.HOST
