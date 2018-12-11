@@ -422,6 +422,7 @@ export default {
         return
       }
       this.dtGroupsUrl = this.dtGroupsUrl + "?shareCode=" + this.cgShareC
+      console.log(1);
       const shareConfig = {
         link: this.dtGroupsUrl,
         title: '官宣 锦鲤和双十一更配哦',
