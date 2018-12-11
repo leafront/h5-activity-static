@@ -1,5 +1,8 @@
 <template>
   <div class="incentive">
+    <!--title-->
+    <AppHeader :title="title" :backFn="backAction">
+    </AppHeader>
     <!--月份选择器-->
     <UIMonthPicker
       :start="start"
@@ -10,59 +13,115 @@
       @confirm="confirm">
     </UIMonthPicker>
 
-    <div class="title">
-      <div class="box">
-        <div>
-          <p>100.00</p>
-          <p>累计收益</p>
+
+      <div class="title" :style="{'marginTop': showHead ? '0.8rem' : '0'}">
+        <div class="box">
+          <div>
+            <p class="totalAmount">{{wholeSaleAward.totalAmount}}<span class="rule" :style="{'top': showHead ? '1.8rem' : '0.9rem'}">收入说明</span></p>
+            <p>累计收益</p>
+          </div>
+        </div>
+
+        <div class="navigation">
+          <span :class="{select: active[index]}"   v-for="(item, index) in tab" @click="change(index)">
+            <div>{{item.value}}</div>
+            <div>{{item.content}}</div>
+            <p v-show="active[index]" :class="{line: active[index]}"></p>
+          </span>
         </div>
       </div>
 
-      <div class="navigation">
-        <span :class="{select: active[index]}"   v-for="(item, index) in tab" @click="change(index)">
-          <div>{{item.value}}</div>
-          <div>{{item.content}}</div>
-          <p v-show="active[index]" :class="{line: active[index]}"></p>
-        </span>
+      <div class="sub-title">
+        <ul>
+          <li class="time">{{checkedValue[0]}}年{{checkedValue[1]}}月</li>
+          <div class="sub-time">
+            <!--<li>点击数 <span>￥10000</span></li>-->
+            <li>支付笔数 <span>{{wholeSaleDetail.payNum}}</span></li>
+            <li>收入 <span>￥{{wholeSaleDetail.income}}</span></li>
+          </div>
+        </ul>
+        <p @click="selectDate">📅</p>
       </div>
 
-    </div>
-    <div class="sub-title">
-      <ul>
-        <li class="time">{{checkedValue[0]}}年{{checkedValue[1]}}月</li>
-        <div class="sub-time">
-          <li>点击数 <span>￥10000</span></li>
-          <li>支付笔数 <span>￥10000</span></li>
-          <li>收入 <span>￥10000</span></li>
-        </div>
-      </ul>
-      <p @click="selectDate">📅</p>
-    </div>
+      <div class="list" v-if="wholeSaleDetail.list.listObj" v-for="item in wholeSaleDetail.list.listObj">
+        <ul>
+          <li>{{item.mpName}}</li>
+          <li>[¥{{item.orderAmount}}]</li>
+          <li class="order-number">订单号：{{item.orderCode}}</li>
+        </ul>
+        <p>
+          +{{item.awardAmount}}
+        </p>
+      </div>
 
-    <div class="list">
-      <ul>
-        <li>2019年新年礼盒A-神来气旺礼盒1…2019年新年礼盒A-神来气旺礼盒1…</li>
-        <li>[¥1400000]</li>
-        <li class="order-number">订单号：10343434343434333</li>
-      </ul>
-      <p>
-        +5
-      </p>
-    </div>
+    <!--<div class="list">-->
+      <!--<ul>-->
+        <!--<li>{{483748738}}</li>-->
+        <!--<li>[¥{{1212}}]</li>-->
+        <!--<li class="order-number">订单号：{{12212}}</li>-->
+      <!--</ul>-->
+      <!--<p>-->
+        <!--+{{3232}}-->
+      <!--</p>-->
+    <!--</div>-->
+    <!--<div class="list">-->
+      <!--<ul>-->
+        <!--<li>{{483748738}}</li>-->
+        <!--<li>[¥{{1212}}]</li>-->
+        <!--<li class="order-number">订单号：{{12212}}</li>-->
+      <!--</ul>-->
+      <!--<p>-->
+        <!--+{{3232}}-->
+      <!--</p>-->
+    <!--</div>-->
+    <!--<div class="list">-->
+      <!--<ul>-->
+        <!--<li>{{483748738}}</li>-->
+        <!--<li>[¥{{1212}}]</li>-->
+        <!--<li class="order-number">订单号：{{12212}}</li>-->
+      <!--</ul>-->
+      <!--<p>-->
+        <!--+{{3232}}-->
+      <!--</p>-->
+    <!--</div>-->
+    <!--<div class="list">-->
+      <!--<ul>-->
+        <!--<li>{{483748738}}</li>-->
+        <!--<li>[¥{{1212}}]</li>-->
+        <!--<li class="order-number">订单号：{{12212}}</li>-->
+      <!--</ul>-->
+      <!--<p>-->
+        <!--+{{3232}}-->
+      <!--</p>-->
+    <!--</div>-->
+
+
   </div>
 </template>
 
 <script>
-   import UIMonthPicker from '../../../components/incentive/ui-month-picker.vue'
+  import utils from '@/widget/utils'
+  import AppHeader from '@/components/common/header'
+  import UIMonthPicker from '../../../components/incentive/ui-month-picker.vue'
+  import * as Model from '@/model/incentive'
 
     export default {
         name: "incentive",
-        components: {UIMonthPicker},
+        components: {UIMonthPicker, AppHeader},
+        create () {
+          this.$showLoading();
+        },
         mounted () {
-          // this.getList()
+          this.showHeader();
+          // 查询全民团购奖金汇总数据
+          this.getWholeSaleAward();
+          // 查询个人团购明细
+          this.queryWholeSaleDetailPage();
         },
         data() {
           return{
+            title: '奖励金',
+            isBorder: true,
             isPicker: false,
             start: 2018,
             checkedValue: ['2018','12'],
@@ -70,24 +129,86 @@
             active: [true, false, false],//统一管理状态;
             tab: [{
               "content": "已结算",　　　　//tab-span
-              "func": "com1",           //仅仅用来存放组件;
-              "value": 60,
+              "func": 3,           //仅仅用来存放组件;
+              "value": 0,
             }, {
               "content": "未结算",
-              "func": "com2",
-              "value": 40,
+              "func": 1,
+              "value": 0,
             }, {
               "content": "预收入",
-              "func": "com3",
-              "value": 10,
+              "func": 0,
+              "value": 0,
             }],
-            who: "com1",
+            salesType: 3,
+            showHead: false,
+            wholeSaleAward: {
+              estimateAmount: 0,//预估金额
+              settledAmount: 0, //已结算金额
+              totalAmount: 0, //累计收益
+              unsettleAmount: 0, //未结算金额
+            },
+            wholeSaleDetail: {
+              list:{
+                listObj: []
+              }
+            },
+            queryDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1),
           }
         },
         methods: {
+          // 查询全民团购奖金汇总数据
+          getWholeSaleAward () {
+            Model.getWholeSaleAward({
+              type: 'POST',
+              data: {
+                ut: '5eed8355c988ee16e14017a096c8fa3343',
+              }
+            }).then((result) => {
+              const data = result.data
+
+              if (result.code == 0 && data) {
+                this.wholeSaleAward = data;
+                // 塞入数据
+                this.tab[0].value = this.wholeSaleAward.settledAmount;
+                this.tab[1].value = this.wholeSaleAward.unsettleAmount;
+                this.tab[2].value = this.wholeSaleAward.estimateAmount;
+
+
+                this.currentPage = 1
+                // this.getCouponList()
+                // this.$toast('领取成功')
+              } else {
+                this.$toast(result.message)
+              }
+            })
+          },
+          // 查询个人团购明细
+          queryWholeSaleDetailPage () {
+            Model.queryWholeSaleDetailPage({
+              type: 'POST',
+              data: {
+                ut: '5eed8355c988ee16e14017a096c8fa3343',
+                settlementStatus: this.salesType,
+                date: this.queryDate,
+                itemsPerPage: 100,
+                currentPage: 1
+              }
+            }).then((result) => {
+              const data = result.data
+
+              if (result.code == 0 && data) {
+                this.wholeSaleDetail = data;
+                this.currentPage = 1
+                // this.getCouponList()
+                // this.$toast('领取成功')
+              } else {
+                this.$toast(result.message)
+              }
+            })
+          },
           selectDate () {
             this.isPicker = true;
-            console.log('isPicker', this.isPicker);
             var alarmTime = '10-12';
             if (alarmTime) {
               alarmTime = alarmTime.split('-');
@@ -97,30 +218,45 @@
           },
           togglePicker (val) {
             this.isPicker = val
-            // let birthday = this.userInfo.birthdayStr
-            //
-            // if (birthday && val) {
-            //   birthday =  birthday.split('-')
-            //   this.checkedValue = birthday
-            // }
           },
           confirm (val) {
             console.log('val', val);
-            this.checkedValue = val.split('-')
+            this.checkedValue = val.split('-');
+            this.queryDate = val;
+            console.log(this.checkedValue);
+            this.queryWholeSaleDetailPage();
           },
           change:function(x){
 
             for(var i=0;i<this.active.length;i++){
               this.active[i]=false;
               this.active[x]=true;
-              this.who=this.tab[x].func;
+              this.salesType=this.tab[x].func;
             }
+            console.log('this.salesType', this.salesType);
             console.log(this.active);
             // console.log(x);
             this.$set(this.active, 3, 0);
+            this.queryWholeSaleDetailPage();
+          },
+          showHeader () {
+            if (utils.isApp()) {
+              if (utils.query('hideHead') == 0 && utils.getVersion() < 5320) {
+                return this.showHead = true;
+              } else {
+                return this.showHead = false;
+              }
+            } else if (utils.weixin() || utils.nativeQQ()) {
+              return this.showHead = false;
+            } else {
+              return this.showHead = true;
+            }
           }
-      }
-    }
+      },
+      computed: {
+
+      },
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -136,6 +272,19 @@
     display: flex;
     justify-content:center;
     align-items:center;
+  }
+  .box .rule {
+    position: fixed;
+    font-size: .3rem;
+    right: 0;
+    top: 1.8rem;
+    background: black;
+    opacity: 0.6;
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+    padding-left: .7rem;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
   }
   .box div p {
     color: #fff;
@@ -172,6 +321,8 @@
     background: #FFEB14;
   }
   .incentive {
+    width: 100%;
+    overflow-x:hidden;
     /*background: #fff;*/
   }
   .sub-title {
@@ -183,8 +334,11 @@
   }
   .sub-title .sub-time {
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     font-size: .25rem;
+  }
+  .sub-title .sub-time li:nth-child(2){
+    margin-left: .5rem;
   }
   .sub-title .sub-time li span{
     color: #FF6900;
@@ -226,9 +380,17 @@
   .list p{
     width: 20%;
     text-align: right;
-    margin-top: .4rem;
     color: #FF6900;
     font-size: .4rem;
+    margin-top: .4rem;
+  }
+  .list .award-money {
+    position: relative;
+    left: 6rem;
+    top: -0.8rem;
+  }
+  .totalAmount {
+    text-align: center;
   }
 
 
