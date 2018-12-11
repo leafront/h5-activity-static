@@ -207,9 +207,7 @@ const app = {
       },2000)
     } else {
       if (utils.weixin()) {
-        console.log(11111);
         this.updateShareMenu(true)
-        console.log(222222);
         weixin_share.weixinShare(shareConfig).then(() => {
           callback && callback()
         })
