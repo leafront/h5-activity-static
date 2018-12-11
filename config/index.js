@@ -12,8 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        // target: 'http://m.lyf.edu.laiyifen.com',
-        target: 'http://192.168.132.114:8090',
+        target: 'http://m.lyf.edu.laiyifen.com',
+        // target: 'http://192.168.132.114:8090',
 
         changeOrigin: true
       },

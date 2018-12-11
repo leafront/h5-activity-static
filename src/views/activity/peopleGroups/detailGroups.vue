@@ -171,7 +171,7 @@ export default {
     */
    initiateOrder(){
 
-       // app.loginAction()
+       app.loginAction()
        Model.initiateOrder({
          type: 'POST',
          data: {
@@ -183,7 +183,7 @@ export default {
              const data = result.data
          if (result.code == 0) {
            console.log("gui");
-           // location.href = "http://m.lyf.edu.laiyifen.com/pay/pay.html" + "?" +"signCode="+ this.dgUrlOj.shareCode
+           location.href = "http://m.lyf.edu.laiyifen.com/pay/pay.html" + "?" +"signCode="+ this.dgUrlOj.shareCode
          } else if (result.code == -1) {
 
          }

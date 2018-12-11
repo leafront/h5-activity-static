@@ -197,7 +197,7 @@
                   <div class="s_body_detail_right4_left">
                     <span class="prize prize_des">奖</span><span class="prize prize_num">{{item.reward}}元</span>1/每盒
                   </div>
-                  <div class="s_body_detail_right4_right">
+                  <div class="s_body_detail_right4_right" @click="showRule(item)">
                     去赚钱
                   </div>
                 </div>
@@ -205,8 +205,8 @@
             </div>
           </div>
 
-          <div class="cg_another_child" v-for ="($item, $index) in item.activityVOList">
-            <div class="child_description">
+          <div class="cg_another_child" >
+            <div class="child_description" v-for ="($item, $index) in item.activityVOList">
               <div class="child_description_left">
                 <p class="child_lf_text">团{{$index + 1}}</p>
                 <p class="child_lf_prize">¥{{$item.totalAmt}}盒，{{$item.salePrice}}盒，¥206/盒</p>
@@ -514,6 +514,8 @@ export default {
       } else if (result.code == -1) {
 
       }
+    }).then(() =>{
+      this.groupsList()
     })
 
 },
