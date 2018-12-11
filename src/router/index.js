@@ -186,17 +186,18 @@ export default new Router({
       component: () => import('@/views/activity/bulk/incentive.vue'),
       meta: {
         title: '奖励金',
-        path: '/activity/peopleGroups/createGroups',
-        name: 'createGroups',
-        component: () => import('@/views/activity/peopleGroups/createGroups.vue'),
-        meta: {
-          title: '全民团购',
-          bgColor: '#F5F5F5',
-          requireLogin: true
-
-        }
       }
   },{
+      path: '/activity/peopleGroups/createGroups',
+      name: 'createGroups',
+      component: () => import('@/views/activity/peopleGroups/createGroups.vue'),
+      meta: {
+        title: '全民团购',
+        bgColor: '#F5F5F5',
+        requireLogin: true
+
+      }
+    },{
       path: '/activity/peopleGroups/detailGroups',
       name: 'detailGroups',
       component: () => import('@/views/activity/peopleGroups/detailGroups.vue'),
