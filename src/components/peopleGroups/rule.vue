@@ -13,7 +13,7 @@
               <div class="item_a_name">
                 数量
               </div>
-              <input type="tel" maxlength="13" autocomplete="off" v-model="mobile" class="item_a" placeholder="0"/>
+              <input type="tel" maxlength="13" autocomplete="off" v-model="formDate.number" class="item_a" placeholder="0"/>
               <div class="item_a_unit">
                 盒
               </div>
@@ -22,7 +22,7 @@
               <div class="item_a_name">
                 单价
               </div>
-              <input type="tel" maxlength="13" autocomplete="off" v-model="mobile" class="item_a" placeholder="0"/>
+              <input type="tel" maxlength="13" autocomplete="off" v-model="formDate.prize" class="item_a" placeholder="0"/>
               <div class="item_a_unit">
                 >=200元/盒
               </div>
@@ -32,7 +32,7 @@
                 合计
               </div>
                <div class="">
-                 40000元
+                 {{formDate.number*formDate.prize}}元
                </div>
           </div>
           <div class="pg-register-input">
@@ -47,7 +47,7 @@
         </div>
 
         </div>
-        <div class="pg_form_bt">
+        <div class="pg_form_bt" @click = "sendGroup">
           发起团购
 
         </div>
@@ -202,6 +202,16 @@
       },
 
     },
+    data() {
+      return {
+         formDate:{
+           number:"",
+           prize:"",
+
+         },
+
+      }
+    },
 
     watch: {
       ruleText () {
@@ -232,6 +242,10 @@
 
       closeRuleText () {
         this.$emit('toggleRuleText',false)
+      },
+      sendGroup(){
+        this.$emit('sendGroup',this.formDate)
+        this.closeRuleText()
       }
     }
   }

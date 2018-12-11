@@ -37,7 +37,7 @@
 
       </div>
 
-      <div class="cg_second_section_body" v-show="firstSection">
+      <div class="cg_second_section_body" v-show="firstSection" >
         <div class="cg_ss_body_title">
           <span class="cg_ss_title1">团购商品</span>
           <span class="cg_ss_title2">分享越多收益越多</span>
@@ -71,35 +71,38 @@
         </div>
         <!-- 骨架部分结束 -->
 
-        <div class="cg_second_body_description">
-          <div class="s_body_des">
+        <div class="cg_second_body_description" id="createGroups-scroll">
+          <LazyLoad :list="createGroupsInt" :options="{ele:'pic-lazyLoad',scrollEle: 'createGroups-scroll'}">
+
+          <div class="s_body_des" v-for ="(item, index) in createGroupsInt">
             <div class="s_body_des_detail">
-              <div class="s_body_detail_left">
+              <div class="s_body_detail_left pic-lazyLoad" :data-src="item.url300x300">
 
               </div>
               <div class="s_body_detail_right">
                 <div class="s_body_detail_right_top">
                   <div class="s_body_detail_right1">
-                    2019年新年礼盒A2019年新年礼盒A2019年新年礼盒A
+                  {{item.name}}
                   </div>
                   <div class="s_body_detail_right2">
-                    零售价 ¥168
+                    零售价 ¥{{item.mpPrice}}
                   </div>
                   <div class="s_body_detail_right3">
-                    团购时间 12/04-12/05
+                    团购时间 {{item.grouponStartTime}}
                   </div>
                 </div>
                 <div class="s_body_detail_right_bottom">
                   <div class="s_body_detail_right4_left">
-                    <span class="prize prize_des">奖</span><span class="prize prize_num">10元</span>1/每盒
+                    <span class="prize prize_des">奖</span><span class="prize prize_num">{{item.grouponPrice}}元</span>1/每盒
                   </div>
-                  <div class="s_body_detail_right4_right">
+                  <div class="s_body_detail_right4_right" @click="showRule(item)">
                     去赚钱
                   </div>
                 </div>
               </div>
             </div>
           </div>
+           </LazyLoad>
 
           <div class="s_body_des">
             <div class="s_body_des_detail">
@@ -137,7 +140,7 @@
 
       <div class="cg_another_body" v-show = "secondSection">
 
-        <div class="cg_anby_circle">
+        <div class="cg_anby_circle" v-for ="(item, index) in createGroupsList">
 
           <!-- 骨架部分 -->
           <div class="cg_structure_body" v-show ="skeleton1">
@@ -169,11 +172,11 @@
           <!-- 骨架部分结束 -->
 
 
-          <div class="cg_ss_body_title" v-show="!(determineTitle == 2)">
+          <div class="cg_ss_body_title" v-show="(determineTitle == index)">
             <span class="cg_ss_title1">团购商品</span>
             <span class="cg_ss_title2">分享越多收益越多</span>
           </div>
-          <div class="s_body_des">
+          <div class="s_body_des"  >
             <div class="s_body_des_detail">
               <div class="s_body_detail_left">
 
@@ -181,18 +184,18 @@
               <div class="s_body_detail_right">
                 <div class="s_body_detail_right_top">
                   <div class="s_body_detail_right1">
-                    2019年新年礼盒A2019年新年礼盒A2019年新年礼盒A
+                    {{item.name}}
                   </div>
                   <div class="s_body_detail_right2">
-                    零售价 ¥168
+                    零售价 ¥{{item.mpPrice}}
                   </div>
                   <div class="s_body_detail_right3">
-                    团购时间 12/04-12/05
+                    团购时间 {{item.grouponStartTime}}
                   </div>
                 </div>
                 <div class="s_body_detail_right_bottom">
                   <div class="s_body_detail_right4_left">
-                    <span class="prize prize_des">奖</span><span class="prize prize_num">10元</span>1/每盒
+                    <span class="prize prize_des">奖</span><span class="prize prize_num">{{item.reward}}元</span>1/每盒
                   </div>
                   <div class="s_body_detail_right4_right">
                     去赚钱
@@ -201,27 +204,15 @@
               </div>
             </div>
           </div>
-          <div class="cg_another_child">
-            <div class="child_description">
-              <div class="child_description_left">
-                <p class="child_lf_text">团1</p>
-                <p class="child_lf_prize">¥41200/200盒，¥206/盒¥41200/200盒，¥206/盒</p>
-              </div>
-              <div class="child_description_right">
-                <div class="child_share">
-                  分享
-                </div class="child_delete">
-                删除
-              </div>
-            </div>
 
+          <div class="cg_another_child" v-for ="($item, $index) in item.activityVOList">
             <div class="child_description">
               <div class="child_description_left">
-                <p class="child_lf_text">团1</p>
-                <p class="child_lf_prize">¥41200/200盒，¥206/盒¥41200/200盒，¥206/盒</p>
+                <p class="child_lf_text">团{{$index + 1}}</p>
+                <p class="child_lf_prize">¥{{$item.totalAmt}}盒，{{$item.salePrice}}盒，¥206/盒</p>
               </div>
               <div class="child_description_right">
-                <div class="child_share">
+                <div class="child_share" @click = "showShareComponent($item)">
                   分享
                 </div class="child_delete">
                 删除
@@ -317,8 +308,8 @@
 
     <!--  商品部分结束-->
 
-    <ShareImg :rulePopup="rulePopup" @toggleRulePopup="toggleRulePopup" ></ShareImg>
-    <Rule :ruleText="ruleText" @toggleRuleText="toggleRuleText"></Rule>
+    <ShareImg :rulePopup="rulePopup" :cgShareC="cgShareC"   @toggleRulePopup="toggleRulePopup" ></ShareImg>
+    <Rule :ruleText="ruleText" @toggleRuleText="toggleRuleText" @sendGroup="initiateGroup" ></Rule>
     <Sure :sureChoose="sureChoose" @toggleSureChoose="toggleSureChoose" @qrcodeShare="qrcodeShare" @shareAction="shareAction"></Sure>
 
 
@@ -328,6 +319,8 @@
 
 <script type="text/javascript">
 import AppHeader from '@/components/common/header'
+
+import LazyLoad from '@/components/widget/lazyLoad'
 
 import * as Model from '@/model/peopleGroups'
 
@@ -358,20 +351,26 @@ export default {
       pick: true,
       firstSection: true,
       secondSection:false,
-      determineTitle: 1,
+      determineTitle: 0,
       choose_botton: true,
       rulePopup: false,
       ruleText: false,
-      sureChoose: true,
+      sureChoose: false,
       skeleton:false,
       skeleton1:false,
+      createGroupsInt:[],
+      createGroupsList:[], //我的团父级数组
+      grouponProductId:"",
+      cgShareC:"",
+      dtGroupsUrl:config.hostPath + "/activity/peopleGroups/detailGroups",
     }
   },
   components: {
     AppHeader,
     ShareImg,
     Rule,
-    Sure
+    Sure,
+    LazyLoad
 
   },
   computed: {
@@ -384,10 +383,25 @@ export default {
       'updateHeaderMenu',
       'updateShareMenu'
     ]),
+
+  showShareComponent(val){
+    this.cgShareC = val.shareCode
+    this.sureChoose = true
+
+ },
+
+
     toggleRulePopup(val) {
       this.rulePopup = val
 
     },
+   showRule(item){
+     this.ruleText = true
+     this.grouponProductId = item.grouponProductId
+     console.log(this.grouponProductId,"gui");
+   },
+
+
     toggleRuleText(val){
       this.ruleText = val
     },
@@ -402,12 +416,14 @@ export default {
      * share operation
      */
     shareAction () {
+
       if (!(utils.isApp() || utils.weixin())) {
         this.$toast('请在APP或微信中打开分享')
         return
       }
+      this.dtGroupsUrl = this.dtGroupsUrl + "?shareCode=" + this.cgShareC
       const shareConfig = {
-        link: this.shareStrategyUrl,
+        link: this.dtGroupsUrl,
         title: '官宣 锦鲤和双十一更配哦',
         description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
         imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png',
@@ -440,9 +456,71 @@ export default {
       }
     },
 
+    /**
+     *  初始化接口
+     */
+
+    groupsInt(){
+        Model.groupsInt({
+          type: 'POST',
+          data: {
+            ut:"f0240dc74259859cc983f642716bc56109",
+          }
+        }).then((result) => {
+          if (result.code == 0) {
+            this.createGroupsInt = result.data.listObj
+
+          } else if (result.code == -1) {
+
+          }
+        })
+
+    },
+
+    groupsList(){
+        Model.groupsList({
+          type: 'POST',
+          data: {
+            ut:"f0240dc74259859cc983f642716bc56109",
+          }
+        }).then((result) => {
+          if (result.code == 0) {
+            this.createGroupsList = result.data.listObj
+            console.log(this.createGroupsList);
+          } else if (result.code == -1) {
+
+          }
+        })
+
+    },
+
+    /**
+     *  发起团购接口
+     */
+  initiateGroup(val){
+    console.log(999911919);
+    Model.initiateGroup({
+      type: 'POST',
+      data:{
+        ut:"f0240dc74259859cc983f642716bc56109",
+        productNum:val.number,
+        salePrice:val.prize,
+        grouponProductId:this.grouponProductId
+
+      }
+    }).then((result) => {
+      if (result.code == 0) {
+        console.log(result.message);
+      } else if (result.code == -1) {
+
+      }
+    })
+
+},
   },
   created() {
-
+ this.groupsInt()
+ this.groupsList()
   }
 }
 </script>

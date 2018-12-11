@@ -193,7 +193,7 @@ export default {
       type: Boolean,
       default: false
     },
-    invitationShareC:{
+    cgShareC:{
       type: String,
       default: ""
     }
@@ -210,9 +210,10 @@ export default {
   },
   watch: {
 
-      invitationShareC (newVal, oldVal) {
-        console.log(111111111);
+      cgShareC (newVal, oldVal) {
+        console.log(this.cgShareC);
         this.qrcode()
+        this.setBgImg()
 
       },
 
@@ -250,14 +251,14 @@ export default {
       } : false)
     }
   },
-  
+
   methods: {
 
     /**
      * 二维码生成
      */
     qrcode() {
-         let url =  config.hostPath + "/actives/online/invitationfriends/index.html"
+         let url =  config.hostPath + "/activity/peopleGroups/detailGroups" +"?shareCode="+ this.cgShareC
          new QRCode('qrcode', {
           width: this.scalePx * 4, // 设置宽度
           height: this.scalePx * 4, // 设置高度
@@ -286,10 +287,10 @@ export default {
   },
   created() {
 
-     setTimeout(() => {
-       this.qrcode()
-       this.setBgImg()
-     }, 0)
+     // setTimeout(() => {
+     //   this.qrcode()
+     //   this.setBgImg()
+     // }, 0)
   }
 }
 </script>

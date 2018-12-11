@@ -1,7 +1,11 @@
 import request from '@/widget/request'
 
-export const recommendUser = (data) => request('/agent-fx-web/api/recommendUserInfo.do', data)
+export const groupsInt = (data) => request('/api/my/groupon/queryGrouponProductList', data)
 
-export const getShareCode = (data) => request('/api/seller/distributor/currDistributor', data)
+export const groupsList = (data) => request('/api/my/groupon/list', data)
 
-export const getAdImg = (data) => request('/api/dolphin/list', data)
+export const initiateGroup = (data) => request('/api/my/groupon/createGrouponActivity', data)
+
+export const detailGroup = (data) => request('/api/my/groupon/productInfo', data)
+
+export const initiateOrder = (data) => request('/api/checkout/initOrder', data)
