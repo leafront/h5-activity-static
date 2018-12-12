@@ -154,6 +154,7 @@ export default {
     *  初始化请求
     */
    detailGroup(){
+     this.loadedshow = true
        Model.detailGroup({
          type: 'POST',
          data: {
@@ -163,6 +164,7 @@ export default {
        }).then((result) => {
              const data = result.data
          if (result.code == 0) {
+           this.loadedshow = false
            this.peopleGroups_banner = data.pics
            this.dgDescription = data
          } else if (result.code == -1) {
