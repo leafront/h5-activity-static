@@ -189,7 +189,8 @@
 
             <div class="s_body_des" v-for="(item, index) in createGroupsInt">
               <div class="s_body_des_detail">
-                <div class="s_body_detail_left pic-lazyLoad" :data-src="item.pics[0].imageUrl">
+                <!-- <div class="s_body_detail_left pic-lazyLoad" :data-src="item.pics[0].imageUrl"> -->
+                  <div class="s_body_detail_left pic-lazyLoad" >
 
                 </div>
                 <div class="s_body_detail_right">
