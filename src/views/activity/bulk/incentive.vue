@@ -69,14 +69,16 @@
   import AppHeader from '@/components/common/header'
   import UIMonthPicker from '../../../components/incentive/ui-month-picker.vue'
   import * as Model from '@/model/incentive'
+  import app from '@/widget/app'
 
     export default {
         name: "incentive",
         components: {UIMonthPicker, AppHeader},
         create () {
-
+          app.loginAction();
         },
         mounted () {
+          app.loginAction();
           this.showHeader();
           // 查询全民团购奖金汇总数据
           this.getWholeSaleAward();
@@ -235,7 +237,22 @@
             } else {
               return this.showHead = true;
             }
-          }
+          },
+          // 登入
+          loginAction (url) {
+            if (!utils.loggedIn()) {
+              if (utils.isApp()) {
+                utils.login()
+              } else {
+                const from = url || utils.getRelatedUrl()
+                if (from) {
+                  location.href = `/login.html?from=` + encodeURIComponent(from)
+                } else {
+                  location.href = '/login.html'
+                }
+              }
+            }
+          },
       },
       computed: {
 
@@ -385,7 +402,7 @@
   }
 
   .loading_circles {
-    position:absolute;
+    position:fixed;
     top:50%;
     left:50%;
     margin:-100px 0 0 -150px;
