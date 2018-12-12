@@ -67,7 +67,6 @@
        *
        */
       scrollLoad () {
-
         const list = Array.prototype.slice.apply(this.appView.querySelectorAll('.' + this.default.ele + '[data-src]'))
         if (!list.length && this.default.complete) {
           cancelAnimationFrame(this.timer)
@@ -103,6 +102,7 @@
 
         el.dataset.LazyLoadImgState = 'start'
         const imgUrl = el.dataset.src
+        console.log(imgUrl);
 
         if (imgUrl) {
           const img = new Image()
@@ -133,4 +133,3 @@
     }
   }
 </script>
- 

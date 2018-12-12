@@ -37,13 +37,13 @@
 
       </div>
 
-      <div class="cg_second_section_body" v-show="firstSection" >
+      <div class="cg_second_section_body" v-show="firstSection">
         <div class="cg_ss_body_title">
           <span class="cg_ss_title1">团购商品</span>
           <span class="cg_ss_title2">分享越多收益越多</span>
         </div>
         <!-- 骨架部分 -->
-        <div class="cg_structure_body" v-show ="skeleton">
+        <div class="cg_structure_body" v-show="skeleton">
           <div class="cg_structure">
             <div class="structure_content">
               <div class="stru_content_left">
@@ -69,114 +69,168 @@
           </div>
 
         </div>
-        <!-- 骨架部分结束 -->
 
-        <div class="cg_second_body_description" id="createGroups-scroll">
-          <LazyLoad :list="createGroupsInt" :options="{ele:'pic-lazyLoad',scrollEle: 'createGroups-scroll'}">
 
-          <div class="s_body_des" v-for ="(item, index) in createGroupsInt">
-            <div class="s_body_des_detail">
-              <div class="s_body_detail_left pic-lazyLoad" :data-src="item.url300x300">
-
+        <div class="cg_structure_body" v-show="skeleton">
+          <div class="cg_structure">
+            <div class="structure_content">
+              <div class="stru_content_left">
               </div>
-              <div class="s_body_detail_right">
-                <div class="s_body_detail_right_top">
-                  <div class="s_body_detail_right1">
-                  {{item.name}}
+              <div class="stru_content_right">
+                <div class="structure_right_top">
+                  <div class="structure_right1">
                   </div>
-                  <div class="s_body_detail_right2">
-                    零售价 ¥{{item.mpPrice}}
+                  <div class="structure_right2">
                   </div>
-                  <div class="s_body_detail_right3">
-                    团购时间 {{item.grouponStartTime}}
+                  <div class="structure_right3">
                   </div>
                 </div>
-                <div class="s_body_detail_right_bottom">
-                  <div class="s_body_detail_right4_left">
-                    <span class="prize prize_des">奖</span><span class="prize prize_num">{{item.grouponPrice}}元</span>1/每盒
-                  </div>
-                  <div class="s_body_detail_right4_right" @click="showRule(item)">
-                    去赚钱
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-           </LazyLoad>
 
-          <div class="s_body_des">
-            <div class="s_body_des_detail">
-              <div class="s_body_detail_left">
-
-              </div>
-              <div class="s_body_detail_right">
-                <div class="s_body_detail_right_top">
-                  <div class="s_body_detail_right1">
-                    2019年新年礼盒A2019年新年礼盒A2019年新年礼盒A
+                <div class="structure_right_bottom">
+                  <div class="structure_right4_left">
                   </div>
-                  <div class="s_body_detail_right2">
-                    零售价 ¥168
-                  </div>
-                  <div class="s_body_detail_right3">
-                    团购时间 12/04-12/05
-                  </div>
-                </div>
-                <div class="s_body_detail_right_bottom">
-                  <div class="s_body_detail_right4_left">
-                    <span class="prize prize_des">奖</span><span class="prize prize_num">10元</span>1/每盒
-                  </div>
-                  <div class="s_body_detail_right4_right">
-                    去赚钱
+                  <div class="structure_right4_right">
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- 导航的第一部门内容结束 -->
-      <!-- 导航第二部分内容开始 -->
-
-      <div class="cg_another_body" v-show = "secondSection">
-
-        <div class="cg_anby_circle" v-for ="(item, index) in createGroupsList">
-
-          <!-- 骨架部分 -->
-          <div class="cg_structure_body" v-show ="skeleton1">
-            <div class="cg_structure">
-              <div class="structure_content">
-                <div class="stru_content_left">
+        <div class="cg_structure_body" v-show="skeleton">
+          <div class="cg_structure">
+            <div class="structure_content">
+              <div class="stru_content_left">
+              </div>
+              <div class="stru_content_right">
+                <div class="structure_right_top">
+                  <div class="structure_right1">
+                  </div>
+                  <div class="structure_right2">
+                  </div>
+                  <div class="structure_right3">
+                  </div>
                 </div>
-                <div class="stru_content_right">
-                  <div class="structure_right_top">
-                    <div class="structure_right1">
+
+                <div class="structure_right_bottom">
+                  <div class="structure_right4_left">
+                  </div>
+                  <div class="structure_right4_right">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+
+        <div class="cg_structure_body" v-show="skeleton">
+          <div class="cg_structure">
+            <div class="structure_content">
+              <div class="stru_content_left">
+              </div>
+              <div class="stru_content_right">
+                <div class="structure_right_top">
+                  <div class="structure_right1">
+                  </div>
+                  <div class="structure_right2">
+                  </div>
+                  <div class="structure_right3">
+                  </div>
+                </div>
+
+                <div class="structure_right_bottom">
+                  <div class="structure_right4_left">
+                  </div>
+                  <div class="structure_right4_right">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="cg_structure_body" v-show="skeleton">
+          <div class="cg_structure">
+            <div class="structure_content">
+              <div class="stru_content_left">
+              </div>
+              <div class="stru_content_right">
+                <div class="structure_right_top">
+                  <div class="structure_right1">
+                  </div>
+                  <div class="structure_right2">
+                  </div>
+                  <div class="structure_right3">
+                  </div>
+                </div>
+
+                <div class="structure_right_bottom">
+                  <div class="structure_right4_left">
+                  </div>
+                  <div class="structure_right4_right">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <!-- 骨架部分结束 -->
+
+        <div class="cg_second_body_description" id="createGroups-scroll">
+          <LazyLoad :list="createGroupsInt" :options="{ele:'pic-lazyLoad',scrollEle: 'createGroups-scroll'}">
+
+            <div class="s_body_des" v-for="(item, index) in createGroupsInt">
+              <div class="s_body_des_detail">
+                <div class="s_body_detail_left pic-lazyLoad" :data-src="item.pics[0].imageUrl">
+
+                </div>
+                <div class="s_body_detail_right">
+                  <div class="s_body_detail_right_top">
+                    <div class="s_body_detail_right1">
+                      {{item.name}}
                     </div>
-                    <div class="structure_right2">
+                    <div class="s_body_detail_right2">
+                      零售价 ¥{{item.mpPrice}}
                     </div>
-                    <div class="structure_right3">
+                    <div class="s_body_detail_right3">
+                      团购时间 {{item.grouponStartTime}}
                     </div>
                   </div>
-
-                  <div class="structure_right_bottom">
-                    <div class="structure_right4_left">
+                  <div class="s_body_detail_right_bottom">
+                    <div class="s_body_detail_right4_left">
+                      <span class="prize prize_des">奖</span><span class="prize prize_num">{{item.grouponPrice}}元</span>1/每盒
                     </div>
-                    <div class="structure_right4_right">
+                    <div class="s_body_detail_right4_right" @click="showRule(item)">
+                      去赚钱
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </LazyLoad>
+        </div>
+      </div>
 
-          </div>
-          <!-- 骨架部分结束 -->
+      <!-- 导航的第一部门内容结束 -->
+      <!-- 导航第二部分内容开始 -->
 
+      <div class="cg_another_body" v-show="secondSection">
 
+        <div class="cg_anby_circle" v-for="(item, index) in createGroupsList">
           <div class="cg_ss_body_title" v-show="(determineTitle == index)">
             <span class="cg_ss_title1">团购商品</span>
             <span class="cg_ss_title2">分享越多收益越多</span>
           </div>
-          <div class="s_body_des"  >
+          <div class="s_body_des">
             <div class="s_body_des_detail">
               <div class="s_body_detail_left">
 
@@ -205,113 +259,39 @@
             </div>
           </div>
 
-          <div class="cg_another_child" >
-            <div class="child_description" v-for ="($item, $index) in item.activityVOList">
+          <div class="cg_another_child">
+            <div class="child_description" v-for="($item, $index) in pointerList[index]">
               <div class="child_description_left">
                 <p class="child_lf_text">团{{$index + 1}}</p>
                 <p class="child_lf_prize">¥{{$item.totalAmt}}盒，{{$item.salePrice}}盒，¥206/盒</p>
               </div>
               <div class="child_description_right">
-                <div class="child_share" @click = "showShareComponent($item)">
+                <div class="child_share" @click="showShareComponent($item)">
                   分享
-                </div class="child_delete">
-                删除
-              </div>
-            </div>
-            <div class="choose_botton">
-              展开
-            </div>
-            <div class="choose_botton" v-show="!choose_botton">
-              收起
-            </div>
-          </div>
-
-        </div>
-
-        <div class="cg_anby_circle">
-          <div class="cg_ss_body_title" v-show="!(determineTitle == 2)">
-            <span class="cg_ss_title1">团购商品</span>
-            <span class="cg_ss_title2">分享越多收益越多</span>
-          </div>
-          <div class="s_body_des">
-            <div class="s_body_des_detail">
-              <div class="s_body_detail_left">
-
-              </div>
-              <div class="s_body_detail_right">
-                <div class="s_body_detail_right_top">
-                  <div class="s_body_detail_right1">
-                    2019年新年礼盒A2019年新年礼盒A2019年新年礼盒A
-                  </div>
-                  <div class="s_body_detail_right2">
-                    零售价 ¥168
-                  </div>
-                  <div class="s_body_detail_right3">
-                    团购时间 12/04-12/05
-                  </div>
                 </div>
-                <div class="s_body_detail_right_bottom">
-                  <div class="s_body_detail_right4_left">
-                    <span class="prize prize_des">奖</span><span class="prize prize_num">10元</span>1/每盒
-                  </div>
-                  <div class="s_body_detail_right4_right">
-                    去赚钱
-                  </div>
+                <div class="child_delete" @click="deleteGroupon(index,$item,$index)">
+                  删除
                 </div>
               </div>
             </div>
-          </div>
-          <div class="cg_another_child">
-            <div class="child_description">
-              <div class="child_description_left">
-                <p class="child_lf_text">团1</p>
-                <p class="child_lf_prize">¥41200/200盒，¥206/盒¥41200/200盒，¥206/盒</p>
-              </div>
-              <div class="child_description_right">
-                <div class="child_share">
-                  分享
-                </div class="child_delete">
-                删除
-              </div>
-            </div>
-
-            <div class="child_description">
-              <div class="child_description_left">
-                <p class="child_lf_text">团1</p>
-                <p class="child_lf_prize">¥41200/200盒，¥206/盒¥41200/200盒，¥206/盒</p>
-              </div>
-              <div class="child_description_right">
-                <div class="child_share">
-                  分享
-                </div class="child_delete">
-                删除
-              </div>
-            </div>
-            <div class="choose_botton">
+            <div class="choose_botton" v-show="choose_botton" @click="chooseBotton(2)">
               展开
             </div>
-            <div class="choose_botton" v-show="!choose_botton">
+            <div class="choose_botton" v-show="!choose_botton" @click="chooseBotton(1)">
               收起
             </div>
           </div>
-
         </div>
-
-
       </div>
-
-
-
-
     </div>
-
-
     <!--  商品部分结束-->
 
-    <ShareImg :rulePopup="rulePopup" :cgShareC="cgShareC"   @toggleRulePopup="toggleRulePopup" ></ShareImg>
-    <Rule :ruleText="ruleText" @toggleRuleText="toggleRuleText" @sendGroup="initiateGroup" ></Rule>
+    <ShareImg :rulePopup="rulePopup" :cgShareC="cgShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
+    <Rule :ruleText="ruleText" :grouponPrice="grouponPrice" :mpPrice="mpPrice" @toggleRuleText="toggleRuleText" @sendGroup="initiateGroup"></Rule>
     <Sure :sureChoose="sureChoose" @toggleSureChoose="toggleSureChoose" @qrcodeShare="qrcodeShare" @shareAction="shareAction"></Sure>
     <UIShare></UIShare>
+    <CircleLoad :loadedshow="loadedshow"></CircleLoad>
+
 
 
   </div>
@@ -339,6 +319,9 @@ import Sure from '@/components/peopleGroups/sure'
 
 import UIShare from '@/components/widget/ui-share'
 
+import CircleLoad from '@/components/peopleGroups/circleLoad'
+
+
 
 import {
   mapGetters,
@@ -354,19 +337,25 @@ export default {
       pageView: true,
       pick: true,
       firstSection: true,
-      secondSection:false,
+      secondSection: false,
       determineTitle: 0,
       choose_botton: true,
       rulePopup: false,
       ruleText: false,
       sureChoose: false,
-      skeleton:false,
-      skeleton1:false,
-      createGroupsInt:[],
-      createGroupsList:[], //我的团父级数组
-      grouponProductId:"",
-      cgShareC:"",
-      dtGroupsUrl:config.hostPath + "/activity/peopleGroups/detailGroups",
+      skeleton: true,
+      createGroupsInt: [],
+      createGroupsList: [], //我的团父级数组
+      childList: [],
+      childList1: [],
+      pointerList: [],
+      grouponProductId: "",
+      cgShareC: "",
+      dtGroupsUrl: config.hostPath + "/activity/peopleGroups/detailGroups",
+      loadedshow: false,
+      grouponPrice: "",
+      mpPrice: "",
+
     }
   },
   components: {
@@ -376,6 +365,7 @@ export default {
     Sure,
     LazyLoad,
     UIShare,
+    CircleLoad,
 
   },
   computed: {
@@ -388,39 +378,86 @@ export default {
       'updateHeaderMenu',
       'updateShareMenu'
     ]),
+    /**
+     * 固定导航条效果
+     */
 
-  showShareComponent(val){
-    this.cgShareC = val.shareCode
-    this.sureChoose = true
+    fixedNa() {
+      let scrollHeight = document.querySelector('.cg_first_section').clientHeight
+      let navigatorBar = document.querySelector('.cg_navigation')
+      window.addEventListener('scroll', () => {
+        if (document.documentElement.scrollTop > scrollHeight) {
+          navigatorBar.style.cssText = "position:fixed; width:100%;top:.88rem;z-index:999;"
+        } else {
+          navigatorBar.style.cssText = "position:static;"
+        }
+      }, false)
+    },
 
- },
+    showShareComponent(val) {
+      this.cgShareC = val.shareCode
+      this.sureChoose = true
+    },
 
+    /**
+     *  删除
+     */
+
+    deleteGroupon(num, val, index) {
+      this.loadedshow = true
+      Model.deleteGroupon({
+        type: 'POST',
+        data: {
+          activityId: val.grouponActivityId
+        }
+      }).then((result) => {
+        if (result.code == 0) {
+          this.loadedshow = false
+          this.$toast('删除成功')
+          this.childList[num].splice(index, 1)
+          if (index < 1) {
+            this.childList1[num].splice(index, 1)
+          }
+        } else if (result.code == -1) {
+        }
+      })
+    },
 
     toggleRulePopup(val) {
       this.rulePopup = val
 
     },
-   showRule(item){
-     this.ruleText = true
-     this.grouponProductId = item.grouponProductId
-     console.log(this.grouponProductId,"gui");
-   },
-
-
-    toggleRuleText(val){
+    showRule(item) {
+      this.ruleText = true
+      this.grouponProductId = item.grouponProductId
+      this.grouponPrice = item.grouponPrice
+      this.mpPrice = item.mpPrice
+    },
+    toggleRuleText(val) {
       this.ruleText = val
     },
-    toggleSureChoose(val){
+    toggleSureChoose(val) {
       this.sureChoose = val
     },
-    qrcodeShare(val){
-      console.log("啥111");
-    this.rulePopup = val
+    qrcodeShare(val) {
+      this.rulePopup = val
     },
+
+    chooseBotton(val) {
+      if (val == 1) {
+        this.choose_botton = true
+        this.pointerList = this.childList1
+      } else if (val == 2) {
+        this.choose_botton = false
+        this.pointerList = this.childList
+      }
+
+    },
+
     /**
      * share operation
      */
-    shareAction () {
+    shareAction() {
 
       if (!(utils.isApp() || utils.weixin())) {
         this.$toast('请在APP或微信中打开分享')
@@ -433,10 +470,10 @@ export default {
         description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
         imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png',
         platforms: [
-         "WechatMoments",
-         "Wechat",
-         "QQ",
-         "QZone"
+          "WechatMoments",
+          "Wechat",
+          "QQ",
+          "QZone"
         ]
       }
       if (utils.loggedIn()) {
@@ -465,69 +502,87 @@ export default {
      *  初始化接口
      */
 
-    groupsInt(){
-        Model.groupsInt({
-          type: 'POST',
-          data: {
-            ut:"f0240dc74259859cc983f642716bc56109",
-          }
-        }).then((result) => {
-          if (result.code == 0) {
-            this.createGroupsInt = result.data.listObj
+    groupsInt() {
 
-          } else if (result.code == -1) {
+      this.skeleton = true
+      Model.groupsInt({
+        type: 'POST',
+        data: {
+          ut: "f0240dc74259859cc983f642716bc56109",
+        }
+      }).then((result) => {
+        if (result.code == 0) {
+          this.skeleton = false
+          console.log(this.skeleton);
+          this.createGroupsInt = result.data.listObj
 
-          }
-        })
+        } else if (result.code == -1) {
+
+        }
+      })
 
     },
 
-    groupsList(){
-        Model.groupsList({
-          type: 'POST',
-          data: {
-            ut:"f0240dc74259859cc983f642716bc56109",
+    groupsList(val) {
+      Model.groupsList({
+        type: 'POST',
+        data: {
+          ut: "f0240dc74259859cc983f642716bc56109",
+        }
+      }).then((result) => {
+        if (result.code == 0) {
+          this.loadedshow = false
+          if (val == 1) {
+            this.$toast('添加成功')
           }
-        }).then((result) => {
-          if (result.code == 0) {
-            this.createGroupsList = result.data.listObj
-            console.log(this.createGroupsList);
-          } else if (result.code == -1) {
+          let groupList = result.data.listObj
+          this.createGroupsList = groupList
+
+          for (var i = 0; i < groupList.length; i++) {
+            let clist = groupList[i].activityVOList
+            this.childList.push(clist)
+            this.childList1.push(clist.slice(0, 2))
 
           }
-        })
+          this.pointerList = this.childList1
+        } else if (result.code == -1) {
+
+        }
+      })
 
     },
 
     /**
      *  发起团购接口
      */
-  initiateGroup(val){
-    console.log(999911919);
-    Model.initiateGroup({
-      type: 'POST',
-      data:{
-        ut:"f0240dc74259859cc983f642716bc56109",
-        productNum:val.number,
-        salePrice:val.prize,
-        grouponProductId:this.grouponProductId
+    initiateGroup(val) {
+      this.loadedshow = true
 
-      }
-    }).then((result) => {
-      if (result.code == 0) {
-        console.log(result.message);
-      } else if (result.code == -1) {
+      Model.initiateGroup({
+        type: 'POST',
+        data: {
+          ut: "f0240dc74259859cc983f642716bc56109",
+          productNum: val.number,
+          salePrice: val.prize,
+          grouponProductId: this.grouponProductId
 
-      }
-    }).then(() =>{
-      this.groupsList()
-    })
-
-},
+        }
+      }).then((result) => {
+        if (result.code == 0) {
+        } else if (result.code == -1) {
+        }
+      }).then(() => {
+        this.groupsList(1)
+      })
+    },
   },
   created() {
- this.groupsInt()
- this.groupsList()
+    this.groupsInt()
+    this.groupsList()
+
+    setTimeout(() => {
+      this.fixedNa()
+    }, 0)
   }
 }
 </script>
