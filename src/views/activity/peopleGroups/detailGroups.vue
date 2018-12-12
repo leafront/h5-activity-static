@@ -45,6 +45,7 @@
     暂不销售
 
    </div>
+   <CircleLoad :loadedshow="loadedshow"></CircleLoad>
 
   </div>
 </div>
@@ -62,6 +63,9 @@ import config from '@/config/index'
 import Banner from '@/components/peopleGroups/banner.vue'
 
 import app from '@/widget/app'
+
+import CircleLoad from '@/components/peopleGroups/circleLoad'
+
 
 import {
   mapGetters,
@@ -82,6 +86,7 @@ export default {
       peopleGroups_banner:[],
       dgUrlOj:{},
       dgDescription:{},
+      loadedshow:false
 
 
     }
@@ -89,6 +94,7 @@ export default {
   components: {
     AppHeader,
     Banner,
+    CircleLoad,
   },
   computed: {
     ...mapGetters({
@@ -172,6 +178,7 @@ export default {
    initiateOrder(){
 
        app.loginAction()
+       this.loadedshow= true
        Model.initiateOrder({
          type: 'POST',
          data: {
@@ -182,6 +189,7 @@ export default {
        }).then((result) => {
              const data = result.data
          if (result.code == 0) {
+           this.loadedshow= false
            console.log("gui");
            location.href = "http://m.lyf.edu.laiyifen.com/pay/pay.html" + "?" +"signCode="+ this.dgUrlOj.shareCode
          } else if (result.code == -1) {
