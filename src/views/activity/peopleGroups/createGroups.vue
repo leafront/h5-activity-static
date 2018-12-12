@@ -153,6 +153,33 @@
 
         </div>
 
+        <div class="cg_structure_body" v-show="skeleton">
+          <div class="cg_structure">
+            <div class="structure_content">
+              <div class="stru_content_left">
+              </div>
+              <div class="stru_content_right">
+                <div class="structure_right_top">
+                  <div class="structure_right1">
+                  </div>
+                  <div class="structure_right2">
+                  </div>
+                  <div class="structure_right3">
+                  </div>
+                </div>
+
+                <div class="structure_right_bottom">
+                  <div class="structure_right4_left">
+                  </div>
+                  <div class="structure_right4_right">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
 
 
         <!-- 骨架部分结束 -->
@@ -315,7 +342,7 @@ export default {
       rulePopup: false,
       ruleText: false,
       sureChoose: false,
-      skeleton: false,
+      skeleton: true,
       createGroupsInt: [],
       createGroupsList: [], //我的团父级数组
       childList: [],
