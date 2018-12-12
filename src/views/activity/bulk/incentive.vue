@@ -96,32 +96,8 @@
               if (vm.switch) {
                 vm.pageNo = vm.pageNo +1;
                 vm.switch = false;
-                console.log('this.pageNo', vm.pageNo)
                 vm.queryWholeSaleDetailPage();
               }
-
-
-
-              // console.log(sw);
-              // 如果开关打开则加载数据
-              // if(sw==true){
-              //   // 将开关关闭
-              //   sw = false;
-              //   axios.get('http://localhost:3000/proxy?url=http://news.at.zhihu.com/api/4/news/before/20170608')
-              //     .then(function(response){
-              //       console.log(JSON.parse(response.data));
-              //       // 将新获取的数据push到vue中的data，就会反应到视图中了
-              //       JSON.parse(response.data).stories.forEach(function(val,index){
-              //         _this.articles.push(val);
-              //         // console.log(val);
-              //       });
-              //       // 数据更新完毕，将开关打开
-              //       sw = true;
-              //     })
-              //     .catch(function(error){
-              //       console.log(error);
-              //     });
-              // }
             }
           });
         },
@@ -173,7 +149,7 @@
             Model.getWholeSaleAward({
               type: 'POST',
               data: {
-                ut: '5eed8355c988ee16e14017a096c8fa3343',
+                ut: utils.getUserToken(),
               }
             }).then((result) => {
               const data = result.data
@@ -196,7 +172,7 @@
             Model.queryWholeSaleDetailPage({
               type: 'POST',
               data: {
-                ut: '5eed8355c988ee16e14017a096c8fa3343',
+                ut: utils.getUserToken(),
                 settlementStatus: this.salesType,
                 date: this.queryDate,
                 pageSize: 10,
@@ -212,13 +188,9 @@
 
                 if (this.pageNo == 1) {
                   this.wholeSaleDetail = data;
-                  console.log(this.wholeSaleDetail)
                 } else {
                   this.wholeSaleDetail.list.listObj = this.wholeSaleDetail.list.listObj.concat(data.list.listObj);
-                  console.log(this.wholeSaleDetail.list.listObj);
                 }
-
-
               } else {
                 this.$toast(result.message)
               }
@@ -230,17 +202,14 @@
             if (alarmTime) {
               alarmTime = alarmTime.split('-');
               this.selectvalue = alarmTime;
-              console.log('this.selectvalue', this.selectvalue);
             }
           },
           togglePicker (val) {
             this.isPicker = val
           },
           confirm (val) {
-            console.log('val', val);
             this.checkedValue = val.split('-');
             this.queryDate = val;
-            console.log(this.checkedValue);
             this.queryWholeSaleDetailPage();
           },
           change:function(x){
@@ -250,9 +219,6 @@
               this.active[x]=true;
               this.salesType=this.tab[x].func;
             }
-            console.log('this.salesType', this.salesType);
-            console.log(this.active);
-            // console.log(x);
             this.$set(this.active, 3, 0);
             this.pageNo = 1;
             this.queryWholeSaleDetailPage();
