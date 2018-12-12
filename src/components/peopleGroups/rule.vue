@@ -24,7 +24,7 @@
               </div>
               <input type="tel" maxlength="13" autocomplete="off" v-model="formDate.prize" class="item_a" placeholder="0"/>
               <div class="item_a_unit">
-                >=200元/盒
+                >={{mpPrice}}/盒
               </div>
           </div>
           <div class="pg-register-input">
@@ -40,7 +40,7 @@
                 预计奖励
               </div>
                <div class="item_a_name1">
-                 40000元
+                 {{formDate.number*formDate.prize*grouponPrice}}元
                </div>
           </div>
 
@@ -200,6 +200,14 @@
         type: Boolean,
         default: false
       },
+      grouponPrice: {
+        type: Number,
+        default: 0
+      },
+      mpPrice: {
+        type: Number,
+        default: 0
+      },
 
     },
     data() {
@@ -244,6 +252,17 @@
         this.$emit('toggleRuleText',false)
       },
       sendGroup(){
+        if(!this.formDate.number){
+        this.$toast('请输入盒数')
+        return
+        }
+        if(!this.formDate.prize){
+        this.$toast('请输入价格')
+        return
+      }else if (this.formDate.prize < this.mpPrice) {
+        this.$toast('价格必须大于商品价格')
+        return
+      }
         this.$emit('sendGroup',this.formDate)
         this.closeRuleText()
       }

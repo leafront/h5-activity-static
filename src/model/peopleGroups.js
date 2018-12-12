@@ -9,3 +9,5 @@ export const initiateGroup = (data) => request('/api/my/groupon/createGrouponAct
 export const detailGroup = (data) => request('/api/my/groupon/productInfo', data)
 
 export const initiateOrder = (data) => request('/api/checkout/initOrder', data)
+
+export const deleteGroupon = (data) => request('/api/my/groupon/deleteGrouponActivity', data)
