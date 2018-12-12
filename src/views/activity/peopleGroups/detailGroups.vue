@@ -159,7 +159,6 @@ export default {
          type: 'POST',
          data: {
            shareCode:this.dgUrlOj.shareCode,
-           ut:"f0240dc74259859cc983f642716bc56109"
          }
        }).then((result) => {
              const data = result.data
@@ -185,7 +184,6 @@ export default {
          type: 'POST',
          data: {
            shareCode:this.dgUrlOj.shareCode,
-           ut:"f0240dc74259859cc983f642716bc56109",
            businessType:8,
          }
        }).then((result) => {

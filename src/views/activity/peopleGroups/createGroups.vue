@@ -507,7 +507,6 @@ export default {
       Model.groupsInt({
         type: 'POST',
         data: {
-          ut: "f0240dc74259859cc983f642716bc56109",
         }
       }).then((result) => {
         if (result.code == 0) {
@@ -526,7 +525,7 @@ export default {
       Model.groupsList({
         type: 'POST',
         data: {
-          ut: "f0240dc74259859cc983f642716bc56109",
+
         }
       }).then((result) => {
         if (result.code == 0) {
@@ -560,7 +559,7 @@ export default {
       Model.initiateGroup({
         type: 'POST',
         data: {
-          ut: "f0240dc74259859cc983f642716bc56109",
+
           productNum: val.number,
           salePrice: val.prize,
           grouponProductId: this.grouponProductId
