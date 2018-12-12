@@ -356,6 +356,8 @@ export default {
       loadedshow: false,
       grouponPrice: "",
       mpPrice: "",
+      shuaxin:[],
+      a:"",
 
     }
   },
@@ -445,12 +447,24 @@ export default {
     },
 
     chooseBotton(val,index) {
+      console.log(val,index);
+
       if (val == 1) {
+        console.log(this.childList1[index]);
         this.choose_botton[index] = index
-        this.pointerList = this.childList1
+        this.childList1[index] = this.a
+        this.pointerList[index] = this.childList1[index]
+        this.createGroupsList = []
+        this.createGroupsList = this.shuaxin
+
       } else if (val == 2) {
+        this.a = this.childList1[index]
+        console.log(this.childList1[index],"gui");
         this.choose_botton[index] = "a"
-        this.pointerList = this.childList
+        this.pointerList[index] = this.childList[index]
+        this.createGroupsList = []
+        this.createGroupsList = this.shuaxin
+
       }
 
     },
@@ -537,6 +551,7 @@ export default {
             this.$toast('添加成功')
           }
           let groupList = result.data.listObj
+          this.shuaxin = groupList
           this.createGroupsList = groupList
 
           for (var i = 0; i < groupList.length; i++) {
