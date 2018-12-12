@@ -121,6 +121,7 @@
               </div>
             </div>
           </div>
+
         </div>
 
 
@@ -274,10 +275,10 @@
                 </div>
               </div>
             </div>
-            <div class="choose_botton" v-show="choose_botton" @click="chooseBotton(2)">
+            <div class="choose_botton" v-show="choose_botton[index] == index" @click="chooseBotton(2,index)">
               展开
             </div>
-            <div class="choose_botton" v-show="!choose_botton" @click="chooseBotton(1)">
+            <div class="choose_botton" v-show="!(choose_botton[index] == index)" @click="chooseBotton(1,index)">
               收起
             </div>
           </div>
@@ -339,7 +340,7 @@ export default {
       firstSection: true,
       secondSection: false,
       determineTitle: 0,
-      choose_botton: true,
+      choose_botton: [],
       rulePopup: false,
       ruleText: false,
       sureChoose: false,
@@ -443,12 +444,12 @@ export default {
       this.rulePopup = val
     },
 
-    chooseBotton(val) {
+    chooseBotton(val,index) {
       if (val == 1) {
-        this.choose_botton = true
+        this.choose_botton[index] = index
         this.pointerList = this.childList1
       } else if (val == 2) {
-        this.choose_botton = false
+        this.choose_botton[index] = "a"
         this.pointerList = this.childList
       }
 
@@ -508,6 +509,7 @@ export default {
       Model.groupsInt({
         type: 'POST',
         data: {
+          ut: "f0240dc74259859cc983f642716bc56109",
         }
       }).then((result) => {
         if (result.code == 0) {
@@ -526,7 +528,7 @@ export default {
       Model.groupsList({
         type: 'POST',
         data: {
-
+          ut: "f0240dc74259859cc983f642716bc56109",
         }
       }).then((result) => {
         if (result.code == 0) {
@@ -539,6 +541,7 @@ export default {
 
           for (var i = 0; i < groupList.length; i++) {
             let clist = groupList[i].activityVOList
+            this.choose_botton.push(i)
             this.childList.push(clist)
             this.childList1.push(clist.slice(0, 2))
 
@@ -560,7 +563,7 @@ export default {
       Model.initiateGroup({
         type: 'POST',
         data: {
-
+          ut: "f0240dc74259859cc983f642716bc56109",
           productNum: val.number,
           salePrice: val.prize,
           grouponProductId: this.grouponProductId
