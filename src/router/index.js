@@ -186,6 +186,7 @@ export default new Router({
       component: () => import('@/views/activity/bulk/incentive.vue'),
       meta: {
         title: '奖励金',
+        requireLogin: true
       }
   },{
       path: '/activity/peopleGroups/createGroups',
