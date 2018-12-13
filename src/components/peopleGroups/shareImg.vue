@@ -19,17 +19,17 @@
         团购价
       </div>
       <div class="cd_prize_number">
-        ¥206/盒
+        ¥{{$salePrice}}/盒
       </div>
 
     </div>
 
     <div class="cd_number_description">
       <div class="cd_nd_one">
-        数量：200盒
+        数量：{{$totalAmt}}盒
       </div>
       <div class="cd_nd_number">
-        总价：¥41200
+        总价：¥{{$salePrice * $totalAmt}}元
       </div>
     </div>
     <span class="ui-shareimg-close" :class="{'active': rulePopup}" @click="closeRulePopup"></span>
@@ -196,7 +196,15 @@ export default {
     cgShareC:{
       type: String,
       default: ""
-    }
+    },
+    $salePrice:{
+      type: Number,
+      default: 0
+    },
+    $totalAmt:{
+      type: Number,
+      default: 0
+    },
   },
   data() {
     return {

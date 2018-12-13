@@ -8,7 +8,7 @@
       <div class="fc_detail">
         <p class="detail_information detail_1">0.00</p>
         <p class="detail_information detail_2">累计收益</p>
-        <p class="detail_information detail_3">收益金明细</p>
+        <p class="detail_information detail_3" @click ="jumpPage">收益金明细</p>
       </div>
     </div>
     <!-- 第一部分结束 -->
@@ -287,7 +287,7 @@
     </div>
     <!--  商品部分结束-->
 
-    <ShareImg :rulePopup="rulePopup" :cgShareC="cgShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
+    <ShareImg :rulePopup="rulePopup" :$salePrice="$salePrice" :$totalAmt="$totalAmt"  :cgShareC="cgShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
     <Rule :ruleText="ruleText" :grouponPrice="grouponPrice" :mpPrice="mpPrice" @toggleRuleText="toggleRuleText" @sendGroup="initiateGroup"></Rule>
     <Sure :sureChoose="sureChoose" @toggleSureChoose="toggleSureChoose" @qrcodeShare="qrcodeShare" @shareAction="shareAction"></Sure>
     <UIShare></UIShare>
@@ -359,6 +359,9 @@ export default {
       shuaxin:[],
       a:"",
       suoyin:"",
+      $salePrice:"",
+      $totalAmt:"",
+
 
     }
   },
@@ -382,6 +385,9 @@ export default {
       'updateHeaderMenu',
       'updateShareMenu'
     ]),
+    jumpPage(){
+      location.href = "/activity/bulk/incentive"
+    },
     /**
      * 固定导航条效果
      */
@@ -399,6 +405,8 @@ export default {
     },
 
     showShareComponent(val) {
+      this.$salePrice = val.salePrice
+      this.$totalAmt = val.totalAmt
       this.cgShareC = val.shareCode
       this.sureChoose = true
     },
