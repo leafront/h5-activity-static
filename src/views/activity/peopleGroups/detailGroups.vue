@@ -19,7 +19,7 @@
          团购价
        </div>
        <div class="dd_prize_number">
-         ¥{{dgDescription.mpPrice}}/盒
+         ¥{{dgDescription.salePrice}}/盒
        </div>
 
      </div>
@@ -30,11 +30,11 @@
        数量：{{dgDescription.productNum}}盒
      </div>
      <div class="n_d_prize">
-       总价：{{dgDescription.totalAmount}}
+       总价：{{dgDescription.totalAmount}}元
      </div>
    </div>
    <div class="buy_now" @click= "initiateOrder" v-if = "dgDescription.grouponStatus == 1">
-     ¥41200 立即购买
+     ¥{{dgDescription.totalAmount}} 立即购买
 
    </div>
 
