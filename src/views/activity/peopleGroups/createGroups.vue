@@ -203,7 +203,7 @@
                       零售价 ¥{{item.mpPrice}}
                     </div>
                     <div class="s_body_detail_right3">
-                      团购时间 {{item.grouponStartTime}}
+                      团购时间 {{item.grouponStartTimeStr + "-" +item.grouponEndTimeStr}}
                     </div>
                   </div>
                   <div class="s_body_detail_right_bottom">
@@ -245,7 +245,7 @@
                     零售价 ¥{{item.mpPrice}}
                   </div>
                   <div class="s_body_detail_right3">
-                    团购时间 {{item.grouponStartTime}}
+                    团购时间 {{item.grouponStartTimeStr + "-" +item.grouponEndTimeStr}}
                   </div>
                 </div>
                 <div class="s_body_detail_right_bottom">
