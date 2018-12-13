@@ -420,7 +420,7 @@ export default {
           this.$toast('删除成功')
           this.childList[num].splice(index, 1)
           this.childList1[num] = this.childList[num].slice(0,2)
-          if(this.suoyin = num){
+          if(this.suoyin === num){
             this.a = this.childList1[num]
           }
           this.createGroupsList = []
@@ -563,7 +563,6 @@ export default {
             this.childList.push(groupList[i].activityVOList)
             this.childList1.push(groupList[i].activityVOList.slice(0, 2))
           }
-          console.log(this.childList1,"miaomiao");
           this.pointerList = this.childList1
           this.createGroupsList =groupList
         } else if (result.code == -1) {
