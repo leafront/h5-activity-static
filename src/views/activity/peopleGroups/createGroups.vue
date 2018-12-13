@@ -356,6 +356,9 @@ export default {
       loadedshow: false,
       grouponPrice: "",
       mpPrice: "",
+      shuaxin:[],
+      a:"",
+      suoyin:"",
 
     }
   },
@@ -416,9 +419,13 @@ export default {
           this.loadedshow = false
           this.$toast('删除成功')
           this.childList[num].splice(index, 1)
-          if (index < 1) {
-            this.childList1[num].splice(index, 1)
+          this.childList1[num] = this.childList[num].slice(0,2)
+          if(this.suoyin = num){
+            this.a = this.childList1[num]
           }
+          this.createGroupsList = []
+          this.createGroupsList = this.shuaxin
+
         } else if (result.code == -1) {
         }
       })
@@ -447,10 +454,19 @@ export default {
     chooseBotton(val,index) {
       if (val == 1) {
         this.choose_botton[index] = index
-        this.pointerList = this.childList1
+        this.childList1[index] = this.a
+        this.pointerList[index] = this.childList1[index]
+        this.createGroupsList = []
+        this.createGroupsList = this.shuaxin
+
       } else if (val == 2) {
+        this.suoyin = index
+        this.a = this.childList1[index]
         this.choose_botton[index] = "a"
-        this.pointerList = this.childList
+        this.pointerList[index] = this.childList[index]
+        this.createGroupsList = []
+        this.createGroupsList = this.shuaxin
+
       }
 
     },
@@ -537,16 +553,19 @@ export default {
             this.$toast('添加成功')
           }
           let groupList = result.data.listObj
-          this.createGroupsList = groupList
+          this.shuaxin = groupList
+          this.createGroupsList = []
+          this.childList = []
+         this.childList1 =[]
 
           for (var i = 0; i < groupList.length; i++) {
-            let clist = groupList[i].activityVOList
             this.choose_botton.push(i)
-            this.childList.push(clist)
-            this.childList1.push(clist.slice(0, 2))
-
+            this.childList.push(groupList[i].activityVOList)
+            this.childList1.push(groupList[i].activityVOList.slice(0, 2))
           }
+          console.log(this.childList1,"miaomiao");
           this.pointerList = this.childList1
+          this.createGroupsList =groupList
         } else if (result.code == -1) {
 
         }
