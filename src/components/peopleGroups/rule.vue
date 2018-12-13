@@ -40,7 +40,7 @@
                 预计奖励
               </div>
                <div class="item_a_name1">
-                 {{formDate.number*formDate.prize*grouponPrice}}元
+                 {{formDate.number*grouponPrice}}元
                </div>
           </div>
 
