@@ -13,7 +13,7 @@
               <div class="item_a_name">
                 数量
               </div>
-              <input type="tel" maxlength="13" autocomplete="off" v-model="formDate.number" class="item_a" placeholder="0"/>
+              <input type="tel"  autocomplete="off" v-model="formDate.number" class="item_a" placeholder="0"/>
               <div class="item_a_unit">
                 盒
               </div>
@@ -22,7 +22,7 @@
               <div class="item_a_name">
                 单价
               </div>
-              <input type="tel" maxlength="13" autocomplete="off" v-model="formDate.prize" class="item_a" placeholder="0"/>
+              <input type="number"  autocomplete="off" v-model="formDate.prize" class="item_a" placeholder="0"/>
               <div class="item_a_unit">
                 >={{grouponPrice}}/盒
               </div>

@@ -190,8 +190,8 @@
 
             <div class="s_body_des" v-for="(item, index) in createGroupsInt">
               <div class="s_body_des_detail">
-                <!-- <div class="s_body_detail_left pic-lazyLoad" :data-src="item.pics[0].imageUrl"> -->
-                  <div class="s_body_detail_left pic-lazyLoad" >
+                <div class="s_body_detail_left pic-lazyLoad" :data-src="item.pics[0] ? (item.pics[0].imageUrl) : defaultImg">
+                  <!-- <div class="s_body_detail_left pic-lazyLoad" > -->
 
                 </div>
                 <div class="s_body_detail_right">
@@ -361,6 +361,7 @@ export default {
       suoyin:"",
       $salePrice:"",
       $totalAmt:"",
+      defaultImg:config.hostPath+"/activity-static/images/bgdefault.png"
 
 
     }
