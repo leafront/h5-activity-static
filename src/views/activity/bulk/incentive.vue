@@ -84,6 +84,8 @@
           this.getWholeSaleAward();
           // 查询个人团购明细
           this.queryWholeSaleDetailPage();
+          // 禁用下拉刷新
+          this.refreshenable(0);
           let vm = this;
 
           // 注册scroll事件并监听
@@ -253,6 +255,24 @@
               }
             }
           },
+          // 禁用下拉刷新
+          refreshenable(a) {
+            if (utils.isApp()) {
+              app.postMessage('refreshenable', {
+                enable: a,
+              }, (cb) => {
+                if (cb == 1) {
+                  console.log(cb);
+                }
+                else {
+                  console.log(cb);
+                }
+
+              })
+            } else {
+              console.log('请使用app');
+            }
+          }
       },
       computed: {
 
