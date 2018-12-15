@@ -8,7 +8,7 @@
       <div class="fc_detail">
         <p class="detail_information detail_1">0.00</p>
         <p class="detail_information detail_2">累计收益</p>
-        <p class="detail_information detail_3">收益金明细</p>
+        <p class="detail_information detail_3" @click ="jumpPage">收益金明细</p>
       </div>
     </div>
     <!-- 第一部分结束 -->
@@ -190,7 +190,8 @@
 
             <div class="s_body_des" v-for="(item, index) in createGroupsInt">
               <div class="s_body_des_detail">
-                <div class="s_body_detail_left pic-lazyLoad" :data-src="item.pics[0].imageUrl">
+                <div class="s_body_detail_left pic-lazyLoad" :data-src="item.pics[0] ? (item.pics[0].imageUrl) : defaultImg">
+                  <!-- <div class="s_body_detail_left pic-lazyLoad" > -->
 
                 </div>
                 <div class="s_body_detail_right">
@@ -202,12 +203,12 @@
                       零售价 ¥{{item.mpPrice}}
                     </div>
                     <div class="s_body_detail_right3">
-                      团购时间 {{item.grouponStartTime}}
+                      团购时间 {{item.grouponStartTimeStr + "-" +item.grouponEndTimeStr}}
                     </div>
                   </div>
                   <div class="s_body_detail_right_bottom">
                     <div class="s_body_detail_right4_left">
-                      <span class="prize prize_des">奖</span><span class="prize prize_num">{{item.grouponPrice}}元</span>1/每盒
+                      <span class="prize prize_des">奖</span><span class="prize prize_num">{{item.reward}}元</span>/每盒
                     </div>
                     <div class="s_body_detail_right4_right" @click="showRule(item)">
                       去赚钱
@@ -244,12 +245,12 @@
                     零售价 ¥{{item.mpPrice}}
                   </div>
                   <div class="s_body_detail_right3">
-                    团购时间 {{item.grouponStartTime}}
+                    团购时间 {{item.grouponStartTimeStr + "-" +item.grouponEndTimeStr}}
                   </div>
                 </div>
                 <div class="s_body_detail_right_bottom">
                   <div class="s_body_detail_right4_left">
-                    <span class="prize prize_des">奖</span><span class="prize prize_num">{{item.reward}}元</span>1/每盒
+                    <span class="prize prize_des">奖</span><span class="prize prize_num">{{item.reward}}元</span>每盒
                   </div>
                   <div class="s_body_detail_right4_right" @click="showRule(item)">
                     去赚钱
@@ -274,10 +275,10 @@
                 </div>
               </div>
             </div>
-            <div class="choose_botton" v-show="choose_botton" @click="chooseBotton(2)">
+            <div class="choose_botton" v-show="choose_botton[index] == index" @click="chooseBotton(2,index)">
               展开
             </div>
-            <div class="choose_botton" v-show="!choose_botton" @click="chooseBotton(1)">
+            <div class="choose_botton" v-show="!(choose_botton[index] == index)" @click="chooseBotton(1,index)">
               收起
             </div>
           </div>
@@ -286,7 +287,7 @@
     </div>
     <!--  商品部分结束-->
 
-    <ShareImg :rulePopup="rulePopup" :cgShareC="cgShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
+    <ShareImg :rulePopup="rulePopup" :$salePrice="$salePrice" :$totalAmt="$totalAmt"  :cgShareC="cgShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
     <Rule :ruleText="ruleText" :grouponPrice="grouponPrice" :mpPrice="mpPrice" @toggleRuleText="toggleRuleText" @sendGroup="initiateGroup"></Rule>
     <Sure :sureChoose="sureChoose" @toggleSureChoose="toggleSureChoose" @qrcodeShare="qrcodeShare" @shareAction="shareAction"></Sure>
     <UIShare></UIShare>
@@ -339,7 +340,7 @@ export default {
       firstSection: true,
       secondSection: false,
       determineTitle: 0,
-      choose_botton: true,
+      choose_botton: [],
       rulePopup: false,
       ruleText: false,
       sureChoose: false,
@@ -355,6 +356,13 @@ export default {
       loadedshow: false,
       grouponPrice: "",
       mpPrice: "",
+      shuaxin:[],
+      a:"",
+      suoyin:"",
+      $salePrice:"",
+      $totalAmt:"",
+      defaultImg:config.hostPath+"/activity-static/images/bgdefault.png"
+
 
     }
   },
@@ -378,6 +386,9 @@ export default {
       'updateHeaderMenu',
       'updateShareMenu'
     ]),
+    jumpPage(){
+      location.href = "/activity/bulk/incentive"
+    },
     /**
      * 固定导航条效果
      */
@@ -395,6 +406,8 @@ export default {
     },
 
     showShareComponent(val) {
+      this.$salePrice = val.salePrice
+      this.$totalAmt = val.totalAmt
       this.cgShareC = val.shareCode
       this.sureChoose = true
     },
@@ -415,9 +428,13 @@ export default {
           this.loadedshow = false
           this.$toast('删除成功')
           this.childList[num].splice(index, 1)
-          if (index < 1) {
-            this.childList1[num].splice(index, 1)
+          this.childList1[num] = this.childList[num].slice(0,2)
+          if(this.suoyin === num){
+            this.a = this.childList1[num]
           }
+          this.createGroupsList = []
+          this.createGroupsList = this.shuaxin
+
         } else if (result.code == -1) {
         }
       })
@@ -431,7 +448,7 @@ export default {
       this.ruleText = true
       this.grouponProductId = item.grouponProductId
       this.grouponPrice = item.grouponPrice
-      this.mpPrice = item.mpPrice
+      this.mpPrice = item.reward
     },
     toggleRuleText(val) {
       this.ruleText = val
@@ -443,13 +460,22 @@ export default {
       this.rulePopup = val
     },
 
-    chooseBotton(val) {
+    chooseBotton(val,index) {
       if (val == 1) {
-        this.choose_botton = true
-        this.pointerList = this.childList1
+        this.choose_botton[index] = index
+        this.childList1[index] = this.a
+        this.pointerList[index] = this.childList1[index]
+        this.createGroupsList = []
+        this.createGroupsList = this.shuaxin
+
       } else if (val == 2) {
-        this.choose_botton = false
-        this.pointerList = this.childList
+        this.suoyin = index
+        this.a = this.childList1[index]
+        this.choose_botton[index] = "a"
+        this.pointerList[index] = this.childList[index]
+        this.createGroupsList = []
+        this.createGroupsList = this.shuaxin
+
       }
 
     },
@@ -507,9 +533,6 @@ export default {
       this.skeleton = true
       Model.groupsInt({
         type: 'POST',
-        data: {
-          ut: "f0240dc74259859cc983f642716bc56109",
-        }
       }).then((result) => {
         if (result.code == 0) {
           this.skeleton = false
@@ -526,9 +549,6 @@ export default {
     groupsList(val) {
       Model.groupsList({
         type: 'POST',
-        data: {
-          ut: "f0240dc74259859cc983f642716bc56109",
-        }
       }).then((result) => {
         if (result.code == 0) {
           this.loadedshow = false
@@ -536,15 +556,18 @@ export default {
             this.$toast('添加成功')
           }
           let groupList = result.data.listObj
-          this.createGroupsList = groupList
+          this.shuaxin = groupList
+          this.createGroupsList = []
+          this.childList = []
+         this.childList1 =[]
 
           for (var i = 0; i < groupList.length; i++) {
-            let clist = groupList[i].activityVOList
-            this.childList.push(clist)
-            this.childList1.push(clist.slice(0, 2))
-
+            this.choose_botton.push(i)
+            this.childList.push(groupList[i].activityVOList)
+            this.childList1.push(groupList[i].activityVOList.slice(0, 2))
           }
           this.pointerList = this.childList1
+          this.createGroupsList =groupList
         } else if (result.code == -1) {
 
         }
@@ -561,7 +584,6 @@ export default {
       Model.initiateGroup({
         type: 'POST',
         data: {
-          ut: "f0240dc74259859cc983f642716bc56109",
           productNum: val.number,
           salePrice: val.prize,
           grouponProductId: this.grouponProductId
