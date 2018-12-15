@@ -51,7 +51,8 @@
           <li class="order-number">订单号：{{item.orderCode}}</li>
         </ul>
         <p>
-          +{{item.awardAmount}}
+          <span v-show="item.awardAmount > 0">+ {{item.awardAmount}}</span>
+          <span v-show="item.awardAmount <= 0">{{item.awardAmount}}</span>
         </p>
       </div>
       <!--没有数据的情况下-->
