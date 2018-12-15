@@ -357,7 +357,7 @@ export default {
       grouponPrice: "",
       mpPrice: "",
       shuaxin:[],
-      a:"",
+      a:[],
       suoyin:"",
       $salePrice:"",
       $totalAmt:"",
@@ -441,9 +441,11 @@ export default {
               self.childList[num].splice(index, 1)
               self.childList1[num] = self.childList[num].slice(0,2)
               if(self.suoyin === num){
-                self.a = self.childList1[num]
+                console.log(8888);
+                self.a[num] = self.childList1[num]
               }
               if(self.pointerId == 2){
+                console.log(777);
                 self.pointerList[num] = self.childList[num]
               }else if (self.pointerId == 1) {
                 self.pointerList[num] = self.childList1[num]
@@ -512,7 +514,7 @@ export default {
       if (val == 1) {
         this.pointerId = 1
         this.choose_botton[index] = index
-        this.childList1[index] = this.a
+        this.childList1[index] = this.a[index]
         this.pointerList[index] = this.childList1[index]
         this.createGroupsList = []
         this.createGroupsList = this.shuaxin
@@ -520,7 +522,7 @@ export default {
       } else if (val == 2) {
         this.pointerId = 2
         this.suoyin = index
-        this.a = this.childList1[index]
+        this.a[index] = this.childList1[index]
         this.choose_botton[index] = "a"
         this.pointerList[index] = this.childList[index]
         this.createGroupsList = []
