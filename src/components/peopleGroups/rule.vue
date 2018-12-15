@@ -272,6 +272,9 @@
         return
       }
         this.$emit('sendGroup',this.formDate)
+        this.formDate.number = ""
+        this.formDate.prize = ""
+
         this.closeRuleText()
       }
     }
