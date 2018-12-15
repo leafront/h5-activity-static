@@ -9,7 +9,7 @@
 
     </div>
     <div class="code_description">
-      2019年新年礼盒-神来气旺礼盒1217g
+      {{goodsName}}
     </div>
     <div class="code_des_prize">
       <div class="cd_prize_style">
@@ -29,7 +29,7 @@
         数量：{{$totalAmt}}盒
       </div>
       <div class="cd_nd_number">
-        总价：¥{{$salePrice * $totalAmt}}元
+        总价：¥{{(this.$salePrice * this.$totalAmt).toFixed(2)}}元
       </div>
     </div>
     <span class="ui-shareimg-close" :class="{'active': rulePopup}" @click="closeRulePopup"></span>
@@ -205,6 +205,10 @@ export default {
       type: Number,
       default: 0
     },
+    goodsName:{
+      type: String,
+      goodsName: ""
+    },
   },
   data() {
     return {
@@ -213,6 +217,8 @@ export default {
     // clientHeight:document.documentElement.clientHeight,
     // scaleWH: 0.65,
     // canvas:{},
+    totalMoney:""
+
 
     }
   },
@@ -267,6 +273,7 @@ export default {
      */
     qrcode() {
          let url =  config.hostPath + "/activity/peopleGroups/detailGroups" +"?shareCode="+ this.cgShareC
+         console.log(url,"what");
          new QRCode('qrcode', {
           width: this.scalePx * 4, // 设置宽度
           height: this.scalePx * 4, // 设置高度
@@ -285,6 +292,9 @@ export default {
         response.onload = () =>{
           let codeImg = document.querySelector(".qrCode_img")
                codeImg.style.backgroundImage = 'url('+response.src+')'
+               let qrEle = document.getElementById('qrcode')
+             let qrChild = qrEle.querySelector('img')
+             qrEle.removeChild(qrChild)
         }
       })
     },
