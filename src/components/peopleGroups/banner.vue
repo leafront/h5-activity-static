@@ -2,7 +2,7 @@
 	<swiper :list="bannerList" :index="index" :preventDefault="true" @toggleIndex="toggleIndex" :itemWidth="wrapperWidth" :style="{'height':itemHeight}">
 		<ul slot="banner" class="slideshow-item">
 			<li v-for="item in bannerList":style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
-				<img :src="item.imageUrl" :style="{'width':itemWidth, 'height':itemHeight}">
+				<img :src="item.url300x300" :style="{'width':itemWidth, 'height':itemHeight}">
 			</li>
 		</ul>
     <ul slot="dot" class="slideshow-dots">

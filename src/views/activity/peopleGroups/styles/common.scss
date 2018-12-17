@@ -338,7 +338,12 @@ font-family: PingFangSC;
   font-size: .24rem;
 }
 .nogoods-style1-img1{
- margin: 2rem  auto 0;
+  width: 3rem;
+  background-image: url(./images/noListImg.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height:2.3rem;
+  margin: auto;
 
 }
 
@@ -352,4 +357,13 @@ font-family: PingFangSC;
   font-size:.32rem;
   font-family: PingFangSC;
   margin-bottom:2rem;
+}
+.nogoods-style{
+  font-family: PingFangSC;
+  background: #fff;
+  padding-bottom: 2rem ;
+  border-radius: .3rem;
+}
+.nogoods-style-title{
+  margin-bottom: 2rem;
 }
