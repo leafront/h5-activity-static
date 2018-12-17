@@ -200,8 +200,8 @@ export default {
     qrcode() {
          let url =  config.hostPath + "/actives/online/invitationfriends/index.html" + "?" + "originCode" + "=" + this.invitationShareC
          new QRCode('qrcode', {
-          width: this.scalePx * 1.4, // 设置宽度
-          height: this.scalePx * 1.4, // 设置高度
+          width: this.scalePx * 2.2, // 设置宽度
+          height: this.scalePx * 2.2, // 设置高度
           text: url
         })
 
@@ -219,55 +219,71 @@ export default {
       let ctx = canvas.getContext("2d")
       ctx.fillStyle = "#fff"
       ctx.fillRect(0,0,canvas.width,canvas.height)
-      let img = new Image()
-      img.src = config.hostPath + '/activity-static/images/invite_qrcode.png'
 
-      // const scalePx = parseInt(document.documentElement.style.fontSize)
-
-
-      // const clientWidth = document.documentElement.clientWidth
-      // const clientHeight = document.documentElement.clientHeight
-      // console.log(clientWidth);
-      //
-      // console.log(clientHeight);
-      // canvas.width = this.clientWidth * .8
-      // canvas.height = canvas.width / self.scaleWH
-      img.onload = () => {
-        const imgScale = img.height / img.width
-
-        ctx.drawImage(img, 0, 0, self.clientWidth * .8, self.clientWidth * .8 * imgScale);
+      const qrCodePromise = () => {
+        return new Promise((resolve,reject) => {
+          let img = new Image()
+          img.src = config.hostPath + '/activity-static/images/invite_qrcode.jpeg'
+          img.onload = () => {
+            console.log(1);
+            const imgScale = img.height / img.width
+            ctx.drawImage(img, 0, 0, self.clientWidth * .8, self.clientWidth * .8 * imgScale);
+            resolve(true)
+          }
+        })
       }
-
-
-      setTimeout(() =>{
-          let qrEle = document.getElementById('qrcode')
+      qrCodePromise().then(() => {
+        let qrEle = document.getElementById('qrcode')
         let qrChild = qrEle.querySelector('img')
-        qrChild.onload = () =>{
-          let qrSrc = qrChild.src
-          console.log(qrSrc);
-          if(qrSrc){
-            let qrImg = new Image()
-            qrImg.src = qrSrc
-            qrImg.onload = () => {
-              ctx.drawImage(qrImg , self.clientWidth * .8/2-(this.scalePx * 1.4)/2 , self.clientWidth * .8*1.05 )
-            }
-        }
-        }
+        console.log(qrChild);
+            let qrSrc = qrChild.src
+            console.log(qrSrc);
+            console.log(2)
+            if(qrSrc){
+              let qrImg = new Image()
+              qrImg.src = qrSrc
+              qrImg.onload = () => {
+                console.log(2);
+                ctx.drawImage(qrImg , self.clientWidth * .8/2-(this.scalePx * 2.2)/2 , self.clientWidth * .8*.68 )
+              }
+          }
 
-    },0)
+      })
+      // img.onload = () => {
+      //   const imgScale = img.height / img.width
+      //
+      //   ctx.drawImage(img, 0, 0, self.clientWidth * .6, self.clientWidth * .6 * imgScale);
+      // }
+
+
+    //   setTimeout(() =>{
+    //       let qrEle = document.getElementById('qrcode')
+    //     let qrChild = qrEle.querySelector('img')
+    //     qrChild.onload = () =>{
+    //       let qrSrc = qrChild.src
+    //       console.log(qrSrc);
+    //       if(qrSrc){
+    //         let qrImg = new Image()
+    //         qrImg.src = qrSrc
+    //         qrImg.onload = () => {
+    //           ctx.drawImage(qrImg , self.clientWidth * .8/2-(this.scalePx * 1.4)/2 , self.clientWidth * .8*1.05 )
+    //         }
+    //     }
+    //     }
+    // },0)
     //第三张图
-    let imgLogo = new Image()
-    imgLogo.src = config.hostPath + '/activity-static/images/qrcodelogo.png'
-    imgLogo.onload = () => {
-      const logoScale = imgLogo.height / imgLogo.width
-      let l_positionx = self.clientWidth * .8/2 - (self.scalePx * 2.5)/2
-      let l_positionY = self.clientWidth * .8*1.1 + this.scalePx * 1.4
-      let l_sizeW = self.scalePx * 2.5
-      let l_sizeH = self.scalePx * 2.5 * logoScale
-
-      ctx.drawImage(imgLogo, l_positionx, l_positionY, l_sizeW, l_sizeH);
-    }
-
+    // let imgLogo = new Image()
+    // imgLogo.src = config.hostPath + '/activity-static/images/qrcodelogo.png'
+    // imgLogo.onload = () => {
+    //   const logoScale = imgLogo.height / imgLogo.width
+    //   let l_positionx = self.clientWidth * .8/2 - (self.scalePx * 2.5)/2
+    //   let l_positionY = self.clientWidth * .8*1.1 + this.scalePx * 1.4
+    //   let l_sizeW = self.scalePx * 2.5
+    //   let l_sizeH = self.scalePx * 2.5 * logoScale
+    //
+    //   ctx.drawImage(imgLogo, l_positionx, l_positionY, l_sizeW, l_sizeH);
+    // }
+    //
 
     },
     closeRulePopup() {
