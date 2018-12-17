@@ -5,3 +5,6 @@ export const getWholeSaleAward = (data) => request('/api/my/groupon/getWholeSale
 
 // 查询个人团购明细
 export const queryWholeSaleDetailPage = (data) => request('/api/my/groupon/queryWholeSaleDetailPage',data)
+
+// 跳转收入说明页面
+export const goPageDeclare = (data) => request('/api/dolphin/list', data)

@@ -18,15 +18,15 @@
       <div class="title" :style="{'marginTop': showHead ? '0.6rem' : '0'}">
         <div class="box">
           <div>
-            <p class="totalAmount">{{wholeSaleAward.totalAmount}}<span class="rule" :style="{'top': showHead ? '1.5rem' : '0.6rem'}"><img src="./images/icon_money.png" />收入说明</span></p>
+            <p class="totalAmount">{{wholeSaleAward.totalAmount}}<span @click="goPageDeclare" class="rule" :style="{'top': showHead ? '1.5rem' : '0.6rem'}"><img src="./images/icon_money.png" />收入说明</span></p>
             <p>累计收益</p>
           </div>
         </div>
 
         <div class="navigation">
           <span :class="{select: active[index]}"   v-for="(item, index) in tab" @click="change(index)">
-            <div>{{item.value}}</div>
-            <div>{{item.content}}</div>
+            <div class="navigation-money">{{item.value}}</div>
+            <div class="navigation-content">{{item.content}}</div>
             <p v-show="active[index]" :class="{line: active[index]}"></p>
           </span>
         </div>
@@ -273,7 +273,26 @@
             } else {
               console.log('请使用app');
             }
-          }
+          },
+          // 跳转收入说明页面
+          goPageDeclare () {
+            Model.goPageDeclare({
+              type: 'GET',
+              data: {
+               pageCode: 'PROMOTION_ACTIVITY',
+               adCode: 'groupon_activity'
+              }
+            }).then((result) => {
+              const data = result.data
+
+              if (result.code == 0 && data) {
+                console.log('data', data);
+                window.location = data.groupon_activity[0].linkUrl;
+              } else {
+                this.$toast(result.message)
+              }
+            })
+          },
       },
       computed: {
 
@@ -316,21 +335,27 @@
   }
   .box div p {
     color: #fff;
-    font-size: 1rem;
+    font-size: .8rem;
   }
   .box div p:nth-child(2)
   {
     text-align: center;
-    font-size: .3rem;
+    font-size: .24rem;
   }
   .navigation {
     display: flex;
     color: #fff;
   }
+  .navigation .navigation-money{
+    font-size: .44rem;
+  }
+  .navigation .navigation-content{
+    font-size: .32rem;
+  }
+
   .navigation span {
     width: 33%;
     text-align: center;
-    font-size: .4rem;
     opacity: 0.6;
   }
   .navigation .select {
@@ -388,7 +413,7 @@
     background: #fff;
     padding: 10px 30px 10px 30px;
     display: flex;
-    border-bottom: thick solid #EAEAEA;
+    border-bottom: .02rem solid #EAEAEA;
   }
   .list ul{
     width: 80%;
