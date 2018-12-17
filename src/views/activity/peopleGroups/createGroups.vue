@@ -441,7 +441,7 @@ export default {
      },
 
     showShareComponent(val,item) {
-      if (val.managementState == 0){
+      if (item.managementState == 0){
         this.$toast('商品已下架')
         return
       }
