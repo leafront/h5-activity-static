@@ -38,9 +38,17 @@
       </div>
 
       <div class="cg_second_section_body" v-show="firstSection">
+
         <div class="cg_ss_body_title">
           <span class="cg_ss_title1">团购商品</span>
           <span class="cg_ss_title2">分享越多收益越多</span>
+        </div>
+  <!-- 无数据时显示 -->
+        <div class="nogoods-style1" v-show="myGroupsInt">
+          <div class="nogoods-style1-img">
+          </div>
+          <p class="nogoods-style1-text1">暂无团购商品</p>
+
         </div>
         <!-- 骨架部分 -->
         <div class="cg_structure_body" v-show="skeleton">
@@ -231,6 +239,16 @@
             <span class="cg_ss_title1">团购商品</span>
             <span class="cg_ss_title2">分享越多收益越多</span>
           </div>
+            <!-- 无数据时显示 -->
+          <div class="nogoods-style1" v-show="myGroupsList">
+            <div class="nogoods-style1-img nogoods-style1-img1">
+            </div>
+            <p class="nogoods-style1-text">暂无团购商品</p>
+            <div class="nogoods-style1-botton" @click="pickItem(1)">
+              去赚钱
+            </div>
+          </div>
+
           <div class="s_body_des">
             <div class="s_body_des_detail">
               <div class="s_body_detail_left" v-if="item.pics.length" :style="{'backgroundImage':'url('+ item.pics[0].imageUrl + ')'}">
@@ -365,7 +383,10 @@ export default {
       defaultImg:config.hostPath+"/activity-static/images/bgdefault.png",
       goodsName:"",
       pointerId :1,
-      totalAmount:""
+      totalAmount:"",
+      myGroupsInt:false,
+      myGroupsList:false,
+
 
 
     }
@@ -397,18 +418,23 @@ export default {
      * 固定导航条效果
      */
 
-    fixedNa() {
-      let scrollHeight = document.querySelector('.cg_first_section').clientHeight
-      let navigatorBar = document.querySelector('.cg_navigation')
-      window.addEventListener('touchmove', () => {
-        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-        if (scrollTop > scrollHeight) {
-          navigatorBar.style.cssText = "position:fixed; width:100%;top:.88rem;z-index:999;"
-        } else {
-          navigatorBar.style.cssText = "position:static;"
-        }
-      }, false)
-    },
+     fixedNa() {
+       let scrollHeight = document.querySelector('.cg_first_section').clientHeight
+       let navigatorBar = document.querySelector('.cg_navigation')
+       window.addEventListener('touchmove', () => {
+         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+         if (scrollTop > scrollHeight) {
+           if(utils.isApp()||utils.weixin()){
+           navigatorBar.style.cssText = "position:fixed; width:100%;top:.0rem;z-index:999;"
+         }else {
+           navigatorBar.style.cssText = "position:fixed; width:100%;top:.88rem;z-index:999;"
+
+         }
+         } else {
+           navigatorBar.style.cssText = "position:static;"
+         }
+       }, false)
+     },
 
     showShareComponent(val,item) {
       this.$salePrice = val.salePrice
@@ -612,6 +638,9 @@ export default {
           this.skeleton = false
           console.log(this.skeleton);
           this.createGroupsInt = result.data.listObj
+          if(this.createGroupsInt.length < 0){
+            this.myGroupsInt = true
+          }
 
         } else if (result.code == -1) {
 
@@ -632,6 +661,9 @@ export default {
           let groupList = result.data.listObj
           this.shuaxin = groupList
           this.createGroupsList = groupList
+          if(this.createGroupsList.length < 1){
+            this.myGroupsList = true
+          }
           console.log(JSON.stringify(this.createGroupsList[0].pics[0].imageUrl),"gui");
           this.childList = []
          this.childList1 =[]
