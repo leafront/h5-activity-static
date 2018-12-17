@@ -524,6 +524,10 @@ export default {
 
     },
     showRule(item) {
+      if(item.managementState == 0){
+        this.$toast('商品已下架')
+        return
+      }
       this.ruleText = true
       this.grouponProductId = item.grouponProductId
       this.grouponPrice = item.grouponPrice
