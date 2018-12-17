@@ -227,7 +227,8 @@ export default {
           img.onload = () => {
             console.log(1);
             const imgScale = img.height / img.width
-            ctx.drawImage(img, 0, 0, self.clientWidth * .8, self.clientWidth * .8 * imgScale);
+            ctx.drawImage(img, 0, 0, self.clientWidth * .8, self.clientWidth * .8 * imgScale)
+            ctx.fillRect(self.clientWidth * .8/2-(this.scalePx * 2.3)/2 , self.clientWidth * .8*.673 ,this.scalePx * 2.3,this.scalePx * 2.3)
             resolve(true)
           }
         })
