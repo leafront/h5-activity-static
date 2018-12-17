@@ -400,8 +400,9 @@ export default {
     fixedNa() {
       let scrollHeight = document.querySelector('.cg_first_section').clientHeight
       let navigatorBar = document.querySelector('.cg_navigation')
-      window.addEventListener('scroll', () => {
-        if (document.documentElement.scrollTop > scrollHeight) {
+      window.addEventListener('touchmove', () => {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        if (scrollTop > scrollHeight) {
           navigatorBar.style.cssText = "position:fixed; width:100%;top:.88rem;z-index:999;"
         } else {
           navigatorBar.style.cssText = "position:static;"
