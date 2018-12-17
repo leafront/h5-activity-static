@@ -64,9 +64,17 @@
 .pgcs_lf_img,.pgcs_rt_img{
   width: 1rem;
   height: 1rem;
-  background: red;
+  background-size: 100%;
+   background-repeat: no-repeat;
   border-radius: 50%;
   margin-bottom: .15rem;
+}
+.pgcs_lf_img{
+    background-image: url(./img/weixin-icon.png);
+}
+
+.pgcs_rt_img{
+    background-image: url(./img/qrcode-icon.png);
 }
 .component_share_close{
   background: #fff;

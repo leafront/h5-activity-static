@@ -169,6 +169,7 @@ p{
         align-items: center;
         border-bottom: solid 2px #EAEAEA;
         padding-bottom: .1rem;
+        font-family: PingFangSC;
       }
       .s_body_detail_left{
         width: 2rem;
@@ -226,6 +227,9 @@ p{
         background: #FF6900;
        font-size: .15rem;
         color: #fff;
+        padding-left: .035rem;
+        padding-right: .035rem;
+        border-radius: 20%;
 
       }
       .prize_num{
@@ -267,6 +271,7 @@ p{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: .15rem;
 }
 .child_description_left{
   flex: 0 0 auto;

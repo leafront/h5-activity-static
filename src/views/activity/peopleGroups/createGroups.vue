@@ -6,7 +6,7 @@
     <!-- 第一部分 -->
     <div class="cg_first_section">
       <div class="fc_detail">
-        <p class="detail_information detail_1">0.00</p>
+        <p class="detail_information detail_1">{{totalAmount}}</p>
         <p class="detail_information detail_2">累计收益</p>
         <p class="detail_information detail_3" @click ="jumpPage">收益金明细</p>
       </div>
@@ -233,16 +233,17 @@
           </div>
           <div class="s_body_des">
             <div class="s_body_des_detail">
-              <div class="s_body_detail_left">
-
+              <div class="s_body_detail_left" v-if="item.pics.length" :style="{'backgroundImage':'url('+ item.pics[0].imageUrl + ')'}">
+              </div>
+              <div class="s_body_detail_left " v-else>
               </div>
               <div class="s_body_detail_right">
                 <div class="s_body_detail_right_top">
                   <div class="s_body_detail_right1">
-                    {{item.name}}
+                    {{item.name }}
                   </div>
                   <div class="s_body_detail_right2">
-                    零售价 ¥{{item.mpPrice}}
+                    零售价 ¥{{item.mpPrice }}
                   </div>
                   <div class="s_body_detail_right3">
                     团购时间 {{item.grouponStartTimeStr + "-" +item.grouponEndTimeStr}}
@@ -364,6 +365,7 @@ export default {
       defaultImg:config.hostPath+"/activity-static/images/bgdefault.png",
       goodsName:"",
       pointerId :1,
+      totalAmount:""
 
 
     }
@@ -577,6 +579,26 @@ export default {
     },
 
     /**
+     *  金额接口
+     */
+
+    getWholeSaleAward() {
+
+      Model.getWholeSaleAward({
+        type: 'POST',
+      }).then((result) => {
+        if (result.code == 0) {
+
+           this.totalAmount = result.data.totalAmount
+
+        } else if (result.code == -1) {
+
+        }
+      })
+
+    },
+
+    /**
      *  初始化接口
      */
 
@@ -609,6 +631,7 @@ export default {
           let groupList = result.data.listObj
           this.shuaxin = groupList
           this.createGroupsList = groupList
+          console.log(JSON.stringify(this.createGroupsList[0].pics[0].imageUrl),"gui");
           this.childList = []
          this.childList1 =[]
          this.choose_botton = []
@@ -651,6 +674,7 @@ export default {
   created() {
     this.groupsInt()
     this.groupsList()
+    this.getWholeSaleAward()
 
     setTimeout(() => {
       this.fixedNa()
