@@ -260,8 +260,8 @@
           this.$toast('请输入数字')
           return
         }
-        if(this.formDate.number <= 0){
-        this.$toast('盒数必须大于零')
+        if(this.formDate.number <= 1){
+        this.$toast('盒数必须大于1')
         return
         }
         if(!this.formDate.prize){
