@@ -421,7 +421,7 @@ export default {
      fixedNa() {
        let scrollHeight = document.querySelector('.cg_first_section').clientHeight
        let navigatorBar = document.querySelector('.cg_navigation')
-       window.addEventListener('touchmove', () => {
+       window.addEventListener('scroll', () => {
          const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
          if (scrollTop > scrollHeight) {
            if(utils.isApp()||utils.weixin()){
@@ -438,7 +438,7 @@ export default {
 
     showShareComponent(val,item) {
       this.$salePrice = val.salePrice
-      this.$totalAmt = val.totalAmt
+      this.$totalAmt = val.productNum
       this.cgShareC = val.shareCode
       this.goodsName = item.name
       this.sureChoose = true
@@ -639,6 +639,7 @@ export default {
           console.log(this.skeleton);
           this.createGroupsInt = result.data.listObj
           if(this.createGroupsInt.length < 0){
+            console.log("guigui");
             this.myGroupsInt = true
           }
 
