@@ -39,7 +39,7 @@
    </div>
 
    <div class="buy_now nobuy_now" v-if = "dgDescription.grouponStatus == 2" >
-     售罄商品
+     商品已售罄
 
    </div><div class="buy_now nobuy_now" v-if = "dgDescription.grouponStatus == 3">
     暂不销售
