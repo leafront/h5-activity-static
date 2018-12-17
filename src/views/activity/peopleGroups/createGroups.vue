@@ -441,6 +441,10 @@ export default {
      },
 
     showShareComponent(val,item) {
+      if (val.managementState == 0){
+        this.$toast('商品已下架')
+        return
+      }
       this.$salePrice = val.salePrice
       this.$totalAmt = val.productNum
       this.cgShareC = val.shareCode
