@@ -543,9 +543,9 @@ export default {
         this.$toast('请在APP或微信中打开分享')
         return
       }
-      this.dtGroupsUrl = this.dtGroupsUrl + "?shareCode=" + this.cgShareC
+       let weixinShareUrl = this.dtGroupsUrl + "?shareCode=" + this.cgShareC
       const shareConfig = {
-        link: this.dtGroupsUrl,
+        link: weixinShareUrl,
         title: '官宣 锦鲤和双十一更配哦',
         description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
         imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png',
