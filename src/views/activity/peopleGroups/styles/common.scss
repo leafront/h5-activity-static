@@ -315,3 +315,41 @@ p{
   width: max-content;
   margin: .2rem auto auto;
 }
+.nogoods-style1{
+font-family: PingFangSC;
+}
+.nogoods-style1-img{
+  width: 3rem;
+  margin:  2rem auto 0;
+  background-image: url(./images/noListImg.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height:2.3rem;
+}
+.nogoods-style1-text{
+    width: max-content;
+    margin: auto;
+    font-size: .24rem;
+
+}
+.nogoods-style1-text1{
+  width: max-content;
+  margin: 0 auto 2rem;
+  font-size: .24rem;
+}
+.nogoods-style1-img1{
+ margin: 2rem  auto 0;
+
+}
+
+.nogoods-style1-botton{
+  width: max-content;
+  margin: auto;
+  margin-top: .2rem;
+  padding: .15rem .5rem;
+  border-radius: 1rem;
+  border: solid 2px #999999;
+  font-size:.32rem;
+  font-family: PingFangSC;
+  margin-bottom:2rem;
+}
