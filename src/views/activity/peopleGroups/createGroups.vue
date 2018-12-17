@@ -402,7 +402,7 @@ export default {
       let navigatorBar = document.querySelector('.cg_navigation')
       window.addEventListener('scroll', () => {
         if (document.documentElement.scrollTop > scrollHeight) {
-          navigatorBar.style.cssText = "position:fixed; width:100%;top:1.76rem;z-index:999;"
+          navigatorBar.style.cssText = "position:fixed; width:100%;top:.88rem;z-index:999;"
         } else {
           navigatorBar.style.cssText = "position:static;"
         }
