@@ -638,7 +638,8 @@ export default {
           this.skeleton = false
           console.log(this.skeleton);
           this.createGroupsInt = result.data.listObj
-          if(this.createGroupsInt.length < 0){
+            console.log("guigui11");
+          if(this.createGroupsInt.length < 1){
             console.log("guigui");
             this.myGroupsInt = true
           }
