@@ -198,7 +198,7 @@
 
             <div class="s_body_des" v-for="(item, index) in createGroupsInt">
               <div class="s_body_des_detail">
-                <div class="s_body_detail_left pic-lazyLoad" :data-src="item.pics[0] ? (item.pics[0].imageUrl) : defaultImg">
+                <div class="s_body_detail_left pic-lazyLoad" :data-src="item.pics[0] ? (item.pics[0].url300x300) : defaultImg">
                   <!-- <div class="s_body_detail_left pic-lazyLoad" > -->
 
                 </div>
@@ -233,25 +233,29 @@
       <!-- 导航第二部分内容开始 -->
 
       <div class="cg_another_body" v-show="secondSection">
-
+        <!-- 无数据时显示 -->
+        <div class="nogoods-style" v-show="myGroupsList">
+          <div class="cg_ss_body_title nogoods-style-title"  >
+            <span class="cg_ss_title1">团购商品</span>
+            <span class="cg_ss_title2">分享越多收益越多</span>
+          </div>
+          <div class=" nogoods-style1-img1">
+          </div>
+          <p class="nogoods-style1-text">暂无团购商品</p>
+          <div class="nogoods-style1-botton" @click="pickItem(1)">
+            去赚钱
+          </div>
+        </div>
         <div class="cg_anby_circle" v-for="(item, index) in createGroupsList">
           <div class="cg_ss_body_title" v-show="(determineTitle == index)">
             <span class="cg_ss_title1">团购商品</span>
             <span class="cg_ss_title2">分享越多收益越多</span>
           </div>
-            <!-- 无数据时显示 -->
-          <div class="nogoods-style1" v-show="myGroupsList">
-            <div class="nogoods-style1-img nogoods-style1-img1">
-            </div>
-            <p class="nogoods-style1-text">暂无团购商品</p>
-            <div class="nogoods-style1-botton" @click="pickItem(1)">
-              去赚钱
-            </div>
-          </div>
+
 
           <div class="s_body_des">
             <div class="s_body_des_detail">
-              <div class="s_body_detail_left" v-if="item.pics.length" :style="{'backgroundImage':'url('+ item.pics[0].imageUrl + ')'}">
+              <div class="s_body_detail_left" v-if="item.pics.length" :style="{'backgroundImage':'url('+ item.pics[0].url300x300 + ')'}">
               </div>
               <div class="s_body_detail_left " v-else>
               </div>
@@ -670,7 +674,7 @@ export default {
           if(this.createGroupsList.length < 1){
             this.myGroupsList = true
           }
-          console.log(JSON.stringify(this.createGroupsList[0].pics[0].imageUrl),"gui");
+          console.log(this.myGroupsList,"333");
           this.childList = []
          this.childList1 =[]
          this.choose_botton = []
