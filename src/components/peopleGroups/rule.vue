@@ -13,7 +13,7 @@
               <div class="item_a_name">
                 数量
               </div>
-              <input type="tel"  autocomplete="off" v-model="formDate.number" class="item_a" placeholder="0"/>
+              <input type="tel"  autocomplete="off" autofocus  v-model="formDate.number" class="item_a" placeholder="0"/>
               <div class="item_a_unit">
                 盒
               </div>
@@ -40,7 +40,7 @@
                 预计奖励
               </div>
                <div class="item_a_name1">
-                 {{formDate.number*mpPrice}}元
+                 {{(formDate.number*mpPrice).toFixed(2)}}元
                </div>
           </div>
 
@@ -256,6 +256,14 @@
         this.$toast('请输入盒数')
         return
         }
+        if(isNaN(this.formDate.number)||isNaN(this.formDate.prize)){
+          this.$toast('请输入数字')
+          return
+        }
+        if(this.formDate.number <= 0){
+        this.$toast('盒数必须大于零')
+        return
+        }
         if(!this.formDate.prize){
         this.$toast('请输入价格')
         return
@@ -264,6 +272,9 @@
         return
       }
         this.$emit('sendGroup',this.formDate)
+        this.formDate.number = ""
+        this.formDate.prize = ""
+
         this.closeRuleText()
       }
     }

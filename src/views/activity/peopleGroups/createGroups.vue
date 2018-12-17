@@ -264,10 +264,10 @@
             <div class="child_description" v-for="($item, $index) in pointerList[index]">
               <div class="child_description_left">
                 <p class="child_lf_text">团{{$index + 1}}</p>
-                <p class="child_lf_prize">¥{{$item.totalAmt}}盒，{{$item.salePrice}}盒，¥206/盒</p>
+                <p class="child_lf_prize">¥{{$item.totalAmt}}/{{$item.productNum}}盒，¥{{$item.salePrice}}/盒</p>
               </div>
               <div class="child_description_right">
-                <div class="child_share" @click="showShareComponent($item)">
+                <div class="child_share" @click="showShareComponent($item,item)">
                   分享
                 </div>
                 <div class="child_delete" @click="deleteGroupon(index,$item,$index)">
@@ -287,7 +287,7 @@
     </div>
     <!--  商品部分结束-->
 
-    <ShareImg :rulePopup="rulePopup" :$salePrice="$salePrice" :$totalAmt="$totalAmt"  :cgShareC="cgShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
+    <ShareImg :goodsName="goodsName" :rulePopup="rulePopup" :$salePrice="$salePrice" :$totalAmt="$totalAmt"  :cgShareC="cgShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
     <Rule :ruleText="ruleText" :grouponPrice="grouponPrice" :mpPrice="mpPrice" @toggleRuleText="toggleRuleText" @sendGroup="initiateGroup"></Rule>
     <Sure :sureChoose="sureChoose" @toggleSureChoose="toggleSureChoose" @qrcodeShare="qrcodeShare" @shareAction="shareAction"></Sure>
     <UIShare></UIShare>
@@ -357,11 +357,13 @@ export default {
       grouponPrice: "",
       mpPrice: "",
       shuaxin:[],
-      a:"",
+      a:[],
       suoyin:"",
       $salePrice:"",
       $totalAmt:"",
-      defaultImg:config.hostPath+"/activity-static/images/bgdefault.png"
+      defaultImg:config.hostPath+"/activity-static/images/bgdefault.png",
+      goodsName:"",
+      pointerId :1,
 
 
     }
@@ -405,10 +407,11 @@ export default {
       }, false)
     },
 
-    showShareComponent(val) {
+    showShareComponent(val,item) {
       this.$salePrice = val.salePrice
       this.$totalAmt = val.totalAmt
       this.cgShareC = val.shareCode
+      this.goodsName = item.name
       this.sureChoose = true
     },
 
@@ -417,27 +420,74 @@ export default {
      */
 
     deleteGroupon(num, val, index) {
-      this.loadedshow = true
-      Model.deleteGroupon({
-        type: 'POST',
-        data: {
-          activityId: val.grouponActivityId
-        }
-      }).then((result) => {
-        if (result.code == 0) {
-          this.loadedshow = false
-          this.$toast('删除成功')
-          this.childList[num].splice(index, 1)
-          this.childList1[num] = this.childList[num].slice(0,2)
-          if(this.suoyin === num){
-            this.a = this.childList1[num]
-          }
-          this.createGroupsList = []
-          this.createGroupsList = this.shuaxin
+      let self = this
 
-        } else if (result.code == -1) {
+      this.$showModal({
+        content: '确认删除团购？',
+        cancelText: '取消',
+        confirmText: '删除',
+        success (){
+          // location.href = '/applyToTuike.html'
+          self.loadedshow = true
+          Model.deleteGroupon({
+            type: 'POST',
+            data: {
+              activityId: val.grouponActivityId
+            }
+          }).then((result) => {
+            if (result.code == 0) {
+              self.loadedshow = false
+              self.$toast('删除成功')
+              self.childList[num].splice(index, 1)
+              self.childList1[num] = self.childList[num].slice(0,2)
+              if(self.suoyin === num){
+                console.log(8888);
+                self.a[num] = self.childList1[num]
+              }
+              if(self.pointerId == 2){
+                console.log(777);
+                self.pointerList[num] = self.childList[num]
+              }else if (self.pointerId == 1) {
+                self.pointerList[num] = self.childList1[num]
+
+              }
+              self.createGroupsList = []
+              self.createGroupsList = self.shuaxin
+
+            } else if (result.code == -1) {
+            }
+          })
+
         }
       })
+
+      // this.loadedshow = true
+      // Model.deleteGroupon({
+      //   type: 'POST',
+      //   data: {
+      //     activityId: val.grouponActivityId
+      //   }
+      // }).then((result) => {
+      //   if (result.code == 0) {
+      //     this.loadedshow = false
+      //     this.$toast('删除成功')
+      //     this.childList[num].splice(index, 1)
+      //     this.childList1[num] = this.childList[num].slice(0,2)
+      //     if(this.suoyin === num){
+      //       this.a = this.childList1[num]
+      //     }
+      //     if(this.pointerId == 2){
+      //       this.pointerList[num] = this.childList[num]
+      //     }else if (this.pointerId == 1) {
+      //       this.pointerList[num] = this.childList1[num]
+      //
+      //     }
+      //     this.createGroupsList = []
+      //     this.createGroupsList = this.shuaxin
+      //
+      //   } else if (result.code == -1) {
+      //   }
+      // })
     },
 
     toggleRulePopup(val) {
@@ -462,15 +512,17 @@ export default {
 
     chooseBotton(val,index) {
       if (val == 1) {
+        this.pointerId = 1
         this.choose_botton[index] = index
-        this.childList1[index] = this.a
+        this.childList1[index] = this.a[index]
         this.pointerList[index] = this.childList1[index]
         this.createGroupsList = []
         this.createGroupsList = this.shuaxin
 
       } else if (val == 2) {
+        this.pointerId = 2
         this.suoyin = index
-        this.a = this.childList1[index]
+        this.a[index] = this.childList1[index]
         this.choose_botton[index] = "a"
         this.pointerList[index] = this.childList[index]
         this.createGroupsList = []
@@ -529,7 +581,6 @@ export default {
      */
 
     groupsInt() {
-
       this.skeleton = true
       Model.groupsInt({
         type: 'POST',
@@ -557,17 +608,16 @@ export default {
           }
           let groupList = result.data.listObj
           this.shuaxin = groupList
-          this.createGroupsList = []
+          this.createGroupsList = groupList
           this.childList = []
          this.childList1 =[]
-
+         this.choose_botton = []
           for (var i = 0; i < groupList.length; i++) {
             this.choose_botton.push(i)
             this.childList.push(groupList[i].activityVOList)
             this.childList1.push(groupList[i].activityVOList.slice(0, 2))
           }
-          this.pointerList = this.childList1
-          this.createGroupsList =groupList
+            this.pointerList = this.childList1
         } else if (result.code == -1) {
 
         }
