@@ -226,6 +226,8 @@
             }
             this.$set(this.active, 3, 0);
             this.pageNo = 1;
+            // 清空数据
+            this.wholeSaleDetail.list.listObj = [];
             this.queryWholeSaleDetailPage();
           },
           showHeader () {
