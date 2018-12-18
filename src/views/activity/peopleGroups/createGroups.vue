@@ -441,6 +441,10 @@ export default {
      },
 
     showShareComponent(val,item) {
+      if (item.managementState == 0){
+        this.$toast('商品已下架')
+        return
+      }
       this.$salePrice = val.salePrice
       this.$totalAmt = val.productNum
       this.cgShareC = val.shareCode
@@ -474,11 +478,9 @@ export default {
               self.childList[num].splice(index, 1)
               self.childList1[num] = self.childList[num].slice(0,2)
               if(self.suoyin === num){
-                console.log(8888);
                 self.a[num] = self.childList1[num]
               }
               if(self.pointerId == 2){
-                console.log(777);
                 self.pointerList[num] = self.childList[num]
               }else if (self.pointerId == 1) {
                 self.pointerList[num] = self.childList1[num]
@@ -644,14 +646,10 @@ export default {
       }).then((result) => {
         if (result.code == 0) {
           this.skeleton = false
-          console.log(this.skeleton);
           this.createGroupsInt = result.data.listObj
-            console.log("guigui11");
           if(this.createGroupsInt.length < 1){
-            console.log("guigui");
             this.myGroupsInt = true
           }
-
         } else if (result.code == -1) {
 
         }
@@ -674,7 +672,6 @@ export default {
           if(this.createGroupsList.length < 1){
             this.myGroupsList = true
           }
-          console.log(this.myGroupsList,"333");
           this.childList = []
          this.childList1 =[]
          this.choose_botton = []
