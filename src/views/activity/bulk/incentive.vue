@@ -333,7 +333,7 @@
   }
   .box .rule img {
     width: .4rem;
-    margin-top: 3px;
+    margin-top: .01rem;
   }
   .box div p {
     color: #fff;
