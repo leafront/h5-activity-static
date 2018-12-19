@@ -310,7 +310,7 @@
     </div>
     <!--  商品部分结束-->
 
-    <ShareImg :goodsName="goodsName" :rulePopup="rulePopup" :$salePrice="$salePrice" :$totalAmt="$totalAmt"  :cgShareC="cgShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
+    <ShareImg :goodsName="goodsName" :saleDisc="saleDisc"  :rulePopup="rulePopup" :$salePrice="$salePrice" :$totalAmt="$totalAmt"  :cgShareC="cgShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
     <Rule :ruleText="ruleText" :rebateArr="rebateArr"  :grouponPrice="grouponPrice" :mpPrice="mpPrice" @toggleRuleText="toggleRuleText" @sendGroup="initiateGroup"></Rule>
     <Sure :sureChoose="sureChoose" @toggleSureChoose="toggleSureChoose" @qrcodeShare="qrcodeShare" @shareAction="shareAction"></Sure>
     <UIShare></UIShare>
@@ -391,6 +391,7 @@ export default {
       myGroupsInt:false,
       myGroupsList:false,
       rebateArr:[],
+      saleDisc:""
 
 
 
@@ -446,6 +447,7 @@ export default {
         this.$toast('商品已下架')
         return
       }
+      this.saleDisc = val.saleDiscount/10
       this.$salePrice = val.salePrice
       this.$totalAmt = val.productNum
       this.cgShareC = val.shareCode

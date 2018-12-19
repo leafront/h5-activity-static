@@ -29,7 +29,7 @@
         数量：{{$totalAmt}}盒
       </div>
       <div class="cd_nd_number">
-        总价：¥{{(this.$salePrice * this.$totalAmt).toFixed(2)}}元
+        总价：¥{{($salePrice * $totalAmt*saleDisc).toFixed(2)}}元
       </div>
     </div>
     <span class="ui-shareimg-close" :class="{'active': rulePopup}" @click="closeRulePopup"></span>
@@ -198,6 +198,10 @@ export default {
       default: ""
     },
     $salePrice:{
+      type: Number,
+      default: 0
+    },
+    saleDisc:{
       type: Number,
       default: 0
     },
