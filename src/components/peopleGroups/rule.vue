@@ -305,6 +305,33 @@ export default {
   },
   methods: {
 
+    /*
+     * 失去焦点后滚动为零
+     */
+
+    scrollInt(){
+      const form = document.getElementById("groupsForm")
+      const fieldOne = form.elements[0]
+      const fieldTwo = form.elements[0]
+      fieldOne.addEventListener("blur",()=>{
+        if(document.body.scrollTop){
+          document.body.scrollTop = 0
+          document.documentElement.scrollTop = 0
+        }else {
+          document.documentElement.scrollTop = 0
+        }
+      },false)
+
+      fieldTwo.addEventListener("blur",()=>{
+        if(document.body.scrollTop){
+          document.body.scrollTop = 0
+          document.documentElement.scrollTop = 0
+        }else {
+          document.documentElement.scrollTop = 0
+        }
+      },false)
+    },
+
     addFocus(index){
       const form = document.getElementById("groupsForm")
       const field = form.elements[index]
@@ -452,6 +479,7 @@ export default {
       this.observeNum()
       this.maxLength()
       this.cancelFoc()
+      this.scrollInt()
 
     }, 0)
 
