@@ -311,7 +311,7 @@
     <!--  商品部分结束-->
 
     <ShareImg :goodsName="goodsName" :rulePopup="rulePopup" :$salePrice="$salePrice" :$totalAmt="$totalAmt"  :cgShareC="cgShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
-    <Rule :ruleText="ruleText" :grouponPrice="grouponPrice" :mpPrice="mpPrice" @toggleRuleText="toggleRuleText" @sendGroup="initiateGroup"></Rule>
+    <Rule :ruleText="ruleText" :rebateArr="rebateArr"  :grouponPrice="grouponPrice" :mpPrice="mpPrice" @toggleRuleText="toggleRuleText" @sendGroup="initiateGroup"></Rule>
     <Sure :sureChoose="sureChoose" @toggleSureChoose="toggleSureChoose" @qrcodeShare="qrcodeShare" @shareAction="shareAction"></Sure>
     <UIShare></UIShare>
     <CircleLoad :loadedshow="loadedshow"></CircleLoad>
@@ -390,6 +390,7 @@ export default {
       totalAmount:"",
       myGroupsInt:false,
       myGroupsList:false,
+      rebateArr:[],
 
 
 
@@ -635,6 +636,22 @@ export default {
 
     },
 
+    getGrouponRuleList() {
+
+      Model.getGrouponRuleList({
+        type: 'POST',
+      }).then((result) => {
+        if (result.code == 0) {
+
+           this.rebateArr = result.data
+
+        } else if (result.code == -1) {
+
+        }
+      })
+
+    },
+
     /**
      *  初始化接口
      */
@@ -698,7 +715,7 @@ export default {
         type: 'POST',
         data: {
           productNum: val.number,
-          salePrice: val.prize,
+          saleDiscount:val.rebate,
           grouponProductId: this.grouponProductId
 
         }
@@ -715,6 +732,7 @@ export default {
     this.groupsInt()
     this.groupsList()
     this.getWholeSaleAward()
+    this.getGrouponRuleList()
 
     setTimeout(() => {
       this.fixedNa()
