@@ -21,7 +21,7 @@
 
             <div class="pg-register-input">
               <div class="item_a_name">
-                单价
+                原价
               </div>
               <!-- <input type="number" autocomplete="off" v-model="formDate.prize" class="item_a" placeholder="0" /> -->
               <div class="item_a_unit">
@@ -329,7 +329,7 @@ export default {
 
         }else {
           document.documentElement.scrollTop = 0
-          
+
         }
       },false)
     },
@@ -397,10 +397,10 @@ export default {
 
      cancelFoc(){
        const form = document.getElementById("groupsForm")
-       const fieldNum = form.elements[0]
-       fieldNum.addEventListener("blur",()=>{
+       const fieldNum = form.elements[1]
+       fieldNum.addEventListener("focus",()=>{
           this.traversing()
-          this.$toast('最低折扣'+ this.zhekouValue )
+          this.$toast('最低折扣'+ this.zhekouValue +'折' )
        },false)
 
 
