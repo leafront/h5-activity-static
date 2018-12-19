@@ -53,7 +53,7 @@
                 合计
               </div>
               <div class="">
-                {{(formDate.number*grouponPrice*formDate.rebate).toFixed(2)}}元
+                {{(formDate.number*grouponPrice*formDate.rebate/10).toFixed(2)}}元
               </div>
             </div>
             <div class="pg-register-input">
@@ -199,9 +199,10 @@
 .ui-invite-rule {
     margin: 0.44rem auto 0;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%,-50%);
+    bottom: 0;
     width: 100%;
     max-height: 80%;
     z-index: 999;
