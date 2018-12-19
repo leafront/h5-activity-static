@@ -539,7 +539,7 @@ export default {
       }
       this.ruleText = true
       this.grouponProductId = item.grouponProductId
-      this.grouponPrice = item.grouponPrice
+      this.grouponPrice = item.mpPrice
       this.mpPrice = item.reward
     },
     toggleRuleText(val) {
