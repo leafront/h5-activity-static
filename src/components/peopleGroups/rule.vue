@@ -312,7 +312,7 @@ export default {
     scrollInt(){
       const form = document.getElementById("groupsForm")
       const fieldOne = form.elements[0]
-      const fieldTwo = form.elements[0]
+      const fieldTwo = form.elements[1]
       fieldOne.addEventListener("blur",()=>{
         if(document.body.scrollTop){
           document.body.scrollTop = 0
@@ -326,8 +326,10 @@ export default {
         if(document.body.scrollTop){
           document.body.scrollTop = 0
           document.documentElement.scrollTop = 0
+
         }else {
           document.documentElement.scrollTop = 0
+          
         }
       },false)
     },
