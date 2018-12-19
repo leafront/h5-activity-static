@@ -430,9 +430,9 @@ export default {
          const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
          if (scrollTop > scrollHeight) {
            if(utils.isApp()||utils.weixin()){
-           navigatorBar.style.cssText = "position:fixed; width:100%;top:.0rem;z-index:999;"
+           navigatorBar.style.cssText = "position:fixed; width:100%;top:.0rem;z-index:99;"
          }else {
-           navigatorBar.style.cssText = "position:fixed; width:100%;top:.88rem;z-index:999;"
+           navigatorBar.style.cssText = "position:fixed; width:100%;top:.88rem;z-index:99;"
 
          }
          } else {
