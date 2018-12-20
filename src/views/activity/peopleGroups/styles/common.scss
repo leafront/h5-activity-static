@@ -314,6 +314,27 @@ p{
 .choose_botton{
   width: max-content;
   margin: .2rem auto auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: .24rem;
+}
+.choose_botton_arrow{
+  margin-left: .15rem;
+  width: .15rem;
+  height: .15rem;
+  transform: rotate(45deg);
+
+}
+.choose_botton_arrow0{
+  border-right: solid 5px #CCCCCC;
+  border-bottom: solid 5px #CCCCCC;
+  margin-bottom: .1rem;
+}
+.choose_botton_arrow1{
+  border-left: solid 5px #CCCCCC;
+  border-top: solid 5px #CCCCCC;
+  margin-top: .1rem;
 }
 .nogoods-style1{
 font-family: PingFangSC;
@@ -363,6 +384,7 @@ font-family: PingFangSC;
   background: #fff;
   padding-bottom: 2rem ;
   border-radius: .3rem;
+  padding-top: .2rem;
 }
 .nogoods-style-title{
   margin-bottom: 2rem;

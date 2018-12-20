@@ -304,6 +304,14 @@ export default {
     }
   },
   methods: {
+    /*
+     * 出现显示焦点
+     */
+     disFocus(){
+       const form = document.getElementById("groupsForm")
+       const fieldOne = form.elements[0]
+       fieldOne.fucus()
+     },
 
     /*
      * 失去焦点后滚动为零
@@ -477,6 +485,7 @@ export default {
   created() {
 
     setTimeout(() => {
+      this.disFocus()
       this.observeNum()
       this.maxLength()
       this.cancelFoc()
