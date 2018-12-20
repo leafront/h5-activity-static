@@ -9,7 +9,7 @@
       <div class="pg_form">
         <form class="" id="groupsForm">
           <div class="pg_form_description">
-            <div class="pg-register-input" >
+            <div class="pg-register-input" @click="addFocus(0)">
               <div class="item_a_name">
                 数量
               </div>
@@ -276,7 +276,7 @@ export default {
 
   watch: {
     ruleText() {
-      this.disFocus()
+
 
       /**
        *
@@ -308,12 +308,12 @@ export default {
     /*
      * 出现显示焦点
      */
-     disFocus(){
-       const form = document.getElementById("groupsForm")
-       const fieldOne = form.elements[0]
-       fieldOne.focus()
-       console.log(9999);
-     },
+     // disFocus(){
+     //   const form = document.getElementById("groupsForm")
+     //   const fieldOne = form.elements[0]
+     //   fieldOne.focus()
+     //   console.log(9999);
+     // },
 
     /*
      * 失去焦点后滚动为零
@@ -339,11 +339,11 @@ export default {
       },false)
     },
 
-    // addFocus(index){
-    //   const form = document.getElementById("groupsForm")
-    //   const field = form.elements[index]
-    //   field.focus()
-    // },
+    addFocus(index){
+      const form = document.getElementById("groupsForm")
+      const field = form.elements[index]
+      field.focus()
+    },
 
     rebateRe() {
       if (this.formDate.rebate <= 0.1) {
