@@ -299,10 +299,20 @@
               </div>
             </div>
             <div class="choose_botton" v-show="choose_botton[index] == index" @click="chooseBotton(2,index)">
-              展开
+              <div class="choose_botton_text">
+                  展开
+              </div>
+             <div class="choose_botton_arrow choose_botton_arrow0">
+
+             </div>
             </div>
             <div class="choose_botton" v-show="!(choose_botton[index] == index)" @click="chooseBotton(1,index)">
-              收起
+              <div class="choose_botton_text">
+                  收起
+              </div>
+             <div class="choose_botton_arrow choose_botton_arrow1">
+
+             </div>
             </div>
           </div>
         </div>
