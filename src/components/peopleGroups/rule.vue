@@ -313,19 +313,9 @@ export default {
       const form = document.getElementById("groupsForm")
       const fieldOne = form.elements[0]
       const fieldTwo = form.elements[1]
-      // fieldOne.addEventListener("blur",()=>{
-      //   if(document.body.scrollTop){
-      //     // let scrolled = document.body.scrollTop
-      //     document.body.scrollTop = 0
-      //     document.documentElement.scrollTop = 0
-      //     // document.body.scrollTop = scrolled
-      //     // document.documentElement.scrollTop = scrolled
-      //   }else {
-      //     let scrolled1 = document.documentElement.scrollTop
-      //     document.documentElement.scrollTop = 0
-      //     document.documentElement.scrollTop = scrolled1
-      //   }
-      // },false)
+      fieldOne.addEventListener("blur",()=>{
+        fieldTwo.focus()
+      },false)
 
       fieldTwo.addEventListener("blur",()=>{
         if(document.body.scrollTop){
@@ -379,9 +369,11 @@ export default {
         if (i <= rebateArr.length - 2) {
           if (rebateArr[i].reachNum <= this.formDate.number && this.formDate.number < rebateArr[i + 1].reachNum) {
             this.zhekouValue = rebateArr[i].discountValue
+              this.formDate.rebate = this.zhekouValue
             return
           } else if (this.formDate.number < rebateArr[i].reachNum) {
             this.zhekouValue = 10
+              this.formDate.rebate = this.zhekouValue
               return
           }else {
             continue
@@ -389,10 +381,12 @@ export default {
         } else if (i == rebateArr.length -1) {
           if (rebateArr[i].reachNum <= this.formDate.number) {
             this.zhekouValue = rebateArr[i].discountValue
+              this.formDate.rebate = this.zhekouValue
             return
           }
         }
       }
+
 
     },
 
