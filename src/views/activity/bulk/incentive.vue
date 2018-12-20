@@ -97,13 +97,15 @@
             // console.log('元素滚动高度',document.documentElement.scrollTop ); // 文档高度
             // 判断是否滚动到底部
             // 手机支持body、 电脑支持documentElement
-            if(document.body.scrollTop + window.innerHeight >= document.body.offsetHeight) {
+
+            if(document.documentElement.scrollTop + document.body.scrollTop + window.innerHeight >= document.body.offsetHeight) {
               if (vm.switch) {
                 vm.pageNo = vm.pageNo +1;
                 vm.switch = false;
                 vm.queryWholeSaleDetailPage();
               }
             }
+
           });
         },
         data() {
