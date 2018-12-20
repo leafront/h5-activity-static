@@ -315,10 +315,15 @@ export default {
       const fieldTwo = form.elements[1]
       fieldOne.addEventListener("blur",()=>{
         if(document.body.scrollTop){
+          let scrolled = document.body.scrollTop
           document.body.scrollTop = 0
           document.documentElement.scrollTop = 0
+          document.body.scrollTop = scrolled
+          document.documentElement.scrollTop = scrolled
         }else {
+          let scrolled1 = document.documentElement.scrollTop
           document.documentElement.scrollTop = 0
+          document.documentElement.scrollTop = scrolled1
         }
       },false)
 
