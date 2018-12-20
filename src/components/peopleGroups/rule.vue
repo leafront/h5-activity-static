@@ -421,7 +421,6 @@ export default {
     maxLength() {
       const form = document.getElementById("groupsForm")
       const rebate = form.elements[1]
-      console.log(rebate,"hahha");
       rebate.addEventListener("keyup", (e) => {
         let target = e.target
         if (target.value.length > target.maxLength) {
