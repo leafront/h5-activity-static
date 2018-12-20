@@ -538,12 +538,14 @@ export default {
         return
       }
       this.ruleText = true
+      utils.appViewFixed()
       this.grouponProductId = item.grouponProductId
       this.grouponPrice = item.mpPrice
       this.mpPrice = item.reward
     },
     toggleRuleText(val) {
       this.ruleText = val
+      utils.appViewFixed()
     },
     toggleSureChoose(val) {
       this.sureChoose = val
