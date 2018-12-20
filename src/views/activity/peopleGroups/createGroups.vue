@@ -665,8 +665,8 @@ export default {
       Model.groupsInt({
         type: 'POST',
         data:{
-          currentPage:1,
-          itemsPerPage:200,
+          pageNo:1,
+          pageSize:200,
         },
       }).then((result) => {
         if (result.code == 0) {
