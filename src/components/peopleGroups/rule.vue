@@ -486,7 +486,7 @@ export default {
       this.observeNum()
       this.maxLength()
       this.cancelFoc()
-      this.scrollInt()
+      // this.scrollInt()
 
     }, 0)
 
