@@ -273,7 +273,7 @@
                 </div>
                 <div class="s_body_detail_right_bottom">
                   <div class="s_body_detail_right4_left">
-                    <span class="prize prize_des">奖</span><span class="prize prize_num">{{item.reward}}元</span>每盒
+                    <span class="prize prize_des">奖</span><span class="prize prize_num">{{item.reward}}元</span>/每盒
                   </div>
                   <div class="s_body_detail_right4_right" @click="showRule(item)">
                     去赚钱
