@@ -454,6 +454,8 @@ export default {
     },
 
     closeRuleText() {
+      this.formDate.number = ""
+      this.formDate.rebate = ""
       this.$emit('toggleRuleText', false)
     },
     sendGroup() {
