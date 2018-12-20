@@ -276,6 +276,7 @@ export default {
 
   watch: {
     ruleText() {
+      this.disFocus()
 
       /**
        *
@@ -310,7 +311,8 @@ export default {
      disFocus(){
        const form = document.getElementById("groupsForm")
        const fieldOne = form.elements[0]
-       fieldOne.fucus()
+       fieldOne.focus()
+       console.log(9999);
      },
 
     /*
@@ -485,7 +487,6 @@ export default {
   created() {
 
     setTimeout(() => {
-      this.disFocus()
       this.observeNum()
       this.maxLength()
       this.cancelFoc()
