@@ -664,6 +664,10 @@ export default {
       this.skeleton = true
       Model.groupsInt({
         type: 'POST',
+        data:{
+          currentPage:1,
+          itemsPerPage:200,
+        },
       }).then((result) => {
         if (result.code == 0) {
           this.skeleton = false
