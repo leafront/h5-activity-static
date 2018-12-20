@@ -287,7 +287,7 @@
             <div class="child_description" v-for="($item, $index) in pointerList[index]">
               <div class="child_description_left">
                 <p class="child_lf_text">团{{$index + 1}}</p>
-                <p class="child_lf_prize">¥{{$item.totalAmt}}/{{$item.productNum}}盒，¥{{$item.salePrice}}/盒</p>
+                <p class="child_lf_prize">¥{{$item.totalAmt}}/{{$item.productNum}}盒，{{$item.saleDiscount}}折</p>
               </div>
               <div class="child_description_right">
                 <div class="child_share" @click="showShareComponent($item,item)">

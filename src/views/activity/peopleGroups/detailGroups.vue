@@ -21,6 +21,10 @@
        <div class="dd_prize_number">
          ¥{{dgDescription.salePrice}}/盒
        </div>
+       <div class="dd_prize_rebate">
+
+         {{dgDescription.saleDiscount}}折
+       </div>
 
      </div>
 
@@ -32,6 +36,7 @@
      <div class="n_d_prize">
        总价：{{dgDescription.totalAmount}}元
      </div>
+
    </div>
    <div class="buy_now" @click= "initiateOrder" v-if = "dgDescription.grouponStatus == 1">
      ¥{{dgDescription.totalAmount}} 立即购买
@@ -238,6 +243,9 @@ export default {
   padding-bottom: .2rem;
 }
 .dd_prize_style{
+  padding-left: .03rem;
+  padding-right: .03rem;
+  border-radius: .05rem;
   color: #FFFFFF;
   font-size: .2rem;
   background: #FF6900;
@@ -250,6 +258,12 @@ export default {
   flex: 0 0 auto;
 }
 .dd_prize_number{
+  color:  #FF6900;
+  font-size: .3rem;
+  margin-left: .1rem;
+  flex: 0 0 auto;
+}
+.dd_prize_rebate{
   color:  #FF6900;
   font-size: .3rem;
   margin-left: .1rem;
