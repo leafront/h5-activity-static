@@ -460,6 +460,7 @@ export default {
       }
       this.goodsDescription.goodsImgUrl = item.pics[0].url100x100
       this.goodsDescription.goodsText = item.name
+        this.goodsDescription.goodsSubtitle = item.subtitle
       this.saleDisc = val.saleDiscount/10
       this.$salePrice = val.salePrice
       this.$totalAmt = val.productNum
@@ -602,7 +603,7 @@ export default {
       const shareConfig = {
         link: weixinShareUrl,
         title: this.goodsDescription.goodsText,
-        description: this.goodsDescription.goodsText,
+        description:this.goodsDescription.goodsSubtitle,
         imgUrl: this.goodsDescription.goodsImgUrl,
         platforms: [
           "WechatMoments",
