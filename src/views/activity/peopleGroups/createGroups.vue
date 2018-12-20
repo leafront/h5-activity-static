@@ -695,6 +695,10 @@ export default {
     groupsList(val) {
       Model.groupsList({
         type: 'POST',
+        data:{
+          pageNo:1,
+          pageSize:200,
+        },
       }).then((result) => {
         if (result.code == 0) {
           this.loadedshow = false
