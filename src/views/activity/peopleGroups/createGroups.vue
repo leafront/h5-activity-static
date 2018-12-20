@@ -401,7 +401,8 @@ export default {
       myGroupsInt:false,
       myGroupsList:false,
       rebateArr:[],
-      saleDisc:""
+      saleDisc:"",
+      goodsDescription:{},
 
 
 
@@ -457,6 +458,9 @@ export default {
         this.$toast('商品已下架')
         return
       }
+      this.goodsDescription.goodsImgUrl = item.pics[0].url100x100
+      this.goodsDescription.goodsText = item.name
+      this.goodsDescription.goodsText
       this.saleDisc = val.saleDiscount/10
       this.$salePrice = val.salePrice
       this.$totalAmt = val.productNum
@@ -598,9 +602,9 @@ export default {
        let weixinShareUrl = this.dtGroupsUrl + "?shareCode=" + this.cgShareC
       const shareConfig = {
         link: weixinShareUrl,
-        title: '官宣 锦鲤和双十一更配哦',
-        description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
-        imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png',
+        title: this.goodsDescription.goodsImgUrl,
+        description: this.goodsDescription.goodsImgUrl,
+        imgUrl: this.goodsDescription.goodsImgUrl,
         platforms: [
           "WechatMoments",
           "Wechat",
