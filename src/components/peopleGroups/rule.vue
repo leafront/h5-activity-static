@@ -199,10 +199,10 @@
 .ui-invite-rule {
     margin: 0.44rem auto 0;
     position: fixed;
-    // top: 50%;
-    // left: 50%;
-    // transform: translate(-50%,-50%);
-    bottom: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    // bottom: 0;
     width: 100%;
     max-height: 80%;
     z-index: 999;
@@ -315,11 +315,11 @@ export default {
       const fieldTwo = form.elements[1]
       fieldOne.addEventListener("blur",()=>{
         if(document.body.scrollTop){
-          let scrolled = document.body.scrollTop
+          // let scrolled = document.body.scrollTop
           document.body.scrollTop = 0
           document.documentElement.scrollTop = 0
-          document.body.scrollTop = scrolled
-          document.documentElement.scrollTop = scrolled
+          // document.body.scrollTop = scrolled
+          // document.documentElement.scrollTop = scrolled
         }else {
           let scrolled1 = document.documentElement.scrollTop
           document.documentElement.scrollTop = 0
