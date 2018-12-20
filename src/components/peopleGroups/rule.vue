@@ -9,7 +9,7 @@
       <div class="pg_form">
         <form class="" id="groupsForm">
           <div class="pg_form_description">
-            <div class="pg-register-input" @click = "addFocus(0)">
+            <div class="pg-register-input" >
               <div class="item_a_name">
                 数量
               </div>
@@ -29,7 +29,7 @@
               </div>
             </div>
 
-            <div class="pg-register-input" @click = "addFocus(1)">
+            <div class="pg-register-input" >
               <div class="item_a_name">
                 折扣
               </div>
@@ -329,11 +329,11 @@ export default {
       },false)
     },
 
-    addFocus(index){
-      const form = document.getElementById("groupsForm")
-      const field = form.elements[index]
-      field.focus()
-    },
+    // addFocus(index){
+    //   const form = document.getElementById("groupsForm")
+    //   const field = form.elements[index]
+    //   field.focus()
+    // },
 
     rebateRe() {
       if (this.formDate.rebate <= 0.1) {
