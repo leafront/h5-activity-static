@@ -399,7 +399,7 @@ export default {
        const fieldNum = form.elements[1]
        fieldNum.addEventListener("focus",()=>{
           this.traversing()
-          this.$toast('最低折扣'+ this.zhekouValue +'折' )
+          // this.$toast('最低折扣'+ this.zhekouValue +'折' )
        },false)
 
 
