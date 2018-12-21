@@ -19,8 +19,6 @@ const weixin_share = {
         data: {
           url: returnURL
         }
-      }).then((data) => {
-        return data
       }).then((result) => {
         const {
           data: {
