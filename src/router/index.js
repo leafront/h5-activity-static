@@ -180,7 +180,33 @@ export default new Router({
         bgColor: '#ff9a37',
 
       }
-    }
+    }, {
+      path: '/activity/sign/index',
+      name: 'sign',
+      component: () => import('@/views/activity/sign/index.vue'),
+      meta: {
+        title: '每日签到',
+        bgColor: '#effbff',
 
+      }
+    }, {
+      path: '/activity/sign/award',
+      name: 'award',
+      component: () => import('@/views/activity/sign/award.vue'),
+      meta: {
+        title: '我的奖品',
+        bgColor: '#fff',
+
+      }
+    }, {
+      path: '/activity/sign/detail',
+      name: 'detail',
+      component: () => import('@/views/activity/sign/detail.vue'),
+      meta: {
+        title: '奖品详情',
+        bgColor: '#fff',
+
+      }
+    }
   ]
 })
