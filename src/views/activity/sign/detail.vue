@@ -35,8 +35,13 @@
       }
     },
     components: {AppHeader},
+    created () {
+      // console.log(location.href);
+    },
     mounted () {
-      this.getAwardDeatil(419)
+      let id = this.getQueryString('id')
+
+      this.getAwardDeatil(id)
     },
     methods: {
       getAwardDeatil (pid) {
@@ -47,9 +52,13 @@
           const data = result.data
           if (result.code == 0 ) {
             this.awardDetail = data;
-            console.log(`data${this.awardDetail}`);
           }
         })
+      },
+      getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
       }
     }
   }

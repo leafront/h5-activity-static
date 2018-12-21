@@ -2,12 +2,12 @@
   <div class="pageView">
     <AppHeader :title="title"></AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
-      <ul v-for="(item, index) in awards">
-        <li><img :src="item.imgSquare"></li>
-        <li>
-          <p>{{item.name}}</p>
-          <p>{{item.range}}</p>
-          <p>{{item.endTime}}</p>
+      <ul class="entry" v-for="(item, index) in awards" @click="goToDeatil(item.id)">
+        <li class="imgSquare"><img :src="item.imgSquare"></li>
+        <li class="desc">
+          <p class="first">{{item.name}}</p>
+          <p class="second">{{item.range}}</p>
+          <p class="third">有效期至{{item.endTime | dateFormat('yyyy-MM-dd')}}</p>
         </li>
       </ul>
     </div>
@@ -16,7 +16,6 @@
 
 <script type="text/javascript">
   import AppHeader from '@/components/common/header'
-  import utils from '@/widget/utils'
   import * as Model from '@/model/sign'
 
 
@@ -45,38 +44,49 @@
             console.log(`data${this.awardDetail}`);
           }
         })
+      },
+      goToDeatil (id) {
+        location.href = `/activity/sign/detail?id=${id}`
       }
     }
   }
 </script>
 
 <style scoped lang="scss">
-  .poster {
-    height: 2.3rem;
+  .entry {
+    display: flex;
+    padding: 0 .44rem;
+    border-bottom: .01rem solid #E5E5E5;
   }
-  .poster img{
-    height: 2.3rem;
+  .entry .imgSquare {
+    display: flex;
+    align-items: center;
   }
-  .title {
-    padding: .24rem .3rem;
-    font-size:0.32rem;
-    font-family:PingFangSC-Medium;
-    font-weight:500;
-    color:rgba(51,51,51,1);
-    line-height:0.4rem;
-    border-bottom: .01rem solid rgba(234,234,234,1);
+  .entry .imgSquare img {
+    width: 1.64rem;
   }
-  .sut-title {
-    margin: .24rem .3rem;
+  .desc {
+    padding-top: .26rem;
+    padding-left: .66rem;
+  }
+  .desc .first {
     font-size:0.28rem;
-    font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(51,51,51,1);
     line-height:0.4rem;
   }
-  .sut-title div p {
-    display: inline-flex;
-    width: 5.5rem;
+  .desc .second {
+    font-size:0.24rem;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+    line-height:0.34rem;
   }
+  .desc .third {
+    font-size:0.24rem;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+    line-height:0.34rem;
+  }
+
 
 </style>
