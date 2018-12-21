@@ -196,7 +196,7 @@ export default {
          if (result.code == 0) {
            this.loadedshow= false
            console.log("gui");
-           location.href = "http://m.lyf.edu.laiyifen.com/pay/pay.html" + "?" +"signCode="+ this.dgUrlOj.shareCode
+           location.href = "/pay/pay.html" + "?" +"signCode="+ this.dgUrlOj.shareCode
          } else if (result.code == -1) {
 
          }
