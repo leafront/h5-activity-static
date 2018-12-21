@@ -163,7 +163,7 @@ const app = {
         pic: imgUrl,
         platforms: platforms
       }, () => {
-        
+
       })
     }
   },

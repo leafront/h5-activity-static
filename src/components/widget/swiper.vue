@@ -100,7 +100,6 @@
         this._end()
       },
       init () {
-
         this.wrapper = document.querySelector(this.slideItem)
         this.pagination = document.querySelectorAll(this.sliderBtn)
         this.startTime = new Date().getTime()
@@ -233,4 +232,3 @@
 <style lang="scss">
   @import '../../styles/slidershow.scss';
 </style>
-
