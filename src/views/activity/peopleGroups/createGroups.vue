@@ -714,6 +714,8 @@ export default {
           this.createGroupsList = groupList
           if(this.createGroupsList.length < 1){
             this.myGroupsList = true
+          }else if (this.createGroupsList.length >= 1) {
+            this.myGroupsList = false
           }
           this.childList = []
          this.childList1 =[]
