@@ -391,12 +391,12 @@ export default {
       mpPrice: "",
       shuaxin:[],
       a:[],
-      suoyin:"",
+      suoyin:[],
       $salePrice:"",
       $totalAmt:"",
       defaultImg:config.hostPath+"/activity-static/images/bgdefault.png",
       goodsName:"",
-      pointerId :1,
+      // pointerId :1,
       totalAmount:"",
       myGroupsInt:false,
       myGroupsList:false,
@@ -494,15 +494,18 @@ export default {
               self.$toast('删除成功')
               self.childList[num].splice(index, 1)
               self.childList1[num] = self.childList[num].slice(0,2)
-              if(self.suoyin === num){
+              if(self.suoyin[num] === num){
                 self.a[num] = self.childList1[num]
-              }
-              if(self.pointerId == 2){
                 self.pointerList[num] = self.childList[num]
-              }else if (self.pointerId == 1) {
+              }else {
                 self.pointerList[num] = self.childList1[num]
-
               }
+              // if(self.pointerId == 2){
+              //   self.pointerList[num] = self.childList[num]
+              // }else if (self.pointerId == 1) {
+              //   self.pointerList[num] = self.childList1[num]
+              //
+              // }
               self.createGroupsList = []
               self.createGroupsList = self.shuaxin
 
@@ -570,7 +573,7 @@ export default {
 
     chooseBotton(val,index) {
       if (val == 1) {
-        this.pointerId = 1
+        this.suoyin[index] = "c"
         this.choose_botton[index] = index
         this.childList1[index] = this.a[index]
         this.pointerList[index] = this.childList1[index]
@@ -578,8 +581,7 @@ export default {
         this.createGroupsList = this.shuaxin
 
       } else if (val == 2) {
-        this.pointerId = 2
-        this.suoyin = index
+        this.suoyin[index] = index
         this.a[index] = this.childList1[index]
         this.choose_botton[index] = "a"
         this.pointerList[index] = this.childList[index]
