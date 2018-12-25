@@ -207,6 +207,32 @@ export default new Router({
         bgColor: '#fff',
 
       }
+    }, {
+      path: '/activity/bulk/incentive',
+      name: 'incentive',
+      component: () => import('@/views/activity/bulk/incentive.vue'),
+      meta: {
+        title: '奖励金',
+        requireLogin: true
+      }
+  },{
+      path: '/activity/peopleGroups/createGroups',
+      name: 'createGroups',
+      component: () => import('@/views/activity/peopleGroups/createGroups.vue'),
+      meta: {
+        title: '全民团购',
+        bgColor: '#F5F5F5',
+        requireLogin: true
+
+      }
+    },{
+      path: '/activity/peopleGroups/detailGroups',
+      name: 'detailGroups',
+      component: () => import('@/views/activity/peopleGroups/detailGroups.vue'),
+      meta: {
+        title: '商品详情',
+        bgColor: '#fff',
+      }
     }
   ]
 })
