@@ -4,7 +4,7 @@
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <!--背景-->
       <img class="img-background" :src="imgBg">
-      <div class="layer" :style="{marginTop: this.showHeader() ? '0': '.88rem'}">
+      <div class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
         <!--标题-->
         <div class="title">{{userInfo.currentTitle}}</div>
         <!--礼物图标-->
@@ -16,6 +16,17 @@
           <img src="./images/sign_light2.png"/>
           <img src="./images/sign_light.png"/>
         </div>
+        <!--中奖轮播-->
+        <div class="broadcast">
+          <img src="./images/sign_horn.png">
+        </div>
+        <div class="broad-box">
+          <p class="wordsLoop">
+            {{broadWinners}}
+          </p>
+        </div>
+
+
       </div>
     </div>
   </div>
@@ -37,6 +48,7 @@
         userInfo: {},
         initInfo: {},
         progressBar: require('./images/sign_progress0.png'), // 签到进度条
+        broadWinners: ' '
       }
     },
     components: {AppHeader},
@@ -89,6 +101,11 @@
           const data = result.data
           if (result.code == 0 ) {
             this.initInfo = data;
+            console.info('initInfo', this.initInfo);
+            // 广播
+            for (let i in this.initInfo.broadCardList) {
+              this.broadWinners = this.broadWinners + this.initInfo.broadCardList[i];
+            }
           }
         })
       },
@@ -122,22 +139,26 @@
     text-shadow: 0px 0px 0px rgba(159,159,159,0.5);
   }
   .progress-bar {
-    position: relative;
-    width: 100%;
-    top: 4.2rem;
+    position: absolute;
+    top: 5.3rem;
+    left: 1.2rem;
     text-align: center;
   }
+  .progress-bar img {
+    width: 5rem;
+  }
   .gift {
-    position: relative;
-    top: 4.3rem;
-    left: 5.6rem;
+    position: absolute;
+    top: 4.65rem;
+    left: 5.7rem;
   }
 
   .img-wrap {
-    position: relative;
-    top: 4.4rem;
+    position: absolute;
+    top: 6.1rem;
   }
   .img-wrap img {
+    width: 7.5rem;
     position: absolute;
   }
   .img-wrap img:first-child {
@@ -166,6 +187,72 @@
     100% {
       opacity: 0;
     }
+  }
+  .broad-box {
+    top: 6.3rem;
+    position: relative;
+    background: #E4A100;
+    border-top-right-radius: .2rem;
+    border-bottom-right-radius: .2rem;
+    width: 4.56rem;
+    left: 1.82rem;
+    overflow: hidden;
+  }
+  .broad-box img {
+    height: .3rem;
+    margin-left: .05rem;
+  }
+  /*文字滚动动画*/
+  .wordsLoop {
+    position: relative;
+    height:0.36rem;
+    font-size:0.24rem;
+    font-weight:400;
+    line-height:0.34rem;
+    color: #fff;
+    display: inline-block;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    white-space: nowrap;
+    animation: 60s wordsLoop linear infinite normal;
+  }
+
+  @keyframes wordsLoop {
+    0% {
+      transform: translateX(220px);
+      -webkit-transform: translateX(220px);
+    }
+    100% {
+      transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
+    }
+  }
+
+  @-webkit-keyframes wordsLoop {
+    0% {
+      transform: translateX(220px);
+      -webkit-transform: translateX(220px);
+    }
+    100% {
+      transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
+    }
+  }
+  .broadcast {
+    position: absolute;
+    padding-left: .15rem;
+    height: .36rem;
+    top: 6.718rem;
+    width: .8rem;
+    left: 1.1rem;
+    background: #E4A100;
+    border-top-left-radius: .2rem;
+    border-bottom-left-radius: .2rem;
+  }
+  .broadcast img{
+    margin-top: .04rem;
+    width: .4rem;
+    left: 1.1rem;
   }
 
 </style>
