@@ -27,6 +27,10 @@
         </div>
         <!--红色气球-->
         <div class="red-ball"><img src="./images/sign_ball.png"></div>
+        <!--拉杆-->
+        <div class="img-rock">
+          <img id='rockImg' src="./images/sign_rock1.png"/>
+        </div>
         <!--抽奖列表-->
         <div class="game-goods-wrap">
           <div class="game-goods-list">
@@ -197,6 +201,8 @@
           if (result.code == 0) {
             console.log('result', result.data);
             this.luckGame();
+            // 拉霸动效
+            document.getElementById('rockImg').src = require('./images/sign_rock.gif');
           }
         })
       },
@@ -594,6 +600,14 @@
     to {
       opacity: 1
     }
+  }
+  .img-rock {
+    position: absolute;
+    top: 7.6rem;
+    left: 6.57rem;
+  }
+  .img-rock img {
+    width: 1rem;
   }
 
 </style>
