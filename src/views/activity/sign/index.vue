@@ -26,6 +26,38 @@
           </p>
         </div>
 
+        <!--抽奖列表-->
+        <div class="game-goods-wrap">
+          <div class="game-goods-list">
+            <div class="game-goods" style="background: #ffffff;">
+              <div class="game-goods-box" id="game1">
+                <ul class="game-goods-ul">
+
+                </ul>
+              </div>
+            </div>
+            <div class="game-goods" style="background: #ffffff;">
+              <div class="game-goods-box" id="game2">
+                <ul class="game-goods-ul">
+
+                </ul>
+              </div>
+            </div>
+            <div class="game-goods" style="background: #ffffff;">
+              <div class="game-goods-box" id="game3">
+                <ul class="game-goods-ul">
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--签到button-->
+        <div style="position: absolute; top: 11rem; left: 3rem;">
+          <button @click="signIn">签到</button>
+        </div>
+
 
       </div>
     </div>
@@ -48,7 +80,18 @@
         userInfo: {},
         initInfo: {},
         progressBar: require('./images/sign_progress0.png'), // 签到进度条
-        broadWinners: ' '
+        broadWinners: ' ',
+        imgSquareList: [],
+        gameArr: [],
+        gameDefaults: {
+          'gameLen': 3,
+          'game_pagesize': 16,//生成多少圈同样的东西
+          'zj_arr': { //中奖数组，第一个表示是否中奖，第二个中奖号码
+            'is_win': 2,
+            'number': 1
+          }
+        },
+        temSquareList: []
       }
     },
     components: {AppHeader},
@@ -88,8 +131,16 @@
           const data = result.data
           if (result.code == 0 ) {
             this.userInfo = data;
-            console.log('this.userInfo.currentCount', this.userInfo.currentCount);
+            // 进度条
             this.progressBar = require(`./images/sign_progress${this.userInfo.currentCount}.png`);
+            // 抽奖池
+            this.temSquareList = data.awards;
+            for (let i in result.data.awards){
+              this.imgSquareList.push(result.data.awards[i].imgSquare);
+            }
+
+            // 创造游戏
+            this.createGame();
           }
         })
       },
@@ -101,7 +152,6 @@
           const data = result.data
           if (result.code == 0 ) {
             this.initInfo = data;
-            console.info('initInfo', this.initInfo);
             // 广播
             for (let i in this.initInfo.broadCardList) {
               this.broadWinners = this.broadWinners + this.initInfo.broadCardList[i];
@@ -110,11 +160,140 @@
         })
       },
 
+      // 开始签到
+      signIn () {
+        Model.signIn({
+          type: 'POST'
+        }).then((result) => {
+          const data = result.data
+          if (result.code == 0) {
+            console.log('result', result.data);
+            this.luckGame();
+          }
+        })
+      },
+
+      // 创造游戏
+      createGame (startGame) {
+        const defaults = {
+          'gameLen': 3,
+          'game_pagesize': 16, //生成多少圈同样的东西
+          'zj_arr': { //中奖数组，第一个表示是否中奖，第二个中奖号码
+            'is_win': 2,
+            'number': 1
+          }
+        };
+
+
+
+        this.getHeight();
+        this.setLi(defaults);
+        this.pushLi(this.gameArr);
+      },
+
+      // 获取高度
+      getHeight () {
+        var w_config = {
+          'w': document.body.clientWidth,
+          'h': document.body.clientHeight
+        }
+        this.game_list_item_h = (w_config.w * 320 / 750 * 0.4 * 0.9).toFixed(2);
+      },
+
+      // 设置奖品
+      setLi (settings) {
+        for (var j = 1; j <= settings.game_pagesize; j++) {
+          for (var i = 1; i <= this.imgSquareList.length; i++) {
+            this.gameArr.push({'type': j, 'index': i, 'src': this.imgSquareList[i-1]});
+          }
+        }
+      },
+
+      //写入，初始化奖品的滚动
+      pushLi (arr) {
+        let vm = this;
+        var html_str = '';
+        for (let i = 0; i < arr.length; i++) {
+          html_str += '<li style="height:' + 1.5 + 'rem; position: relative; width:100%; text-align: center" data-index="' + arr[i]['index'] + '" data-type="' + arr[i]['type'] + '"><img style="width:' + 1.3 + 'rem" src="' + arr[i]['src'] + '"></li>';
+        }
+
+          var gameList = document.getElementsByClassName('game-goods-ul')
+          var len = gameList.length
+          for (var i = 0; i<len; i+=1) {
+            gameList[i].innerHTML = html_str
+            gameList[i].style.transform = 'translate(0px, -' + 1.2 + 'rem) translateZ(0px)'
+            gameList[i].style.transitionDuration = '0ms'
+          }
+      },
+
+      // 开始游戏
+      luckGame () {
+        if (true) {
+          // 抽奖中
+          this.signing = true;
+          this.gameDefaults.zj_arr.is_win = this.isAwarded ? 1 : 2;
+          let vm = this;
+          // ms控制一共时间、y来控制速度
+          //如果中奖
+          if (this.gameDefaults.zj_arr.is_win == 1) {
+            // 第几个中奖
+            // this.gameDefaults.zj_arr.number = vm.awardNumber;
+            this.gameDefaults.zj_arr.number = 2;
+
+            let gameList = document.getElementsByClassName('game-goods-ul')
+            for (let i =0, j = gameList.length; i<j; i+=1) {
+              let y = 6 * 1.5 * vm.temSquareList.length + 1.2 - 1.5 + (2 * 1.5)
+              setTimeout(function () {
+                  gameList[i].style.transitionDuration = '4000ms'
+                  gameList[i].style.transform = 'translate(0px, -' + y + 'rem) translateZ(0px)'
+
+              }, i * 300);
+            }
+          } else {
+            let numRand = this.randNum(this.gameDefaults);
+            let gameList = document.getElementsByClassName('game-goods-ul')
+            for (let i =0, j = gameList.length; i<j; i+=1) {
+              let y0 = (numRand[0] * 1.5) + 1.5 * (this.gameDefaults.gameLen + 0.38) * 10;
+              let y1 = (numRand[1] * 1.5) + 1.5 * (this.gameDefaults.gameLen + 0.38) * 10;
+              let y2 = (numRand[2] * 1.5) + 1.5 * (this.gameDefaults.gameLen + 0.38) * 10;
+
+              setTimeout(function () {
+                  gameList[i].style.transitionDuration = '4000ms'
+                  if (i == 0) {
+                    gameList[i].style.transform = 'translate(0px, -' + y0 + 'rem) translateZ(0px)'
+                  }
+                  if (i == 1) {
+                    gameList[i].style.transform = 'translate(0px, -' + y1 + 'rem) translateZ(0px)'
+                  }
+                  if (i == 2) {
+                    gameList[i].style.transform = 'translate(0px, -' + y2 + 'rem) translateZ(0px)'
+                  }
+                }, i * 300);
+            }
+          }
+        } else {
+          console.log('游戏未开始');
+        }
+      },
+      // 得到不中奖时候的随机数
+      randNum (settings) {
+        var a = Math.floor(Math.random() * settings.gameLen);
+        var b = Math.floor(Math.random() * settings.gameLen);
+        var c = Math.floor(Math.random() * settings.gameLen);
+        var arr = [];
+        if (a == b || a == 0 || b == 0 || c == 0) {
+          return this.randNum(settings);
+        } else {
+          return arr = [a, b, c];
+        }
+      },
+
     }
   }
 </script>
 
 <style scoped lang="scss">
+  @import './styles/luckyGame.scss';
   .img-background {
     width: 100%;
     z-index: 1
@@ -253,6 +432,24 @@
     margin-top: .04rem;
     width: .4rem;
     left: 1.1rem;
+  }
+
+  .game-goods-ul li {
+    height: 1.2rem;
+    //margin-top: 0.15rem;
+    top: -0.1rem;
+    position: relative;
+    width: 100%;
+  }
+  .game-goods-ul li img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    height: 1.2rem;
+    width: auto;
   }
 
 </style>
