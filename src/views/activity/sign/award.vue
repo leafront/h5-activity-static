@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title"></AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
-      <ul class="entry" v-for="(item, index) in awards" @click="goToDeatil(item.id)">
+      <ul class="entry" v-for="(item, index) in awards" @click="openDeatil(item.id)">
         <li class="imgSquare"><img :src="item.imgSquare"></li>
         <li class="desc">
           <p class="first">{{item.name}}</p>
@@ -41,11 +41,10 @@
           const data = result.data
           if (result.code == 0 ) {
             this.awards = data.awards;
-            console.log(`data${this.awardDetail}`);
           }
         })
       },
-      goToDeatil (id) {
+      openDeatil (id) {
         location.href = `/activity/sign/detail?id=${id}`
       }
     }

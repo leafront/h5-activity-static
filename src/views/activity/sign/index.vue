@@ -25,7 +25,8 @@
             {{broadWinners}}
           </p>
         </div>
-
+        <!--红色气球-->
+        <div class="red-ball"><img src="./images/sign_ball.png"></div>
         <!--抽奖列表-->
         <div class="game-goods-wrap">
           <div class="game-goods-list">
@@ -52,13 +53,36 @@
             </div>
           </div>
         </div>
-
+        <!--交替灯光下-->
+        <div class="img-wrap" style="top: 10.4rem">
+          <img src="./images/sign_light.png"/>
+          <img src="./images/sign_light2.png"/>
+        </div>
         <!--签到button-->
-        <div style="position: absolute; top: 11rem; left: 3rem;">
-          <button @click="signIn">签到</button>
+        <div class="buttons">
+          <img @click="openAward" class="btn-awards"  src="./images/sign_award.png" />
+          <img @click="signIn" class="btn-sign" src="./images/sign_click.gif" />
+          <img @click="showRule = true" src="./images/sign_rule.png" />
+        </div>
+        <!--滑动区域-->
+        <div class="slide">
+          <ul class="category-head">
+            <li v-for="item in awardsList" @click="openDeatil(item.id)">
+              <img v-bind:src=item.imgBigSquare />
+            </li>
+          </ul>
         </div>
 
+      </div>
+    </div>
 
+    <!--弹窗、活动规则-->
+    <div class="rule" v-show="showRule">
+      <div class="rule-content">
+        <span class="btn-close" @click="showRule = false"><img src="./images/sign_close.png"></span>
+        <div class="rule-body">
+          {{initInfo.rule}}
+        </div>
       </div>
     </div>
   </div>
@@ -91,7 +115,10 @@
             'number': 1
           }
         },
-        temSquareList: []
+        temSquareList: [],
+        awardsList: [], //滑动大图
+        rules: '',
+        showRule: false,
       }
     },
     components: {AppHeader},
@@ -156,6 +183,7 @@
             for (let i in this.initInfo.broadCardList) {
               this.broadWinners = this.broadWinners + this.initInfo.broadCardList[i];
             }
+            this.awardsList = this.initInfo.awards;
           }
         })
       },
@@ -172,22 +200,19 @@
           }
         })
       },
+      // 去详情页
+      openDeatil (id) {
+        location.href = `/activity/sign/detail?id=${id}`
+      },
+      // 去奖品页面
+      openAward () {
+        location.href = `/activity/sign/award`
+      },
 
       // 创造游戏
-      createGame (startGame) {
-        const defaults = {
-          'gameLen': 3,
-          'game_pagesize': 16, //生成多少圈同样的东西
-          'zj_arr': { //中奖数组，第一个表示是否中奖，第二个中奖号码
-            'is_win': 2,
-            'number': 1
-          }
-        };
-
-
-
+      createGame () {
         this.getHeight();
-        this.setLi(defaults);
+        this.setLi(this.gameDefaults);
         this.pushLi(this.gameArr);
       },
 
@@ -216,7 +241,6 @@
         for (let i = 0; i < arr.length; i++) {
           html_str += '<li style="height:' + 1.5 + 'rem; position: relative; width:100%; text-align: center" data-index="' + arr[i]['index'] + '" data-type="' + arr[i]['type'] + '"><img style="width:' + 1.3 + 'rem" src="' + arr[i]['src'] + '"></li>';
         }
-
           var gameList = document.getElementsByClassName('game-goods-ul')
           var len = gameList.length
           for (var i = 0; i<len; i+=1) {
@@ -277,16 +301,21 @@
       },
       // 得到不中奖时候的随机数
       randNum (settings) {
-        var a = Math.floor(Math.random() * settings.gameLen);
-        var b = Math.floor(Math.random() * settings.gameLen);
-        var c = Math.floor(Math.random() * settings.gameLen);
-        var arr = [];
+        let a = Math.floor(Math.random() * settings.gameLen);
+        let b = Math.floor(Math.random() * settings.gameLen);
+        let c = Math.floor(Math.random() * settings.gameLen);
+        let arr = [];
         if (a == b || a == 0 || b == 0 || c == 0) {
           return this.randNum(settings);
         } else {
           return arr = [a, b, c];
         }
       },
+
+
+
+
+
 
     }
   }
@@ -450,6 +479,121 @@
     margin: auto;
     height: 1.2rem;
     width: auto;
+  }
+  .red-ball {
+    position: absolute;
+    left: 5.9rem;
+    top: 6.6rem;
+    z-index: 99;
+  }
+  .buttons {
+    position: absolute;
+    display: flex;
+    top: 11.2rem;
+    width: 5.5rem;
+    left: .95rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .buttons .btn-sign {
+    width: 3rem;
+  }
+  .buttons .btn-awards {
+    width: 1rem;
+  }
+
+  .slide {
+    position: absolute;
+    top: 13rem
+  }
+  .slide .category-head {
+    display: inline;
+    white-space: nowrap;
+    overflow-x: scroll;
+    float: left;
+    overflow-y: hidden;
+    height: 1.9rem;
+    width: 6rem;
+    margin-left: 0.7rem;
+    padding-top: 0.15rem;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px 1px #F0AA00 inset
+
+  }
+  .slide .category-head li {
+    display: inline-block;
+    padding-left: 10px;
+    width: 1.5rem
+  }
+  .slide .category-head li img {
+    width: 1.5rem;
+  }
+
+  /* 弹窗 */
+  .rule {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 弹窗内容 */
+  .rule .rule-content {
+    background-size:100% 100%;
+    background-image: url('./images/sign_popu.png');
+    margin-top: 1rem;
+    width: 6.2rem;
+    height: 8rem;
+    background-color: #fefefe;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s;
+    border-radius: .2rem;
+  }
+  .rule .rule-content .btn-close {
+    position: absolute;
+    top: 12rem;
+    left: 3.4rem;
+  }
+  .rule .rule-content .rule-body {
+    font-size: .3rem;
+    padding: 0.3rem 0.5rem;
+    height: 8rem;
+    overflow: scroll;
+    white-space: pre-line;
+  }
+
+  .rule .rule-content .rule-body::-webkit-scrollbar {display:none}
+
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0
+    }
+    to {
+      opacity: 1
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0
+    }
+    to {
+      opacity: 1
+    }
   }
 
 </style>
