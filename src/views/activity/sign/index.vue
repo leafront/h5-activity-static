@@ -93,6 +93,47 @@
         </div>
       </div>
     </div>
+
+    <!--弹窗、是否中奖-->
+    <div class="pop-up" v-show="showPop" v-cloak>
+      <div class="content">
+
+          <!--<div v-show="!isAwarded" style="position: absolute; top: 5%; text-align: center; width: 100%">-->
+            <!--<p>很遗憾未中奖</p>-->
+            <!--<p>再接再厉，明天再来</p>-->
+          <!--</div>-->
+          <div class="title" v-show="signInfo.isAwarded">
+            <p>恭喜您获得</p>
+            <p>{{signInfo.name}}</p>
+          </div>
+          <div class="coupon">
+            <img :src="signInfo.imgSquare" />
+          </div>
+        <div class="button" @click="showPop = false">
+          <img src="./images/sign_iknow.png" />
+        </div>
+        <div class="my-award">
+          <span>查看我的礼物></span>
+        </div>
+
+          <!--<div v-show="!isAwarded" style="position: absolute; top: 30%; text-align: center; width: 100%">-->
+            <!--<img style="width: 45%" src="/images/sign_mascot.png?v=${version}" />-->
+          <!--</div>-->
+
+          <!--<div @click="formShow = false" style="position: absolute; top: 70%; text-align: center; width: 100%" >-->
+            <!--<img style="width: 60%" src="/images/sign_iknow.png?v=${version}"/>-->
+          <!--</div>-->
+          <!--<div v-show="isAwarded" style="width: 100%; position: absolute; top: 87%; text-align: center;">-->
+            <!--<div>查看我的礼物></div>-->
+          <!--</div>-->
+        <div class="btn-close" @click="showPop = false">
+          <img src="./images/sign_close.png">
+        </div>
+      </div>
+
+    </div>
+
+
   </div>
 </template>
 
@@ -129,6 +170,8 @@
         showRule: false,
         awardNum: '',
         showGrowth: false,
+        signInfo: {},
+        showPop: false //中奖弹窗
       }
     },
     components: {AppHeader},
@@ -206,6 +249,8 @@
         }).then((result) => {
           const data = result.data
           if (result.code == 0) {
+            this.signInfo = data
+            console.log('signInfo', this.signInfo)
             // 是否中奖
             this.gameDefaults.zj_arr.is_win = data.isAwarded ? 1 : 2;
 
@@ -220,6 +265,10 @@
             setTimeout(() => {
               this.showGrowth = false
             }, 4500)
+
+            setTimeout(() => {
+              this.showPop = true
+            }, 5000)
 
 
             // 游戏开始
@@ -638,6 +687,112 @@
   }
   .growthIn-enter, .growthIn-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+  }
+
+  /*弹窗*/
+  .pop-up {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .5s linear;
+    -webkit-transition: .5s linear;
+    .lyf-close {
+      margin: 25% 0 10px 83%;
+      position: relative;
+      width: 32px;
+      height: 32px;
+      border: 1px solid #4e4d4d;
+      border-radius: 50%;
+      background-color: #ffffff;
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 16px;
+        height: 1px;
+        background: #4e4d4d;
+        transform: translateX(-50%) rotate(45deg);
+        -webkit-transform: translateX(-50%) rotate(45deg);
+      }
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 16px;
+        height: 1px;
+        background: #4e4d4d;
+        transform: translateX(-50%) rotate(-45deg);
+        -webkit-transform: translateX(-50%) rotate(-45deg);
+      }
+    }
+    .lyf-rule-con {
+      margin: 0 auto;
+      width: 73%;
+      max-width: 630px;
+    }
+  }
+  .pop-up .content {
+    background-size:100% 100%;
+    background-image: url('./images/sign_popu.png');
+    width:4.48rem;
+    height:5.14rem;
+    background-color: #fefefe;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s;
+    border-radius: .2rem;
+    display: flex;
+    justify-content: center;
+  }
+  .pop-up .content .title {
+    position: absolute;
+    color: #000000;
+    font-size: 0.27rem;
+    top: 4.5rem
+  }
+  .pop-up .content .coupon {
+    position: absolute;
+    width:1.9rem;
+    top: 5.5rem;
+  }
+  .pop-up .content .coupon img {
+    width:1.9rem;
+  }
+  .pop-up .content .button {
+    position: absolute;
+    width: 2.7rem;
+    top: 7.5rem;
+  }
+  .pop-up .content .my-award {
+    position: absolute;
+    width: 1.6rem;
+    height: 0.34rem;
+    font-size: 0.24rem;
+    top: 8.5rem;
+    font-weight:400;
+    line-height:0.34rem;
+    color: #000000;
+    border-bottom: 2px solid #000000;
+  }
+  .pop-up .content .btn-close {
+    position: absolute;
+    top: 10rem;
+  }
+  .pop-up .content .btn-close img {
+    width:0.5rem;
+    height:0.5rem;
   }
 
 </style>
