@@ -62,6 +62,10 @@
           <img src="./images/sign_light.png"/>
           <img src="./images/sign_light2.png"/>
         </div>
+        <!--经验值-->
+        <div v-show="showGrowth" class="experience">
+          <transition name="growthIn"><span v-if="showGrowth">+成长值{{initInfo.growth}}</span></transition>
+        </div>
         <!--签到button-->
         <div class="buttons">
           <img @click="openAward" class="btn-awards"  src="./images/sign_award.png" />
@@ -123,6 +127,8 @@
         awardsList: [], //滑动大图
         rules: '',
         showRule: false,
+        awardNum: '',
+        showGrowth: false,
       }
     },
     components: {AppHeader},
@@ -183,6 +189,7 @@
           const data = result.data
           if (result.code == 0 ) {
             this.initInfo = data;
+
             // 广播
             for (let i in this.initInfo.broadCardList) {
               this.broadWinners = this.broadWinners + this.initInfo.broadCardList[i];
@@ -199,7 +206,23 @@
         }).then((result) => {
           const data = result.data
           if (result.code == 0) {
-            console.log('result', result.data);
+            // 是否中奖
+            this.gameDefaults.zj_arr.is_win = data.isAwarded ? 1 : 2;
+
+            // 中奖number
+            for (let i = 0, j = this.temSquareList.length; i < j; i++){
+              if (result.data.id == this.temSquareList[i].id) {
+                this.awardNum = i;
+              };
+            }
+            // 显示成长值
+            this.showGrowth = true,
+            setTimeout(() => {
+              this.showGrowth = false
+            }, 4500)
+
+
+            // 游戏开始
             this.luckGame();
             // 拉霸动效
             document.getElementById('rockImg').src = require('./images/sign_rock.gif');
@@ -258,51 +281,41 @@
 
       // 开始游戏
       luckGame () {
-        if (true) {
-          // 抽奖中
-          this.signing = true;
-          this.gameDefaults.zj_arr.is_win = this.isAwarded ? 1 : 2;
-          let vm = this;
-          // ms控制一共时间、y来控制速度
-          //如果中奖
-          if (this.gameDefaults.zj_arr.is_win == 1) {
-            // 第几个中奖
-            // this.gameDefaults.zj_arr.number = vm.awardNumber;
-            this.gameDefaults.zj_arr.number = 2;
+        let vm = this;
+        // ms控制一共时间、y来控制速度
+        //如果中奖
+        if (this.gameDefaults.zj_arr.is_win == 1) {
 
-            let gameList = document.getElementsByClassName('game-goods-ul')
-            for (let i =0, j = gameList.length; i<j; i+=1) {
-              let y = 6 * 1.5 * vm.temSquareList.length + 1.2 - 1.5 + (2 * 1.5)
-              setTimeout(function () {
-                  gameList[i].style.transitionDuration = '4000ms'
-                  gameList[i].style.transform = 'translate(0px, -' + y + 'rem) translateZ(0px)'
+          let gameList = document.getElementsByClassName('game-goods-ul')
+          for (let i =0, j = gameList.length; i<j; i+=1) {
+            let y = 6 * 1.5 * vm.temSquareList.length + 1.2 - 1.5 + (this.awardNum * 1.5)
+            setTimeout(function () {
+                gameList[i].style.transitionDuration = '4000ms'
+                gameList[i].style.transform = 'translate(0px, -' + y + 'rem) translateZ(0px)'
 
-              }, i * 300);
-            }
-          } else {
-            let numRand = this.randNum(this.gameDefaults);
-            let gameList = document.getElementsByClassName('game-goods-ul')
-            for (let i =0, j = gameList.length; i<j; i+=1) {
-              let y0 = (numRand[0] * 1.5) + 1.5 * (this.gameDefaults.gameLen + 0.38) * 10;
-              let y1 = (numRand[1] * 1.5) + 1.5 * (this.gameDefaults.gameLen + 0.38) * 10;
-              let y2 = (numRand[2] * 1.5) + 1.5 * (this.gameDefaults.gameLen + 0.38) * 10;
-
-              setTimeout(function () {
-                  gameList[i].style.transitionDuration = '4000ms'
-                  if (i == 0) {
-                    gameList[i].style.transform = 'translate(0px, -' + y0 + 'rem) translateZ(0px)'
-                  }
-                  if (i == 1) {
-                    gameList[i].style.transform = 'translate(0px, -' + y1 + 'rem) translateZ(0px)'
-                  }
-                  if (i == 2) {
-                    gameList[i].style.transform = 'translate(0px, -' + y2 + 'rem) translateZ(0px)'
-                  }
-                }, i * 300);
-            }
+            }, i * 300);
           }
         } else {
-          console.log('游戏未开始');
+          let numRand = this.randNum(this.gameDefaults);
+          let gameList = document.getElementsByClassName('game-goods-ul')
+          for (let i =0, j = gameList.length; i<j; i+=1) {
+            let y0 = (numRand[0] * 1.5) + 1.5 * (this.gameDefaults.gameLen + 0.38) * 10;
+            let y1 = (numRand[1] * 1.5) + 1.5 * (this.gameDefaults.gameLen + 0.38) * 10;
+            let y2 = (numRand[2] * 1.5) + 1.5 * (this.gameDefaults.gameLen + 0.38) * 10;
+
+            setTimeout(function () {
+                gameList[i].style.transitionDuration = '4000ms'
+                if (i == 0) {
+                  gameList[i].style.transform = 'translate(0px, -' + y0 + 'rem) translateZ(0px)'
+                }
+                if (i == 1) {
+                  gameList[i].style.transform = 'translate(0px, -' + y1 + 'rem) translateZ(0px)'
+                }
+                if (i == 2) {
+                  gameList[i].style.transform = 'translate(0px, -' + y2 + 'rem) translateZ(0px)'
+                }
+              }, i * 300);
+          }
         }
       },
       // 得到不中奖时候的随机数
@@ -608,6 +621,23 @@
   }
   .img-rock img {
     width: 1rem;
+  }
+  .experience {
+    position: absolute;
+    top: 10.6rem;
+    color: red;
+    z-index: 98;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    font-size: .3rem;
+  }
+  /*成长值动效*/
+  .growthIn-enter-active, .growthIn-leave-active {
+    transition: opacity .8s;
+  }
+  .growthIn-enter, .growthIn-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 
 </style>
