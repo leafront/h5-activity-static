@@ -97,40 +97,29 @@
     <!--弹窗、是否中奖-->
     <div class="pop-up" v-show="showPop" v-cloak>
       <div class="content">
-
-          <!--<div v-show="!isAwarded" style="position: absolute; top: 5%; text-align: center; width: 100%">-->
-            <!--<p>很遗憾未中奖</p>-->
-            <!--<p>再接再厉，明天再来</p>-->
-          <!--</div>-->
-          <div class="title" v-show="signInfo.isAwarded">
-            <p>恭喜您获得</p>
-            <p>{{signInfo.name}}</p>
-          </div>
-          <div class="coupon">
-            <img :src="signInfo.imgSquare" />
-          </div>
-        <div class="button" @click="showPop = false">
+        <div class="title" v-if="signInfo.isAwarded">
+          <p>恭喜您获得</p>
+          <p>{{signInfo.name}}</p>
+        </div>
+        <div class="title" v-else>
+          <p>很遗憾未中奖</p>
+          <p>再接再厉，明天再来</p>
+        </div>
+        <div class="coupon">
+          <img v-if="signInfo.isAwarded" :src="signInfo.imgSquare" />
+          <img v-else src="./images/sign_mascot.png" />
+        </div>
+        <div :style="{marginTop: signInfo.isAwarded ? '0' : '.5rem'}" class="button" @click="showPop = false">
           <img src="./images/sign_iknow.png" />
         </div>
-        <div class="my-award">
+        <div v-if="signInfo.isAwarded" class="my-award" @click="openAward">
           <span>查看我的礼物></span>
         </div>
 
-          <!--<div v-show="!isAwarded" style="position: absolute; top: 30%; text-align: center; width: 100%">-->
-            <!--<img style="width: 45%" src="/images/sign_mascot.png?v=${version}" />-->
-          <!--</div>-->
-
-          <!--<div @click="formShow = false" style="position: absolute; top: 70%; text-align: center; width: 100%" >-->
-            <!--<img style="width: 60%" src="/images/sign_iknow.png?v=${version}"/>-->
-          <!--</div>-->
-          <!--<div v-show="isAwarded" style="width: 100%; position: absolute; top: 87%; text-align: center;">-->
-            <!--<div>查看我的礼物></div>-->
-          <!--</div>-->
         <div class="btn-close" @click="showPop = false">
           <img src="./images/sign_close.png">
         </div>
       </div>
-
     </div>
 
 
