@@ -10,7 +10,18 @@
           <p class="third">有效期至{{item.endTime | dateFormat('yyyy-MM-dd')}}</p>
         </li>
       </ul>
+      <!--签到未抽奖-->
+      <div class="no-awards">
+        <img src="./images/sign_no_bg.png" />
+        <p>还没有奖品哦~</p>
+        <p>赶快签到抽奖吧~</p>
+        <img class="sign_award_draw" src="./images/sign_award_draw.png" />
+      </div>
     </div>
+
+
+
+
   </div>
 </template>
 
@@ -86,6 +97,19 @@
     color:rgba(153,153,153,1);
     line-height:0.34rem;
   }
-
-
+  .no-awards {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 3.6rem
+  }
+  .no-awards p {
+    font-size:0.3rem;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+    line-height:0.45rem;
+  }
+  .no-awards .sign_award_draw {
+    margin-top: .45rem;
+  }
 </style>

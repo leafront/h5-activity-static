@@ -69,7 +69,12 @@
         <!--签到button-->
         <div class="buttons">
           <img @click="openAward" class="btn-awards"  src="./images/sign_award.png" />
-          <img @click="signIn" class="btn-sign" src="./images/sign_click.gif" />
+          <!--0 未签到、未分享  1 已签到、未分享  2 已签到、已分享、未抽奖 3 已签到、已分享、已抽奖-->
+          <img v-show="userInfo.currentStatus == 0" id="btnClick" @click="signIn" class="btn-sign" src="./images/sign_click.gif" />
+          <img v-show="userInfo.currentStatus == 1" @click="shareInfo" class="btn-sign" src="./images/sign_share.png" />
+          <img v-show="userInfo.currentStatus == 2" @click="signIn" class="btn-sign" src="./images/sign_shared_draw.png" />
+          <img v-show="userInfo.currentStatus == 3" class="btn-sign" src="./images/sign_drawed.png" />
+
           <img @click="showRule = true" src="./images/sign_rule.png" />
         </div>
         <!--滑动区域-->
@@ -130,6 +135,7 @@
   import AppHeader from '@/components/common/header'
   import utils from '@/widget/utils'
   import * as Model from '@/model/sign'
+  import app from '@/widget/app'
 
 
   export default {
@@ -160,7 +166,16 @@
         awardNum: '',
         showGrowth: false,
         signInfo: {},
-        showPop: false //中奖弹窗
+        showPop: false, //中奖弹窗
+        shareConfig: {
+          link: location.href,
+          url: location.href,
+          title: '来伊份签到7天赢豪礼',
+          desc: '来伊份签到7天赢豪礼',
+          description: '集齐七日份的好运，即可召唤神秘惊喜好礼',
+          imgUrl: 'https://static2.laiyifen.com/files/H5-mall-static/image/sign_share_icon.jpg',
+          pic: 'https://static2.laiyifen.com/files/H5-mall-static/image/sign_share_icon.jpg',
+        },
       }
     },
     components: {AppHeader},
@@ -175,7 +190,7 @@
         this.imgBg = require('./images/sign_background_android.jpg');
       }
       this.getInit();
-      this.getUserInfo();
+      this.getUserInfo(1);
     },
     methods: {
       // 如果是app就往下移
@@ -192,7 +207,7 @@
           return true
         }
       },
-      getUserInfo () {
+      getUserInfo (val) {
         Model.getUserInfo({
           type: 'GET'
         }).then((result) => {
@@ -209,7 +224,9 @@
             }
 
             // 创造游戏
-            this.createGame();
+            if (val == 1) {
+              this.createGame();
+            }
           }
         })
       },
@@ -251,12 +268,18 @@
             }
             // 显示成长值
             this.showGrowth = true,
+
+            // button 变成抽奖中
+            document.getElementById('btnClick').src = require('./images/sign_clicked.png');
+
             setTimeout(() => {
-              this.showGrowth = false
+              this.showGrowth = false;
+              // 再去获取一次数据 0不用刷新数据、1需要刷新数据
+              this.getUserInfo(0);
             }, 4500)
 
             setTimeout(() => {
-              this.showPop = true
+              this.showPop = true;
             }, 5000)
 
 
@@ -367,6 +390,38 @@
         } else {
           return arr = [a, b, c];
         }
+      },
+      shareInfo () {
+        const config = this.shareConfig;
+        let vm = this;
+        if (utils.isApp()) {
+          app.postMessage('share', {
+            url: config.url,
+            title: config.title,
+            description: config.description,
+            url160x160: config.pic,
+            pic: config.pic
+          }, (cb) => {
+            // this.showShare = false;
+            if (cb == 1) {
+              vm.postShare();
+              // this.postIsShare();
+            } else {
+              // alert('分享失败');
+            }
+          })
+        }
+      },
+      postShare() {
+        Model.postShare({
+          type: 'POST'
+        }).then((result) => {
+          const data = result.data
+          if (result.code == 0 ) {
+            this.getUserInfo(1);
+            // this.awards = data.awards;
+          }
+        })
       },
 
 
@@ -479,13 +534,13 @@
     /*overflow: hidden;*/
     /*text-overflow: ellipsis;*/
     white-space: nowrap;
-    animation: 60s wordsLoop linear infinite normal;
+    animation: 30s wordsLoop linear infinite normal;
   }
 
   @keyframes wordsLoop {
     0% {
-      transform: translateX(220px);
-      -webkit-transform: translateX(220px);
+      transform: translateX(1rem);
+      -webkit-transform: translateX(1rem);
     }
     100% {
       transform: translateX(-100%);
@@ -495,8 +550,8 @@
 
   @-webkit-keyframes wordsLoop {
     0% {
-      transform: translateX(220px);
-      -webkit-transform: translateX(220px);
+      transform: translateX(1rem);
+      -webkit-transform: translateX(1rem);
     }
     100% {
       transform: translateX(-100%);
@@ -610,7 +665,6 @@
   .rule .rule-content {
     background-size:100% 100%;
     background-image: url('./images/sign_popu.png');
-    margin-top: 1rem;
     width: 6.2rem;
     height: 8rem;
     background-color: #fefefe;
@@ -622,7 +676,7 @@
   }
   .rule .rule-content .btn-close {
     position: absolute;
-    top: 12rem;
+    top: 11rem;
     left: 3.4rem;
   }
   .rule .rule-content .rule-body {
@@ -749,12 +803,12 @@
     position: absolute;
     color: #000000;
     font-size: 0.27rem;
-    top: 4.5rem
+    top: 3.7rem;
   }
   .pop-up .content .coupon {
     position: absolute;
     width:1.9rem;
-    top: 5.5rem;
+    top: 4.7rem;
   }
   .pop-up .content .coupon img {
     width:1.9rem;
@@ -762,14 +816,14 @@
   .pop-up .content .button {
     position: absolute;
     width: 2.7rem;
-    top: 7.5rem;
+    top: 6.8rem;
   }
   .pop-up .content .my-award {
     position: absolute;
     width: 1.6rem;
     height: 0.34rem;
     font-size: 0.24rem;
-    top: 8.5rem;
+    top: 7.8rem;
     font-weight:400;
     line-height:0.34rem;
     color: #000000;
@@ -777,7 +831,7 @@
   }
   .pop-up .content .btn-close {
     position: absolute;
-    top: 10rem;
+    top: 9rem;
   }
   .pop-up .content .btn-close img {
     width:0.5rem;

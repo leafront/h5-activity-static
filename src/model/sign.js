@@ -10,6 +10,8 @@ export const getInit = (data) => request('/ouser-center/activity/init.do', data)
 
 export const signIn = (data) => request('/ouser-center/activity/sign.do', data)
 
+export const postShare = (data) => request('/ouser-center/activity/receiveShare.do', data)
+
 
 
 
