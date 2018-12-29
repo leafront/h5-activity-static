@@ -167,6 +167,7 @@
       },
       cancel () {
         this.$emit('togglePicker', false)
+        this.$emit('cancel', false)
       },
       confirm () {
         let monthVal =  this.checkedDate[1] + 1

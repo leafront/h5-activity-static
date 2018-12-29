@@ -1,7 +1,15 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title"></AppHeader>
-    <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
+    <!--无奖品-->
+    <div v-if="!awards" class="no-awards">
+      <img src="./images/sign_no_bg.png" />
+      <p>还没有奖品哦~</p>
+      <p>小主继续加油呦~</p>
+      <img @click="goBack" class="sign_award_draw" src="./images/sign_iknow.png" />
+    </div>
+    <!--有奖品-->
+    <div v-else class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <ul class="entry" v-for="(item, index) in awards" @click="openDeatil(item.id)">
         <li class="imgSquare"><img :src="item.imgSquare"></li>
         <li class="desc">
@@ -10,13 +18,6 @@
           <p class="third">有效期至{{item.endTime | dateFormat('yyyy-MM-dd')}}</p>
         </li>
       </ul>
-      <!--签到未抽奖-->
-      <div class="no-awards">
-        <img src="./images/sign_no_bg.png" />
-        <p>还没有奖品哦~</p>
-        <p>赶快签到抽奖吧~</p>
-        <img class="sign_award_draw" src="./images/sign_award_draw.png" />
-      </div>
     </div>
 
 
@@ -54,6 +55,9 @@
             this.awards = data.awards;
           }
         })
+      },
+      goBack () {
+        location.href = `/activity/sign/index`
       },
       openDeatil (id) {
         location.href = `/activity/sign/detail?id=${id}`

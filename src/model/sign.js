@@ -16,6 +16,8 @@ export const remindSign = (data) => request('/ouser-center/notify/open.do', data
 
 export const querySign = (data) => request('/ouser-center/notify/query.do', data)
 
+export const closeSign = (data) => request('/ouser-center/notify/close.do', data)
+
 
 
 

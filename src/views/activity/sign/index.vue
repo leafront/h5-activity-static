@@ -7,17 +7,7 @@
       <img class="img-background" :src="imgBg">
       <div class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
         <!--签到提醒-->
-        <div class="remind">
-          <button @click="selectDate">提醒</button>
-        </div>
-        <div class="toggle-button-wrapper">
-          <input type="checkbox" id="toggle-button" name="switch">
-          <label for="toggle-button" class="button-label">
-            <span class="circle"></span>
-            <span class="text on">关闭提醒 </span>
-            <span class="text off">签到提醒</span>
-          </label>
-        </div>
+        <vswitch @changeSwitch = 'changeSwitch' :value ='switchValue' text="关闭提醒|开启提醒"></vswitch>
         <!--标题-->
         <div class="title">{{userInfo.currentTitle}}</div>
         <!--礼物图标-->
@@ -145,7 +135,8 @@
       :selectValue="checkedValue"
       :isPicker="isPicker"
       @togglePicker="togglePicker"
-      @confirm="confirm">
+      @confirm="confirm"
+      @cancel="cancel">
     </UITimePicker>
 
 
@@ -158,6 +149,7 @@
   import * as Model from '@/model/sign'
   import app from '@/widget/app'
   import UITimePicker from '../../../components/incentive/ui-time-picker.vue'
+  import vswitch from './component/vswitch'
 
 
   export default {
@@ -199,10 +191,11 @@
           pic: 'https://static2.laiyifen.com/files/H5-mall-static/image/sign_share_icon.jpg',
         },
         isPicker: false, //时间选择器
-        checkedValue: ['10', '30']
+        checkedValue: ['10', '30'],
+        switchValue: false,
       }
     },
-    components: {UITimePicker, AppHeader},
+    components: {UITimePicker, AppHeader, vswitch},
     created () {
       // console.log(location.href);
     },
@@ -462,13 +455,18 @@
       togglePicker (val) {
         this.isPicker = val
       },
+      // 日期选择确定
       confirm (val) {
         this.checkedValue = val.split('-');
-        console.log('this.checkedValue', this.checkedValue);
         this.queryDate = val;
         this.queryDate = this.checkedValue[0] + this.checkedValue[1];
         this.remindSign()
         console.log('this.queryDate', this.queryDate);
+      },
+      // 日期选择取消
+      cancel () {
+        this.switchValue = false;
+        console.log('switchValue', this.switchValue);
       },
       // 开启签到窗口
       remindSign () {
@@ -479,7 +477,19 @@
           },
         }).then((result) => {
           const data = result.data;
-          if (result.code == 0 ) {
+          if (result.code == 0 && data) {
+            this.$toast('提醒成功')
+          }
+        })
+      },
+      // 关闭签到提醒
+      closeSign () {
+        Model.closeSign({
+          type: 'POST',
+        }).then((result) => {
+          const data = result.data;
+          if (result.code == 0 && data) {
+            this.$toast('关闭提醒')
             // this.getUserInfo(1);
             // this.awards = data.awards;
           }
@@ -491,13 +501,22 @@
           type: 'GET'
         }).then((result) => {
           const data = result.data
-          if (result.code == 0 ) {
+          if (result.code == 0 && data) {
+             this.switchValue = true;
             // this.getUserInfo(1);
             // this.awards = data.awards;
           }
         })
+      },
+      // switch开关
+      changeSwitch(checked){
+        console.log('index', checked)
+        if (checked) {
+          this.selectDate();
+        } else {
+          this.closeSign();
+        }
       }
-
 
 
 
@@ -910,10 +929,10 @@
     width:0.5rem;
     height:0.5rem;
   }
-  .remind {
-    position: absolute;
-    top: 2rem;
-    left: 4rem;
-  }
+
+
+
+
+
 
 </style>
