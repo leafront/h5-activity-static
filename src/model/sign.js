@@ -12,6 +12,11 @@ export const signIn = (data) => request('/ouser-center/activity/sign.do', data)
 
 export const postShare = (data) => request('/ouser-center/activity/receiveShare.do', data)
 
+export const remindSign = (data) => request('/ouser-center/notify/open.do', data)
+
+export const querySign = (data) => request('/ouser-center/notify/query.do', data)
+
+
 
 
 

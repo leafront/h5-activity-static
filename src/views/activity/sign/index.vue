@@ -1,10 +1,23 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title"></AppHeader>
+
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <!--背景-->
       <img class="img-background" :src="imgBg">
       <div class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
+        <!--签到提醒-->
+        <div class="remind">
+          <button @click="selectDate">提醒</button>
+        </div>
+        <div class="toggle-button-wrapper">
+          <input type="checkbox" id="toggle-button" name="switch">
+          <label for="toggle-button" class="button-label">
+            <span class="circle"></span>
+            <span class="text on">关闭提醒 </span>
+            <span class="text off">签到提醒</span>
+          </label>
+        </div>
         <!--标题-->
         <div class="title">{{userInfo.currentTitle}}</div>
         <!--礼物图标-->
@@ -127,6 +140,14 @@
       </div>
     </div>
 
+    <!--时间选择器-->
+    <UITimePicker
+      :selectValue="checkedValue"
+      :isPicker="isPicker"
+      @togglePicker="togglePicker"
+      @confirm="confirm">
+    </UITimePicker>
+
 
   </div>
 </template>
@@ -136,6 +157,7 @@
   import utils from '@/widget/utils'
   import * as Model from '@/model/sign'
   import app from '@/widget/app'
+  import UITimePicker from '../../../components/incentive/ui-time-picker.vue'
 
 
   export default {
@@ -176,9 +198,11 @@
           imgUrl: 'https://static2.laiyifen.com/files/H5-mall-static/image/sign_share_icon.jpg',
           pic: 'https://static2.laiyifen.com/files/H5-mall-static/image/sign_share_icon.jpg',
         },
+        isPicker: false, //时间选择器
+        checkedValue: ['10', '30']
       }
     },
-    components: {AppHeader},
+    components: {UITimePicker, AppHeader},
     created () {
       // console.log(location.href);
     },
@@ -191,6 +215,7 @@
       }
       this.getInit();
       this.getUserInfo(1);
+      this.querySign();
     },
     methods: {
       // 如果是app就往下移
@@ -412,6 +437,7 @@
           })
         }
       },
+      // 给后台发送分享成功
       postShare() {
         Model.postShare({
           type: 'POST'
@@ -423,7 +449,54 @@
           }
         })
       },
-
+      // 日期选择器
+      selectDate () {
+        this.isPicker = true;
+        let alarmTime = '10-12';
+        if (alarmTime) {
+          alarmTime = alarmTime.split('-');
+          this.selectValue = alarmTime;
+          console.log('this.selectValue', this.selectValue);
+        }
+      },
+      togglePicker (val) {
+        this.isPicker = val
+      },
+      confirm (val) {
+        this.checkedValue = val.split('-');
+        console.log('this.checkedValue', this.checkedValue);
+        this.queryDate = val;
+        this.queryDate = this.checkedValue[0] + this.checkedValue[1];
+        this.remindSign()
+        console.log('this.queryDate', this.queryDate);
+      },
+      // 开启签到窗口
+      remindSign () {
+        Model.remindSign({
+          type: 'POST',
+          data: {
+            notifyTime: this.queryDate
+          },
+        }).then((result) => {
+          const data = result.data;
+          if (result.code == 0 ) {
+            // this.getUserInfo(1);
+            // this.awards = data.awards;
+          }
+        })
+      },
+      // 查询签到窗口
+      querySign () {
+        Model.querySign({
+          type: 'GET'
+        }).then((result) => {
+          const data = result.data
+          if (result.code == 0 ) {
+            // this.getUserInfo(1);
+            // this.awards = data.awards;
+          }
+        })
+      }
 
 
 
@@ -708,11 +781,11 @@
   }
   .img-rock {
     position: absolute;
-    top: 7.6rem;
-    left: 6.57rem;
+    top: 7.7rem;
+    left: 6.88rem;
   }
   .img-rock img {
-    width: 1rem;
+    width: .4rem;
   }
   .experience {
     position: absolute;
@@ -836,6 +909,11 @@
   .pop-up .content .btn-close img {
     width:0.5rem;
     height:0.5rem;
+  }
+  .remind {
+    position: absolute;
+    top: 2rem;
+    left: 4rem;
   }
 
 </style>
