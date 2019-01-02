@@ -4,16 +4,16 @@
 
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <!--背景-->
-      <img class="img-background" :src="imgBg">
-      <div class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
+      <img class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/1541749068675_2598.jpg">
+      <div v-if="true" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
         <!--签到提醒-->
         <vswitch @changeSwitch = 'changeSwitch' :value ='switchValue' text="关闭提醒|开启提醒"></vswitch>
-        <!--标题-->
-        <div class="title">{{userInfo.currentTitle}}</div>
+        <!--&lt;!&ndash;标题&ndash;&gt;-->
+        <!--<div class="title">{{userInfo.currentTitle}}</div>-->
         <!--礼物图标-->
         <div class="gift"><img src="./images/sign_gift.png"></div>
         <!--第三天礼物图标-->
-        <div class="gift-three"><img src="./images/sign_gift.png"></div>
+        <div v-if="currentDay == 3" class="gift-three"><img src="./images/sign_gift.png"></div>
         <!--进度条-->
         <div class="progress-bar"><img :src="progressBar"></div>
         <!--交替灯光上-->
@@ -63,7 +63,7 @@
           </div>
         </div>
         <!--交替灯光下-->
-        <div class="img-wrap" style="top: 10.4rem">
+        <div class="img-wrap" style="top: 9.9rem">
           <img src="./images/sign_light.png"/>
           <img src="./images/sign_light2.png"/>
         </div>
@@ -92,6 +92,9 @@
         </div>
 
       </div>
+
+      <!--<img class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/sign_bg2.jpg" />-->
+
     </div>
 
     <!--弹窗、活动规则-->
@@ -268,7 +271,7 @@
               this.currentDay = this.userInfo.currentCount - 1;
             }
             console.log(this.currentDay)
-            this.currentDay == 5 ? this.showPopThree = true : this.showPopThree = false
+            this.currentDay == 3 ? this.showPopThree = true : this.showPopThree = false
 
 
             // 进度条
@@ -590,7 +593,7 @@
   }
   .progress-bar {
     position: absolute;
-    top: 5.3rem;
+    top: 5rem;
     left: 1.2rem;
     text-align: center;
   }
@@ -599,12 +602,12 @@
   }
   .gift {
     position: absolute;
-    top: 4.65rem;
+    top: 4.35rem;
     left: 5.7rem;
   }
   .gift-three {
     position: absolute;
-    top: 4.75rem;
+    top: 4.45rem;
     left: 2.7rem;
     img {
       width: .5rem;
@@ -613,7 +616,7 @@
 
   .img-wrap {
     position: absolute;
-    top: 6.1rem;
+    top: 5.8rem;
   }
   .img-wrap img {
     width: 7.5rem;
@@ -647,7 +650,7 @@
     }
   }
   .broad-box {
-    top: 6.3rem;
+    top: 6.5rem;
     position: relative;
     background: #E4A100;
     border-top-right-radius: .2rem;
@@ -700,7 +703,7 @@
     position: absolute;
     padding-left: .15rem;
     height: .36rem;
-    top: 6.718rem;
+    top: 6.5rem;
     width: .8rem;
     left: 1.1rem;
     background: #E4A100;
@@ -733,13 +736,13 @@
   .red-ball {
     position: absolute;
     left: 5.9rem;
-    top: 6.6rem;
+    top: 6.1rem;
     z-index: 99;
   }
   .buttons {
     position: absolute;
     display: flex;
-    top: 11.2rem;
+    top: 10.7rem;
     width: 5.5rem;
     left: .95rem;
     align-items: center;
@@ -754,7 +757,7 @@
 
   .slide {
     position: absolute;
-    top: 13rem
+    top: 12.5rem
   }
   .slide .category-head {
     display: inline;
@@ -846,7 +849,7 @@
   }
   .img-rock {
     position: absolute;
-    top: 7.7rem;
+    top: 7.1rem;
     left: 6.88rem;
   }
   .img-rock img {
