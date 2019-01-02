@@ -12,6 +12,8 @@
         <div class="title">{{userInfo.currentTitle}}</div>
         <!--礼物图标-->
         <div class="gift"><img src="./images/sign_gift.png"></div>
+        <!--第三天礼物图标-->
+        <div class="gift-three"><img src="./images/sign_gift.png"></div>
         <!--进度条-->
         <div class="progress-bar"><img :src="progressBar"></div>
         <!--交替灯光上-->
@@ -130,6 +132,29 @@
       </div>
     </div>
 
+
+    <!--弹窗第三天-->
+    <div class="pop-up" v-show="showPopThree">
+      <div class="content-three">
+        <div class="title">
+          <p>勤劳的吃货今天签到有惊喜哦！</p>
+        </div>
+        <div class="coupon">
+          <img src="./images/sign_box.png" />
+        </div>
+        <div class="button" @click="showPopThree = false">
+          <img src="./images/sign_iknow_three.png" />
+        </div>
+        <div class="sub-title" >
+          <span>海量奖品记得每日签到哟~></span>
+        </div>
+
+        <div class="btn-close" @click="showPopThree = false">
+          <img src="./images/sign_close.png">
+        </div>
+      </div>
+    </div>
+
     <!--时间选择器-->
     <UITimePicker
       :selectValue="checkedValue"
@@ -193,6 +218,8 @@
         isPicker: false, //时间选择器
         checkedValue: ['10', '30'],
         switchValue: false,
+        currentDay: 0,
+        showPopThree: false,
       }
     },
     components: {UITimePicker, AppHeader, vswitch},
@@ -233,6 +260,17 @@
           const data = result.data
           if (result.code == 0 ) {
             this.userInfo = data;
+
+            // 先根据是否签到、分享判断
+            if (this.userInfo.currentStatus == 0) {
+              this.currentDay = this.userInfo.currentCount;
+            } else {
+              this.currentDay = this.userInfo.currentCount - 1;
+            }
+            console.log(this.currentDay)
+            this.currentDay == 5 ? this.showPopThree = true : this.showPopThree = false
+
+
             // 进度条
             this.progressBar = require(`./images/sign_progress${this.userInfo.currentCount}.png`);
             // 抽奖池
@@ -563,6 +601,14 @@
     position: absolute;
     top: 4.65rem;
     left: 5.7rem;
+  }
+  .gift-three {
+    position: absolute;
+    top: 4.75rem;
+    left: 2.7rem;
+    img {
+      width: .5rem;
+    }
   }
 
   .img-wrap {
@@ -930,7 +976,67 @@
     height:0.5rem;
   }
 
+  .pop-up .content-three {
+    background-size:100% 100%;
+    background-image: url('./images/sign_popo_three.png');
+    width:4.48rem;
+    height:5.14rem;
+    background-color: #fefefe;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s;
+    border-radius: .2rem;
+    display: flex;
+    justify-content: center;
+  }
 
+  .pop-up .content-three .title {
+    position: absolute;
+    top: 3.7rem;
+
+    font-size:0.32rem;
+    font-weight:500;
+    color:rgba(91,49,0,1);
+    line-height:0.44rem;
+  }
+  .pop-up .content-three .sub-title {
+    position: absolute;
+    color: #5B3100;
+    font-size: 0.24rem;
+    top: 8rem;
+  }
+  .pop-up .content-three .coupon {
+    position: absolute;
+    width:1.9rem;
+    top: 4.7rem;
+  }
+  .pop-up .content-three .coupon img {
+    width:1.9rem;
+  }
+  .pop-up .content-three .button {
+    position: absolute;
+    top: 6.8rem;
+  }
+  .pop-up .content-three .my-award {
+    position: absolute;
+    width: 1.6rem;
+    height: 0.34rem;
+    font-size: 0.24rem;
+    top: 7.8rem;
+    font-weight:400;
+    line-height:0.34rem;
+    color: #000000;
+    border-bottom: 2px solid #000000;
+  }
+  .pop-up .content-three .btn-close {
+    position: absolute;
+    top: 9rem;
+  }
+  .pop-up .content-three .btn-close img {
+    width:0.5rem;
+    height:0.5rem;
+  }
 
 
 
