@@ -4,8 +4,8 @@
 
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <!--背景-->
-      <img class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/1541749068675_2598.jpg">
-      <div v-if="true" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
+      <img v-if="false" class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/1541749068675_2598.jpg">
+      <div v-if="false" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
         <!--签到提醒-->
         <vswitch @changeSwitch = 'changeSwitch' :value ='switchValue' text="关闭提醒|开启提醒"></vswitch>
         <!--&lt;!&ndash;标题&ndash;&gt;-->
@@ -93,8 +93,104 @@
 
       </div>
 
-      <!--<img class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/sign_bg2.jpg" />-->
+      <img v-if="true" class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/sign_bg2.jpg" />
+      <div v-if="true" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
+        <!--签到提醒-->
+        <vswitch @changeSwitch = 'changeSwitch' :value ='switchValue' text="关闭提醒|开启提醒"></vswitch>
+        <!--四个红包-->
+        <div class="redbag1">
+          <img src="./images/sign_redbag1.png">
+        </div>
+        <div class="redbag2">
+          <img src="./images/sign_redbag3.png">
+        </div>
+        <div class="redbag3">
+          <img src="./images/sign_redbag1.png">
+        </div>
+        <div class="redbag4">
+          <img src="./images/sign_redbag4.png">
+        </div>
 
+        <!--礼物图标-->
+        <div class="gift"><img src="./images/sign_gift.png"></div>
+        <!--进度条-->
+        <div class="progress-bar"><img :src="progressBar"></div>
+        <!--交替灯光上-->
+        <div class="img-wrap">
+          <img src="./images/sign_light2.png"/>
+          <img src="./images/sign_light.png"/>
+        </div>
+        <!--中奖轮播-->
+        <div class="broadcast" style="background: #71091B">
+          <img src="./images/sign_horn.png">
+        </div>
+        <div class="broad-box" style="background: #71091B">
+          <p class="wordsLoop">
+            {{broadWinners}}
+          </p>
+        </div>
+        <!--红色气球-->
+        <div class="red-ball"><img src="./images/sign_ball_seven.png"></div>
+        <!--拉杆-->
+        <div class="img-rock">
+          <img id='rockImg' src="./images/sign_rock1.png"/>
+        </div>
+        <!--抽奖列表-->
+        <div class="game-goods-wrap">
+          <div class="game-goods-list">
+            <div class="game-goods" style="background: #ffffff;">
+              <div class="game-goods-box" id="game1">
+                <ul class="game-goods-ul">
+
+                </ul>
+              </div>
+            </div>
+            <div class="game-goods" style="background: #ffffff;">
+              <div class="game-goods-box" id="game2">
+                <ul class="game-goods-ul">
+
+                </ul>
+              </div>
+            </div>
+            <div class="game-goods" style="background: #ffffff;">
+              <div class="game-goods-box" id="game3">
+                <ul class="game-goods-ul">
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--交替灯光下-->
+        <div class="img-wrap" style="top: 9.9rem">
+          <img src="./images/sign_light.png"/>
+          <img src="./images/sign_light2.png"/>
+        </div>
+        <!--经验值-->
+        <div v-show="showGrowth" class="experience">
+          <transition name="growthIn"><span v-if="showGrowth">+成长值{{initInfo.growth}}</span></transition>
+        </div>
+        <!--签到button-->
+        <div class="buttons">
+          <img @click="openAward" class="btn-awards"  src="./images/sign_award_seven.png" />
+          <!--0 未签到、未分享  1 已签到、未分享  2 已签到、已分享、未抽奖 3 已签到、已分享、已抽奖-->
+          <img v-show="userInfo.currentStatus == 0" id="btnClick" @click="signIn" class="btn-sign" src="./images/sign_click.gif" />
+          <img v-show="userInfo.currentStatus == 1" @click="shareInfo" class="btn-sign" src="./images/sign_share.png" />
+          <img v-show="userInfo.currentStatus == 2" @click="signIn" class="btn-sign" src="./images/sign_shared_draw.png" />
+          <img v-show="userInfo.currentStatus == 3" class="btn-sign" src="./images/sign_drawed.png" />
+
+          <img @click="showRule = true" src="./images/sign_rule_seven.png" />
+        </div>
+        <!--滑动区域-->
+        <div class="slide">
+          <ul class="category-head">
+            <li v-for="item in awardsList" @click="openDeatil(item.id)">
+              <img v-bind:src=item.imgBigSquare />
+            </li>
+          </ul>
+        </div>
+
+      </div>
     </div>
 
     <!--弹窗、活动规则-->
@@ -742,7 +838,7 @@
   .buttons {
     position: absolute;
     display: flex;
-    top: 10.7rem;
+    top: 10.65rem;
     width: 5.5rem;
     left: .95rem;
     align-items: center;
@@ -1030,7 +1126,28 @@
     width:0.5rem;
     height:0.5rem;
   }
-
+  .redbag1 {
+    position: absolute;
+    top: 2.4rem;
+    left: .32rem;
+  }
+  .redbag2 {
+    position: absolute;
+    top: 10rem;
+  }
+  .redbag3 {
+    position: absolute;
+    top: 2rem;
+    left: 6.5rem;
+    img {
+      width: .72rem;
+    }
+  }
+  .redbag4 {
+    position: absolute;
+    top: 9.5rem;
+    left: 6.4rem;
+  }
 
 
 
