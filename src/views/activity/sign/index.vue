@@ -979,8 +979,8 @@
   .pop-up .content-three {
     background-size:100% 100%;
     background-image: url('./images/sign_popo_three.png');
-    width:4.48rem;
-    height:5.14rem;
+    width:5.3rem;
+    height:6.56rem;
     background-color: #fefefe;
     -webkit-animation-name: slideIn;
     -webkit-animation-duration: 0.4s;
@@ -993,8 +993,7 @@
 
   .pop-up .content-three .title {
     position: absolute;
-    top: 3.7rem;
-
+    top: 4.5rem;
     font-size:0.32rem;
     font-weight:500;
     color:rgba(91,49,0,1);
@@ -1004,34 +1003,25 @@
     position: absolute;
     color: #5B3100;
     font-size: 0.24rem;
-    top: 8rem;
+    top: 9.5rem;
   }
   .pop-up .content-three .coupon {
     position: absolute;
-    width:1.9rem;
-    top: 4.7rem;
+    top: 5.5rem;
   }
   .pop-up .content-three .coupon img {
-    width:1.9rem;
+    width: 2.7rem;
   }
   .pop-up .content-three .button {
     position: absolute;
-    top: 6.8rem;
+    top: 8.5rem;
   }
-  .pop-up .content-three .my-award {
-    position: absolute;
-    width: 1.6rem;
-    height: 0.34rem;
-    font-size: 0.24rem;
-    top: 7.8rem;
-    font-weight:400;
-    line-height:0.34rem;
-    color: #000000;
-    border-bottom: 2px solid #000000;
+  .pop-up .content-three .button img{
+    width: 2.36rem;
   }
   .pop-up .content-three .btn-close {
     position: absolute;
-    top: 9rem;
+    top: 11rem;
   }
   .pop-up .content-three .btn-close img {
     width:0.5rem;
