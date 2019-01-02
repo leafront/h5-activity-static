@@ -138,7 +138,6 @@ export default {
   watch: {
 
       invitationShareC (newVal, oldVal) {
-        console.log(111111111);
         this.qrcode()
         this.drawingCanvas()
       },
@@ -183,7 +182,6 @@ export default {
      */
    generateImg(){
      let imgUrl = this.canvas.toDataURL("image/png")
-     console.log(3333);
      if (utils.isApp()) {
 
        app.postMessage('storgeQRcode',{
@@ -225,7 +223,6 @@ export default {
           let img = new Image()
           img.src = config.hostPath + '/activity-static/images/invite_qrcode.jpeg'
           img.onload = () => {
-            console.log(1);
             const imgScale = img.height / img.width
             ctx.drawImage(img, 0, 0, self.clientWidth * .8, self.clientWidth * .8 * imgScale)
             ctx.fillRect(self.clientWidth * .8/2-(this.scalePx * 2.3)/2 , self.clientWidth * .8*.673 ,this.scalePx * 2.3,this.scalePx * 2.3)
@@ -238,13 +235,19 @@ export default {
         let qrChild = qrEle.querySelector('img')
         console.log(qrChild);
             let qrSrc = qrChild.src
-            console.log(qrSrc);
-            console.log(2)
-            if(qrSrc){
+            if(!qrSrc){
+               qrChild.onload = () =>{
+                 qrSrc = qrChild.src
+                 let qrImg = new Image()
+                 qrImg.src = qrSrc
+                 qrImg.onload = () => {
+                   ctx.drawImage(qrImg , self.clientWidth * .8/2-(this.scalePx * 2.2)/2 , self.clientWidth * .8*.68 )
+                 }
+               }
+            }else if (qrSrc){
               let qrImg = new Image()
               qrImg.src = qrSrc
               qrImg.onload = () => {
-                console.log(2);
                 ctx.drawImage(qrImg , self.clientWidth * .8/2-(this.scalePx * 2.2)/2 , self.clientWidth * .8*.68 )
               }
           }
