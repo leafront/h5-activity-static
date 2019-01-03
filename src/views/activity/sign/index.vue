@@ -4,8 +4,10 @@
 
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <!--背景-->
-      <img v-if="false" class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/1541749068675_2598.jpg">
-      <div v-if="false" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
+      <img v-if="showPopSeven" class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/1541749068675_2598.jpg">
+      <div v-if="showPopSeven" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
+        <!--底部文字-->
+        <div class="annotation">{{annotation}}</div>
         <!--签到提醒-->
         <vswitch @changeSwitch = 'changeSwitch' :value ='switchValue' text="关闭提醒|开启提醒"></vswitch>
         <!--&lt;!&ndash;标题&ndash;&gt;-->
@@ -80,7 +82,7 @@
           <img v-show="userInfo.currentStatus == 2" @click="signIn" class="btn-sign" src="./images/sign_shared_draw.png" />
           <img v-show="userInfo.currentStatus == 3" class="btn-sign" src="./images/sign_drawed.png" />
 
-          <img @click="showRule = true" src="./images/sign_rule.png" />
+          <img class="btn-rules" @click="showRule = true" src="./images/sign_rule.png" />
         </div>
         <!--滑动区域-->
         <div class="slide">
@@ -93,8 +95,25 @@
 
       </div>
 
-      <img v-if="true" class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/sign_bg2.jpg" />
-      <div v-if="true" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
+      <img v-if="!showPopSeven" class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/sign_bg2.jpg" />
+      <div v-if="!showPopSeven" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
+        <!--红包雨-->
+        <div class="ser_home">
+          <ul class="red_packet" id="red_packet">
+            <template v-for="(item, index) in liParams">
+              <li :style="{ left: item.left, animationDuration: item.durTime, webkitAnimationDuration: item.durTime}"
+                  :class="item.cls" :data-index="index" @webkitAnimationEnd="removeDom">
+                <a href='javascript:;'>
+                  <i :style="{ transform: item.transforms, webkitTransform: item.transforms}"></i>
+                  <i class="i2" :style="{ transform: item.transforms, webkitTransform: item.transforms}"></i>
+                  <i class="i3" :style="{ transform: item.transforms, webkitTransform: item.transforms}"></i>
+                </a>
+              </li>
+            </template>
+          </ul>
+        </div>
+        <!--底部文字-->
+        <div class="annotation">{{annotation}}</div>
         <!--签到提醒-->
         <vswitch @changeSwitch = 'changeSwitch' :value ='switchValue' text="关闭提醒|开启提醒"></vswitch>
         <!--四个红包-->
@@ -112,13 +131,13 @@
         </div>
 
         <!--礼物图标-->
-        <div class="gift"><img src="./images/sign_gift.png"></div>
+        <div class="gift_seven"><img src="./images/sign_gift_seven.png"></div>
         <!--进度条-->
         <div class="progress-bar"><img :src="progressBar"></div>
         <!--交替灯光上-->
         <div class="img-wrap">
-          <img src="./images/sign_light2.png"/>
-          <img src="./images/sign_light.png"/>
+          <img src="./images/sign_light_seven2.png"/>
+          <img src="./images/sign_light_seven.png"/>
         </div>
         <!--中奖轮播-->
         <div class="broadcast" style="background: #71091B">
@@ -133,7 +152,7 @@
         <div class="red-ball"><img src="./images/sign_ball_seven.png"></div>
         <!--拉杆-->
         <div class="img-rock">
-          <img id='rockImg' src="./images/sign_rock1.png"/>
+          <img id='rockImg' src="./images/sign_rock2.png"/>
         </div>
         <!--抽奖列表-->
         <div class="game-goods-wrap">
@@ -163,23 +182,23 @@
         </div>
         <!--交替灯光下-->
         <div class="img-wrap" style="top: 9.9rem">
-          <img src="./images/sign_light.png"/>
-          <img src="./images/sign_light2.png"/>
+          <img src="./images/sign_light_seven.png"/>
+          <img src="./images/sign_light_seven2.png"/>
         </div>
         <!--经验值-->
-        <div v-show="showGrowth" class="experience">
+        <div v-show="showGrowth" class="experience-seven">
           <transition name="growthIn"><span v-if="showGrowth">+成长值{{initInfo.growth}}</span></transition>
         </div>
         <!--签到button-->
         <div class="buttons">
           <img @click="openAward" class="btn-awards"  src="./images/sign_award_seven.png" />
           <!--0 未签到、未分享  1 已签到、未分享  2 已签到、已分享、未抽奖 3 已签到、已分享、已抽奖-->
-          <img v-show="userInfo.currentStatus == 0" id="btnClick" @click="signIn" class="btn-sign" src="./images/sign_click.gif" />
+          <img v-show="userInfo.currentStatus == 0" id="btnClick" @click="signIn" class="btn-sign" src="./images/sign_click_seven.png" />
           <img v-show="userInfo.currentStatus == 1" @click="shareInfo" class="btn-sign" src="./images/sign_share.png" />
           <img v-show="userInfo.currentStatus == 2" @click="signIn" class="btn-sign" src="./images/sign_shared_draw.png" />
           <img v-show="userInfo.currentStatus == 3" class="btn-sign" src="./images/sign_drawed.png" />
 
-          <img @click="showRule = true" src="./images/sign_rule_seven.png" />
+          <img class="btn-rules" @click="showRule = true" src="./images/sign_rule_seven.png" />
         </div>
         <!--滑动区域-->
         <div class="slide">
@@ -195,9 +214,15 @@
 
     <!--弹窗、活动规则-->
     <div class="rule" v-show="showRule">
-      <div class="rule-content">
+      <div v-show="currentDay != 6" class="rule-content">
         <span class="btn-close" @click="showRule = false"><img src="./images/sign_close.png"></span>
         <div class="rule-body">
+          {{initInfo.rule}}
+        </div>
+      </div>
+      <div v-show="currentDay == 6" class="rule-content" :style="{'backgroundImage' : 'none', 'background': 'linear-gradient(180deg,rgba(184,10,62,1) 0%,rgba(146,26,146,1) 100%)'}">
+        <span class="btn-close" @click="showRule = false"><img src="./images/sign_close.png"></span>
+        <div class="rule-body" style="color: #FFFFFF;">
           {{initInfo.rule}}
         </div>
       </div>
@@ -254,6 +279,69 @@
       </div>
     </div>
 
+
+    <!--弹窗第七天-->
+    <div class="pop-up-seven" v-show="showPopSeven" v-cloak>
+      <div class="sing_ribbon">
+        <img src="./images/sing_ribbon_left.png">
+        <img src="./images/sing_ribbon_right.png">
+      </div>
+      <div class="content-seven">
+        <div class="title" v-if="signInfo.isAwarded">
+          <p>恭喜您获得</p>
+          <p>{{signInfo.name}}</p>
+        </div>
+        <div class="title" v-else>
+          <p>很遗憾未中奖</p>
+          <p class="sub-title">再接再厉！明天再来吧~</p>
+        </div>
+        <div class="coupon">
+          <img v-if="signInfo.isAwarded" :src="signInfo.imgSquare" />
+          <img v-else src="./images/sign_mascot_seven.png" />
+        </div>
+        <div class="button" @click="showPopSeven = false">
+          <span>明天提醒我</span>
+        </div>
+        <div v-if="signInfo.isAwarded" class="button" @click="openAward">
+          <span>查看我的礼物</span>
+        </div>
+
+        <div class="btn-close" @click="showPopSeven = false">
+          <img src="./images/sign_close.png">
+        </div>
+      </div>
+    </div>
+
+    <!--第七天首次进入加载-->
+    <div id="sign-disappear" v-show="showPopSeven">
+    <div class="rule-wrapper" >
+    <div class="form-con">
+      <div class="sendsms-con" style="top: 5rem;" v-cloak>
+        <div class="form-conimg" id="form-conimg">
+          <img width="100%" src="./images/sign_giftbox_bg.png">
+        </div>
+        <div id='seven-words' style="position: absolute; top: 3.6rem; text-align: center; width: 100%; color: #ffffff;">
+          <p>哇塞~签到第7天，真棒！</p>
+          <p>神秘礼物已经填充完毕，快去抽奖吧！</p>
+        </div>
+
+        <div style="position: absolute; top: 1rem; text-align: center; width: 100%; z-index: 100">
+          <img id='sign_box' style="width: 50%; z-index: 100" src="./images/sign_box.png" />
+        </div>
+
+        <div id="close-win" @click="closeWin" style="position: absolute; top: 4.8rem; text-align: center; width: 100%">
+          <img style="width: 45%" src="./images/sign_iknow_bg.png" />
+        </div>
+
+        <!--<span id="close-btn" style="position: absolute; margin-top: 10%; width: 100%; text-align: center">-->
+          <!--<img style="width: 20px" src="./images/sign_close.png">-->
+        <!--</span>-->
+      </div>
+    </div>
+    </div>
+    </div>
+
+
     <!--时间选择器-->
     <UITimePicker
       :selectValue="checkedValue"
@@ -274,6 +362,7 @@
   import app from '@/widget/app'
   import UITimePicker from '../../../components/incentive/ui-time-picker.vue'
   import vswitch from './component/vswitch'
+  import config from '@/config/index'
 
 
   export default {
@@ -282,7 +371,7 @@
       return {
         title: '每日签到',
         pageView: false,
-        imgBg: '',
+        annotation: '',
         userInfo: {},
         initInfo: {},
         progressBar: require('./images/sign_progress0.png'), // 签到进度条
@@ -319,6 +408,10 @@
         switchValue: false,
         currentDay: 0,
         showPopThree: false,
+        showPopSeven: false,
+        liParams: [],
+        timer: null,
+        duration: 5000 // 定义时间
       }
     },
     components: {UITimePicker, AppHeader, vswitch},
@@ -328,13 +421,15 @@
     mounted () {
       // 判断是否是ios还是安卓手机用来加载背景
       if (utils.ios()) {
-        this.imgBg = require('./images/sign_background_iphone.jpg');
+        this.annotation = '*兑换项与活动和设备生产商Apple Inc.公司无关';
       } else if (utils.android()) {
-        this.imgBg = require('./images/sign_background_android.jpg');
+        this.annotation = '';
       }
       this.getInit();
       this.getUserInfo(1);
       this.querySign();
+      //红包雨
+      this.startRedPacket()
     },
     methods: {
       // 如果是app就往下移
@@ -367,7 +462,8 @@
               this.currentDay = this.userInfo.currentCount - 1;
             }
             console.log(this.currentDay)
-            this.currentDay == 3 ? this.showPopThree = true : this.showPopThree = false
+            // 第三天弹窗
+            this.currentDay == 3 &&  this.userInfo.currentStatus == 0 ? this.showPopThree = true : this.showPopThree = false
 
 
             // 进度条
@@ -434,14 +530,18 @@
             }, 4500)
 
             setTimeout(() => {
-              this.showPop = true;
+              this.currentDay == 6 ? this.showPopSeven = true : this.showPop = true;
             }, 5000)
 
 
             // 游戏开始
             this.luckGame();
-            // 拉霸动效
-            document.getElementById('rockImg').src = require('./images/sign_rock.gif');
+            // 拉霸动效、区分第七天
+            if (this.showPopSeven) {
+              document.getElementById('rockImg').src = require('./images/sign_rock_seven.gif');
+            } else {
+              document.getElementById('rockImg').src = require('./images/sign_rock.gif');
+            }
           }
         })
       },
@@ -653,9 +753,57 @@
         } else {
           this.closeSign();
         }
+      },
+      // 关闭第七天的效果图
+      closeWin () {
+        // document.getElementsByClassName("sign-disappear")
+        document.getElementById("seven-words").style.display = 'none';
+        document.getElementById("form-conimg").style.display = 'none';
+        document.getElementById("close-win").style.display = 'none';
+        // document.getElementById("close-btn").style.display = 'none';
+
+        let box = document.getElementById("sign-disappear");
+        box.classList.add('change-size');
+
+        setTimeout(function () {
+          document.getElementById("sign-disappear").style.display = "none";
+        }, 2000);
+
+      },
+
+      /**
+       * 开启动画
+       */
+      startRedPacket() {
+        let win = document.documentElement.clientWidth || document.body.clientWidth
+        let left = parseInt(Math.random() * (win - 50) + 0);
+
+        let rotate = (parseInt(Math.random() * (45 - (-45)) - 45)) + "deg"; // 旋转角度
+        // let scales = (Math.random() * (12 - 8 + 1) + 8) * 0.1; // 图片尺寸
+        let scales = 2
+        console.log('scales', scales);
+        let durTime = (Math.random() * (2.5 - 1.2 + 1) + 1.2) + 's'; // 时间 1.2和1.2这个数值保持一样
+        console.log(durTime)
+        this.liParams.push({left: left+'px', cls: 'move_1', transforms: 'rotate('+ rotate +') scale('+ scales +')', durTime: durTime})
+
+
+        setTimeout( () => {  // 多少时间结束
+          clearTimeout(this.timer)
+          return;
+        }, this.duration)
+
+
+        this.timer = setTimeout( () => {
+          this.startRedPacket()
+        },100)
+      },
+      /**
+       * 回收dom节点
+       */
+      removeDom (e) {
+        let target = e.currentTarget;
+        document.querySelector('#red_packet').removeChild(target)
       }
-
-
 
 
     }
@@ -670,7 +818,7 @@
   }
   .layer {
     position: absolute;
-    z-index: 99;
+    z-index: 10;
     top: 0;
     left: 0;
     height: 100%;
@@ -703,10 +851,18 @@
   }
   .gift-three {
     position: absolute;
-    top: 4.45rem;
-    left: 2.7rem;
+    top: 4.4rem;
+    left: 5.71rem;
     img {
       width: .5rem;
+    }
+  }
+  .gift_seven {
+    position: absolute;
+    top: 4.4rem;
+    left: 5.71rem;
+    img {
+      width: .55rem;
     }
   }
 
@@ -850,6 +1006,9 @@
   .buttons .btn-awards {
     width: 1rem;
   }
+  .buttons .btn-rules {
+    width: 1rem;
+  }
 
   .slide {
     position: absolute;
@@ -953,13 +1112,25 @@
   }
   .experience {
     position: absolute;
-    top: 10.6rem;
+    top: 10rem;
     color: red;
     z-index: 98;
     justify-content: center;
     display: flex;
     width: 100%;
     font-size: .3rem;
+  }
+  .experience-seven {
+    position: absolute;
+    top: 10rem;
+    color: red;
+    z-index: 98;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    font-size: .3rem;
+    color:rgba(253,244,0,1);
+    text-shadow:0px 0px 0px rgba(93,3,17,1);
   }
   /*成长值动效*/
   .growthIn-enter-active, .growthIn-leave-active {
@@ -1074,7 +1245,145 @@
     width:0.5rem;
     height:0.5rem;
   }
+  /*弹窗第七天*/
+  .pop-up-seven {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .5s linear;
+    -webkit-transition: .5s linear;
+    .lyf-close {
+      margin: 25% 0 10px 83%;
+      position: relative;
+      width: 32px;
+      height: 32px;
+      border: 1px solid #4e4d4d;
+      border-radius: 50%;
+      background-color: #ffffff;
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 16px;
+        height: 1px;
+        background: #4e4d4d;
+        transform: translateX(-50%) rotate(45deg);
+        -webkit-transform: translateX(-50%) rotate(45deg);
+      }
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 16px;
+        height: 1px;
+        background: #4e4d4d;
+        transform: translateX(-50%) rotate(-45deg);
+        -webkit-transform: translateX(-50%) rotate(-45deg);
+      }
+    }
+    .lyf-rule-con {
+      margin: 0 auto;
+      width: 73%;
+      max-width: 630px;
+    }
+  }
+  .pop-up-seven .sing_ribbon {
+    display: flex;
+    -webkit-animation-name:'ripple';/*动画属性名，也就是我们前面keyframes定义的动画名*/
+    -webkit-animation-duration: 1s;/*动画持续时间*/
+    -webkit-animation-timing-function: ease; /*动画频率，和transition-timing-function是一样的*/
+    -webkit-animation-delay: 0s;/*动画延迟时间*/
+    -webkit-animation-iteration-count: 1;/*定义循环资料，infinite为无限次*/
+    -webkit-animation-direction: alternate;/*定义动画方式*/
+  }
 
+  @keyframes ripple {
+    from {-webkit-transform: scale(0.5);
+      transform: scale(0.5);}
+    to{-webkit-transform: scale(1);
+      transform: scale(1);}
+  }
+  .pop-up-seven .content-seven {
+    position: absolute;
+    background-size:100% 100%;
+    background-image: url('./images/sign_popu_seven.png');
+    width:5.3rem;
+    height:7.7rem;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s;
+    border-radius: .2rem;
+    display: flex;
+    justify-content: center;
+  }
+  .pop-up-seven .content-seven .title {
+    position: absolute;
+    color: #000000;
+    font-size: 0.28rem;
+    top: 3.7rem;
+    font-weight:500;
+    color:rgba(147,26,45,1);
+    line-height:0.4rem;
+  }
+  .pop-up-seven .content-seven .sub-title {
+    position: absolute;
+    width: 100%;
+    top: 1.7rem;
+    font-size:0.24rem;
+    font-weight:400;
+    color:rgba(147,26,45,1);
+    line-height:0.34rem;
+  }
+  .pop-up-seven .content-seven .coupon {
+    position: absolute;
+    width:1.9rem;
+    top: 4.7rem;
+  }
+  .pop-up-seven .content-seven .coupon img {
+    width:1.9rem;
+  }
+  .pop-up-seven .content-seven .button {
+    position: absolute;
+    top: 6.8rem;
+    width:2.16rem;
+    height:0.5rem;
+    font-size:0.36rem;
+    font-weight:400;
+    color:rgba(147,26,45,1);
+    line-height:0.5rem;
+  }
+  .pop-up-seven .content-seven .my-award {
+    position: absolute;
+    width: 1.6rem;
+    height: 0.34rem;
+    font-size: 0.24rem;
+    top: 7.8rem;
+    font-weight:400;
+    line-height:0.34rem;
+    color: #000000;
+    border-bottom: 2px solid #000000;
+  }
+  .pop-up-seven .content-seven .btn-close {
+    position: absolute;
+    top: 9rem;
+  }
+  .pop-up-seven .content-seven .btn-close img {
+    width:0.5rem;
+    height:0.5rem;
+  }
+  /*弹窗第三天*/
   .pop-up .content-three {
     background-size:100% 100%;
     background-image: url('./images/sign_popo_three.png');
@@ -1089,7 +1398,6 @@
     display: flex;
     justify-content: center;
   }
-
   .pop-up .content-three .title {
     position: absolute;
     top: 4.5rem;
@@ -1126,6 +1434,7 @@
     width:0.5rem;
     height:0.5rem;
   }
+
   .redbag1 {
     position: absolute;
     top: 2.4rem;
@@ -1148,6 +1457,260 @@
     top: 9.5rem;
     left: 6.4rem;
   }
+
+  .annotation {
+    position: absolute;
+    top: 15.1rem;
+    width: 100%;
+    text-align: center;
+    font-size: .2rem;
+    color: #5D0059;
+  }
+
+
+  .rule-wrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+    z-index: 66;
+    transition: .5s linear;
+    -webkit-transition: .5s linear;
+    .lyf-close {
+      margin: 25% 0 10px 83%;
+      position: relative;
+      width: 32px;
+      height: 32px;
+      border: 1px solid #4e4d4d;
+      border-radius: 50%;
+      background-color: #ffffff;
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 16px;
+        height: 1px;
+        background: #4e4d4d;
+        transform: translateX(-50%) rotate(45deg);
+        -webkit-transform: translateX(-50%) rotate(45deg);
+      }
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 16px;
+        height: 1px;
+        background: #4e4d4d;
+        transform: translateX(-50%) rotate(-45deg);
+        -webkit-transform: translateX(-50%) rotate(-45deg);
+      }
+    }
+    .lyf-rule-con {
+      margin: 0 auto;
+      width: 73%;
+      max-width: 630px;
+    }
+  }
+
+
+  .form-con {
+    position: relative;
+    background: #e95022;
+    .sendsms-con {
+      position: absolute;
+      width: 70%;
+      left: 1.1rem;
+      top: 2rem;
+      z-index: 66;
+
+      -webkit-animation-name:'ripple';/*动画属性名，也就是我们前面keyframes定义的动画名*/
+      -webkit-animation-duration: 1s;/*动画持续时间*/
+      -webkit-animation-timing-function: ease; /*动画频率，和transition-timing-function是一样的*/
+      -webkit-animation-delay: 0s;/*动画延迟时间*/
+      -webkit-animation-iteration-count: 1;/*定义循环资料，infinite为无限次*/
+      -webkit-animation-direction: alternate;/*定义动画方式*/
+
+      from {-webkit-transform: scale(0.5);
+        transform: scale(0.5);}
+      to{-webkit-transform: scale(1);
+        transform: scale(1);}
+    }
+
+    #sign_box {
+      -webkit-animation-name:'ripple3';/*动画属性名，也就是我们前面keyframes定义的动画名*/
+      -webkit-animation-duration: 1s;/*动画持续时间*/
+      -webkit-animation-timing-function: ease; /*动画频率，和transition-timing-function是一样的*/
+      -webkit-animation-delay: 0s;/*动画延迟时间*/
+      -webkit-animation-iteration-count: 1;/*定义循环资料，infinite为无限次*/
+      -webkit-animation-direction: alternate;/*定义动画方式*/
+    }
+    @keyframes ripple3 {
+      0% {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+      }
+      50% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+      75% {
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
+      }
+      100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+    }
+
+
+    .form-inp {
+      overflow: hidden;
+      padding: 0 20px;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      background: #fff;
+      .coupon-btn {
+        margin: 20px 0 10px 0;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 18px;
+        color: #fff;
+        border-radius: 5px;
+        background: #ff6900;
+      }
+    }
+    .get-step {
+      margin-top: 15px;
+      text-align: center;
+      color: #f7f7f7;
+      font-size: 11px;
+      line-height: 22px;
+      opacity: .9;
+    }
+
+
+
+  .form-conimg {
+    -webkit-animation: form-conimg 4s linear infinite;
+    animation: form-conimg 4s linear infinite;
+    img {
+        border-radius: 4px 4px 0 0;
+      }
+    }
+  @keyframes form-conimg {
+    from {
+      transform:rotate(0deg);
+    }
+    to {
+      transform:rotate(360deg);
+    }
+  }
+
+  }
+
+  .change-size {
+    -webkit-animation-name: 'ripple2';/*动画属性名，也就是我们前面keyframes定义的动画名*/
+    -webkit-animation-duration: 2s;/*动画持续时间*/
+    -webkit-animation-timing-function: ease; /*动画频率，和transition-timing-function是一样的*/
+    -webkit-animation-delay: 0s;/*动画延迟时间*/
+    -webkit-animation-iteration-count: 1;/*定义循环资料，infinite为无限次*/
+    -webkit-animation-direction: alternate;/*定义动画方式*/
+
+    animation-name: 'ripple2';/*动画属性名，也就是我们前面keyframes定义的动画名*/
+    animation-duration: 2s;/*动画持续时间*/
+    animation-timing-function: ease; /*动画频率，和transition-timing-function是一样的*/
+    animation-delay: 0s;/*动画延迟时间*/
+    animation-iteration-count: 1;/*定义循环资料，infinite为无限次*/
+    animation-direction: alternate;/*定义动画方式*/
+
+    @-webkit-keyframes ripple2 {
+      from {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+      to{
+        -webkit-transform: scale(0.4) translate(2rem, 4rem);
+        transform: scale(0.4) translate(2rem, 4rem);
+      }
+    }
+    @keyframes ripple2 {
+      from {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+      to{
+        -webkit-transform: scale(0.4) translate(2rem, 4rem);
+        transform: scale(0.4) translate(2rem, 4rem);
+      }
+    }
+  }
+
+
+  .ser_home {
+    width: 100%;
+    height: 100%;
+  }
+  .red_packet {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    i1 {
+      width: 48px;
+      height: 69px;
+      display: block;
+      background: url('./images/petal1.png') no-repeat;
+    }
+    .i2 {
+      width: 38px;
+      height: 59px;
+      display: block;
+      background: url('./images/petal2.png') no-repeat;
+    }
+    .i3 {
+      width: 28px;
+      height: 49px;
+      display: block;
+      background: url('./images/petal3.png') no-repeat;
+    }
+    li {
+      position: absolute;
+      animation: all 3s linear;
+      top:-100px;
+      z-index: 10;
+      &.move_1 {
+        -webkit-animation: aim_move 3s linear 1 forwards;
+        animation: aim_move 3s linear 1 forwards;
+      }
+    }
+    a {
+      display: block;
+    }
+  }
+
+
+  @keyframes aim_move {
+    0% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    100% {
+      -webkit-transform: translateY(120vh);
+      transform: translateY(120vh);
+    }
+  }
+
+
+
 
 
 
