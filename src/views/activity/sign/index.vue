@@ -101,14 +101,37 @@
         <div class="ser_home">
           <ul class="red_packet" id="red_packet">
             <template v-for="(item, index) in liParams">
-              <li :style="{ left: item.left, animationDuration: item.durTime, webkitAnimationDuration: item.durTime}"
+              <li :style="{ left: item.left1, animationDuration: item.durTime, webkitAnimationDuration: item.durTime}"
                   :class="item.cls" :data-index="index" @webkitAnimationEnd="removeDom">
                 <a href='javascript:;'>
-                  <i :style="{ transform: item.transforms, webkitTransform: item.transforms}"></i>
+                  <i class="i1" :style="{ transform: item.transforms, webkitTransform: item.transforms}"></i>
+                </a>
+              </li>
+              <li :style="{ left: item.left2, animationDuration: item.durTime, webkitAnimationDuration: item.durTime}"
+                  :class="item.cls" :data-index="index" @webkitAnimationEnd="removeDom">
+                <a href='javascript:;'>
                   <i class="i2" :style="{ transform: item.transforms, webkitTransform: item.transforms}"></i>
+                </a>
+              </li>
+              <li :style="{ left: item.left3, animationDuration: item.durTime, webkitAnimationDuration: item.durTime}"
+                  :class="item.cls" :data-index="index" @webkitAnimationEnd="removeDom">
+                <a href='javascript:;'>
                   <i class="i3" :style="{ transform: item.transforms, webkitTransform: item.transforms}"></i>
                 </a>
               </li>
+              <li :style="{ left: item.left4, animationDuration: item.durTime, webkitAnimationDuration: item.durTime}"
+                  :class="item.cls" :data-index="index" @webkitAnimationEnd="removeDom">
+                <a href='javascript:;'>
+                  <i class="i4" :style="{ transform: item.transforms, webkitTransform: item.transforms}"></i>
+                </a>
+              </li>
+              <li :style="{ left: item.left5, animationDuration: item.durTime, webkitAnimationDuration: item.durTime}"
+                  :class="item.cls" :data-index="index" @webkitAnimationEnd="removeDom">
+                <a href='javascript:;'>
+                  <i class="i5" :style="{ transform: item.transforms, webkitTransform: item.transforms}"></i>
+                </a>
+              </li>
+
             </template>
           </ul>
         </div>
@@ -411,7 +434,7 @@
         showPopSeven: false,
         liParams: [],
         timer: null,
-        duration: 5000 // 定义时间
+        duration: 2000 // 定义时间
       }
     },
     components: {UITimePicker, AppHeader, vswitch},
@@ -776,15 +799,16 @@
        */
       startRedPacket() {
         let win = document.documentElement.clientWidth || document.body.clientWidth
-        let left = parseInt(Math.random() * (win - 50) + 0);
-
+        let left1 = parseInt(Math.random() * (win - 50) + 0);
+        let left2 = parseInt(Math.random() * (win - 50) + 0);
+        let left3 = parseInt(Math.random() * (win - 50) + 0);
+        let left4 = parseInt(Math.random() * (win - 50) + 0);
+        let left5 = parseInt(Math.random() * (win - 50) + 0);
         let rotate = (parseInt(Math.random() * (45 - (-45)) - 45)) + "deg"; // 旋转角度
         // let scales = (Math.random() * (12 - 8 + 1) + 8) * 0.1; // 图片尺寸
         let scales = 2
-        console.log('scales', scales);
         let durTime = (Math.random() * (2.5 - 1.2 + 1) + 1.2) + 's'; // 时间 1.2和1.2这个数值保持一样
-        console.log(durTime)
-        this.liParams.push({left: left+'px', cls: 'move_1', transforms: 'rotate('+ rotate +') scale('+ scales +')', durTime: durTime})
+        this.liParams.push({left1: left1+'px', left2: left2+'px', left3: left3+'px', left4: left4+'px', left5: left5+'px', cls: 'move_1', transforms: 'rotate('+ rotate +') scale('+ scales +')', durTime: durTime})
 
 
         setTimeout( () => {  // 多少时间结束
@@ -903,7 +927,7 @@
   }
   .broad-box {
     top: 6.5rem;
-    position: relative;
+    position: absolute;
     background: #E4A100;
     border-top-right-radius: .2rem;
     border-bottom-right-radius: .2rem;
@@ -1664,32 +1688,48 @@
     overflow: hidden;
     width: 100%;
     height: 100%;
-    i1 {
-      width: 48px;
-      height: 69px;
+    z-index: 101;
+    .i1 {
+      width: 25px;
+      height: 25px;
       display: block;
       background: url('./images/petal1.png') no-repeat;
     }
     .i2 {
-      width: 38px;
-      height: 59px;
+      left: 2rem;
+      width: 25px;
+      height: 25px;
       display: block;
       background: url('./images/petal2.png') no-repeat;
     }
     .i3 {
-      width: 28px;
-      height: 49px;
+      left: 3rem;
+      width: 25px;
+      height: 25px;
       display: block;
       background: url('./images/petal3.png') no-repeat;
     }
+    .i4 {
+      left: 4rem;
+      width: 25px;
+      height: 25px;
+      display: block;
+      background: url('./images/petal4.png') no-repeat;
+    }
+    .i5 {
+      width: 25px;
+      height: 25px;
+      display: block;
+      background: url('./images/petal5.png') no-repeat;
+    }
     li {
       position: absolute;
-      animation: all 3s linear;
+      animation: all 2s linear;
       top:-100px;
       z-index: 10;
       &.move_1 {
-        -webkit-animation: aim_move 3s linear 1 forwards;
-        animation: aim_move 3s linear 1 forwards;
+        -webkit-animation: aim_move 2s linear 1 forwards;
+        animation: aim_move 2s linear 1 forwards;
       }
     }
     a {
