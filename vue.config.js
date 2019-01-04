@@ -66,7 +66,7 @@ module.exports = {
   },
   devServer: {// 环境配置
     host: '127.0.0.1',
-    port: 8081,
+    port: 8084,
     https: false,
     hotOnly: false,
     open: false, //配置自动启动浏览器
