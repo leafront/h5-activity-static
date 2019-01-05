@@ -4,8 +4,8 @@
 
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <!--背景-->
-      <img v-if="showPopSeven" class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/1541749068675_2598.jpg">
-      <div v-if="showPopSeven" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
+      <img v-if="currentDay != 6" class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/1541749068675_2598.jpg">
+      <div v-if="currentDay != 6" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
         <!--底部文字-->
         <div class="annotation">{{annotation}}</div>
         <!--签到提醒-->
@@ -95,10 +95,10 @@
 
       </div>
 
-      <img v-if="!showPopSeven" class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/sign_bg2.jpg" />
-      <div v-if="!showPopSeven" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
+      <img v-if="currentDay == 6" class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/sign_bg2.jpg" />
+      <div v-if="currentDay == 6" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
         <!--红包雨-->
-        <div class="ser_home">
+        <div class="ser_home" id="ser_home">
           <ul class="red_packet" id="red_packet">
             <template v-for="(item, index) in liParams">
               <li :style="{ left: item.left1, animationDuration: item.durTime, webkitAnimationDuration: item.durTime}"
@@ -266,7 +266,7 @@
           <img v-if="signInfo.isAwarded" :src="signInfo.imgSquare" />
           <img v-else src="./images/sign_mascot.png" />
         </div>
-        <div :style="{marginTop: signInfo.isAwarded ? '0' : '.5rem'}" class="button" @click="showPop = false">
+        <div class="button" @click="showPop = false">
           <img src="./images/sign_iknow.png" />
         </div>
         <div v-if="signInfo.isAwarded" class="my-award" @click="openAward">
@@ -279,9 +279,8 @@
       </div>
     </div>
 
-
     <!--弹窗第三天-->
-    <div class="pop-up" v-show="showPopThree">
+    <div class="pop-up" v-show="showPopThree" v-cloak>
       <div class="content-three">
         <div class="title">
           <p>勤劳的吃货今天签到有惊喜哦！</p>
@@ -302,7 +301,6 @@
       </div>
     </div>
 
-
     <!--弹窗第七天-->
     <div class="pop-up-seven" v-show="showPopSeven" v-cloak>
       <div class="sing_ribbon">
@@ -315,12 +313,14 @@
           <p>{{signInfo.name}}</p>
         </div>
         <div class="title" v-else>
-          <p>很遗憾未中奖</p>
-          <p class="sub-title">再接再厉！明天再来吧~</p>
+          很遗憾未中奖
         </div>
         <div class="coupon">
           <img v-if="signInfo.isAwarded" :src="signInfo.imgSquare" />
           <img v-else src="./images/sign_mascot_seven.png" />
+        </div>
+        <div class="sub-title" v-if="!signInfo.isAwarded">
+          再接再厉！明天再来吧~
         </div>
         <div class="button" @click="showPopSeven = false">
           <span>明天提醒我</span>
@@ -439,6 +439,8 @@
     },
     components: {UITimePicker, AppHeader, vswitch},
     created () {
+      // 禁用下拉刷新
+      this.refreshenable(0);
       // console.log(location.href);
     },
     mounted () {
@@ -451,8 +453,6 @@
       this.getInit();
       this.getUserInfo(1);
       this.querySign();
-      //红包雨
-      this.startRedPacket()
     },
     methods: {
       // 如果是app就往下移
@@ -486,7 +486,7 @@
             }
             console.log(this.currentDay)
             // 第三天弹窗
-            this.currentDay == 3 &&  this.userInfo.currentStatus == 0 ? this.showPopThree = true : this.showPopThree = false
+            this.currentDay == 3 && this.userInfo.currentStatus == 0 ? this.showPopThree = true : this.showPopThree = false
 
 
             // 进度条
@@ -556,11 +556,17 @@
               this.currentDay == 6 ? this.showPopSeven = true : this.showPop = true;
             }, 5000)
 
+            
+            //红包雨
+            if (this.currentDay == 6 && this.userInfo.currentStatus == 0) {
+              document.getElementById('ser_home').style.display = 'block'
+              this.startRedPacket()
+            }
 
             // 游戏开始
             this.luckGame();
             // 拉霸动效、区分第七天
-            if (this.showPopSeven) {
+            if (this.currentDay == 6) {
               document.getElementById('rockImg').src = require('./images/sign_rock_seven.gif');
             } else {
               document.getElementById('rockImg').src = require('./images/sign_rock.gif');
@@ -827,7 +833,26 @@
       removeDom (e) {
         let target = e.currentTarget;
         document.querySelector('#red_packet').removeChild(target)
-      }
+      },
+
+      // 禁用下拉刷新
+      refreshenable(a) {
+        if (utils.isApp()) {
+          app.postMessage('refreshenable', {
+            enable: a,
+          }, (cb) => {
+            if (cb == 1) {
+              console.log(cb);
+            }
+            else {
+              console.log(cb);
+            }
+
+          })
+        } else {
+          console.log('请使用app');
+        }
+      },
 
 
     }
@@ -848,17 +873,17 @@
     height: 100%;
     width: 100%;
   }
-  .title {
-    position: relative;
-    top: 4.8rem;
-    width: 100%;
-    text-align: center;
-    font-size: 0.3rem;
-    font-weight: 600;
-    color: rgba(255,255,255,1);
-    line-height: 0.42rem;
-    text-shadow: 0px 0px 0px rgba(159,159,159,0.5);
-  }
+  /*.title {*/
+    /*position: relative;*/
+    /*top: 4.8rem;*/
+    /*width: 100%;*/
+    /*text-align: center;*/
+    /*font-size: 0.3rem;*/
+    /*font-weight: 600;*/
+    /*color: rgba(255,255,255,1);*/
+    /*line-height: 0.42rem;*/
+    /*text-shadow: 0px 0px 0px rgba(159,159,159,0.5);*/
+  /*}*/
   .progress-bar {
     position: absolute;
     top: 5rem;
@@ -872,6 +897,9 @@
     position: absolute;
     top: 4.35rem;
     left: 5.7rem;
+    img {
+      width: .6rem;
+    }
   }
   .gift-three {
     position: absolute;
@@ -1096,7 +1124,7 @@
   }
   .rule .rule-content .btn-close {
     position: absolute;
-    top: 11rem;
+    top: 12rem;
     left: 3.4rem;
   }
   .rule .rule-content .rule-body {
@@ -1178,44 +1206,6 @@
     justify-content: center;
     transition: .5s linear;
     -webkit-transition: .5s linear;
-    .lyf-close {
-      margin: 25% 0 10px 83%;
-      position: relative;
-      width: 32px;
-      height: 32px;
-      border: 1px solid #4e4d4d;
-      border-radius: 50%;
-      background-color: #ffffff;
-      &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 16px;
-        height: 1px;
-        background: #4e4d4d;
-        transform: translateX(-50%) rotate(45deg);
-        -webkit-transform: translateX(-50%) rotate(45deg);
-      }
-      &::after {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 16px;
-        height: 1px;
-        background: #4e4d4d;
-        transform: translateX(-50%) rotate(-45deg);
-        -webkit-transform: translateX(-50%) rotate(-45deg);
-      }
-    }
-    .lyf-rule-con {
-      margin: 0 auto;
-      width: 73%;
-      max-width: 630px;
-    }
   }
   .pop-up .content {
     background-size:100% 100%;
@@ -1228,42 +1218,41 @@
     animation-name: slideIn;
     animation-duration: 0.4s;
     border-radius: .2rem;
-    display: flex;
-    justify-content: center;
+    text-align: center;
   }
   .pop-up .content .title {
-    position: absolute;
+    margin-top: .32rem;
     color: #000000;
     font-size: 0.27rem;
-    top: 3.7rem;
+    font-weight:500;
+    color:rgba(0,0,0,1);
+    line-height:0.38rem;
   }
   .pop-up .content .coupon {
-    position: absolute;
-    width:1.9rem;
-    top: 4.7rem;
+    margin-top: .36rem;
   }
   .pop-up .content .coupon img {
     width:1.9rem;
   }
   .pop-up .content .button {
-    position: absolute;
-    width: 2.7rem;
-    top: 6.8rem;
+    margin-top: .45rem;
+  }
+  .pop-up .content .button img{
+    width: 2.48rem;
   }
   .pop-up .content .my-award {
-    position: absolute;
-    width: 1.6rem;
     height: 0.34rem;
     font-size: 0.24rem;
-    top: 7.8rem;
     font-weight:400;
     line-height:0.34rem;
     color: #000000;
+    margin-top: .2rem;
+  }
+  .pop-up .content .my-award span{
     border-bottom: 2px solid #000000;
   }
   .pop-up .content .btn-close {
-    position: absolute;
-    top: 9rem;
+    margin-top: 1rem;
   }
   .pop-up .content .btn-close img {
     width:0.5rem;
@@ -1283,46 +1272,9 @@
     justify-content: center;
     transition: .5s linear;
     -webkit-transition: .5s linear;
-    .lyf-close {
-      margin: 25% 0 10px 83%;
-      position: relative;
-      width: 32px;
-      height: 32px;
-      border: 1px solid #4e4d4d;
-      border-radius: 50%;
-      background-color: #ffffff;
-      &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 16px;
-        height: 1px;
-        background: #4e4d4d;
-        transform: translateX(-50%) rotate(45deg);
-        -webkit-transform: translateX(-50%) rotate(45deg);
-      }
-      &::after {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 16px;
-        height: 1px;
-        background: #4e4d4d;
-        transform: translateX(-50%) rotate(-45deg);
-        -webkit-transform: translateX(-50%) rotate(-45deg);
-      }
-    }
-    .lyf-rule-con {
-      margin: 0 auto;
-      width: 73%;
-      max-width: 630px;
-    }
   }
   .pop-up-seven .sing_ribbon {
+    width: 100%;
     display: flex;
     -webkit-animation-name:'ripple';/*动画属性名，也就是我们前面keyframes定义的动画名*/
     -webkit-animation-duration: 1s;/*动画持续时间*/
@@ -1331,82 +1283,79 @@
     -webkit-animation-iteration-count: 1;/*定义循环资料，infinite为无限次*/
     -webkit-animation-direction: alternate;/*定义动画方式*/
   }
-
-  @keyframes ripple {
-    from {-webkit-transform: scale(0.5);
-      transform: scale(0.5);}
-    to{-webkit-transform: scale(1);
-      transform: scale(1);}
+  .pop-up-seven .sing_ribbon img {
+    width: 50%;
+    height: 3rem;
   }
+  @keyframes ripple {
+    from {
+      -webkit-transform: scale(0.5);
+      transform: scale(0.5);
+    }
+    to{
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  }
+
   .pop-up-seven .content-seven {
-    position: absolute;
     background-size:100% 100%;
     background-image: url('./images/sign_popu_seven.png');
-    width:5.3rem;
-    height:7.7rem;
+    width: 5.3rem;
+    height: 7.7rem;
     -webkit-animation-name: slideIn;
     -webkit-animation-duration: 0.4s;
     animation-name: slideIn;
     animation-duration: 0.4s;
     border-radius: .2rem;
-    display: flex;
-    justify-content: center;
+    text-align: center;
+    position: absolute;
   }
   .pop-up-seven .content-seven .title {
-    position: absolute;
-    color: #000000;
-    font-size: 0.28rem;
-    top: 3.7rem;
+    margin-top: 2.52rem;
+    font-size:0.28rem;
     font-weight:500;
     color:rgba(147,26,45,1);
     line-height:0.4rem;
   }
   .pop-up-seven .content-seven .sub-title {
-    position: absolute;
-    width: 100%;
-    top: 1.7rem;
     font-size:0.24rem;
     font-weight:400;
     color:rgba(147,26,45,1);
     line-height:0.34rem;
   }
   .pop-up-seven .content-seven .coupon {
-    position: absolute;
-    width:1.9rem;
-    top: 4.7rem;
+    margin-top: .36rem;
   }
   .pop-up-seven .content-seven .coupon img {
     width:1.9rem;
   }
   .pop-up-seven .content-seven .button {
-    position: absolute;
-    top: 6.8rem;
-    width:2.16rem;
-    height:0.5rem;
-    font-size:0.36rem;
+    margin-top: 1rem;
+    font-size:0.38rem;
     font-weight:400;
     color:rgba(147,26,45,1);
-    line-height:0.5rem;
+    line-height:0.52rem;
   }
   .pop-up-seven .content-seven .my-award {
-    position: absolute;
-    width: 1.6rem;
     height: 0.34rem;
     font-size: 0.24rem;
-    top: 7.8rem;
     font-weight:400;
     line-height:0.34rem;
     color: #000000;
+    margin-top: .2rem;
+  }
+  .pop-up-seven .content-seven .my-award span{
     border-bottom: 2px solid #000000;
   }
   .pop-up-seven .content-seven .btn-close {
-    position: absolute;
-    top: 9rem;
+    margin-top: 1rem;
   }
   .pop-up-seven .content-seven .btn-close img {
     width:0.5rem;
     height:0.5rem;
   }
+
   /*弹窗第三天*/
   .pop-up .content-three {
     background-size:100% 100%;
@@ -1419,40 +1368,48 @@
     animation-name: slideIn;
     animation-duration: 0.4s;
     border-radius: .2rem;
-    display: flex;
-    justify-content: center;
+    text-align: center;
   }
   .pop-up .content-three .title {
-    position: absolute;
-    top: 4.5rem;
+    margin-top: .32rem;
+    font-weight:500;
     font-size:0.32rem;
     font-weight:500;
     color:rgba(91,49,0,1);
     line-height:0.44rem;
   }
-  .pop-up .content-three .sub-title {
-    position: absolute;
-    color: #5B3100;
-    font-size: 0.24rem;
-    top: 9.5rem;
-  }
   .pop-up .content-three .coupon {
-    position: absolute;
-    top: 5.5rem;
+    margin-top: .36rem;
   }
   .pop-up .content-three .coupon img {
-    width: 2.7rem;
+    width: 2.76rem;
   }
   .pop-up .content-three .button {
-    position: absolute;
-    top: 8.5rem;
+    margin-top: .45rem;
   }
   .pop-up .content-three .button img{
     width: 2.36rem;
   }
+  .pop-up .content-three .my-award {
+    height: 0.34rem;
+    font-size: 0.24rem;
+    font-weight:400;
+    line-height:0.34rem;
+    color: #000000;
+    margin-top: .2rem;
+  }
+  .pop-up .content-three .my-award span{
+    border-bottom: 2px solid #000000;
+  }
+  .pop-up .content-three .sub-title {
+    font-size:0.24rem;
+    font-weight:400;
+    color:rgba(91,49,0,1);
+    line-height:0.34rem;
+    margin-top: .5rem;
+  }
   .pop-up .content-three .btn-close {
-    position: absolute;
-    top: 11rem;
+    margin-top: 1.2rem;
   }
   .pop-up .content-three .btn-close img {
     width:0.5rem;
@@ -1502,44 +1459,7 @@
     z-index: 66;
     transition: .5s linear;
     -webkit-transition: .5s linear;
-    .lyf-close {
-      margin: 25% 0 10px 83%;
-      position: relative;
-      width: 32px;
-      height: 32px;
-      border: 1px solid #4e4d4d;
-      border-radius: 50%;
-      background-color: #ffffff;
-      &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 16px;
-        height: 1px;
-        background: #4e4d4d;
-        transform: translateX(-50%) rotate(45deg);
-        -webkit-transform: translateX(-50%) rotate(45deg);
-      }
-      &::after {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 16px;
-        height: 1px;
-        background: #4e4d4d;
-        transform: translateX(-50%) rotate(-45deg);
-        -webkit-transform: translateX(-50%) rotate(-45deg);
-      }
-    }
-    .lyf-rule-con {
-      margin: 0 auto;
-      width: 73%;
-      max-width: 630px;
-    }
+
   }
 
 
@@ -1679,6 +1599,7 @@
 
 
   .ser_home {
+    display: none;
     width: 100%;
     height: 100%;
   }
