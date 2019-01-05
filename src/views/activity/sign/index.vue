@@ -84,7 +84,7 @@
           <!--0 未签到、未分享  1 已签到、未分享  2 已签到、已分享、未抽奖 3 已签到、已分享、已抽奖-->
           <img v-show="userInfo.currentStatus == 0" id="btnClick" @click="signIn" class="btn-sign" src="./images/sign_click.gif" />
           <img v-show="userInfo.currentStatus == 1" @click="shareInfo" class="btn-sign" src="./images/sign_share.png" />
-          <img v-show="userInfo.currentStatus == 2" @click="signIn" class="btn-sign" src="./images/sign_shared_draw.png" />
+          <img v-show="userInfo.currentStatus == 2" @click="signDraw" class="btn-sign" src="./images/sign_shared_draw.png" />
           <img v-show="userInfo.currentStatus == 3" class="btn-sign" src="./images/sign_drawed.png" />
 
           <img class="btn-rules" @click="showRule = true" src="./images/sign_rule.png" />
@@ -143,7 +143,12 @@
         <!--底部文字-->
         <div class="annotation">{{annotation}}</div>
         <!--签到提醒-->
-        <vswitch @changeSwitch = 'changeSwitch' :value ='initSwitch' text="关闭提醒|开启提醒"></vswitch>
+        <vswitch
+                @changeSwitch = 'changeSwitch'
+                :initSwitch="initSwitch"
+                :isCancel = "isCancel"
+                text="关闭提醒|开启提醒">
+        </vswitch>
         <!--四个红包-->
         <div class="redbag1">
           <img src="./images/sign_redbag1.png">
@@ -223,7 +228,7 @@
           <!--0 未签到、未分享  1 已签到、未分享  2 已签到、已分享、未抽奖 3 已签到、已分享、已抽奖-->
           <img v-show="userInfo.currentStatus == 0" id="btnClick" @click="signIn" class="btn-sign" src="./images/sign_click_seven.png" />
           <img v-show="userInfo.currentStatus == 1" @click="shareInfo" class="btn-sign" src="./images/sign_share.png" />
-          <img v-show="userInfo.currentStatus == 2" @click="signIn" class="btn-sign" src="./images/sign_shared_draw.png" />
+          <img v-show="userInfo.currentStatus == 2" @click="signDraw" class="btn-sign" src="./images/sign_shared_draw.png" />
           <img v-show="userInfo.currentStatus == 3" class="btn-sign" src="./images/sign_drawed.png" />
 
           <img class="btn-rules" @click="showRule = true" src="./images/sign_rule_seven.png" />
@@ -440,7 +445,8 @@
         showPopSeven: false,
         liParams: [],
         timer: null,
-        duration: 2000 // 定义时间
+        duration: 2000, // 定义时间
+        isDisable: false
       }
     },
     components: {UITimePicker, AppHeader, vswitch},
@@ -529,55 +535,123 @@
 
       // 开始签到
       signIn () {
-        Model.signIn({
-          type: 'POST'
-        }).then((result) => {
-          const data = result.data
-          if (result.code == 0) {
-            this.signInfo = data
-            console.log('signInfo', this.signInfo)
-            // 是否中奖
-            this.gameDefaults.zj_arr.is_win = data.isAwarded ? 1 : 2;
+        if (!this.isDisable){
+          Model.signIn({
+            type: 'POST'
+          }).then((result) => {
+            const data = result.data;
+            this.isDisable = true;
+            if (result.code == 0) {
+              this.signInfo = data
+              console.log('signInfo', this.signInfo)
+              // 是否中奖
+              this.gameDefaults.zj_arr.is_win = data.isAwarded ? 1 : 2;
 
-            // 中奖number
-            for (let i = 0, j = this.temSquareList.length; i < j; i++){
-              if (result.data.id == this.temSquareList[i].id) {
-                this.awardNum = i;
-              };
-            }
-            // 显示成长值
-            this.showGrowth = true,
+              // 中奖number
+              for (let i = 0, j = this.temSquareList.length; i < j; i++){
+                if (result.data.id == this.temSquareList[i].id) {
+                  this.awardNum = i;
+                };
+              }
+              // 显示成长值
+              this.showGrowth = true,
 
-            // button 变成抽奖中
-            document.getElementById('btnClick').src = require('./images/sign_clicked.png');
+              // button 变成抽奖中
+              document.getElementById('btnClick').src = require('./images/sign_clicked.png');
 
-            setTimeout(() => {
-              this.showGrowth = false;
-              // 再去获取一次数据 0不用刷新数据、1需要刷新数据
-              this.getUserInfo(0);
-            }, 4500)
+              setTimeout(() => {
+                this.showGrowth = false;
+                // 再去获取一次数据 0不用刷新数据、1需要刷新数据
+                this.getUserInfo(0);
+              }, 4500)
 
-            setTimeout(() => {
-              this.currentDay == 6 ? this.showPopSeven = true : this.showPop = true;
-            }, 5000)
+              setTimeout(() => {
+                this.currentDay == 6 ? this.showPopSeven = true : this.showPop = true;
+              }, 5000)
 
-            
-            //红包雨
-            if (this.currentDay == 6 && this.userInfo.currentStatus == 0) {
-              document.getElementById('ser_home').style.display = 'block'
-              this.startRedPacket()
-            }
 
-            // 游戏开始
-            this.luckGame();
-            // 拉霸动效、区分第七天
-            if (this.currentDay == 6) {
-              document.getElementById('rockImg').src = require('./images/sign_rock_seven.gif');
+              //红包雨
+              if (this.currentDay == 6 && this.userInfo.currentStatus == 0) {
+                document.getElementById('ser_home').style.display = 'block'
+                this.startRedPacket()
+              }
+
+              // 游戏开始
+              this.luckGame();
+              // 拉霸动效、区分第七天
+              if (this.currentDay == 6) {
+                document.getElementById('rockImg').src = require('./images/sign_rock_seven.gif');
+              } else {
+                document.getElementById('rockImg').src = require('./images/sign_rock.gif');
+              }
             } else {
-              document.getElementById('rockImg').src = require('./images/sign_rock.gif');
+              this.$toast('签到失败，请稍后重试');
+              setTimeout(() => {
+                this.isDisable = false;
+              }, 2000)
             }
-          }
-        })
+          })
+        }
+      },
+      // 分享后抽奖
+      signDraw () {
+        if (!this.isDisable){
+          Model.signDraw({
+            type: 'POST'
+          }).then((result) => {
+            const data = result.data;
+            this.isDisable = true;
+            if (result.code == 0) {
+              this.signInfo = data
+              console.log('signInfo', this.signInfo)
+              // 是否中奖
+              this.gameDefaults.zj_arr.is_win = data.isAwarded ? 1 : 2;
+
+              // 中奖number
+              for (let i = 0, j = this.temSquareList.length; i < j; i++){
+                if (result.data.id == this.temSquareList[i].id) {
+                  this.awardNum = i;
+                };
+              }
+              // 显示成长值
+              this.showGrowth = true,
+
+              // button 变成抽奖中
+              document.getElementById('btnClick').src = require('./images/sign_clicked.png');
+
+              setTimeout(() => {
+                this.showGrowth = false;
+                // 再去获取一次数据 0不用刷新数据、1需要刷新数据
+                this.getUserInfo(0);
+              }, 4500)
+
+              setTimeout(() => {
+                this.currentDay == 6 ? this.showPopSeven = true : this.showPop = true;
+              }, 5000)
+
+
+              //红包雨
+              if (this.currentDay == 6 && this.userInfo.currentStatus == 0) {
+                document.getElementById('ser_home').style.display = 'block'
+                this.startRedPacket()
+              }
+
+              // 游戏开始
+              this.luckGame();
+              // 拉霸动效、区分第七天
+              if (this.currentDay == 6) {
+                document.getElementById('rockImg').src = require('./images/sign_rock_seven.gif');
+              } else {
+                document.getElementById('rockImg').src = require('./images/sign_rock.gif');
+              }
+            } else {
+              this.$toast('签到失败，请稍后重试');
+              setTimeout(() => {
+                this.isDisable = false;
+              }, 2000)
+            }
+          })
+        }
       },
       // 去详情页
       openDeatil (id) {
