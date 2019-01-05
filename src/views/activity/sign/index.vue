@@ -346,32 +346,25 @@
     </div>
 
     <!--第七天首次进入加载-->
-    <div id="sign-disappear" v-show="showPopSeven">
-    <div class="rule-wrapper" >
-    <div class="form-con">
-      <div class="sendsms-con" style="top: 5rem;" v-cloak>
-        <div class="form-conimg" id="form-conimg">
-          <img width="100%" src="./images/sign_giftbox_bg.png">
-        </div>
-        <div id='seven-words' style="position: absolute; top: 3.6rem; text-align: center; width: 100%; color: #ffffff;">
-          <p>哇塞~签到第7天，真棒！</p>
-          <p>神秘礼物已经填充完毕，快去抽奖吧！</p>
-        </div>
+    <!--<div id="sign-disappear" v-show="showPopSeven || true">-->
+    <div id="cool-effect" class="cool-effect">
+        <div class="frame">
+          <div id="cool-bg" class="bg-rotation">
+            <img src="./images/sign_giftbox_bg.png">
+          </div>
+          <div id="cool-box" class="gift-box">
+            <img src="./images/sign_box.png" />
+          </div>
 
-        <div style="position: absolute; top: 1rem; text-align: center; width: 100%; z-index: 100">
-          <img id='sign_box' style="width: 50%; z-index: 100" src="./images/sign_box.png" />
-        </div>
+          <div id="cool-desc" class="desc">
+            <p>哇塞~签到第7天，真棒！</p>
+            <p>神秘礼物已经填充完毕，快去抽奖吧！</p>
+          </div>
 
-        <div id="close-win" @click="closeWin" style="position: absolute; top: 4.8rem; text-align: center; width: 100%">
-          <img style="width: 45%" src="./images/sign_iknow_bg.png" />
-        </div>
-
-        <!--<span id="close-btn" style="position: absolute; margin-top: 10%; width: 100%; text-align: center">-->
-          <!--<img style="width: 20px" src="./images/sign_close.png">-->
-        <!--</span>-->
+          <div id="cool-button" class="button" @click="closeWin">
+            <img src="./images/sign_iknow_bg.png" />
+          </div>
       </div>
-    </div>
-    </div>
     </div>
 
 
@@ -862,18 +855,17 @@
       },
       // 关闭第七天的效果图
       closeWin () {
-        // document.getElementsByClassName("sign-disappear")
-        document.getElementById("seven-words").style.display = 'none';
-        document.getElementById("form-conimg").style.display = 'none';
-        document.getElementById("close-win").style.display = 'none';
-        // document.getElementById("close-btn").style.display = 'none';
+        document.getElementById("cool-effect").style.background = 'rgba(0, 0, 0, 0)';
+        document.getElementById("cool-bg").style.display = 'none';
+        document.getElementById("cool-button").style.display = 'none';
+        document.getElementById("cool-desc").style.display = 'none';
 
-        let box = document.getElementById("sign-disappear");
+        let box = document.getElementById("cool-box");
         box.classList.add('change-size');
 
         setTimeout(function () {
-          document.getElementById("sign-disappear").style.display = "none";
-        }, 2000);
+          document.getElementById("cool-box").style.display = "none";
+        }, 2400);
 
       },
 
@@ -950,17 +942,6 @@
     height: 100%;
     width: 100%;
   }
-  /*.title {*/
-    /*position: relative;*/
-    /*top: 4.8rem;*/
-    /*width: 100%;*/
-    /*text-align: center;*/
-    /*font-size: 0.3rem;*/
-    /*font-weight: 600;*/
-    /*color: rgba(255,255,255,1);*/
-    /*line-height: 0.42rem;*/
-    /*text-shadow: 0px 0px 0px rgba(159,159,159,0.5);*/
-  /*}*/
   .progress-bar {
     position: absolute;
     top: 5rem;
@@ -1526,107 +1507,41 @@
   }
 
 
-  .rule-wrapper {
+  .cool-effect {
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     background: rgba(0, 0, 0, .5);
-    z-index: 66;
+    z-index: 99;
     transition: .5s linear;
     -webkit-transition: .5s linear;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-
-
-  .form-con {
-    position: relative;
-    background: #e95022;
-    .sendsms-con {
-      position: absolute;
-      width: 70%;
-      left: 1.1rem;
-      top: 2rem;
-      z-index: 66;
-
-      -webkit-animation-name:'ripple';/*动画属性名，也就是我们前面keyframes定义的动画名*/
-      -webkit-animation-duration: 1s;/*动画持续时间*/
-      -webkit-animation-timing-function: ease; /*动画频率，和transition-timing-function是一样的*/
-      -webkit-animation-delay: 0s;/*动画延迟时间*/
-      -webkit-animation-iteration-count: 1;/*定义循环资料，infinite为无限次*/
-      -webkit-animation-direction: alternate;/*定义动画方式*/
-
-      from {-webkit-transform: scale(0.5);
-        transform: scale(0.5);}
-      to{-webkit-transform: scale(1);
-        transform: scale(1);}
-    }
-
-    #sign_box {
-      -webkit-animation-name:'ripple3';/*动画属性名，也就是我们前面keyframes定义的动画名*/
-      -webkit-animation-duration: 1s;/*动画持续时间*/
-      -webkit-animation-timing-function: ease; /*动画频率，和transition-timing-function是一样的*/
-      -webkit-animation-delay: 0s;/*动画延迟时间*/
-      -webkit-animation-iteration-count: 1;/*定义循环资料，infinite为无限次*/
-      -webkit-animation-direction: alternate;/*定义动画方式*/
-    }
-    @keyframes ripple3 {
-      0% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-      }
-      50% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-      }
-      75% {
-        -webkit-transform: scale(0.8);
-        transform: scale(0.8);
-      }
-      100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-      }
-    }
-
-
-    .form-inp {
-      overflow: hidden;
-      padding: 0 20px;
-      box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      background: #fff;
-      .coupon-btn {
-        margin: 20px 0 10px 0;
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-        font-size: 18px;
-        color: #fff;
-        border-radius: 5px;
-        background: #ff6900;
-      }
-    }
-    .get-step {
-      margin-top: 15px;
-      text-align: center;
-      color: #f7f7f7;
-      font-size: 11px;
-      line-height: 22px;
-      opacity: .9;
-    }
-
-
-
-  .form-conimg {
-    -webkit-animation: form-conimg 4s linear infinite;
-    animation: form-conimg 4s linear infinite;
+  .cool-effect .frame {
+    background-size:100% 100%;
+    width: 6rem;
+    height: 8rem;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s;
+    border-radius: .2rem;
+    text-align: center;
+    position: absolute;
+  }
+  .cool-effect .frame .bg-rotation {
+    -webkit-animation: bg-rotation 4s linear infinite;
+    animation: bg-rotation 4s linear infinite;
     img {
-        border-radius: 4px 4px 0 0;
-      }
+      border-radius: 4px 4px 0 0;
+      width: 6rem;
     }
-  @keyframes form-conimg {
+  }
+  @keyframes bg-rotation {
     from {
       transform:rotate(0deg);
     }
@@ -1634,45 +1549,59 @@
       transform:rotate(360deg);
     }
   }
-
+  .cool-effect .frame .gift-box{
+    position: absolute;
+    top: 2rem;
+    text-align: center;
+    width: 100%;
+    z-index: 100
+  }
+  .cool-effect .frame .gift-box img{
+    width: 2.64rem;
+  }
+  .cool-effect .frame .desc {
+    font-size:0.28rem;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    line-height:0.4rem;
+    margin-top: -1rem;
+  }
+  .cool-effect .frame .button{
+    margin-top: .5rem;
+  }
+  .cool-effect .frame .button img{
+    width: 2.3rem;
   }
 
   .change-size {
-    -webkit-animation-name: 'ripple2';/*动画属性名，也就是我们前面keyframes定义的动画名*/
-    -webkit-animation-duration: 2s;/*动画持续时间*/
-    -webkit-animation-timing-function: ease; /*动画频率，和transition-timing-function是一样的*/
-    -webkit-animation-delay: 0s;/*动画延迟时间*/
-    -webkit-animation-iteration-count: 1;/*定义循环资料，infinite为无限次*/
-    -webkit-animation-direction: alternate;/*定义动画方式*/
-
-    animation-name: 'ripple2';/*动画属性名，也就是我们前面keyframes定义的动画名*/
-    animation-duration: 2s;/*动画持续时间*/
-    animation-timing-function: ease; /*动画频率，和transition-timing-function是一样的*/
-    animation-delay: 0s;/*动画延迟时间*/
-    animation-iteration-count: 1;/*定义循环资料，infinite为无限次*/
-    animation-direction: alternate;/*定义动画方式*/
-
-    @-webkit-keyframes ripple2 {
-      from {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-      }
-      to{
-        -webkit-transform: scale(0.4) translate(2rem, 4rem);
-        transform: scale(0.4) translate(2rem, 4rem);
-      }
+    animation:mymove 2.4s 1;
+    -webkit-animation:mymove 2.4s 1; /*Safari and Chrome*/
+  }
+  @keyframes mymove
+  {
+    from {
+      left:0px;
+      transform: scale(1);
     }
-    @keyframes ripple2 {
-      from {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-      }
-      to{
-        -webkit-transform: scale(0.4) translate(2rem, 4rem);
-        transform: scale(0.4) translate(2rem, 4rem);
-      }
+    to {
+      left: 2.25rem;
+      top: .8rem;
+      transform: scale(.1);
     }
   }
+
+  @-webkit-keyframes mymove /*Safari and Chrome*/
+  {
+    from {
+      left:0px;
+      transform: scale(1);
+    }
+    to {
+      left: 0rem;
+      transform: scale(.1);
+    }
+  }
+
 
 
   .ser_home {
