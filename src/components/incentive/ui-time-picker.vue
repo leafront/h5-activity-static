@@ -24,15 +24,6 @@
           <div class="ui-picker__mask"></div>
           <div class="ui-picker__indicator"></div>
         </div>
-        <!--<div class="ui-picker__group" v-if="isDays">-->
-        <!--<ul class="ui-picker__content">-->
-        <!--<li v-for="num in 3"></li>-->
-        <!--<li class="ui-picker__item" :class="{'active': checkedDate[2]== index}" v-for="(item,index) in dates">{{item.label}}</li>-->
-        <!--<li v-for="num in 3"></li>-->
-        <!--</ul>-->
-        <!--<div class="ui-picker__mask"></div>-->
-        <!--<div class="ui-picker__indicator"></div>-->
-        <!--</div>-->
       </div>
     </div>
     <div class="ui-mask" :class="{'active':isPicker}"></div>
@@ -85,9 +76,7 @@
         return this.selectValue[1] - 1
       },
       months () {
-
         return this.pickerData[this.checkedDate[0]].children
-
       },
     },
     created () {

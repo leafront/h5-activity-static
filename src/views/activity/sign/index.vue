@@ -9,7 +9,12 @@
         <!--底部文字-->
         <div class="annotation">{{annotation}}</div>
         <!--签到提醒-->
-        <vswitch @changeSwitch = 'changeSwitch' :value ='switchValue' text="关闭提醒|开启提醒"></vswitch>
+        <vswitch
+                @changeSwitch = 'changeSwitch'
+                :initSwitch="initSwitch"
+                :isCancel = "isCancel"
+                text="关闭提醒|开启提醒">
+        </vswitch>
         <!--&lt;!&ndash;标题&ndash;&gt;-->
         <!--<div class="title">{{userInfo.currentTitle}}</div>-->
         <!--礼物图标-->
@@ -138,7 +143,7 @@
         <!--底部文字-->
         <div class="annotation">{{annotation}}</div>
         <!--签到提醒-->
-        <vswitch @changeSwitch = 'changeSwitch' :value ='switchValue' text="关闭提醒|开启提醒"></vswitch>
+        <vswitch @changeSwitch = 'changeSwitch' :value ='initSwitch' text="关闭提醒|开启提醒"></vswitch>
         <!--四个红包-->
         <div class="redbag1">
           <img src="./images/sign_redbag1.png">
@@ -428,7 +433,8 @@
         },
         isPicker: false, //时间选择器
         checkedValue: ['10', '30'],
-        switchValue: false,
+        initSwitch: false, // 首次判断是否有进行过签到提醒
+        isCancel: false, // 取消签到提醒
         currentDay: 0,
         showPopThree: false,
         showPopSeven: false,
@@ -484,7 +490,6 @@
             } else {
               this.currentDay = this.userInfo.currentCount - 1;
             }
-            console.log(this.currentDay)
             // 第三天弹窗
             this.currentDay == 3 && this.userInfo.currentStatus == 0 ? this.showPopThree = true : this.showPopThree = false
 
@@ -727,12 +732,14 @@
         this.queryDate = val;
         this.queryDate = this.checkedValue[0] + this.checkedValue[1];
         this.remindSign()
-        console.log('this.queryDate', this.queryDate);
       },
       // 日期选择取消
       cancel () {
-        this.switchValue = false;
-        console.log('switchValue', this.switchValue);
+        this.isCancel = true;
+        setTimeout(() => {
+          this.isCancel = false;
+        })
+        // this.switchValue = false;
       },
       // 开启签到窗口
       remindSign () {
@@ -756,8 +763,6 @@
           const data = result.data;
           if (result.code == 0 && data) {
             this.$toast('关闭提醒')
-            // this.getUserInfo(1);
-            // this.awards = data.awards;
           }
         })
       },
@@ -768,9 +773,7 @@
         }).then((result) => {
           const data = result.data
           if (result.code == 0 && data) {
-             this.switchValue = true;
-            // this.getUserInfo(1);
-            // this.awards = data.awards;
+             this.initSwitch = true;
           }
         })
       },
