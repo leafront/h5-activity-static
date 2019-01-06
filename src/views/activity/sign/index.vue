@@ -347,7 +347,7 @@
 
     <!--第七天首次进入加载-->
     <!--<div id="sign-disappear" v-show="showPopSeven || true">-->
-    <div id="cool-effect" class="cool-effect">
+    <div id="cool-effect" class="cool-effect" v-show="showPopSeven">
         <div class="frame">
           <div id="cool-bg" class="bg-rotation">
             <img src="./images/sign_giftbox_bg.png">
