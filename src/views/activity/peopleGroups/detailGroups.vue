@@ -292,8 +292,8 @@ export default {
   margin-left: .3rem;
 }
 .tipText{
-  padding-left: .2rem;
-  padding-right: .2rem;
+  padding: .1rem .2rem;
+
   font-family: PingFangSC;
   color: #333333;
   font-size: .28rem;
@@ -305,7 +305,7 @@ export default {
   width: 90%;
   height:.6rem;
   line-height: .6rem;
-  margin: .2rem auto;
+  margin: .1rem auto .2rem;
   font-size: .32rem;
   color: #fff;
   background: linear-gradient(to right , #FF8E0C,#FF8E0C,#FF761A,#FF5E28);
