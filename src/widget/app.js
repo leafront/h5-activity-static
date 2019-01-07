@@ -167,6 +167,21 @@ const app = {
       })
     }
   },
+  getWeixinAppId () {
+    if (!utils.weixin()) {
+      return
+    }
+    return request('/opay-web/getWxpayAppId.do', {
+      type: 'POST',
+      cache: true,
+      expires: 60 * 60 * 1000
+    }).then((result) => {
+      const data = result.data
+      if (result.code == 0 && data) {
+        return data.appId
+      }
+    })
+  },
   /**
    * 分享操作
    * @param {String} link
