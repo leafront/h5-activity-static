@@ -25,6 +25,10 @@
 
          {{dgDescription.saleDiscount}}折
        </div>
+       <div class="dd_prize_rebate">
+
+         付款后7天内发货
+       </div>
 
      </div>
 
@@ -37,6 +41,10 @@
        总价：{{dgDescription.totalAmount}}元
      </div>
 
+
+   </div>
+   <div class="tipText">
+     更多团购更多折扣，详情联系客服400-8819-777
    </div>
    <div class="buy_now" @click= "initiateOrder" v-if = "dgDescription.grouponStatus == 1">
      ¥{{dgDescription.totalAmount}} 立即购买
@@ -276,8 +284,21 @@ export default {
   border-bottom: solid 5px #FAFAFA;
 }
 .n_d_number,.n_d_prize{
+  display: inline-block;
   color: #333333;
   font-size: .3rem;
+}
+.n_d_prize{
+  margin-left: .3rem;
+}
+.tipText{
+  padding-left: .2rem;
+  padding-right: .2rem;
+  font-family: PingFangSC;
+  color: #333333;
+  font-size: .28rem;
+  background: #FCF7D6;
+
 }
 .buy_now{
   text-align: center;
