@@ -292,6 +292,7 @@ export default {
 
   watch: {
     ruleText() {
+      this.traversing()
 
 
       /**
