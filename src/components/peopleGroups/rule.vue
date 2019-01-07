@@ -280,7 +280,7 @@ export default {
   data() {
     return {
       formDate: {
-        number: "",
+        number: 5,
         prize: "",
         rebate: 10,
 
@@ -473,8 +473,8 @@ export default {
     },
 
     closeRuleText() {
-      this.formDate.number = ""
-      this.formDate.rebate = ""
+      this.formDate.number = 5
+      this.formDate.rebate = 10
       this.$emit('toggleRuleText', false)
     },
     sendGroup() {
