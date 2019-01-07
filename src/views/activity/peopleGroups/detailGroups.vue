@@ -298,6 +298,8 @@ export default {
   color: #333333;
   font-size: .28rem;
   background: #FCF7D6;
+   margin-top: .2rem;
+   margin-bottom: .3rem;
 
 }
 .buy_now{
