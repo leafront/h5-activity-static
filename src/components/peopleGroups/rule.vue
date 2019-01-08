@@ -17,8 +17,9 @@
               <div class="item_a_unit">
                 盒
               </div>
-            </div>
 
+            </div>
+             <p class="item1_des">5盒起售，最多500盒</p>
             <div class="pg-register-input">
               <div class="item_a_name">
                 原价
@@ -29,7 +30,18 @@
               </div>
             </div>
 
-            <div class="pg-register-input" >
+            <div class="pg-register-input">
+              <div class="item_a_name">
+                折扣
+              </div>
+              <!-- <input type="number" autocomplete="off" v-model="formDate.prize" class="item_a" placeholder="0" /> -->
+              <div class="item_a_unit">
+                {{formDate.rebate}} 折
+              </div>
+            </div>
+
+
+            <!-- <div class="pg-register-input" >
               <div class="item_a_name">
                 折扣
               </div>
@@ -42,11 +54,10 @@
                   折
                 </div>
               </div>
-              <!-- <input type="tel" autocomplete="off" autofocus v-model="formDate.number" class="item_a field_a" placeholder="0" /> -->
               <div class="field_plus" @click="rebateAdd">
 
               </div>
-            </div>
+            </div> -->
 
             <div class="pg-register-input">
               <div class="item_a_name">
@@ -120,6 +131,11 @@
     font-size: 0.32rem;
     margin-right: 0.5rem;
     letter-spacing: 0.2rem;
+}
+.item1_des{
+margin-left: 1.78rem;
+margin-top: -.3rem;
+margin-bottom: .2rem;
 }
 .item_a {
     width: 2rem;
@@ -264,9 +280,9 @@ export default {
   data() {
     return {
       formDate: {
-        number: "",
+        number: 5,
         prize: "",
-        rebate: "",
+        rebate: 10,
 
       },
       zhekouValue: "",
@@ -276,6 +292,7 @@ export default {
 
   watch: {
     ruleText() {
+      this.traversing()
 
 
       /**
@@ -322,12 +339,16 @@ export default {
     scrollInt(){
       const form = document.getElementById("groupsForm")
       const fieldOne = form.elements[0]
-      const fieldTwo = form.elements[1]
-      fieldOne.addEventListener("blur",()=>{
-        fieldTwo.focus()
+      // const fieldTwo = form.elements[1]
+      // fieldOne.addEventListener("blur",()=>{
+      //   fieldTwo.focus()
+      // },false)
+      fieldOne.addEventListener("keyup",()=>{
+
+        this.traversing()
       },false)
 
-      fieldTwo.addEventListener("blur",()=>{
+      fieldOne.addEventListener("blur",()=>{
         if(document.body.scrollTop){
           document.body.scrollTop = 0
           document.documentElement.scrollTop = 0
@@ -345,29 +366,29 @@ export default {
       field.focus()
     },
 
-    rebateRe() {
-      if (this.formDate.rebate <= 0.1) {
-        this.$toast('已经是最小值')
-        return
-      }
-      this.formDate.rebate = Number(this.formDate.rebate)
-      this.formDate.rebate -= 0.1
-      this.formDate.rebate = this.fomatFloat(this.formDate.rebate, 1)
-    },
+    // rebateRe() {
+    //   if (this.formDate.rebate <= 0.1) {
+    //     this.$toast('已经是最小值')
+    //     return
+    //   }
+    //   this.formDate.rebate = Number(this.formDate.rebate)
+    //   this.formDate.rebate -= 0.1
+    //   this.formDate.rebate = this.fomatFloat(this.formDate.rebate, 1)
+    // },
+    //
+    // rebateAdd() {
+    //   if (this.formDate.rebate >= 10) {
+    //     this.$toast('已经是最大值')
+    //     return
+    //   }
+    //     this.formDate.rebate = Number(this.formDate.rebate)
+    //   this.formDate.rebate += 0.1
+    //   this.formDate.rebate = this.fomatFloat(this.formDate.rebate, 1)
+    // },
 
-    rebateAdd() {
-      if (this.formDate.rebate >= 10) {
-        this.$toast('已经是最大值')
-        return
-      }
-        this.formDate.rebate = Number(this.formDate.rebate)
-      this.formDate.rebate += 0.1
-      this.formDate.rebate = this.fomatFloat(this.formDate.rebate, 1)
-    },
-
-    fomatFloat(src, pos) {
-      return Math.round(src * Math.pow(10, pos)) / Math.pow(10, pos);
-    },
+    // fomatFloat(src, pos) {
+    //   return Math.round(src * Math.pow(10, pos)) / Math.pow(10, pos);
+    // },
 
     /*
      * 遍历折扣数组数组
@@ -404,31 +425,30 @@ export default {
      * 取消焦点的监听
      */
 
-     cancelFoc(){
-       const form = document.getElementById("groupsForm")
-       const fieldNum = form.elements[1]
-       fieldNum.addEventListener("focus",()=>{
-          this.traversing()
-          // this.$toast('最低折扣'+ this.zhekouValue +'折' )
-       },false)
-
-
-     },
+     // cancelFoc(){
+     //   const form = document.getElementById("groupsForm")
+     //   const fieldNum = form.elements[1]
+     //   fieldNum.addEventListener("focus",()=>{
+     //      this.traversing()
+     //   },false)
+     //
+     //
+     // },
 
     /*
      * 输入三位后禁掉
      */
-    maxLength() {
-      const form = document.getElementById("groupsForm")
-      const rebate = form.elements[1]
-      rebate.addEventListener("keyup", (e) => {
-        let target = e.target
-        if (target.value.length > target.maxLength) {
-        this.$toast('已经超过最大位数')
-        }
-      }, false)
-
-    },
+    // maxLength() {
+    //   const form = document.getElementById("groupsForm")
+    //   const rebate = form.elements[0]
+    //   rebate.addEventListener("keyup", (e) => {
+    //     let target = e.target
+    //     if (target.value.length > target.maxLength) {
+    //     this.$toast('已经超过最大位数')
+    //     }
+    //   }, false)
+    //
+    // },
 
     /*
      * 适配取carCode
@@ -454,13 +474,21 @@ export default {
     },
 
     closeRuleText() {
-      this.formDate.number = ""
-      this.formDate.rebate = ""
+      this.formDate.number = 5
+      this.formDate.rebate = 10
       this.$emit('toggleRuleText', false)
     },
     sendGroup() {
       if (!this.formDate.number) {
         this.$toast('请输入盒数')
+        return
+      }
+      if (this.formDate.number < 5) {
+        this.$toast('5盒起售')
+        return
+      }
+      if (this.formDate.number > 500) {
+        this.$toast('最多500盒')
         return
       }
       if (isNaN(this.formDate.number) ) {
@@ -489,8 +517,8 @@ export default {
 
     setTimeout(() => {
       this.observeNum()
-      this.maxLength()
-      this.cancelFoc()
+      // this.maxLength()
+      // this.cancelFoc()
       this.scrollInt()
 
     }, 0)
