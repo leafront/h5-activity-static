@@ -15,3 +15,5 @@ export const deleteGroupon = (data) => request('/api/my/groupon/deleteGrouponAct
 export const getWholeSaleAward = (data) => request('/api/my/groupon/getWholeSaleAward', data)
 
 export const getGrouponRuleList = (data) => request('/api/my/groupon/getGrouponRuleList', data)
+
+export const getCustomerInfo = (data) => request('/customer/user/getInfo.do', data)
