@@ -206,7 +206,14 @@ export default new Router({
         title: '商品详情',
         bgColor: '#fff',
       }
+    }, {
+      path: '/activity/queen/index',
+      name: 'queenIndex',
+      component: () => import('@/views/activity/queen/index'),
+      meta: {
+        title: '女王节',
+        bgColor: '#fff'
+      }
     }
-
   ]
 })
