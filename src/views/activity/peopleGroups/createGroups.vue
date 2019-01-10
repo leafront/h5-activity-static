@@ -198,7 +198,7 @@
 
             <div class="s_body_des" v-for="(item, index) in createGroupsInt">
               <div class="s_body_des_detail">
-                <div class="s_body_detail_left pic-lazyLoad" :data-src="item.pics[0] ? (item.pics[0].url300x300) : defaultImg">
+                <div class="s_body_detail_left pic-lazyLoad" :data-src="item.pics[0] ? (item.pics[0].url300x300) : defaultImg" @click="gotoDetail(item)">
                   <!-- <div class="s_body_detail_left pic-lazyLoad" > -->
 
                 </div>
@@ -255,7 +255,7 @@
 
           <div class="s_body_des">
             <div class="s_body_des_detail">
-              <div class="s_body_detail_left" v-if="item.pics.length" :style="{'backgroundImage':'url('+ item.pics[0].url300x300 + ')'}">
+              <div class="s_body_detail_left" v-if="item.pics.length" :style="{'backgroundImage':'url('+ item.pics[0].url300x300 + ')'}" @click="gotoDetail(item)">
               </div>
               <div class="s_body_detail_left " v-else>
               </div>
@@ -431,6 +431,16 @@ export default {
     jumpPage() {
       location.href = "/activity/bulk/incentive"
     },
+
+    // 跳转详情页
+  gotoDetail: function(item) {
+
+    if (utils.isApp()) {
+      location.href = 'lyf://productdetail?body={"mpId":' + item.mpId + '}';
+    } else {
+      location.href = '/detail.html?itemId=' + item.mpId;
+    }
+  },
     /**
      * 固定导航条效果
      */
