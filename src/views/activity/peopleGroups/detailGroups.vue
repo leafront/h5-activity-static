@@ -408,7 +408,7 @@ export default {
 .im_img{
   width: .35rem;
   height: .35rem;
-  background-image: url(/activity-static/images/customerserver.jpeg);
+  background-image: url(/activity-static/images/customerS.png);
   background-size: 100%;
   background-repeat: no-repeat;
 }
