@@ -207,7 +207,7 @@ export default new Router({
         bgColor: '#fff',
       }
     }, {
-      path: '/activity/queen/queenMerge',
+      path: '/activity/queen/merge',
       name: 'queenMerge',
       component: () => import('@/views/activity/queen/queenMerge'),
       meta: {
