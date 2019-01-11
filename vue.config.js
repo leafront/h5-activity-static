@@ -6,7 +6,7 @@ function resolve (dir) {
 }
 
 module.exports = {
-  chainWebpack: config =>  { 
+  chainWebpack: config =>  {
     config.resolve.alias.set('@$', resolve('src'))
     config.plugins.delete('preload');
     config.plugins.delete('prefetch');
@@ -72,7 +72,7 @@ module.exports = {
     open: false, //配置自动启动浏览器
     proxy: {
       '/api': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/osc-api': {

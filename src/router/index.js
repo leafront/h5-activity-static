@@ -207,6 +207,14 @@ export default new Router({
         bgColor: '#fff',
       }
     }, {
+      path: '/activity/queen/queenMerge',
+      name: 'queenMerge',
+      component: () => import('@/views/activity/queen/queenMerge'),
+      meta: {
+        title: '女王节',
+        bgColor: '#b61716'
+      }
+    },{
       path: '/activity/queen/index',
       name: 'queenIndex',
       component: () => import('@/views/activity/queen/index'),
@@ -214,6 +222,6 @@ export default new Router({
         title: '女王节',
         bgColor: '#b61716'
       }
-    }
+    },
   ]
 })
