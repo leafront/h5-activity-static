@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="ui-mask" id="koi-rule-mask" :class="{'active': isPopup}"></div>
-    <div class="koi__popup" :class="{'active': isPopup}">
+    <div class="ui-mask" id="queen-rule-mask" :class="{'active': isPopup}"></div>
+    <div class="queen__popup" :class="{'active': isPopup}">
       <img src="./images/popup.png"/>
-      <div class="koi__popup--action" @click="submitCouponExchange"></div>
-      <div class="koi__popup--close" @click="togglePopup">
-        <span class="koi__popup--btn"></span>
+      <div class="queen__popup--action" @click="submitCouponExchange"></div>
+      <div class="queen__popup--close" @click="togglePopup">
+        <span class="queen__popup--btn"></span>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@
     watch: {
       isPopup (newVal,oldVal) {
         if (newVal) {
-          document.getElementById('koi-rule-mask').addEventListener('touchmove',(event) => {
+          document.getElementById('queen-rule-mask').addEventListener('touchmove',(event) => {
             if (!utils.isPassive()) {
               event.preventDefault()
             }
@@ -57,7 +57,7 @@
 </script>
 
 <style lang="scss">
-  .koi__popup{
+  .queen__popup{
     position: fixed;
     width: 100%;
     top: 50%;
@@ -70,8 +70,8 @@
       width: 3.2rem;
       height: 1rem;
       position: absolute;
-      left: 2.2rem;
-      top: 3.2rem;
+      left: 1.9rem;
+      top: 4.2rem;
     }
     &--close{
       padding: .12rem .3rem;
@@ -110,7 +110,7 @@
     }
     img{
       width: 6.89rem;
-      height: 5.03rem;
+      height: 6.67rem;
       margin: 0 auto;
       display: block;
     }
