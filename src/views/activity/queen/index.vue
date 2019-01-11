@@ -6,17 +6,17 @@
 				<div class="queen-nav">
 					<div class="queen-nav__item">
           	<p>收集津贴</p>
-          	<span>01.02-01.27</span>
+          	<span>01.02 ~ 01.28</span>
           	<i class="queen-nav__item--circle"></i>
         	</div>
        	  <div class="queen-nav__item">
             <p>合成食运券</p>
-            <span>01.18-01.27</span>
+            <span>01.18 ~ 01.28</span>
             <i class="queen-nav__item--circle"></i>
           </div>
           <div class="queen-nav__item">
             <p>使用食运券</p>
-            <span>01.18-01.27</span>
+            <span>01.18 ~ 01.28</span>
             <i class="queen-nav__item--circle"></i>
           </div>
           <div class="queen-nav__line"></div>
@@ -172,11 +172,14 @@
 					<img src="./images/queen_price_03.png"/>
 				</div>
 				<div class="queen-seed__des">
-          <span class="font">我已拥有¥{{couponSum}}过年津贴</span>
+          <span class="font">我已拥有 ¥ {{couponSum}} 过年津贴</span>
         </div>
-        <div class="queen_active_merge">
+        <div class="queen_active_merge" @click="pageAction" v-if="mergeButtonStatus == 0">
         	<span></span>
         </div>
+        <div class="queen_active_merge_open" v-else>
+        	<span></span>
+        </div>	
         <div class="queen_intro">
         	<span class="queen_intro_bg"></span>
         	<div class="queen_intro_info">
@@ -184,25 +187,24 @@
         		<div class="queen_intro_item">
         			<i class="queen_intro_circle">1</i>
         			<div class="queen_intro_txt">
-        				<p>活动时间:2019年1月2日0:00 - 1月27日24:00</p>
+        				<p>活动时间:2019年1月2日0:00 - 1月28日24:00</p>
         			</div>	
         		</div>	
         		<div class="queen_intro_item">
         			<i class="queen_intro_circle">2</i>
         			<div class="queen_intro_txt">
-        				<p>活动进程:1月02日 - 1月27日收集过年津贴，
-        				<p>1月18日10点 - 1月27日24点期间可以合成食运劵并使用</p>
+        				<p>活动进程:1月02日 - 1月28日收集过年津贴，
+        				<p>1月18日10点 - 1月28日24点期间可以合成食运劵并使用</p>
         			</div>	
         		</div>
         		<div class="queen_intro_item">
         			<i class="queen_intro_circle">3</i>
         			<div class="queen_intro_txt">
         				<p>津贴收集方式</p>
-        				<p>1、首次登录状态下浏览食运券活动页可获得¥30津贴，满99可用， 1、
-同一用户ID活动期间仅可获得1次;</p>
+        				<p>1、首次登录状态下浏览食运券活动页可获得¥30津贴，满99可用，同一用户ID活动期间仅可获得1次;</p>
 								<p>2、首次点击食运劵活动页面“去分享”按钮分享活动，可以获得¥20个 1元个津贴，并且同一用户ID活动期间仅限首次分享可获得</p>
 								<p>3、同一用户ID，每天签到1次，可获得¥1津贴</p>
-								<p>4、同一用户ID，每天可使用3积分兑换¥3津贴，同一用户每天上限兑换3次，</p>
+								<p>4、同一用户ID，每天可使用3积分兑换¥3津贴，同一用户每天上限兑换1次，</p>
 								<p>5、活动期间，每支付完成1笔订单(外卖、团购订单除外)， 可以获得¥10元无门槛津贴，同一用户每天限3单</p>
 								<p>6、活动期间津贴可作为优惠券正常下单使用， 津贴使用过后即不可再用于合成食运劵;</p>
 								<p>7、所谓同一用户是指同一用户ID、同一手机号、 同一支付账号都视为同一用户;</p>
@@ -213,7 +215,7 @@
         			<i class="queen_intro_circle">4</i>
         			<div class="queen_intro_txt">
         				<p>食运劵合成规则</p>
-        				<p>1、戴森吹风机兑换券，津贴¥120及以上可兑换，仅限1张， 限1月22日10点开始兑换，错过则无</p>
+        				<p>1、戴森吹风机兑换券，津贴¥120及以上可兑换，仅限1张， 限1月20、21、22日10点开始兑换，错过则无</p>
         				<p>2、满299-200元券，津贴¥100元及以上可兑换，每日限量，兑完即止</p>
         				<p>3、满199-100元券，津贴¥50元及以上可兑换，每日限量，兑完即止;</p>
         				<p>4、满199-70元券，津贴¥35元及以上可兑换，每日限量，兑完即止;</p>
@@ -611,6 +613,18 @@
 			width: 3.05rem;
 			height: .53rem;
 			background: url(./images/queen_merge_btn_bg.png) no-repeat;
+			background-size: 100% auto;
+		}
+	}
+	.queen_active_merge_open{
+		margin-top: .32rem;
+		height: .53rem;
+		display: flex;
+		justify-content: center;
+		span{
+			width: 4.39rem;
+			height: .53rem;
+			background: url(./images/queen_merge_btn_bg1.png) no-repeat;
 			background-size: 100% auto;
 		}
 	}
