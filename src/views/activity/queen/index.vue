@@ -3,6 +3,10 @@
 		<AppHeader :title="title"></AppHeader>
 		<div class="scroll-view-wrapper" :class="{'visibility': pageView,'scroll_view_hidden': isPopup}">
 			<div class="queen_index_header">
+				<div class="queen__banner--rule" @click="ruleAction">
+          <i>!</i>
+          <span class="font">规则</span>
+        </div>
 				<div class="queen-nav">
 					<div class="queen-nav__item">
           	<p>收集津贴</p>
@@ -180,7 +184,7 @@
         <div class="queen_active_merge_open" v-else>
         	<span></span>
         </div>	
-        <div class="queen_intro">
+        <div class="queen_intro" id="queen_rule">
         	<span class="queen_intro_bg"></span>
         	<div class="queen_intro_info">
         		<h4 class="font-b">活动说明</h4>
@@ -201,10 +205,10 @@
         			<i class="queen_intro_circle">3</i>
         			<div class="queen_intro_txt">
         				<p>津贴收集方式</p>
-        				<p>1、首次登录状态下浏览食运券活动页可获得¥30津贴，满99可用，同一用户ID活动期间仅可获得1次;</p>
-								<p>2、首次点击食运劵活动页面“去分享”按钮分享活动，可以获得¥20个 1元个津贴，并且同一用户ID活动期间仅限首次分享可获得</p>
-								<p>3、同一用户ID，每天签到1次，可获得¥1津贴</p>
-								<p>4、同一用户ID，每天可使用3积分兑换¥3津贴，同一用户每天上限兑换1次，</p>
+        				<p>1、首次登录状态下浏览食运券活动页可获得 ¥ 30 津贴，满99可用，同一用户ID活动期间仅可获得1次;</p>
+								<p>2、首次点击食运劵活动页面“去分享”按钮分享活动，可以获得 ¥ 20 个1元个津贴，并且同一用户ID活动期间仅限首次分享可获得;</p>
+								<p>3、同一用户ID，每天签到1次，可获得¥1 津贴，仅限一次;</p>
+								<p>4、同一用户ID，每天可使用3积分兑换¥3 津贴，同一用户每天上限兑换1次;</p>
 								<p>5、活动期间，每支付完成1笔订单(外卖、团购订单除外)， 可以获得¥10元无门槛津贴，同一用户每天限3单</p>
 								<p>6、活动期间津贴可作为优惠券正常下单使用， 津贴使用过后即不可再用于合成食运劵;</p>
 								<p>7、所谓同一用户是指同一用户ID、同一手机号、 同一支付账号都视为同一用户;</p>
@@ -215,12 +219,12 @@
         			<i class="queen_intro_circle">4</i>
         			<div class="queen_intro_txt">
         				<p>食运劵合成规则</p>
-        				<p>1、戴森吹风机兑换券，津贴¥120及以上可兑换，仅限1张， 限1月20、21、22日10点开始兑换，错过则无</p>
-        				<p>2、满299-200元券，津贴¥100元及以上可兑换，每日限量，兑完即止</p>
-        				<p>3、满199-100元券，津贴¥50元及以上可兑换，每日限量，兑完即止;</p>
-        				<p>4、满199-70元券，津贴¥35元及以上可兑换，每日限量，兑完即止;</p>
-        				<p>5、满149-50元券，津贴¥25元及以上可兑换，不限量;</p>
-        				<p>6、满99-30元券，津贴¥15元及以上可兑换，不限量;</p>
+        				<p>1、戴森吹风机兑换券，津贴 ¥ 120 及以上可兑换，仅限1张， 限1月20、21、22日10点开始兑换，错过则无</p>
+        				<p>2、满299-200元券，津贴 ¥ 100元及以上可兑换，每日限量，兑完即止</p>
+        				<p>3、满199-100元券，津贴 ¥ 50元及以上可兑换，每日限量，兑完即止;</p>
+        				<p>4、满199-70元券，津贴 ¥ 35元及以上可兑换，每日限量，兑完即止;</p>
+        				<p>5、满149-50元券，津贴 ¥ 25元及以上可兑换，不限量;</p>
+        				<p>6、满99-30元券，津贴 ¥ 15元及以上可兑换，不限量;</p>
         			</div>	
         		</div>	
         		<div class="queen_intro_item">
@@ -284,7 +288,7 @@
   export default {
     data () {
       return {
-        title: '女王节',
+        title: '食运券',
         pageView: true,
         isPopup: false,
         couponSum: 0,                      //累计无门槛优惠券总额
@@ -311,6 +315,13 @@
       ...mapActions([
         'updateShareMenu'
       ]),
+      ruleAction () {
+      	const offsetTop = document.getElementById('queen_rule').getBoundingClientRect().top
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        const docRem = parseFloat(document.documentElement.style.fontSize)
+        const headerHeight = (utils.isApp() || utils.weixin()) ? 0 : .88 * docRem
+        document.documentElement.scrollTop = document.body.scrollTop = offsetTop + scrollTop - headerHeight - .8 * docRem
+      },
       /**
        * @param {Boolean} val
        */
@@ -560,6 +571,30 @@
 			color: #e7925a;
 			font-weight: bold;
 		}
+	}
+	.queen__banner--rule{
+	  position: absolute;
+    right: .2rem;
+    top: .5rem;
+    padding: 0 .2rem;
+    height: .5rem;
+    border-radius: .3rem;
+    background: #ca221a;
+    display: flex;
+    align-items: center;
+    i{
+      width: .26rem;
+      height: .26rem;
+      border-radius: 50%;
+      background: #faf0d2;
+      color: #ca231b;
+      line-height: .26rem;
+      text-align: center;
+      margin-right: .06rem;
+    }
+    span{
+      color: #faefd2;
+    }
 	}
 	.queen_intro_item{
 		display: flex;
