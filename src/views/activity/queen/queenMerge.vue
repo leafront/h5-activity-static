@@ -202,7 +202,7 @@ import app from '@/widget/app'
 
 import utils from '@/widget/utils'
 
-import * as Model from '@/model/koi'
+import * as Model from '@/model/queen'
 
 export default {
   data() {
