@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="ui-mask" id="queen-rule-mask" :class="{'active': isPopup}"></div>
+  <div id="queen-rule">
+    <div class="ui-mask" :class="{'active': isPopup}"></div>
     <div class="queen__popup" :class="{'active': isPopup}">
       <img src="./images/popup.png"/>
       <div class="queen__popup--action" @click="submitCouponExchange"></div>
@@ -29,7 +29,7 @@
     watch: {
       isPopup (newVal,oldVal) {
         if (newVal) {
-          document.getElementById('queen-rule-mask').addEventListener('touchmove',(event) => {
+          document.getElementById('queen-rule').addEventListener('touchmove',(event) => {
             if (!utils.isPassive()) {
               event.preventDefault()
             }
