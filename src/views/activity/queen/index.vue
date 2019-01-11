@@ -394,7 +394,7 @@
         }).then((result) => {
           const data = result.data
           if (data && data.activityStatus == 3) {
-       			this.$router.replace('/activity/koi/end')
+       			this.$router.replace('/activity/queen/end')
           }
         })
       },
