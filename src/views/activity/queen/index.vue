@@ -41,7 +41,7 @@
 					</div>
 				</div>		
 				<div class="queen-active-times">
-					<p>1.22早上10点开始兑换</p>
+					<p>1月20、21、22早上10点开始兑换</p>
 				</div>
 				<div class="queen_active_item">
 					<div class="queen_item_coupon">
