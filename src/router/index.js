@@ -211,7 +211,7 @@ export default new Router({
       name: 'queenMerge',
       component: () => import('@/views/activity/queen/queenMerge'),
       meta: {
-        title: '女王节',
+        title: '食运券',
         bgColor: '#b61716'
       }
     },{
@@ -219,7 +219,7 @@ export default new Router({
       name: 'queenIndex',
       component: () => import('@/views/activity/queen/index'),
       meta: {
-        title: '女王节',
+        title: '食运券',
         bgColor: '#b61716'
       }
     },
