@@ -212,7 +212,7 @@ export default new Router({
       component: () => import('@/views/activity/queen/index'),
       meta: {
         title: '女王节',
-        bgColor: '#fff'
+        bgColor: '#b61716'
       }
     }
   ]
