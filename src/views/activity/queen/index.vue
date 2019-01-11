@@ -11,12 +11,12 @@
         	</div>
        	  <div class="queen-nav__item">
             <p>合成食运券</p>
-            <span>01.18早10点-01.27晚24点</span>
+            <span>01.18-01.27</span>
             <i class="queen-nav__item--circle"></i>
           </div>
           <div class="queen-nav__item">
             <p>使用食运券</p>
-            <span>01.18早10点-01.27晚24点</span>
+            <span>01.18-01.27</span>
             <i class="queen-nav__item--circle"></i>
           </div>
           <div class="queen-nav__line"></div>
@@ -777,8 +777,9 @@
 		left: 50%;
 		margin-left: -3.39rem;
 		display: flex;
+		justify-content: space-between;
 		&__item{
-      flex: 1;
+			flex:1;
       height: 100%;
       padding: .15rem 0;
       color: #ffbb7e;
