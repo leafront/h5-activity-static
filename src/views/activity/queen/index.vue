@@ -135,7 +135,7 @@
 				<div class="queen_coupon_way">
 					<div class="queen_coupon_way_item">
 						<img src="./images/queen_coupon_pic_01.png"/>
-						<div class="queen_coupon_way_info" @click="signAction(signUrl)" :class="{'active': secondStrategyButtonStatus == 1}">
+						<div class="queen_coupon_way_info" @click="pageAction(signUrl)" :class="{'active': secondStrategyButtonStatus == 1}">
 							<span v-if="secondStrategyButtonStatus == 0">去签到</span>
               <span v-else-if="secondStrategyButtonStatus == 1">今日已签到</span>
 						</div>	
@@ -320,19 +320,7 @@
        * page location
        * @param {String} url
        */
-      signAction (url) {
-        app.loggedInAction(url)
-      },
-      /**
-       * page location
-       * @param {String} url
-       */
-      pageAction () {
-        const hideHead = utils.query('hideHead')
-        let url = '/activity/koi/merge'
-        if (hideHead !== undefined) {
-          url = `${url}?hideHead=${hideHead}`
-        }
+      pageAction (url) {
         app.loggedInAction(url)
       },
       /**
