@@ -222,6 +222,18 @@ export default new Router({
         title: '女王节',
         bgColor: '#b61716'
       }
+<<<<<<< HEAD
     },
+=======
+    }, {
+      path: '/activity/queen/end',
+      name: 'queenEnd',
+      component: () => import('@/views/activity/queen/end'),
+      meta: {
+        title: '女王节',
+        bgColor: '#b61716'
+      }
+    }
+>>>>>>> 3992efb79875ad0333022c6d52c15b3da4d991ef
   ]
 })
