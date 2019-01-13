@@ -110,7 +110,7 @@
 
     .weui-switch-on:before {
         /*border-color: #1AAD19;*/
-        background: #F8E71C;
+        background: #DDDDDD;
     }
 
     .weui-switch-on:after {

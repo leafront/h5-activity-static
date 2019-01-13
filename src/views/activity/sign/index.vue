@@ -20,7 +20,7 @@
         <!--礼物图标-->
         <div class="gift"><img src="./images/sign_gift.png"></div>
         <!--第三天礼物图标-->
-        <div v-if="currentDay == 3" class="gift-three"><img src="./images/sign_gift.png"></div>
+        <div v-if="currentDay == 2" class="gift-three"><img src="./images/sign_gift.png"></div>
         <!--进度条-->
         <div class="progress-bar"><img :src="progressBar"></div>
         <!--交替灯光上-->
@@ -336,7 +336,7 @@
           <span>查看我的礼物</span>
         </div>
         <div v-else class="button" @click="showPopSeven = false">
-          <span>明天提醒我</span>
+          <span>朕知道了</span>
         </div>
 
         <div class="btn-close" @click="showPopSeven = false">
@@ -491,7 +491,7 @@
               this.currentDay = this.userInfo.currentCount - 1;
             }
             // 第三天弹窗
-            this.currentDay == 3 && this.userInfo.currentStatus == 0 ? this.showPopThree = true : this.showPopThree = false;
+            this.currentDay == 2 && this.userInfo.currentStatus == 0 ? this.showPopThree = true : this.showPopThree = false;
 
             this.currentDay == 6 && this.userInfo.currentStatus == 0 ? this.firstSeven = true : this.firstSeven = false;
 
@@ -962,8 +962,8 @@
   }
   .gift-three {
     position: absolute;
-    top: 4.4rem;
-    left: 5.71rem;
+    top: 4.45rem;
+    left: 2.71rem;
     img {
       width: .5rem;
     }
