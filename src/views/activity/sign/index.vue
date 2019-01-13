@@ -4,7 +4,7 @@
 
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <!--背景-->
-      <img v-if="currentDay != 6" class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/1541749068675_2598.jpg">
+      <img v-if="currentDay != 6" class="img-background" src="./images/sign_bg.jpg">
       <div v-if="currentDay != 6" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
         <!--底部文字-->
         <div class="annotation">{{annotation}}</div>
@@ -84,7 +84,7 @@
           <!--0 未签到、未分享  1 已签到、未分享  2 已签到、已分享、未抽奖 3 已签到、已分享、已抽奖-->
           <img v-show="userInfo.currentStatus == 0" id="btnClick" @click="signIn" class="btn-sign" src="./images/sign_click.gif" />
           <img v-show="userInfo.currentStatus == 1" @click="shareInfo" class="btn-sign" src="./images/sign_share.png" />
-          <img v-show="userInfo.currentStatus == 2" @click="signDraw" class="btn-sign" src="./images/sign_shared_draw.png" />
+          <img v-show="userInfo.currentStatus == 2" id="btnClickAga" @click="signDraw" class="btn-sign" src="./images/sign_shared_draw.png" />
           <img v-show="userInfo.currentStatus == 3" class="btn-sign" src="./images/sign_drawed.png" />
 
           <img class="btn-rules" @click="showRule = true" src="./images/sign_rule.png" />
@@ -100,7 +100,7 @@
 
       </div>
 
-      <img v-if="currentDay == 6" class="img-background" src="https://static3.laiyifen.com/files/h5-mall-static/image/sign_bg2.jpg" />
+      <img v-if="currentDay == 6" class="img-background" src="./images/sign_bg_seven.jpg" />
       <div v-if="currentDay == 6" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
         <!--红包雨-->
         <div class="ser_home" id="ser_home">
@@ -332,11 +332,11 @@
         <div class="sub-title" v-if="!signInfo.isAwarded">
           再接再厉！明天再来吧~
         </div>
-        <div class="button" @click="showPopSeven = false">
-          <span>明天提醒我</span>
-        </div>
-        <div v-if="signInfo.isAwarded" class="button" @click="openAward">
+        <div v-if="signInfo.isAwarded" style="margin-top: .9rem" class="button" @click="openAward">
           <span>查看我的礼物</span>
+        </div>
+        <div v-else class="button" @click="showPopSeven = false">
+          <span>明天提醒我</span>
         </div>
 
         <div class="btn-close" @click="showPopSeven = false">
@@ -346,9 +346,8 @@
     </div>
 
     <!--第七天首次进入加载-->
-    <!--<div id="sign-disappear" v-show="showPopSeven || true">-->
-    <div id="cool-effect" class="cool-effect" v-show="showPopSeven">
-        <div class="frame">
+    <div id="cool-effect" class="cool-effect" v-show="firstSeven">
+        <div class="frame" id="frame">
           <div id="cool-bg" class="bg-rotation">
             <img src="./images/sign_giftbox_bg.png">
           </div>
@@ -439,7 +438,8 @@
         liParams: [],
         timer: null,
         duration: 2000, // 定义时间
-        isDisable: false
+        isDisable: false,
+        firstSeven: false, //用于判断第七天首次进入是时候的弹窗
       }
     },
     components: {UITimePicker, AppHeader, vswitch},
@@ -478,6 +478,7 @@
         Model.getUserInfo({
           type: 'GET'
         }).then((result) => {
+          let vm = this;
           this.pageView = true;
           const data = result.data
           if (result.code == 0 ) {
@@ -490,7 +491,9 @@
               this.currentDay = this.userInfo.currentCount - 1;
             }
             // 第三天弹窗
-            this.currentDay == 3 && this.userInfo.currentStatus == 0 ? this.showPopThree = true : this.showPopThree = false
+            this.currentDay == 3 && this.userInfo.currentStatus == 0 ? this.showPopThree = true : this.showPopThree = false;
+
+            this.currentDay == 6 && this.userInfo.currentStatus == 0 ? this.firstSeven = true : this.firstSeven = false;
 
 
             // 进度条
@@ -503,7 +506,9 @@
 
             // 创造游戏
             if (val == 1) {
-              this.createGame();
+              setTimeout(function(){
+                vm.createGame();
+              },0 );
             }
           }
         })
@@ -521,6 +526,7 @@
             for (let i in this.initInfo.broadCardList) {
               this.broadWinners = this.broadWinners + this.initInfo.broadCardList[i];
             }
+            console.log('broadWinners',this.broadWinners);
             this.awardsList = this.initInfo.awards;
           }
         })
@@ -536,7 +542,6 @@
             this.isDisable = true;
             if (result.code == 0) {
               this.signInfo = data
-              console.log('signInfo', this.signInfo)
               // 是否中奖
               this.gameDefaults.zj_arr.is_win = data.isAwarded ? 1 : 2;
 
@@ -565,8 +570,11 @@
 
               //红包雨
               if (this.currentDay == 6 && this.userInfo.currentStatus == 0) {
-                document.getElementById('ser_home').style.display = 'block'
-                this.startRedPacket()
+                document.getElementById('ser_home').style.display = 'block';
+                this.startRedPacket();
+                setTimeout(() => {
+                  document.getElementById('red_packet').style.display = 'none';
+                }, 3500)
               }
 
               // 游戏开始
@@ -596,7 +604,6 @@
             this.isDisable = true;
             if (result.code == 0) {
               this.signInfo = data
-              console.log('signInfo', this.signInfo)
               // 是否中奖
               this.gameDefaults.zj_arr.is_win = data.isAwarded ? 1 : 2;
 
@@ -610,7 +617,7 @@
               this.showGrowth = true,
 
               // button 变成抽奖中
-              document.getElementById('btnClick').src = require('./images/sign_clicked.png');
+              document.getElementById('btnClickAga').src = require('./images/sign_clicked.png');
 
               setTimeout(() => {
                 this.showGrowth = false;
@@ -622,12 +629,6 @@
                 this.currentDay == 6 ? this.showPopSeven = true : this.showPop = true;
               }, 5000)
 
-
-              //红包雨
-              if (this.currentDay == 6 && this.userInfo.currentStatus == 0) {
-                document.getElementById('ser_home').style.display = 'block'
-                this.startRedPacket()
-              }
 
               // 游戏开始
               this.luckGame();
@@ -787,7 +788,6 @@
         if (alarmTime) {
           alarmTime = alarmTime.split('-');
           this.selectValue = alarmTime;
-          console.log('this.selectValue', this.selectValue);
         }
       },
       togglePicker (val) {
@@ -846,7 +846,6 @@
       },
       // switch开关
       changeSwitch(checked){
-        console.log('index', checked)
         if (checked) {
           this.selectDate();
         } else {
@@ -864,8 +863,10 @@
         box.classList.add('change-size');
 
         setTimeout(function () {
+          document.getElementById("frame").style.display = 'none';
+          document.getElementById("cool-effect").style.display = 'none';
           document.getElementById("cool-box").style.display = "none";
-        }, 2400);
+        }, 1550);
 
       },
 
@@ -887,7 +888,7 @@
 
 
         setTimeout( () => {  // 多少时间结束
-          clearTimeout(this.timer)
+          clearTimeout(this.timer);
           return;
         }, this.duration)
 
@@ -1033,7 +1034,7 @@
     font-weight:400;
     line-height:0.34rem;
     color: #fff;
-    display: inline-block;
+    display: inline-flex;
     /*overflow: hidden;*/
     /*text-overflow: ellipsis;*/
     white-space: nowrap;
@@ -1100,6 +1101,9 @@
     left: 5.9rem;
     top: 6.1rem;
     z-index: 99;
+    img {
+      width: 1.2rem;
+    }
   }
   .buttons {
     position: absolute;
@@ -1324,7 +1328,7 @@
     top: 0;
     bottom: 0;
     background: rgba(0, 0, 0, .5);
-    z-index: 99;
+    z-index: 101;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1574,8 +1578,8 @@
   }
 
   .change-size {
-    animation:mymove 2.4s 1;
-    -webkit-animation:mymove 2.4s 1; /*Safari and Chrome*/
+    animation:mymove 1.6s 1;
+    -webkit-animation:mymove 1.6s 1; /*Safari and Chrome*/
   }
   @keyframes mymove
   {
@@ -1584,8 +1588,8 @@
       transform: scale(1);
     }
     to {
-      left: 2.25rem;
-      top: .8rem;
+      left: 0rem;
+      top: 45%;
       transform: scale(.1);
     }
   }
