@@ -226,9 +226,9 @@
         <div class="buttons">
           <img @click="openAward" class="btn-awards"  src="./images/sign_award_seven.png" />
           <!--0 未签到、未分享  1 已签到、未分享  2 已签到、已分享、未抽奖 3 已签到、已分享、已抽奖-->
-          <img v-show="userInfo.currentStatus == 0" id="btnClick" @click="signIn" class="btn-sign" src="./images/sign_click_seven.png" />
+          <img v-show="userInfo.currentStatus == 0" id="btnClick" @click="signIn" class="btn-sign" src="./images/sign_click.gif" />
           <img v-show="userInfo.currentStatus == 1" @click="shareInfo" class="btn-sign" src="./images/sign_share.png" />
-          <img v-show="userInfo.currentStatus == 2" @click="signDraw" class="btn-sign" src="./images/sign_shared_draw.png" />
+          <img v-show="userInfo.currentStatus == 2" id="btnClickAga" @click="signDraw" class="btn-sign" src="./images/sign_shared_draw.png" />
           <img v-show="userInfo.currentStatus == 3" class="btn-sign" src="./images/sign_drawed.png" />
 
           <img class="btn-rules" @click="showRule = true" src="./images/sign_rule_seven.png" />
@@ -490,6 +490,7 @@
             } else {
               this.currentDay = this.userInfo.currentCount - 1;
             }
+            console.log(this.currentDay);
             // 第三天弹窗
             this.currentDay == 2 && this.userInfo.currentStatus == 0 ? this.showPopThree = true : this.showPopThree = false;
 
@@ -497,7 +498,11 @@
 
 
             // 进度条
-            this.progressBar = require(`./images/sign_progress${this.userInfo.currentCount}.png`);
+            if (this.currentDay == 5 && this.userInfo.currentStatus != 0) {
+              this.progressBar = require(`./images/sign_progress6_1.png`);
+            } else {
+              this.progressBar = require(`./images/sign_progress${this.userInfo.currentCount}.png`);
+            }
             // 抽奖池
             this.temSquareList = data.awards;
             for (let i in result.data.awards){
@@ -526,7 +531,6 @@
             for (let i in this.initInfo.broadCardList) {
               this.broadWinners = this.broadWinners + this.initInfo.broadCardList[i];
             }
-            console.log('broadWinners',this.broadWinners);
             this.awardsList = this.initInfo.awards;
           }
         })
@@ -535,11 +539,14 @@
       // 开始签到
       signIn () {
         if (!this.isDisable){
+          this.isDisable = true;
           Model.signIn({
             type: 'POST'
           }).then((result) => {
             const data = result.data;
-            this.isDisable = true;
+            setTimeout(() => {
+              this.isDisable = false;
+            }, 2000)
             if (result.code == 0) {
               this.signInfo = data
               // 是否中奖
@@ -586,10 +593,7 @@
                 document.getElementById('rockImg').src = require('./images/sign_rock.gif');
               }
             } else {
-              this.$toast('签到失败，请稍后重试');
-              setTimeout(() => {
-                this.isDisable = false;
-              }, 2000)
+              this.$toast(result.msg);
             }
           })
         }
@@ -601,7 +605,9 @@
             type: 'POST'
           }).then((result) => {
             const data = result.data;
-            this.isDisable = true;
+            setTimeout(() => {
+              this.isDisable = false;
+            }, 2000)
             if (result.code == 0) {
               this.signInfo = data
               // 是否中奖
@@ -614,7 +620,9 @@
                 };
               }
               // 显示成长值
-              this.showGrowth = true,
+              this.showGrowth = true;
+              // 游戏开始
+              this.luckGame();
 
               // button 变成抽奖中
               document.getElementById('btnClickAga').src = require('./images/sign_clicked.png');
@@ -630,8 +638,6 @@
               }, 5000)
 
 
-              // 游戏开始
-              this.luckGame();
               // 拉霸动效、区分第七天
               if (this.currentDay == 6) {
                 document.getElementById('rockImg').src = require('./images/sign_rock_seven.gif');
@@ -639,10 +645,7 @@
                 document.getElementById('rockImg').src = require('./images/sign_rock.gif');
               }
             } else {
-              this.$toast('签到失败，请稍后重试');
-              setTimeout(() => {
-                this.isDisable = false;
-              }, 2000)
+              this.$toast(result.msg);
             }
           })
         }
@@ -818,7 +821,7 @@
         }).then((result) => {
           const data = result.data;
           if (result.code == 0 && data) {
-            this.$toast('提醒成功')
+            this.$toast('已成功开启提醒')
           }
         })
       },
@@ -829,7 +832,7 @@
         }).then((result) => {
           const data = result.data;
           if (result.code == 0 && data) {
-            this.$toast('关闭提醒')
+            this.$toast('已成功关闭提醒')
           }
         })
       },
