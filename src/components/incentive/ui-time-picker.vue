@@ -97,7 +97,7 @@
         for (let i = this.start; i <= this.end; i++) {
           let months = []
 
-          for (let j = 0; j < 59; j++) {
+          for (let j = -1; j < 59; j++) {
             months.push({
               label: j + 1 + '分',
               value: j + 1
@@ -159,7 +159,7 @@
         this.$emit('cancel', false)
       },
       confirm () {
-        let monthVal =  this.checkedDate[1] + 1
+        let monthVal =  this.checkedDate[1];
         if (monthVal < 10) {
           monthVal = '0' + monthVal
         }

@@ -363,7 +363,8 @@
           <div id="cool-button" class="button" @click="closeWin">
             <img src="./images/sign_iknow_bg.png" />
           </div>
-      </div>
+          <div style="margin-top: .5rem;" class="cool-close" id="cool-close" @click="closeWin"><img src="./images/sign_close.png"></div>
+        </div>
     </div>
 
 
@@ -429,7 +430,7 @@
           pic: 'https://static2.laiyifen.com/files/H5-mall-static/image/sign_share_icon.jpg',
         },
         isPicker: false, //时间选择器
-        checkedValue: ['10', '30'],
+        checkedValue: ['10', '31'],
         initSwitch: false, // 首次判断是否有进行过签到提醒
         isCancel: false, // 取消签到提醒
         currentDay: 0,
@@ -798,6 +799,7 @@
       },
       // 日期选择确定
       confirm (val) {
+        console.log('val', val);
         this.checkedValue = val.split('-');
         this.queryDate = val;
         this.queryDate = this.checkedValue[0] + this.checkedValue[1];
@@ -861,6 +863,7 @@
         document.getElementById("cool-bg").style.display = 'none';
         document.getElementById("cool-button").style.display = 'none';
         document.getElementById("cool-desc").style.display = 'none';
+        document.getElementById("cool-close").style.display = 'none';
 
         let box = document.getElementById("cool-box");
         box.classList.add('change-size');
