@@ -207,7 +207,7 @@ import * as Model from '@/model/queen'
 export default {
   data() {
     return {
-      title: '合成锦鲤券',
+      title: '女王节',
       loadValue: true,
       pageView: true,
       isBorder: true,
@@ -271,7 +271,7 @@ export default {
     },
 
     jumpKoi() {
-      location.href = "/activity/koi/index"
+      location.href = "/activity/queen/index"
     },
     /*
      * 选取合成方式
