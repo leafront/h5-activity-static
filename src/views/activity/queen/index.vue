@@ -178,7 +178,7 @@
 				<div class="queen-seed__des">
           <span class="font">我已拥有 ¥ {{couponSum}} 过年津贴</span>
         </div>
-        <div class="queen_active_merge" @click="pageAction" v-if="mergeButtonStatus == 0">
+        <div class="queen_active_merge" @click="pageAction('/activity/queen/merge')" v-if="mergeButtonStatus == 0">
         	<span></span>
         </div>
         <div class="queen_active_merge_open" v-else>
