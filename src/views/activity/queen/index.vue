@@ -354,9 +354,9 @@
         }
         const shareConfig = {
           link: this.shareStrategyUrl,
-          title: '官宣 锦鲤和双十一更配哦',
-          description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
-          imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png',
+          title: '食来运转巨福气',
+          description: '来伊份匠心年货节，集津贴换食运券，让你猪年巨有福~',
+          imgUrl: config.staticPath + '/activity-static/images/queen_share_icon.png',
           platforms: [
            "WechatMoments",
            "Wechat",
