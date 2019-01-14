@@ -9,7 +9,7 @@
         {{dgDescription.name}}
       </div>
       <div class="detail_des_text2">
-        {{dgDescription.subtitle}}
+        不支持7天无理由退货
       </div>
       <div class="detail_des_prize">
         <div class="dd_prize_style">
