@@ -191,13 +191,13 @@
         		<div class="queen_intro_item">
         			<i class="queen_intro_circle">1</i>
         			<div class="queen_intro_txt">
-        				<p>活动时间:2019年1月2日00:00 - 1月28日24:00</p>
+        				<p>活动时间:2019年1月18日00:00 - 1月28日24:00</p>
         			</div>	
         		</div>	
         		<div class="queen_intro_item">
         			<i class="queen_intro_circle">2</i>
         			<div class="queen_intro_txt">
-        				<p>活动进程:1月02日 - 1月28日收集过年津贴，
+        				<p>活动进程:1月18日 - 1月28日收集过年津贴，
         				<p>1月18日10点 - 1月28日24点期间可以合成食运劵并使用</p>
         			</div>	
         		</div>
