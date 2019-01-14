@@ -10,7 +10,7 @@
 				<div class="queen-nav">
 					<div class="queen-nav__item">
           	<p>收集津贴</p>
-          	<span>01.02 ~ 01.28</span>
+          	<span>01.18 ~ 01.28</span>
           	<i class="queen-nav__item--circle"></i>
         	</div>
        	  <div class="queen-nav__item">
@@ -349,7 +349,7 @@
           link: this.shareStrategyUrl,
           title: '食来运转巨福气',
           description: '来伊份匠心年货节，集津贴换食运券，让你猪年巨有福~',
-          imgUrl: config.staticPath + '/activity-static/images/queen_share_icon.png',
+          imgUrl: config.staticPath + '/activity-static/images/queen_share_icon.jpg',
           platforms: [
            "WechatMoments",
            "Wechat",
