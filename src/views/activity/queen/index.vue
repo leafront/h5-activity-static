@@ -191,7 +191,7 @@
         		<div class="queen_intro_item">
         			<i class="queen_intro_circle">1</i>
         			<div class="queen_intro_txt">
-        				<p>活动时间:2019年1月2日0:00 - 1月28日24:00</p>
+        				<p>活动时间:2019年1月2日00:00 - 1月28日24:00</p>
         			</div>	
         		</div>	
         		<div class="queen_intro_item">
@@ -270,19 +270,12 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import QueenPopup from '@/components/queen/popup'
-
   import app from '@/widget/app'
-
   import utils from '@/widget/utils'
-
   import * as Model from '@/model/queen'
-
   import config from '@/config/index'
-
   import UIShare from '@/components/widget/ui-share'
-
   import { mapActions } from 'vuex'
 
   export default {
