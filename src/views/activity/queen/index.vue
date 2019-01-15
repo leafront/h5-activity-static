@@ -93,7 +93,6 @@
               <div class="queen_coupon_item_name">
                 <span>(食运券)</span>
                 <p>满￥199立减</p>
-                <span>每日限量，兑完即止</span>
               </div>    
             </div>  
             <div class="queen_coupon_button"> 
@@ -109,7 +108,6 @@
               <div class="queen_coupon_item_name">
                 <span>(食运券)</span>
                 <p>满￥149立减</p>
-                <span>每日限量，兑完即止</span>
               </div>    
             </div>
             <div class="queen_coupon_button"> 
@@ -125,7 +123,6 @@
               <div class="queen_coupon_item_name">
                 <span>(食运券)</span>
                 <p>满￥99立减</p>
-                <span>每日限量，兑完即止</span>
               </div>    
             </div>
             <div class="queen_coupon_button"> 
@@ -223,7 +220,7 @@
                 <p>1、戴森吹风机兑换券，津贴 ¥ 120 及以上可兑换，仅限1张， 限1月20、21、22日10点开始兑换，错过则无</p>
                 <p>2、满299-200元券，津贴 ¥ 100元及以上可兑换，每日限量，兑完即止</p>
                 <p>3、满199-100元券，津贴 ¥ 50元及以上可兑换，每日限量，兑完即止;</p>
-                <p>4、满199-70元券，津贴 ¥ 35元及以上可兑换，每日限量，兑完即止;</p>
+                <p>4、满199-70元券，津贴 ¥ 35元及以上可兑换，不限量;</p>
                 <p>5、满149-50元券，津贴 ¥ 25元及以上可兑换，不限量;</p>
                 <p>6、满99-30元券，津贴 ¥ 15元及以上可兑换，不限量;</p>
               </div>  
