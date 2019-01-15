@@ -174,7 +174,8 @@
           </div> 
         </div>
         <div class="queen-seed__des">
-          <span class="font">我已拥有 ¥ {{couponSum}} 过年津贴</span>
+          <span class="font">已经获得 {{couponNum}} 张过年津贴</span>
+          <strong>共计 {{couponSum}} 元</strong>
         </div>
         <div class="queen_active_merge" @click="pageAction('/activity/queen/merge')" v-if="mergeButtonStatus == 0">
           <span></span>
@@ -986,18 +987,17 @@
     }
   }
    .queen-seed__des{
-    margin-top: .6rem;
-    width: 100%;
+    margin: .6rem .3rem 0;
     display: flex;
-    justify-content: center;
-    position: relative;
+    border-radius: .25rem;
+    justify-content: space-between;
+    border: .02rem solid #ecaa6c;
+    height: .48rem;
+    align-items: center;
+    padding: 0 .3rem;
+    color: #f8cb80;
     span{
-      color: #f8cb80;
-      border: .02rem solid #ecaa6c;
-      border-radius: .25rem;
-      padding: 0 .45rem;
-      height: .46rem;
-      line-height: .46rem;
+      position: relative;
     }
     &:before,&:after{
       bottom: 100%;
