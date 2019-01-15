@@ -1,5 +1,5 @@
 <template>
-    <div style="position: absolute; top: 1.2rem; left: 6rem" v-if="direction.length > 0">
+    <div style="position: absolute; top: 1.2rem; left: 5.8rem" v-if="direction.length > 0">
 	<span class="weui-switch" :class="{'weui-switch-on' : isChecked}" @click="toggle">
 		<div v-show="isChecked" class="selected">
 			{{direction[0]}}
@@ -68,7 +68,7 @@
     .weui-switch {
         display: block;
         position: relative;
-        width: 1.36rem;
+        width: 1.5rem;
         height: 0.36rem;
         border: 1px solid #DFDFDF;
         outline: 0;
@@ -84,7 +84,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 1.36rem;
+        width: 1.5rem;
         height: 0.36rem;
         border-radius: .2rem;
         background-color: #FDFDFD;
@@ -115,20 +115,20 @@
 
     .weui-switch-on:after {
         background: #ffffff;
-        transform: translateX(1rem);
+        transform: translateX(1.15rem);
     }
 
     .selected {
         position: absolute;
         color: #000;
         user-select: none;
-        width: .8rem;
+        width: 1rem;
         height: 0.28rem;
         font-size: 0.2rem;
-        line-height: 0.28rem;
         font-weight: 400;
         left: .1rem;
         line-height: .35rem;
+		text-align: center;
     }
 
     .unselected {
@@ -137,11 +137,12 @@
         color: #000;
         text-align: right;
         user-select: none;
-        width: .8rem;
+        width: 1rem;
         height: 0.28rem;
         font-size: 0.2rem;
         line-height: 0.35rem;
         font-weight: 400;
-    }
+		text-align: center;
+	}
 </style>
 
