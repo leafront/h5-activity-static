@@ -963,7 +963,6 @@
   .queen_coupon_price{
     margin-top: .28rem;
     display: flex;
-    height: 2.12rem;
     .queen_coupon_price_item{
       flex: 1;
       position: relative;
