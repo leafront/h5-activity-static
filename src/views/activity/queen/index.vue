@@ -134,9 +134,9 @@
           <img src="./images/queen_news_txt_01.png"/>
         </div>
         <div class="queen_coupon_way">
-          <div class="queen_coupon_way_item">
+          <div class="queen_coupon_way_item" @click="pageAction(signUrl)">
             <img src="./images/queen_coupon_pic_01.png"/>
-            <div class="queen_coupon_way_info" @click="pageAction(signUrl)" :class="{'active': secondStrategyButtonStatus == 1}">
+            <div class="queen_coupon_way_info" :class="{'active': secondStrategyButtonStatus == 1}">
               <span v-if="secondStrategyButtonStatus == 0">去签到</span>
               <span v-else-if="secondStrategyButtonStatus == 1">今日已签到</span>
             </div>  
