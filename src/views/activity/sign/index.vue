@@ -226,8 +226,8 @@
         <div class="buttons">
           <img @click="openAward" class="btn-awards"  src="./images/sign_award_seven.png" />
           <!--0 未签到、未分享  1 已签到、未分享  2 已签到、已分享、未抽奖 3 已签到、已分享、已抽奖-->
-          <img v-show="userInfo.currentStatus == 0" id="btnClick" @click="signIn" class="btn-sign" src="./images/sign_click.gif" />
-          <img v-show="userInfo.currentStatus == 1" @click="shareInfo" class="btn-sign" src="./images/sign_share.png" />
+          <img v-show="userInfo.currentStatus == 0" id="btnClick" @click="signIn" class="btn-sign" src="./images/sign_click_seven.gif" />
+          <img v-show="userInfo.currentStatus == 1" @click="shareInfo" class="btn-sign" src="./images/sign_share_seven.png" />
           <img v-show="userInfo.currentStatus == 2" id="btnClickAga" @click="signDraw" class="btn-sign" src="./images/sign_shared_draw.png" />
           <img v-show="userInfo.currentStatus == 3" class="btn-sign" src="./images/sign_drawed.png" />
 
@@ -235,7 +235,7 @@
         </div>
         <!--滑动区域-->
         <div class="slide">
-          <ul class="category-head">
+          <ul class="category-head" style="box-shadow: 0px 0px 5px 1px rgb(217, 83, 125) inset">
             <li v-for="item in awardsList" @click="openDeatil(item.id)">
               <img v-bind:src=item.imgBigSquare />
             </li>
@@ -248,16 +248,16 @@
     <!--弹窗、活动规则-->
     <div class="rule" v-show="showRule">
       <div v-show="currentDay != 6" class="rule-content">
-        <span class="btn-close" @click="showRule = false"><img src="./images/sign_close.png"></span>
         <div class="rule-body">
           {{initInfo.rule}}
         </div>
+        <div class="btn-close" @click="showRule = false"><img src="./images/sign_close.jpg"></div>
       </div>
       <div v-show="currentDay == 6" class="rule-content" :style="{'backgroundImage' : 'none', 'background': 'linear-gradient(180deg,rgba(184,10,62,1) 0%,rgba(146,26,146,1) 100%)'}">
-        <span class="btn-close" @click="showRule = false"><img src="./images/sign_close.png"></span>
         <div class="rule-body" style="color: #FFFFFF;">
           {{initInfo.rule}}
         </div>
+        <div class="btn-close" @click="showRule = false"><img src="./images/sign_close.jpg"></div>
       </div>
     </div>
 
@@ -284,7 +284,7 @@
         </div>
 
         <div class="btn-close" @click="showPop = false">
-          <img src="./images/sign_close.png">
+          <img src="./images/sign_close.jpg">
         </div>
       </div>
     </div>
@@ -306,7 +306,7 @@
         </div>
 
         <div class="btn-close" @click="showPopThree = false">
-          <img src="./images/sign_close.png">
+          <img src="./images/sign_close.jpg">
         </div>
       </div>
     </div>
@@ -340,7 +340,7 @@
         </div>
 
         <div class="btn-close" @click="showPopSeven = false">
-          <img src="./images/sign_close.png">
+          <img src="./images/sign_close.jpg">
         </div>
       </div>
     </div>
@@ -363,7 +363,7 @@
           <div id="cool-button" class="button" @click="closeWin">
             <img src="./images/sign_iknow_bg.png" />
           </div>
-          <div style="margin-top: .5rem;" class="cool-close" id="cool-close" @click="closeWin"><img src="./images/sign_close.png"></div>
+          <div style="margin-top: .5rem;" class="cool-close" id="cool-close" @click="closeWin"><img src="./images/sign_close.jpg"></div>
         </div>
     </div>
 
@@ -529,7 +529,7 @@
             this.initInfo = data;
 
             // 广播
-            for (let i in this.initInfo.broadCardList) {
+            for (let i = 0; i < this.initInfo.broadCardList.length; i++) {
               this.broadWinners = this.broadWinners + this.initInfo.broadCardList[i];
             }
             this.awardsList = this.initInfo.awards;
@@ -807,10 +807,11 @@
       },
       // 日期选择取消
       cancel () {
+        let vm = this;
         this.isCancel = true;
         setTimeout(() => {
-          this.isCancel = false;
-        })
+          vm.isCancel = false;
+        },50)
         // this.switchValue = false;
       },
       // 开启签到窗口
@@ -1191,9 +1192,12 @@
     border-radius: .2rem;
   }
   .rule .rule-content .btn-close {
-    position: absolute;
-    top: 12rem;
+    margin-top: .5rem;
     left: 3.4rem;
+    text-align: center;
+  }
+  .rule .rule-content .btn-close img {
+    width: .5rem;
   }
   .rule .rule-content .rule-body {
     font-size: .3rem;
@@ -1509,7 +1513,7 @@
 
   .annotation {
     position: absolute;
-    top: 15.1rem;
+    top: 14.6rem;
     width: 100%;
     text-align: center;
     font-size: .2rem;
@@ -1595,7 +1599,7 @@
     }
     to {
       left: 0rem;
-      top: 45%;
+      top: 50%;
       transform: scale(.1);
     }
   }
