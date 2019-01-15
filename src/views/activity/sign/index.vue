@@ -1,8 +1,8 @@
 <template>
-  <div class="pageView">
+  <div class="pageView" v-show="pageViewInit && pageViewUser">
     <AppHeader :title="title"></AppHeader>
 
-    <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
+    <div class="scroll-view-wrapper" :class="{'visibility': pageViewInit && pageViewUser}">
       <!--背景-->
       <img v-if="currentDay != 6" class="img-background" src="./images/sign_bg.jpg">
       <div v-if="currentDay != 6" class="layer" :style="{marginTop: this.showHeader() ? '0': '-.88rem'}">
@@ -228,7 +228,7 @@
           <!--0 未签到、未分享  1 已签到、未分享  2 已签到、已分享、未抽奖 3 已签到、已分享、已抽奖-->
           <img v-show="userInfo.currentStatus == 0" id="btnClick" @click="signIn" class="btn-sign" src="./images/sign_click_seven.gif" />
           <img v-show="userInfo.currentStatus == 1" @click="shareInfo" class="btn-sign" src="./images/sign_share_seven.png" />
-          <img v-show="userInfo.currentStatus == 2" id="btnClickAga" @click="signDraw" class="btn-sign" src="./images/sign_shared_draw.png" />
+          <img v-show="userInfo.currentStatus == 2" id="btnClickAga" @click="signDraw" class="btn-sign" src="./images/sign_shared_draw_seven.png" />
           <img v-show="userInfo.currentStatus == 3" class="btn-sign" src="./images/sign_drawed.png" />
 
           <img class="btn-rules" @click="showRule = true" src="./images/sign_rule_seven.png" />
@@ -398,12 +398,13 @@
     data() {
       return {
         title: '每日签到',
-        pageView: false,
+        pageViewInit: false,
+        pageViewUser: false,
         annotation: '',
         userInfo: {},
         initInfo: {},
         progressBar: require('./images/sign_progress0.png'), // 签到进度条
-        broadWinners: ' ',
+        broadWinners: '188****1737 获得 大优惠券    185****5865 获得 333    135****1197 获得 积分15    135****1197 获得 积分15    158****9022 获得 积分15    188****1737 获得 大优惠券    152****6239 获得 大优惠券    156****6195 获得 积分15    152****6239 获得 大优惠券    188****1737 获得 大优惠券    135****7640 获得 1    134****4205 获得 优惠券咯    158****5759 获得 1    158****7924 获得 1    134****5199 获得 优惠券咯    134****3001 获得 大优惠券    136****0949 获得 1    156****4492 获得 1    150****6914 获得 优惠券咯    132****4152 获得 1 ',
         imgSquareList: [],
         gameArr: [],
         gameDefaults: {
@@ -460,7 +461,6 @@
       }
       this.getInit();
       this.getUserInfo(1);
-      this.querySign();
 
       // 引流
       this.goApp();
@@ -483,6 +483,7 @@
       goApp () {
         if (utils.isApp()) {
           document.getElementById('mask').style.display = 'none';
+          this.querySign();
         } else {
 
         }
@@ -496,7 +497,7 @@
           type: 'GET'
         }).then((result) => {
           let vm = this;
-          this.pageView = true;
+          this.pageViewUser = true;
           const data = result.data
           if (result.code == 0 ) {
             this.userInfo = data;
@@ -539,15 +540,20 @@
         Model.getInit({
           type: 'GET'
         }).then((result) => {
-          this.pageView = true;
+          let vm = this;
+          this.pageViewInit = true;
           const data = result.data
           if (result.code == 0 ) {
             this.initInfo = data;
 
             // 广播
-            for (let i = 0; i < this.initInfo.broadCardList.length; i++) {
-              this.broadWinners = this.broadWinners + this.initInfo.broadCardList[i];
-            }
+            setTimeout(function(){
+              for (let i = 0; i < vm.initInfo.broadCardList.length; i++) {
+                vm.broadWinners = vm.broadWinners + vm.initInfo.broadCardList[i];
+              }
+            },0 );
+
+            console.log(this.broadWinners);
             this.awardsList = this.initInfo.awards;
           }
         })
