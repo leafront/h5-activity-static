@@ -245,6 +245,8 @@
       </div>
     </div>
 
+    <!--蒙层-->
+    <div id="mask" @click="openAPP"></div>
     <!--弹窗、活动规则-->
     <div class="rule" v-show="showRule">
       <div v-show="currentDay != 6" class="rule-content">
@@ -459,6 +461,9 @@
       this.getInit();
       this.getUserInfo(1);
       this.querySign();
+
+      // 引流
+      this.goApp();
     },
     methods: {
       // 如果是app就往下移
@@ -474,6 +479,17 @@
         } else {
           return true
         }
+      },
+      goApp () {
+        if (utils.isApp()) {
+          document.getElementById('mask').style.display = 'none';
+        } else {
+
+        }
+
+      },
+      openAPP () {
+        window.location.href = 'https://sj.qq.com/myapp/detail.htm?apkName=com.umaman.laiyifen'
       },
       getUserInfo (val) {
         Model.getUserInfo({
@@ -941,6 +957,15 @@
   .img-background {
     width: 100%;
     z-index: 1
+  }
+  #mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    z-index: 110;
   }
   .layer {
     position: absolute;
