@@ -181,6 +181,33 @@ export default new Router({
 
       }
     }, {
+      path: '/activity/sign/index',
+      name: 'sign',
+      component: () => import('@/views/activity/sign/index.vue'),
+      meta: {
+        title: '每日签到',
+        bgColor: '#effbff',
+        requireLogin: false
+      }
+    }, {
+      path: '/activity/sign/award',
+      name: 'award',
+      component: () => import('@/views/activity/sign/award.vue'),
+      meta: {
+        title: '我的奖品',
+        bgColor: '#fff',
+        requireLogin: true
+      }
+    }, {
+      path: '/activity/sign/detail',
+      name: 'detail',
+      component: () => import('@/views/activity/sign/detail.vue'),
+      meta: {
+        title: '奖品详情',
+        bgColor: '#fff',
+        requireLogin: true
+      }
+    }, {
       path: '/activity/bulk/incentive',
       name: 'incentive',
       component: () => import('@/views/activity/bulk/incentive.vue'),
@@ -207,6 +234,5 @@ export default new Router({
         bgColor: '#fff',
       }
     }
-
   ]
 })

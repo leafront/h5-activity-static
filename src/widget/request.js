@@ -36,7 +36,8 @@ export default function request (url,{
 }){
 
   const ut = utils.getUserToken()
-  const errorCode = 99
+  const errorCode1 = 99;
+  const errorCode2 = 999;
   const options = {
     isHeader:true,
     type,
@@ -92,7 +93,7 @@ export default function request (url,{
         results
       }
 
-      if (results.code == errorCode &&
+      if ((results.code == errorCode1 || results.code == errorCode2) &&
         process.env.NODE_ENV != 'develop'
       ) {
         utils.deleteUserToken()
