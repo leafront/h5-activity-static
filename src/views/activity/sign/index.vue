@@ -9,12 +9,12 @@
         <!--底部文字-->
         <div class="annotation">{{annotation}}</div>
         <!--签到提醒-->
-        <vswitch
-                @changeSwitch = 'changeSwitch'
-                :initSwitch="initSwitch"
-                :isCancel = "isCancel"
-                text="关闭提醒|开启提醒">
-        </vswitch>
+        <!--<vswitch-->
+                <!--@changeSwitch = 'changeSwitch'-->
+                <!--:initSwitch="initSwitch"-->
+                <!--:isCancel = "isCancel"-->
+                <!--text="关闭提醒|开启提醒">-->
+        <!--</vswitch>-->
         <!--&lt;!&ndash;标题&ndash;&gt;-->
         <!--<div class="title">{{userInfo.currentTitle}}</div>-->
         <!--礼物图标-->
@@ -143,12 +143,12 @@
         <!--底部文字-->
         <div class="annotation">{{annotation}}</div>
         <!--签到提醒-->
-        <vswitch
-                @changeSwitch = 'changeSwitch'
-                :initSwitch="initSwitch"
-                :isCancel = "isCancel"
-                text="关闭提醒|开启提醒">
-        </vswitch>
+        <!--<vswitch-->
+                <!--@changeSwitch = 'changeSwitch'-->
+                <!--:initSwitch="initSwitch"-->
+                <!--:isCancel = "isCancel"-->
+                <!--text="关闭提醒|开启提醒">-->
+        <!--</vswitch>-->
         <!--四个红包-->
         <div class="redbag1">
           <img src="./images/sign_redbag1.png">
@@ -483,7 +483,8 @@
       goApp () {
         if (utils.isApp()) {
           document.getElementById('mask').style.display = 'none';
-          this.querySign();
+          //todo: 后台为准备好
+          // this.querySign();
         } else {
 
         }

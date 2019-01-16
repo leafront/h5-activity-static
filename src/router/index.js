@@ -187,7 +187,7 @@ export default new Router({
       meta: {
         title: '每日签到',
         bgColor: '#effbff',
-
+        requireLogin: false
       }
     }, {
       path: '/activity/sign/award',
@@ -196,7 +196,7 @@ export default new Router({
       meta: {
         title: '我的奖品',
         bgColor: '#fff',
-
+        requireLogin: true
       }
     }, {
       path: '/activity/sign/detail',
@@ -205,7 +205,7 @@ export default new Router({
       meta: {
         title: '奖品详情',
         bgColor: '#fff',
-
+        requireLogin: true
       }
     }, {
       path: '/activity/bulk/incentive',
