@@ -411,6 +411,7 @@ export default {
             limitNum50
           } = data
           this.handleData(unionMaxList, unionFullList, myCouponList, showUnionType, limitNum120, limitNum100, limitNum50)
+          this.selectNum = 0
           this.$toast(result.message)
         } else if (result.code == -3 || result.code == -4) {
           if (utils.isApp()) {
