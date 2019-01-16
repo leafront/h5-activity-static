@@ -181,6 +181,33 @@ export default new Router({
 
       }
     }, {
+      path: '/activity/sign/index',
+      name: 'sign',
+      component: () => import('@/views/activity/sign/index.vue'),
+      meta: {
+        title: '每日签到',
+        bgColor: '#effbff',
+        requireLogin: false
+      }
+    }, {
+      path: '/activity/sign/award',
+      name: 'award',
+      component: () => import('@/views/activity/sign/award.vue'),
+      meta: {
+        title: '我的奖品',
+        bgColor: '#fff',
+        requireLogin: true
+      }
+    }, {
+      path: '/activity/sign/detail',
+      name: 'detail',
+      component: () => import('@/views/activity/sign/detail.vue'),
+      meta: {
+        title: '奖品详情',
+        bgColor: '#fff',
+        requireLogin: true
+      }
+    }, {
       path: '/activity/bulk/incentive',
       name: 'incentive',
       component: () => import('@/views/activity/bulk/incentive.vue'),
@@ -206,7 +233,30 @@ export default new Router({
         title: '商品详情',
         bgColor: '#fff',
       }
+    }, {
+      path: '/activity/queen/merge',
+      name: 'queenMerge',
+      component: () => import('@/views/activity/queen/queenMerge'),
+      meta: {
+        title: '食运券',
+        bgColor: '#b61716'
+      }
+    },{
+      path: '/activity/queen/index',
+      name: 'queenIndex',
+      component: () => import('@/views/activity/queen/index'),
+      meta: {
+        title: '食运券',
+        bgColor: '#b61716'
+      }
+    }, {
+      path: '/activity/queen/end',
+      name: 'queenEnd',
+      component: () => import('@/views/activity/queen/end'),
+      meta: {
+        title: '食运券',
+        bgColor: '#b61716'
+      }
     }
-
   ]
 })

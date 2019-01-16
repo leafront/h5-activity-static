@@ -6,7 +6,7 @@ function resolve (dir) {
 }
 
 module.exports = {
-  chainWebpack: config =>  { 
+  chainWebpack: config =>  {
     config.resolve.alias.set('@$', resolve('src'))
     config.plugins.delete('preload');
     config.plugins.delete('prefetch');
@@ -55,7 +55,7 @@ module.exports = {
     // css相关配置
   css: {
     // 是否使用css分离插件 ExtractTextPlugin
-    extract: true,
+    extract: false,
     // 开启 CSS source maps?
     sourceMap: false,
     // css预设器配置项
@@ -72,27 +72,27 @@ module.exports = {
     open: false, //配置自动启动浏览器
     proxy: {
       '/api': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/osc-api': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/ouser-web': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/opay-web': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/ouser-center': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/customer': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
       '/webapp-static': {

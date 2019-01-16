@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta http-equiv="x-dns-prefetch-control" content="on"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name=apple-mobile-web-app-capable content=yes>
   <link rel="dns-prefetch" href="<%= htmlWebpackPlugin.options.staticPath %>"/>
   <meta http-equiv="cache-control" content="no-store">
   <meta http-equiv="cache-control" content="no-cache">
@@ -16,11 +15,12 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="white">
   <meta name="theme-color" content="#ff6900">
+  <link rel="stylesheet" href="<%=htmlWebpackPlugin.options.staticPath%>/webapp-static/css/main.css?v=<%=htmlWebpackPlugin.options.getTime%>">
   <link rel="apple-touch-icon-precomposed" href="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/images/touch-icon-iphone.png" />
   <link rel="apple-touch-startup-image" href="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/images/touch-icon-iphone.png" />
   <link href="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/images/touch-icon-iphone.png" rel="Shortcut Icon" type="image/x-icon" />
   <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
-  <title>来伊份</title>
+  <title>加载中...</title>
   <script type="text/javascript">
     (function (win,doc) {
       var flex = function flex() {

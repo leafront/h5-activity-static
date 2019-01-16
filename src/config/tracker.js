@@ -3,7 +3,7 @@ const pageInfo = {
 	  p_id: '1',
 	  p_name: 'home'
 	},
-	'category.html': {
+	'webapp/category': {
 	  p_id: '2',
 	  p_name: 'category'
 	},
@@ -67,7 +67,7 @@ const pageInfo = {
 	  p_id: "21",
 	  p_name: 'myOrder'
 	},
-	'search.html': {
+	'webapp/search': {
 	  p_id: "22",
 	  p_name: 'search'
 	},
