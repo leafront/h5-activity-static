@@ -1,6 +1,5 @@
 .redpack-view{
-  background: linear-gradient(top,#7394f3,#3c157f);
-  background: -webkit-linear-gradient(top,#7394f3,#3c157f);
+  background: linear-gradient(to bottom,#7394f3,#3c157f);
   padding: 0 .3rem;
   position: relative;
   overflow: hidden;
@@ -23,8 +22,7 @@
 
 .redpack-share-btn{
   border-radius: .5rem;
-  background: linear-gradient(top,#fbf5ba,#f0b432);
-  background: -webkit-linear-gradient(top,#fbf5ba,#f0b432);
+  background: linear-gradient(to bottom,#fbf5ba,#f0b432);
   height: .8rem;
   display: flex;
   justify-content:center;
@@ -42,8 +40,7 @@
   top:0;
   height: 100%;
   z-index:5;
-  background: linear-gradient(top,#7495f3,#3c157f);
-  background: -webkit-linear-gradient(top,#7495f3,#3c157f);
+  background: linear-gradient(to bottom,#7495f3,#3c157f);
 }
 
 .redpack-view-bg2{
@@ -53,8 +50,7 @@
   top:0;
   height: 100%;
   z-index:5;
-  background: linear-gradient(top,#8574e6,#3c157f);
-  background: -webkit-linear-gradient(top,#8574e6,#3c157f);
+  background: linear-gradient(to bottom,#8574e6,#3c157f);
   span{
     width: .27rem;
     height: 1.07rem;

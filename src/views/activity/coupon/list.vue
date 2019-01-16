@@ -235,8 +235,7 @@
       line-height: .6rem;
       color:#fff;
       text-align: center;
-      background: linear-gradient(top,#ff7c20,#ff7900);
-      background: -webkit-linear-gradient(top,#ff7c20,#ff7900);
+      background: linear-gradient(to bottom,#ff7c20,#ff7900);
       border-radius: .06rem;
       &.coupon-button-receive{
         border:.01rem solid #ddd;

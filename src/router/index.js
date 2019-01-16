@@ -233,6 +233,30 @@ export default new Router({
         title: '商品详情',
         bgColor: '#fff',
       }
+    }, {
+      path: '/activity/queen/merge',
+      name: 'queenMerge',
+      component: () => import('@/views/activity/queen/queenMerge'),
+      meta: {
+        title: '食运券',
+        bgColor: '#b61716'
+      }
+    },{
+      path: '/activity/queen/index',
+      name: 'queenIndex',
+      component: () => import('@/views/activity/queen/index'),
+      meta: {
+        title: '食运券',
+        bgColor: '#b61716'
+      }
+    }, {
+      path: '/activity/queen/end',
+      name: 'queenEnd',
+      component: () => import('@/views/activity/queen/end'),
+      meta: {
+        title: '食运券',
+        bgColor: '#b61716'
+      }
     }
   ]
 })
