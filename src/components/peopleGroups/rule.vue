@@ -40,6 +40,16 @@
               </div>
             </div>
 
+            <div class="pg-register-input">
+              <div class="item_a_name item_a_name_price">
+                折扣价
+              </div>
+              <!-- <input type="number" autocomplete="off" v-model="formDate.prize" class="item_a" placeholder="0" /> -->
+              <div class="item_a_unit">
+                {{(formDate.rebate*grouponPrice/10).toFixed(2)}} 元/盒
+              </div>
+            </div>
+
 
             <!-- <div class="pg-register-input" >
               <div class="item_a_name">
@@ -131,6 +141,9 @@
     font-size: 0.32rem;
     margin-right: 0.5rem;
     letter-spacing: 0.2rem;
+}
+.item_a_name_price{
+  letter-spacing:normal;
 }
 .item1_des{
 margin-left: 1.78rem;
