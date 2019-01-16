@@ -34,7 +34,7 @@
 
       <div class="sub-title">
         <ul>
-          <li class="time">{{checkedValue[0]}}年{{checkedValue[1]}}月</li>
+          <li class="time">{{currentTime[0]}}年{{currentTime[1]}}月</li>
           <div class="sub-time">
             <!--<li>点击数 <span>￥10000</span></li>-->
             <li>支付笔数 <span>{{wholeSaleDetail.payNum}}</span></li>
@@ -79,6 +79,9 @@
           app.loginAction();
         },
         mounted () {
+          this.checkedValue[0] = new Date().getFullYear();
+          this.checkedValue[1] = (new Date().getMonth() + 1);
+
           app.loginAction();
           this.showHeader();
           // 查询全民团购奖金汇总数据
@@ -146,7 +149,8 @@
             queryDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1),
             showLoading: true,
             pageNo: 1,
-            switch: false // 开关控制分页
+            switch: false, // 开关控制分页
+            currentTime: [],
           }
         },
         methods: {
@@ -176,6 +180,7 @@
           // 查询个人团购明细
           queryWholeSaleDetailPage () {
             this.showLoading = true;
+            this.currentTime = this.queryDate.split('-');
             Model.queryWholeSaleDetailPage({
               type: 'POST',
               data: {
@@ -217,6 +222,7 @@
           confirm (val) {
             this.checkedValue = val.split('-');
             this.queryDate = val;
+            this.pageNo = 1;
             this.queryWholeSaleDetailPage();
           },
           change:function(x){
@@ -298,10 +304,10 @@
             })
           },
       },
-      computed: {
+        computed: {
 
-      },
-  }
+        },
+    }
 </script>
 
 <style lang="scss" scoped>
