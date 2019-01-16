@@ -644,7 +644,7 @@
                 };
               }
               // 显示成长值
-              this.showGrowth = true;
+              this.showGrowth = false;
               // 游戏开始
               this.luckGame();
 
