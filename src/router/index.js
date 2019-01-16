@@ -222,6 +222,14 @@ export default new Router({
         title: '食运券',
         bgColor: '#b61716'
       }
+    }, {
+      path: '/activity/queen/end',
+      name: 'queenEnd',
+      component: () => import('@/views/activity/queen/end'),
+      meta: {
+        title: '食运券',
+        bgColor: '#b61716'
+      }
     },
   ]
 })
