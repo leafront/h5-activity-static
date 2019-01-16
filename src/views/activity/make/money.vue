@@ -43,20 +43,20 @@
         <NoticeScroll :list="noticeText" :categoryLink="categoryLink"></NoticeScroll>
       </div>
       <div class="make-banner" v-if="wonderful_activity.length" @click="pageAction(wonderful_activity[0].linkUrl)">
-        <img class="pic-lazyLoad" :src="wonderful_activity[0].imageUrl | imgScale(750)"/>
+        <img class="make-banner-pic pic-lazyLoad" :src="wonderful_activity[0].imageUrl | imgScale(750)"/>
         <TextScroll :list="userBroadcast"></TextScroll>
       </div>
       <div class="make-banner" v-if="wonderful_activity01.length" @click="pageAction(wonderful_activity01[0].linkUrl)">
-        <img class="pic-lazyLoad" :src="wonderful_activity01[0].imageUrl | imgScale(750)"/>
+        <img class="make-banner-pic pic-lazyLoad" :src="wonderful_activity01[0].imageUrl | imgScale(750)"/>
       </div>
       <div class="make-banner" v-if="wonderful_activity02.length" @click="pageAction(wonderful_activity02[0].linkUrl)">
-        <img class="pic-lazyLoad" :src="wonderful_activity02[0].imageUrl | imgScale(750)"/>
+        <img class="make-banner-pic pic-lazyLoad" :src="wonderful_activity02[0].imageUrl | imgScale(750)"/>
       </div>
       <div class="make-banner" v-if="wonderful_activity03.length" @click="pageAction(wonderful_activity03[0].linkUrl)">
-        <img class="pic-lazyLoad" :src="wonderful_activity03[0].imageUrl | imgScale(750)"/>
+        <img class="make-banner-pic pic-lazyLoad" :src="wonderful_activity03[0].imageUrl | imgScale(750)"/>
       </div>
       <div class="make-banner" v-if="wonderful_activity04.length" @click="pageAction(wonderful_activity04[0].linkUrl)">
-        <img class="pic-lazyLoad" :src="wonderful_activity04[0].imageUrl | imgScale(750)"/>
+        <img class="make-banner-pic pic-lazyLoad" :src="wonderful_activity04[0].imageUrl | imgScale(750)"/>
       </div>
       <div class="make-pageRight">
         <ul class="make-pageRight-list">

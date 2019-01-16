@@ -20,7 +20,7 @@ const weixin_share = {
         return data
       }).then((result) => {
         app.getWeixinAppId().then((appId) => {
-          const {
+          const { 
             data: {
               data: {
                 timestamp,

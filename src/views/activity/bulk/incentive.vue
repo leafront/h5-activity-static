@@ -313,9 +313,6 @@
 <style lang="scss" scoped>
   .title {
     height: 3.6rem;
-    background: -webkit-linear-gradient(left, #FF7F1B , #FF4301); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(right, #FF7F1B, #FF4301); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(right, #FF7F1B, #FF4301); /* Firefox 3.6 - 15 */
     background: linear-gradient(to right, #FF7F1B , #FF4301); /* 标准的语法（必须放在最后） */
   }
   .box {
