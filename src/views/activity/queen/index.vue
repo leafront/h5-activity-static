@@ -10,17 +10,17 @@
         <div class="queen-nav">
           <div class="queen-nav__item">
             <p>收集津贴</p>
-            <span>01.18 ~ 01.28</span>
+            <span>01.17 ~ 01.28</span>
             <i class="queen-nav__item--circle"></i>
           </div>
           <div class="queen-nav__item">
             <p>合成食运券</p>
-            <span>01.18 ~ 01.28</span>
+            <span>01.17 ~ 01.28</span>
             <i class="queen-nav__item--circle"></i>
           </div>
           <div class="queen-nav__item">
             <p>使用食运券</p>
-            <span>01.18 ~ 01.28</span>
+            <span>01.17 ~ 01.28</span>
             <i class="queen-nav__item--circle"></i>
           </div>
           <div class="queen-nav__line"></div>
@@ -190,14 +190,14 @@
             <div class="queen_intro_item">
               <i class="queen_intro_circle">1</i>
               <div class="queen_intro_txt">
-                <p>活动时间:2019年1月18日00:00 - 1月28日24:00</p>
+                <p>活动时间:2019年1月17日00:00 - 1月28日24:00</p>
               </div>  
             </div>  
             <div class="queen_intro_item">
               <i class="queen_intro_circle">2</i>
               <div class="queen_intro_txt">
-                <p>活动进程:1月18日 - 1月28日收集过年津贴，
-                <p>1月18日10点 - 1月28日24点期间可以合成食运劵并使用</p>
+                <p>活动进程:1月17日 - 1月28日收集过年津贴，
+                <p>1月17日10点 - 1月28日24点期间可以合成食运劵并使用</p>
               </div>  
             </div>
             <div class="queen_intro_item">
@@ -205,7 +205,7 @@
               <div class="queen_intro_txt">
                 <p>津贴收集方式</p>
                 <p>1、首次登录状态下浏览食运券活动页可获得 ¥ 30 津贴，满99可用，同一用户ID活动期间仅可获得1次;</p>
-                <p>2、首次点击食运劵活动页面“去分享”按钮分享活动，可以获得 ¥ 20 个1元个津贴，并且同一用户ID活动期间仅限首次分享可获得;</p>
+                <p>2、首次点击食运劵活动页面“去分享”按钮分享活动，可以获得 ¥ 20 个￥1津贴，并且同一用户ID活动期间仅限首次分享可获得;</p>
                 <p>3、同一用户ID，每天签到1次，可获得¥1 津贴，仅限一次;</p>
                 <p>4、同一用户ID，每天可使用3积分兑换¥3 津贴，同一用户每天上限兑换1次;</p>
                 <p>5、活动期间，每支付完成1笔订单(外卖、团购订单除外)， 可以获得¥10元无门槛津贴，同一用户每天限3单</p>
