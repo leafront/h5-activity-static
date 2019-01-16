@@ -267,7 +267,7 @@ export default {
 
 
     jumpRule() {
-      location.href = "http://m.laiyifen.com/view/h5/1003081001000067.html?1539920083525"
+      location.href = "https://m.laiyifen.com/view/h5/1024089901000009.html?1547619365873"
     },
 
     jumpKoi() {
