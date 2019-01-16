@@ -10,17 +10,17 @@
         <div class="queen-nav">
           <div class="queen-nav__item">
             <p>收集津贴</p>
-            <span>01.18 ~ 01.28</span>
+            <span>01.17 ~ 01.28</span>
             <i class="queen-nav__item--circle"></i>
           </div>
           <div class="queen-nav__item">
             <p>合成食运券</p>
-            <span>01.18 ~ 01.28</span>
+            <span>01.17 ~ 01.28</span>
             <i class="queen-nav__item--circle"></i>
           </div>
           <div class="queen-nav__item">
             <p>使用食运券</p>
-            <span>01.18 ~ 01.28</span>
+            <span>01.17 ~ 01.28</span>
             <i class="queen-nav__item--circle"></i>
           </div>
           <div class="queen-nav__line"></div>
@@ -190,14 +190,14 @@
             <div class="queen_intro_item">
               <i class="queen_intro_circle">1</i>
               <div class="queen_intro_txt">
-                <p>活动时间:2019年1月18日00:00 - 1月28日24:00</p>
+                <p>活动时间:2019年1月17日00:00 - 1月28日24:00</p>
               </div>  
             </div>  
             <div class="queen_intro_item">
               <i class="queen_intro_circle">2</i>
               <div class="queen_intro_txt">
-                <p>活动进程:1月18日 - 1月28日收集过年津贴，
-                <p>1月18日10点 - 1月28日24点期间可以合成食运劵并使用</p>
+                <p>活动进程:1月17日 - 1月28日收集过年津贴，
+                <p>1月17日10点 - 1月28日24点期间可以合成食运劵并使用</p>
               </div>  
             </div>
             <div class="queen_intro_item">
