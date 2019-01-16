@@ -110,7 +110,7 @@
     }
     img{
       width: 6.89rem;
-      height: 6.67rem;
+      height: 7.7rem;
       margin: 0 auto;
       display: block;
     }
