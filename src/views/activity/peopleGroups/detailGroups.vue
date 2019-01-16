@@ -47,14 +47,14 @@
       更多团购更多折扣，详情联系客服400-8819-777
     </div>
    <div class="foot_body" >
-     <div class="foot_im" @click="_openCustom">
+     <!-- <div class="foot_im" @click="_openCustom">
        <div class="im_img">
 
        </div>
        <div class="im_des">
         客服
        </div>
-     </div>
+     </div> -->
      <div class="buy_now" @click="initiateOrder" v-if="dgDescription.grouponStatus == 1">
        ¥{{dgDescription.totalAmount}} 立即购买
 
@@ -395,7 +395,8 @@ export default {
 .foot_body{
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  margin-bottom: .3rem;
 }
 .foot_im{
   display: flex;
@@ -418,7 +419,7 @@ export default {
 }
 .buy_now {
     text-align: center;
-    width: 3.5rem;
+    width: 90%;
     height: 0.6rem;
     line-height: 0.6rem;
     margin-right: .2rem;

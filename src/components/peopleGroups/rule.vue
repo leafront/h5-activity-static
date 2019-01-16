@@ -46,7 +46,7 @@
               </div>
               <!-- <input type="number" autocomplete="off" v-model="formDate.prize" class="item_a" placeholder="0" /> -->
               <div class="item_a_unit">
-                {{(formDate.rebate*grouponPrice/10).toFixed(2)}} 折
+                {{(formDate.rebate*grouponPrice/10).toFixed(2)}} 元/盒
               </div>
             </div>
 

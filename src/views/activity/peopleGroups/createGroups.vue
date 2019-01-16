@@ -204,7 +204,7 @@
                 </div>
                 <div class="s_body_detail_right">
                   <div class="s_body_detail_right_top">
-                    <div class="s_body_detail_right1">
+                    <div class="s_body_detail_right1" @click="gotoDetail(item)">
                       {{item.name}}
                     </div>
                     <div class="s_body_detail_right2">
@@ -261,7 +261,7 @@
               </div>
               <div class="s_body_detail_right">
                 <div class="s_body_detail_right_top">
-                  <div class="s_body_detail_right1">
+                  <div class="s_body_detail_right1" @click="gotoDetail(item)">
                     {{item.name }}
                   </div>
                   <div class="s_body_detail_right2">
