@@ -996,6 +996,7 @@
     align-items: center;
     padding: 0 .3rem;
     color: #f8cb80;
+    position: relative;
     span{
       position: relative;
     }
