@@ -123,7 +123,11 @@ export default {
     invitationShareC:{
       type: String,
       default: ""
-    }
+    },
+    adWinImg:{
+      type: String,
+      default: ""
+    },
   },
   data() {
     return {
@@ -221,7 +225,9 @@ export default {
       const qrCodePromise = () => {
         return new Promise((resolve,reject) => {
           let img = new Image()
-          img.src = config.hostPath + '/activity-static/images/invite_qrcode.jpeg'
+          // 用广告位配置的图片
+          img.src = this.adWinImg;
+          // img.src = config.hostPath + '/activity-static/images/invite_qrcode.jpeg'
           img.onload = () => {
             const imgScale = img.height / img.width
             ctx.drawImage(img, 0, 0, self.clientWidth * .8, self.clientWidth * .8 * imgScale)

@@ -28,7 +28,10 @@
             <p class="b_text2" v-show = "completionZero">您还没有邀请好友，快去邀请好友吧~</p>
 
             <p class="b_text3 first_t" @click="weixinShare" >立即邀请</p>
-            <p @click="ajaxShareCode(1)" class="b_text4 first_t">生成我的邀请码</p>
+            <p style="display: flex; padding-left: .4rem; padding-right: .4rem;">
+              <span style="padding-left: .6rem; padding-right: .6rem; font-size: .32rem; font-weight:400;" @click="ajaxShareCode(1)" class="b_text4 first_t">专属海报</span>
+              <span style="padding-left: .6rem; padding-right: .6rem; font-size: .32rem; font-weight:400;" @click="ajaxShareCode2(1)" class="b_text4 first_t">面对面扫码</span>
+            </p>
           </div>
         </div>
         <!-- 第二部分 -->
@@ -139,7 +142,8 @@
         </div>
 
       </div>
-      <ShareImg :rulePopup="rulePopup"  :invitationShareC = "invitationShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
+      <ShareImg :rulePopup="rulePopup"  :invitationShareC = "invitationShareC" @toggleRulePopup="toggleRulePopup" :adWinImg="adWinImg"></ShareImg>
+      <face-code :rulePopup2="rulePopup2"  :invitationShareC2 = "invitationShareC2" @toggleRulePopup2="toggleRulePopup2"></face-code>
       <UIShare></UIShare>
       <Rule :ruleText="ruleText"  @toggleRuleText="toggleRuleText"></Rule>
       <Imglayer :imgLayer="imgLayer" @toggleImgLayer="toggleImgLayer"></Imglayer>
@@ -153,6 +157,8 @@
   import ProgressBar from '@/components/invitation/progress'
 
   import ShareImg from '@/components/invitation/shareImg'
+
+  import faceCode from '@/components/invitation/faceCode'
 
   import Rule from '@/components/invitation/rule'
 
@@ -182,6 +188,7 @@
         imgLayer:false,
         ruleText: false,
         rulePopup: false,
+        rulePopup2: false,
         dynamicProgress: {},
         dynamicReward: {},
         registerRewardAmount: null,
@@ -201,13 +208,16 @@
         invationToSecond:null,
         invationToFirst:null,
         invitationShareC:"",//获取sharecode
-        shareConfig: {}
+        invitationShareC2:"",//获取sharecode
+        shareConfig: {},
+        adWinImg: '',// ad广告位配置的图片背景
       }
     },
     components: {
       AppHeader,
       ProgressBar,
       ShareImg,
+      faceCode,
       UIShare,
       Rule,
       Imglayer
@@ -216,6 +226,9 @@
       ...mapGetters({
         'headerMenu': 'getHeaderMenu'
       })
+    },
+    mounted () {
+      this.getAdImg();
     },
     methods: {
       ...mapActions([
@@ -227,30 +240,24 @@
       *获取广告位
       */
 
-      // getAdImg () {
-      //   return Model.getAdImg({
-      //     type: 'GET',
-      //     data: {
-      //       pageCode: 'H5_INVITE_FRIEND_PAGE',
-      //       adCode: 'invited_rule',
-      //       areaCode: common.getAreaCode().areaCode
-      //     }
-      //   }).then((result) => {
-      //     console.log(777777);
-      //     const data = result.data
-      //     if (result.code == 0 && data) {
-      //       const invited_rule = data.invited_rule
-      //       console.log("啥",invited_rule);
-      //       invited_rule.forEach((item) => {
-      //         item.imageUrl = utils.imgScale(item.imageUrl,85)
-      //       })
-      //       this.addList = invited_rule
-      //     } else {
-      //       this.$toast(result.message)
-      //     }
-      //     return result
-      //   })
-      // },
+      getAdImg () {
+        return Model.getAdImg({
+          type: 'GET',
+          data: {
+            pageCode: 'H5_INVITE_FRIEND_PAGE',
+            adCode: 'own_poster',
+          }
+        }).then((result) => {
+          const data = result.data
+          if (result.code == 0 && data) {
+            this.adWinImg = result.data.own_poster[0].imageUrl;
+            console.log('result.code', result.data.own_poster[0].imageUrl);
+          } else {
+            this.$toast(result.message)
+          }
+          return result
+        })
+      },
       /**
        * 获取个人获得的奖品列表
        */
@@ -278,6 +285,10 @@
         this.rulePopup = val
 
       },
+      toggleRulePopup2 (val) {
+        this.rulePopup2 = val
+
+      },
       ajaxShareCode(type){
         if (type == 1 && this.invitationShareC) {
           this.rulePopup = true
@@ -294,6 +305,31 @@
               this.rulePopup = true
 
             } else if (type == 2 && this.invitationShareC) {
+              this.shareConfig = wx_share.shareConfig.call(this)
+              wx_share.weixinShare.call(this)
+
+            } else if (type == 1 || type == 2) {
+              this.$toast("网络繁忙，请稍后再试!")
+            }
+          }
+        })
+      },
+      ajaxShareCode2(type){
+        if (type == 1 && this.invitationShareC2) {
+          this.rulePopup2 = true
+          return;
+        }
+        Model.getShareCode({
+          type: 'GET'
+        }).then((result) => {
+          const data = result.data
+          if (result.code == 0 ) {
+            this.invitationShareC2 = data.shareCode
+
+            if (type == 1 && this.invitationShareC2){
+              this.rulePopup2 = true
+
+            } else if (type == 2 && this.invitationShareC2) {
               this.shareConfig = wx_share.shareConfig.call(this)
               wx_share.weixinShare.call(this)
 
@@ -408,6 +444,7 @@
       // this.getAdImg()
       this.ajaxRecommend()
       this.ajaxShareCode()
+      this.ajaxShareCode2()
 
 
     }
