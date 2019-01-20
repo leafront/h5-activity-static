@@ -44,8 +44,6 @@
 
   import PageLoading from '@/components/common/pageLoading'
 
-  import '@/widget/requestAnimationFrame'
-
   export default {
     data () {
       return {
