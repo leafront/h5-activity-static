@@ -31,19 +31,13 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import Banner from '@/components/common/banner'
-
   import utils from '@/widget/utils'
-
   import * as Model from '@/model/coupon'
-
   import common from '@/widget/common'
-
   import app from '@/widget/app'
-
   import PageLoading from '@/components/common/pageLoading'
-
+  
   export default {
     data () {
       return {
