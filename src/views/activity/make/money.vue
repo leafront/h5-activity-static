@@ -444,7 +444,7 @@
     &:last-child{
       margin-bottom: 0;
     }
-    img{
+    .make-banner-pic{
       width: 100%;
       height: 2.5rem;
     }
