@@ -14,8 +14,42 @@
   </div>
 </template>
 
-<style lang="scss">
+<script type="text/javascript">
 
+  import {mapGetters, mapActions} from 'vuex'
+
+  import utils from '@/widget/utils'
+
+  export default {
+    computed: {
+      ...mapGetters({
+        'headerMenu': 'getHeaderMenu'
+      })
+    },
+    methods: {
+      ...mapActions([
+        'updateHeaderMenu',
+        'updateShareMenu'
+      ]),
+      homeAction (url) {
+        if (utils.isApp()) {
+          location.href = 'lyf://home'
+        } else {
+          location.href = url
+        }
+      },
+      myAction (url) {
+        if (utils.isApp()) {
+          location.href = 'lyf://myhome'
+        } else {
+          location.href = url
+        }
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
   .ui-header-nav{
     position: fixed;
     width: 1.6rem;
@@ -94,38 +128,3 @@
     }
   }
 </style>
-
-<script type="text/javascript">
-
-  import {mapGetters, mapActions} from 'vuex'
-
-  import utils from '@/widget/utils'
-
-  export default {
-    computed: {
-      ...mapGetters({
-        'headerMenu': 'getHeaderMenu'
-      })
-    },
-    methods: {
-      ...mapActions([
-        'updateHeaderMenu',
-        'updateShareMenu'
-      ]),
-      homeAction (url) {
-        if (utils.isApp()) {
-          location.href = 'lyf://home'
-        } else {
-          location.href = url
-        }
-      },
-      myAction (url) {
-        if (utils.isApp()) {
-          location.href = 'lyf://myhome'
-        } else {
-          location.href = url
-        }
-      }
-    }
-  }
-</script>

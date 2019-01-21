@@ -12,7 +12,6 @@
 <script type="text/javascript">
 
   import app from '@/widget/app'
-
   import utils from '@/widget/utils'
 
   export default {

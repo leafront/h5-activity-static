@@ -39,27 +39,16 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import UIShare from '@/components/widget/ui-share'
-
   import RedPackRule from '@/components/redpack/rule'
-
   import utils from '@/widget/utils'
-
   import app from '@/widget/app'
-
   import config from '@/config/index'
-
   import * as Model from '@/model/redpack'
-
   import {mapGetters, mapActions} from 'vuex'
-
   import wx_share from './weixin_share'
-
   import Vue from 'vue'
-
   import VueClipboard from 'vue-clipboard2'
-
   Vue.use(VueClipboard)
 
   export default {

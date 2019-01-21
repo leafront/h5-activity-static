@@ -1,9 +1,6 @@
 import weixin_share from '@/common/weixin_share'
-
 import utils from '@/widget/utils'
-
 import app from '@/widget/app'
-
 import config from '@/config/index'
 
 const wx_share = {

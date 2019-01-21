@@ -78,17 +78,11 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import Banner from '@/components/common/banner'
-
   import NoticeScroll from '@/components/make/noticeScroll'
-
   import TextScroll from '@/components/make/textScroll'
-
   import app from '@/widget/app'
-
   import utils from'@/widget/utils'
-
   import * as Model from '@/model/make'
 
   export default {

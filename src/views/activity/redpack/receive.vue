@@ -41,23 +41,14 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import RedPackRule from '@/components/redpack/rule'
-
   import ImageValidate from '@/components/common/imageValidate'
-
   import validate from '@/widget/validate'
-
   import utils from '@/widget/utils'
-
   import app from '@/widget/app'
-
   import config from '@/config/index'
-
   import {mapGetters, mapActions} from 'vuex'
-
   import { countTime, getSystemTimes } from './common'
-
   import * as Model from '@/model/redpack'
 
   export default {

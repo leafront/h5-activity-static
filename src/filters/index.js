@@ -1,8 +1,6 @@
 /**
 * @params {String || Boolean} tiems
-*
 * @params {String} fmt
-*
 * @return {String}
   *
   * @example

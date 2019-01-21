@@ -21,12 +21,9 @@
 <script type="text/javascript">
 
   import * as Model from '@/model/common'
-
   import validate from '@/widget/validate'
-
   import utils from '@/widget/utils'
-
-  import {mapGetters, mapActions} from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
 
   export default {
     data () {

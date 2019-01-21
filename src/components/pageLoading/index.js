@@ -1,16 +1,19 @@
-
 import utils from '@/widget/utils'
 
 const pageLoading = {
   installed: false,
   install (Vue) {
-    if(pageLoading.installed) return
+    if (pageLoading.installed) {
+      return
+    }
     Vue.prototype.$showPageLoading = () => {
 
       // 如果页面有pageLoading则不继续执行
-      if(document.querySelector('.ui-pageLoading-mask')) return
+      if (document.querySelector('.ui-pageLoading-mask')) {
+        return
+      }
       // 1、创建构造器，定义好提示信息的模板
-      let pageLoadingTpl = Vue.extend({
+      const pageLoadingTpl = Vue.extend({
         template: `
 			<div class="ui-pageLoading-mask">
 			 <div class="ui-mask-cont">
@@ -22,7 +25,7 @@ const pageLoading = {
 			`
       })
       // 2、创建实例，挂载到文档以后的地方
-      let tpl = new pageLoadingTpl().$mount().$el
+      const tpl = new pageLoadingTpl().$mount().$el
       // 3、把创建的实例添加到body中
       document.body.appendChild(tpl)
 

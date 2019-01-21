@@ -12,31 +12,10 @@
   </div>
 </template>
 
-<style lang="scss">
-  .queen-end{
-    padding-top: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    img{
-      width: 5.54rem;
-      height: 2.2rem;
-    }
-    h4{
-      font-size: .36rem;
-      color: #fff;
-      padding-top: .32rem;
-    }
-  }
-
-</style>
-
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import utils from '@/widget/utils'
-
   import app from '@/widget/app'
 
   export default {
@@ -82,5 +61,23 @@
       }
     }
   }
-
 </script>
+
+<style lang="scss">
+  .queen-end{
+    padding-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img{
+      width: 5.54rem;
+      height: 2.2rem;
+    }
+    h4{
+      font-size: .36rem;
+      color: #fff;
+      padding-top: .32rem;
+    }
+  }
+
+</style>
