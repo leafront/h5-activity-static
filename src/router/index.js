@@ -1,7 +1,5 @@
 import Vue from 'vue'
-
 import Router from 'vue-router'
-
 import config from '@/config/index'
 
 Vue.use(Router)

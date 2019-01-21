@@ -1,11 +1,7 @@
 import request from '@/widget/request'
-
 import config from '@/config/index'
-
 import utils from '@/widget/utils'
-
 import store from '@/widget/store'
-
 import pageInfo from '@/config/tracker'
 
 /**
