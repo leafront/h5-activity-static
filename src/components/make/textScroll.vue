@@ -56,9 +56,6 @@
     position: absolute;
     top: .2rem;
     left: .3rem;
-    &.active{
-      transition: transform .3s ease-in;
-    }
   }
   .user-broadcast-item{
     display: flex;

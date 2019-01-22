@@ -58,9 +58,6 @@
   }
   .make-text-scroll{
     padding-left: .2rem;
-    &.active{
-      transition: transform .3s ease-in;
-    }
   }
   .make-text-scroll-item-wrapper{
     height: .8rem;
