@@ -342,7 +342,11 @@
           if (result.code == 0 && data) {
             if (data.pageResult && data.pageResult.listObj) {
               this.categoryLink = data.categoryLink
-              this.noticeText = divisionArr(data.pageResult.listObj)
+              const noticeText = divisionArr(data.pageResult.listObj)
+              if (noticeText && noticeText.length) {
+                noticeText.push(noticeText[0])
+              }
+              this.noticeText = noticeText
             }
           } else {
             this.$toast(result.message)
@@ -358,7 +362,11 @@
           const data = result.data
 
           if (result.code == 0 && data) {
-            this.userBroadcast = data
+            const userBroadcast = data
+            if (userBroadcast && userBroadcast.length) {
+              userBroadcast.push(userBroadcast[0])
+            }
+            this.userBroadcast = userBroadcast
           }
         })
       },
@@ -377,11 +385,6 @@
         if (isDistributor == 1 || distributorType == 3) {
 
           location.href = url
-          // if (utils.isApp()) {
-          //   location.href = 'lyf://inviteFriend'
-          // } else {
-          //   location.href = url
-          // }
         } else {
           this.$showModal({
             content: '您还不是推客！',

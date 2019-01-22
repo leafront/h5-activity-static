@@ -1,26 +1,30 @@
 <template>
   <div class="make-text-scroll-list">
-    <div class="make-text-scroll" id="make-textScroll-list">
-      <div class="make-text-scroll-item-wrapper" v-if="list.length" v-for="item in list" @click="pageAction(categoryLink)">
-        <div class="make-text-scroll-item" v-for="child in item">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-speaker"></use>
-          </svg>
-          <p>{{child.displayTitle}}</p>
+    <UiTextScroll 
+      :list="list"
+      :eleHeight="eleHeight">
+      <div class="make-text-scroll">
+        <div class="make-text-scroll-item-wrapper" v-if="list.length" v-for="item in list" @click="pageAction(categoryLink)">
+          <div class="make-text-scroll-item" v-for="child in item">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-speaker"></use>
+            </svg>
+            <p>{{child.displayTitle}}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </UiTextScroll>
   </div>
 </template>
 
 <script type="text/javascript">
 
+  import UiTextScroll from '@/components/widget/ui-text-scroll'
+
   export default {
     data () {
       return {
-        index: 0,
-        iNow: 0,
-        timer: null
+        eleHeight: '.8'
       }
     },
     props: {
@@ -28,60 +32,20 @@
         type: Array,
         default: []
       },
-      autoTime: {
-        type: Number,
-        default: 3000
-      },
       categoryLink: {
         type: String,
         default: ''
       }
     },
-    watch: {
-      list() {
-        setTimeout(() => {
-          this.showText()
-        },0)
-      }
+    components: {
+      UiTextScroll
     },
     methods: {
       pageAction (url) {
         if (url) {
           location.href = url
         }
-      },
-      showText () {
-        const el = document.getElementById('make-textScroll-list')
-        const liEl = el.querySelectorAll('.make-text-scroll-item-wrapper')
-        const firstChildEle = el.firstElementChild.cloneNode(true)
-        el.appendChild(firstChildEle)
-        this.eleLen = liEl.length
-        this.timer = setInterval(() => {
-          this.autoScroll()
-        },this.autoTime)
-      },
-      autoScroll () {
-        const el = document.getElementById('make-textScroll-list')
-        const liEl = el.querySelectorAll('.make-text-scroll-item-wrapper')
-        const eleLen = liEl.length
-        if (eleLen < 2) {
-          return
-        }
-        this.index ++
-        el.style.transition = 'transform .3s ease-in'
-        el.style.transform = 'translateY(' + (-liEl[0].offsetHeight * this.index) + 'px)'
-        setTimeout(() => {
-          if (this.index == this.eleLen - 1) {
-            el.style.transition = 'none'
-            el.style.transform = 'translateY(0)'
-            this.index = 0
-          }
-        },310)
-
       }
-    },
-    beforeDestroy () {
-      clearInterval(this.timer)
     }
   }
 
@@ -94,6 +58,9 @@
   }
   .make-text-scroll{
     padding-left: .2rem;
+    &.active{
+      transition: transform .3s ease-in;
+    }
   }
   .make-text-scroll-item-wrapper{
     height: .8rem;

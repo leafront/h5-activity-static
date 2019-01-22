@@ -102,6 +102,10 @@ module.exports = {
         target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       },
+      '/cms': {
+        target: 'http://m.lyf.edu.laiyifen.com',
+        changeOrigin: true
+      },
       '/webapp-static': {
         target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
