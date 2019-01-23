@@ -128,6 +128,7 @@ export default {
       type: String,
       default: ""
     },
+
   },
   data() {
     return {
@@ -143,11 +144,12 @@ export default {
 
       invitationShareC (newVal, oldVal) {
         this.qrcode()
-        this.drawingCanvas()
+        // this.drawingCanvas()
       },
 
 
-    rulePopup() {
+    rulePopup(newVal, oldVal) {
+      if(newVal){ this.drawingCanvas()}
 
       /**
        *
@@ -216,6 +218,8 @@ export default {
     },
     drawingCanvas() {
 
+    console.log(111);
+
       /**
        * canvas绘图
        */
@@ -227,17 +231,28 @@ export default {
       let ctx = canvas.getContext("2d")
       ctx.fillStyle = "#fff"
       ctx.fillRect(0,0,canvas.width,canvas.height)
+      console.log(112);
 
       const qrCodePromise = () => {
         return new Promise((resolve,reject) => {
+          console.log(113);
+
           let img = new Image();
           // img.setAttribute('crossOrigin', 'Anonymous');
           // img.setAttribute("crossOrigin",'Anonymous')
           // 用广告位配置的图片
-          img.crossOrigin="anonymous";
+          // img.crossOrigin="anonymous";
           img.src = this.adWinImg;
+          this.$toast("图片计算中!!!")
+           let t  = setTimeout(()=>{
+            $toast(" 计算失败!")
+            this.closeRulePopup()
+
+          },3000)
           // img.src = config.hostPath + '/activity-static/images/invite_qrcode.jpeg'
           img.onload = () => {
+             clearTimeout(t)
+            console.log("gui","gui");
             const imgScale = img.height / img.width
             ctx.drawImage(img, 0, 0, self.clientWidth * .8, self.clientWidth * .8 * imgScale)
             ctx.fillRect(self.clientWidth * .8/2-(this.scalePx * 2.3)/2 , self.clientWidth * .8*.673 ,this.scalePx * 2.3,this.scalePx * 2.3)
@@ -311,10 +326,7 @@ export default {
   },
   created() {
 
-    // setTimeout(() => {
-    //   this.qrcode()
-    //   this.drawingCanvas()
-    // }, 0)
+
   }
 }
 </script>
