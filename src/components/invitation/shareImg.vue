@@ -237,17 +237,17 @@ export default {
         return new Promise((resolve,reject) => {
           console.log(113);
 
+          let self = this;
           let img = new Image();
           // img.setAttribute('crossOrigin', 'Anonymous');
           // img.setAttribute("crossOrigin",'Anonymous')
           // 用广告位配置的图片
-          // img.crossOrigin="anonymous";
           img.src = this.adWinImg;
           this.$toast("图片计算中!!!")
            let t  = setTimeout(()=>{
-            $toast(" 计算失败!")
-            this.closeRulePopup()
 
+             self.$toast("计算失败!")
+             self.closeRulePopup()
           },3000)
           // img.src = config.hostPath + '/activity-static/images/invite_qrcode.jpeg'
           img.onload = () => {
