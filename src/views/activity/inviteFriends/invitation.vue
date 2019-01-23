@@ -142,7 +142,7 @@
         </div>
 
       </div>
-      <ShareImg :rulePopup="rulePopup"  :invitationShareC = "invitationShareC" @toggleRulePopup="toggleRulePopup" :adWinImg="adWinImg" ></ShareImg>
+      <ShareImg :rulePopup="rulePopup"  :invitationShareC = "invitationShareC" @toggleRulePopup="toggleRulePopup"></ShareImg>
       <face-code :rulePopup2="rulePopup2"  :invitationShareC2 = "invitationShareC2" @toggleRulePopup2="toggleRulePopup2"></face-code>
       <UIShare></UIShare>
       <Rule :ruleText="ruleText"  @toggleRuleText="toggleRuleText"></Rule>
@@ -229,7 +229,7 @@
       })
     },
     mounted () {
-      this.getAdImg();
+      // this.getAdImg();
     },
     methods: {
       ...mapActions([
@@ -291,13 +291,11 @@
 
       },
       ajaxShareCode(type){
-        console.log('this.adWinImg', this.adWinImg);
-
         if (type == 1 && this.invitationShareC) {
-          if (!this.adWinImg) {
-            this.$toast("网络繁忙，请稍后再试!");
-            return;
-          }
+          // if (!this.adWinImg) {
+          //   this.$toast("网络繁忙，请稍后再试!");
+          //   return;
+          // }
               this.rulePopup = true
               return;
 
