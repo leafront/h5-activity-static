@@ -190,8 +190,14 @@ export default {
 
        app.postMessage('storgeQRcode',{
          imgUrl,
-       },() => {
-         this.$toast("保存成功")
+       },(cb) => {
+         if (cb == 1) {
+           alert(cb);
+         }
+         else {
+           alert(cb);
+         }
+
        })
      }
    },
@@ -224,8 +230,11 @@ export default {
 
       const qrCodePromise = () => {
         return new Promise((resolve,reject) => {
-          let img = new Image()
+          let img = new Image();
+          // img.setAttribute('crossOrigin', 'Anonymous');
+          // img.setAttribute("crossOrigin",'Anonymous')
           // 用广告位配置的图片
+          img.crossOrigin="anonymous";
           img.src = this.adWinImg;
           // img.src = config.hostPath + '/activity-static/images/invite_qrcode.jpeg'
           img.onload = () => {

@@ -250,7 +250,7 @@
         }).then((result) => {
           const data = result.data
           if (result.code == 0 && data) {
-            this.adWinImg = result.data.own_poster[0].imageUrl;
+            this.adWinImg = result.data.own_poster[0].imageUrl.replace(/^https/,"http");
             console.log('result.code', result.data.own_poster[0].imageUrl);
           } else {
             this.$toast(result.message)
@@ -290,6 +290,12 @@
 
       },
       ajaxShareCode(type){
+        console.log('this.adWinImg', this.adWinImg);
+        if (!this.adWinImg) {
+          this.$toast("网络繁忙，请稍后再试!");
+          debugger;
+          return;
+        }
         if (type == 1 && this.invitationShareC) {
           this.rulePopup = true
           return;
