@@ -241,12 +241,14 @@ export default {
           let img = new Image();
           // img.setAttribute('crossOrigin', 'Anonymous');
           // img.setAttribute("crossOrigin",'Anonymous')
+          // img.crossOrigin = 'anonymous';
           // 用广告位配置的图片
-          img.src = this.adWinImg;
-          this.$toast("图片计算中!!!")
+          // img.src = this.adWinImg;
+          img.src =  '/activity-static/images/invite_qrcode.jpeg'
+          // this.$toast("图片计算中!!!")
            let t  = setTimeout(()=>{
 
-             self.$toast("计算失败!")
+             // self.$toast("计算失败!")
              self.closeRulePopup()
           },3000)
           // img.src = config.hostPath + '/activity-static/images/invite_qrcode.jpeg'
