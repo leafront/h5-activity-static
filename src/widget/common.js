@@ -1,8 +1,5 @@
-
 import * as Model from '@/model/common'
-
 import store from '@/widget/store'
-
 import utils from '@/widget/utils'
 
 const common = {

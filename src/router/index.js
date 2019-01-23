@@ -1,7 +1,5 @@
 import Vue from 'vue'
-
 import Router from 'vue-router'
-
 import config from '@/config/index'
 
 Vue.use(Router)
@@ -78,7 +76,7 @@ export default new Router({
       name: 'makeMoney',
       component: () => import('@/views/activity/make/money.vue'),
       meta: {
-        title: '伊起赚专区'
+        title: '伊起赚'
       }
     }, {
       path: '/activity/coupon/list',

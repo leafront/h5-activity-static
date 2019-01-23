@@ -1,4 +1,3 @@
-
 import request from '@/widget/request'
 
 export const getKoiMerge = (data) => request('/api/promotion/dragonball/unionInfo', data)

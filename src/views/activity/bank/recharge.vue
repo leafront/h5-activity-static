@@ -71,15 +71,10 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import config from '@/config/index'
-
   import app from '@/widget/app'
-
   import utils from '@/widget/utils'
-
   import store from '@/widget/store'
-
   import * as Model from '@/model/bank'
 
   export default {

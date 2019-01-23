@@ -27,19 +27,12 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import RedPackRule from '@/components/redpack/rule'
-
   import utils from '@/widget/utils'
-
   import config from '@/config/index'
-
   import common from '@/widget/common'
-
   import * as Model from '@/model/redpack'
-
   import app from '@/widget/app'
-
   import {mapGetters, mapActions} from 'vuex'
 
   export default {

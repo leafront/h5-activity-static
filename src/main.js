@@ -1,4 +1,3 @@
-
 import Vue from 'vue'
 import Application from './App'
 import app from '@/widget/app'

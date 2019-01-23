@@ -13,7 +13,6 @@
 <script>
 
 	import swiper from '@/components/widget/swiper.vue'
-
   const docWidth = document.documentElement.clientWidth
 
 	export default {

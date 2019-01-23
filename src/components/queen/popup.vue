@@ -14,9 +14,7 @@
 <script type="text/javascript">
 
   import * as Model from '@/model/koi'
-
   import utils from '@/widget/utils'
-
   import app from '@/widget/app'
 
   export default {

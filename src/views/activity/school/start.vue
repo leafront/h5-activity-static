@@ -43,22 +43,14 @@
 
 <script type="text/javascript">
 
-  import {mapGetters, mapActions} from 'vuex'
-
+  import { mapGetters, mapActions } from 'vuex'
   import AppHeader from '@/components/common/header'
-
   import app from '@/widget/app'
-
   import utils from '@/widget/utils'
-
   import ImageValidate from '@/components/common/imageValidate'
-
   import validate from '@/widget/validate'
-
   import * as Model from '@/model/activity'
-
   import config from '@/config/index'
-
   import SchoolRule from '@/components/school/rule'
 
   export default {
