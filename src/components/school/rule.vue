@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div class="ui-mask" id="school-rule-mask" :class="{'active': isPopup}"></div>
+  <div class="ui-mask" :class="{'active': isPopup}" @touchmove="stopSchoolPopup($event)">
     <div class="school-rule" :style="{'height': ruleHeight, 'marginTop': ruleTop}" :class="{'active': isPopup}">
       <div class="school-close"  @click="togglePopup(false)">
         <span class="school-close-btn"></span>
@@ -36,20 +35,6 @@
         default: false
       }
     },
-    watch: {
-      isPopup (newVal,oldVal) {
-        if (newVal) {
-          document.getElementById('school-rule-mask').addEventListener('touchmove',(event) => {
-            if (!utils.isPassive()) {
-
-              event.preventDefault()
-
-            }
-            event.stopPropagation()
-          }, utils.isPassive() ? {passive: true} : false)
-        }
-      }
-    },
     data () {
       return {
         ruleHeight: '1200px',
@@ -57,6 +42,10 @@
       }
     },
     methods: {
+      stopSchoolPopup (event) {
+        event.preventDefault()
+        event.stopPropagation()
+      },
       togglePopup (val) {
         this.$emit('togglePopup', val)
       }

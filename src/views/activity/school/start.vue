@@ -1,8 +1,8 @@
 <template>
-  <div class="pageView">
+  <div class="pageView" :class="{'scroll_view_hidden': imageValidate || isPopup}">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper" :class="{'visibility': pageView, 'scroll_view_hidden': imageValidate || isPopup}">
+    <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="school-wrapper" id="schoolWrapper">
         <div class="school-pic school-pic1">
           <h4 class="font-b" @click="togglePopup(true)">活动说明</h4>

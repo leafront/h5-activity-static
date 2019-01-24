@@ -1,10 +1,10 @@
 <template>
-  <div v-if="needImgCaptcha">
+  <div v-if="needImgCaptcha" @touchmove="stopValidatePopup($event)">
     <div class="ui-mask" :class="{'active': imageValidate}"></div>
     <div class="ui-image" :class="{'active': imageValidate}">
       <h4 class="c3">请输入图片验证码</h4>
-      <div class="ui-image-cont">
-        <input type="tel" class="ui-image-code" v-model="verifyCode" maxlength="6" placeholder="请输入验证码"/>
+      <div class="ui-image-cont" @click="autofocusCode()">
+        <input type="tel" class="ui-image-code" @blur="blurVerifyCode()" id="verifyCode" v-model="verifyCode" maxlength="6" placeholder="请输入验证码"/>
         <div class="ui-image-close" :class="{'active': verifyCode}" @click="deleteVerifyCode">
           <i class="icon-close"></i>
         </div>
@@ -66,6 +66,16 @@
       }
     },
     methods: {
+      autofocusCode () {
+        document.getElementById('verifyCode').focus()
+      },
+      blurVerifyCode () {
+        document.documentElement.scrollTop = document.body.scrollTop = 0
+      },
+      stopValidatePopup (event) {
+        event.preventDefault()
+        event.stopPropagation()
+      },
       ...mapActions([
         'updateImageValidate'
       ]),
