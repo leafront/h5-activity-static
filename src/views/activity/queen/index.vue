@@ -1,7 +1,7 @@
 <template>
-  <div class="pageView">
+  <div class="pageView" :class="{'scroll_view_hidden': isPopup}">
     <AppHeader :title="title"></AppHeader>
-    <div class="scroll-view-wrapper" :class="{'visibility': pageView,'scroll_view_hidden': isPopup}">
+    <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="queen_index_header">
         <div class="queen__banner--rule" @click="ruleAction">
           <i>!</i>
