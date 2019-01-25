@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-mask" :class="{'active': isPopup}" @touchmove="stopSchoolPopup($event)">
+  <div class="ui-mask-visibility" :class="{'active': isPopup}" @touchmove="stopSchoolPopup($event)">
     <div class="school-rule" :style="{'height': ruleHeight, 'marginTop': ruleTop}" :class="{'active': isPopup}">
       <div class="school-close"  @click="togglePopup(false)">
         <span class="school-close-btn"></span>
