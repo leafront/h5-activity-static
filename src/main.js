@@ -21,15 +21,12 @@ Object.keys(filter).forEach(key => {
 })
 
 const setHeader = () => {
-  const hideHead = utils.query('hideHead')
   if (utils.isApp()) {
-    if (hideHead == 0 && utils.getVersion() < 5320) {
-      app.postMessage('hiddenHead',{'isHidden':'1'})
-    } else {
-      app.postMessage('hiddenHead',{'isHidden':'0'})
-    } 
+    app.postMessage('hiddenHead', {'isHidden':'0'})
   }
 }
+
+app.getWeixinAppId()
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title
