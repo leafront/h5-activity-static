@@ -32,7 +32,8 @@
 
 <script>
 
-  import IScroll from '@/libs/IScroll'
+  import IScroll from 'better-scroll'
+
   export default {
     props: {
       start: {
@@ -123,10 +124,13 @@
 
         Array.from(groupEle).forEach((item,idx) => {
           var iscroll = new IScroll(item, {
-            scrollX: false
+            scrollX: false,
+            probeType: 2
           })
 
           self.scroll.push(iscroll)
+
+          this.scroll[idx].scrollTo(0, -self.checkedDate[idx] * itemHeight)
 
           iscroll.on('scrollEnd', function () {
 
@@ -151,7 +155,6 @@
 
             iscroll.scrollTo(0, -index * itemHeight)
           })
-          this.scroll[idx].scrollTo(0, -self.checkedDate[idx] * itemHeight)
         })
       },
       cancel () {

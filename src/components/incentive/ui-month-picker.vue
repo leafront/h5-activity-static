@@ -41,7 +41,8 @@
 
 <script>
 
-  import IScroll from '@/libs/IScroll'
+ import IScroll from 'better-scroll'
+
   export default {
     props: {
       start: {
@@ -85,9 +86,7 @@
         return this.selectValue[1] - 1
       },
       months () {
-
         return this.pickerData[this.checkedDate[0]].children
-
       },
     },
     created () {
@@ -134,11 +133,12 @@
 
         Array.from(groupEle).forEach((item,idx) => {
           var iscroll = new IScroll(item, {
-            scrollX: false
+            scrollX: false,
+            probeType: 2
           })
 
           self.scroll.push(iscroll)
-
+          this.scroll[idx].scrollTo(0, -self.checkedDate[idx] * itemHeight)
           iscroll.on('scrollEnd', function () {
 
             const itemLen = item.querySelectorAll('.ui-picker__content li').length - 7
@@ -162,7 +162,6 @@
 
             iscroll.scrollTo(0, -index * itemHeight)
           })
-          this.scroll[idx].scrollTo(0, -self.checkedDate[idx] * itemHeight)
         })
       },
       cancel () {
