@@ -1,6 +1,6 @@
 <template>
-  <div class="pageView" :class="{'scroll_view_hidden': imageValidate || isPopup}">
-    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
+  <div class="pageView">
+    <AppHeader :title="title" :backFn="backAction">
     </AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="school-wrapper" id="schoolWrapper">
@@ -57,7 +57,6 @@
     data() {
       return {
         title: '开学季',
-        isBorder: true,
         pageView: false,
         isClickCode: true,
         codeText: '验证码',

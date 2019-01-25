@@ -1,5 +1,5 @@
 <template>
-  <div class="pageView" :class="{'scroll_view_hidden': isPopup}">
+  <div class="pageView">
     <AppHeader :title="title"></AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="queen_index_header">

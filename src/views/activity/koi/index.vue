@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder"></AppHeader>
+    <AppHeader :title="title"></AppHeader>
     <div class="scroll-view-wrapper koi-view" :class="{'visibility': pageView,'scroll_view_hidden': isPopup}">
       <div class="koi__banner">
         <img class="koi__banner--pic" src="./images/koi_bg.jpg"/>
@@ -269,7 +269,6 @@
       return {
         title: '翻倍锦鲤券',
         pageView: true,
-        isBorder: true,
         couponPic: [
           config.staticPath + '/activity-static/images/koi_discount_amount_01.png',
           config.staticPath + '/activity-static/images/koi_discount_amount_02.png',
