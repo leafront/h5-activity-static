@@ -1,6 +1,7 @@
 import utils from './utils'
 import store from './store'
 import weixin_share from '@/common/weixin_share'
+import request from '@/widget/request'
 
 var count = 0  //回调函数计数
 
