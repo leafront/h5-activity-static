@@ -88,12 +88,8 @@
           }
           this.isCheck = true
         }
-
+        e.preventDefault()
         this._move(e, differX)
-
-        if (!utils.isPassive()) {
-          e.preventDefault()
-        }
       },
       touchend (e) {
         if (!this.isValid) return
