@@ -1,5 +1,5 @@
 <template>
-	<swiper :list="bannerList" :index="index" :preventDefault="true" @toggleIndex="toggleIndex" :itemWidth="wrapperWidth" :style="{'height':itemHeight}">
+	<swiper :list="bannerList" :index="index" :preventDefault="preventDefault" @toggleIndex="toggleIndex" :itemWidth="wrapperWidth" :style="{'height':itemHeight}">
 		<ul slot="banner" class="slideshow-item">
 			<li v-for="item in bannerList":style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
 				<img :src="item.imageUrl" :style="{'width':itemWidth, 'height':itemHeight}">
@@ -21,7 +21,8 @@
         index: 1,
         wrapperWidth: docWidth,
         itemWidth: docWidth + 'px',
-        itemHeight: docWidth * 0.4 + 'px',
+        itemHeight: docWidth / 3 + 'px',
+        preventDefault: true
       }
     },
 		props: {
