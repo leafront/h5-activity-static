@@ -94,14 +94,11 @@
 
           // 注册scroll事件并监听
           window.addEventListener('scroll',function(){
-            // console.log('可视区域高度', document.documentElement.clientHeight+'-----------'+window.innerHeight); // 可视区域高度
-            // console.log('滚动高度', document.body.scrollTop); // 滚动高度
-            // console.log('文档高度',document.body.offsetHeight); // 文档高度
-            // console.log('元素滚动高度',document.documentElement.scrollTop ); // 文档高度
-            // 判断是否滚动到底部
-            // 手机支持body、 电脑支持documentElement
+        
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop 
+            const pageHeight = document.querySelector('.scroll-view-wrapper').offsetHeight
 
-            if(document.documentElement.scrollTop + document.body.scrollTop + window.innerHeight >= document.body.offsetHeight) {
+            if (scrollTop + window.innerHeight >= pageHeight) {
               if (vm.switch) {
                 vm.pageNo = vm.pageNo +1;
                 vm.switch = false;
