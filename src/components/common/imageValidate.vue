@@ -35,7 +35,7 @@
         params: {
           initType: 2,
           width: 1.6,
-          height: .6,
+          height: .6
         }
       }
     },
