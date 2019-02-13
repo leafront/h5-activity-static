@@ -127,7 +127,7 @@
     },
     beforeDestroy () {
       cancelAnimationFrame(this.timer)
-      window.removeEventListener('scroll',this.scrollImg,false)
+      window.removeEventListener('scroll',this.scrollImg, utils.isPassive() ? {passive: true} : false)
     }
   }
 </script>
