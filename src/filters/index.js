@@ -2,9 +2,8 @@
 * @params {String || Boolean} tiems
 * @params {String} fmt
 * @return {String}
-  *
-  * @example
-  * (new Date().getTime(),"yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+* @example
+* (new Date().getTime(),"yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
 * (new Date().getTime(),"yyyy-MM-dd E HH:mm:ss") ==> 2009-03-10 二 20:09:04
 * (new Date().getTime(),"yyyy-MM-dd EE hh:mm:ss") ==> 2009-03-10 周二 08:09:04
 * (new Date().getTime(),"yyyy-MM-dd EEE hh:mm:ss") ==> 2009-03-10 星期二 08:09:04
