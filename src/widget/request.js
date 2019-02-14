@@ -39,7 +39,6 @@ export default function request (url,{
   const errorCode1 = 99;
   const errorCode2 = 999;
   const options = {
-    isHeader:true,
     type,
     data,
     async: true,
