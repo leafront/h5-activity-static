@@ -52,7 +52,7 @@ export default function request (url,{
     },
     hostPath
   }
-  clearStorage()
+  
   if (dataType !== 'text') {
     options.data = Object.assign({
       ut,
@@ -121,7 +121,7 @@ export default function request (url,{
 
     let currentTime = new Date().getTime()
     const cacheData = store.get(cacheUrl,'local')
-
+    clearStorage()
     if (cache && cacheData) {
       const getCacheTime = cacheData.times
       if (currentTime < getCacheTime) {
