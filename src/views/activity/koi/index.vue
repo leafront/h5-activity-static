@@ -384,18 +384,14 @@
           ignoreLogin: true
         }).then((result) => {
           const data = result.data
-          const hideHead = utils.query('hideHead')
           if (data && data.activityStatus == 3) {
-            if (hideHead !== undefined) {
-              this.$router.replace(`/activity/koi/end?hideHead=${hideHead}`)
-            } else {
-              this.$router.replace('/activity/koi/end')
-            }
+            //this.$router.replace('/activity/koi/end')
           }
         })
       },
       /**
        * exchange coupon
+       * 
        */
       submitCouponExchange () {
         if (utils.loggedIn()) {
