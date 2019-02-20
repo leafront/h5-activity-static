@@ -12,7 +12,7 @@
     </swiper>
   </div>
 </template>
-<style lang="scss" scoped="scoped">
+<style lang="scss">
   .activity-queen-banner{
     margin: 0 .38rem;
     padding-top: .24rem;
