@@ -400,7 +400,7 @@
         },{
           imageUrl: require('./images/slider_queen_02.png')
         },{
-          imageUrl: require('./images/slider_queen_02.png')
+          imageUrl: require('./images/slider_queen_03.png')
         }]
       }, 200)
       const query = utils.query()
