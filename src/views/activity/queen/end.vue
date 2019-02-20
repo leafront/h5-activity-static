@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
+    <AppHeader :title="title" :backFn="backAction">
     </AppHeader>
     <div class="scroll-view-wrapper koi-end-view" :class="{'visibility': pageView}">
       <div class="koi-end">
@@ -47,7 +47,6 @@
       return {
         title: '翻倍锦鲤券',
         pageView: true,
-        isBorder: true,
         times: 3,
         timer: null
       }

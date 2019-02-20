@@ -1,6 +1,6 @@
 <template>
 <div class="pageView">
-  <AppHeader :title="title" :isBorder="isBorder">
+  <AppHeader :title="title">
   </AppHeader>
   <div class="scroll-view-wrapper koi_bg" :class="{'visibility': pageView}">
     <div class="region_tip">
@@ -212,7 +212,6 @@ export default {
       title: '合成锦鲤券',
       loadValue: true,
       pageView: true,
-      isBorder: true,
       regionFst: false,
       otherArr: false,
       otherArr1: false,
@@ -234,9 +233,7 @@ export default {
       selectNum: 1,
       innerCle: true,
       innerCle1: false,
-      unUseUrl: "",
-
-
+      unUseUrl: ""
     }
   },
   components: {
