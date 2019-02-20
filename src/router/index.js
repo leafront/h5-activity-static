@@ -236,7 +236,7 @@ export default new Router({
       name: 'queenMerge',
       component: () => import('@/views/activity/queen/merge'),
       meta: {
-        title: '食运券',
+        title: '翻倍锦鲤券',
         bgColor: '#bd0004'
       }
     },{
@@ -244,7 +244,7 @@ export default new Router({
       name: 'queenIndex',
       component: () => import('@/views/activity/queen/index'),
       meta: {
-        title: '食运券',
+        title: '翻倍锦鲤券',
         bgColor: '#bd0004'
       }
     }, {
@@ -252,7 +252,7 @@ export default new Router({
       name: 'queenEnd',
       component: () => import('@/views/activity/queen/end'),
       meta: {
-        title: '食运券',
+        title: '翻倍锦鲤券',
         bgColor: '#bd0004'
       }
     }
