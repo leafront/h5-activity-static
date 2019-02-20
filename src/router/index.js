@@ -138,19 +138,7 @@ export default new Router({
       component: () => import('@/views/activity/koi/index.vue'),
       meta: {
         title: '翻倍锦鲤券',
-        bgColor: '#bd0004',
-        shareConfig: {
-          link: config.hostPath + '/activity/koi/index',
-          title: '官宣 锦鲤和双十一更配哦',
-          desc: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
-          imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png',
-          channel: [
-           "WechatMoments",
-           "Wechat",
-           "QQ",
-           "QZone"
-          ]
-        }
+        bgColor: '#bd0004'
       }
     }, {
       path: '/activity/koi/end',
