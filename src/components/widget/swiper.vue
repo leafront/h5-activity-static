@@ -70,7 +70,8 @@
         this.startY = this.endY = point.pageY
         this.isValid = true
         this.isCheck = false
-        this._start(e);
+        this.stopAutoPlay()
+        this._start(e)
       },
       touchmove (e) {
         if (!this.isValid) return;
@@ -149,6 +150,7 @@
           this.startTime = new Date().getTime()
         }
         this.$emit('toggleIndex', index)
+        this.startAutoPlay()
       },
       setWrapperPos (x) {
         this.wrapper.style.transform = 'translate3d(' + x + 'px, 0, 0)'
