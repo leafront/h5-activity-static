@@ -1,6 +1,6 @@
 <template>
   <div class="activity-queen-banner">
-    <swiper :list="list" :preventDefault="preventDefault" :index="index" :picLazyLoad="picLazyLoad" :itemWidth="wrapperWidth" @toggleIndex="toggleIndex" :style="{'height':itemHeight}">
+    <swiper :list="list" :index="index" :picLazyLoad="picLazyLoad" :itemWidth="wrapperWidth" @toggleIndex="toggleIndex" :style="{'height':itemHeight}">
       <ul slot="banner" class="slideshow-item" :style="{'height':itemHeight}">
         <li v-for="item in list" :style="{'width':itemWidth,'height': itemHeight}">
           <img :src="item.imageUrl" :style="{'width':itemWidth, 'height': itemHeight}">
@@ -43,7 +43,6 @@
   }
 </style>
 <script>
-
   import swiper from '@/components/widget/swiper.vue'
   const itemWidth = document.documentElement.clientWidth
   export default {
@@ -53,7 +52,6 @@
         wrapperWidth: itemWidth * .8986,
         itemWidth: itemWidth * .8986 + 'px',
         itemHeight: itemWidth * .1786 + 'px',
-        preventDefault: true,
         picLazyLoad: false
       }
     },
