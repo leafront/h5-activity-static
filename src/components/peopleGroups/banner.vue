@@ -1,7 +1,7 @@
 <template>
-	<swiper :list="bannerList" :index="index" :preventDefault="true" @toggleIndex="toggleIndex" :itemWidth="wrapperWidth" :style="{'height':itemHeight}">
+	<swiper :list="list" :index="index" :preventDefault="true" @toggleIndex="toggleIndex" :itemWidth="wrapperWidth" :style="{'height':itemHeight}">
 		<ul slot="banner" class="slideshow-item">
-			<li v-for="item in bannerList":style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
+			<li v-for="item in list":style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
 				<img :src="item.url300x300" :style="{'width':itemWidth, 'height':itemHeight}">
 			</li>
 		</ul>
@@ -13,7 +13,6 @@
 <script>
 
 	import swiper from '@/components/widget/swiper.vue'
-
   const docWidth = document.documentElement.clientWidth
 
 	export default {
@@ -36,6 +35,19 @@
 		components:{
 			swiper
 		},
+		computed: {
+      list () {
+        const list = Object.assign([],this.bannerList)
+        if (list && list.length) {
+          const len = list.length
+          const firstEl = list[len - 1]
+          const lastEl = list[0]
+          list.unshift(lastEl)
+          list.push(firstEl)
+        }
+        return list
+      }
+    },
 		methods: {
 			pageAction (url) {
 				if (url) {

@@ -1,286 +1,163 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title"></AppHeader>
-    <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
-      <div class="queen_index_header">
-        <div class="queen__banner--rule" @click="ruleAction">
+    <div class="scroll-view-wrapper" :class="{'visibility': pageView,'scroll_view_hidden': isPopup}">
+      <div class="koi__banner">
+        <img class="koi__banner--pic" src="./images/koi_bg.jpg"/>
+        <h4 class="koi__banner--tit font-xb">女王节锦鲤券获取攻略</h4>
+        <p class="koi__banner--txt">种子券收集时间: 2月25日-3月17日</p>
+        <div class="koi__banner--rule" @click="routerAction(shareStrategyUrl)">
           <i>!</i>
-          <span class="font">规则</span>
+          <span class="font">10秒玩转锦鲤券</span>
         </div>
-        <div class="queen-nav">
-          <div class="queen-nav__item">
-            <p>收集津贴</p>
-            <span>01.17 ~ 01.28</span>
-            <i class="queen-nav__item--circle"></i>
-          </div>
-          <div class="queen-nav__item">
-            <p>合成食运券</p>
-            <span>01.17 ~ 01.28</span>
-            <i class="queen-nav__item--circle"></i>
-          </div>
-          <div class="queen-nav__item">
-            <p>使用食运券</p>
-            <span>01.17 ~ 01.28</span>
-            <i class="queen-nav__item--circle"></i>
-          </div>
-          <div class="queen-nav__line"></div>
-        </div>  
+      </div>
+      <div class="koi-nav">
+        <div class="koi-nav__item">
+          <p>种子券收集</p>
+          <span>2月25日-3月17日</span>
+          <i class="koi-nav__item--circle"></i>
+        </div>
+        <div class="koi-nav__item">
+          <p>翻倍锦鲤券使用</p>
+          <span>3月5日-3月17日</span>
+          <i class="koi-nav__item--circle"></i>
+        </div>
+        <div class="koi-nav__line"></div>
+      </div>
+      <div class="koi-des">
+        <div class="koi-des__title">
+          <span>锦</span>
+          <span>鲤</span>
+          <span>大</span>
+          <span>礼</span>
+          <span>包</span>
+        </div>
+      </div>
+      <div class="queen-slider">
+        <Banner :bannerList="bannerList"></Banner>
       </div>  
-      <div class="queen_cont">
-        <div class="queen_active_item">
-          <div class="queen_item_pic">
-            <img src="./images/queen_goods.png"/>
-          </div>
-          <div class="queen_item_txt">
-            <div class="queen_item_info">
-              <p>戴森吹风机</p>
-              <strong>(食运券)</strong>
-            </div>  
-            <div class="queen_item_button">
-              <p>津贴￥120以上可合成</p>
+      <div class="quuen-banner-line">
+      </div>  
+      <div class="koi-strategy">
+        <div class="koi-strategy__tit">
+          <span>种</span>
+          <span>子</span>
+          <span>券</span>
+          <span>收</span>
+          <span>集</span>
+          <span>攻</span>
+          <span>略</span>
+        </div>
+        <div class="koi-strategy__list">
+          <div class="koi-strategy__item">
+            <strong class="koi-strategy__tag">攻略1</strong>
+            <div class="koi-strategy__discount">
+              <h5><i>¥</i>20<span>种子券</span></h5>
+              <p>首次分享可获得20张¥1种子券</p>
             </div>
-            <div class="queen_item_number">
-              <p>仅限3张，兑完即止</p>
-            </div>        
-          </div>
-        </div>    
-        <div class="queen-active-times">
-          <p>1月20、21、22早上10点开始兑换</p>
-        </div>
-        <div class="queen_active_item">
-          <div class="queen_item_coupon">
-            <div class="queen_item_coupon_txt">
-              <strong>￥</strong>
-              <p>200</p>
-            </div>  
-            <span class="font">食运券</span>
-          </div>
-          <div class="queen_item_txt">
-            <div class="queen_item_info">
-              <p>满￥299立减</p>
-            </div>  
-            <div class="queen_item_button">
-              <p>津贴￥100以上可合成</p>
+            <div class="koi-strategy__action">
+              <span class="font-b" v-if="firstStrategyButtonStatus == 0" @click="shareAction">去分享</span>
+              <span class="disabled font-b" v-else-if="firstStrategyButtonStatus == 1" @click="shareAction">已分享</span>
+              <span class="disabled font-b" v-else-if="firstStrategyButtonStatus == 2" @click="shareAction">分享</span>
             </div>
-            <div class="queen_item_number">
-              <p>每日限量，兑完即止</p>
-            </div>        
           </div>
-        </div>
-        <div class="queen_coupon_list">
-          <div class="queen_coupon_item">
-            <div class="queen_coupon_item_txt">
-              <div class="queen_coupon_item_amount">
-                <strong>￥</strong>
-                <p>100</p>
-              </div>
-              <div class="queen_coupon_item_name">
-                <span>(食运券)</span>
-                <p>满￥199立减</p>
-                <span>每日限量，兑完即止</span>
-              </div>    
+          <div class="koi-strategy__item">
+            <strong class="koi-strategy__tag">攻略2</strong>
+            <div class="koi-strategy__discount">
+              <h5><i>¥</i>1<span>种子券</span></h5>
+              <p>签到返¥1种子券 每日限一次</p>
             </div>
-            <div class="queen_coupon_button"> 
-              <p>津贴￥50以上可合成</p>
-            </div>  
-          </div>  
-          <div class="queen_coupon_item">
-            <div class="queen_coupon_item_txt">
-              <div class="queen_coupon_item_amount">
-                <strong>￥</strong>
-                <p>70</p>
-              </div>
-              <div class="queen_coupon_item_name">
-                <span>(食运券)</span>
-                <p>满￥199立减</p>
-              </div>    
-            </div>  
-            <div class="queen_coupon_button"> 
-              <p>津贴￥35以上可合成</p>
-            </div>  
-          </div>
-          <div class="queen_coupon_item">
-            <div class="queen_coupon_item_txt">
-              <div class="queen_coupon_item_amount">
-                <strong>￥</strong>
-                <p>50</p>
-              </div>
-              <div class="queen_coupon_item_name">
-                <span>(食运券)</span>
-                <p>满￥149立减</p>
-              </div>    
+            <div class="koi-strategy__action">
+              <span class="font-b" v-if="secondStrategyButtonStatus == 0" @click="pageAction(signUrl)">去签到</span>
+              <span class="disabled font-b" v-else-if="secondStrategyButtonStatus == 1" @click="pageAction(signUrl)">今日已签到</span>
             </div>
-            <div class="queen_coupon_button"> 
-              <p>津贴￥25以上可合成</p>
-            </div>    
           </div>
-          <div class="queen_coupon_item">
-            <div class="queen_coupon_item_txt">
-              <div class="queen_coupon_item_amount">
-                <strong>￥</strong>
-                <p>30</p>
-              </div>
-              <div class="queen_coupon_item_name">
-                <span>(食运券)</span>
-                <p>满￥99立减</p>
-              </div>    
+          <div class="koi-strategy__item">
+            <strong class="koi-strategy__tag">攻略3</strong>
+            <div class="koi-strategy__discount">
+              <h5><i>¥</i>3<span>种子券</span></h5>
+              <p>3积分兑¥3种子券 每日限一次</p>
             </div>
-            <div class="queen_coupon_button"> 
-              <p>津贴￥15以上可合成</p>
+            <div class="koi-strategy__des">
+              <p>今日剩余 {{thirdStrategyRemainCount}} 张</p>
+              <p>已有积分 {{points}}</p>
             </div>  
+            <div class="koi-strategy__action noPadding">
+              <span class="font-xb" v-if="thirdStrategyButtonStatus == 0" @click="submitCouponExchange">兑换</span>
+              <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 1">兑换</span>
+              <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 2">今日已兑换</span>
+            </div>
+          </div>
+          <div class="koi-strategy__item">
+            <strong class="koi-strategy__tag">攻略4</strong>
+            <div class="koi-strategy__discount">
+              <h5><i>¥</i>10<span>种子券</span></h5>
+              <p>下单支付成功即返¥10种子券</p>
+            </div>
+            <div class="koi-strategy__des">
+              <p>团购 ,外卖订单除外</p>
+            </div> 
+            <div class="koi-strategy__action noPadding">
+              <span class="font-b"  @click="routerAction(forthStrategyUrl)">去购物</span>
+            </div>
           </div>
         </div>
-        <div class="queen_news_txt1">
-          <img src="./images/queen_news_txt_01.png"/>
+      </div>
+      <div class="koi-seed_action_bg" :class="{'active': mergeButtonStatus == 0}">
+        <div class="koi-seed__action">
+          <span v-if="mergeButtonStatus == 0" @click="pageAction('/activity/queen/merge')">立即合成</span>
+          <span v-else>3月5日 10:00 开始合成，敬请期待……</span>
         </div>
-        <div class="queen_coupon_way">
-          <div class="queen_coupon_way_item" @click="pageAction(signUrl)">
-            <img src="./images/queen_coupon_pic_01.png"/>
-            <div class="queen_coupon_way_info" :class="{'active': secondStrategyButtonStatus == 1}">
-              <span v-if="secondStrategyButtonStatus == 0">去签到</span>
-              <span v-else-if="secondStrategyButtonStatus == 1">今日已签到</span>
-            </div>  
-          </div>  
-          <div class="queen_coupon_way_item">
-            <img src="./images/queen_coupon_pic_02.png"/>
-            <div class="queen_coupon_way_info" :class="{'active': firstStrategyButtonStatus == 1 || firstStrategyButtonStatus == 2}" @click="shareAction"> 
-              <span v-if="firstStrategyButtonStatus == 0">去分享</span>
-              <span v-else-if="firstStrategyButtonStatus == 1">已分享</span>
-              <span v-else-if="firstStrategyButtonStatus == 2">分享</span>
-            </div>  
-          </div>  
-          <div class="queen_coupon_way_item">
-            <img src="./images/queen_coupon_pic_03.png"/>
-            <div class="queen_coupon_way_info queen_coupon_way_info1" :class="{'active': thirdStrategyButtonStatus == 1 || thirdStrategyButtonStatus == 2}">
-              <span v-if="thirdStrategyButtonStatus == 0" @click="submitCouponExchange">兑换</span>
-              <span v-else-if="thirdStrategyButtonStatus == 1">兑换</span>
-              <span v-else-if="thirdStrategyButtonStatus == 2">今日已兑换</span>
-            </div>  
-          </div>
-          <div class="queen_coupon_way_item">
-            <img src="./images/queen_coupon_pic_04.png"/>
-            <div class="queen_coupon_way_info queen_coupon_way_info1" @click="routerAction(forthStrategyUrl)">
-              <span>去购物</span>
-            </div>  
-          </div>
+      </div> 
+      <div class="koi-seed">
+        <div class="koi-seed__title">
+          <span>我</span>
+          <span>的</span>
+          <span>种</span>
+          <span>子</span>
+          <span>券</span>
         </div>
-        <div class="queen_news_txt2">
-          <img src="./images/queen_news_txt_02.png"/>
-        </div>
-        <div class="queen_coupon_price">
-          <div class="queen_coupon_price_item" v-for="(item,index) in couponList">
+        <div class="koi-seed__pic">
+          <div class="koi-seed__item" v-for="(item,index) in couponList">
             <img :src="couponPic[index]"/>
             <span>{{item}}</span>
-          </div> 
+          </div>
         </div>
-        <div class="queen-seed__des">
-          <span class="font">已经获得 {{couponNum}} 张过年津贴</span>
+        <div class="koi-seed__des">
+          <span>目前拥有种子券 {{couponNum}} 张</span>
           <strong>共计 {{couponSum}} 元</strong>
         </div>
-        <div class="queen_active_merge" @click="pageAction('/activity/queen/merge')" v-if="mergeButtonStatus == 0">
-          <span></span>
-        </div>
-        <div class="queen_active_merge_open" v-else>
-          <span></span>
-        </div>  
-        <div class="queen_intro" id="queen_rule">
-          <span class="queen_intro_bg"></span>
-          <div class="queen_intro_info">
-            <h4 class="font-b">活动说明</h4>
-            <div class="queen_intro_item">
-              <i class="queen_intro_circle">1</i>
-              <div class="queen_intro_txt">
-                <p>活动时间:2019年1月17日00:00 - 1月28日24:00</p>
-              </div>  
-            </div>  
-            <div class="queen_intro_item">
-              <i class="queen_intro_circle">2</i>
-              <div class="queen_intro_txt">
-                <p>活动进程:1月17日 - 1月28日收集过年津贴，
-                <p>1月17日10点 - 1月28日24点期间可以合成食运劵并使用</p>
-              </div>  
-            </div>
-            <div class="queen_intro_item">
-              <i class="queen_intro_circle">3</i>
-              <div class="queen_intro_txt">
-                <p>津贴收集方式</p>
-                <p>1、首次登录状态下浏览食运券活动页可获得 ¥ 30 津贴，满99可用，同一用户ID活动期间仅可获得1次;</p>
-                <p>2、首次点击食运劵活动页面“去分享”按钮分享活动，可以获得 20 个￥1津贴，并且同一用户ID活动期间仅限首次分享可获得;</p>
-                <p>3、同一用户ID，每天签到1次，可获得¥1 津贴，仅限一次;</p>
-                <p>4、同一用户ID，每天可使用3积分兑换¥3 津贴，同一用户每天上限兑换1次;</p>
-                <p>5、活动期间，每支付完成1笔订单(外卖、团购订单除外)， 可以获得¥10元无门槛津贴，同一用户每天限3单</p>
-                <p>6、活动期间津贴可作为优惠券正常下单使用， 津贴使用过后即不可再用于合成食运劵;</p>
-                <p>7、所谓同一用户是指同一用户ID、同一手机号、 同一支付账号都视为同一用户;</p>
-              </div>  
-            </div>
-            <div class="queen_intro_item">
-              <i class="queen_intro_circle">4</i>
-              <div class="queen_intro_txt">
-                <p>食运劵合成规则</p>
-                <p>1、戴森吹风机兑换券，津贴 ¥ 120 及以上可兑换，仅限1张， 限1月20、21、22日10点开始兑换，错过则无</p>
-                <p>2、满299-200元券，津贴 ¥ 100元及以上可兑换，每日限量，兑完即止</p>
-                <p>3、满199-100元券，津贴 ¥ 50元及以上可兑换，每日限量，兑完即止;</p>
-                <p>4、满199-70元券，津贴 ¥ 35元及以上可兑换，不限量;</p>
-                <p>5、满149-50元券，津贴 ¥ 25元及以上可兑换，不限量;</p>
-                <p>6、满99-30元券，津贴 ¥ 15元及以上可兑换，不限量;</p>
-              </div>  
-            </div>  
-            <div class="queen_intro_item">
-              <i class="queen_intro_circle">5</i>
-              <div class="queen_intro_txt">
-                <p>合成某一食运券时，津贴金额合计不低于该食运券的最低金额要求， 高出部分不予退还;(例如:津贴累计¥55，兑换199-100元劵，兑换完成，5元不退回)</p>
-              </div>  
-            </div>
-            <div class="queen_intro_item">
-              <i class="queen_intro_circle">6</i>
-              <div class="queen_intro_txt">
-                <p>根据用户现有津贴种类和数量，以及限量食运券的存量情况为客户提供两种合成方案:</p>
-                <p>“面额最大抵更多”当前津贴总额可合成的最大面额食运劵，高出部分不 予退还。选择"精打细算不浪费”，充分利用津贴数量和种类精确合成， 不会超出食运劵的最低合成额度; (例如小余有1张¥30津贴，2张¥10津贴，17张¥3津贴，共计101元。如 选择“面额最大抵更多”，可合成299减200食运劵，多出的1元额度不退 回账户;如选择"精打细算不浪费”，可合成1张199减100食运劵和3张99减 30食运劵，剩余2张¥3津贴仍保留在个人账户等待下次合成;)</p>
-              </div>  
-            </div>
-            <div class="queen_intro_item">
-              <i class="queen_intro_circle">7</i>
-              <div class="queen_intro_txt">
-                <p>戴森吹风机实物兑换劵为满0.1减0优惠券， 获得兑换劵的用户等待客服联系，需用劵后才可兑换实物; 工作人员会在20个工作日内联系，食运券生鲜、酒饮类商品不可用， 具体使用规则，参见个人中心[我的钱包-优惠券];</p>
-              </div>  
-            </div>
-            <div class="queen_intro_item">
-              <i class="queen_intro_circle">8</i>
-              <div class="queen_intro_txt">
-                <p>每日限量的食运券，每天10点、19点更新，把握时间点，不要错过;</p>
-              </div>  
-            </div>
-            <div class="queen_intro_item">
-              <i class="queen_intro_circle">9</i>
-              <div class="queen_intro_txt">
-                <p>来伊份保留法律范围内允许的对活动的解释权。</p>
-              </div>  
-            </div>
-          </div>  
-        </div>  
       </div>
-      <div class="queen_bottom_bg"></div> 
-    </div>  
-    <QueenPopup :isPopup="isPopup" @togglePopup="togglePopup"></QueenPopup>
-  </div>  
-</template> 
+      <UIShare></UIShare>
+    </div>
+    <KoiPopup :isPopup="isPopup" @togglePopup="togglePopup"></KoiPopup>
+  </div>
+</template>
 
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-  import QueenPopup from '@/components/queen/popup'
+  import KoiPopup from '@/components/koi/popup'
   import app from '@/widget/app'
   import utils from '@/widget/utils'
-  import * as Model from '@/model/queen'
+  import * as Model from '@/model/koi'
   import config from '@/config/index'
   import UIShare from '@/components/widget/ui-share'
-  import { mapActions } from 'vuex'
+  import Banner from '@/components/queen/banner'
+  import {mapActions} from 'vuex'
 
   export default {
     data () {
       return {
-        title: '食运券',
+        title: '翻倍锦鲤券',
         pageView: true,
+        couponPic: [
+          config.staticPath + '/activity-static/images/koi_discount_amount_01.png',
+          config.staticPath + '/activity-static/images/koi_discount_amount_02.png',
+          config.staticPath + '/activity-static/images/koi_discount_amount_03.png',
+          config.staticPath + '/activity-static/images/koi_discount_amount_04.png',
+        ],
+        bannerList: [],
         isPopup: false,
         couponSum: 0,                      //累计无门槛优惠券总额
         couponNum: 0,                      //累计无门槛优惠券数量
@@ -294,31 +171,19 @@
         points: 0,
         shareStrategyUrl: '',             //分享规则链接
         couponTimer: null,
-        signUrl: '',
-        couponPic: [
-          config.staticPath + '/activity-static/images/queen_price_01.png',
-          config.staticPath + '/activity-static/images/queen_price_02.png',
-          config.staticPath + '/activity-static/images/queen_price_03.png',
-          config.staticPath + '/activity-static/images/queen_price_04.png',
-        ],
+        signUrl: ''
       }
     },
     components: {
       AppHeader,
-      QueenPopup,
+      KoiPopup,
+      Banner,
       UIShare
     },
     methods: {
       ...mapActions([
         'updateShareMenu'
       ]),
-      ruleAction () {
-        const offsetTop = document.getElementById('queen_rule').getBoundingClientRect().top
-        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-        const docRem = parseFloat(document.documentElement.style.fontSize)
-        const headerHeight = (utils.isApp() || utils.weixin()) ? 0 : .88 * docRem
-        document.documentElement.scrollTop = document.body.scrollTop = offsetTop + scrollTop - headerHeight - .8 * docRem
-      },
       /**
        * @param {Boolean} val
        */
@@ -351,9 +216,9 @@
         }
         const shareConfig = {
           link: this.shareStrategyUrl,
-          title: '食来运转巨福气',
-          description: '来伊份匠心年货节，集津贴换食运券，让你猪年巨有福~',
-          imgUrl: config.staticPath + '/activity-static/images/queen_share_icon.jpg',
+          title: '官宣 锦鲤和双十一更配哦',
+          description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
+          imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png',
           platforms: [
            "WechatMoments",
            "Wechat",
@@ -379,7 +244,7 @@
             })
           })
         } else {
-          app.loginAction()
+					app.loginAction()
         }
       },
       /**
@@ -398,6 +263,7 @@
       },
       /**
        * exchange coupon
+       * 
        */
       submitCouponExchange () {
         if (utils.loggedIn()) {
@@ -528,6 +394,15 @@
       this.getKoiStatus()
       this.getKoiInfo()
       this.getCouponList()
+      setTimeout(() => {
+        this.bannerList = [{
+          imageUrl: require('./images/slider_queen_01.png')
+        },{
+          imageUrl: require('./images/slider_queen_02.png')
+        },{
+          imageUrl: require('./images/slider_queen_02.png')
+        }]
+      }, 200)
       const query = utils.query()
       const {
         refresh,
@@ -549,456 +424,67 @@
 </script>
 
 <style lang="scss">
-  .queen_coupon_way{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  .queen-slider{
+    background: #d44334;
   }
-  .queen_bottom_bg{
-    margin-top: .4rem;
-    width: 7.5rem;
-    height: 1.72rem;
-    background: url(./images/queen_bottom_bg.png) no-repeat;
-    background-size: 100% auto;
+  .quuen-banner-line{
+    height: .07rem;
+    background: #f26b5c;
   }
-  .queen_intro_info{
-    padding: .64rem .2rem 0;
-    h4{
-      text-align: center;
-      color: #e7925a;
-      font-weight: bold;
-    }
-  }
-  .queen__banner--rule{
-    position: absolute;
-    right: .2rem;
-    top: .5rem;
-    padding: 0 .2rem;
-    height: .5rem;
-    border-radius: .3rem;
-    background: #ca221a;
-    display: flex;
-    align-items: center;
-    i{
-      width: .26rem;
-      height: .26rem;
-      border-radius: 50%;
-      background: #faf0d2;
-      color: #ca231b;
-      line-height: .26rem;
-      text-align: center;
-      margin-right: .06rem;
-    }
-    span{
-      color: #faefd2;
-    }
-  }
-  .queen_intro_item{
-    display: flex;
-    margin-top: .4rem;
-    .queen_intro_circle{
-      width: .3rem;
-      height: .3rem;
-      border-radius: 50%;
-      background: #f9c77b;
-      line-height: .3rem;
-      text-align: center;
-      color: #b40000;
-      margin-top: .1rem;
-    }
-  }
-  .queen_intro_txt{
+  .koi-strategy__des{
+    background:#fcc67b;
+    height: .8rem;
     display: flex;
     flex-direction: column;
-    flex:1;
+    align-items: center;
+    justify-content: center;
     p{
-      padding-left: .12rem;
+      color: #ae2418;
       font-size: .26rem;
-      color: #f9c77b;
-      line-height: .5rem;
     }
   }
-  .queen_intro{
-    border-radius: .2rem;
-    border: .03rem solid #ffbb82;
-    background: #b40000;
-    margin-top: 1.15rem;
-    position: relative;
-    padding-bottom: .35rem;
-    .queen_intro_bg{
-      width: 5.28rem;
-      height: .77rem;
-      background: url(./images/queen_intro_bg.png) no-repeat;
-      background-size: 100% auto;
-      position: absolute;
-      left: 50%;
-      top: 0;
-      transform: translate(-50%, -50%);
-    }
-  }
-  .queen_active_merge{
-    margin-top: .32rem;
-    height: .53rem;
-    display: flex;
-    justify-content: center;
-    span{
-      width: 3.05rem;
-      height: .53rem;
-      background: url(./images/queen_merge_btn_bg.png) no-repeat;
-      background-size: 100% auto;
-    }
-  }
-  .queen_active_merge_open{
-    margin-top: .32rem;
-    height: .53rem;
-    display: flex;
-    justify-content: center;
-    span{
-      width: 4.39rem;
-      height: .53rem;
-      background: url(./images/queen_merge_btn_bg1.png) no-repeat;
-      background-size: 100% auto;
-    }
-  }
-  .queen_coupon_way_item{
-    position: relative;
-    margin-bottom: .48rem;
-    img{
-      width: 3.33rem;
-      height: 1.71rem;
-    }
-  }
-  .queen_news_txt2{
-    display: flex;
-    height: .62rem;
-    justify-content: center;
-    img{
-      width: 3.21rem;
-      height: .62rem;
-    }
-  }
-  .queen_coupon_way_info{
-    position: absolute;
-    bottom: .26rem;
-    right: .65rem;
-    height: .3rem;
-    border-radius: .2rem;
-    background: #f9c578;
-    padding: 0 .15rem;
-    line-height: .3rem;
+  .koi-seed_action_bg{
+    margin: .35rem .2rem 0;
+    padding: .05rem;
+    background: linear-gradient(to bottom,rgba(241,174,93,.61),rgba(245,199,134,.61));
+    border-radius: .35rem;
     &.active{
-      background: #dd8862;
-      span{
-        color: #fff;
-        &:after{
-          border-left: .08rem solid #fff;
+      background: linear-gradient(to bottom,#F1AE5D,#F5C786);
+      .koi-seed__action{
+        span{
+          color: #a30001;
         }
       }
     }
-    span{
-      height: .3rem;
-      color: #d00619;
-      display: block;
-      font-size: .22rem;
-      &:after{
-        content: '';
-        display: inline-block;
-        position: relative;
-        top: -.02rem;
-        width: 0;
-        height: 0;
-        margin-left: .05rem;
-        border-top: .06rem solid transparent;
-        border-left: .08rem solid #d00619;
-        border-bottom: .06rem solid transparent;
-      }
-    }
   }
-  .queen_coupon_way_info1{
-    span{
-      color: #fdb767;
-      &:after{
-        border-left: .08rem solid #fdb767;
-      }
-    }
-  }
-  .queen_coupon_way_info1{
-    background: #d00619;
-  }
-  .queen_news_txt1{
-    padding-top: .13rem;
-    padding-bottom: .3rem;
-    width: 5.32rem;
-    margin: 0 auto;
-    img{
-      width: 5.32rem;
-      height: .66rem;
-    }
-  }
-  .queen_coupon_button{
+  .koi-seed__action{
     display: flex;
     justify-content: center;
-    padding-top: .1rem;
-    p{
-      width: 2.58rem;
-      height: .52rem;
-      color: #fff;
-      background: url(./images/queen_coupon_button_bg.png) no-repeat;
-      background-size: 2.58rem auto;
-      text-align: center;
-      line-height: .52rem;
-    }
-  }
-  .queen_coupon_item_txt{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #b40007;
-    width: 3.18rem;
-    height: 1.82rem;
-    background: url(./images/queen_coupon_item_bg.png) no-repeat;
-    background-size: 100% auto;
-  }
-  .queen_coupon_item_amount{
-    display: flex;
-    align-items: flex-end;
-    margin-top: -.1rem;
-    strong{
-      font-size: .4rem;
-      font-weight: bold;
-    }
-    p{
-      font-size: .55rem;
-      font-weight: bold;
-    }
-  }
-  .queen_coupon_item_name{
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    align-items: center;
-    p{
-      font-size: .34rem;
-      font-weight: bold;
-      margin-top: -.1rem;
-    }
+    border-radius: .3rem;
+    border: .01rem solid #fbdaad;
     span{
-      font-weight: bold;
-      margin-top: -.1rem;
-    }
-  }
-  .queen_index_header{
-    height: 14.18rem;
-    background: url(./images/queen_bg.png) no-repeat;
-    background-size: 100% auto;
-    margin-bottom: .21rem;
-    position: relative;
-  }
-  .queen_coupon_list{
-    padding-top: .45rem;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  .queen-nav{
-    width: 6.78rem;
-    height: 1.16rem;
-    background: url(./images/queen_header_news.png) no-repeat;
-    background-size: 100% auto;
-    position: absolute;
-    top: 11.14rem;
-    left: 50%;
-    margin-left: -3.39rem;
-    display: flex;
-    justify-content: space-between;
-    &__item{
-      flex:1;
-      height: 100%;
-      padding: .15rem 0;
-      color: #ffbb7e;
+      padding: 0 .3rem;
+      height: .65rem;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
       align-items: center;
-      position: relative;
-      &--circle{
-        width: .2rem;
-        height: .2rem;
-        background: #ffed50;
-        border-radius:50%;
-        position: absolute;
-        left: 50%;
-        top:50%;
-        transform: translate(-50%,-50%);
-        z-index: 20;
-      }
-    }
-    &__line{
-      width: 92%;
-      height: .03rem;
-      position: absolute;
-      background: #fbb930;
-      left: 4%;
-      top: 50%;
-      transform: translateY(-.01rem);
-      z-index: 10;
+      justify-content: center;
+      font-size: .34rem;
+      color: rgba(250,245,245,.58);
     }
   }
-  .queen_cont{
-    padding: 0 .16rem;
-  }
-  .queen_active_item{
-    width: 7.18rem;
-    height: 3.04rem;
-    background: url(./images/queen_item_bg.png) no-repeat;
-    background-size: 7.18rem auto;
-    padding-top: .4rem;
-    display: flex;
-    position: relative;
-    z-index: 10;
-  }
-  .queen_item_pic{
-    padding-left: .52rem;
-    padding-top: .16rem;
-    width: 2.5rem;
-    height: 2.34rem;
-    background: url(./images/queen_item_line_bg.png) right top no-repeat;
-    background-size: .02rem auto;
-    img{
-      width: 1.52rem;
-      height: 2.05rem;
-    }
-  }
-  .queen_item_coupon{
-    padding-top: .16rem;
-    width: 2.5rem;
-    height: 2.34rem;
-    background: url(./images/queen_item_line_bg.png) right top no-repeat;
-    background-size: .02rem auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    span{
-      color: #b40007;
-      font-weight: bold;
-      margin-top: -.1rem;
-    }
-  }
-  .queen_item_txt{
-    padding-top: .26rem;
-    padding-left: .2rem;
-  }
-  .queen_item_info{
-    color: #b40007;
-    display: flex;
-    align-items: flex-end;
-    font-weight: bold;
-    p{
-      font-size: .6rem;
-    }
-    strong{
-      padding-bottom: .1rem;
-      padding-left: .1rem;
-    }
-  }
-  .queen_item_button{
-    margin-top: .05rem;
-    width: 3.88rem;
-    height: .8rem;
-    background: url(./images/queen_button_bg.png) no-repeat;
-    background-size: 3.88rem auto;
+  .koi-seed__des{
+    margin-top: .36rem;
+    width: 100%;
+    height: .58rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-left: .08rem;
-    p{
-      color: #fff;
-      font-size: .32rem;
-    }
-  }
-  .queen_item_number{
-    margin-top: .05rem;
-    display: flex;
-    justify-content: center;
-    p{
-      color: #b40007;
-    }
-  }
-  .queen-active-times{
-    height: .6rem;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    margin-top: -.25rem;
-    margin-bottom: .1rem;
-    p{
-      padding: .2rem .22rem 0;
-      height: 100%;
-      border-radius: .3rem;
-      border: .02rem solid #f9c77b;
-      color: #f9c77b;
-    }
-  }
-  .queen_item_coupon_txt{
-    display: flex;
-    color: #b40007;
-    display: flex;
-    align-items: flex-end;
-    strong{
-      font-weight: bold;
-      font-size: .4rem;
-    }
-    p{
-      font-size: .8rem;
-      font-weight: bold;
-    }
-  }
-  .queen_coupon_item{
-    padding: .08rem .08rem .1rem;
-    background: #d00619;
-    margin-bottom: .48rem;
-  }
-  .queen_coupon_price{
-    margin-top: .28rem;
-    display: flex;
-    .queen_coupon_price_item{
-      flex: 1;
-      position: relative;
-      img{
-        width: 1.71rem;
-        height: 1.71rem;
-      }
-      span{
-        left: 1.2rem;
-        top: .15rem;
-        width: .32rem;
-        height: .32rem;
-        display: block;
-        background: #fbbd6e;
-        position: absolute;
-        color: #aa0c10;
-        line-height: .32rem;
-        text-align: center;
-        border-radius: 50%;
-      }
-    }
-  }
-   .queen-seed__des{
-    margin: .6rem .3rem 0;
-    display: flex;
-    border-radius: .25rem;
     justify-content: space-between;
-    border: .02rem solid #ecaa6c;
-    height: .48rem;
-    align-items: center;
-    padding: 0 .3rem;
-    color: #f8cb80;
+    border: .02rem solid #e0936c;
+    border-radius: .1rem;
     position: relative;
-    span{
-      position: relative;
-    }
+    background: #960508;
+    padding: 0 .14rem;
+    color: #fbfaf9;
     &:before,&:after{
       bottom: 100%;
       left: 50%;
@@ -1009,15 +495,365 @@
       position: absolute;
     }
     &:after{
-      border-bottom-color: #b61716;
+      border-color: rgba(150, 5, 8, 0);
+      border-bottom-color: #960508;
       border-width: .2rem;
       margin-left: -.2rem;
-      bottom: 95%;
+      bottom: 99%;
     }
     &:before{
+      border-color: rgba(224, 147, 108, 0);
       border-bottom-color: #e0936c;
-      border-width: .2rem;
-      margin-left: -.2rem;
+      border-width: .22rem;
+      margin-left: -.22rem;
+    }
+  }
+  .koi-seed{
+    margin: .65rem .2rem .6rem;
+    padding: .72rem .26rem .26rem;
+    background: #960508;
+    border: .06rem solid #850002;
+    border-radius: .1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    &__pic{
+      width: 6.8rem;
+      width: 90vw;
+      display: flex;
+      justify-content: space-around;
+    }
+    &__item{
+      position: relative;
+      img{
+        width: 1.42rem;
+        height: 1.42rem;
+      }
+      span{
+        display: block;
+        width: .4rem;
+        height: .4rem;
+        background: #ffd6a4;
+        border-radius: 50%;
+        position: absolute;
+        transform: translate(35%,-40%);
+        right: 0;
+        top: 0;
+        font-size: .25rem;
+        color: #804922;
+        text-align: center;
+        line-height: .4rem;
+      }
+    }
+    &__title{
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%,-50%);
+      span{
+        width: .64rem;
+        height: .64rem;
+        font-size: .38rem;
+        color: #b90a04;
+        border-radius: 50%;
+        box-shadow: .03rem .03rem .1rem .01rem rgb(96,30,23);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: .05rem;
+        background:linear-gradient(to left,#FFAB7C,#FED99F);
+      }
+    }
+  }
+  .koi-strategy__discount{
+    padding: 0 .1rem 0;
+    background: #f11425;
+    position: relative;
+    h5{
+      font-size: .78rem;
+      color: #f3edbf;
+      border-bottom: .02rem dashed #f3edbf;
+      text-align: center;
+      i{
+        font-size: .34rem;
+        padding-right: .08rem;
+      }
+      span{
+        font-size: .3rem;
+        padding-left: .08rem;
+      }
+    }
+    p{
+      text-align: center;
+      color: #f3edbf;
+      line-height: .48rem;
+    }
+  }
+  .koi-strategy{
+    margin: .68rem .2rem 0;
+    padding: .54rem .12rem .18rem;
+    border-radius: .2rem;
+    border: .02rem solid #e5764a;
+    position: relative;
+    &__tag{
+      position: absolute;
+      left: .09rem;
+      top: .06rem;
+      transform: scale(.5);
+      transform-origin: 0 0;
+      font-size: .3rem;
+      color: #faf0d2;
+      width: 1rem;
+      height: .44rem;
+      background: #9e0307;
+      border-radius: .2rem;
+      z-index:10;
+      text-align: center;
+    }
+    &__action{
+      padding: .1rem .38rem;
+      background: #fcc67b;
+      text-align: center;
+      &.noPadding{
+        padding-top: 0;
+      }
+      span{
+        display: block;
+        width: 2.42rem;
+        height: .62rem;
+        line-height: .62rem;
+        color: #fff;
+        background: #c40000;
+        border-radius: .3rem;
+        &.disabled{
+          background: #dd8862;
+          &:after{
+            display: none;
+          }
+        }
+        &:after{
+          content: '';
+          display: inline-block;
+          margin-left: .03rem;
+          position: relative;
+          top: .02rem;
+          width: .15rem;
+          height: .23rem;
+          background: url(./images/queen_sprite.png) no-repeat -1.75rem -.08rem;
+          background-size: 1.94rem auto;
+        }
+      }
+    }
+    &__list{
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    &__item{
+      width: 49.5%;
+      position: relative;
+      border-radius: .1rem;
+      overflow: hidden;
+      margin-bottom: .12rem;
+    }
+    &__tit{
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%,-50%);
+      span{
+        width: .64rem;
+        height: .64rem;
+        font-size: .38rem;
+        color: #b90a04;
+        border-radius: 50%;
+        box-shadow: .03rem .03rem .1rem .01rem rgb(96,30,23);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: .05rem;
+        background:linear-gradient(to left,#FFAB7C,#FED99F);
+      }
+    }
+
+  }
+  .koi-discount__price--des{
+    padding-left: .08rem;
+    border-left: 2px dashed #bd0004;
+    position: relative;
+    display: flex;
+    height: .6rem;
+    margin-left: -.02rem;
+    padding-right: .08rem;
+    span{
+      color: #bd0004;
+      display: block;
+      width: 1.5rem;
+      font-size: .26rem;
+      margin-top: -.06rem;
+    }
+    p{
+      width: 3.3rem;
+      height: .6rem;
+      background: linear-gradient(to top, #BA0000,#D50000);
+      border-radius: .6rem;
+      text-align: center;
+      line-height: .6rem;
+      font-size: .3rem;
+      transform: scale(.5);
+      color: #fff;
+      position: absolute;
+      left:.05rem;
+      top:.32rem;
+      transform-origin: 0 0;
+    }
+  }
+  .koi-des{
+    padding-top: .38rem;
+    position: relative;
+    background: linear-gradient(to bottom, #bd0004,#d24133);
+    &__title{
+      display: flex;
+      justify-content: center;
+      position: relative;
+      &:before,&:after{
+        display:block;
+        content: '';
+        width: 1.67rem;
+        height: .17rem;
+        background:url(./images/queen_sprite.png) no-repeat;
+        background-size: 1.94rem auto;
+        position: absolute;
+        top: 50%;
+      }
+      &:before{
+        left: 3%;
+        background-position: -.03rem -.03rem;
+        transform: translateY(-50%);
+      }
+      &:after{
+        right: 3%;
+        background-position: -.03rem -.23rem;
+        transform: translateY(-50%);
+      }
+      span{
+        width: .64rem;
+        height: .64rem;
+        font-size: .38rem;
+        color: #b90a04;
+        border-radius: 50%;
+        box-shadow: .03rem .03rem .1rem .01rem rgb(96,30,23);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: .05rem;
+        background:linear-gradient(to left,#FFAB7C,#FED99F);
+        &:last-child{
+          margin-right:0;
+        }
+      }
+    }
+  }
+  .koi-nav{
+    margin: 0 .2rem;
+    display: flex;
+    border-radius: .1rem;
+    position: relative;
+    background: #881C15;
+    border: .02rem solid rgba(249,201,125,.45);
+    &__item{
+      flex: 1;
+      height: 1.27rem;
+      padding: .18rem .2rem;
+      color: #F3EDBF;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      &--circle{
+        width: .23rem;
+        height: .23rem;
+        background: #feb964;
+        border-radius:50%;
+        position: absolute;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+        z-index: 20;
+      }
+    }
+    &__line{
+      width: 86%;
+      height: .04rem;
+      position: absolute;
+      background: #feb964;
+      left: .55rem;
+      top: 50%;
+      transform: translateY(-.01rem);
+      z-index: 10;
+    }
+  }
+  .koi__banner{
+    width: 100%;
+    position: relative;
+    &--pic{
+      width: 100%;
+      height: 6.4rem;
+    }
+    &--tit{
+      width:3.82rem;
+      height:.68rem;
+      line-height: .68rem;
+      background:linear-gradient(to left,rgba(237,17,0,1),rgba(239,3,7,1));
+      box-shadow:0 .02rem .1rem .02rem rgba(96,30,23,0.26);
+      border-radius:.3rem;
+      color: #F3EDBF;
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      top: .07rem;
+      transform: translateX(-50%);
+    }
+    &--txt{
+      position: absolute;
+      left: 50%;
+      top: 3.8rem;
+      width: 4.4rem;
+      transform: translateX(-50%);
+      color: #EBB282;
+      text-align: center;
+    }
+    &--rule{
+      position: absolute;
+      right: .58rem;
+      top: .84rem;
+      width: 2.6rem;
+      height: .5rem;
+      border-radius: .1rem;
+      background: #ca221a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: scaleIn 1s infinite;
+      i{
+        width: .26rem;
+        height: .26rem;
+        border-radius: 50%;
+        background: #faf0d2;
+        color: #ca231b;
+        line-height: .26rem;
+        text-align: center;
+        margin-right: .06rem;
+      }
+      span{
+        color: #faefd2;
+      }
     }
   }
 </style>

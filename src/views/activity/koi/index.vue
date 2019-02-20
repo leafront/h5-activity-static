@@ -391,7 +391,6 @@
       },
       /**
        * exchange coupon
-       * 
        */
       submitCouponExchange () {
         if (utils.loggedIn()) {

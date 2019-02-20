@@ -1,53 +1,28 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
+    <AppHeader :title="title" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper koi-end-view" :class="{'visibility': pageView}">
-      <div class="koi-end">
-        <img src="./images/koi_end.png"/>
-        <h4>翻倍锦鲤券活动结束啦～</h4>
-        <p class="font-b cfff">{{times}} 秒后自动跳转到首页</p>
+    <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
+      <div class="queen-end">
+        <img src="./images/queen_end.png"/>
+        <h4>食运券活动结束啦~</h4>
+        <p class="cfff">{{times}} 秒后自动跳转到首页</p>
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss">
-  .koi-end-view{
-    background: #bd0004;
-  }
-  .koi-end{
-    padding-top: .46rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    img{
-      width: 2.88rem;
-      height: 2.88rem;
-    }
-    h4{
-      font-size: .36rem;
-      color: #fff;
-      padding-top: .32rem;
-    }
-  }
-
-</style>
-
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import utils from '@/widget/utils'
-
   import app from '@/widget/app'
 
   export default {
     data () {
       return {
-        title: '翻倍锦鲤券',
+        title: '女王节',
         pageView: true,
-        isBorder: true,
         times: 3,
         timer: null
       }
@@ -86,5 +61,23 @@
       }
     }
   }
-
 </script>
+
+<style lang="scss">
+  .queen-end{
+    padding-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img{
+      width: 5.54rem;
+      height: 2.2rem;
+    }
+    h4{
+      font-size: .36rem;
+      color: #fff;
+      padding-top: .32rem;
+    }
+  }
+
+</style>

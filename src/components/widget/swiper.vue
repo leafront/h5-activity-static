@@ -1,5 +1,5 @@
 <template>
-  <div class="slideshow-wrap pic-lazyLoad">
+  <div class="slideshow-wrap" :class="{'pic-lazyLoad': picLazyLoad}">
     <slot name="banner"></slot>
     <slot name="dot"></slot>
   </div>
@@ -26,10 +26,6 @@
         type: Boolean,
         default: true
       },
-      sliderBtn: {
-        type: String,
-        default: '.slideshow-dots li'
-      },
       slideItem:{
         type: String,
         default: '.slideshow-item'
@@ -37,7 +33,7 @@
       // 阻止页面上下滑动
       preventDefault: {
         type: Boolean,
-        default: true
+        default: false
       },
       autoTime: {
         type: Number,
@@ -46,6 +42,10 @@
       itemWidth: {
         type: Number,
         default: 750
+      },
+      picLazyLoad: {
+        type: Boolean,
+        default: true
       }
     },
     data () {
@@ -53,7 +53,6 @@
         startTime: 0,
         itemLength: 0,
         wrapper: null,
-        pagination: null,
         startX: 0,
         startY:0,
         endX: 0,
@@ -71,7 +70,7 @@
         this.startY = this.endY = point.pageY
         this.isValid = true
         this.isCheck = false
-        this._start(e)
+        this._start(e);
       },
       touchmove (e) {
         if (!this.isValid) return;
@@ -97,18 +96,11 @@
       },
       init () {
         this.wrapper = document.querySelector(this.slideItem)
-        this.pagination = document.querySelectorAll(this.sliderBtn)
         this.startTime = new Date().getTime()
-        this.itemLength = this.pagination.length
-        const firstElement = this.wrapper.firstElementChild
-        const lastElement = this.wrapper.lastElementChild
-        const firstEleClone = firstElement.cloneNode(true)
-        const lastEleClone = lastElement.cloneNode(true)
-        firstElement.insertAdjacentElement('beforebegin',lastEleClone)
-        lastElement.insertAdjacentElement('afterend',firstEleClone)
+        this.itemLength = this.list.length - 2
+        this.itemWidth = parseFloat(this.itemWidth)
         this.setWrapperPos(-this.index * this.itemWidth)
         this.startAutoPlay()
-
       },
       _start () {
         this.clearAnimate()
@@ -128,20 +120,17 @@
         this.setWrapperPos(this.x + differX)
       },
       _end () {
-        const left = this.wrapper.style.transform;
+        const left = this.wrapper.style.transform
         const distance = -parseInt(left.match(/\(([-\.\d]+)px,/)[1], 10)
-        const width = this.itemWidth;
-
+        const width = this.itemWidth
         if (this.startX > this.endX) {
           this.x = - Math.ceil(distance / width) * width
         } else {
           this.x = - Math.floor(distance / width) * width
         }
-
-        this.wrapper.style.transition = '300ms cubic-bezier(0.22, 0.69, 0.72, 0.88)';
-        this.wrapper.style.WebkitTransition = '300ms cubic-bezier(0.22, 0.69, 0.72, 0.88)'
+        this.wrapper.style.transition = '300ms ease-in'
+        this.wrapper.style.WebkitTransition = '300ms ease-in'
         this.setWrapperPos(this.x)
-
         let index = -this.x / width
         // 最后控制
         if (this.x >= 0) {
@@ -154,22 +143,20 @@
         } else if (Math.abs(this.x) >= (this.itemLength +1) * width) {
           index = 1
           setTimeout(() => {
-            this.clearAnimate();
-            this.setWrapperPos(-width);
-          }, 300);
+            this.clearAnimate()
+            this.setWrapperPos(-width)
+          }, 300)
           this.startTime = new Date().getTime()
         }
         this.$emit('toggleIndex', index)
-
-        this.startAutoPlay()
       },
       setWrapperPos (x) {
         this.wrapper.style.transform = 'translate3d(' + x + 'px, 0, 0)'
         this.wrapper.style.WebkitTransform = 'translate3d(' + x + 'px, 0, 0)'
       },
       clearAnimate () {
-
         this.wrapper.style.transition =  'none'
+        this.wrapper.style.WebkitTransition =  'none'
       },
       autoPlay () {
         let autoIndex = this.index
@@ -183,11 +170,7 @@
             this.setWrapperPos(-this.itemWidth)
           }, 310)
         }
-
-        this.wrapper.style.transition = '300ms ease-in'
-        this.wrapper.style.WebkitTransition = '300ms ease-in'
-        this.wrapper.style.transform = 'translate3d(' + x + 'px, 0, 0)'
-        this.wrapper.style.WebkitTransform = 'translate3d(' + x + 'px, 0, 0)'
+        this.wrapper.style.cssText = 'transition:300ms ease-in; -webkit-transition:300ms ease-in; transform: translate3d(' + x + 'px, 0, 0); -webkit-transform:translate3d(' + x + 'px, 0, 0)'
       },
       startAutoPlay () {
         if (this.isAutoPlay && this.itemLength > 1) {
@@ -218,7 +201,7 @@
         },false)
       }
     },
-    beforeDestroy () {
+    destroyed () {
       clearInterval(this.autoPlayTimer)
     }
   }
@@ -226,5 +209,6 @@
 </script>
 
 <style lang="scss">
-  @import '../../styles/slidershow.scss';
+  @import '@/styles/slidershow.scss'
 </style>
+

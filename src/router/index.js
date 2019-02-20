@@ -234,10 +234,10 @@ export default new Router({
     }, {
       path: '/activity/queen/merge',
       name: 'queenMerge',
-      component: () => import('@/views/activity/queen/queenMerge'),
+      component: () => import('@/views/activity/queen/merge'),
       meta: {
         title: '食运券',
-        bgColor: '#b61716'
+        bgColor: '#bd0004'
       }
     },{
       path: '/activity/queen/index',
@@ -245,7 +245,7 @@ export default new Router({
       component: () => import('@/views/activity/queen/index'),
       meta: {
         title: '食运券',
-        bgColor: '#b61716'
+        bgColor: '#bd0004'
       }
     }, {
       path: '/activity/queen/end',
@@ -253,7 +253,7 @@ export default new Router({
       component: () => import('@/views/activity/queen/end'),
       meta: {
         title: '食运券',
-        bgColor: '#b61716'
+        bgColor: '#bd0004'
       }
     }
   ]
