@@ -28,7 +28,6 @@
     left: 0;
     bottom: -.4rem;
     height: .4rem;
-    background: #d24133;
     li {
       width: .1rem;
       height: .1rem;
