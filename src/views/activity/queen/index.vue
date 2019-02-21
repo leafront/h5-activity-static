@@ -402,7 +402,7 @@
         },{
           imageUrl: require('./images/slider_queen_03.png')
         }]
-      }, 200)
+      }, 100)
       const query = utils.query()
       const {
         refresh,
