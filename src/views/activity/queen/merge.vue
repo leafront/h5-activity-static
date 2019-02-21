@@ -3,11 +3,11 @@
   <AppHeader :title="title">
   </AppHeader>
   <div class="scroll-view-wrapper koi_bg" :class="{'visibility': pageView}">
-    <div class="region_tip">
+    <!-- <div class="region_tip">
       <div class="region_tip_l">
       </div>
       <p class="region_tip_r">锦鲤券免单券/锦鲤券299减200/锦鲤券199减100 每日10:00/19:00开抢，数量有限，先到先得。</p>
-    </div>
+    </div> -->
 
     <div class="region_header">
       <div class="region_rule" @click="jumpRule">
