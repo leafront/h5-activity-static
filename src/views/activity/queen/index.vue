@@ -216,8 +216,8 @@
         }
         const shareConfig = {
           link: this.shareStrategyUrl,
-          title: '官宣 锦鲤和双十一更配哦',
-          description: '多张小劵合成翻倍大额劵，一笔订单减更多，免单劵、¥200劵、等各种超值劵等你来合',
+          title: '这可能是你离锦鲤最近的一次',
+          description: '小种子换大能量，超值免单券等你来抢。',
           imgUrl: config.staticPath + '/activity-static/images/koi_share_icon.png',
           platforms: [
            "WechatMoments",
@@ -764,7 +764,8 @@
     display: flex;
     border-radius: .1rem;
     position: relative;
-    background: #881C15;
+    background: url(./images/queen_nav_bg.png) no-repeat;
+    background-size: 100% auto;
     border: .02rem solid rgba(249,201,125,.45);
     &__item{
       flex: 1;
