@@ -53,7 +53,7 @@
             <strong class="koi-strategy__tag">攻略1</strong>
             <div class="koi-strategy__discount">
               <h5><i>¥</i>20<span>种子券</span></h5>
-              <p>首次分享可获得20张¥1种子券</p>
+              <p>首次分享可获20张¥1种子券</p>
             </div>
             <div class="koi-strategy__action">
               <span class="font-b" v-if="firstStrategyButtonStatus == 0" @click="shareAction">去分享</span>
