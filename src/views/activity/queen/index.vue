@@ -425,7 +425,6 @@
 
 <style lang="scss">
   .queen-slider{
-    //background: #d44334;
     background: linear-gradient(to bottom, #bd0004,#d24133);
   }
   .quuen-banner-line{
