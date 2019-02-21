@@ -425,7 +425,8 @@
 
 <style lang="scss">
   .queen-slider{
-    background: #d44334;
+    //background: #d44334;
+    background: linear-gradient(to bottom, #bd0004,#d24133);
   }
   .quuen-banner-line{
     height: .07rem;
@@ -716,7 +717,6 @@
   .koi-des{
     padding-top: .38rem;
     position: relative;
-    background: linear-gradient(to bottom, #bd0004,#d24133);
     &__title{
       display: flex;
       justify-content: center;

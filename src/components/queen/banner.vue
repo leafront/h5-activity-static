@@ -18,7 +18,6 @@
     padding-top: .24rem;
     padding-bottom: .4rem;
     overflow: hidden;
-    background: #d24133;
   }
   .slideshow-queen-dots{
     width: 100%;
