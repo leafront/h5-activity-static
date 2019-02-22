@@ -83,7 +83,7 @@
               <p>已有积分 {{points}}</p>
             </div>  
             <div class="koi-strategy__action noPadding">
-              <span class="font-xb" v-if="thirdStrategyButtonStatus == 0" @click="submitCouponExchange">兑换</span>
+              <span class="font-xb" v-if="thirdStrategyButtonStatus == 0" @click="submitCouponExchange">去兑换</span>
               <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 1">兑换</span>
               <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 2">今日已兑换</span>
             </div>
