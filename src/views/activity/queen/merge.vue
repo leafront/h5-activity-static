@@ -270,7 +270,7 @@ export default {
     },
 
     jumpKoi() {
-      location.href = "/activity/koi/index"
+      location.href = "/activity/queen/index"
     },
     /*
      * 选取合成方式
