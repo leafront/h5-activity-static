@@ -199,7 +199,6 @@
       }
     },
     created () {
-      var vconsole = new VConsole()
       this.$showLoading()
       this.getWalletInfo()
       this.getRechargeList()
