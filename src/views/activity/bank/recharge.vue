@@ -163,9 +163,7 @@
         } = this
 
         const sessionId = utils.getSessionId()
-
         this.$showPageLoading()
-
         const ut = utils.getUserToken()
 
         Model.createPay({

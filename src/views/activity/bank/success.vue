@@ -10,7 +10,7 @@
         <div class="bank-success-info">
           <i class="icon"></i>
           <span class="font">支付成功</span>
-          <p class="c3">¥100.00</p>
+          <p class="c3">¥{{money | price}}</p>
         </div>
         <div class="bank-success-des">
           <p>优惠券已发送，请至<b>来伊份APP</b></p>
@@ -33,7 +33,8 @@
       return {
         title: '交易结果',
         isBorder: true,
-        pageView: true
+        pageView: true,
+        money: ''
       }
     },
     components: {
@@ -46,6 +47,10 @@
       routerAction (url) {
         location.href = url
       }
+    },
+    created () {
+      const money = store.get('BANK_RECHARGE_MONEY', 'session')
+      this.money = money
     }
   }
 
