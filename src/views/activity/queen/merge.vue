@@ -266,11 +266,11 @@ export default {
 
 
     jumpRule() {
-      location.href = "http://m.laiyifen.com/view/h5/1003081001000067.html?1539920083525"
+      location.href = "https://m.laiyifen.com/view/h5/1003093201000061.html?1550802705094"
     },
 
     jumpKoi() {
-      location.href = "/activity/koi/index"
+      location.href = "/activity/queen/index"
     },
     /*
      * 选取合成方式
