@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
+    <AppHeader :title="title" :isBorder="isBorder" :isBack="isBack" :backFn="backAction">
       <!--<div class="ui-header-right">-->
         <!--<span>充值记录</span>-->
       <!--</div>-->
@@ -87,7 +87,8 @@
         money: '',
         rechargeList:  [],
         rechargeIndex: 0,
-        isBankPopup: false
+        isBankPopup: false,
+        isBack: false
       }
     },
     components: {
@@ -157,7 +158,6 @@
        * 创建支付悠点卡支付
        */
       createPay () {
-
         const {
           money
         } = this
