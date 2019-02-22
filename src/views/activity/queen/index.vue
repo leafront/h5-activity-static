@@ -57,7 +57,7 @@
             </div>
             <div class="koi-strategy__action">
               <span class="font-b" v-if="firstStrategyButtonStatus == 0" @click="shareAction">去分享</span>
-              <span class="disabled font-b" v-else-if="firstStrategyButtonStatus == 1" @click="shareAction">已分享</span>
+              <span class="font-b" v-else-if="firstStrategyButtonStatus == 1" @click="shareAction">已分享</span>
               <span class="disabled font-b" v-else-if="firstStrategyButtonStatus == 2" @click="shareAction">分享</span>
             </div>
           </div>
@@ -69,7 +69,7 @@
             </div>
             <div class="koi-strategy__action">
               <span class="font-b" v-if="secondStrategyButtonStatus == 0" @click="pageAction(signUrl)">去签到</span>
-              <span class="disabled font-b" v-else-if="secondStrategyButtonStatus == 1" @click="pageAction(signUrl)">今日已签到</span>
+              <span class="disabled font-b" v-else-if="secondStrategyButtonStatus == 1">今日已签到</span>
             </div>
           </div>
           <div class="koi-strategy__item">
@@ -84,7 +84,7 @@
             </div>  
             <div class="koi-strategy__action noPadding">
               <span class="font-xb" v-if="thirdStrategyButtonStatus == 0" @click="submitCouponExchange">去兑换</span>
-              <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 1">兑换</span>
+              <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 1">去兑换</span>
               <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 2">今日已兑换</span>
             </div>
           </div>
