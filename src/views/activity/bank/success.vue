@@ -16,8 +16,8 @@
           <p>优惠券已发送，请至<b>来伊份APP</b></p>
           <p><b>"我的"-"优惠券"</b>查收</p>
         </div>
-        <div class="bank-success-btn" @click="pageAction('/activity/bank/recharge')">
-          <span>返回</span>
+        <div class="bank-success-btn" @click="routerAction('/index.html')">
+          <span>去购物</span>
         </div>
       </div>
     </div>
@@ -42,6 +42,9 @@
     methods: {
       pageAction (url) {
         this.$router.replace(url)
+      },
+      routerAction (url) {
+        location.href = url
       }
     }
   }
