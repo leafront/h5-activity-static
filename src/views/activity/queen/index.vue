@@ -463,7 +463,7 @@
     border-radius: .3rem;
     border: .01rem solid #fbdaad;
     span{
-      padding: 0 .3rem;
+      width: 100%;
       height: .65rem;
       display: flex;
       align-items: center;
