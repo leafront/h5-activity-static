@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-dns-prefetch-control" content="on"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <link rel="dns-prefetch" href="<%= htmlWebpackPlugin.options.staticPath %>"/>
   <meta http-equiv="cache-control" content="no-store">
   <meta http-equiv="cache-control" content="no-cache">
@@ -108,7 +109,7 @@
 <script crossorigin="anonymous" type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/polyfill/index.js?v=<%=htmlWebpackPlugin.options.getTime%>"></script>
 <!-- <script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>
 <script>
-var vconsole = new VConsole()
+  var vconsole = new VConsole()
 </script> -->
 </body>
 </html>
