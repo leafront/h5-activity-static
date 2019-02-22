@@ -27,6 +27,7 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
+  import store from '@/widget/store'
 
   export default {
     data () {
