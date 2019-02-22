@@ -199,10 +199,10 @@
       }
     },
     created () {
+      var vconsole = new VConsole()
       this.$showLoading()
       this.getWalletInfo()
       this.getRechargeList()
-      alert('尊敬的来伊份客户：为了提供更好的服务，我司定于2月22日15:00至18:00进行系统优化升级，期间停止悠点卡充值业务，请您提前做好准备。由此给您造成的不便我们深表歉意，感谢您的支持与配合。来伊份科技 2019年2月21日')
     }
   }
 
