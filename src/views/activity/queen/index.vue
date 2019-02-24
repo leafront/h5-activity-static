@@ -235,7 +235,9 @@
               }
             }).then((result) => {
               if (result.code == 0) {
-                this.$toast(result.message)
+                if (utils.ios()) {
+                  this.$toast(result.message)
+                }
                 this.getKoiInfo()
                 this.getCouponList()
               } else if (result.code == -1) {
