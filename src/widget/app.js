@@ -216,7 +216,7 @@ const app = {
         pic: shareConfig.pic,
         channel: shareConfig.channel
       },() => {
-        callback && callback()
+        
       })
       setTimeout(() => {
         callback && callback()
