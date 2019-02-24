@@ -1,6 +1,6 @@
 <template>
   <div class="ui-header" :class="{'ui-header-border':isBorder}"  v-if="showHeader">
-    <div class="ui-header-back" @click="backAction">
+    <div class="ui-header-back" v-if="isBack" @click="backAction">
       <div class="ui-header-back_btn">
       </div>
     </div>
@@ -30,6 +30,10 @@
       },
       isShowHeader: {
         default: false,
+        type: Boolean
+      },
+      isBack: {
+        default: true,
         type: Boolean
       }
     },

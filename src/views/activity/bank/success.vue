@@ -10,14 +10,14 @@
         <div class="bank-success-info">
           <i class="icon"></i>
           <span class="font">支付成功</span>
-          <p class="c3">¥100.00</p>
+          <p class="c3">¥{{money | price}}</p>
         </div>
         <div class="bank-success-des">
           <p>优惠券已发送，请至<b>来伊份APP</b></p>
           <p><b>"我的"-"优惠券"</b>查收</p>
         </div>
-        <div class="bank-success-btn" @click="pageAction('/activity/bank/recharge')">
-          <span>返回</span>
+        <div class="bank-success-btn" @click="routerAction('/index.html')">
+          <span>去购物</span>
         </div>
       </div>
     </div>
@@ -27,13 +27,15 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
+  import store from '@/widget/store'
 
   export default {
     data () {
       return {
         title: '交易结果',
         isBorder: true,
-        pageView: true
+        pageView: true,
+        money: ''
       }
     },
     components: {
@@ -42,7 +44,14 @@
     methods: {
       pageAction (url) {
         this.$router.replace(url)
+      },
+      routerAction (url) {
+        location.href = url
       }
+    },
+    created () {
+      const money = store.get('BANK_RECHARGE_MONEY', 'session')
+      this.money = money
     }
   }
 

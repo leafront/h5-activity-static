@@ -99,20 +99,15 @@
 
         el.dataset.LazyLoadImgState = 'start'
         const imgUrl = el.dataset.src
-        console.log(imgUrl);
-
         if (imgUrl) {
           const img = new Image()
           img.src = imgUrl
           img.addEventListener('load', () => {
-            setTimeout(() => {
-              el.style.backgroundImage = 'url('+imgUrl+')'
-              el.style.backgroundSize = '100% auto'
-              delete el.dataset.src
-              el.dataset.LazyLoadImgState = 'success'
-              el.classList.add('successImg')
-            },150)
-
+            el.style.backgroundImage = 'url('+imgUrl+')'
+            el.style.backgroundSize = '100% auto'
+            delete el.dataset.src
+            el.dataset.LazyLoadImgState = 'success'
+            el.classList.add('successImg')
           }, false)
 
           img.addEventListener('error', () => {
