@@ -235,11 +235,7 @@
               }
             }).then((result) => {
               if (result.code == 0) {
-                if (utils.isApp()) {
-                  if (utils.ios()) {
-                    this.$toast(result.message)
-                  } 
-                } else {
+                if (!(utils.isApp() && utils.android())) {
                   this.$toast(result.message)
                 }
                 this.getKoiInfo()
