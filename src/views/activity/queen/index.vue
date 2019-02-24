@@ -235,7 +235,11 @@
               }
             }).then((result) => {
               if (result.code == 0) {
-                if (utils.ios()) {
+                if (utils.isApp()) {
+                  if (utils.ios()) {
+                    this.$toast(result.message)
+                  } 
+                } else {
                   this.$toast(result.message)
                 }
                 this.getKoiInfo()
