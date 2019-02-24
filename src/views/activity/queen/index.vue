@@ -301,7 +301,6 @@
           app.loginAction()
         }
       },
-
       /**
        * get coupon info
        */
@@ -569,7 +568,7 @@
     }
   }
   .koi-strategy__discount{
-    padding: 0 .1rem 0;
+    padding: 0 .1rem;
     background: #f11425;
     position: relative;
     h5{
