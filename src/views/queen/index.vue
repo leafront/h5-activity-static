@@ -35,9 +35,9 @@
       </div>
       <div class="queen-slider">
         <Banner :bannerList="bannerList"></Banner>
-      </div>  
+      </div>
       <div class="quuen-banner-line">
-      </div>  
+      </div>
       <div class="koi-strategy">
         <div class="koi-strategy__tit">
           <span>种</span>
@@ -81,7 +81,7 @@
             <div class="koi-strategy__des">
               <p>今日剩余 {{thirdStrategyRemainCount}} 张</p>
               <p>已有积分 {{points}}</p>
-            </div>  
+            </div>
             <div class="koi-strategy__action noPadding">
               <span class="font-xb" v-if="thirdStrategyButtonStatus == 0" @click="submitCouponExchange">去兑换</span>
               <span class="disabled font-xb" v-else-if="thirdStrategyButtonStatus == 1">去兑换</span>
@@ -96,7 +96,7 @@
             </div>
             <div class="koi-strategy__des">
               <p>团购 ,外卖订单除外</p>
-            </div> 
+            </div>
             <div class="koi-strategy__action noPadding">
               <span class="font-b"  @click="routerAction(forthStrategyUrl)">去购物</span>
             </div>
@@ -108,7 +108,7 @@
           <span v-if="mergeButtonStatus == 0" @click="pageAction('/activity/queen/merge')">立即合成</span>
           <span v-else>3月5日 10:00 开始合成，敬请期待……</span>
         </div>
-      </div> 
+      </div>
       <div class="koi-seed">
         <div class="koi-seed__title">
           <span>我</span>
@@ -246,7 +246,7 @@
             })
           })
         } else {
-					app.loginAction()
+          app.loginAction()
         }
       },
       /**
@@ -265,7 +265,7 @@
       },
       /**
        * exchange coupon
-       * 
+       *
        */
       submitCouponExchange () {
         if (utils.loggedIn()) {

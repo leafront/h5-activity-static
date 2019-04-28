@@ -12,4 +12,6 @@ const config = {
   "getTime": process.env.VUE_APP_GET_TIME
 }
 
+console.log(config)
+
 export default config 

@@ -17,7 +17,7 @@ export default new Router({
     {
       path: '*',
       name: 'PageError',
-      component: () => import('@/views/activity/error/404.vue'),
+      component: () => import('@/views/error/404.vue'),
       meta: {
         title: '找不到页面',
         bgColor: '#61b8ff'
@@ -25,70 +25,70 @@ export default new Router({
     }, {
       path: '/activity/redpack/invite',
       name: 'redPackInvite',
-      component: () => import('@/views/activity/redpack/invite.vue'),
+      component: () => import('@/views/redpack/invite.vue'),
       meta: {
         title: '拆红包'
       }
     }, {
       path: '/activity/redpack/receive',
       name: 'redPackReceive',
-      component: () => import('@/views/activity/redpack/receive.vue'),
+      component: () => import('@/views/redpack/receive.vue'),
       meta: {
         title: '拆红包'
       }
     }, {
       path: '/activity/redpack/start',
       name: 'redPackStart',
-      component: () => import('@/views/activity/redpack/start.vue'),
+      component: () => import('@/views/redpack/start.vue'),
       meta: {
         title: '拆红包'
       }
     }, {
       path: '/activity/redpack/finished',
       name: 'redPakFinished',
-      component: () => import('@/views/activity/redpack/finished.vue'),
+      component: () => import('@/views/redpack/finished.vue'),
       meta: {
         title: '拆红包'
       }
     }, {
       path: '/activity/redpack/success',
       name: 'redPackSuccess',
-      component: () => import('@/views/activity/redpack/success.vue'),
+      component: () => import('@/views/redpack/success.vue'),
       meta: {
         title: '拆红包'
       }
     }, {
       path: '/activity/redpack/stop',
       name: 'redPackStop',
-      component: () => import('@/views/activity/redpack/stop.vue'),
+      component: () => import('@/views/redpack/stop.vue'),
       meta: {
         title: '拆红包'
       }
     }, {
       path: '/activity/redpack/invalid',
       name: 'redPackInvalid',
-      component: () => import('@/views/activity/redpack/invalid.vue'),
+      component: () => import('@/views/redpack/invalid.vue'),
       meta: {
         title: '拆红包'
       }
     }, {
       path: '/activity/make/money',
       name: 'makeMoney',
-      component: () => import('@/views/activity/make/money.vue'),
+      component: () => import('@/views/make/money.vue'),
       meta: {
         title: '伊起赚'
       }
     }, {
       path: '/activity/coupon/list',
       name: 'couponList',
-      component: () => import('@/views/activity/coupon/list.vue'),
+      component: () => import('@/views/coupon/list.vue'),
       meta: {
         title: '领券专区'
       }
     }, {
       path: '/activity/inviteFriends/invitation',
       name: 'invitation',
-      component: () => import('@/views/activity/inviteFriends/invitation.vue'),
+      component: () => import('@/views/inviteFriends/invitation.vue'),
       meta: {
         title: '邀请好友',
         requireLogin: true
@@ -96,7 +96,7 @@ export default new Router({
     }, {
       path: '/activity/inviteFriends/invitedsuccess',
       name: 'invitedsuccess',
-      component: () => import('@/views/activity/inviteFriends/invitedsuccess.vue'),
+      component: () => import('@/views/inviteFriends/invitedsuccess.vue'),
       meta: {
         title: '邀请好友',
         requireLogin: true
@@ -104,7 +104,7 @@ export default new Router({
     }, {
 			path: '/activity/bank/recharge',
 			name: 'bankRecharge',
-			component: () => import('@/views/activity/bank/recharge.vue'),
+			component: () => import('@/views/bank/recharge.vue'),
 			meta: {
 				title: '悠点卡',
 				requireLogin: true
@@ -112,7 +112,7 @@ export default new Router({
 		}, {
 			path: '/activity/bank/pay',
 			name: 'bankPay',
-			component: () => import('@/views/activity/bank/pay.vue'),
+			component: () => import('@/views/bank/pay.vue'),
 			meta: {
 				title: '收银台',
 				requireLogin: true
@@ -120,7 +120,7 @@ export default new Router({
 		}, {
 			path: '/activity/bank/success',
 			name: 'bankSuccess',
-			component: () => import('@/views/activity/bank/success.vue'),
+			component: () => import('@/views/bank/success.vue'),
 			meta: {
 				title: '交易结果',
 				requireLogin: true
@@ -128,14 +128,14 @@ export default new Router({
 		}, {
       path: '/activity/school/start',
       name: 'schoolStart',
-      component: () => import('@/views/activity/school/start.vue'),
+      component: () => import('@/views/school/start.vue'),
       meta: {
         title: '开学季'
       }
     }, {
       path: '/activity/koi/index',
       name: 'koiIndex',
-      component: () => import('@/views/activity/koi/index.vue'),
+      component: () => import('@/views/koi/index.vue'),
       meta: {
         title: '翻倍锦鲤券',
         bgColor: '#bd0004'
@@ -143,7 +143,7 @@ export default new Router({
     }, {
       path: '/activity/koi/end',
       name: 'koiEnd',
-      component: () => import('@/views/activity/koi/end.vue'),
+      component: () => import('@/views/koi/end.vue'),
       meta: {
         bgColor: '#bd0004',
         title: '翻倍锦鲤券'
@@ -151,7 +151,7 @@ export default new Router({
     },{
       path: '/activity/koi/merge',
       name: 'koiMerge',
-      component: () => import('@/views/activity/koi/koi_merge.vue'),
+      component: () => import('@/views/koi/koi_merge.vue'),
       meta: {
         title: '锦鲤券',
         bgColor: '#bd0004',
@@ -160,7 +160,7 @@ export default new Router({
     },{
       path: '/activity/receiveydka/ydka',
       name: 'ydka',
-      component: () => import('@/views/activity/receiveydka/ydka.vue'),
+      component: () => import('@/views/receiveydka/ydka.vue'),
       meta: {
         title: '伊点卡',
         bgColor: '#ff9a37',
@@ -169,7 +169,7 @@ export default new Router({
     }, {
       path: '/activity/sign/index',
       name: 'sign',
-      component: () => import('@/views/activity/sign/index.vue'),
+      component: () => import('@/views/sign/index.vue'),
       meta: {
         title: '每日签到',
         bgColor: '#effbff',
@@ -178,7 +178,7 @@ export default new Router({
     }, {
       path: '/activity/sign/award',
       name: 'award',
-      component: () => import('@/views/activity/sign/award.vue'),
+      component: () => import('@/views/sign/award.vue'),
       meta: {
         title: '我的奖品',
         bgColor: '#fff',
@@ -187,7 +187,7 @@ export default new Router({
     }, {
       path: '/activity/sign/detail',
       name: 'detail',
-      component: () => import('@/views/activity/sign/detail.vue'),
+      component: () => import('@/views/sign/detail.vue'),
       meta: {
         title: '奖品详情',
         bgColor: '#fff',
@@ -196,7 +196,7 @@ export default new Router({
     }, {
       path: '/activity/bulk/incentive',
       name: 'incentive',
-      component: () => import('@/views/activity/bulk/incentive.vue'),
+      component: () => import('@/views/bulk/incentive.vue'),
       meta: {
         title: '奖励金',
         requireLogin: true
@@ -204,7 +204,7 @@ export default new Router({
   },{
       path: '/activity/peopleGroups/createGroups',
       name: 'createGroups',
-      component: () => import('@/views/activity/peopleGroups/createGroups.vue'),
+      component: () => import('@/views/peopleGroups/createGroups.vue'),
       meta: {
         title: '全民团购',
         bgColor: '#F5F5F5',
@@ -214,7 +214,7 @@ export default new Router({
     },{
       path: '/activity/peopleGroups/detailGroups',
       name: 'detailGroups',
-      component: () => import('@/views/activity/peopleGroups/detailGroups.vue'),
+      component: () => import('@/views/peopleGroups/detailGroups.vue'),
       meta: {
         title: '商品详情',
         bgColor: '#fff',
@@ -222,7 +222,7 @@ export default new Router({
     }, {
       path: '/activity/queen/merge',
       name: 'queenMerge',
-      component: () => import('@/views/activity/queen/merge'),
+      component: () => import('@/views/queen/merge'),
       meta: {
         title: '翻倍锦鲤券',
         bgColor: '#bd0004'
@@ -230,7 +230,7 @@ export default new Router({
     },{
       path: '/activity/queen/index',
       name: 'queenIndex',
-      component: () => import('@/views/activity/queen/index'),
+      component: () => import('@/views/queen/index'),
       meta: {
         title: '翻倍锦鲤券',
         bgColor: '#bd0004'
@@ -238,7 +238,7 @@ export default new Router({
     }, {
       path: '/activity/queen/end',
       name: 'queenEnd',
-      component: () => import('@/views/activity/queen/end'),
+      component: () => import('@/views/queen/end'),
       meta: {
         title: '翻倍锦鲤券',
         bgColor: '#bd0004'
